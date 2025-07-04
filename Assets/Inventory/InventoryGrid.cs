@@ -11,8 +11,7 @@ public class InventoryGrid : MonoBehaviour {
 
     // Resize state array if needed
     public void Refresh() {
-        int size = rows * columns;
-        if (cellStates == null || cellStates.Length != columns) {
+        if (cellStates == null || cellStates.GetLength(0) != rows || cellStates.GetLength(1)!= columns) {
             bool[,] newStates = new bool[columns, rows];
             for (int x = 0; x < columns; x++) {
                 for (int y = 0; y < rows; y++) {
