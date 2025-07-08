@@ -27,7 +27,7 @@ namespace RPGFramework.Inventory
                 if (!slotDefinitions.ContainsKey(typeName))
                 {
                     slotDefinitions[typeName] = new SlotUIDefinition();
-                    Debug.Log($"InventoryUIGenerator: Added new slot type '{typeName}' to definitions.");
+                    //Debug.Log($"InventoryUIGenerator: Added new slot type '{typeName}' to definitions.");
                 }
             });
         }
