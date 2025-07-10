@@ -1,9 +1,7 @@
 {
-    "name": "Inventory",
-    "rootNamespace": "RPGFramework.Inventory",
-    "references": [
-        "GUID:7b6de08bf59fc834e92fca320acf1bf5"
-    ],
+    "name": "Utils",
+    "rootNamespace": "RPGFramework.Utils",
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

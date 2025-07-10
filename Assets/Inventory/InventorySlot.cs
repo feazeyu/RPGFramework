@@ -26,16 +26,7 @@ namespace RPGFramework.Inventory
         protected override Color BaseColor => Color.red;
         public LockedInventorySlot() => IsEnabled = false;
     }
-    [Serializable]
-    public class EquipmentSlot : InventorySlot
-    {
-        protected override Color BaseColor => Color.green;
-    }
-    [Serializable]
-    public class ConsumableSlot : InventorySlot
-    {
-        protected override Color BaseColor => Color.blue;
-    }
+    
     [Serializable]
     public static class InventorySlotUtils
     {

@@ -1,38 +1,21 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Runtime.Serialization;
 using UnityEditor;
 using UnityEngine;
-
+using RPGFramework.Utils;
 #nullable enable
 namespace RPGFramework.Inventory {
     [Serializable]
     public class InventoryGrid : MonoBehaviour, ISerializationCallbackReceiver {
         public void OnBeforeSerialize()
         {
-            // Convert our unserializable array into a serializable list
-            serializableCells = new List<Package<InventorySlot>>();
-            for (int i = 0; i < cells.GetLength(0); i++)
-            {
-                for (int j = 0; j < cells.GetLength(1); j++)
-                {
-                    serializableCells.Add(new Package<InventorySlot>(i, j, cells[i, j]));
-                }
-            }
+            serializableCells = new Serializable2DArray<InventorySlot>(cells);  
         }
         public void OnAfterDeserialize()
         {
-            Debug.Log($"Deserializing InventoryGrid with {serializableCells.Count} cells.");
-            cells = new InventorySlot[columns, rows];
-            foreach (var package in serializableCells)
-            {
-                if (package.Element.IsEnabled) {
-                    Debug.Log($"Type: {package.Element.GetType().ToString()}");
-                }
-                if (package.Index0 < cells.GetLength(0) && package.Index1 < cells.GetLength(1)) { 
-                    cells[package.Index0, package.Index1] = package.Element;
-                }
+            if (serializableCells!=null) { 
+                cells = (InventorySlot[,])serializableCells.ToArray();
             }
         }
 
@@ -43,7 +26,7 @@ namespace RPGFramework.Inventory {
         [SerializeField, Range(1, 20)]
         public int columns = 5;
         [HideInInspector, SerializeField]
-        private List<Package<InventorySlot>> serializableCells;
+        private Serializable2DArray<InventorySlot>? serializableCells;
 
         public InventorySlot[,] cells = new InventorySlot[0, 0];
         public void ResizeIfNecessary() {
@@ -107,19 +90,6 @@ namespace RPGFramework.Inventory {
         }
     }
 
-    [System.Serializable]
-    public struct Package<TElement>
-    {
-        public int Index0;
-        public int Index1;
-        [SerializeReference]
-        public TElement Element;
-        public Package(int idx0, int idx1, TElement element)
-        {
-            Index0 = idx0;
-            Index1 = idx1;
-            Element = element;
-        }
-    }
+
     
 }

@@ -2,22 +2,25 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-
+using System;
+using RPGFramework.Utils;
 namespace RPGFramework.Inventory
 {
 #nullable enable
-    [ExecuteInEditMode]
-    public class InventoryUIGenerator : MonoBehaviour
+    [ExecuteInEditMode, Serializable]
+    public class InventoryUIGenerator : MonoBehaviour, ISerializationCallbackReceiver
     {
         [Header("UI Prefab Settings")]
         public Dictionary<string, SlotUIDefinition> slotDefinitions = new();
+        [SerializeField]
         public RectTransform? parentTransform;
 
         [Header("Cell Layout Settings")]
         public Vector2 cellSize = new Vector2(100, 100);
         public Vector2 spacing = new Vector2(5, 5);
 
-        [HideInInspector] public GameObject? lastGeneratedRoot;
+        [HideInInspector, SerializeField] 
+        private GameObject? lastGeneratedRoot;
         public void OnEnable()
         {
             ReloadSlotTypes();
@@ -85,7 +88,23 @@ namespace RPGFramework.Inventory
 
             lastGeneratedRoot = root;
         }
+        [SerializeField]
+        SerializableDictionary<string, SlotUIDefinition>? SerializableSlotDictionary;
+        public void OnBeforeSerialize()
+        {
+            SerializableSlotDictionary = new SerializableDictionary<string, SlotUIDefinition>(slotDefinitions);
+        }
+
+        public void OnAfterDeserialize()
+        {
+            if (SerializableSlotDictionary != null) { 
+                slotDefinitions = SerializableSlotDictionary.ToDictionary();
+            }
+        }
     }
+    
+    
+    [Serializable]
     public struct SlotUIDefinition
     {
         public GameObject? cellPrefab;
