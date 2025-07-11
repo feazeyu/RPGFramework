@@ -12,8 +12,8 @@ namespace RPGFramework.Inventory
     {
         [Header("UI Prefab Settings")]
         public Dictionary<string, SlotUIDefinition> slotDefinitions = new();
-        [SerializeField]
-        public RectTransform? parentTransform;
+        [SerializeField, Tooltip("Canvas to generate to")]
+        public Canvas? target;
 
         [Header("Cell Layout Settings")]
         public Vector2 cellSize = new Vector2(100, 100);
@@ -54,6 +54,11 @@ namespace RPGFramework.Inventory
             // Create root container
             var root = new GameObject("GeneratedInventoryUI");
             var rootRect = root.AddComponent<RectTransform>();
+            if (target == null) {
+                Debug.LogError("InventoryUIGenerator: Target Canvas is not set.");
+                return;
+            }
+            var parentTransform = target.transform;
             rootRect.SetParent(parentTransform != null ? parentTransform : transform, false);
             rootRect.anchorMin = Vector2.zero;
             rootRect.anchorMax = Vector2.one;
@@ -78,14 +83,17 @@ namespace RPGFramework.Inventory
                     var selectedPrefab = inventoryGrid.cells[x, y].IsEnabled ? slotDefinitions[slotType].cellPrefab : slotDefinitions[slotType].disabledCellPrefab;
                     var cellInstance = (GameObject)PrefabUtility.InstantiatePrefab(selectedPrefab, root.transform);
                     cellInstance.name = $"Cell_{x}_{y}";
-
-                    if (inventoryGrid.TryGetCell(x, y, out var cell))
+                    var uislot = cellInstance.AddComponent<UISlot>();
+                    uislot.invSlot = inventoryGrid.cells[x, y];
+                    if (uislot.invSlot.Item != null)
                     {
-
+                        Debug.Log(uislot.invSlot.Item);
+                        Instantiate(uislot.invSlot.Item, cellInstance.transform, false);
+                        Debug.Log("Generated item");
                     }
                 }
             }
-
+            GenerateDragLayer();
             lastGeneratedRoot = root;
         }
         [SerializeField]
@@ -101,6 +109,36 @@ namespace RPGFramework.Inventory
                 slotDefinitions = SerializableSlotDictionary.ToDictionary();
             }
         }
+        private void GenerateDragLayer()
+        {
+            if (target == null) {
+                Debug.LogError("InventoryUIGenerator: Target Canvas is not set.");
+                return;
+            }
+            Transform existing = target.transform.Find("DragLayer");
+            if (existing != null)
+            {
+                return;
+            }
+
+            GameObject dragLayer = new GameObject("DragLayer", typeof(RectTransform), typeof(CanvasRenderer));
+            RectTransform rectTransform = dragLayer.GetComponent<RectTransform>();
+            dragLayer.transform.SetParent(target.transform, false);
+            dragLayer.layer = LayerMask.NameToLayer("UI");
+            rectTransform.anchorMin = Vector2.zero;
+            rectTransform.anchorMax = Vector2.one;
+            rectTransform.offsetMin = Vector2.zero;
+            rectTransform.offsetMax = Vector2.zero;
+            rectTransform.pivot = new Vector2(0.5f, 0.5f);
+
+            dragLayer.transform.SetAsLastSibling();
+
+            Undo.RegisterCreatedObjectUndo(dragLayer, "Create DragLayer");
+            Selection.activeGameObject = dragLayer;
+
+            Debug.Log("DragLayer created. It is used for handling item drag and drop interactions, do not delete if u don't know what you're doing.");
+        }
+        
     }
     
     
