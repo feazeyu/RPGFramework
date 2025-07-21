@@ -1,87 +1,85 @@
+using Game.Utils;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using UnityEditor;
 using UnityEngine;
-using RPGFramework.Utils;
+
 #nullable enable
-namespace RPGFramework.Inventory {
+namespace Game.Inventory
+{
     [Serializable]
-    public class InventoryGrid : MonoBehaviour, ISerializationCallbackReceiver {
-        public void OnBeforeSerialize()
-        {
-            serializableCells = new Serializable2DArray<InventorySlot>(cells);  
-        }
-        public void OnAfterDeserialize()
-        {
-            if (serializableCells!=null) { 
-                cells = (InventorySlot[,])serializableCells.ToArray();
-            }
-        }
+    public class InventoryGrid : MonoBehaviour
+    {
+        [HideInInspector]
+        public bool suppressAutoAddUI = false;
 
-        [HideInInspector] public bool suppressAutoAddUI = false;
-
-        [SerializeField, Range(1, 20)]
+        [Range(1, 20)]
         public int rows = 5;
-        [SerializeField, Range(1, 20)]
+        [Range(1, 20)]
         public int columns = 5;
-        [HideInInspector, SerializeField]
-        private Serializable2DArray<InventorySlot>? serializableCells;
+        public Array2D<InventorySlot> Cells = new(0, 0);
 
-        public InventorySlot[,] cells = new InventorySlot[0, 0];
-        public void ResizeIfNecessary() {
-            if (cells is null || cells.GetLength(0) != columns || cells.GetLength(1) != rows) {
-                var newStates = new InventorySlot[columns, rows];
-                for (int x = 0; x < columns; x++) {
-                    for (int y = 0; y < rows; y++) {
-                        if (TryGetCell(x, y, out var existing)) {
+        public void ResizeIfNecessary()
+        {
+            if (Cells is null || Cells.Columns != columns || Cells.Rows != rows)
+            {
+                var newStates = new Array2D<InventorySlot>(columns, rows);
+                for (int x = 0; x < columns; x++)
+                {
+                    for (int y = 0; y < rows; y++)
+                    {
+                        if (TryGetCell(x, y, out var existing))
+                        {
                             newStates[x, y] = existing;
                         }
-                        else {
+                        else
+                        {
                             newStates[x, y] = new();
                         }
                     }
                 }
-                cells = newStates;
+                Cells = newStates;
             }
         }
 
         public bool TryGetCell(int x, int y, [NotNullWhen(true)] out InventorySlot? cell)
         {
-            if (cells is not null && (uint)x < (uint)cells.GetLength(0) && (uint)y < (uint)cells.GetLength(1)) {
-                cell = cells[x, y];
-                return true;
-            }
-            cell = null;
-            return false;
+            return Cells.TryGet(x, y, out cell);
         }
 
-        public void DisableAll() {
+        public void DisableAll()
+        {
             SetEnabledAll(false);
         }
 
-        public void EnableAll() {
+        public void EnableAll()
+        {
             SetEnabledAll(true);
         }
 
-        private void SetEnabledAll(bool enabled) {
-            for (int x = 0; x < cells.GetLength(0); x++) {
-                for (int y = 0; y < cells.GetLength(1); y++) {
-                    cells[x, y].IsEnabled = enabled;
+        private void SetEnabledAll(bool enabled)
+        {
+            for (int x = 0; x < Cells.Columns; x++)
+            {
+                for (int y = 0; y < Cells.Rows; y++)
+                {
+                    Cells[x, y].IsEnabled = enabled;
                 }
             }
             ResizeIfNecessary();
         }
 
-        void OnValidate()
+        private void OnValidate()
         {
 #if UNITY_EDITOR
+            //Ensure the generator UI is only added once
             if (!suppressAutoAddUI && GetComponent<InventoryUIGenerator>() == null)
             {
                 EditorApplication.delayCall += () =>
                 {
                     if (gameObject != null && gameObject.GetComponent<InventoryUIGenerator>() == null && !Application.isPlaying)
                     {
+                        suppressAutoAddUI = true;
                         Undo.AddComponent<InventoryUIGenerator>(gameObject);
                     }
                 };
@@ -89,7 +87,4 @@ namespace RPGFramework.Inventory {
 #endif
         }
     }
-
-
-    
 }

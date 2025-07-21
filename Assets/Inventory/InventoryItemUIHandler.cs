@@ -1,17 +1,17 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace RPGFramework.Inventory
+namespace Game.Inventory
 {
     public class InventoryItemUIHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
-        GameObject originalParent;
-        UISlot UISlot;
-        Canvas canvas;
-        RectTransform rectTransform;
-        CanvasGroup canvasGroup;
+        private GameObject originalParent;
+        private UISlot UISlot;
+        private Canvas canvas;
+        private RectTransform rectTransform;
+        private CanvasGroup canvasGroup;
 
-        Transform dragLayer;
+        private Transform dragLayer;
 
         public void Start()
         {
@@ -28,38 +28,41 @@ namespace RPGFramework.Inventory
                 Debug.LogWarning($"InventoryItem {gameObject.name} is not in an inventory");
 
             // Find DragLayer
-            var found = canvas.transform.Find("DragLayer");
-            if (found != null)
-                dragLayer = found;
-            else
+            dragLayer = canvas.transform.Find("DragLayer");
+            if (dragLayer == null)
+            {
                 Debug.LogError("No DragLayer found under Canvas");
+            }
         }
+
         public void OnBeginDrag(PointerEventData eventData)
         {
             originalParent = transform.parent.gameObject;
-            if (UISlot.invSlot.RemoveItem())
+            if (UISlot.inventorySlot.RemoveItem())
             {
                 transform.SetParent(dragLayer, true);
                 canvasGroup.blocksRaycasts = false;
             }
-            else { 
+            else
+            {
                 eventData.pointerDrag = null; // Prevents the item from being dragged if it cannot be removed
             }
         }
 
         public void OnDrag(PointerEventData eventData)
         {
-            if (canvas != null)
+            if (canvas == null)
             {
-                Vector2 localPoint;
-                RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                    canvas.transform as RectTransform,
-                    eventData.position,
-                    eventData.pressEventCamera,
-                    out localPoint);
-
-                rectTransform.localPosition = localPoint;
+                return;
             }
+
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                canvas.transform as RectTransform,
+                eventData.position,
+                eventData.pressEventCamera,
+                out Vector2 localPoint
+            );
+            rectTransform.localPosition = localPoint;
         }
 
         public void OnEndDrag(PointerEventData eventData)
@@ -72,7 +75,7 @@ namespace RPGFramework.Inventory
             if (target != null)
                 targetSlot = target.GetComponent<UISlot>();
 
-            if (targetSlot != null && targetSlot.invSlot.PutItem(gameObject))
+            if (targetSlot != null && targetSlot.inventorySlot.PutItem(gameObject))
             {
                 transform.SetParent(targetSlot.transform, false);
                 UISlot = targetSlot;
@@ -80,7 +83,7 @@ namespace RPGFramework.Inventory
             else
             {
                 transform.SetParent(originalParent.transform, false);
-                UISlot.invSlot.PutItem(gameObject); // Put back in original slot
+                UISlot.inventorySlot.PutItem(gameObject); // Put back in original slot
             }
             rectTransform.offsetMin = Vector2.zero;
             rectTransform.offsetMax = Vector2.zero;

@@ -1,43 +1,46 @@
+using Game.Utils;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using System;
-using RPGFramework.Utils;
-namespace RPGFramework.Inventory
-{
+
 #nullable enable
+namespace Game.Inventory
+{
     [ExecuteInEditMode, Serializable]
     public class InventoryUIGenerator : MonoBehaviour, ISerializationCallbackReceiver
     {
         [Header("UI Prefab Settings")]
         public Dictionary<string, SlotUIDefinition> slotDefinitions = new();
-        [SerializeField, Tooltip("Canvas to generate to")]
+        [Tooltip("Canvas to generate to")]
         public Canvas? target;
 
         [Header("Cell Layout Settings")]
-        public Vector2 cellSize = new Vector2(100, 100);
-        public Vector2 spacing = new Vector2(5, 5);
+        public Vector2 cellSize = new(100, 100);
+        public Vector2 spacing = new(5, 5);
 
-        [HideInInspector, SerializeField] 
+        [HideInInspector, SerializeField]
         private GameObject? lastGeneratedRoot;
+
+        [SerializeField, HideInInspector]
+        private SerializableDictionary<string, SlotUIDefinition>? serializableSlotDictionary;
+
         public void OnEnable()
         {
             ReloadSlotTypes();
         }
-        private void ReloadSlotTypes() { 
-            InventorySlotUtils.GetSlotTypeNames().ToList().ForEach(typeName => {
-                if (!slotDefinitions.ContainsKey(typeName))
-                {
-                    slotDefinitions[typeName] = new SlotUIDefinition();
-                    //Debug.Log($"InventoryUIGenerator: Added new slot type '{typeName}' to definitions.");
-                }
-            });
+
+        private void ReloadSlotTypes()
+        {
+            foreach (string typeName in InventoryHelper.GetSlotTypeNames())
+            {
+                slotDefinitions.TryAdd(typeName, default);
+            }
         }
+
         public void GenerateUI()
         {
-            var inventoryGrid = GetComponent<InventoryGrid>();
-            if (inventoryGrid == null)
+            if (!TryGetComponent<InventoryGrid>(out var inventoryGrid))
             {
                 Debug.LogError("InventoryUIGenerator: Missing InventoryGrid component.");
                 return;
@@ -54,7 +57,8 @@ namespace RPGFramework.Inventory
             // Create root container
             var root = new GameObject("GeneratedInventoryUI");
             var rootRect = root.AddComponent<RectTransform>();
-            if (target == null) {
+            if (target == null)
+            {
                 Debug.LogError("InventoryUIGenerator: Target Canvas is not set.");
                 return;
             }
@@ -75,53 +79,60 @@ namespace RPGFramework.Inventory
             {
                 for (int x = 0; x < inventoryGrid.columns; x++)
                 {
-                    var slotType = inventoryGrid.cells[x, y].GetType().Name;
-                    if (slotDefinitions[slotType].cellPrefab == null || slotDefinitions[slotType].disabledCellPrefab == null) {
+                    InventorySlot cell = inventoryGrid.Cells[x, y];
+                    SlotUIDefinition definition = slotDefinitions[cell.GetType().Name];
+
+                    if (definition.cellPrefab == null || definition.disabledCellPrefab == null)
+                    {
                         Debug.LogWarning($"InventoryUIGenerator: Cell at ({x}, {y}) is missing a prefab.");
                         continue;
                     }
-                    var selectedPrefab = inventoryGrid.cells[x, y].IsEnabled ? slotDefinitions[slotType].cellPrefab : slotDefinitions[slotType].disabledCellPrefab;
-                    var cellInstance = (GameObject)PrefabUtility.InstantiatePrefab(selectedPrefab, root.transform);
+                    GameObject selectedPrefab = cell.IsEnabled ? definition.cellPrefab : definition.disabledCellPrefab;
+                    GameObject cellInstance = (GameObject)PrefabUtility.InstantiatePrefab(selectedPrefab, root.transform);
                     cellInstance.name = $"Cell_{x}_{y}";
-                    var uislot = cellInstance.AddComponent<UISlot>();
-                    uislot.invSlot = inventoryGrid.cells[x, y];
-                    if (uislot.invSlot.Item != null)
+
+                    UISlot slot = cellInstance.AddComponent<UISlot>();
+                    slot.inventorySlot = cell;
+                    if (slot.Item != null)
                     {
-                        Debug.Log(uislot.invSlot.Item);
-                        Instantiate(uislot.invSlot.Item, cellInstance.transform, false);
-                        Debug.Log("Generated item");
+                        //Debug.Log(uislot.invSlot.Item);
+                        Instantiate(slot.Item, cellInstance.transform, false);
+                        //Debug.Log("Generated item");
                     }
                 }
             }
             GenerateDragLayer();
             lastGeneratedRoot = root;
         }
-        [SerializeField]
-        SerializableDictionary<string, SlotUIDefinition>? SerializableSlotDictionary;
+
         public void OnBeforeSerialize()
         {
-            SerializableSlotDictionary = new SerializableDictionary<string, SlotUIDefinition>(slotDefinitions);
+            serializableSlotDictionary = new SerializableDictionary<string, SlotUIDefinition>(slotDefinitions);
         }
 
         public void OnAfterDeserialize()
         {
-            if (SerializableSlotDictionary != null) { 
-                slotDefinitions = SerializableSlotDictionary.ToDictionary();
+            if (serializableSlotDictionary is not null)
+            {
+                slotDefinitions = serializableSlotDictionary.ToDictionary();
             }
         }
+
         private void GenerateDragLayer()
         {
-            if (target == null) {
+            if (target == null)
+            {
                 Debug.LogError("InventoryUIGenerator: Target Canvas is not set.");
                 return;
             }
             Transform existing = target.transform.Find("DragLayer");
             if (existing != null)
             {
+                existing.transform.SetAsLastSibling();
                 return;
             }
 
-            GameObject dragLayer = new GameObject("DragLayer", typeof(RectTransform), typeof(CanvasRenderer));
+            GameObject dragLayer = new("DragLayer", typeof(RectTransform), typeof(CanvasRenderer));
             RectTransform rectTransform = dragLayer.GetComponent<RectTransform>();
             dragLayer.transform.SetParent(target.transform, false);
             dragLayer.layer = LayerMask.NameToLayer("UI");
@@ -134,19 +145,15 @@ namespace RPGFramework.Inventory
             dragLayer.transform.SetAsLastSibling();
 
             Undo.RegisterCreatedObjectUndo(dragLayer, "Create DragLayer");
-            Selection.activeGameObject = dragLayer;
 
             Debug.Log("DragLayer created. It is used for handling item drag and drop interactions, do not delete if u don't know what you're doing.");
         }
-        
     }
-    
-    
+
     [Serializable]
     public struct SlotUIDefinition
     {
         public GameObject? cellPrefab;
         public GameObject? disabledCellPrefab;
     }
-
 }

@@ -1,47 +1,53 @@
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
-namespace RPGFramework.Utils
+
+namespace Game.Utils
 {
-    //For large dictionaries, this is going to be very slow. Don't use it.
     [Serializable]
-    public class SerializableDictionary<TKey, TValue>
+    public class SerializableDictionary<TKey, TValue> : ISerializationCallbackReceiver
     {
         [SerializeField]
-        private List<DictItem> items = new();
-        [Serializable]
-        private struct DictItem
-        {
-            public TKey Key;
-            public TValue Value;
-        }
+        private TKey[] keys;
+        [SerializeField]
+        private TValue[] values;
+
+        private Dictionary<TKey, TValue> dictionary;
+
         public SerializableDictionary(Dictionary<TKey, TValue> dict)
         {
-            FromDictionary(dict);
+            dictionary = dict;
         }
-        public void FromDictionary(Dictionary<TKey, TValue> dict)
-        {
-            foreach (var kvp in dict)
-            {
-                items.Add(new DictItem { Key = kvp.Key, Value = kvp.Value });
-            }
-        }
+
         public Dictionary<TKey, TValue> ToDictionary()
         {
-            var result = new Dictionary<TKey, TValue>();
-            foreach (var item in items)
+            return dictionary;
+        }
+
+        public void OnBeforeSerialize()
+        {
+            dictionary ??= new();
+
+            keys = new TKey[dictionary.Count];
+            values = new TValue[dictionary.Count];
+
+            int index = 0;
+            foreach (var (key, value) in dictionary)
             {
-                if (item.Key != null && item.Value != null)
-                {
-                    result[item.Key] = item.Value;
-                }
+                keys[index] = key;
+                values[index] = value;
+                index++;
             }
-            if (result.Count > 20)
+        }
+
+        public void OnAfterDeserialize()
+        {
+            dictionary ??= new();
+
+            for (int i = 0; i < keys.Length; i++)
             {
-                Debug.LogWarning($"The SerializableDictionary implementation you are using is not made with performance in mind, and may severely impact performance. Consider making your own.");
+                dictionary[keys[i]] = values[i];
             }
-            return result;
         }
     }
-
 }

@@ -1,14 +1,14 @@
-﻿
-using System;
+﻿using System;
 using UnityEngine;
 
-namespace RPGFramework.Inventory
+namespace Game.Inventory
 {
-    //[HideInInspector]
     [Serializable]
-    class UISlot : MonoBehaviour
+    internal class UISlot : MonoBehaviour
     {
+        public GameObject Item => inventorySlot.Item;
+
         [SerializeReference, HideInInspector]
-        public InventorySlot invSlot;
+        public InventorySlot inventorySlot;
     }
 }

@@ -2,20 +2,18 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace RPGFramework.Inventory
+namespace Game.Inventory
 {
     [CustomEditor(typeof(InventoryUIGenerator))]
     public class InventoryUIGeneratorEditor : Editor
     {
-        private InventoryUIGenerator generator;
         public override void OnInspectorGUI()
         {
             DrawDefaultInspector();
             GenerateEditorUI();
-            generator = (InventoryUIGenerator)target;
             if (GUILayout.Button("Generate Inventory UI"))
             {
-                generator.GenerateUI();
+                ((InventoryUIGenerator)target).GenerateUI();
             }
         }
 
@@ -24,26 +22,26 @@ namespace RPGFramework.Inventory
             GUILayout.Label("Inventory slot prefabs", EditorStyles.boldLabel);
             GUILayout.Space(10);
             Dictionary<string, SlotUIDefinition> temp = new();
-            if (generator == null) { 
-                generator = target as InventoryUIGenerator;
-            }
-            foreach (var entry in generator.slotDefinitions)
+
+            var generator = (InventoryUIGenerator)target;
+            foreach (var (name, slot) in generator.slotDefinitions)
             {
-                var slotDefinition = entry.Value;
-                GUILayout.Label($"{entry.Key}", EditorStyles.boldLabel);
-                slotDefinition.cellPrefab = (GameObject)EditorGUILayout.ObjectField(
+                GUILayout.Label($"{name}", EditorStyles.boldLabel);
+
+                SlotUIDefinition definition = slot;
+                definition.cellPrefab = (GameObject)EditorGUILayout.ObjectField(
                     $"Slot prefab",
-                    slotDefinition.cellPrefab,
+                    definition.cellPrefab,
                     typeof(GameObject),
                     false
                 );
-                slotDefinition.disabledCellPrefab = (GameObject)EditorGUILayout.ObjectField(
+                definition.disabledCellPrefab = (GameObject)EditorGUILayout.ObjectField(
                     $"Disabled slot prefab",
-                    slotDefinition.disabledCellPrefab,
+                    definition.disabledCellPrefab,
                     typeof(GameObject),
                     false
                 );
-                temp[entry.Key] = slotDefinition;
+                temp[name] = definition;
                 GUILayout.Space(10);
             }
             generator.slotDefinitions = temp;
