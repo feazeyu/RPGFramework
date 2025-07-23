@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-
 #nullable enable
 namespace Game.Inventory
 {
@@ -96,12 +95,12 @@ namespace Game.Inventory
                     if (slot.Item != null)
                     {
                         //Debug.Log(uislot.invSlot.Item);
-                        Instantiate(slot.Item, cellInstance.transform, false);
+                        var item = Instantiate(slot.Item, cellInstance.transform, false);
                         //Debug.Log("Generated item");
                     }
                 }
             }
-            GenerateDragLayer();
+            InventoryHelper.GenerateDragLayer(target);
             lastGeneratedRoot = root;
         }
 
@@ -118,36 +117,7 @@ namespace Game.Inventory
             }
         }
 
-        private void GenerateDragLayer()
-        {
-            if (target == null)
-            {
-                Debug.LogError("InventoryUIGenerator: Target Canvas is not set.");
-                return;
-            }
-            Transform existing = target.transform.Find("DragLayer");
-            if (existing != null)
-            {
-                existing.transform.SetAsLastSibling();
-                return;
-            }
-
-            GameObject dragLayer = new("DragLayer", typeof(RectTransform), typeof(CanvasRenderer));
-            RectTransform rectTransform = dragLayer.GetComponent<RectTransform>();
-            dragLayer.transform.SetParent(target.transform, false);
-            dragLayer.layer = LayerMask.NameToLayer("UI");
-            rectTransform.anchorMin = Vector2.zero;
-            rectTransform.anchorMax = Vector2.one;
-            rectTransform.offsetMin = Vector2.zero;
-            rectTransform.offsetMax = Vector2.zero;
-            rectTransform.pivot = new Vector2(0.5f, 0.5f);
-
-            dragLayer.transform.SetAsLastSibling();
-
-            Undo.RegisterCreatedObjectUndo(dragLayer, "Create DragLayer");
-
-            Debug.Log("DragLayer created. It is used for handling item drag and drop interactions, do not delete if u don't know what you're doing.");
-        }
+        
     }
 
     [Serializable]

@@ -90,7 +90,7 @@ namespace Game.Inventory
                     }
 
                     // Draw square button with no label
-                    if (GUILayout.Button(hasCell ? cell.EditorUILabel : "", GUILayout.Width(25), GUILayout.Height(25)))
+                    if (GUILayout.Button(hasCell ? cell.editorUILabel : "", GUILayout.Width(25), GUILayout.Height(25)))
                     {
                         if (!hasCell)
                         {

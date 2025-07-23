@@ -1,21 +1,27 @@
+
 using System;
 using UnityEngine;
 
 namespace Game.Inventory
 {
+    public interface HideInSelections { };
     [Serializable]
     public class InventorySlot
     {
-        [SerializeField]
-        public bool IsEnabled;
+        [SerializeReference, HideInInspector]
+        internal UISlot uiSlot;
+        [SerializeField, HideInInspector]
+        public bool IsEnabled = true;
         protected virtual Color BaseColor => Color.white;
-        public string EditorUILabel = "";
+        protected string defaultUILabel = "I";
+        [HideInInspector]
+        public string editorUILabel = "";
         [SerializeField]
         private GameObject _item;
         public GameObject Item
         {
             get => _item;
-            private set => _item = value;
+            protected set => _item = value;
         }
 
         // These methods are here only for use in the editor, to be able to force items into slots they don't belong.
@@ -24,14 +30,14 @@ namespace Game.Inventory
         public virtual bool EditorOnlyPutItem(GameObject item)
         {
             if (item == null) return false;
-            EditorUILabel = "I";
+            editorUILabel = defaultUILabel;
             Item = item;
             return true;
         }
 
         public virtual bool EditorOnlyRemoveItem()
         {
-            EditorUILabel = "";
+            editorUILabel = "";
             Item = null;
             return true;
         }
@@ -39,20 +45,21 @@ namespace Game.Inventory
         public virtual bool PutItem(GameObject item)
         {
             if (Item != null || !IsEnabled) return false;
-            EditorUILabel = "I";
+            editorUILabel = defaultUILabel;
             Item = item;
             return true;
         }
 
-        public virtual bool RemoveItem()
+        public virtual bool RemoveItem(GameObject item = null)
         {
             if (Item == null) return false;
-            EditorUILabel = "";
+            editorUILabel = "";
             Item = null;
             return true;
         }
 
         public Color Color => IsEnabled ? BaseColor : BaseColor * 0.5f;
+
     }
 
     [Serializable]
@@ -60,6 +67,49 @@ namespace Game.Inventory
     {
         protected override Color BaseColor => Color.red;
         public override bool PutItem(GameObject item) => false;
-        public override bool RemoveItem() => false;
+        public override bool RemoveItem(GameObject item) => false;
+    }
+
+    [Serializable]
+    public class ListInventorySlot : InventorySlot, HideInSelections
+    {
+        public ListInventorySlot(GameObject item)
+        {
+            Item = item;
+        }
+        [SerializeReference, HideInInspector]
+        private InventoryList _target;
+        public InventoryList Target
+        {
+            get
+            {
+                return _target;
+            }
+            set
+            {
+                _target = value;
+            }
+        }
+        public override bool PutItem(GameObject item)
+        {
+            if (Target == null)
+            {
+                Debug.LogWarning($"Trying to insert to a non existent {Target}");
+                return false;
+            }
+            return Target.PutItem(item);
+
+        }
+        public override bool RemoveItem(GameObject nonoitem)
+        {
+            if (Target == null)
+            {
+                Debug.LogWarning($"Trying to remove from a non existent {Target}");
+                return false;
+            }
+            return Target.RemoveItem(Item);
+
+        }
+
     }
 }

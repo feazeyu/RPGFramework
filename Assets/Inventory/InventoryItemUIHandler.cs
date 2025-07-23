@@ -1,3 +1,4 @@
+using Game.Utils;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -6,7 +7,7 @@ namespace Game.Inventory
     public class InventoryItemUIHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         private GameObject originalParent;
-        private UISlot UISlot;
+        private IItemContainer Slot;
         private Canvas canvas;
         private RectTransform rectTransform;
         private CanvasGroup canvasGroup;
@@ -22,9 +23,9 @@ namespace Game.Inventory
 
             canvas = GetComponentInParent<Canvas>();
             originalParent = transform.parent.gameObject;
-            UISlot = originalParent.GetComponent<UISlot>();
+            Slot = originalParent.GetComponent<IItemContainer>();
 
-            if (UISlot == null)
+            if (Slot == null)
                 Debug.LogWarning($"InventoryItem {gameObject.name} is not in an inventory");
 
             // Find DragLayer
@@ -38,7 +39,8 @@ namespace Game.Inventory
         public void OnBeginDrag(PointerEventData eventData)
         {
             originalParent = transform.parent.gameObject;
-            if (UISlot.inventorySlot.RemoveItem())
+            //TODO Tidy up this workaround, too tired to do it today.
+            if (Slot.RemoveItem(null))
             {
                 transform.SetParent(dragLayer, true);
                 canvasGroup.blocksRaycasts = false;
@@ -69,21 +71,39 @@ namespace Game.Inventory
         {
             canvasGroup.blocksRaycasts = true;
 
-            GameObject target = eventData.pointerEnter;
-            UISlot targetSlot = null;
+            GameObject target = eventData.pointerCurrentRaycast.gameObject;
+            IItemContainer targetSlot = null;
 
             if (target != null)
-                targetSlot = target.GetComponent<UISlot>();
+                if (target.GetComponent<EventRedirector>() != null)
+                {
+                    targetSlot = target.GetComponent<EventRedirector>().redirectTarget?.GetComponent<IItemContainer>();
+                    Debug.Log($"Redirecting");
+                }
+                else { 
+                    targetSlot = target.GetComponent<IItemContainer>();
+                }
 
-            if (targetSlot != null && targetSlot.inventorySlot.PutItem(gameObject))
+            if (targetSlot != null && targetSlot.PutItem(gameObject))
             {
+                ListInventorySlot oriParent = originalParent.GetComponent<UISlot>().inventorySlot as ListInventorySlot;
+                if (oriParent != null)
+                {
+                    oriParent.Target.RedrawContents();
+                    originalParent = null;
+                }
+                InventoryList targetList = targetSlot as InventoryList;
+                if (targetList != null) {
+                    Destroy(gameObject);
+                }
                 transform.SetParent(targetSlot.transform, false);
-                UISlot = targetSlot;
+                
+                Slot = targetSlot;
             }
             else
             {
                 transform.SetParent(originalParent.transform, false);
-                UISlot.inventorySlot.PutItem(gameObject); // Put back in original slot
+                Slot.PutItem(gameObject); // Put back in original slot
             }
             rectTransform.offsetMin = Vector2.zero;
             rectTransform.offsetMax = Vector2.zero;
