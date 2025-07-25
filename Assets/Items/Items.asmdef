@@ -1,9 +1,8 @@
 {
-    "name": "Inventory",
-    "rootNamespace": "Game.Inventory",
+    "name": "Items",
+    "rootNamespace": "Game.Items",
     "references": [
-        "GUID:7b6de08bf59fc834e92fca320acf1bf5",
-        "GUID:3a8d0b3f647628f4b9fce3484acfd1e5"
+        "GUID:7b6de08bf59fc834e92fca320acf1bf5"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

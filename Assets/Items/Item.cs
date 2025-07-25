@@ -2,10 +2,11 @@
 
 namespace Game.Items
 {
-    public class TestItem : Item { }
-
-    public abstract class Item
+    public abstract class Item : MonoBehaviour
     {
+        public string itemName;
+        public string itemDescription;
+        public int id;
         private int _repeats;
         public int Repeats
         {

@@ -1,21 +1,25 @@
 using Game.Utils;
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace Game.Inventory
 {
+    [Serializable]
     public class InventoryItemUIHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         private GameObject originalParent;
-        private IItemContainer Slot;
+        private IItemContainer _slot;
         private Canvas canvas;
         private RectTransform rectTransform;
         private CanvasGroup canvasGroup;
-
+        private IItemContainer _target;
         private Transform dragLayer;
-
+        private InventoryManager inventoryManager;
+        private int draggedId;
         public void Start()
         {
+            inventoryManager = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
             rectTransform = GetComponent<RectTransform>();
             canvasGroup = GetComponent<CanvasGroup>();
             if (canvasGroup == null)
@@ -23,9 +27,9 @@ namespace Game.Inventory
 
             canvas = GetComponentInParent<Canvas>();
             originalParent = transform.parent.gameObject;
-            Slot = originalParent.GetComponent<IItemContainer>();
+            _slot = originalParent.GetComponent<IItemContainer>();
 
-            if (Slot == null)
+            if (_slot == null)
                 Debug.LogWarning($"InventoryItem {gameObject.name} is not in an inventory");
 
             // Find DragLayer
@@ -39,11 +43,12 @@ namespace Game.Inventory
         public void OnBeginDrag(PointerEventData eventData)
         {
             originalParent = transform.parent.gameObject;
-            //TODO Tidy up this workaround, too tired to do it today.
-            if (Slot.RemoveItem(null))
+            gameObject.transform.SetParent(dragLayer, false);
+            int removedItemId = _slot.RemoveItem(null);
+            if (removedItemId != -1)
             {
-                transform.SetParent(dragLayer, true);
-                canvasGroup.blocksRaycasts = false;
+                draggedId = removedItemId;
+                CreateDraggedItem(draggedId);
             }
             else
             {
@@ -71,42 +76,41 @@ namespace Game.Inventory
         {
             canvasGroup.blocksRaycasts = true;
 
-            GameObject target = eventData.pointerCurrentRaycast.gameObject;
-            IItemContainer targetSlot = null;
+            GameObject dragTarget = eventData.pointerCurrentRaycast.gameObject;
 
-            if (target != null)
-                if (target.GetComponent<EventRedirector>() != null)
+            if (dragTarget != null)
+            {
+                if (dragTarget.GetComponent<EventRedirector>() != null)
                 {
-                    targetSlot = target.GetComponent<EventRedirector>().redirectTarget?.GetComponent<IItemContainer>();
+                    _target = dragTarget.GetComponent<EventRedirector>().redirectTarget.GetComponent<IItemContainer>();
                     Debug.Log($"Redirecting");
                 }
-                else { 
-                    targetSlot = target.GetComponent<IItemContainer>();
-                }
-
-            if (targetSlot != null && targetSlot.PutItem(gameObject))
-            {
-                ListInventorySlot oriParent = originalParent.GetComponent<UISlot>().inventorySlot as ListInventorySlot;
-                if (oriParent != null)
+                else
                 {
-                    oriParent.Target.RedrawContents();
-                    originalParent = null;
+                    _target = dragTarget.GetComponent<IItemContainer>();
                 }
-                InventoryList targetList = targetSlot as InventoryList;
-                if (targetList != null) {
-                    Destroy(gameObject);
-                }
-                transform.SetParent(targetSlot.transform, false);
-                
-                Slot = targetSlot;
             }
-            else
+            if (_target == null || !_target.PutItem(inventoryManager.GetItemById(draggedId)))
             {
-                transform.SetParent(originalParent.transform, false);
-                Slot.PutItem(gameObject); // Put back in original slot
+                _slot.ReturnItem(inventoryManager.GetItemById(draggedId)); // Return item to original slot
             }
-            rectTransform.offsetMin = Vector2.zero;
-            rectTransform.offsetMax = Vector2.zero;
+            Destroy(gameObject);
         }
+
+        private void CreateDraggedItem(int itemId)
+        {
+            GameObject draggedItem = inventoryManager.GetItemById(draggedId);
+            if (draggedItem == null)
+            {
+                Debug.LogError($"No item prefab found for ID {itemId}");
+                return;
+            }
+            draggedItem = Instantiate(draggedItem, gameObject.transform);
+            draggedItem.transform.localPosition = Vector3.zero;
+            draggedItem.GetComponent<RectTransform>().offsetMin = Vector2.zero;
+            draggedItem.GetComponent<RectTransform>().offsetMax = Vector2.zero;
+            canvasGroup.blocksRaycasts = false;
+        }
+
     }
 }

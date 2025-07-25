@@ -1,29 +1,59 @@
-﻿using Game.Items;
+﻿#nullable enable
+using Game.Items;
 using System;
 using UnityEngine;
 
 namespace Game.Inventory
 {
     [Serializable]
-    internal class UISlot : MonoBehaviour, IItemContainer
+    internal class UISlot : MonoBehaviour, IUIItemContainer
     {
-        private void Start()
-        {
-            inventorySlot.uiSlot = this;
-        }
-        public GameObject Item => inventorySlot.Item;
+        public GameObject? Item => inventorySlot.Item;
 
         [SerializeReference]
         public InventorySlot inventorySlot;
 
-        public bool PutItem(GameObject item)
+        public virtual bool PutItem(GameObject item)
         {
-            return inventorySlot.PutItem(item);
+            bool success = inventorySlot.PutItem(item);
+            RedrawContents();
+            return success;
         }
 
-        public bool RemoveItem(GameObject item = null)
+        public virtual int RemoveItem(GameObject? item = null)
         {
-            return inventorySlot.RemoveItem(item);
+            int removedId = inventorySlot.RemoveItem(item);
+            RedrawContents();
+            return removedId;
+        }
+
+        public virtual void ReturnItem(GameObject item) {
+            ((IItemContainer)inventorySlot).ReturnItem(item);
+            RedrawContents();
+        }
+
+        void IItemContainer.ReturnItem(GameObject item)
+        {
+            ReturnItem(item);
+        }
+
+        public virtual void RedrawContents() {
+            foreach (Transform child in transform)
+            {
+                Item? itemComponent = child.GetComponent<Item>();
+                if (itemComponent != null) {
+                    Destroy(child.gameObject);
+                }
+            }
+            if (Item != null)
+            {
+                var newitem = Instantiate(Item, transform, false);
+                InventoryHelper.CreateUIDragHandler(gameObject);
+                newitem.transform.SetAsFirstSibling();
+            }
+
         }
     }
+
+    
 }

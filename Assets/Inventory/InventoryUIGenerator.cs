@@ -78,30 +78,35 @@ namespace Game.Inventory
             {
                 for (int x = 0; x < inventoryGrid.columns; x++)
                 {
-                    InventorySlot cell = inventoryGrid.Cells[x, y];
-                    SlotUIDefinition definition = slotDefinitions[cell.GetType().Name];
-
-                    if (definition.cellPrefab == null || definition.disabledCellPrefab == null)
-                    {
-                        Debug.LogWarning($"InventoryUIGenerator: Cell at ({x}, {y}) is missing a prefab.");
-                        continue;
-                    }
-                    GameObject selectedPrefab = cell.IsEnabled ? definition.cellPrefab : definition.disabledCellPrefab;
-                    GameObject cellInstance = (GameObject)PrefabUtility.InstantiatePrefab(selectedPrefab, root.transform);
-                    cellInstance.name = $"Cell_{x}_{y}";
-
-                    UISlot slot = cellInstance.AddComponent<UISlot>();
-                    slot.inventorySlot = cell;
-                    if (slot.Item != null)
-                    {
-                        //Debug.Log(uislot.invSlot.Item);
-                        var item = Instantiate(slot.Item, cellInstance.transform, false);
-                        //Debug.Log("Generated item");
-                    }
+                    GenerateSlot(inventoryGrid, root, x, y);
                 }
             }
             InventoryHelper.GenerateDragLayer(target);
             lastGeneratedRoot = root;
+        }
+
+        private void GenerateSlot(InventoryGrid inventoryGrid, GameObject root, int x, int y)
+        {
+            InventorySlot cell = inventoryGrid.Cells[x, y];
+            SlotUIDefinition definition = slotDefinitions[cell.GetType().Name];
+
+            if (definition.cellPrefab == null || definition.disabledCellPrefab == null)
+            {
+                Debug.LogWarning($"InventoryUIGenerator: Cell at ({x}, {y}) is missing a prefab.");
+                return;
+            }
+            GameObject selectedPrefab = cell.IsEnabled ? definition.cellPrefab : definition.disabledCellPrefab;
+            GameObject cellInstance = (GameObject)PrefabUtility.InstantiatePrefab(selectedPrefab, root.transform);
+            cellInstance.name = $"Cell_{x}_{y}";
+
+            UISlot slot = cellInstance.AddComponent<UISlot>();
+            slot.inventorySlot = cell;
+            if (slot.Item != null)
+            {
+                //Debug.Log(uislot.invSlot.Item);
+                Instantiate(slot.Item, cellInstance.transform, false);
+                InventoryHelper.CreateUIDragHandler(cellInstance);
+            }
         }
 
         public void OnBeforeSerialize()

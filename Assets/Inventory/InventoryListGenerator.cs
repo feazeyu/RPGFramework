@@ -8,7 +8,7 @@ namespace Game.Inventory
     {
         public int capacity = 20;
         [SerializeField]
-        private List<ListInventorySlot> contents;
+        private List<InventorySlot> contents;
         [Tooltip("Background behind the item name.")]
         public GameObject slotPrefab;
         public Canvas targetCanvas;
@@ -19,8 +19,8 @@ namespace Game.Inventory
         [Tooltip("Set first inventory element's position relative to the resulting inventory object")]
         public Vector2 firstElementPosition = new Vector2(0, 0);
         public Vector2 margin = new Vector2(0, 0);
+        private InventoryList target;
         private void GenerateInventoryObject() {
-            InventoryList target = null;
             if (inventoryContainerOverride == null)
             {
                 inventoryObject = Instantiate(new GameObject(), targetCanvas.transform);
@@ -50,26 +50,11 @@ namespace Game.Inventory
             {
                 DestroyImmediate(inventoryObject.transform.GetChild(0).gameObject);
             }
-            Utils.EventRedirector.AddEventRedirector(inventoryObject, inventoryObject);
-            int i = 0;
-            foreach (InventorySlot slot in contents)
-            {
-                DrawSlotUI(slot, i);
-                i++;
+            if (target == null) {
+                target = inventoryObject.GetComponent<InventoryList>();
             }
+            target.GenerateUI();
         }
-        protected void DrawSlotUI(InventorySlot slot, int offset) { 
-            if(slot.Item != null)
-            {
-                var slotUIElement = Instantiate(slotPrefab, inventoryObject.GetComponent<RectTransform>());
-                slotUIElement.GetComponent<RectTransform>().anchoredPosition = new Vector3(firstElementPosition.x + margin.x*offset, firstElementPosition.y-offset * slotPrefab.transform.GetComponent<RectTransform>().sizeDelta.y-offset*margin.y, 0);
-                slotUIElement.AddComponent<UISlot>().inventorySlot = slot;
-                if (slot.Item != null) { 
-                    Instantiate(slot.Item, slotUIElement.transform);
-                }
-            }
-        }
-
 
     }
 }

@@ -1,10 +1,6 @@
 ﻿using Game.Items;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Schema;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -15,7 +11,7 @@ namespace Game.Inventory
     {
         public int capacity = 20;
         [SerializeReference]
-        public List<ListInventorySlot> contents = new();
+        public List<InventorySlot> contents = new();
         [Tooltip("Background behind the item name.")]
         public GameObject slotPrefab;
         public Vector2 firstElementPosition = new Vector2(0, 0);
@@ -27,36 +23,29 @@ namespace Game.Inventory
                 Debug.LogWarning($"The InventoryList {gameObject} is missing a RectTransform. Some functionality may be affected.");
             }
             dragLayer = GameObject.Find("DragLayer");
-            if (dragLayer == null) {
-                Debug.LogWarning($"No DragLayer found, drag and drop won't work.");
-            }
-            foreach (var slot in contents)
+            if (dragLayer == null)
             {
-                if (slot == null)
-                {
-                    Debug.LogWarning("Found a null slot in the contents of InventoryList. This may cause issues.");
-                    continue;
-                }
-                slot.Target = this;
+                Debug.LogWarning($"No DragLayer found, drag and drop won't work.");
             }
             RedrawContents();
         }
         public void OnEndDrag(PointerEventData eventData)
         {
-            Debug.Log($"End drag event on {gameObject.name} at position {eventData.position} with delta {eventData.delta}");
+            //Debug.Log($"End drag event on {gameObject.name} at position {eventData.position} with delta {eventData.delta}");
         }
 
         public void OnScroll(PointerEventData eventData)
         {
-            Debug.Log($"Scroll event on {gameObject.name} with delta {eventData.scrollDelta}");
+            //Debug.Log($"Scroll event on {gameObject.name} with delta {eventData.scrollDelta}");
         }
         public void RedrawContents()
         {
-            
-            foreach (Transform child in gameObject.transform)
-            {
-                Destroy(child.gameObject);
-            }
+            RemoveChildren();
+            GenerateUI();
+        }
+
+        public void GenerateUI()
+        {
             Utils.EventRedirector.AddEventRedirector(gameObject, gameObject);
             int i = 0;
             foreach (InventorySlot slot in contents)
@@ -65,24 +54,31 @@ namespace Game.Inventory
                 i++;
             }
         }
-        protected void DrawSlotUI(InventorySlot slot, int offset)
+
+        private void RemoveChildren() {
+            foreach (Transform child in gameObject.transform)
+            {
+                Destroy(child.gameObject);
+            }
+        }
+        public void DrawSlotUI(InventorySlot slot, int offset)
         {
             if (slot.Item != null)
             {
                 var slotUIElement = Instantiate(slotPrefab, gameObject.GetComponent<RectTransform>());
                 slotUIElement.GetComponent<RectTransform>().anchoredPosition = new Vector3(firstElementPosition.x + margin.x*offset, firstElementPosition.y-offset * slotPrefab.transform.GetComponent<RectTransform>().sizeDelta.y-offset*margin.y, 0);
-                slotUIElement.AddComponent<UISlot>().inventorySlot = slot;
-                ((ListInventorySlot)slotUIElement.GetComponent<UISlot>().inventorySlot).Target = this;
+                slotUIElement.AddComponent<ListUISlot>().inventorySlot = slot;
+                slotUIElement.GetComponent<ListUISlot>().target = this;
                 if (slot.Item!=null) { 
                     Instantiate(slot.Item, slotUIElement.transform);
                 }
+                InventoryHelper.CreateUIDragHandler(slotUIElement);
             }
         }
         public bool PutItem(GameObject item)
         {
             if (contents.Count < capacity) {
-                var newSlot = new ListInventorySlot(item);
-                newSlot.Target = this;
+                var newSlot = new InventorySlot(item);
                 contents.Add(newSlot);
                 RedrawContents();
                 return true;
@@ -90,17 +86,19 @@ namespace Game.Inventory
             return false;
         }
 
-        public bool RemoveItem(GameObject item)
+        public int RemoveItem(GameObject item)
         {
             var itemSlot = FindSlotByItem(item);
-            if (itemSlot != null) { 
+            if (itemSlot != null) {
+                int itemId = itemSlot.ItemId;
                 contents.Remove(itemSlot);
-                return true;
+                RedrawContents();
+                return itemId;
             }
-            return false;
+            return -1;
         }
 
-        private ListInventorySlot FindSlotByItem(GameObject item) {
+        private InventorySlot FindSlotByItem(GameObject item) {
             foreach (var slot in contents)
             {
                 if (slot.Item != null && slot.Item == item)
