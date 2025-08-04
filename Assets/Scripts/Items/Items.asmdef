@@ -1,0 +1,16 @@
+{
+    "name": "Items",
+    "rootNamespace": "Game.Items",
+    "references": [
+        "GUID:d4d0fdff77b93224e90130945fc2c196"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
