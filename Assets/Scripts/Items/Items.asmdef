@@ -2,7 +2,8 @@
     "name": "Items",
     "rootNamespace": "Game.Items",
     "references": [
-        "GUID:d4d0fdff77b93224e90130945fc2c196"
+        "GUID:d4d0fdff77b93224e90130945fc2c196",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

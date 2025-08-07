@@ -109,19 +109,25 @@ namespace Game.Inventory
             slot.position = new Vector2Int(x, y);
             CreateSlotItem(inventoryGrid, slot);
         }
-        private void CreateSlotItem(InventoryGrid grid, GridUISlot slot) {
+        private void CreateSlotItem(InventoryGrid grid, GridUISlot slot)
+        {
             GameObject? item = slot.target.GetItem(slot.position);
             var anchor = grid.Cells[slot.position.x, slot.position.y].anchorPosition;
             if (item != null)
             {
                 var itemInstance = Instantiate(slot.target.GetItem(slot.position), slot.transform);
+                if (itemInstance == null) // Check to make the compiler happy
+                {
+                    Debug.LogError($"InventoryUIGenerator: Item at {slot.position} failed to instantiate... how?");
+                    return;
+                }   
                 var canvas = itemInstance.AddComponent<Canvas>();
                 canvas.overrideSorting = true;
-                
+
                 InventoryHelper.CreateUIDragHandler(slot.gameObject);
-                
+
             }
-            else if (anchor != new Vector2Int(-1,-1))
+            else if (anchor != new Vector2Int(-1, -1))
             {
                 var redirect = InventoryHelper.CreateUIDragHandler(slot.gameObject, true);
                 redirect.GetComponent<InventoryItemUIRedirectingHandler>().targetPosition = anchor;

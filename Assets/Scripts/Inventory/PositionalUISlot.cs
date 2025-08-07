@@ -6,7 +6,7 @@ using Game.Items;
 namespace Game.Inventory
 {
     [Serializable]
-    internal class PositionalUISlot : MonoBehaviour, IUIItemContainer
+    internal class PositionalUISlot : MonoBehaviour, IUIItemContainer, ISingleItemContainer
     {
         public Vector2Int position;
         public IUIPositionalItemContainer target;

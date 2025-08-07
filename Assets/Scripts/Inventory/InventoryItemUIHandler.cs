@@ -1,3 +1,4 @@
+using Game.Core.Utilities;
 using Game.Items;
 using Game.Utils;
 using System;
@@ -9,16 +10,19 @@ using UnityEngine.UI;
 namespace Game.Inventory
 {
     [Serializable]
-    public class InventoryItemUIHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+    public class InventoryItemUIHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
     {
         private GameObject originalParent;
-        private IItemContainer _slot;
+        private ISingleItemContainer _slot;
         private Canvas canvas;
         private RectTransform rectTransform;
         private CanvasGroup canvasGroup;
         private IItemContainer _target;
         private Transform dragLayer;
         private int draggedId;
+        private bool cursorInside = false;
+        private bool tooltipShown = false;
+        private Coroutine tooltipDisplayCoroutine;
         public void Start()
         {
             rectTransform = GetComponent<RectTransform>();
@@ -28,7 +32,7 @@ namespace Game.Inventory
 
             canvas = GetComponentInParent<Canvas>();
             originalParent = GetOriginalParent();
-            _slot = originalParent.GetComponent<IItemContainer>();
+            _slot = originalParent.GetComponent<ISingleItemContainer>();
 
             if (_slot == null)
                 Debug.LogWarning($"InventoryItem {gameObject.name} is not in an inventory");
@@ -48,6 +52,7 @@ namespace Game.Inventory
 
         public virtual void OnBeginDrag(PointerEventData eventData)
         {
+            HideTooltip();
             originalParent = GetOriginalParent();
             gameObject.transform.SetParent(dragLayer, false);
             int removedItemId = _slot.RemoveItem();
@@ -133,6 +138,71 @@ namespace Game.Inventory
             }
 
             return null;
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            if (_slot == null)
+            {
+                return; // No item to display tooltip for
+            }
+            cursorInside = true;
+            tooltipDisplayCoroutine = StartCoroutine(DisplayTooltip(eventData));
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            cursorInside = false;
+            StopCoroutine(tooltipDisplayCoroutine);
+            HideTooltip();
+        }
+        private static readonly Vector2[] corners = {new Vector2(0f,0f), new Vector2(1f,0f), new Vector2(1f,1f), new Vector2(0f,1f)};
+        private IEnumerator<WaitForSeconds> DisplayTooltip(PointerEventData eventData)
+        {
+            yield return new WaitForSeconds(0.5f);
+            if (cursorInside)
+            {
+                tooltipShown = true;
+                var tooltip = _slot.Item.GetComponent<Item>().DisplayTooltip(canvas.transform);
+                if (tooltip != null)
+                {
+                    RectTransform tooltipRect = tooltip.GetComponent<RectTransform>();
+                    if (tooltipRect != null)
+                    {
+                        // Set the pivot to top-left by default (can be adjusted for better positioning)
+                        tooltipRect.pivot = new Vector2(0f, 1f);
+
+                        // Convert screen position to local position in canvas
+                        Vector2 localPoint;
+                        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                            canvas.transform as RectTransform,
+                            eventData.position,
+                            eventData.pressEventCamera,
+                            out localPoint
+                        );
+
+                        // Set the tooltip position to the mouse cursor position
+                        tooltipRect.anchoredPosition = localPoint;
+
+                        foreach (var corner in corners)
+                        {
+                            tooltipRect.pivot = corner;
+                            if (RectBoundCheck.IsElementWithinAnother(canvas.GetComponent<RectTransform>(), tooltipRect))
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        private void HideTooltip()
+        {
+            if (tooltipShown)
+            {
+                tooltipShown = false;
+                _slot.Item.GetComponent<Item>().HideTooltip();
+            }
         }
     }
 }

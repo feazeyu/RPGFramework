@@ -19,6 +19,10 @@ namespace Game.Inventory
                     Debug.LogError("GridUISlot: Target is not set.");
                     return null;
                 }
+                if(anchorSlotPosition == new Vector2Int(-1,-1))
+                {
+                    return target.GetItem(position);
+                }
                 return target.GetItem(anchorSlotPosition);
             }
         }

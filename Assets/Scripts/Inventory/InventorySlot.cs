@@ -7,7 +7,7 @@ namespace Game.Inventory
 {
     public interface IHideInSelections { };
     [Serializable]
-    public class InventorySlot : IItemContainer
+    public class InventorySlot : ISingleItemContainer
     {
         public Vector2Int position = Vector2Int.zero;
 

@@ -15,9 +15,9 @@ namespace Game.Items
         [SerializeField]
         private string _name = string.Empty;
 
-        public Texture2D? Icon => _icon;
+        public Sprite? Icon => _icon;
         [SerializeField]
-        private Texture2D? _icon = null;
+        private Sprite? _icon = null;
 
         public ItemTarget Target => _target;
         [SerializeField]

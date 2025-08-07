@@ -11,6 +11,14 @@ namespace Game.Items
     {
         public Vector2Int[] Positions;
 
+        public bool[,] GetBoolGrid(int dimension = 5) {
+            bool[,] bools = new bool[dimension,dimension];
+            foreach (Vector2Int i in Positions)
+            {
+                bools[i.x,i.y] = true;
+            }
+            return bools;
+        }
         public readonly Vector2Int GetOffset()
         {
             if (Positions is null or { Length: 0 })

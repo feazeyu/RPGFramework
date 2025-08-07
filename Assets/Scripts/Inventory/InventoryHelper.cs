@@ -95,6 +95,10 @@ namespace Game.Inventory
             PutItem(item);
         }
     }
+    public interface ISingleItemContainer : IItemContainer
+    {
+        GameObject? Item { get; }
+    }
     public interface IPositionalItemContainer : IItemContainer
     {
         int IItemContainer.RemoveItem()
