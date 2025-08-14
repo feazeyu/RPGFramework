@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 namespace Game.Character
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class PlayerController : Entity
+    public class PlayerController : MonoBehaviour
     {
         [Header("Movement Settings")]
         public float moveSpeed = 5f;

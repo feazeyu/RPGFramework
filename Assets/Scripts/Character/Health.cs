@@ -16,8 +16,6 @@ namespace Game.Character
         
         [SerializeField]
         private float _health;
-        [SerializeField, HideInInspector]
-        private Entity _entity;
         public float maxHealth;
         public float HealthPoints
         {
@@ -41,13 +39,13 @@ namespace Game.Character
                 }
             }
         }
+        /// <summary>
+        /// Percent as a value between 0 and 1
+
         public float HealthPercent
         {
             get => _health / maxHealth;
             set => HealthPoints = value * maxHealth;
-        }
-        private Entity GetEntity() { 
-            return GetComponent<Entity>();
         }
 
     }
