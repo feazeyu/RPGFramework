@@ -12,15 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d66b38050acbfe468440ae2016ab08e, type: 3}
   m_Name: NewAbility
   m_EditorClassIdentifier: 
-  defaultCaster: {x: 0, y: 0, z: 0}
+  defaultCaster: {x: 1.4376912, y: 8.3105545, z: 0}
   defaultTarget: {x: 6.24, y: 9.3, z: 0}
   steps:
   - rid: 8057927398894338149
   - rid: 8057927398894338150
-  lineColor: {r: 0.7735849, g: 0.31746176, b: 0.31746176, a: 0.85}
-  fillColor: {r: 0.1, g: 0.8, b: 0.2, a: 0.15}
-  projectileColor: {r: 0.2, g: 0.6, b: 1, a: 0.25}
-  explosionColor: {r: 1, g: 0.3, b: 0.2, a: 0.25}
+  lineColor:
+    r: 1
+    g: 0
+    b: 0
+    a: 0.85
+  fillColor:
+    r: 0.20140618
+    g: 0.5849056
+    b: 0.25526848
+    a: 0.15
   references:
     version: 2
     RefIds:
@@ -28,11 +34,9 @@ MonoBehaviour:
       type: {class: ProjectileStep, ns: RPGFramework.Abilities, asm: Assembly-CSharp}
       data:
         speed: 12
-        maxRange: 5.4359093
+        maxRange: 20.216494
         radius: 1.6347351
-        trajectory: 0
-        gravity: 0
-        runtimeProjectilePrefab: {fileID: 2627398030570870322, guid: ffe051125558f5e46a65c9f7e8d6a368, type: 3}
+        projectilePrefab: {fileID: 0}
     - rid: 8057927398894338150
       type: {class: ExplosionStep, ns: RPGFramework.Abilities, asm: Assembly-CSharp}
       data:
