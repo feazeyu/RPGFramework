@@ -2,7 +2,8 @@
     "name": "Abilities",
     "rootNamespace": "",
     "references": [
-        "GUID:d4d0fdff77b93224e90130945fc2c196"
+        "GUID:d4d0fdff77b93224e90130945fc2c196",
+        "GUID:64d855b201eaf6845a7189ef749e4235"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

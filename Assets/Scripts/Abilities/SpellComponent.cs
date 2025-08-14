@@ -1,5 +1,6 @@
 using Game.Core.Utilities;
 using UnityEngine;
+using Game.Character;
 namespace Game.Abilities { 
 internal class SpellComponent : ScriptableObject
 {

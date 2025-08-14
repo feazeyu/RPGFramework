@@ -26,7 +26,7 @@ namespace Game.Character
 
             Health health = GetComponent<Health>();
             if (health != null) { 
-                health.onHealthReachesZero += Die;
+                health.onResourceReachesZero += Die;
             }
         }
 
@@ -34,7 +34,7 @@ namespace Game.Character
         {
             Health health = GetComponent<Health>();
             if (health != null) { 
-                health.onHealthReachesZero -= Die;
+                health.onResourceReachesZero -= Die;
             }
         }
 
