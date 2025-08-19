@@ -1,16 +1,15 @@
-﻿using Game.Character;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Game.Abilities
+namespace Game.Character
 {
     [Serializable]
-    internal class Spell : ScriptableObject
+    internal class CompositeSpell : ScriptableObject
     {
-        [SerializeReference]
-        public List<SpellComponent> Components;
+        [SerializeField]
+        private List<Spell> Components = new List<Spell>();
         [SerializeField, HideInInspector]
         private int _manaCost;
         public int ManaCost
@@ -103,7 +102,7 @@ namespace Game.Abilities
         [UnityEditor.MenuItem("Assets/Create/Abilities/Spell")]
         public static void CreateSpell()
         {
-            var asset = ScriptableObject.CreateInstance<Spell>();
+            var asset = ScriptableObject.CreateInstance<CompositeSpell>();
             string path = UnityEditor.AssetDatabase.GenerateUniqueAssetPath("Assets/NewSpell.asset");
             UnityEditor.AssetDatabase.CreateAsset(asset, path);
             UnityEditor.AssetDatabase.SaveAssets();

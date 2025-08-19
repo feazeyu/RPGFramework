@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 namespace Game.Character
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : Entity
     {
         [Header("Movement Settings")]
         public float moveSpeed = 5f;
@@ -20,11 +20,11 @@ namespace Game.Character
         private void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
-
+            GetResourceComponents();
             if (mainCamera == null)
                 mainCamera = Camera.main;
 
-            Health health = GetComponent<Health>();
+            Health health = resources[ResourceTypes.Health] as Health;
             if (health != null) { 
                 health.onResourceReachesZero += Die;
             }
@@ -32,7 +32,7 @@ namespace Game.Character
 
         private void OnDestroy()
         {
-            Health health = GetComponent<Health>();
+            Health health = resources[ResourceTypes.Health] as Health;
             if (health != null) { 
                 health.onResourceReachesZero -= Die;
             }
