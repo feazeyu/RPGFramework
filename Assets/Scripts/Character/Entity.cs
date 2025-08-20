@@ -21,7 +21,7 @@ namespace Game.Character
             }
         }
 
-        public GameObject? Cast(Spell spell) { 
+        public GameObject? Cast(SpellInfo spell) { 
             foreach (var resourceCost in spell.resourceCosts)
             {
                 if (!resources.TryGetValue(resourceCost.Key, out var resource) || resource.Points < resourceCost.Value)
@@ -38,7 +38,8 @@ namespace Game.Character
                     resource.Points -= resourceCost.Value;
                 }
             }
-            return Instantiate(spell.prefab);
+            var SpellObject = Instantiate(spell.prefab);
+            return SpellObject;
         }
     }
 }

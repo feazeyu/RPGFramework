@@ -9,7 +9,7 @@ namespace Game.Character
     internal class CompositeSpell : ScriptableObject
     {
         [SerializeField]
-        private List<Spell> Components = new List<Spell>();
+        private List<SpellInfo> Components = new List<SpellInfo>();
         [SerializeField, HideInInspector]
         private int _manaCost;
         public int ManaCost
@@ -99,11 +99,11 @@ namespace Game.Character
         }
 
 #if UNITY_EDITOR
-        [UnityEditor.MenuItem("Assets/Create/Abilities/Spell")]
+        [UnityEditor.MenuItem("Assets/Create/Abilities/CompositeSpell")]
         public static void CreateSpell()
         {
             var asset = ScriptableObject.CreateInstance<CompositeSpell>();
-            string path = UnityEditor.AssetDatabase.GenerateUniqueAssetPath("Assets/NewSpell.asset");
+            string path = UnityEditor.AssetDatabase.GenerateUniqueAssetPath("Assets/NewCompositeSpell.asset");
             UnityEditor.AssetDatabase.CreateAsset(asset, path);
             UnityEditor.AssetDatabase.SaveAssets();
             UnityEditor.EditorUtility.FocusProjectWindow();
