@@ -6,7 +6,6 @@ namespace Game.Character
     {
         [Header("Projectile Settings")]
         public GameObject prefab;
-        public Transform spawnPoint;
         public float speed = 10f;
         public float range = 20f;
         public float damage = 5f;

@@ -1375,9 +1375,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0aba3df66bd95d41937b834413645d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resources:
+    pairs: []
   moveSpeed: 5
   mainCamera: {fileID: 1398394598}
   weaponPivot: {fileID: 651837780}
+  spellToCast: {fileID: 11400000, guid: f0cf391c20c226742b847b26aaf0b6c9, type: 2}
 --- !u!50 &651837778
 Rigidbody2D:
   serializedVersion: 5
@@ -1634,8 +1637,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1185b4f80af0ef4788b8cbd191a27da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _amount: 0
-  maxAmount: 0
+  _amount: 50
+  maxAmount: 50
 --- !u!1 &713638568
 GameObject:
   m_ObjectHideFlags: 0
@@ -3234,7 +3237,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1398394596}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 5.4, y: 5.23, z: -8.684467}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5303,7 +5306,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 447442664}
   - {fileID: 467750075}
-  - {fileID: 1398394599}
   - {fileID: 2044099796}
   - {fileID: 1464078103}
   - {fileID: 651837780}
+  - {fileID: 1398394599}

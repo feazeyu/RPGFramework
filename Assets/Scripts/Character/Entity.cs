@@ -39,6 +39,8 @@ namespace Game.Character
                 }
             }
             var SpellObject = Instantiate(spell.prefab);
+            SpellObject.transform.position = transform.position;
+            SpellObject.transform.rotation = transform.rotation;
             return SpellObject;
         }
     }

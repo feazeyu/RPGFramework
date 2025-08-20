@@ -11,7 +11,7 @@ namespace Game.Character
         [Header("References")]
         public Camera mainCamera;
         public Transform weaponPivot; 
-
+        public SpellInfo spellToCast;
         private Rigidbody2D rb;
         private Vector2 moveInput;
         private Vector2 aimInput;
@@ -103,7 +103,7 @@ namespace Game.Character
         {
             if (isShooting)
             {
-                Debug.Log("Pew pew!");
+                Cast(spellToCast);
             }
         }
 
