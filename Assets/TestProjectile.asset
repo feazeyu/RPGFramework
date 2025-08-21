@@ -16,7 +16,7 @@ MonoBehaviour:
   speed: 10
   range: 20
   damage: 5
-  cooldown: 1
+  cooldown: 200
   resourceCosts:
     pairs:
     - Key: 0

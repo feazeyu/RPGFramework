@@ -9,7 +9,8 @@ namespace Game.Character
         public float speed = 10f;
         public float range = 20f;
         public float damage = 5f;
-        public float cooldown = 1f;
+        //Cooldown in milliseconds
+        public float cooldown = 100;
         public SerializableDictionary<ResourceTypes, float> resourceCosts;
 #if UNITY_EDITOR
         [UnityEditor.MenuItem("Assets/Create/Abilities/SpellInfo")]

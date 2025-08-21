@@ -28,10 +28,11 @@ namespace Game.Abilities
         }
         public virtual void OnCollisionEnter2D(Collision2D collision)
         {
-
-            OnHit?.Invoke(collision.gameObject);
-            Destroy(gameObject);
-
+            // Collide only with other layers.
+            if (collision.gameObject.layer != gameObject.layer) { 
+                OnHit?.Invoke(collision.gameObject);
+                Destroy(gameObject);
+            }
         }
 
         public virtual void OnDestroy()

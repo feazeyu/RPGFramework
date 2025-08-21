@@ -38,7 +38,7 @@ namespace Game.Character
             }
         }
 
-        private void Update()
+        public void Update()
         {
             HandleAiming();
             HandleAttack();

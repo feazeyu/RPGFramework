@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using Game.Core.Utilities;
+using System;
 namespace Game.Character
 {
     public class Entity : MonoBehaviour
     {
         public SerializableDictionary<ResourceTypes, Resource> resources;
+        public SerializableDictionary<SpellInfo, DateTime> spellCooldowns;
 
         public void GetResourceComponents()
         {
@@ -21,7 +23,15 @@ namespace Game.Character
             }
         }
 
-        public GameObject? Cast(SpellInfo spell) { 
+        public GameObject? Cast(SpellInfo spell) {
+            if (!spellCooldowns.TryGetValue(spell, out var cooldown)) {
+                spellCooldowns[spell] = DateTime.Now;
+            }
+            if (cooldown > DateTime.Now)
+            {
+                return null; // Spell is on cooldown
+            }
+
             foreach (var resourceCost in spell.resourceCosts)
             {
                 if (!resources.TryGetValue(resourceCost.Key, out var resource) || resource.Points < resourceCost.Value)
@@ -39,6 +49,7 @@ namespace Game.Character
                 }
             }
             var SpellObject = Instantiate(spell.prefab);
+            spellCooldowns[spell] = DateTime.Now.AddMilliseconds(spell.cooldown);
             SpellObject.transform.position = transform.position;
             SpellObject.transform.rotation = transform.rotation;
             return SpellObject;
