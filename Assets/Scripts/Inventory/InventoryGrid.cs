@@ -165,5 +165,19 @@ namespace Game.Inventory
         {
             return Cells.TryGet(position.x, position.y, out var cell) ? cell.Item : null;
         }
+
+        public void ToggleInventory() { 
+            if(uiGenerator)
+                uiGenerator.ToggleInventoryActiveState();
+        }
+        public void OpenInventory() {
+            if(uiGenerator)
+            uiGenerator.SetInventoryActiveState(true);
+        }
+
+        public void CloseInventory() {
+            if (uiGenerator)
+                uiGenerator.SetInventoryActiveState(false);
+        }
     }
 }

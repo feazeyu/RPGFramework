@@ -104,7 +104,9 @@ namespace Game.Items
 
         public void HideTooltip()
         {
-            descriptionObject.SetActive(false);
+            if (descriptionObject) { 
+                descriptionObject.SetActive(false);
+            }
         }
 
     }

@@ -147,8 +147,19 @@ namespace Game.Inventory
             }
         }
 
+        public void SetInventoryActiveState(bool active) { 
+            if(lastGeneratedRoot)
+            lastGeneratedRoot.SetActive(active);
+        }
+        public void ToggleInventoryActiveState() { 
+            if(lastGeneratedRoot)
+                SetInventoryActiveState(!lastGeneratedRoot.activeSelf);
+        }
 
     }
+
+
+
 
     [Serializable]
     public struct SlotUIDefinition

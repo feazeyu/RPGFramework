@@ -7,56 +7,53 @@ namespace Game.Inventory
 {
     public class InventoryListGenerator : MonoBehaviour
     {
-        public int capacity = 20;
-        [SerializeField]
-        private List<StackableInventorySlot> contents;
+        public InventoryList list;
+        private InventoryListUI target;
         [Tooltip("Background behind the item name.")]
         public GameObject slotPrefab;
         public Canvas targetCanvas;
         [SerializeField, HideInInspector]
-        private GameObject inventoryObject;
+        private GameObject UIObject;
         [Tooltip("If unset, will generate an empty object.")]
         public GameObject inventoryContainerOverride;
         [Tooltip("Set first inventory element's position relative to the resulting inventory object")]
         public Vector2 firstElementPosition = new Vector2(0, 0);
         public Vector2 margin = new Vector2(0, 0);
-        private InventoryList target;
         private void GenerateInventoryObject()
         {
             if (inventoryContainerOverride == null)
             {
-                inventoryObject = new GameObject("ListInventory");
-                inventoryObject.transform.parent = targetCanvas.transform;
-                target = inventoryObject.AddComponent<InventoryList>();
+                UIObject = new GameObject("ListInventoryUI");
+                UIObject.transform.parent = targetCanvas.transform;
+                target = UIObject.AddComponent<InventoryListUI>();
                 target.gameObject.AddComponent<RectTransform>();
                 target.margin = margin;
                 target.firstElementPosition = firstElementPosition;
-                Utils.EventRedirector.AddEventRedirector(inventoryObject, inventoryObject);
+                Utils.EventRedirector.AddEventRedirector(UIObject, UIObject);
             }
             else
             {
 #if UNITY_EDITOR
-                inventoryObject = (GameObject)PrefabUtility.InstantiatePrefab(inventoryContainerOverride, targetCanvas.transform);
+                UIObject = (GameObject)PrefabUtility.InstantiatePrefab(inventoryContainerOverride, targetCanvas.transform);
 #else
                 inventoryObject = Instantiate(inventoryContainerOverride, targetCanvas.transform);
 #endif
-                target = inventoryObject.GetComponent<InventoryList>();
+                target = UIObject.GetComponent<InventoryListUI>();
             }
             if (target!=null)
             {
-                target.capacity = capacity;
-                target.contents = contents;
+                target.list = list;
                 target.slotPrefab = slotPrefab;
             }
         }
         public void DrawContents()
         {
-            DestroyImmediate(inventoryObject);
+            DestroyImmediate(UIObject);
             GenerateInventoryObject();
 
             if (target == null)
             {
-                target = inventoryObject.GetComponent<InventoryList>();
+                target = UIObject.GetComponent<InventoryListUI>();
             }
             target.CreateOriginPoint();
             target.GenerateUI();
