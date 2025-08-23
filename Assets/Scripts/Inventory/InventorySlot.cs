@@ -18,29 +18,35 @@ namespace Game.Inventory
         public InventorySlot(GameObject item)
         {
             ItemId = item.GetComponent<Item>().info.id;
+            IsEnabled = true;
         }
         public InventorySlot(GameObject item, Vector2Int position)
         {
             ItemId = item.GetComponent<Item>().info.id;
             this.position = position;
+            IsEnabled = true;
         }
         public InventorySlot(int id, Vector2Int position)
         {
             ItemId = id;
             this.position = position;
+            IsEnabled = true;
         }
         public InventorySlot(int id)
         {
             ItemId = id;
+            IsEnabled = true;
         }
         public InventorySlot(Vector2Int position)
         {
             ItemId = -1;
             this.position = position;
+            IsEnabled = true;
         }
         public InventorySlot()
         {
             ItemId = -1;
+            IsEnabled = true;
         }
         #endregion
         //[HideInInspector]

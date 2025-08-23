@@ -16,6 +16,17 @@ namespace Game.Inventory
         public int scrollSensitivity = 10;
         public List<StackableInventorySlot> contents;
         private bool suppressAutoAddUI = false;
+        [SerializeField]
+        private InventoryListGenerator _uiGenerator;
+        public InventoryListGenerator uiGenerator {
+            get {
+                if (_uiGenerator == null)
+                {
+                    _uiGenerator = GetComponent<InventoryListGenerator>();
+                }
+                return _uiGenerator;
+            }
+            }
         private void OnValidate()
         {
 #if UNITY_EDITOR
@@ -32,6 +43,22 @@ namespace Game.Inventory
                 };
             }
 #endif
+        }
+        public void ToggleInventory()
+        {
+            if (uiGenerator)
+                uiGenerator.ToggleInventoryActiveState();
+        }
+        public void OpenInventory()
+        {
+            if (uiGenerator)
+                uiGenerator.SetInventoryActiveState(true);
+        }
+
+        public void CloseInventory()
+        {
+            if (uiGenerator)
+                uiGenerator.SetInventoryActiveState(false);
         }
     }
 }

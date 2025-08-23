@@ -1216,6 +1216,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 651837786}
+        m_TargetAssemblyTypeName: Game.Inventory.InventoryList, Inventory
+        m_MethodName: ToggleInventory
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: b6a0f65d-c968-433a-8081-f3f73dfe1715
     m_ActionName: Player/OpenInventory
   m_NeverAutoSwitchControlSchemes: 0
@@ -1299,8 +1311,8 @@ MonoBehaviour:
         - rid: 8057927579299479663
         - rid: 8057927579299479664
         - rid: 8057927579299479665
-        - rid: 8057927579299479666
-        - rid: 8057927579299479667
+        - rid: 8057927603643482115
+        - rid: 8057927603643482114
         - rid: 8057927579299479668
         - rid: 8057927579299479669
         - rid: 8057927579299479670
@@ -1363,20 +1375,6 @@ MonoBehaviour:
       type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
       data:
         position: {x: 1, y: 1}
-        anchorPosition: {x: -1, y: -1}
-        IsEnabled: 1
-        _itemId: -1
-    - rid: 8057927579299479666
-      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
-      data:
-        position: {x: 1, y: 2}
-        anchorPosition: {x: -1, y: -1}
-        IsEnabled: 1
-        _itemId: -1
-    - rid: 8057927579299479667
-      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
-      data:
-        position: {x: 1, y: 3}
         anchorPosition: {x: -1, y: -1}
         IsEnabled: 1
         _itemId: -1
@@ -1492,6 +1490,20 @@ MonoBehaviour:
         anchorPosition: {x: -1, y: -1}
         IsEnabled: 0
         _itemId: -1
+    - rid: 8057927603643482114
+      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
+      data:
+        position: {x: 0, y: 0}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 8057927603643482115
+      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
+      data:
+        position: {x: 0, y: 0}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
 --- !u!114 &651837785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1528,11 +1540,12 @@ MonoBehaviour:
   scrollSensitivity: 10
   contents:
   - position: {x: 0, y: 0}
-    anchorPosition: {x: 0, y: 0}
+    anchorPosition: {x: -1, y: -1}
     IsEnabled: 1
-    _itemId: 1
-    stackSize: 2
-    itemCount: 2
+    _itemId: -1
+    stackSize: -1
+    itemCount: 0
+  _uiGenerator: {fileID: 0}
 --- !u!1001 &804114982
 PrefabInstance:
   m_ObjectHideFlags: 0

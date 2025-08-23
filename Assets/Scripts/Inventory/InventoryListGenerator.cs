@@ -58,6 +58,16 @@ namespace Game.Inventory
             target.CreateOriginPoint();
             target.GenerateUI();
         }
+        public void SetInventoryActiveState(bool active)
+        {
+            if (UIObject)
+                UIObject.SetActive(active);
+        }
+        public void ToggleInventoryActiveState()
+        {
+            if (UIObject)
+                SetInventoryActiveState(!UIObject.activeSelf);
+        }
 
     }
 }
