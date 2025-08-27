@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Game.Abilities
 {
-    internal class Combo
+    [Serializable]
+    public class Combo : ScriptableObject
     {
+        public List<ComboStep> steps;
     }
+
 }
