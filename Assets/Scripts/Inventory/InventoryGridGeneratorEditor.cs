@@ -1,12 +1,14 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 namespace Game.Inventory
 {
     [CustomEditor(typeof(InventoryGridGenerator))]
     public class InventoryGridGeneratorEditor : Editor
     {
+        int frame = 0;
         public override void OnInspectorGUI()
         {
             DrawDefaultInspector();

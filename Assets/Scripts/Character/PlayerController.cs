@@ -15,7 +15,7 @@ namespace Game.Character
         private Rigidbody2D rb;
         private Vector2 moveInput;
         private Vector2 aimInput;
-
+        public GameObject sword;
         private bool isShooting;
         private void Awake()
         {
@@ -81,7 +81,6 @@ namespace Game.Character
             // Mouse aiming
             if (Mouse.current != null && Mouse.current.position.IsActuated())
             {
-                
                 Vector2 screenPosition = mainCamera.WorldToScreenPoint(transform.position);
                 aimDirection = (aimInput - screenPosition).normalized;
             }
@@ -95,6 +94,13 @@ namespace Game.Character
             {
                 float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
                 weaponPivot.rotation = Quaternion.Euler(0, 0, angle);
+
+                // Flip sprite if aiming left
+                SpriteRenderer sr = GetComponent<SpriteRenderer>();
+                if (sr != null)
+                {
+                    sr.flipX = aimDirection.x < 0f;
+                }
             }
         }
 
@@ -103,7 +109,11 @@ namespace Game.Character
         {
             if (isShooting)
             {
-                Cast(spellToCast);
+                //Cast(spellToCast);
+                sword.GetComponent<MeleeWeapon>().StartAttack();
+            }
+            else { 
+                sword.GetComponent<MeleeWeapon>().StopAttack();
             }
         }
 

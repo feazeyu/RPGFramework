@@ -7,7 +7,10 @@ namespace Game.Character
     {
         public SerializableDictionary<ResourceTypes, Resource> resources;
         public SerializableDictionary<SpellInfo, DateTime> spellCooldowns;
-
+        [Tooltip("Spells spawn here")]
+        public Transform castingPosition;
+        [Tooltip("Spells inherit the rotation of this")]
+        public Transform castingRotationReference;
         public void GetResourceComponents()
         {
             resources.Clear();
@@ -50,8 +53,8 @@ namespace Game.Character
             }
             var SpellObject = Instantiate(spell.prefab);
             spellCooldowns[spell] = DateTime.Now.AddMilliseconds(spell.cooldown);
-            SpellObject.transform.position = transform.position;
-            SpellObject.transform.rotation = transform.rotation;
+            SpellObject.transform.position = castingPosition.position;
+            SpellObject.transform.rotation = castingRotationReference.rotation;
             return SpellObject;
         }
     }

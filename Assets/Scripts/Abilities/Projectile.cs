@@ -4,10 +4,8 @@ using UnityEngine.PlayerLoop;
 
 namespace Game.Abilities
 {
-    public class Projectile : MonoBehaviour
+    public abstract class Projectile : WeaponCollisionHandler
     {
-        public delegate void ProjectileHit(GameObject target);
-        public event ProjectileHit OnHit;
         public delegate void ProjectileExpired();
         public event ProjectileExpired OnExpired;
         public delegate void ProjectileDestroyed();
@@ -28,11 +26,8 @@ namespace Game.Abilities
         }
         public virtual void OnCollisionEnter2D(Collision2D collision)
         {
-            // Collide only with other layers.
-            if (collision.gameObject.layer != gameObject.layer) { 
-                OnHit?.Invoke(collision.gameObject);
-                Destroy(gameObject);
-            }
+            HandleCollision(collision.gameObject);
+            Destroy(gameObject);
         }
 
         public virtual void OnDestroy()
