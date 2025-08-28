@@ -10,8 +10,8 @@ namespace Game.Character
 
         [Header("References")]
         public Camera mainCamera;
-        public Transform weaponPivot; 
-        public SpellInfo spellToCast;
+        public Transform weaponPivot;
+        public Weapon weapon;
         private Rigidbody2D rb;
         private Vector2 moveInput;
         private Vector2 aimInput;
@@ -109,11 +109,10 @@ namespace Game.Character
         {
             if (isShooting)
             {
-                //Cast(spellToCast);
-                sword.GetComponent<MeleeWeapon>().StartAttack();
-            }
-            else { 
-                sword.GetComponent<MeleeWeapon>().StopAttack();
+                if(weapon == null) { 
+                    weapon = GetComponentInChildren<Weapon>();
+                }
+                weapon.Attack();
             }
         }
 

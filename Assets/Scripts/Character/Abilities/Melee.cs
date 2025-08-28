@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Game.Abilities
+namespace Game.Character
 {
     [RequireComponent(typeof(Collider2D))]
     public abstract class Melee : WeaponCollisionHandler

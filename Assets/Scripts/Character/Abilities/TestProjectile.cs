@@ -2,7 +2,7 @@
 using UnityEngine;
  using Game.Character;
 
-namespace Game.Abilities
+namespace Game.Character
 {
     internal class TestProjectile : Projectile
     {

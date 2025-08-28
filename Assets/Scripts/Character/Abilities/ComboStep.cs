@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Game.Abilities
+namespace Game.Character
 {
     [Serializable, CreateAssetMenu(fileName = "NewComboStep", menuName = "RPGFramework/Abilities/ComboStep")]
     public class ComboStep : ScriptableObject

@@ -2,7 +2,7 @@ using Game.Character;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
-namespace Game.Abilities
+namespace Game.Character
 {
     public abstract class Projectile : WeaponCollisionHandler
     {
