@@ -8,7 +8,6 @@ namespace Game.Inventory
     [CustomEditor(typeof(InventoryGridGenerator))]
     public class InventoryGridGeneratorEditor : Editor
     {
-        int frame = 0;
         public override void OnInspectorGUI()
         {
             DrawDefaultInspector();

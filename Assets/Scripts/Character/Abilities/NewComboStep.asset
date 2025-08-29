@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: NewComboStep
   m_EditorClassIdentifier: 
   motion: {fileID: 7400000, guid: e64133f861bdab744902514798009831, type: 2}
-  comboCancelTime: 5
+  comboCancelTime: 1

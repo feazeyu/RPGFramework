@@ -7,7 +7,7 @@ using UnityEngine;
 #nullable enable
 namespace Game.Items
 {
-    [CreateAssetMenu(fileName = "NewItem", menuName = "Scriptable Objects/Item")]
+    [CreateAssetMenu(fileName = "NewItemInfo", menuName = "RPGFramework/Items/ItemInfo")]
     public class ItemInfo : ScriptableObject, INamed
     {
         public int id;

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Game.Character
 {
-    [Serializable]
+    [Serializable, CreateAssetMenu(fileName = "NewCompositeSpell", menuName = "RPGFramework/Abilities/CompositeSpell")]
     internal class CompositeSpell : ScriptableObject
     {
         [SerializeField]
@@ -97,18 +97,5 @@ namespace Game.Character
                 return _damage;
             }
         }
-
-#if UNITY_EDITOR
-        [UnityEditor.MenuItem("Assets/Create/Abilities/CompositeSpell")]
-        public static void CreateSpell()
-        {
-            var asset = ScriptableObject.CreateInstance<CompositeSpell>();
-            string path = UnityEditor.AssetDatabase.GenerateUniqueAssetPath("Assets/NewCompositeSpell.asset");
-            UnityEditor.AssetDatabase.CreateAsset(asset, path);
-            UnityEditor.AssetDatabase.SaveAssets();
-            UnityEditor.EditorUtility.FocusProjectWindow();
-            UnityEditor.Selection.activeObject = asset;
-        }
-#endif
     }
 }

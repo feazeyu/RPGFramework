@@ -146,7 +146,7 @@ namespace Game.Character
         }
 
 
-        private void GenerateAnimator(ComboWeapon comboWeapon)
+        private void GenerateAnimator(ComboWeapon comboWeapon) //TODO Fix
         {
             var combo = comboWeapon.currentCombo;
             if (combo == null || combo.steps == null || combo.steps.Count == 0)
