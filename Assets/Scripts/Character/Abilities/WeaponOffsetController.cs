@@ -6,7 +6,9 @@ public class WeaponOffsetController : MonoBehaviour
     public event Recovered onRecovered;
 
     [Header("Recovery Settings")]
-    public float returnSpeed = 8f;       // how fast it decays
+    [Tooltip("Speed of return - Higher is faster")]
+    public float returnSpeed = 8f;
+    [Tooltip("When the curve reaches 1, the weapon is at its original position.")]
     public AnimationCurve returnCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
 
     Quaternion _baseLocalRot;
@@ -24,11 +26,6 @@ public class WeaponOffsetController : MonoBehaviour
         _baseLocalPos = transform.localPosition;
     }
 
-    private void Start()
-    {
-        onRecovered += () => { Debug.Log("Recovered"); };
-    }
-
     void LateUpdate()
     {
         if (!_recovering) return;
@@ -36,7 +33,6 @@ public class WeaponOffsetController : MonoBehaviour
         float t = Mathf.Clamp01(_returnT);
         float k = returnCurve.Evaluate(t);
 
-        // Lerp/Slerp from the animation's final pose back to base
         transform.localRotation = Quaternion.Slerp(_startRot, _baseLocalRot, k);
         transform.localPosition = Vector3.Lerp(_startPos, _baseLocalPos, k);
 
@@ -46,7 +42,6 @@ public class WeaponOffsetController : MonoBehaviour
             transform.localRotation = _baseLocalRot;
             transform.localPosition = _baseLocalPos;
             onRecovered?.Invoke();
-            Debug.Log("Recovered Invoke");
         }
     }
 
@@ -61,6 +56,5 @@ public class WeaponOffsetController : MonoBehaviour
 
         _returnT = 0f;
         _recovering = true;
-        Debug.Log("Begin Recovery");
     }
 }

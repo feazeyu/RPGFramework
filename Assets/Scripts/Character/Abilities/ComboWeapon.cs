@@ -146,7 +146,7 @@ namespace Game.Character
         }
 
 
-        private void GenerateAnimator(ComboWeapon comboWeapon) //TODO Fix
+        private void GenerateAnimator(ComboWeapon comboWeapon)
         {
             var combo = comboWeapon.currentCombo;
             if (combo == null || combo.steps == null || combo.steps.Count == 0)
@@ -200,7 +200,7 @@ namespace Game.Character
                 if (i == 0)
                 {
                     var trans = idleState.AddTransition(state);
-                    trans.hasExitTime = false;
+                    trans.hasExitTime = false; // No exit time for idle transitions
                     trans.AddCondition(AnimatorConditionMode.Equals, 1, "currentStep");
                 }
                 // Transition from previous step to current step
@@ -227,6 +227,7 @@ namespace Game.Character
                 animator = comboWeapon.gameObject.AddComponent<Animator>();
             }
             animator.runtimeAnimatorController = animatorController;
+            animator.applyRootMotion = true;
 
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
