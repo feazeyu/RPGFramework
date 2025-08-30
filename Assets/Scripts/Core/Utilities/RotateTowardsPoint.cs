@@ -10,6 +10,8 @@ namespace Game.Core
         public float angle;
         public void RotateTowards(Vector2 point, Camera cam = null) {
             // Mouse aiming
+            if (point == Vector2.zero)
+                return;
             if (Mouse.current != null && Mouse.current.position.IsActuated())
             {
                 if(cam == null)

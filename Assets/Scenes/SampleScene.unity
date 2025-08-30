@@ -341,9 +341,9 @@ MonoBehaviour:
   castingRotationReference: {fileID: 926965320}
   moveSpeed: 5
   mainCamera: {fileID: 1398394598}
-  weaponPivot: {fileID: 926965320}
+  weaponRotationHandler: {fileID: 0}
   weapon: {fileID: 0}
-  sword: {fileID: 1220574009}
+  flipOnAimLeft: 1
 --- !u!50 &651837778
 Rigidbody2D:
   serializedVersion: 5
@@ -635,6 +635,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 926965320}
+  - component: {fileID: 926965321}
   m_Layer: 0
   m_Name: WeaponPivot
   m_TagString: Untagged
@@ -658,6 +659,20 @@ Transform:
   - {fileID: 1287510341}
   m_Father: {fileID: 651837780}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &926965321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 926965319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7941df6082daa764eb18816e05d1957f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aimDirection: {x: 0, y: 0}
+  angle: 0
 --- !u!1 &1220574009
 GameObject:
   m_ObjectHideFlags: 0
@@ -867,7 +882,7 @@ GameObject:
   - component: {fileID: 1398394597}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1170,7 +1185,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2044099796}
   - component: {fileID: 2044099795}
-  - component: {fileID: 2044099797}
   m_Layer: 0
   m_Name: InventoryManager
   m_TagString: Untagged
@@ -1214,26 +1228,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2044099797
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2044099794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ba52f561e61b334db2d381ff416aab2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  list: {fileID: 0}
-  target: {fileID: 0}
-  slotPrefab: {fileID: 6909569672574216487, guid: ca2974eb2b1bcd34aaf0150ea3f01a89, type: 3}
-  targetCanvas: {fileID: 447442663}
-  UIObject: {fileID: 0}
-  inventoryContainerOverride: {fileID: 7481346189191518307, guid: 5fda91875c45f7c4993feaabcb36e2bd, type: 3}
-  firstElementPosition: {x: 0, y: 0}
-  margin: {x: 0, y: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
