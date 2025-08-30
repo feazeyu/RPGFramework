@@ -169,10 +169,7 @@ namespace Game.Inventory
                     RectTransform tooltipRect = tooltip.GetComponent<RectTransform>();
                     if (tooltipRect != null)
                     {
-                        // Set the pivot to top-left by default (can be adjusted for better positioning)
                         tooltipRect.pivot = new Vector2(0f, 1f);
-
-                        // Convert screen position to local position in canvas
                         Vector2 localPoint;
                         RectTransformUtility.ScreenPointToLocalPointInRectangle(
                             canvas.transform as RectTransform,
@@ -180,8 +177,6 @@ namespace Game.Inventory
                             eventData.pressEventCamera,
                             out localPoint
                         );
-
-                        // Set the tooltip position to the mouse cursor position
                         tooltipRect.anchoredPosition = localPoint;
 
                         foreach (var corner in corners)

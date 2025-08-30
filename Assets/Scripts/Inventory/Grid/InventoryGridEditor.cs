@@ -110,8 +110,8 @@ namespace Game.Inventory
                         switch (SelectedMode)
                         {
                             case ActionMode.IgnoreItems: break; // Ignore items, do nothing
-                            case ActionMode.RemoveItems: cell.EditorOnlyRemoveItem(); break;
-                            case ActionMode.SetItems: cell.EditorOnlyPutItem(SelectedItem); break;
+                            case ActionMode.RemoveItems: grid.RemoveItem(new Vector2Int(x,y)); break;
+                            case ActionMode.SetItems: grid.EditorOnlyPutItem(new Vector2Int(x,y), SelectedItem); break;
                             default: Debug.LogWarning("Unknown item setting mode selected."); break;
                         }
 #endif

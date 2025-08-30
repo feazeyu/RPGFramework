@@ -140,6 +140,7 @@ namespace Game.Inventory
     [Serializable]
     public class LockedInventorySlot : InventorySlot
     {
+        #region Constructors
         public LockedInventorySlot(GameObject item) : base(item)
         {
         }
@@ -149,6 +150,8 @@ namespace Game.Inventory
         public LockedInventorySlot() : base()
         {
         }
+        #endregion
+        public override bool AcceptsItem() => false;
         protected override Color BaseColor => Color.red;
         public override bool PutItem(GameObject item) => false;
         public override int RemoveItem() => -1;
@@ -159,6 +162,7 @@ namespace Game.Inventory
     {
         public int stackSize = -1;
         public int itemCount;
+        #region Constructors
         public StackableInventorySlot() : base()
         {
             IsEnabled = true;
@@ -173,6 +177,7 @@ namespace Game.Inventory
             itemCount = 1;
             IsEnabled = true;
         }
+        #endregion
         protected override Color BaseColor => Color.green;
         public override bool PutItem(GameObject item)
         {

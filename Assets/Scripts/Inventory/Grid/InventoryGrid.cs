@@ -4,6 +4,7 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 #nullable enable
 namespace Game.Inventory
@@ -94,7 +95,14 @@ namespace Game.Inventory
             }
 #endif
         }
-
+#if UNITY_EDITOR
+        public bool EditorOnlyPutItem(Vector2Int position, GameObject item)
+        {
+            Cells[position.x, position.y].EditorOnlyPutItem(item);
+            SetAnchors(position, item.GetComponent<Item>().info, item.GetComponent<Item>().GetAnchorSlot());
+            return true;
+        }
+#endif
         public int RemoveItem(Vector2Int position)
         {
             if (!Cells.TryGet(position.x, position.y, out var cell) || cell.Item == null)
@@ -123,15 +131,17 @@ namespace Game.Inventory
         {
             ItemInfo itemInfo = item.GetComponent<Item>().info;
             Vector2Int center = item.GetComponent<Item>().GetAnchorSlot();
-            foreach (Vector2Int otherPosition in itemInfo.Shape.Positions)
-            {
-                Cells.TryGet(position.x + otherPosition.x - center.x, position.y + otherPosition.y-center.y, out var cell);
-                if (cell == null || !cell.AcceptsItem())
-                {
-                    return false;
-                }
-            }
+            bool valid = IsPlacementValid(position, itemInfo, center);
+            if (!valid) return false;
+            return PutItemUnchecked(position, item, itemInfo, center);
+        }
+        private bool PutItemUnchecked(Vector2Int position, GameObject item, ItemInfo itemInfo, Vector2Int center)
+        {
             Cells[position.x, position.y].PutItem(item);
+            SetAnchors(position, itemInfo, center);
+            return true;
+        }
+        private void SetAnchors(Vector2Int position, ItemInfo itemInfo, Vector2Int center) {
             foreach (Vector2Int otherPosition in itemInfo.Shape.Positions)
             {
                 Vector2Int translatedOther = new(position.x + otherPosition.x - center.x, position.y + otherPosition.y - center.y);
@@ -140,8 +150,19 @@ namespace Game.Inventory
                     Cells[translatedOther.x, translatedOther.y].anchorPosition = position;
                 }
             }
+        }
+        private bool IsPlacementValid(Vector2Int position, ItemInfo itemInfo, Vector2Int center) {
+            foreach (Vector2Int otherPosition in itemInfo.Shape.Positions)
+            {
+                Cells.TryGet(position.x + otherPosition.x - center.x, position.y + otherPosition.y-center.y, out var cell);
+                if (cell == null || !cell.AcceptsItem())
+                {
+                    return false;
+                }
+            }
             return true;
         }
+
         public bool ReturnItem(Vector2Int position, GameObject item)
         {
             return PutItem(position, item);
