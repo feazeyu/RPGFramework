@@ -1,3 +1,4 @@
+using Game.Core;
 using UnityEngine;
 using UnityEngine.InputSystem;
 namespace Game.Character
@@ -9,23 +10,33 @@ namespace Game.Character
         public float moveSpeed = 5f;
 
         [Header("References")]
+        [Tooltip("(Optional) Camera used to calculate mouse position on screen")]
         public Camera mainCamera;
-        public Transform weaponPivot;
+        [Tooltip("(Optional) Component of a gameobject that will get rotated when aiming")]
+        public RotateTowardsPoint weaponRotationHandler;
+        [Tooltip("(Optional) Weapon component used for attacks")]
         public Weapon weapon;
+        [Tooltip("Flip the sprite when aiming left")]
+        public bool flipOnAimLeft = true;
         private Rigidbody2D rb;
         private Vector2 moveInput;
         private Vector2 aimInput;
-        public GameObject sword;
         private bool isShooting;
+        private SpriteRenderer sr;
         private void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
             GetResourceComponents();
             if (mainCamera == null)
                 mainCamera = Camera.main;
-
+            if (weaponRotationHandler == null)
+                weaponRotationHandler = GetComponentInChildren<RotateTowardsPoint>();
+            if (weapon == null)
+                weapon = GetComponentInChildren<Weapon>();
+            sr = GetComponent<SpriteRenderer>();
             Health health = resources[ResourceTypes.Health] as Health;
-            if (health != null) { 
+            if (health != null)
+            {
                 health.onResourceReachesZero += Die;
             }
         }
@@ -33,7 +44,8 @@ namespace Game.Character
         private void OnDestroy()
         {
             Health health = resources[ResourceTypes.Health] as Health;
-            if (health != null) { 
+            if (health != null)
+            {
                 health.onResourceReachesZero -= Die;
             }
         }
@@ -76,32 +88,14 @@ namespace Game.Character
         // --- Aiming ---
         private void HandleAiming()
         {
-            Vector2 aimDirection = Vector2.zero;
-
-            // Mouse aiming
-            if (Mouse.current != null && Mouse.current.position.IsActuated())
+            if (weaponRotationHandler == null)
+                return;
+            weaponRotationHandler.RotateTowards(aimInput);
+            if (sr != null && flipOnAimLeft)
             {
-                Vector2 screenPosition = mainCamera.WorldToScreenPoint(transform.position);
-                aimDirection = (aimInput - screenPosition).normalized;
-            }
-            // Controller right stick aiming
-            else if (aimInput.sqrMagnitude > 0.01f)
-            {
-                aimDirection = aimInput.normalized;
+                sr.flipX = Mathf.Abs(weaponRotationHandler.angle) > 90;
             }
 
-            if (aimDirection.sqrMagnitude > 0.001f && weaponPivot != null)
-            {
-                float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
-                weaponPivot.rotation = Quaternion.Euler(0, 0, angle);
-
-                // Flip sprite if aiming left
-                SpriteRenderer sr = GetComponent<SpriteRenderer>();
-                if (sr != null)
-                {
-                    sr.flipX = aimDirection.x < 0f;
-                }
-            }
         }
 
         // --- Attacks ---
@@ -109,15 +103,13 @@ namespace Game.Character
         {
             if (isShooting)
             {
-                if(weapon == null) { 
-                    weapon = GetComponentInChildren<Weapon>();
-                }
                 weapon.Attack();
             }
         }
 
 
-        private void Die() { 
+        private void Die()
+        {
             Destroy(gameObject);
         }
     }
