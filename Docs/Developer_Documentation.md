@@ -280,3 +280,35 @@ RedrawContents() is the method for deleting and instantiating all the slots agai
 In case you don't want your items to always look like their prefab, you can do something similiar to this class.
 
 Instead of drawing the sprite of the item in the list inventory, thanks to this class only its amount and name will be shown.
+
+## Core
+
+Contains mainly utility functions and classes.
+
+I do not recommend editing existing files here, as it may have unforseen consequences
+
+### Utilities
+
+#### Array2D
+
+A Unity serializable generic 2d array. Reading elements and enumeration should work the same as a regular 2D array, internally stored as a 1D array which remembers the number of elements in a row.
+
+#### EditorHelper
+
+A bunch of useful functions for manipulating Unity editor UI
+
+#### EventRedirector
+
+This component redirects a bunch of Unity events to a target gameObject. Probably doesn't have them all, adding additional ones wont break anything.
+
+#### RectBoundCheck
+
+Check if one RectTransform is completely within another one using IsElementWithinAnother()
+
+#### RotateTowards
+
+Rotate an object towards a point.
+
+#### SerializableDictionary
+
+A classic dictionary, but it is serializable by unity. Works just like a dictionary, but implements serialization. Serialization splits the dictionary into two collections, one of keys and one of values.
