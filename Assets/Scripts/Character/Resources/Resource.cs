@@ -5,13 +5,14 @@ namespace Game.Character
     public abstract class Resource : MonoBehaviour
     {
         //Events
+        public readonly ResourceTypes resourceType = ResourceTypes.None;
         public delegate void OnResourceReachesZero();
         public event OnResourceReachesZero onResourceReachesZero;
         public delegate void OnResourceLost(float lostAmount);
         public event OnResourceLost onResourceLost;
         public delegate void OnResourceGained(float gainAmount);
         public event OnResourceGained onResourceGained;
-        public delegate void OnResourceChanged(float newAmount);
+        public delegate void OnResourceChanged(float changeAmount);
         public event OnResourceChanged onResourceChanged;
         
         [SerializeField]
@@ -33,6 +34,7 @@ namespace Game.Character
                     onResourceChanged?.Invoke(diff);
                 }
                     _amount = value;
+                    Mathf.Clamp(_amount, 0, maxAmount);
                 if (_amount <= 0)
                 {
                     onResourceReachesZero?.Invoke();  

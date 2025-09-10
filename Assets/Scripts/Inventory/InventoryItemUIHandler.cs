@@ -125,8 +125,6 @@ namespace Game.Inventory
 
         protected GameObject GetDragTarget(PointerEventData eventData)
         {
-            ItemInfo itemInfo = InventoryManager.Instance.GetItemById(draggedId).GetComponent<Item>().info;
-
             if (canvas == null)
                 return null;
             var results = new List<RaycastResult>();

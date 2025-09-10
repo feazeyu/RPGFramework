@@ -20,7 +20,6 @@ namespace Game.Inventory
 
         public override void OnInspectorGUI()
         {
-            DrawDefaultInspector();
             InventoryGrid grid = (InventoryGrid)target;
             EditorGUILayout.LabelField("Grid Size", EditorStyles.boldLabel);
 

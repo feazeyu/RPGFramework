@@ -12,7 +12,7 @@ namespace Game.Character
         public event ProjectileDestroyed OnDestroyed;
         public SpellInfo SpellInfo;
         private float travelledDistance = 0f;
-        private void Update()
+        public virtual void Update()
         {
             float distanceThisFrame = SpellInfo.speed * Time.deltaTime;
             travelledDistance += distanceThisFrame;

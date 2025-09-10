@@ -11,6 +11,14 @@ namespace Game.Character
         public Transform castingPosition;
         [Tooltip("Spells inherit the rotation of this")]
         public Transform castingRotationReference;
+
+        private void Awake()
+        {
+            resources = new SerializableDictionary<ResourceTypes, Resource>();
+            spellCooldowns = new SerializableDictionary<SpellInfo, DateTime>();
+            GetResourceComponents();
+        }
+
         public void GetResourceComponents()
         {
             resources.Clear();
@@ -22,6 +30,8 @@ namespace Game.Character
                 if (System.Enum.TryParse<ResourceTypes>(resource.GetType().Name, out var resourceType))
                 {
                     resources.Add(resourceType, resource);
+                } else if (resource.resourceType != ResourceTypes.None) {
+                    resources.Add(resource.resourceType, resource);
                 }
             }
         }

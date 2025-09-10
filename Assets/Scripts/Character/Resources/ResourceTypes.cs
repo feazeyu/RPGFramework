@@ -2,6 +2,7 @@
 {
     public enum ResourceTypes
     {
+        None,
         Health,
         Mana,
         Stamina

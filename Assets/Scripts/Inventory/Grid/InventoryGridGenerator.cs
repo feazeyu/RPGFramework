@@ -1,5 +1,6 @@
 #nullable enable
 using Game.Core.Utilities;
+using Game.Items;
 using System;
 using System.Collections.Generic;
 using Unity.VisualScripting.YamlDotNet.Core.Tokens;
@@ -123,7 +124,7 @@ namespace Game.Inventory
                 }   
                 var canvas = itemInstance.AddComponent<Canvas>();
                 canvas.overrideSorting = true;
-
+                itemInstance.GetComponent<Item>().CalculatePivot();
                 InventoryHelper.CreateUIDragHandler(slot.gameObject);
 
             }
