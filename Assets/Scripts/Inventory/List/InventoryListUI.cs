@@ -16,6 +16,7 @@ namespace Game.Inventory
         private RectTransform slotPrefabRect;
         [Tooltip("Background behind the item name.")]
         public GameObject slotPrefab;
+        [HideInInspector]
         public Vector2 firstElementPosition = new Vector2(0, 0);
         public Vector2 margin = new Vector2(0, 0);
         private GameObject dragLayer;

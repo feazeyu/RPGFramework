@@ -27,7 +27,6 @@ namespace Game.Inventory
                 UIObject.transform.parent = targetCanvas.transform;
                 target = UIObject.AddComponent<InventoryListUI>();
                 target.gameObject.AddComponent<RectTransform>();
-                target.margin = margin;
                 target.firstElementPosition = firstElementPosition;
                 Utils.EventRedirector.AddEventRedirector(UIObject, UIObject);
             }
@@ -44,6 +43,7 @@ namespace Game.Inventory
             {
                 target.list = list;
                 target.slotPrefab = slotPrefab;
+                target.margin = margin;
             }
         }
         public void DrawContents()
