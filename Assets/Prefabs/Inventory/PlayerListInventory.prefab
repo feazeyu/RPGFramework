@@ -111,7 +111,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7158491167226031843}
-  - component: {fileID: 8200717678680927133}
+  - component: {fileID: 4394323348528887900}
   - component: {fileID: 1173466862524341102}
   m_Layer: 0
   m_Name: PlayerListInventory
@@ -140,7 +140,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 576, y: 800}
   m_Pivot: {x: 1, y: 1}
---- !u!114 &8200717678680927133
+--- !u!114 &4394323348528887900
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -149,16 +149,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 7481346189191518307}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f65ab0e647a902a44aca4fd13ee5a896, type: 3}
+  m_Script: {fileID: 11500000, guid: 7eace214e87336e4389686480d1a5817, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnableSlotCapacity: 0
-  capacity: 20
-  contents: []
-  slotPrefab: {fileID: 6909569672574216487, guid: ca2974eb2b1bcd34aaf0150ea3f01a89, type: 3}
-  firstElementPosition: {x: -288, y: -10}
+  list: {fileID: 0}
+  slotPrefab: {fileID: 0}
+  firstElementPosition: {x: 0, y: 0}
   margin: {x: 0, y: 0}
-  dragLayer: {fileID: 0}
   originPoint: {fileID: 0}
 --- !u!114 &1173466862524341102
 MonoBehaviour:
