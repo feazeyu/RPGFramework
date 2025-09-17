@@ -4,20 +4,50 @@ using UnityEngine;
 
 namespace Game.Inventory
 {
+    /// <summary>
+    /// Custom editor for the <see cref="InventoryGrid"/> component.
+    /// Provides a visual grid editor in the Unity Inspector for configuring inventory slots and items.
+    /// </summary>
     [CustomEditor(typeof(InventoryGrid))]
     public class InventoryGridEditor : Editor
     {
+        /// <summary>
+        /// The currently selected slot type index.
+        /// </summary>
         private int SelectedType = 0;
+
+        /// <summary>
+        /// The available slot type names.
+        /// </summary>
         private string[] AvailableTypes;
+
+        /// <summary>
+        /// The currently selected item prefab for insertion.
+        /// </summary>
         private GameObject SelectedItem;
+
+        /// <summary>
+        /// The currently selected action mode for item handling.
+        /// </summary>
         private ActionMode SelectedMode = ActionMode.IgnoreItems;
+
+        /// <summary>
+        /// The available action mode names.
+        /// </summary>
         private readonly string[] AvailableModes = { "Ignore items", "Remove items", "Set items" };
 
+        /// <summary>
+        /// Called when the editor is enabled.
+        /// Initializes the available slot types.
+        /// </summary>
         public void OnEnable()
         {
             AvailableTypes = InventoryHelper.GetSlotTypeNames();
         }
 
+        /// <summary>
+        /// Draws the custom inspector GUI for the <see cref="InventoryGrid"/>.
+        /// </summary>
         public override void OnInspectorGUI()
         {
             InventoryGrid grid = (InventoryGrid)target;
@@ -71,6 +101,10 @@ namespace Game.Inventory
             }
         }
 
+        /// <summary>
+        /// Builds and displays the grid of inventory slots in the inspector.
+        /// </summary>
+        /// <param name="grid">The inventory grid to display and edit.</param>
         private void BuildGrid(InventoryGrid grid)
         {
             Color defaultColor = GUI.backgroundColor;
@@ -109,8 +143,8 @@ namespace Game.Inventory
                         switch (SelectedMode)
                         {
                             case ActionMode.IgnoreItems: break; // Ignore items, do nothing
-                            case ActionMode.RemoveItems: grid.RemoveItem(new Vector2Int(x,y)); break;
-                            case ActionMode.SetItems: grid.EditorOnlyPutItem(new Vector2Int(x,y), SelectedItem); break;
+                            case ActionMode.RemoveItems: grid.RemoveItem(new Vector2Int(x, y)); break;
+                            case ActionMode.SetItems: grid.EditorOnlyPutItem(new Vector2Int(x, y), SelectedItem); break;
                             default: Debug.LogWarning("Unknown item setting mode selected."); break;
                         }
 #endif
@@ -121,9 +155,23 @@ namespace Game.Inventory
             GUI.backgroundColor = defaultColor;
         }
 
+        /// <summary>
+        /// Represents the available action modes for item handling in the grid editor.
+        /// </summary>
         private enum ActionMode
         {
-            IgnoreItems, RemoveItems, SetItems
+            /// <summary>
+            /// Ignore items when clicking slots.
+            /// </summary>
+            IgnoreItems,
+            /// <summary>
+            /// Remove items from slots when clicking.
+            /// </summary>
+            RemoveItems,
+            /// <summary>
+            /// Set items in slots when clicking.
+            /// </summary>
+            SetItems
         }
     }
 }

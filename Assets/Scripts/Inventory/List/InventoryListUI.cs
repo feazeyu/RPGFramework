@@ -7,24 +7,62 @@ using UnityEngine.EventSystems;
 
 namespace Game.Inventory
 {
+    /// <summary>
+    /// Manages the UI for an inventory list, including slot creation, drawing, scrolling, and item manipulation.
+    /// </summary>
     [Serializable]
-    public class InventoryListUI: MonoBehaviour, IScrollHandler, IUIPositionalItemContainer
+    public class InventoryListUI : MonoBehaviour, IScrollHandler, IUIPositionalItemContainer
     {
+        /// <summary>
+        /// The inventory list data source.
+        /// </summary>
         [SerializeReference]
         public InventoryList list;
+
+        /// <summary>
+        /// Cached RectTransform of this UI.
+        /// </summary>
         private RectTransform rectTransform;
+
+        /// <summary>
+        /// Cached RectTransform of the slot prefab.
+        /// </summary>
         private RectTransform slotPrefabRect;
+
+        /// <summary>
+        /// Prefab for the background behind the item name.
+        /// </summary>
         [Tooltip("Background behind the item name.")]
         public GameObject slotPrefab;
+
+        /// <summary>
+        /// The position of the first element in the inventory UI.
+        /// </summary>
         [HideInInspector]
         public Vector2 firstElementPosition = new Vector2(0, 0);
+
+        /// <summary>
+        /// Margin between inventory slots.
+        /// </summary>
         public Vector2 margin = new Vector2(0, 0);
+
+        /// <summary>
+        /// The drag layer GameObject for drag-and-drop operations.
+        /// </summary>
         private GameObject dragLayer;
+
+        /// <summary>
+        /// The origin point GameObject for slot positioning.
+        /// </summary>
         [SerializeField, HideInInspector]
         private GameObject originPoint;
+
+        /// <summary>
+        /// Unity Start method. Initializes components and draws the inventory contents.
+        /// </summary>
         private void Start()
         {
-            if (gameObject.GetComponent<RectTransform>()== null)
+            if (gameObject.GetComponent<RectTransform>() == null)
             {
                 Debug.LogWarning($"The InventoryList {gameObject} is missing a RectTransform. Some functionality may be affected.");
             }
@@ -35,11 +73,20 @@ namespace Game.Inventory
             }
             RedrawContents();
         }
+
+        /// <summary>
+        /// Handles the end of a drag event. (Currently not implemented.)
+        /// </summary>
+        /// <param name="eventData">Pointer event data.</param>
         public void OnEndDrag(PointerEventData eventData)
         {
             //Debug.Log($"End drag event on {gameObject.name} at position {eventData.position} with delta {eventData.delta}");
         }
 
+        /// <summary>
+        /// Handles scroll events to move the inventory UI vertically.
+        /// </summary>
+        /// <param name="eventData">Pointer event data.</param>
         public void OnScroll(PointerEventData eventData)
         {
             if (rectTransform == null)
@@ -50,14 +97,18 @@ namespace Game.Inventory
             {
                 slotPrefabRect = slotPrefab.GetComponent<RectTransform>();
             }
-            float overflowSize = -rectTransform.sizeDelta.y + list.contents.Count*(slotPrefabRect.sizeDelta.y+margin.y);
+            float overflowSize = -rectTransform.sizeDelta.y + list.contents.Count * (slotPrefabRect.sizeDelta.y + margin.y);
             if (overflowSize > 0)
             {
-                firstElementPosition += new Vector2(0, eventData.scrollDelta.y * list.scrollSensitivity); // Adjust the scroll sensitivity as needed
+                firstElementPosition += new Vector2(0, eventData.scrollDelta.y * list.scrollSensitivity);
                 firstElementPosition.y = Mathf.Clamp(firstElementPosition.y, 0, overflowSize);
                 originPoint.transform.localPosition = firstElementPosition;
             }
         }
+
+        /// <summary>
+        /// Redraws the inventory UI contents.
+        /// </summary>
         public void RedrawContents()
         {
             ClearItemSlots();
@@ -65,6 +116,9 @@ namespace Game.Inventory
             GenerateUI();
         }
 
+        /// <summary>
+        /// Creates or recreates the origin point GameObject for slot positioning.
+        /// </summary>
         public void CreateOriginPoint()
         {
             if (originPoint == null)
@@ -80,6 +134,9 @@ namespace Game.Inventory
             originPoint.transform.localPosition = firstElementPosition;
         }
 
+        /// <summary>
+        /// Generates the UI elements for each inventory slot.
+        /// </summary>
         public void GenerateUI()
         {
             int i = 0;
@@ -94,6 +151,9 @@ namespace Game.Inventory
             }
         }
 
+        /// <summary>
+        /// Removes all item slot UI elements from the inventory UI.
+        /// </summary>
         private void ClearItemSlots()
         {
             foreach (Transform child in gameObject.transform)
@@ -110,6 +170,12 @@ namespace Game.Inventory
                 }
             }
         }
+
+        /// <summary>
+        /// Draws a single inventory slot UI element.
+        /// </summary>
+        /// <param name="slot">The inventory slot to draw.</param>
+        /// <param name="offset">The vertical offset index for positioning.</param>
         public void DrawSlotUI(StackableInventorySlot slot, int offset)
         {
             if (slot.Item != null)
@@ -117,9 +183,9 @@ namespace Game.Inventory
 #if UNITY_EDITOR
                 GameObject slotUIElement = (GameObject)PrefabUtility.InstantiatePrefab(slotPrefab, originPoint.transform);
 #else
-                GameObject slotUIElement = Instantiate(slotPrefab, originPoint.transform);  
+                    GameObject slotUIElement = Instantiate(slotPrefab, originPoint.transform);  
 #endif
-                slotUIElement.GetComponent<RectTransform>().anchoredPosition = new Vector3(margin.x*offset, -offset*slotPrefab.transform.GetComponent<RectTransform>().sizeDelta.y-offset*margin.y, 0);
+                slotUIElement.GetComponent<RectTransform>().anchoredPosition = new Vector3(margin.x * offset, -offset * slotPrefab.transform.GetComponent<RectTransform>().sizeDelta.y - offset * margin.y, 0);
                 PositionalUISlot positional = slotUIElement.AddComponent<PositionalUISlot>();
                 positional.target = this;
                 positional.position = new Vector2Int(0, offset);
@@ -132,6 +198,13 @@ namespace Game.Inventory
                 InventoryHelper.CreateUIDragHandler(slotUIElement);
             }
         }
+
+        /// <summary>
+        /// Attempts to put an item into the inventory at the specified position.
+        /// </summary>
+        /// <param name="position">The position to put the item.</param>
+        /// <param name="item">The item GameObject to add.</param>
+        /// <returns>True if the item was added; otherwise, false.</returns>
         public bool PutItem(Vector2Int position, GameObject item)
         {
             list.contents ??= new();
@@ -169,7 +242,11 @@ namespace Game.Inventory
             return true;
         }
 
-
+        /// <summary>
+        /// Removes an item from the inventory at the specified position.
+        /// </summary>
+        /// <param name="position">The position to remove the item from.</param>
+        /// <returns>The ID of the removed item, or -1 if removal failed.</returns>
         public int RemoveItem(Vector2Int position)
         {
             var itemSlot = list.contents[position.y];
@@ -186,6 +263,11 @@ namespace Game.Inventory
             return -1;
         }
 
+        /// <summary>
+        /// Gets the item GameObject at the specified position in the inventory.
+        /// </summary>
+        /// <param name="position">The position to retrieve the item from.</param>
+        /// <returns>The item GameObject, or null if not found.</returns>
         public GameObject GetItem(Vector2Int position)
         {
             if (list.contents == null || position.y < 0 || position.y >= list.contents.Count)

@@ -6,19 +6,36 @@ using UnityEngine;
 #nullable enable
 namespace Game.Items
 {
+    /// <summary>
+    /// Represents the shape of an item using a set of grid positions.
+    /// </summary>
     [Serializable]
     public struct ItemShape
     {
+        /// <summary>
+        /// The positions that make up the shape of the item.
+        /// </summary>
         public Vector2Int[] Positions;
 
-        public bool[,] GetBoolGrid(int dimension = 5) {
-            bool[,] bools = new bool[dimension,dimension];
+        /// <summary>
+        /// Returns a boolean grid representation of the shape.
+        /// </summary>
+        /// <param name="dimension">The size of the grid (width and height).</param>
+        /// <returns>A 2D boolean array where true indicates the presence of the shape at that position.</returns>
+        public bool[,] GetBoolGrid(int dimension = 5)
+        {
+            bool[,] bools = new bool[dimension, dimension];
             foreach (Vector2Int i in Positions)
             {
-                bools[i.x,i.y] = true;
+                bools[i.x, i.y] = true;
             }
             return bools;
         }
+
+        /// <summary>
+        /// Gets the minimum offset of the shape from the origin.
+        /// </summary>
+        /// <returns>The minimum <see cref="Vector2Int"/> offset.</returns>
         public readonly Vector2Int GetOffset()
         {
             if (Positions is null or { Length: 0 })
@@ -34,6 +51,10 @@ namespace Game.Items
             return offset;
         }
 
+        /// <summary>
+        /// Gets the center point of the shape.
+        /// </summary>
+        /// <returns>The center <see cref="Vector2"/> of the shape.</returns>
         public readonly Vector2 GetCenter()
         {
             if (Positions is null or { Length: 0 })
@@ -50,6 +71,9 @@ namespace Game.Items
             return min + (max - min) / 2;
         }
 
+        /// <summary>
+        /// Normalizes the shape so that its minimum position is at the origin.
+        /// </summary>
         public readonly void Trim()
         {
             if (Positions is null or { Length: 0 })
@@ -75,12 +99,27 @@ namespace Game.Items
         }
     }
 
+    /// <summary>
+    /// Custom property drawer for <see cref="ItemShape"/> to display and edit shapes in the Unity Inspector.
+    /// </summary>
     [CustomPropertyDrawer(typeof(ItemShape))]
     public sealed class ShapeDrawer : PropertyDrawer
     {
+        /// <summary>
+        /// The height of a single line in the editor.
+        /// </summary>
         private static readonly float lineHeight = EditorGUIUtility.singleLineHeight;
+
+        /// <summary>
+        /// The maximum size of a tile in the grid.
+        /// </summary>
         private static readonly float maxTileSize = lineHeight * 1.4f;
 
+        /// <summary>
+        /// Checks if the property is attached to a valid target object.
+        /// </summary>
+        /// <param name="property">The serialized property.</param>
+        /// <returns>True if the target is valid; otherwise, false.</returns>
         private bool HasValidTarget(SerializedProperty property)
         {
             if (property.serializedObject.targetObject is not ItemInfo)
@@ -91,11 +130,23 @@ namespace Game.Items
             return true;
         }
 
+        /// <summary>
+        /// Gets the tier value from the serialized property.
+        /// </summary>
+        /// <param name="property">The serialized property.</param>
+        /// <returns>The tier value.</returns>
         private int GetTier(SerializedProperty property)
         {
             return property.serializedObject.FindProperty("_tier").intValue;
         }
 
+        /// <summary>
+        /// Calculates the size of each tile in the grid and the offset for centering.
+        /// </summary>
+        /// <param name="width">The total width available.</param>
+        /// <param name="tileCount">The number of tiles per row/column.</param>
+        /// <param name="offset">The calculated offset for centering.</param>
+        /// <returns>The size of each tile.</returns>
         private float GetTileSize(float width, int tileCount, out float offset)
         {
             offset = 0f;
@@ -110,11 +161,21 @@ namespace Game.Items
             return width / tileCount;
         }
 
+        /// <summary>
+        /// Gets a read-only span of the shape's positions from the serialized property.
+        /// </summary>
+        /// <param name="property">The serialized property.</param>
+        /// <returns>A read-only span of <see cref="Vector2Int"/> positions.</returns>
         private ReadOnlySpan<Vector2Int> GetSpan(SerializedProperty property)
         {
             return ((ItemShape)property.boxedValue).Positions.AsSpan();
         }
 
+        /// <summary>
+        /// Removes any positions from the shape that are outside the grid defined by the tier.
+        /// </summary>
+        /// <param name="property">The serialized property.</param>
+        /// <param name="tier">The grid size.</param>
         private void CropShapeIfOutsideGrid(SerializedProperty property, int tier)
         {
             int invalidCount = 0;
@@ -145,6 +206,12 @@ namespace Game.Items
             property.boxedValue = new ItemShape() { Positions = cropped };
         }
 
+        /// <summary>
+        /// Draws the custom property field for the <see cref="ItemShape"/> in the Unity Inspector.
+        /// </summary>
+        /// <param name="position">The rectangle on the screen to use for the property GUI.</param>
+        /// <param name="property">The serialized property to make the custom GUI for.</param>
+        /// <param name="label">The label of this property.</param>
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             if (!HasValidTarget(property))
@@ -212,6 +279,12 @@ namespace Game.Items
             EditorGUI.EndProperty();
         }
 
+        /// <summary>
+        /// Gets the height needed to display the property in the inspector.
+        /// </summary>
+        /// <param name="property">The serialized property.</param>
+        /// <param name="label">The label of this property.</param>
+        /// <returns>The height in pixels required to display the property.</returns>
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
             if (!HasValidTarget(property))
