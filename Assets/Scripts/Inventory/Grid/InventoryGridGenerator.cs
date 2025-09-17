@@ -17,8 +17,11 @@ namespace Game.Inventory
         public Canvas? target;
 
         [Header("Cell Layout Settings")]
+        public Vector2 spacing = new(0, 0);
 
-        public Vector2 spacing = new(5, 5);
+        [Header("UI Position Settings")]
+        [Tooltip("Position of the generated UI from the top left (in pixels)")]
+        public Vector2 uiPosition = new(0, 0);
 
         [HideInInspector, SerializeField]
         private GameObject? lastGeneratedRoot;
@@ -31,6 +34,9 @@ namespace Game.Inventory
             ReloadSlotTypes();
         }
 
+        /// <summary>
+        /// Reloads the slot types from the InventoryHelper and ensures all slot definitions are present.
+        /// </summary>
         private void ReloadSlotTypes()
         {
             foreach (string typeName in InventoryHelper.GetSlotTypeNames())
@@ -39,6 +45,12 @@ namespace Game.Inventory
             }
         }
 
+        /// <summary>
+        /// Generates the inventory UI grid based on the current InventoryGrid configuration.
+        /// This method creates and arranges UI slot elements as children of the specified target Canvas,
+        /// using the defined slot UI prefabs and layout settings. It cleans up any previously generated UI,
+        /// instantiates new slot UI elements for each cell in the grid, and sets up drag layers for item interaction.
+        /// </summary>
         public void GenerateUI()
         {
             if (!TryGetComponent<InventoryGrid>(out var inventoryGrid))
@@ -65,10 +77,12 @@ namespace Game.Inventory
             }
             var parentTransform = target.transform;
             rootRect.SetParent(parentTransform != null ? parentTransform : transform, false);
-            rootRect.anchorMin = Vector2.zero;
-            rootRect.anchorMax = Vector2.one;
-            rootRect.offsetMin = Vector2.zero;
-            rootRect.offsetMax = Vector2.zero;
+
+            // Set anchors to top-left, but position with uiPosition
+            rootRect.anchorMin = new Vector2(0, 1);
+            rootRect.anchorMax = new Vector2(0, 1);
+            rootRect.pivot = new Vector2(0, 1);
+            rootRect.anchoredPosition = new Vector2(uiPosition.x, -uiPosition.y); // Y is negative for top-left origin
 
             var grid = root.AddComponent<UnityEngine.UI.GridLayoutGroup>();
             grid.cellSize = InventoryManager.Instance.cellSize;
@@ -87,6 +101,13 @@ namespace Game.Inventory
             lastGeneratedRoot = root;
         }
 
+        /// <summary>
+        /// Generates a single slot UI element for the specified cell in the inventory grid.
+        /// </summary>
+        /// <param name="inventoryGrid">The inventory grid containing the cell.</param>
+        /// <param name="root">The root GameObject to parent the slot UI element to.</param>
+        /// <param name="x">The column index of the cell.</param>
+        /// <param name="y">The row index of the cell.</param>
         private void GenerateSlot(InventoryGrid inventoryGrid, GameObject root, int x, int y)
         {
             InventorySlot cell = inventoryGrid.Cells[x, y];
@@ -101,7 +122,7 @@ namespace Game.Inventory
 #if UNITY_EDITOR
             GameObject cellInstance = (GameObject)PrefabUtility.InstantiatePrefab(selectedPrefab, root.transform);
 #else
-             GameObject cellInstance = Instantiate(selectedPrefab, root.transform);
+            GameObject cellInstance = Instantiate(selectedPrefab, root.transform);
 #endif
             cellInstance.name = $"Cell_{x}_{y}";
 
@@ -110,6 +131,13 @@ namespace Game.Inventory
             slot.position = new Vector2Int(x, y);
             CreateSlotItem(inventoryGrid, slot);
         }
+
+        /// <summary>
+        /// Creates and attaches the item UI to the specified slot, if an item exists at the slot's position.
+        /// Handles drag handler setup and anchor redirection for non-anchor slots.
+        /// </summary>
+        /// <param name="grid">The inventory grid.</param>
+        /// <param name="slot">The UI slot to attach the item to.</param>
         private void CreateSlotItem(InventoryGrid grid, GridUISlot slot)
         {
             GameObject? item = slot.target.GetItem(slot.position);
@@ -121,7 +149,7 @@ namespace Game.Inventory
                 {
                     Debug.LogError($"InventoryUIGenerator: Item at {slot.position} failed to instantiate... how?");
                     return;
-                }   
+                }
                 var canvas = itemInstance.AddComponent<Canvas>();
                 canvas.overrideSorting = true;
                 itemInstance.GetComponent<Item>().CalculatePivot();
@@ -135,11 +163,17 @@ namespace Game.Inventory
             }
         }
 
+        /// <summary>
+        /// Called before Unity serializes this object. Serializes the slotDefinitions dictionary.
+        /// </summary>
         public void OnBeforeSerialize()
         {
             serializableSlotDictionary = new SerializableDictionary<string, SlotUIDefinition>(slotDefinitions);
         }
 
+        /// <summary>
+        /// Called after Unity deserializes this object. Restores the slotDefinitions dictionary.
+        /// </summary>
         public void OnAfterDeserialize()
         {
             if (serializableSlotDictionary is not null)
@@ -148,15 +182,24 @@ namespace Game.Inventory
             }
         }
 
-        public void SetInventoryActiveState(bool active) { 
-            if(lastGeneratedRoot)
-            lastGeneratedRoot.SetActive(active);
-        }
-        public void ToggleInventoryActiveState() { 
-            if(lastGeneratedRoot)
-                SetInventoryActiveState(!lastGeneratedRoot.activeSelf);
+        /// <summary>
+        /// Sets the active state of the generated inventory UI.
+        /// </summary>
+        /// <param name="active">True to activate, false to deactivate.</param>
+        public void SetInventoryActiveState(bool active)
+        {
+            if (lastGeneratedRoot)
+                lastGeneratedRoot.SetActive(active);
         }
 
+        /// <summary>
+        /// Toggles the active state of the generated inventory UI.
+        /// </summary>
+        public void ToggleInventoryActiveState()
+        {
+            if (lastGeneratedRoot)
+                SetInventoryActiveState(!lastGeneratedRoot.activeSelf);
+        }
     }
 
 

@@ -8,12 +8,30 @@ using UnityEngine.EventSystems;
 
 namespace Game.Items
 {
+    /// <summary>
+    /// Represents an item in the game, including its info, shape, and tooltip display logic.
+    /// </summary>
     public class Item : MonoBehaviour
     {
+        /// <summary>
+        /// The information associated with this item.
+        /// </summary>
         public ItemInfo info;
+
+        /// <summary>
+        /// Set a different prefab to display on hover.
+        /// </summary>
         [Tooltip("Set a different prefab to display on hover")]
         public GameObject descriptionOverride;
+
+        /// <summary>
+        /// The instantiated description object for the tooltip.
+        /// </summary>
         private GameObject descriptionObject;
+
+        /// <summary>
+        /// Unity Start method. Calculates the pivot for the item's RectTransform.
+        /// </summary>
         public void Start()
         {
             CalculatePivot();
@@ -24,10 +42,14 @@ namespace Game.Items
             var centerF = info.Shape.GetCenter();
             Vector2 dimensions = centerF * 2 + new Vector2(1, 1);
             var center = GetAnchorSlot() + new Vector2(0.5f, 0.5f);
-            Vector2 newPivot = new(center.x / dimensions.x, 1-(center.y / dimensions.y));
+            Vector2 newPivot = new(center.x / dimensions.x, 1 - (center.y / dimensions.y));
             gameObject.GetComponent<RectTransform>().pivot = newPivot;
         }
 
+        /// <summary>
+        /// Gets the anchor slot (closest position to the center) of the item's shape.
+        /// </summary>
+        /// <returns>The anchor slot as a <see cref="Vector2Int"/>.</returns>
         public Vector2Int GetAnchorSlot()
         {
             var centerF = info.Shape.GetCenter();
@@ -44,6 +66,11 @@ namespace Game.Items
             return new Vector2Int((int)centerProspect.x, (int)centerProspect.y);
         }
 
+        /// <summary>
+        /// Displays the tooltip for this item, instantiating the description object if necessary.
+        /// </summary>
+        /// <param name="parent">The parent transform for the tooltip object.</param>
+        /// <returns>The instantiated tooltip <see cref="GameObject"/>.</returns>
         public GameObject DisplayTooltip(Transform parent)
         {
             if (descriptionOverride == null)
@@ -68,11 +95,16 @@ namespace Game.Items
             return descriptionObject;
         }
 
+        /// <summary>
+        /// Creates a sprite from a boolean array representing the item's shape.
+        /// </summary>
+        /// <param name="boolArray">A 2D boolean array where true indicates presence of the shape.</param>
+        /// <returns>A <see cref="Sprite"/> representing the shape.</returns>
         private Sprite CreateSpriteFromBoolArray(bool[,] boolArray)
         {
             int gridSize = 5;
-            Color trueColor = Color.white; 
-            Color falseColor = Color.black; 
+            Color trueColor = Color.white;
+            Color falseColor = Color.black;
             // Create a new texture
             Texture2D texture = new Texture2D(gridSize, gridSize);
 
@@ -102,12 +134,15 @@ namespace Game.Items
             return sprite;
         }
 
+        /// <summary>
+        /// Hides the tooltip for this item if it is currently displayed.
+        /// </summary>
         public void HideTooltip()
         {
-            if (descriptionObject) { 
+            if (descriptionObject)
+            {
                 descriptionObject.SetActive(false);
             }
         }
-
     }
 }

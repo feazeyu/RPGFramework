@@ -11,6 +11,7 @@ namespace Game.Inventory
         public override void OnInspectorGUI()
         {
             DrawDefaultInspector();
+            //Button c:
             if (GUILayout.Button($"Reload items in Resources/{resourcePath}"))
             {
                 ((InventoryManager)target).ReloadItems(resourcePath);

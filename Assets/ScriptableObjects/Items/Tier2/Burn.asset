@@ -17,7 +17,7 @@ MonoBehaviour:
   _icon: {fileID: 0}
   _target: 0
   _tier: 2
-  _description: 
+  _description: Burn your enemies!
   _shape:
     Positions:
     - {x: 0, y: 0}

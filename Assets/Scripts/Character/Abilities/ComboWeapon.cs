@@ -6,15 +6,38 @@ using UnityEngine;
 
 namespace Game.Character
 {
+    /// <summary>
+    /// Represents a weapon that supports combo attacks, managing combo steps, animator parameters, and recovery.
+    /// </summary>
     [Serializable]
     public class ComboWeapon : Weapon
     {
+        /// <summary>
+        /// Indicates whether an attempt has been made to get the offset controller.
+        /// </summary>
         private bool triedToGetOffsetController = false;
+
+        /// <summary>
+        /// Reference to the weapon's offset controller for handling recovery.
+        /// </summary>
         private WeaponOffsetController offsetController = null;
+
+        /// <summary>
+        /// The current combo configuration for this weapon.
+        /// </summary>
         public Combo currentCombo;
+
+        /// <summary>
+        /// Indicates whether the weapon is currently recovering.
+        /// </summary>
         private bool recovering = false;
+
         [SerializeField]
         private int currentStep;
+
+        /// <summary>
+        /// Gets or sets the current step in the combo sequence.
+        /// </summary>
         public int CurrentStep
         {
             get => currentStep;
@@ -24,9 +47,20 @@ namespace Game.Character
                 UpdateAnimatorParameters();
             }
         }
+
+        /// <summary>
+        /// The time when the last attack ended.
+        /// </summary>
         private float lastAttackEndTime = 0f;
+
+        /// <summary>
+        /// Reference to the Animator component controlling the weapon's animations.
+        /// </summary>
         public Animator animator;
 
+        /// <summary>
+        /// Gets the time after which the combo can be cancelled.
+        /// </summary>
         public float ComboCancelTime
         {
             get
@@ -39,6 +73,9 @@ namespace Game.Character
             }
         }
 
+        /// <summary>
+        /// Unity Update method. Handles automatic combo cancellation based on timing.
+        /// </summary>
         private void Update()
         {
             if (CurrentStep > 0 && Time.time > lastAttackEndTime + ComboCancelTime)
@@ -47,6 +84,9 @@ namespace Game.Character
             }
         }
 
+        /// <summary>
+        /// Unity OnDestroy method. Cleans up event subscriptions.
+        /// </summary>
         public void OnDestroy()
         {
             if (offsetController != null)
@@ -55,6 +95,9 @@ namespace Game.Character
             }
         }
 
+        /// <summary>
+        /// Initiates an attack, progressing the combo if possible.
+        /// </summary>
         public override void Attack()
         {
             if (animator == null)
@@ -70,9 +113,9 @@ namespace Game.Character
                 currentStep == currentCombo.steps.Count ||
                 recovering)
                 )
-            {
-                return;
-            }
+                {
+                    return;
+                }
 
             // Increment CurrentStep if not playing
             if (currentCombo != null && CurrentStep < currentCombo.steps.Count)
@@ -82,6 +125,9 @@ namespace Game.Character
             lastAttackEndTime = Time.time + animator.GetCurrentAnimatorStateInfo(0).length;
         }
 
+        /// <summary>
+        /// Cancels the current combo and initiates recovery.
+        /// </summary>
         private void CancelCombo()
         {
             CurrentStep = 0;
@@ -101,6 +147,10 @@ namespace Game.Character
             }
             UpdateAnimatorParameters();
         }
+
+        /// <summary>
+        /// Updates the animator parameters to reflect the current combo step.
+        /// </summary>
         private void UpdateAnimatorParameters()
         {
             if (animator == null)
@@ -111,6 +161,9 @@ namespace Game.Character
         }
     }
 
+    /// <summary>
+    /// Custom editor for the <see cref="ComboWeapon"/> class, providing inspector controls and animator generation.
+    /// </summary>
     [CustomEditor(typeof(ComboWeapon))]
     [CanEditMultipleObjects]
     internal sealed class ComboWeaponEditor : Editor
@@ -119,6 +172,9 @@ namespace Game.Character
         private SerializedProperty currentStepProp;
         private SerializedProperty animatorProp;
 
+        /// <summary>
+        /// Called when the editor is enabled. Initializes serialized properties.
+        /// </summary>
         private void OnEnable()
         {
             currentComboProp = serializedObject.FindProperty("currentCombo");
@@ -126,6 +182,9 @@ namespace Game.Character
             animatorProp = serializedObject.FindProperty("animator");
         }
 
+        /// <summary>
+        /// Draws the custom inspector GUI for the ComboWeapon.
+        /// </summary>
         public override void OnInspectorGUI()
         {
             serializedObject.Update();
@@ -145,7 +204,10 @@ namespace Game.Character
             serializedObject.ApplyModifiedProperties();
         }
 
-
+        /// <summary>
+        /// Generates an AnimatorController based on the combo steps and assigns it to the weapon's Animator.
+        /// </summary>
+        /// <param name="comboWeapon">The ComboWeapon instance to generate the animator for.</param>
         private void GenerateAnimator(ComboWeapon comboWeapon)
         {
             var combo = comboWeapon.currentCombo;
