@@ -15,7 +15,6 @@ Keep in mind, that some folder names cannot be changed due to the way unity hand
 ## Contents
 
 The project is composed of modules, which are largely independent on each other, some dependencies of course exist.
-
 ### List of current modules
 
 - Core
@@ -69,9 +68,39 @@ There is a provided method - GetResourceComponents() that gets all components ca
 
 After providing a spell to cast, calling the Cast(SpellInfo spell) method checks the cooldown, the resources and then casts the spell by instantiating the prefab in your provided SpellInfo.
 
+#### Entity public fields
+
+resources - Dictionary of ResourceTypes - Resource pairs
+
+spellCooldowns - Dictionary of SpellInfo and Times. Times are stored as seconds from the running of the game.
+
+castingPosition - transform of where to instantiate spells
+
+castingRotationReference - transform whose rotation is inherited by spells
+
+#### Entity methods
+
+GetResourceComponents() - finds all child gameobjects and/or components attached to the entity gameobject of the type Resource and loads them into the resources dictionary
+
+Cast(SpellInfo spell) - Checks if the cooldown has passed and if the entity has enough resources to cast the spell, if so, instantiate it at castingPosition with the rotation of castingRotationReference
+
 ### Player Controller
 
 PlayerController.cs is a sample player controller that assumes you're going to be using the new input system for Unity in Event mode, calling the OnMove, OnLook and OnAttack events correspondingly.
+
+#### Player Controller public fields
+
+mainCamera - Camera object used for mouse calculations, if unassigned the scene's main camera is used.
+
+weaponRotationHandler - Script used to handle the aiming of the weapon
+
+weapon - Weapon script
+
+flipOnAimLeft - should the sprite get flipped when aiming to the left of the player?
+
+#### Player Controller public methods
+
+OnMOve(), OnLook(), OnAttack() - Callbacks for corresponding actions
 
 ### Abilities
 
@@ -80,6 +109,18 @@ Weapons should all be derived from the class Weapon, and I have implemented a sa
 #### WeaponCollisionHandler
 
 Things that physically hit enemies should have the WeaponCollisionHandler component, which ensures each enemy is hit only once and Invokes the OnHit(GameObject collisionTarget) event.
+
+##### WeaponCollisionHandler fields
+
+alreadyHit - hashset of objects that were hit recently, so they can be ignored
+
+OnHit(target) event - event called OnHit
+
+##### WeaponCollisionHandler public methods
+
+HandleCollision(GameObject) - should be called on collision with any gameobject, choose whether or not to apply effects here
+
+ClearAlreadyHit - Clear the alreadyHit set
 
 #### Projectile
 
@@ -130,6 +171,18 @@ That means you need an animator attached to the same GameObject as the ComboWeap
 
 That's why, the ComboWeaponEditor class in the same file has a GenerateAnimator method, which creates an animator from the assigned combo. You can later modify the animator however you want.
 
+##### ComboWeapon fields
+
+currentCombo - Current combo scriptableObject
+
+CurrentStep - the step which the combo currently is in
+
+animator - weapon animator that will be affected by this script
+
+##### ComboWeapon public methods
+
+Attack - Virtual method that is intended to be called when you want to progress in the combo. Ignores being called mid animation.
+
 ## Inventory module
 
 This module implements two main types of inventories - Grid and list inventories
@@ -148,7 +201,49 @@ It automatically assigns id's when the editor button is pressed.
 
 All of its functionality is in the method ReloadItems() where it goes through prefabs in the Resources folder that have the Item component and puts them into the items dictionary.
 
+#### InventoryManager fields
+
+instance - This is a singleton class, this is its instance. If none exists, a new one will be made.
+
+items - dictionary of all items in your game
+
+#### InventoryManager methods
+
+ReloadItems(path) - Accepts a path relative to the resources folder and fill found items into the items dictionary. For an item to be found, it has to have an Item component.
+
+GetItemByID(id) - returns a registered item with the id, if there is none, returns null.
+
 ### Inventory Slot
+
+Many inventories and slots implement some of the following interfaces:
+
+#### IItemContainer
+
+PutItem() - Put an item in the container
+
+RemoveItem() - Remove item from the container
+
+ReturnItem() - Intended to be used when an item is dragged out of the inventory to an invalid place, then returned back to its original slot.
+
+#### IUIItemContainer : IITemContainer
+
+RedrawContents() - Redraws all slots
+
+#### ISingleItemContainer : IItemContainer
+
+Item - Item in this container
+
+#### IPositionalItemContainer : IItemContainer
+
+Intended to be used for bigger containers, like GridInventory
+
+Overwrites base implementations, add new ones with Vector2Int positional arguments.
+
+#### IUIPositionalItemContainer : IPositionalItemContainer
+
+RedrawContents() - redraws the container contents
+
+#### InventorySlot fields
 
 Position - Position in the parent container (for example grid)
 
@@ -157,6 +252,14 @@ Anchor position - In case you're using multi-slot items, this is the position of
 IsEnabled - In case you want to disable some slots.
 
 BaseColor - Color in the unity editor
+
+#### InventorySlot methods
+
+PutItem(item) - Tries to put an item into the slot.
+
+AcceptsItem() - Returns true if the slot can accept an item.
+
+RemoveItem() - Remove the slot's item
 
 #### Put item/Remove item/Editor only variants
 
@@ -230,6 +333,8 @@ It expects to have a target IUIPositionalItemContainer (Both ListInventoryUI and
 
 When Putting/Removing items into this type of slot, it instead delegates the work to its target with a positional argument.
 
+Implements IUIItemContainer, ISingleItemContainer interfaces and their methods
+
 ### InventoryGrid
 
 This class is designed to generate and handle grid-based inventory operations. It is separated into a UI and a data part.
@@ -238,6 +343,8 @@ Just like inventory slots, item can be put into it or removed by using PutItem()
 However, these require a Vector2Int position of where to be put or removed from, as the grid inventory is handled like a 2D array of inventorySlots.
 
 In order to update the inventory's UI, you'll need to call InventoryGridGenerator's GenerateUI(), which is called from RedrawContents() aswell.
+
+Implements IUIPositionalItemContainer
 
 ### InventoryGridGenerator
 
