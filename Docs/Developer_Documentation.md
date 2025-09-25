@@ -350,6 +350,12 @@ Implements IUIPositionalItemContainer
 
 Handles the unity editor UI, and more importantly the generation of your UI elements. That is done by instantiating the selected slot prefabs into a target Canvas.
 
+#### InventoryGrifGenerator methods
+
+SetInventoryActiveState(bool) - Set the generated ui element's active state to bool
+
+ToggleInventoryActiveState() - change the generated ui element's active state
+
 #### GenerateUI() Method
 
 This is an expensive operation.
