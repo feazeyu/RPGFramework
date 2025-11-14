@@ -105,7 +105,7 @@ namespace Game.Inventory
         /// Generates a single slot UI element for the specified cell in the inventory grid.
         /// </summary>
         /// <param name="inventoryGrid">The inventory grid containing the cell.</param>
-        /// <param name="root">The root GameObject to parent the slot UI element to.</param>
+        /// <param name="root">The root GameObject to parent the slot UI element to.</param>aw
         /// <param name="x">The column index of the cell.</param>
         /// <param name="y">The row index of the cell.</param>
         private void GenerateSlot(InventoryGrid inventoryGrid, GameObject root, int x, int y)

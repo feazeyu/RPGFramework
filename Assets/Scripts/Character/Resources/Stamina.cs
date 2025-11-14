@@ -6,6 +6,6 @@ namespace Game.Character
     [Serializable]
     public class Stamina : Resource
     {
-        public readonly ResourceTypes resourceType = ResourceTypes.Stamina;
+        public readonly new ResourceTypes resourceType = ResourceTypes.Stamina;
     }
 }

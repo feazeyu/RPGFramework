@@ -347,7 +347,7 @@ namespace Game.Inventory
         /// <returns>The id of the removed item, or -1 if none was removed.</returns>
         public override int RemoveItem()
         {
-            if (!IsEnabled || itemCount <= 0) return -1;
+            if (!IsEnabled || itemCount <= 0) return -1;    
             int removedItemId = ItemId;
             itemCount--;
             if (itemCount <= 0)

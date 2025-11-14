@@ -1,4 +1,4 @@
-using Game.Core;
+    using Game.Core;
 using UnityEngine;
 using UnityEngine.InputSystem;
 namespace Game.Character
@@ -18,6 +18,9 @@ namespace Game.Character
         public Weapon weapon;
         [Tooltip("Flip the sprite when aiming left")]
         public bool flipOnAimLeft = true;
+        [Tooltip("(Optional) Interactor component reference")]
+        public Interactor interactor;
+
         private Rigidbody2D rb;
         private Vector2 moveInput;
         private Vector2 aimInput;
@@ -70,6 +73,17 @@ namespace Game.Character
         public void OnLook(InputAction.CallbackContext ctx)
         {
             aimInput = ctx.ReadValue<Vector2>();
+        }
+
+        public void OnInteract(InputAction.CallbackContext ctx)
+        {
+            if (interactor == null) { 
+                Debug.LogWarning("Interactor reference not set on PlayerController. This is not a problem if you don't need interaction functionality.");
+            }
+            if (ctx.started)
+            {
+                interactor.InteractWithClosest();
+            }
         }
 
         public void OnAttack(InputAction.CallbackContext ctx)

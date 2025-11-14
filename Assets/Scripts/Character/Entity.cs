@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿#nullable enable
+
+using UnityEngine;
 using Game.Core.Utilities;
 using System;
 namespace Game.Character
@@ -16,6 +18,7 @@ namespace Game.Character
         /// <summary>
         /// The cooldowns for each spell, mapped by spell info.
         /// </summary>
+        [HideInInspector]
         public SerializableDictionary<SpellInfo, DateTime> spellCooldowns;
 
         /// <summary>
