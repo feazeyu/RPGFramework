@@ -6,6 +6,6 @@ namespace Game.Character
     [Serializable]
     public class Mana : Resource
     {
-        public readonly ResourceTypes resourceType = ResourceTypes.Mana;
+        new public readonly ResourceTypes resourceType = ResourceTypes.Mana;
     }
 }

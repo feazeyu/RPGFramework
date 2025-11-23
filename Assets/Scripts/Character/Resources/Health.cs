@@ -6,7 +6,7 @@ namespace Game.Character
     [Serializable]
     public class Health : Resource
     {
-        public readonly ResourceTypes resourceType = ResourceTypes.Health;
+        new public readonly ResourceTypes resourceType = ResourceTypes.Health;
         public virtual void Start()
         {
             onResourceReachesZero += () => Destroy(gameObject);

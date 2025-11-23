@@ -6,7 +6,7 @@ namespace Game.Character
 {
     public class Interactor : MonoBehaviour
     {
-        //[HideInInspector]
+        [HideInInspector]
         public List<Interactable> interactables = new List<Interactable>();
 
 

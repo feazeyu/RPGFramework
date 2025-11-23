@@ -13,25 +13,25 @@ namespace Game.Character
         /// <summary>
         /// The resources available to this entity, mapped by resource type.
         /// </summary>
-        public SerializableDictionary<ResourceTypes, Resource> resources;
+        public SerializableDictionary<ResourceTypes, Resource>? resources;
 
         /// <summary>
         /// The cooldowns for each spell, mapped by spell info.
         /// </summary>
         [HideInInspector]
-        public SerializableDictionary<SpellInfo, DateTime> spellCooldowns;
+        public SerializableDictionary<SpellInfo, DateTime>? spellCooldowns;
 
         /// <summary>
         /// The transform where spells are spawned when cast.
         /// </summary>
         [Tooltip("Spells spawn here")]
-        public Transform castingPosition;
+        public Transform? castingPosition;
 
         /// <summary>
         /// The transform whose rotation is inherited by spawned spells.
         /// </summary>
         [Tooltip("Spells inherit the rotation of this")]
-        public Transform castingRotationReference;
+        public Transform? castingRotationReference;
 
         /// <summary>
         /// Initializes the entity's resources and spell cooldowns.
@@ -48,6 +48,10 @@ namespace Game.Character
         /// </summary>
         public void GetResourceComponents()
         {
+            if (resources == null)
+            {
+                return;
+            }
             resources.Clear();
             var resourceComponents = GetComponents<Resource>();
 
@@ -74,6 +78,10 @@ namespace Game.Character
         /// </returns>
         public GameObject? Cast(SpellInfo spell)
         {
+            if (resources == null || spellCooldowns == null || castingPosition==null || castingRotationReference==null)
+            {
+                return null;
+            }
             if (!spellCooldowns.TryGetValue(spell, out var cooldown))
             {
                 spellCooldowns[spell] = DateTime.Now;
@@ -101,6 +109,7 @@ namespace Game.Character
             }
             var SpellObject = Instantiate(spell.prefab);
             spellCooldowns[spell] = DateTime.Now.AddMilliseconds(spell.cooldown);
+
             SpellObject.transform.position = castingPosition.position;
             SpellObject.transform.rotation = castingRotationReference.rotation;
             return SpellObject;
