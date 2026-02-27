@@ -31,7 +31,10 @@ namespace DialogueGraph.Editor
 
         // ── Data ──────────────────────────────────────────────────────────────
 
+
         public NodeData Data { get; }
+
+        Label nodeTitle;
 
         private readonly DialogueGraphAsset m_Asset;
         private readonly DialogueNodeInfo   m_Info;
@@ -44,6 +47,8 @@ namespace DialogueGraph.Editor
             Data    = data;
             m_Asset = asset;
             m_Info  = NodeRegistry.Get(data.NodeType);
+
+            
 
             SetPosition(new Rect(data.Position, Vector2.zero));
             userData = data.Guid;
@@ -86,9 +91,9 @@ namespace DialogueGraph.Editor
                 icon.style.color = new StyleColor(m_Info.AccentColor);
             titleContainer.Add(icon);
 
-            var title = new Label(Data.DisplayName);
-            title.AddToClassList("node-header-title");
-            titleContainer.Add(title);
+            nodeTitle = new Label(Data.DisplayName);
+            nodeTitle.AddToClassList("node-header-title");
+            titleContainer.Add(nodeTitle);
 
             // Type badge (top-right).
             var badge = new Label(Data.NodeType);
@@ -101,9 +106,9 @@ namespace DialogueGraph.Editor
             titleContainer.Add(badge);
 
             // Allow renaming on double-click of the title.
-            title.RegisterCallback<MouseDownEvent>(evt =>
+            nodeTitle.RegisterCallback<MouseDownEvent>(evt =>
             {
-                if (evt.clickCount == 2) BeginRename(title);
+                if (evt.clickCount == 2) BeginRename(nodeTitle);
             });
         }
 
@@ -214,9 +219,8 @@ namespace DialogueGraph.Editor
             BuildFields();
             RefreshExpandedState();
 
-            // Update the title label.
-            var titleLabel = titleContainer.Q<Label>("node-header-title");
-            if (titleLabel != null) titleLabel.text = Data.DisplayName;
+            // Update the title label
+            if (nodeTitle != null) nodeTitle.text = Data.DisplayName;
         }
 
         // ── Selection ─────────────────────────────────────────────────────────
