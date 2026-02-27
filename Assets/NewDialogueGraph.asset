@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c46074447551644d84d2cff096592b0, type: 3}
+  m_Name: NewDialogueGraph
+  m_EditorClassIdentifier: 
+  m_Nodes:
+  - Guid: 7797e6e3-eaca-4925-87f6-d2e0aeb04923
+    NodeType: Start
+    DisplayName: Start
+    StoryText: 
+    Position: {x: -374, y: -59}
+    Ports:
+    - PortName: Out
+      Direction: 1
+      Capacity: 1
+    Fields: []
+  - Guid: 8f8593c1-3ddf-42be-9267-77736040715f
+    NodeType: End
+    DisplayName: End
+    StoryText: 
+    Position: {x: -2, y: -59}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    Fields: []
+  m_Edges:
+  - Guid: ffd783d6-4a20-4a99-80e4-236e5422583a
+    OutputNodeGuid: 7797e6e3-eaca-4925-87f6-d2e0aeb04923
+    OutputPortName: Out
+    InputNodeGuid: 8f8593c1-3ddf-42be-9267-77736040715f
+    InputPortName: In
+  m_Blackboard:
+    m_Variables:
+    - rid: 600483503812378702
+    - rid: 600483503812378703
+  ViewTransform: {x: 790, y: 466, z: 1}
+  BlackboardPosition: {x: 10, y: 60}
+  references:
+    version: 2
+    RefIds:
+    - rid: 600483503812378702
+      type: {class: BlackboardVariableString, ns: DialogueGraph.Runtime, asm: Dialogue}
+      data:
+        m_Name: NewVariable
+        m_Guid: 9f911aeb-2728-4ae9-b0b6-5b473b7f3dcb
+        m_Exposed: 0
+        m_Shared: 1
+        m_Value: 
+    - rid: 600483503812378703
+      type: {class: BlackboardVariableGameObject, ns: DialogueGraph.Runtime, asm: Dialogue}
+      data:
+        m_Name: NewVariable
+        m_Guid: c7273a0c-709c-42bd-81de-061ad16da605
+        m_Exposed: 1
+        m_Shared: 0
+        m_Value: {fileID: 0}
