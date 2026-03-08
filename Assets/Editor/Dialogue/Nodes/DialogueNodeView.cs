@@ -4,6 +4,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 using DialogueGraph.Runtime;
+using UnityEditor;
 
 namespace DialogueGraph.Editor
 {
@@ -31,10 +32,7 @@ namespace DialogueGraph.Editor
 
         // ── Data ──────────────────────────────────────────────────────────────
 
-
         public NodeData Data { get; }
-
-        Label nodeTitle;
 
         private readonly DialogueGraphAsset m_Asset;
         private readonly DialogueNodeInfo   m_Info;
@@ -47,8 +45,6 @@ namespace DialogueGraph.Editor
             Data    = data;
             m_Asset = asset;
             m_Info  = NodeRegistry.Get(data.NodeType);
-
-            
 
             SetPosition(new Rect(data.Position, Vector2.zero));
             userData = data.Guid;
@@ -91,9 +87,9 @@ namespace DialogueGraph.Editor
                 icon.style.color = new StyleColor(m_Info.AccentColor);
             titleContainer.Add(icon);
 
-            nodeTitle = new Label(Data.DisplayName);
-            nodeTitle.AddToClassList("node-header-title");
-            titleContainer.Add(nodeTitle);
+            var title = new Label(Data.DisplayName);
+            title.AddToClassList("node-header-title");
+            titleContainer.Add(title);
 
             // Type badge (top-right).
             var badge = new Label(Data.NodeType);
@@ -106,9 +102,9 @@ namespace DialogueGraph.Editor
             titleContainer.Add(badge);
 
             // Allow renaming on double-click of the title.
-            nodeTitle.RegisterCallback<MouseDownEvent>(evt =>
+            title.RegisterCallback<MouseDownEvent>(evt =>
             {
-                if (evt.clickCount == 2) BeginRename(nodeTitle);
+                if (evt.clickCount == 2) BeginRename(title);
             });
         }
 
@@ -169,18 +165,93 @@ namespace DialogueGraph.Editor
             nameLabel.AddToClassList("node-field-name");
             row.Add(nameLabel);
 
-            // Value / link indicator.
+            // Value / link display — rebuilt by RefreshFieldRow when link changes.
+            var valueSlot = new VisualElement();
+            valueSlot.style.flexGrow = 1;
+            row.Add(valueSlot);
+            RefreshValueSlot(valueSlot, field);
+
+            // Link indicator dot — also the drop target for blackboard variables.
+            var dot = new VisualElement();
+            dot.AddToClassList("node-field-link-dot");
+            if (!string.IsNullOrEmpty(field.LinkedVariableGuid))
+                dot.AddToClassList("linked");
+            row.Add(dot);
+
+            // Clicking the dot unlinks the field.
+            dot.tooltip = string.IsNullOrEmpty(field.LinkedVariableGuid)
+                ? "Drag a Blackboard variable here to link"
+                : "Linked — click to unlink";
+            dot.RegisterCallback<ClickEvent>(evt =>
+            {
+                if (string.IsNullOrEmpty(field.LinkedVariableGuid)) return;
+                field.LinkedVariableGuid = null;
+                RefreshValueSlot(valueSlot, field);
+                dot.RemoveFromClassList("linked");
+                dot.tooltip = "Drag a Blackboard variable here to link";
+                EditorUtilityHelper.SetDirty(m_Asset);
+                evt.StopPropagation();
+            });
+
+            // ── Drag & Drop ──────────────────────────────────────────────────
+            // The entire row is a drop target for blackboard variable GUIDs.
+            // We highlight on DragEnter/DragUpdated and commit on DragPerform.
+
+            row.RegisterCallback<DragEnterEvent>(_ =>
+            {
+                if (DragAndDrop.GetGenericData("BlackboardVariableGuid") is string)
+                    row.style.backgroundColor = new StyleColor(new Color(0.18f, 0.30f, 0.45f));
+            });
+
+            row.RegisterCallback<DragLeaveEvent>(_ =>
+            {
+                row.style.backgroundColor = StyleKeyword.Null;
+            });
+
+            row.RegisterCallback<DragUpdatedEvent>(evt =>
+            {
+                if (DragAndDrop.GetGenericData("BlackboardVariableGuid") is string)
+                {
+                    DragAndDrop.visualMode = DragAndDropVisualMode.Link;
+                    evt.StopPropagation();
+                }
+            });
+
+            row.RegisterCallback<DragPerformEvent>(evt =>
+            {
+                if (DragAndDrop.GetGenericData("BlackboardVariableGuid") is not string guid) return;
+
+                DragAndDrop.AcceptDrag();
+                row.style.backgroundColor = StyleKeyword.Null;
+
+                field.LinkedVariableGuid = guid;
+                RefreshValueSlot(valueSlot, field);
+                dot.AddToClassList("linked");
+                dot.tooltip = "Linked — click to unlink";
+                EditorUtilityHelper.SetDirty(m_Asset);
+                evt.StopPropagation();
+            });
+
+            row.RegisterCallback<DragExitedEvent>(_ =>
+            {
+                row.style.backgroundColor = StyleKeyword.Null;
+            });
+
+            return row;
+        }
+
+        private void RefreshValueSlot(VisualElement slot, FieldData field)
+        {
+            slot.Clear();
             if (!string.IsNullOrEmpty(field.LinkedVariableGuid))
             {
-                // Linked to a blackboard variable — show the variable name.
                 var bbVar = m_Asset.Blackboard.GetVariable(field.LinkedVariableGuid);
                 var linkedLabel = new Label("⟵ " + (bbVar?.Name ?? "?"));
                 linkedLabel.AddToClassList("node-field-linked");
-                row.Add(linkedLabel);
+                slot.Add(linkedLabel);
             }
             else
             {
-                // Inline value — show an editable field.
                 var valueField = new TextField { value = field.InlineValue ?? "" };
                 valueField.AddToClassList("node-field-value");
                 valueField.RegisterValueChangedCallback(evt =>
@@ -188,20 +259,8 @@ namespace DialogueGraph.Editor
                     field.InlineValue = evt.newValue;
                     EditorUtilityHelper.SetDirty(m_Asset);
                 });
-                row.Add(valueField);
+                slot.Add(valueField);
             }
-
-            // Link indicator dot.
-            var dot = new VisualElement();
-            dot.AddToClassList("node-field-link-dot");
-            dot.tooltip = string.IsNullOrEmpty(field.LinkedVariableGuid)
-                ? "Not linked to Blackboard"
-                : "Linked to Blackboard variable";
-            if (!string.IsNullOrEmpty(field.LinkedVariableGuid))
-                dot.AddToClassList("linked");
-            row.Add(dot);
-
-            return row;
         }
 
         // ── Public API ────────────────────────────────────────────────────────
@@ -219,8 +278,9 @@ namespace DialogueGraph.Editor
             BuildFields();
             RefreshExpandedState();
 
-            // Update the title label
-            if (nodeTitle != null) nodeTitle.text = Data.DisplayName;
+            // Update the title label.
+            var titleLabel = titleContainer.Q<Label>("node-header-title");
+            if (titleLabel != null) titleLabel.text = Data.DisplayName;
         }
 
         // ── Selection ─────────────────────────────────────────────────────────

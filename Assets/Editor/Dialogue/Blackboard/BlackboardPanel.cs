@@ -132,9 +132,9 @@ namespace DialogueGraph.Editor
             m_AddForm.style.display         = DisplayStyle.None;
             m_AddForm.style.flexDirection   = FlexDirection.Column;
             m_AddForm.style.paddingTop         = 10;
-            m_AddForm.style.paddingBottom = 10;
             m_AddForm.style.paddingLeft = 10;
             m_AddForm.style.paddingRight = 10;
+            m_AddForm.style.paddingBottom = 10;
             m_AddForm.style.backgroundColor = new StyleColor(new Color(0.11f, 0.14f, 0.20f));
             m_AddForm.style.borderBottomWidth = 1;
             m_AddForm.style.borderBottomColor = new StyleColor(ColDivider);
@@ -287,6 +287,29 @@ namespace DialogueGraph.Editor
             chevron.style.color      = new StyleColor(ColMuted);
             chevron.style.marginLeft = 6;
             row.Add(chevron);
+
+            // Drag to node field — register this row as a drag source.
+            // We start a DragAndDrop operation carrying the variable GUID.
+            row.RegisterCallback<MouseDownEvent>(evt =>
+            {
+                if (evt.button != 0 || evt.clickCount != 1) return;
+                // Only start drag on a slow/deliberate press — let click still work.
+                row.RegisterCallback<MouseMoveEvent>(OnDragStartMove);
+
+                void OnDragStartMove(MouseMoveEvent moveEvt)
+                {
+                    row.UnregisterCallback<MouseMoveEvent>(OnDragStartMove);
+                    if (Vector2.Distance(evt.mousePosition, moveEvt.mousePosition) < 5f) return;
+
+                    DragAndDrop.PrepareStartDrag();
+                    DragAndDrop.SetGenericData("BlackboardVariableGuid", variable.Guid);
+                    DragAndDrop.SetGenericData("BlackboardVariableName", variable.Name);
+                    DragAndDrop.SetGenericData("BlackboardVariableType", GetShortTypeName(variable));
+                    DragAndDrop.StartDrag(variable.Name);
+                    DragAndDrop.visualMode = DragAndDropVisualMode.Link;
+                    evt.StopPropagation();
+                }
+            }, TrickleDown.NoTrickleDown);
 
             // Click header to toggle expand.
             row.RegisterCallback<ClickEvent>(_ =>

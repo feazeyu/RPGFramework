@@ -318,8 +318,10 @@ namespace DialogueGraph.Editor
 
         public void RefreshNodeView(string guid)
         {
-            if (m_NodeViews.TryGetValue(guid, out var v))
+            if (m_NodeViews.TryGetValue(guid, out var v)) { 
                 v.Refresh();
+            }
+
         }
     }
 }
