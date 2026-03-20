@@ -290,7 +290,7 @@ namespace DialogueGraph.Editor
             }
         }
 
-        // ── Field editor with BB link button ──────────────────────────────────
+        // ── Field editor with blackboard link button ──────────────────────────────────
 
         private VisualElement BuildFieldEditor(FieldData field, DialogueGraphAsset asset)
         {

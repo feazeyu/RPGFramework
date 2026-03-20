@@ -38,6 +38,7 @@ namespace DialogueGraph.Runtime
         public string          DisplayName;
         public string          StoryText;     // human-readable "story" template
         public Vector2         Position;
+        public Vector2         Size = Vector2.zero; // zero = auto (not yet user-resized)
         public List<PortData>  Ports  = new List<PortData>();
         public List<FieldData> Fields = new List<FieldData>();
     }

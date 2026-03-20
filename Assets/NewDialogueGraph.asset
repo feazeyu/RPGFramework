@@ -13,81 +13,80 @@ MonoBehaviour:
   m_Name: NewDialogueGraph
   m_EditorClassIdentifier: 
   m_Nodes:
-  - Guid: 7797e6e3-eaca-4925-87f6-d2e0aeb04923
-    NodeType: Start
-    DisplayName: Start
+  - Guid: 90ca8973-ae24-4fb7-b58e-fc35d896c7fd
+    NodeType: ChoiceBranch
+    DisplayName: Test
     StoryText: 
-    Position: {x: -994, y: -69}
+    Position: {x: -764, y: 28}
+    Size: {x: 358, y: 311}
     Ports:
-    - PortName: Out
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Choice 1
       Direction: 1
-      Capacity: 1
-    Fields: []
-  - Guid: 8f8593c1-3ddf-42be-9267-77736040715f
-    NodeType: End
-    DisplayName: End
-    StoryText: 
-    Position: {x: 28, y: 8}
-    Ports:
-    - PortName: In
-      Direction: 0
-      Capacity: 1
-    Fields: []
-  - Guid: d39c7092-7ef4-4a72-ab28-7e97fd473a39
-    NodeType: DialogueLine
-    DisplayName: Less
-    StoryText: 
-    Position: {x: -544, y: 75}
-    Ports:
-    - PortName: In
-      Direction: 0
-      Capacity: 1
-    - PortName: Out
+      Capacity: 0
+    - PortName: Choice 2
+      Direction: 1
+      Capacity: 0
+    - PortName: Choice 3
+      Direction: 1
+      Capacity: 0
+    - PortName: Choice 4
       Direction: 1
       Capacity: 0
     Fields:
-    - FieldName: Speaker
+    - FieldName: Choice 1 Text
+      TypeName: System.String
+      InlineValue: 
+      LinkedVariableGuid: 345b027b-969e-4b51-8cee-ba9d95e7e651
+    - FieldName: Choice 2 Text
       TypeName: System.String
       InlineValue: 
       LinkedVariableGuid: 
-    - FieldName: Text
+    - FieldName: Choice 3 Text
       TypeName: System.String
       InlineValue: 
       LinkedVariableGuid: 
-    - FieldName: Portrait
-      TypeName: UnityEngine.Sprite
-      InlineValue: 
-      LinkedVariableGuid: 
-  - Guid: 3fd10900-de23-419d-a2e2-96967fe80a59
-    NodeType: DialogueLine
-    DisplayName: DA
-    StoryText: 
-    Position: {x: -544, y: -213}
-    Ports:
-    - PortName: In
-      Direction: 0
-      Capacity: 1
-    - PortName: Out
-      Direction: 1
-      Capacity: 0
-    Fields:
-    - FieldName: Speaker
+    - FieldName: Choice 4 Text
       TypeName: System.String
       InlineValue: 
       LinkedVariableGuid: 
-    - FieldName: Text
-      TypeName: System.String
-      InlineValue: 
-      LinkedVariableGuid: 
-    - FieldName: Portrait
-      TypeName: UnityEngine.Sprite
-      InlineValue: 
-      LinkedVariableGuid: 
-  - Guid: c8f4d0e6-eb7d-4d79-902b-07dceeabf11f
+  - Guid: 820f0401-53a1-45a0-9c7d-2d35f619f239
     NodeType: Condition
-    DisplayName: Slouch
+    DisplayName: Condition
     StoryText: 
-    Position: {x: -168, y: -249}
+    Position: {x: -277, y: -145}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: True
+      Direction: 1
+      Capacity: 0
+    - PortName: False
+      Direction: 1
+      Capacity: 0
+    Fields:
+    - FieldName: Variable
+      TypeName: System.String
+      InlineValue: 
+      LinkedVariableGuid: 
+    - FieldName: Operator
+      TypeName: System.String
+      InlineValue: '*'
+      LinkedVariableGuid: 
+    - FieldName: Value
+      TypeName: System.String
+      InlineValue: 
+      LinkedVariableGuid: 
+  - Guid: 2d5ca349-f085-4bee-a348-b3157be2d2a7
+    NodeType: Condition
+    DisplayName: Condition
+    StoryText: 
+    Position: {x: -268, y: 192}
+    Size: {x: 0, y: 0}
     Ports:
     - PortName: In
       Direction: 0
@@ -111,36 +110,73 @@ MonoBehaviour:
       TypeName: System.String
       InlineValue: 
       LinkedVariableGuid: 
+  - Guid: fd49241c-e82c-4b65-9115-aa86984b023c
+    NodeType: Start
+    DisplayName: Start
+    StoryText: 
+    Position: {x: -1067, y: -91}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: Out
+      Direction: 1
+      Capacity: 0
+    Fields: []
+  - Guid: 559567f3-6cd6-4818-bbf7-01664ba2dc3c
+    NodeType: End
+    DisplayName: End
+    StoryText: 
+    Position: {x: 282, y: 28}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    Fields: []
   m_Edges:
-  - Guid: 168e1d80-3cb1-4c6d-aa11-adc96daed078
-    OutputNodeGuid: 7797e6e3-eaca-4925-87f6-d2e0aeb04923
-    OutputPortName: Out
-    InputNodeGuid: d39c7092-7ef4-4a72-ab28-7e97fd473a39
+  - Guid: 686d27b2-7e75-4d5b-8b3b-c1a565a73ab8
+    OutputNodeGuid: 90ca8973-ae24-4fb7-b58e-fc35d896c7fd
+    OutputPortName: Choice 1
+    InputNodeGuid: 820f0401-53a1-45a0-9c7d-2d35f619f239
     InputPortName: In
-  - Guid: 2b546782-960b-4ee5-a506-8e0c3623beec
-    OutputNodeGuid: 7797e6e3-eaca-4925-87f6-d2e0aeb04923
+  - Guid: 44a57d96-b036-414c-9514-44d9ec0f3c32
+    OutputNodeGuid: fd49241c-e82c-4b65-9115-aa86984b023c
     OutputPortName: Out
-    InputNodeGuid: d39c7092-7ef4-4a72-ab28-7e97fd473a39
+    InputNodeGuid: 90ca8973-ae24-4fb7-b58e-fc35d896c7fd
     InputPortName: In
-  - Guid: ec39f07f-9698-4872-bb1a-e5b40f2fc3e9
-    OutputNodeGuid: 3fd10900-de23-419d-a2e2-96967fe80a59
-    OutputPortName: Out
-    InputNodeGuid: 8f8593c1-3ddf-42be-9267-77736040715f
+  - Guid: 55c716eb-5e24-493e-a3c6-a6d3e9dce8cd
+    OutputNodeGuid: 90ca8973-ae24-4fb7-b58e-fc35d896c7fd
+    OutputPortName: Choice 4
+    InputNodeGuid: 2d5ca349-f085-4bee-a348-b3157be2d2a7
     InputPortName: In
-  - Guid: 629a66c3-264a-4855-be3b-167e5270d48b
-    OutputNodeGuid: 7797e6e3-eaca-4925-87f6-d2e0aeb04923
-    OutputPortName: Out
-    InputNodeGuid: 8f8593c1-3ddf-42be-9267-77736040715f
+  - Guid: 9c34f5c9-3b2e-4d8b-bf43-ea0ff9ec496b
+    OutputNodeGuid: 820f0401-53a1-45a0-9c7d-2d35f619f239
+    OutputPortName: False
+    InputNodeGuid: 559567f3-6cd6-4818-bbf7-01664ba2dc3c
     InputPortName: In
-  - Guid: 1d1b088e-4ab1-45bd-82e3-828aad0f736a
-    OutputNodeGuid: 7797e6e3-eaca-4925-87f6-d2e0aeb04923
-    OutputPortName: Out
-    InputNodeGuid: 3fd10900-de23-419d-a2e2-96967fe80a59
+  - Guid: c75378ce-ca76-48e6-b40a-1f12ef71bbe5
+    OutputNodeGuid: 820f0401-53a1-45a0-9c7d-2d35f619f239
+    OutputPortName: True
+    InputNodeGuid: 559567f3-6cd6-4818-bbf7-01664ba2dc3c
     InputPortName: In
-  - Guid: 83e2e56b-3fc7-467b-86e4-8259c6f14fd6
-    OutputNodeGuid: 7797e6e3-eaca-4925-87f6-d2e0aeb04923
-    OutputPortName: Out
-    InputNodeGuid: c8f4d0e6-eb7d-4d79-902b-07dceeabf11f
+  - Guid: f8efa8c3-0845-4a7b-87bf-a5b9f0f6fac4
+    OutputNodeGuid: 2d5ca349-f085-4bee-a348-b3157be2d2a7
+    OutputPortName: True
+    InputNodeGuid: 559567f3-6cd6-4818-bbf7-01664ba2dc3c
+    InputPortName: In
+  - Guid: ac76b06f-ae2c-44f3-a6b2-ef3be707f5a0
+    OutputNodeGuid: 2d5ca349-f085-4bee-a348-b3157be2d2a7
+    OutputPortName: False
+    InputNodeGuid: 559567f3-6cd6-4818-bbf7-01664ba2dc3c
+    InputPortName: In
+  - Guid: 3dbffae4-ecd2-4d2e-afea-5bdc49e4990d
+    OutputNodeGuid: 90ca8973-ae24-4fb7-b58e-fc35d896c7fd
+    OutputPortName: Choice 2
+    InputNodeGuid: 820f0401-53a1-45a0-9c7d-2d35f619f239
+    InputPortName: In
+  - Guid: 81638a5b-0e0d-4966-bcd9-7f90cedbe393
+    OutputNodeGuid: 90ca8973-ae24-4fb7-b58e-fc35d896c7fd
+    OutputPortName: Choice 3
+    InputNodeGuid: 2d5ca349-f085-4bee-a348-b3157be2d2a7
     InputPortName: In
   m_Blackboard:
     m_Variables:
@@ -148,7 +184,7 @@ MonoBehaviour:
     - rid: 3869425589960310785
     - rid: 3869425699909533696
     - rid: 3869425699909533767
-  ViewTransform: {x: 1062, y: 308, z: 1}
+  ViewTransform: {x: 1043, y: 242, z: 1}
   BlackboardPosition: {x: 10, y: 60}
   references:
     version: 2

@@ -9,6 +9,14 @@ using DialogueGraph.Runtime;
 namespace DialogueGraph.Editor
 {
     /// <summary>
+    /// Marker Edge subclass. Used so ConnectTo&lt;SoftEdge&gt; creates consistently
+    /// typed edges; actual curve softness comes from Orientation.Vertical ports
+    /// and the --edge-width USS variable rather than C# tangent manipulation
+    /// (EdgeControl.controlPoints is read-only in current Unity versions).
+    /// </summary>
+    public class SoftEdge : Edge { }
+
+    /// <summary>
     /// The main graph canvas. Extends Unity's GraphView so we get built-in:
     ///   • Node drag, multi-select, rubber-band selection
     ///   • Edge drawing (port-to-port)
@@ -26,6 +34,10 @@ namespace DialogueGraph.Editor
 
         public Action<NodeData> OnNodeSelected;
         public Action           OnNodeDeselected;
+
+        // Fired when a blackboard variable is dropped onto a node field.
+        // Args: (fieldData, variableGuid)  — empty guid = unlink
+        public Action<FieldData, string> OnVariableLinked;
 
         // ── Internal state ────────────────────────────────────────────────────
 
@@ -67,6 +79,11 @@ namespace DialogueGraph.Editor
         }
 
         // ── GraphView overrides ───────────────────────────────────────────────
+
+        /// <summary>
+        /// Use SoftEdge instead of the default Edge so bezier tangents are gentler.
+        /// </summary>
+        public Edge CreateEdge() => new SoftEdge();
 
         /// <summary>
         /// Controls which ports can connect to which.
@@ -189,7 +206,7 @@ namespace DialogueGraph.Editor
         private DialogueNodeView CreateNodeView(NodeData data)
         {
             var view = new DialogueNodeView(data, m_Asset);
-            view.OnSelect   = () => OnNodeSelected?.Invoke(data);
+            view.OnSelect  = () => OnNodeSelected?.Invoke(data);
             view.OnDeselected = () => OnNodeDeselected?.Invoke();
             view.OnMoved      = pos =>
             {
@@ -215,7 +232,7 @@ namespace DialogueGraph.Editor
             var inPort  = inView.GetPort(edgeData.InputPortName,   Direction.Input);
             if (outPort == null || inPort == null) return;
 
-            var edge = outPort.ConnectTo(inPort);
+            var edge = outPort.ConnectTo<SoftEdge>(inPort);
             edge.userData = edgeData.Guid;
             AddElement(edge);
         }
@@ -318,10 +335,8 @@ namespace DialogueGraph.Editor
 
         public void RefreshNodeView(string guid)
         {
-            if (m_NodeViews.TryGetValue(guid, out var v)) { 
+            if (m_NodeViews.TryGetValue(guid, out var v))
                 v.Refresh();
-            }
-
         }
     }
 }

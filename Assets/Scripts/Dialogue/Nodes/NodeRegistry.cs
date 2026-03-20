@@ -31,7 +31,7 @@ namespace DialogueGraph.Runtime
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
     public class DialogueNodeAttribute : Attribute
     {
-        public string TypeId      { get; }
+        public new string TypeId      { get; }
         public string DisplayName { get; }
         public string Category    { get; }
         public string Description { get; }
@@ -112,7 +112,7 @@ namespace DialogueGraph.Runtime
                 AccentColor = ColStart, Icon = "▶",
                 DefaultPorts = new List<PortData>
                 {
-                    new PortData { PortName = "Out", Direction = PortDirection.Output, Capacity = PortCapacity.Multi }
+                    new PortData { PortName = "Out", Direction = PortDirection.Output, Capacity = PortCapacity.Single }
                 }
             });
 
@@ -135,7 +135,7 @@ namespace DialogueGraph.Runtime
                 DefaultPorts = new List<PortData>
                 {
                     new PortData { PortName = "In",  Direction = PortDirection.Input,  Capacity = PortCapacity.Multi },
-                    new PortData { PortName = "Out", Direction = PortDirection.Output, Capacity = PortCapacity.Multi }
+                    new PortData { PortName = "Out", Direction = PortDirection.Output, Capacity = PortCapacity.Single }
                 }
             });
 
@@ -147,7 +147,7 @@ namespace DialogueGraph.Runtime
                 DefaultPorts = new List<PortData>
                 {
                     new PortData { PortName = "In",  Direction = PortDirection.Input,  Capacity = PortCapacity.Multi },
-                    new PortData { PortName = "Out", Direction = PortDirection.Output, Capacity = PortCapacity.Multi }
+                    new PortData { PortName = "Out", Direction = PortDirection.Output, Capacity = PortCapacity.Single }
                 }
             });
 

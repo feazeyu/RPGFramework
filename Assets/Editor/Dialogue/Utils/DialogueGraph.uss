@@ -35,8 +35,8 @@
     border-color:     rgb(36, 40, 54);
     border-width:     1.5px;
     border-radius:    6px;
-    min-width:        180px;
-    max-width:        260px;
+    min-width:        160px;
+    overflow:         visible;
 }
 
 .dialogue-node:hover {
@@ -113,6 +113,16 @@
     flex-direction: row;
     align-items:    center;
     margin-top:     4px;
+    border-radius:  3px;
+    padding:        1px 0;
+    transition:     background-color 0.1s;
+}
+
+.node-field-row.drag-over {
+    background-color: rgba(74, 158, 255, 0.15);
+    border-color:     rgba(74, 158, 255, 0.4);
+    border-width:     1px;
+    border-radius:    3px;
 }
 
 .node-field-name {
@@ -159,6 +169,12 @@
     border-color:     rgb(45, 125, 224);
 }
 
+/* ── Choice branch add button ───────────────────────────── */
+
+.node-add-choice-btn {
+    align-self: flex-start;
+}
+
 /* ── Port circles ───────────────────────────────────────── */
 
 .dialogue-port {
@@ -193,8 +209,60 @@
 /* ── Edges ──────────────────────────────────────────────── */
 
 .edgeControl {
-    --edge-color:         rgba(120, 140, 180, 0.6);
+    --edge-color:          rgba(120, 140, 180, 0.6);
     --edge-color-selected: rgb(255, 255, 255);
+    --edge-width:          2;
+}
+
+/* Reduce the default tangent aggressiveness.
+   GraphView computes tangent length as a fraction of port distance;
+   capping it keeps short-range connections looking clean. */
+.dialogue-graph-view .edge {
+    --edge-control-from-cap-size: 0;
+    --edge-control-to-cap-size:   0;
+}
+
+/* ── Resize handles ─────────────────────────────────────── */
+
+.node-resize-handle {
+    position:         absolute;
+    background-color: transparent;
+}
+
+/* Right edge — show a faint vertical line on hover */
+.node-resize-handle-e {
+    cursor: ew-resize;
+    border-right-width: 2px;
+    border-right-color: transparent;
+    border-top-right-radius:    4px;
+    border-bottom-right-radius: 4px;
+}
+
+.node-resize-handle-e:hover {
+    border-right-color: rgba(120, 160, 220, 0.5);
+}
+
+/* Bottom edge */
+.node-resize-handle-s {
+    cursor: ns-resize;
+    border-bottom-width: 2px;
+    border-bottom-color: transparent;
+    border-bottom-left-radius:  4px;
+    border-bottom-right-radius: 4px;
+}
+
+.node-resize-handle-s:hover {
+    border-bottom-color: rgba(120, 160, 220, 0.5);
+}
+
+/* SE corner — diagonal gripper dot */
+.node-resize-handle-se {
+    cursor: nwse-resize;
+    border-bottom-right-radius: 6px;
+}
+
+.node-resize-handle-se:hover {
+    background-color: rgba(120, 160, 220, 0.25);
 }
 
 /* ── Rename field overlay ───────────────────────────────── */

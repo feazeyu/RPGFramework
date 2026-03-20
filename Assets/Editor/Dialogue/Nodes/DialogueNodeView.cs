@@ -53,6 +53,20 @@ namespace DialogueGraph.Editor
             if (m_Info != null) AddToClassList("node-" + data.NodeType.ToLower());
 
             BuildVisuals();
+
+            // Restore saved size (zero = not yet user-resized → leave auto).
+            if (data.Size.x > 0 && data.Size.y > 0)
+            {
+                style.width  = data.Size.x;
+                style.height = data.Size.y;
+            }
+
+            // Attach resize handles. Save the new size into data so it persists.
+            this.AddManipulator(new NodeResizer(newSize =>
+            {
+                data.Size = newSize;
+                EditorUtilityHelper.SetDirty(m_Asset);
+            }));
         }
 
         // ── Build ─────────────────────────────────────────────────────────────
@@ -141,18 +155,351 @@ namespace DialogueGraph.Editor
         {
             extensionContainer.Clear();
 
-            if (Data.Fields == null || Data.Fields.Count == 0) return;
+            bool isChoice = Data.NodeType == NodeRegistry.TypeChoiceBranch;
+
+            if ((Data.Fields == null || Data.Fields.Count == 0) && !isChoice) return;
 
             var fieldsContainer = new VisualElement();
             fieldsContainer.AddToClassList("node-fields-container");
 
-            foreach (var field in Data.Fields)
+            // Count how many choice outputs exist so we can show/hide remove buttons.
+            int choiceCount = isChoice
+                ? Data.Ports.FindAll(p => p.Direction == PortDirection.Output).Count
+                : 0;
+
+            if (Data.Fields != null)
             {
-                var row = BuildFieldRow(field);
-                fieldsContainer.Add(row);
+                foreach (var field in Data.Fields)
+                {
+                    // For ChoiceBranch, pair each "Choice N Text" field with a remove button.
+                    if (isChoice && field.FieldName.StartsWith("Choice ") && field.FieldName.EndsWith(" Text"))
+                    {
+                        var row = BuildChoiceFieldRow(field, choiceCount);
+                        fieldsContainer.Add(row);
+                    }
+                    else
+                    {
+                        fieldsContainer.Add(BuildFieldRow(field));
+                    }
+                }
+            }
+
+            // "+ Add Choice" button — only on ChoiceBranch nodes.
+            if (isChoice)
+            {
+                var addBtn = new Button(AddChoice) { text = "+ Add Choice" };
+                addBtn.AddToClassList("node-add-choice-btn");
+                addBtn.style.marginTop    = 6;
+                addBtn.style.marginBottom = 2;
+                addBtn.style.fontSize     = 9;
+                addBtn.style.color        = new StyleColor(new Color(0.29f, 0.61f, 0.78f));
+                addBtn.style.backgroundColor = new StyleColor(new Color(0.10f, 0.18f, 0.26f));
+                addBtn.style.borderTopWidth = addBtn.style.borderBottomWidth =
+                addBtn.style.borderLeftWidth = addBtn.style.borderRightWidth = 1;
+                addBtn.style.borderTopColor = addBtn.style.borderBottomColor =
+                addBtn.style.borderLeftColor = addBtn.style.borderRightColor =
+                    new StyleColor(new Color(0.20f, 0.36f, 0.52f));
+                addBtn.style.borderTopLeftRadius = addBtn.style.borderTopRightRadius =
+                addBtn.style.borderBottomLeftRadius = addBtn.style.borderBottomRightRadius = 3;
+                addBtn.style.paddingTop = addBtn.style.paddingBottom = 3;
+                fieldsContainer.Add(addBtn);
             }
 
             extensionContainer.Add(fieldsContainer);
+        }
+
+        /// <summary>
+        /// Builds a field row for a ChoiceBranch choice, with a "×" remove button.
+        /// The remove button is hidden when only one choice remains.
+        /// </summary>
+        private VisualElement BuildChoiceFieldRow(FieldData field, int totalChoices)
+        {
+            var row = new VisualElement();
+            row.AddToClassList("node-field-row");
+
+            // "×" remove button — shown only when 2+ choices exist.
+            var removeBtn = new Button(() => RemoveChoice(field)) { text = "×" };
+            removeBtn.style.display       = totalChoices > 1 ? DisplayStyle.Flex : DisplayStyle.None;
+            removeBtn.style.fontSize      = 10;
+            removeBtn.style.color         = new StyleColor(new Color(0.80f, 0.30f, 0.30f));
+            removeBtn.style.backgroundColor = new StyleColor(new Color(0.20f, 0.10f, 0.10f));
+            removeBtn.style.borderTopWidth = removeBtn.style.borderBottomWidth =
+            removeBtn.style.borderLeftWidth = removeBtn.style.borderRightWidth = 1;
+            removeBtn.style.borderTopColor = removeBtn.style.borderBottomColor =
+            removeBtn.style.borderLeftColor = removeBtn.style.borderRightColor =
+                new StyleColor(new Color(0.36f, 0.14f, 0.14f));
+            removeBtn.style.borderTopLeftRadius = removeBtn.style.borderTopRightRadius =
+            removeBtn.style.borderBottomLeftRadius = removeBtn.style.borderBottomRightRadius = 3;
+            removeBtn.style.width         = 16;
+            removeBtn.style.height        = 16;
+            removeBtn.style.paddingTop = removeBtn.style.paddingBottom =
+            removeBtn.style.paddingLeft = removeBtn.style.paddingRight = 0;
+            removeBtn.style.marginRight   = 4;
+            removeBtn.style.flexShrink    = 0;
+            row.Add(removeBtn);
+
+            // Field name label (e.g. "Choice 1 Text").
+            var nameLabel = new Label(field.FieldName);
+            nameLabel.AddToClassList("node-field-name");
+            row.Add(nameLabel);
+
+            // Value / link display.
+            if (!string.IsNullOrEmpty(field.LinkedVariableGuid))
+            {
+                var bbVar = m_Asset.Blackboard.GetVariable(field.LinkedVariableGuid);
+                var linkedLabel = new Label("⟵ " + (bbVar?.Name ?? "?"));
+                linkedLabel.AddToClassList("node-field-linked");
+                row.Add(linkedLabel);
+            }
+            else
+            {
+                var valueField = new TextField { value = field.InlineValue ?? "" };
+                valueField.AddToClassList("node-field-value");
+                valueField.RegisterValueChangedCallback(evt =>
+                {
+                    field.InlineValue = evt.newValue;
+                    EditorUtilityHelper.SetDirty(m_Asset);
+                });
+                row.Add(valueField);
+            }
+
+            // Link dot.
+            var dot = new VisualElement();
+            dot.AddToClassList("node-field-link-dot");
+            dot.tooltip = string.IsNullOrEmpty(field.LinkedVariableGuid)
+                ? "Drag a Blackboard variable here to link"
+                : "Linked — click to unlink";
+            if (!string.IsNullOrEmpty(field.LinkedVariableGuid))
+                dot.AddToClassList("linked");
+            dot.RegisterCallback<ClickEvent>(evt =>
+            {
+                if (string.IsNullOrEmpty(field.LinkedVariableGuid)) return;
+                field.LinkedVariableGuid = null;
+                EditorUtilityHelper.SetDirty(m_Asset);
+                Refresh();
+                evt.StopPropagation();
+            });
+            row.Add(dot);
+
+            // Drag & drop.
+            row.RegisterCallback<DragEnterEvent>(_ =>
+            {
+                if (DragAndDrop.GetGenericData("BlackboardVariableGuid") is string)
+                    row.style.backgroundColor = new StyleColor(new Color(0.18f, 0.30f, 0.45f));
+            });
+            row.RegisterCallback<DragLeaveEvent>(_ => { row.style.backgroundColor = StyleKeyword.Null; });
+            row.RegisterCallback<DragUpdatedEvent>(evt =>
+            {
+                if (DragAndDrop.GetGenericData("BlackboardVariableGuid") is string)
+                { DragAndDrop.visualMode = DragAndDropVisualMode.Link; evt.StopPropagation(); }
+            });
+            row.RegisterCallback<DragPerformEvent>(evt =>
+            {
+                if (DragAndDrop.GetGenericData("BlackboardVariableGuid") is not string guid) return;
+                DragAndDrop.AcceptDrag();
+                row.style.backgroundColor = StyleKeyword.Null;
+                field.LinkedVariableGuid = guid;
+                EditorUtilityHelper.SetDirty(m_Asset);
+                Refresh();
+                evt.StopPropagation();
+            });
+            row.RegisterCallback<DragExitedEvent>(_ => { row.style.backgroundColor = StyleKeyword.Null; });
+
+            return row;
+        }
+
+        /// <summary>
+        /// Adds a new choice to a ChoiceBranch node:
+        ///   • One Output port ("Choice N")
+        ///   • One field ("Choice N Text")
+        /// Then rebuilds visuals and ports.
+        /// </summary>
+        private void AddChoice()
+        {
+            // Find the highest existing choice number to name the new one.
+            int next = 1;
+            foreach (var p in Data.Ports)
+            {
+                if (p.Direction == PortDirection.Output &&
+                    p.PortName.StartsWith("Choice ") &&
+                    int.TryParse(p.PortName.Substring(7), out int n))
+                    next = Mathf.Max(next, n + 1);
+            }
+
+            Undo.RecordObject(m_Asset, "Add Choice");
+
+            Data.Ports.Add(new PortData
+            {
+                PortName  = $"Choice {next}",
+                Direction = PortDirection.Output,
+                Capacity  = PortCapacity.Single,
+            });
+            Data.Fields.Add(new FieldData
+            {
+                FieldName = $"Choice {next} Text",
+                TypeName  = "System.String",
+            });
+
+            EditorUtilityHelper.SetDirty(m_Asset);
+            RebuildPortsAndFields();
+        }
+
+        /// <summary>
+        /// Removes the choice paired with the given field.
+        /// Derives the port name from the field name ("Choice N Text" → "Choice N").
+        /// Disconnects any live edges on that port before removing.
+        /// </summary>
+        private void RemoveChoice(FieldData field)
+        {
+            // Derive port name: "Choice N Text" → "Choice N"
+            var portName = field.FieldName.EndsWith(" Text")
+                ? field.FieldName.Substring(0, field.FieldName.Length - 5)
+                : null;
+
+            Undo.RecordObject(m_Asset, "Remove Choice");
+
+            // Remove the port and its field from the data.
+            if (portName != null)
+                Data.Ports.RemoveAll(p => p.PortName == portName && p.Direction == PortDirection.Output);
+            Data.Fields.Remove(field);
+
+            // Remove any saved edges that reference this port.
+            if (portName != null)
+            {
+                var edgesToRemove = new List<string>();
+                foreach (var e in m_Asset.Edges)
+                    if (e.OutputNodeGuid == Data.Guid && e.OutputPortName == portName)
+                        edgesToRemove.Add(e.Guid);
+                foreach (var guid in edgesToRemove)
+                    m_Asset.RemoveEdge(guid);
+            }
+
+            EditorUtilityHelper.SetDirty(m_Asset);
+            RebuildPortsAndFields();
+        }
+
+        /// <summary>
+        /// Rebuilds ports and fields in-place.
+        ///
+        /// The tricky part: GraphView Edge elements hold direct references to Port
+        /// VisualElements. When we call outputContainer.Clear() those port objects are
+        /// detached from the hierarchy, so every edge that was connected to ANY port on
+        /// this node loses its visual anchor — not just the deleted one.
+        ///
+        /// Strategy:
+        ///   1. Before clearing, snapshot all edges connected to this node's outputs,
+        ///      keyed by port name.
+        ///   2. Identify which port names are being deleted; fully disconnect those edges.
+        ///   3. Clear and rebuild ports/fields.
+        ///   4. Re-connect surviving edges to their corresponding new port objects.
+        /// </summary>
+        private void RebuildPortsAndFields()
+        {
+            var graphView = GetFirstAncestorOfType<UnityEditor.Experimental.GraphView.GraphView>();
+
+            // Build sets of surviving port names for each direction.
+            var survivingOut = new System.Collections.Generic.HashSet<string>();
+            var survivingIn  = new System.Collections.Generic.HashSet<string>();
+            foreach (var pd in Data.Ports)
+            {
+                if (pd.Direction == PortDirection.Output) survivingOut.Add(pd.PortName);
+                else                                       survivingIn.Add(pd.PortName);
+            }
+
+            // portName → edges to re-attach after rebuild
+            var outEdgesByPort = new Dictionary<string, List<UnityEditor.Experimental.GraphView.Edge>>();
+            var inEdgesByPort  = new Dictionary<string, List<UnityEditor.Experimental.GraphView.Edge>>();
+            var edgesToDelete  = new List<UnityEditor.Experimental.GraphView.Edge>();
+
+            if (graphView != null)
+            {
+                graphView.edges.ForEach(edge =>
+                {
+                    // ── Output side (this node drives the edge) ──────────────
+                    if (edge.output?.node == this)
+                    {
+                        var pName = edge.output.portName;
+                        if (survivingOut.Contains(pName))
+                        {
+                            if (!outEdgesByPort.ContainsKey(pName))
+                                outEdgesByPort[pName] = new List<UnityEditor.Experimental.GraphView.Edge>();
+                            outEdgesByPort[pName].Add(edge);
+                        }
+                        else
+                        {
+                            edgesToDelete.Add(edge);
+                        }
+                        return;
+                    }
+
+                    // ── Input side (this node receives the edge) ─────────────
+                    if (edge.input?.node == this)
+                    {
+                        var pName = edge.input.portName;
+                        if (survivingIn.Contains(pName))
+                        {
+                            if (!inEdgesByPort.ContainsKey(pName))
+                                inEdgesByPort[pName] = new List<UnityEditor.Experimental.GraphView.Edge>();
+                            inEdgesByPort[pName].Add(edge);
+                        }
+                        else
+                        {
+                            edgesToDelete.Add(edge);
+                        }
+                    }
+                });
+
+                // Fully remove edges whose port no longer exists.
+                foreach (var edge in edgesToDelete)
+                {
+                    edge.output?.Disconnect(edge);
+                    edge.input?.Disconnect(edge);
+                    graphView.RemoveElement(edge);
+                }
+
+                // Pre-disconnect surviving edges from the old port objects.
+                foreach (var kvp in outEdgesByPort)
+                    foreach (var edge in kvp.Value)
+                        edge.output?.Disconnect(edge);
+
+                foreach (var kvp in inEdgesByPort)
+                    foreach (var edge in kvp.Value)
+                        edge.input?.Disconnect(edge);
+            }
+
+            // Rebuild ports and fields from data.
+            inputContainer.Clear();
+            outputContainer.Clear();
+            m_Ports.Clear();
+            BuildPorts();
+
+            // Re-attach surviving edges to the new port objects.
+            if (graphView != null)
+            {
+                foreach (var kvp in outEdgesByPort)
+                {
+                    if (!m_Ports.TryGetValue(kvp.Key, out var newPort)) continue;
+                    foreach (var edge in kvp.Value)
+                    {
+                        edge.output = newPort;
+                        newPort.Connect(edge);
+                    }
+                }
+
+                foreach (var kvp in inEdgesByPort)
+                {
+                    if (!m_Ports.TryGetValue(kvp.Key, out var newPort)) continue;
+                    foreach (var edge in kvp.Value)
+                    {
+                        edge.input = newPort;
+                        newPort.Connect(edge);
+                    }
+                }
+            }
+
+            BuildFields();
+            RefreshExpandedState();
+            RefreshPorts();
         }
 
         private VisualElement BuildFieldRow(FieldData field)
@@ -165,11 +512,25 @@ namespace DialogueGraph.Editor
             nameLabel.AddToClassList("node-field-name");
             row.Add(nameLabel);
 
-            // Value / link display — rebuilt by RefreshFieldRow when link changes.
-            var valueSlot = new VisualElement();
-            valueSlot.style.flexGrow = 1;
-            row.Add(valueSlot);
-            RefreshValueSlot(valueSlot, field);
+            // Value / link display.
+            if (!string.IsNullOrEmpty(field.LinkedVariableGuid))
+            {
+                var bbVar = m_Asset.Blackboard.GetVariable(field.LinkedVariableGuid);
+                var linkedLabel = new Label("⟵ " + (bbVar?.Name ?? "?"));
+                linkedLabel.AddToClassList("node-field-linked");
+                row.Add(linkedLabel);
+            }
+            else
+            {
+                var valueField = new TextField { value = field.InlineValue ?? "" };
+                valueField.AddToClassList("node-field-value");
+                valueField.RegisterValueChangedCallback(evt =>
+                {
+                    field.InlineValue = evt.newValue;
+                    EditorUtilityHelper.SetDirty(m_Asset);
+                });
+                row.Add(valueField);
+            }
 
             // Link indicator dot — also the drop target for blackboard variables.
             var dot = new VisualElement();
@@ -186,10 +547,8 @@ namespace DialogueGraph.Editor
             {
                 if (string.IsNullOrEmpty(field.LinkedVariableGuid)) return;
                 field.LinkedVariableGuid = null;
-                RefreshValueSlot(valueSlot, field);
-                dot.RemoveFromClassList("linked");
-                dot.tooltip = "Drag a Blackboard variable here to link";
                 EditorUtilityHelper.SetDirty(m_Asset);
+                Refresh();
                 evt.StopPropagation();
             });
 
@@ -225,10 +584,8 @@ namespace DialogueGraph.Editor
                 row.style.backgroundColor = StyleKeyword.Null;
 
                 field.LinkedVariableGuid = guid;
-                RefreshValueSlot(valueSlot, field);
-                dot.AddToClassList("linked");
-                dot.tooltip = "Linked — click to unlink";
                 EditorUtilityHelper.SetDirty(m_Asset);
+                Refresh();
                 evt.StopPropagation();
             });
 
@@ -238,29 +595,6 @@ namespace DialogueGraph.Editor
             });
 
             return row;
-        }
-
-        private void RefreshValueSlot(VisualElement slot, FieldData field)
-        {
-            slot.Clear();
-            if (!string.IsNullOrEmpty(field.LinkedVariableGuid))
-            {
-                var bbVar = m_Asset.Blackboard.GetVariable(field.LinkedVariableGuid);
-                var linkedLabel = new Label("⟵ " + (bbVar?.Name ?? "?"));
-                linkedLabel.AddToClassList("node-field-linked");
-                slot.Add(linkedLabel);
-            }
-            else
-            {
-                var valueField = new TextField { value = field.InlineValue ?? "" };
-                valueField.AddToClassList("node-field-value");
-                valueField.RegisterValueChangedCallback(evt =>
-                {
-                    field.InlineValue = evt.newValue;
-                    EditorUtilityHelper.SetDirty(m_Asset);
-                });
-                slot.Add(valueField);
-            }
         }
 
         // ── Public API ────────────────────────────────────────────────────────
@@ -274,12 +608,10 @@ namespace DialogueGraph.Editor
         /// <summary>Rebuild the visual representation (call after data change).</summary>
         public void Refresh()
         {
-            // Rebuild just the fields section.
-            BuildFields();
-            RefreshExpandedState();
+            RebuildPortsAndFields();
 
             // Update the title label.
-            var titleLabel = titleContainer.Q<Label>("node-header-title");
+            var titleLabel = titleContainer.Q<Label>(className: "node-header-title");
             if (titleLabel != null) titleLabel.text = Data.DisplayName;
         }
 
