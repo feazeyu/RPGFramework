@@ -13,109 +13,12 @@ MonoBehaviour:
   m_Name: NewDialogueGraph
   m_EditorClassIdentifier: 
   m_Nodes:
-  - Guid: 90ca8973-ae24-4fb7-b58e-fc35d896c7fd
-    NodeType: ChoiceBranch
-    DisplayName: Test
-    StoryText: 
-    Position: {x: -764, y: 28}
-    Size: {x: 358, y: 311}
-    Ports:
-    - PortName: In
-      Direction: 0
-      Capacity: 1
-    - PortName: Choice 1
-      Direction: 1
-      Capacity: 0
-    - PortName: Choice 2
-      Direction: 1
-      Capacity: 0
-    - PortName: Choice 3
-      Direction: 1
-      Capacity: 0
-    - PortName: Choice 4
-      Direction: 1
-      Capacity: 0
-    Fields:
-    - FieldName: Choice 1 Text
-      TypeName: System.String
-      InlineValue: 
-      LinkedVariableGuid: 345b027b-969e-4b51-8cee-ba9d95e7e651
-    - FieldName: Choice 2 Text
-      TypeName: System.String
-      InlineValue: 
-      LinkedVariableGuid: 
-    - FieldName: Choice 3 Text
-      TypeName: System.String
-      InlineValue: 
-      LinkedVariableGuid: 
-    - FieldName: Choice 4 Text
-      TypeName: System.String
-      InlineValue: 
-      LinkedVariableGuid: 
-  - Guid: 820f0401-53a1-45a0-9c7d-2d35f619f239
-    NodeType: Condition
-    DisplayName: Condition
-    StoryText: 
-    Position: {x: -277, y: -145}
-    Size: {x: 0, y: 0}
-    Ports:
-    - PortName: In
-      Direction: 0
-      Capacity: 1
-    - PortName: True
-      Direction: 1
-      Capacity: 0
-    - PortName: False
-      Direction: 1
-      Capacity: 0
-    Fields:
-    - FieldName: Variable
-      TypeName: System.String
-      InlineValue: 
-      LinkedVariableGuid: 
-    - FieldName: Operator
-      TypeName: System.String
-      InlineValue: '*'
-      LinkedVariableGuid: 
-    - FieldName: Value
-      TypeName: System.String
-      InlineValue: 
-      LinkedVariableGuid: 
-  - Guid: 2d5ca349-f085-4bee-a348-b3157be2d2a7
-    NodeType: Condition
-    DisplayName: Condition
-    StoryText: 
-    Position: {x: -268, y: 192}
-    Size: {x: 0, y: 0}
-    Ports:
-    - PortName: In
-      Direction: 0
-      Capacity: 1
-    - PortName: True
-      Direction: 1
-      Capacity: 0
-    - PortName: False
-      Direction: 1
-      Capacity: 0
-    Fields:
-    - FieldName: Variable
-      TypeName: System.String
-      InlineValue: 
-      LinkedVariableGuid: 
-    - FieldName: Operator
-      TypeName: System.String
-      InlineValue: ==
-      LinkedVariableGuid: 
-    - FieldName: Value
-      TypeName: System.String
-      InlineValue: 
-      LinkedVariableGuid: 
   - Guid: fd49241c-e82c-4b65-9115-aa86984b023c
     NodeType: Start
     DisplayName: Start
     StoryText: 
-    Position: {x: -1067, y: -91}
-    Size: {x: 0, y: 0}
+    Position: {x: -1036, y: -95}
+    Size: {x: 160, y: 75}
     Ports:
     - PortName: Out
       Direction: 1
@@ -132,59 +35,79 @@ MonoBehaviour:
       Direction: 0
       Capacity: 1
     Fields: []
+  - Guid: d4ad2048-368d-4879-91d1-11149bf84639
+    NodeType: DialogueLine
+    DisplayName: Dialogue Line
+    StoryText: 
+    Position: {x: -239, y: -184}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Out
+      Direction: 1
+      Capacity: 0
+    Fields:
+    - FieldName: Speaker
+      TypeName: System.String
+      InlineValue: Bob
+      LinkedVariableGuid: 
+    - FieldName: Text
+      TypeName: System.String
+      InlineValue: Thank you :3
+      LinkedVariableGuid: 
+    - FieldName: Portrait
+      TypeName: UnityEngine.Sprite
+      InlineValue: 
+      LinkedVariableGuid: 
+  - Guid: 98e6ad52-dc28-4486-9583-8427b5331a9a
+    NodeType: DialogueLine
+    DisplayName: Dialogue Line
+    StoryText: 
+    Position: {x: -239, y: 124}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Out
+      Direction: 1
+      Capacity: 0
+    Fields:
+    - FieldName: Speaker
+      TypeName: System.String
+      InlineValue: Bob
+      LinkedVariableGuid: 
+    - FieldName: Text
+      TypeName: System.String
+      InlineValue: Thank you :3
+      LinkedVariableGuid: 
+    - FieldName: Portrait
+      TypeName: UnityEngine.Sprite
+      InlineValue: 
+      LinkedVariableGuid: 
   m_Edges:
-  - Guid: 686d27b2-7e75-4d5b-8b3b-c1a565a73ab8
-    OutputNodeGuid: 90ca8973-ae24-4fb7-b58e-fc35d896c7fd
-    OutputPortName: Choice 1
-    InputNodeGuid: 820f0401-53a1-45a0-9c7d-2d35f619f239
+  - Guid: 7c198f9c-c40c-44b1-b233-db771c7965f3
+    OutputNodeGuid: 98e6ad52-dc28-4486-9583-8427b5331a9a
+    OutputPortName: Out
+    InputNodeGuid: 559567f3-6cd6-4818-bbf7-01664ba2dc3c
     InputPortName: In
-  - Guid: 44a57d96-b036-414c-9514-44d9ec0f3c32
+  - Guid: 014998f6-6af7-4dd5-a2b3-e24f0008ea32
+    OutputNodeGuid: d4ad2048-368d-4879-91d1-11149bf84639
+    OutputPortName: Out
+    InputNodeGuid: 559567f3-6cd6-4818-bbf7-01664ba2dc3c
+    InputPortName: In
+  - Guid: 566b13c8-f789-427a-936f-efad75e42434
     OutputNodeGuid: fd49241c-e82c-4b65-9115-aa86984b023c
     OutputPortName: Out
-    InputNodeGuid: 90ca8973-ae24-4fb7-b58e-fc35d896c7fd
-    InputPortName: In
-  - Guid: 55c716eb-5e24-493e-a3c6-a6d3e9dce8cd
-    OutputNodeGuid: 90ca8973-ae24-4fb7-b58e-fc35d896c7fd
-    OutputPortName: Choice 4
-    InputNodeGuid: 2d5ca349-f085-4bee-a348-b3157be2d2a7
-    InputPortName: In
-  - Guid: 9c34f5c9-3b2e-4d8b-bf43-ea0ff9ec496b
-    OutputNodeGuid: 820f0401-53a1-45a0-9c7d-2d35f619f239
-    OutputPortName: False
-    InputNodeGuid: 559567f3-6cd6-4818-bbf7-01664ba2dc3c
-    InputPortName: In
-  - Guid: c75378ce-ca76-48e6-b40a-1f12ef71bbe5
-    OutputNodeGuid: 820f0401-53a1-45a0-9c7d-2d35f619f239
-    OutputPortName: True
-    InputNodeGuid: 559567f3-6cd6-4818-bbf7-01664ba2dc3c
-    InputPortName: In
-  - Guid: f8efa8c3-0845-4a7b-87bf-a5b9f0f6fac4
-    OutputNodeGuid: 2d5ca349-f085-4bee-a348-b3157be2d2a7
-    OutputPortName: True
-    InputNodeGuid: 559567f3-6cd6-4818-bbf7-01664ba2dc3c
-    InputPortName: In
-  - Guid: ac76b06f-ae2c-44f3-a6b2-ef3be707f5a0
-    OutputNodeGuid: 2d5ca349-f085-4bee-a348-b3157be2d2a7
-    OutputPortName: False
-    InputNodeGuid: 559567f3-6cd6-4818-bbf7-01664ba2dc3c
-    InputPortName: In
-  - Guid: 3dbffae4-ecd2-4d2e-afea-5bdc49e4990d
-    OutputNodeGuid: 90ca8973-ae24-4fb7-b58e-fc35d896c7fd
-    OutputPortName: Choice 2
-    InputNodeGuid: 820f0401-53a1-45a0-9c7d-2d35f619f239
-    InputPortName: In
-  - Guid: 81638a5b-0e0d-4966-bcd9-7f90cedbe393
-    OutputNodeGuid: 90ca8973-ae24-4fb7-b58e-fc35d896c7fd
-    OutputPortName: Choice 3
-    InputNodeGuid: 2d5ca349-f085-4bee-a348-b3157be2d2a7
+    InputNodeGuid: d4ad2048-368d-4879-91d1-11149bf84639
     InputPortName: In
   m_Blackboard:
     m_Variables:
     - rid: 3869425589960310784
-    - rid: 3869425589960310785
-    - rid: 3869425699909533696
-    - rid: 3869425699909533767
-  ViewTransform: {x: 1043, y: 242, z: 1}
+    - rid: 3869426129174528077
+  ViewTransform: {x: 830, y: 319, z: 0.65751624}
   BlackboardPosition: {x: 10, y: 60}
   references:
     version: 2
@@ -192,32 +115,16 @@ MonoBehaviour:
     - rid: 3869425589960310784
       type: {class: BlackboardVariableString, ns: DialogueGraph.Runtime, asm: Dialogue}
       data:
-        m_Name: NewVariable
+        m_Name: Choice1
         m_Guid: d79ae5e5-af25-48fb-a36e-ba90c2d80e37
         m_Exposed: 1
         m_Shared: 0
-        m_Value: 
-    - rid: 3869425589960310785
-      type: {class: BlackboardVariableColor, ns: DialogueGraph.Runtime, asm: Dialogue}
+        m_Value: KILL THEM
+    - rid: 3869426129174528077
+      type: {class: BlackboardVariableString, ns: DialogueGraph.Runtime, asm: Dialogue}
       data:
-        m_Name: NewVariable
-        m_Guid: 8cc673dc-b5eb-4845-8479-b849ccbd1250
+        m_Name: Choice2
+        m_Guid: 9029db7d-32ce-4a78-8752-9346974222c7
         m_Exposed: 1
         m_Shared: 0
-        m_Value: {r: 0, g: 0.9150943, b: 0.15591213, a: 0}
-    - rid: 3869425699909533696
-      type: {class: BlackboardVariableBool, ns: DialogueGraph.Runtime, asm: Dialogue}
-      data:
-        m_Name: NewVariable
-        m_Guid: a0948e6f-a774-4d42-8172-e0a238dd5454
-        m_Exposed: 1
-        m_Shared: 0
-        m_Value: 0
-    - rid: 3869425699909533767
-      type: {class: BlackboardVariableBool, ns: DialogueGraph.Runtime, asm: Dialogue}
-      data:
-        m_Name: NewVariable
-        m_Guid: 345b027b-969e-4b51-8cee-ba9d95e7e651
-        m_Exposed: 1
-        m_Shared: 0
-        m_Value: 0
+        m_Value: Save them... for later

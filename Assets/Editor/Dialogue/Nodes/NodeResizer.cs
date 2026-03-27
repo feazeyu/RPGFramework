@@ -9,12 +9,6 @@ namespace DialogueGraph.Editor
     ///
     /// Seven hit zones are overlaid on the node edges and corners:
     ///
-    ///   ╔══════════╤══╗
-    ///   ║          │ E║  E = East (right edge)
-    ///   ║   node   ╞══╣  S = South (bottom edge)
-    ///   ║          │SE║  SE = South-East corner
-    ///   ╚══════════╧══╝
-    ///
     /// Only right, bottom and the SE corner are exposed — top/left would
     /// fight with the GraphView's own drag-to-move gesture.
     ///

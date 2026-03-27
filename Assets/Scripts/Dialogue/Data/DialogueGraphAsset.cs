@@ -7,14 +7,14 @@ namespace DialogueGraph.Runtime
     // ── Port ────────────────────────────────────────────────────────────────────
 
     public enum PortDirection { Input, Output }
-    public enum PortCapacity   { Single, Multi }
+    public enum PortCapacity { Single, Multi }
 
     [Serializable]
     public class PortData
     {
-        public string        PortName;
+        public string PortName;
         public PortDirection Direction;
-        public PortCapacity  Capacity = PortCapacity.Multi;
+        public PortCapacity Capacity = PortCapacity.Multi;
     }
 
     // ── Field (node variable slot) ──────────────────────────────────────────────
@@ -33,13 +33,13 @@ namespace DialogueGraph.Runtime
     [Serializable]
     public class NodeData
     {
-        public string          Guid;
-        public string          NodeType;      // e.g. "DialogueLine", "ChoiceBranch"
-        public string          DisplayName;
-        public string          StoryText;     // human-readable "story" template
-        public Vector2         Position;
-        public Vector2         Size = Vector2.zero; // zero = auto (not yet user-resized)
-        public List<PortData>  Ports  = new List<PortData>();
+        public string Guid;
+        public string NodeType;      // e.g. "DialogueLine", "ChoiceBranch"
+        public string DisplayName;
+        public string StoryText;     // human-readable "story" template
+        public Vector2 Position;
+        public Vector2 Size = Vector2.zero; // zero = auto (not yet user-resized)
+        public List<PortData> Ports = new List<PortData>();
         public List<FieldData> Fields = new List<FieldData>();
     }
 
@@ -64,20 +64,20 @@ namespace DialogueGraph.Runtime
     [CreateAssetMenu(
         menuName = "Dialogue/Dialogue Graph",
         fileName = "NewDialogueGraph",
-        order    = 1)]
+        order = 1)]
     public class DialogueGraphAsset : ScriptableObject
     {
         [SerializeField] private List<NodeData> m_Nodes = new List<NodeData>();
         [SerializeField] private List<EdgeData> m_Edges = new List<EdgeData>();
-        [SerializeField] private Blackboard     m_Blackboard = new Blackboard();
+        [SerializeField] private Blackboard m_Blackboard = new Blackboard();
 
         // Editor-only view state (panning / zoom).
-        [SerializeField] public Vector3 ViewTransform      = Vector3.zero; // xy = pan, z = scale
+        [SerializeField] public Vector3 ViewTransform = Vector3.zero; // xy = pan, z = scale
         [SerializeField] public Vector2 BlackboardPosition = new Vector2(10, 60);
 
-        public IReadOnlyList<NodeData> Nodes      => m_Nodes;
-        public IReadOnlyList<EdgeData> Edges      => m_Edges;
-        public Blackboard              Blackboard => m_Blackboard;
+        public IReadOnlyList<NodeData> Nodes => m_Nodes;
+        public IReadOnlyList<EdgeData> Edges => m_Edges;
+        public Blackboard Blackboard => m_Blackboard;
 
         // ── Node CRUD ───────────────────────────────────────────────────────
 
@@ -85,10 +85,10 @@ namespace DialogueGraph.Runtime
         {
             var node = new NodeData
             {
-                Guid        = System.Guid.NewGuid().ToString(),
-                NodeType    = nodeType,
+                Guid = System.Guid.NewGuid().ToString(),
+                NodeType = nodeType,
                 DisplayName = displayName,
-                Position    = position,
+                Position = position,
             };
             m_Nodes.Add(node);
             return node;
@@ -109,15 +109,15 @@ namespace DialogueGraph.Runtime
         // ── Edge CRUD ───────────────────────────────────────────────────────
 
         public EdgeData AddEdge(string outputGuid, string outputPort,
-                                string inputGuid,  string inputPort)
+                                string inputGuid, string inputPort)
         {
             var edge = new EdgeData
             {
-                Guid           = System.Guid.NewGuid().ToString(),
+                Guid = System.Guid.NewGuid().ToString(),
                 OutputNodeGuid = outputGuid,
                 OutputPortName = outputPort,
-                InputNodeGuid  = inputGuid,
-                InputPortName  = inputPort,
+                InputNodeGuid = inputGuid,
+                InputPortName = inputPort,
             };
             m_Edges.Add(edge);
             return edge;
@@ -133,9 +133,9 @@ namespace DialogueGraph.Runtime
 
         // ── Helpers ─────────────────────────────────────────────────────────
 
-        /// <summary>
-        /// Finds the entry / Start node (first node with no incoming edges).
-        /// </summary>
+            /// <summary>
+            /// Finds the entry / Start node (first node with no incoming edges).
+            /// </summary>
         public NodeData FindEntryNode()
         {
             var hasIncoming = new HashSet<string>();

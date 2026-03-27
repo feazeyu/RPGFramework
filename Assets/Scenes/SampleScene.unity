@@ -294,6 +294,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c64eecf1c98f0042bf0dbd750a20ca7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnInteract:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &165487602
 GameObject:
   m_ObjectHideFlags: 0
@@ -1398,6 +1401,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3272467655b73574bbd115376c7d1076, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnInteract:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!58 &1397052329
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1782,6 +1788,9 @@ GameObject:
   - component: {fileID: 1604252548}
   - component: {fileID: 1604252551}
   - component: {fileID: 1604252552}
+  - component: {fileID: 1604252554}
+  - component: {fileID: 1604252553}
+  - component: {fileID: 1604252555}
   m_Layer: 0
   m_Name: Dummy
   m_TagString: Untagged
@@ -1939,6 +1948,115 @@ MonoBehaviour:
     pairs: []
   castingPosition: {fileID: 0}
   castingRotationReference: {fileID: 0}
+--- !u!114 &1604252553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1604252547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3272467655b73574bbd115376c7d1076, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnInteract:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1604252554}
+        m_TargetAssemblyTypeName: DialogueGraph.Runtime.DialogueRunner, Dialogue
+        m_MethodName: StartDialogue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1604252554}
+        m_TargetAssemblyTypeName: DialogueGraph.Runtime.DialogueRunner, Dialogue
+        m_MethodName: Advance
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1604252554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1604252547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e36ca3275683664194c3050e649e806, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Graph: {fileID: 11400000, guid: 3470717cf1621094ca95ae8c59a92bb6, type: 2}
+  OnDialogueLine:
+    m_PersistentCalls:
+      m_Calls: []
+  OnChoicesPresented:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDialogueEnded:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDialogueStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  OnVariableSet:
+    m_PersistentCalls:
+      m_Calls: []
+  OnEventTriggered:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPlayerInRange:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!58 &1604252555
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1604252547}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.011480999, y: 0}
+  m_Radius: 0.26041555
 --- !u!1 &2044099794
 GameObject:
   m_ObjectHideFlags: 0
