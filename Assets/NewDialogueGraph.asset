@@ -39,7 +39,7 @@ MonoBehaviour:
     NodeType: DialogueLine
     DisplayName: Dialogue Line
     StoryText: 
-    Position: {x: -239, y: -184}
+    Position: {x: -353, y: -170}
     Size: {x: 0, y: 0}
     Ports:
     - PortName: In
@@ -65,7 +65,7 @@ MonoBehaviour:
     NodeType: DialogueLine
     DisplayName: Dialogue Line
     StoryText: 
-    Position: {x: -239, y: 124}
+    Position: {x: -304, y: 86}
     Size: {x: 0, y: 0}
     Ports:
     - PortName: In
@@ -88,26 +88,26 @@ MonoBehaviour:
       InlineValue: 
       LinkedVariableGuid: 
   m_Edges:
-  - Guid: 7c198f9c-c40c-44b1-b233-db771c7965f3
+  - Guid: 2ad1ddba-881d-432c-aeda-a20dddd3452f
     OutputNodeGuid: 98e6ad52-dc28-4486-9583-8427b5331a9a
     OutputPortName: Out
     InputNodeGuid: 559567f3-6cd6-4818-bbf7-01664ba2dc3c
     InputPortName: In
-  - Guid: 014998f6-6af7-4dd5-a2b3-e24f0008ea32
+  - Guid: 2c049bf4-2c3f-48a0-bb64-5382e7a2312f
     OutputNodeGuid: d4ad2048-368d-4879-91d1-11149bf84639
     OutputPortName: Out
     InputNodeGuid: 559567f3-6cd6-4818-bbf7-01664ba2dc3c
     InputPortName: In
-  - Guid: 566b13c8-f789-427a-936f-efad75e42434
+  - Guid: 56d9a9f3-451f-46d4-b23d-66ce71c8bf6a
     OutputNodeGuid: fd49241c-e82c-4b65-9115-aa86984b023c
     OutputPortName: Out
-    InputNodeGuid: d4ad2048-368d-4879-91d1-11149bf84639
+    InputNodeGuid: 98e6ad52-dc28-4486-9583-8427b5331a9a
     InputPortName: In
   m_Blackboard:
     m_Variables:
     - rid: 3869425589960310784
     - rid: 3869426129174528077
-  ViewTransform: {x: 830, y: 319, z: 0.65751624}
+  ViewTransform: {x: 617, y: 349, z: 0.65751624}
   BlackboardPosition: {x: 10, y: 60}
   references:
     version: 2
