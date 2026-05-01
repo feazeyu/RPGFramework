@@ -1,12 +1,15 @@
-/* ============================================================
-   DialogueGraph Editor StyleSheet
-   Applies dark-panel Unity Behavior-like aesthetics to:
-     • .dialogue-graph-view   (the GraphView canvas)
-     • .dialogue-node         (individual node cards)
-     • .dialogue-port         (port circles)
-   ============================================================ */
+/* ================================================================
+   DialogueGraph.uss  —  Dialogue-system theme overrides
+   Loaded in addition to GraphEditor.uss.
 
-/* ── Canvas ─────────────────────────────────────────────── */
+   Only contains colours that are specific to the dialogue editor:
+   canvas background, node card colours, port colours, edge colours.
+
+   A quest system would create QuestGraph.uss with different values
+   for the same set of rules.
+   ================================================================ */
+
+/* ── Canvas ──────────────────────────────────────────────────── */
 
 .dialogue-graph-view {
     background-color: rgb(18, 20, 26);
@@ -19,7 +22,7 @@
     --spacing:                20;
 }
 
-/* ── Minimap ────────────────────────────────────────────── */
+/* ── Minimap ─────────────────────────────────────────────────── */
 
 .dialogue-graph-view MiniMap {
     background-color: rgb(14, 16, 22);
@@ -28,7 +31,7 @@
     border-radius:    4px;
 }
 
-/* ── Node card ──────────────────────────────────────────── */
+/* ── Node card ───────────────────────────────────────────────── */
 
 .dialogue-node {
     background-color: rgb(24, 27, 36);
@@ -48,137 +51,27 @@
     border-width: 2px;
 }
 
-/* Left accent stripe — coloured per node type via inline style */
-.node-accent-stripe {
-    position:  absolute;
-    left:      0;
-    top:       0;
-    bottom:    0;
-    width:     4px;
-    border-top-left-radius:    6px;
-    border-bottom-left-radius: 6px;
-}
-
-/* ── Node title bar ─────────────────────────────────────── */
-
 .dialogue-node #title {
-    background-color: rgba(255,255,255, 0.04);
-    border-bottom-color: rgba(0,0,0,0.25);
+    background-color:    rgba(255, 255, 255, 0.04);
+    border-bottom-color: rgba(0, 0, 0, 0.25);
     border-bottom-width: 1px;
-    padding: 6px 8px 6px 14px;
-    flex-direction: row;
-    align-items: center;
+    padding:             6px 8px 6px 14px;
+    flex-direction:      row;
+    align-items:         center;
 }
 
-.node-header-icon {
-    font-size:    12px;
-    margin-right: 6px;
-    -unity-font-style: bold;
-}
+.dialogue-node #contents  { background-color: transparent; }
+.dialogue-node #extension { background-color: transparent; padding: 0; }
 
-.node-header-title {
-    font-size:  11px;
-    color:      rgb(210, 218, 235);
-    flex-grow:  1;
-    overflow:   hidden;
-    -unity-font-style: bold;
-}
+/* ── Ports ───────────────────────────────────────────────────── */
 
-.node-type-badge {
-    font-size:      8px;
-    border-radius:  3px;
-    padding:        1px 5px;
-    background-color: rgba(255,255,255, 0.06);
-    -unity-text-align: middle-right;
-}
-
-/* ── Node fields area ───────────────────────────────────── */
-
-.dialogue-node #contents {
-    background-color: transparent;
-}
-
-.dialogue-node #extension {
-    background-color: transparent;
-    padding: 0;
-}
-
-.node-fields-container {
-    padding: 6px 10px 8px 14px;
-    border-top-color: rgba(0,0,0, 0.20);
-    border-top-width: 1px;
-}
-
-.node-field-row {
-    flex-direction: row;
-    align-items:    center;
-    margin-top:     4px;
-    border-radius:  3px;
-    padding:        1px 0;
-    transition:     background-color 0.1s;
-}
-
-.node-field-row.drag-over {
-    background-color: rgba(74, 158, 255, 0.15);
-    border-color:     rgba(74, 158, 255, 0.4);
-    border-width:     1px;
-    border-radius:    3px;
-}
-
-.node-field-name {
-    font-size:  9px;
-    color:      rgb(130, 142, 168);
-    width:      70px;
-    flex-shrink: 0;
-    overflow:   hidden;
-}
-
-.node-field-value {
-    flex-grow:       1;
-    font-size:       9px;
-    background-color: rgb(20, 22, 30);
-    border-color:    rgb(36, 40, 54);
-    border-width:    1px;
-    border-radius:   3px;
-    padding:         2px 4px;
-}
-
-.node-field-linked {
-    flex-grow:        1;
-    font-size:        9px;
-    color:            rgb(74, 158, 255);
-    background-color: rgba(74, 158, 255, 0.08);
-    border-radius:    3px;
-    padding:          2px 6px;
-    overflow:         hidden;
-}
-
-.node-field-link-dot {
-    width:            7px;
-    height:           7px;
-    border-radius:    4px;
-    background-color: rgb(50, 56, 74);
-    border-color:     rgb(70, 78, 100);
-    border-width:     1px;
-    margin-left:      5px;
-    flex-shrink:      0;
-}
-
-.node-field-link-dot.linked {
-    background-color: rgb(74, 158, 255);
-    border-color:     rgb(45, 125, 224);
-}
-
-/* ── Choice branch add button ───────────────────────────── */
-
-.node-add-choice-btn {
-    align-self: flex-start;
-}
-
-/* ── Port circles ───────────────────────────────────────── */
-
+/* Re-expose graph-port rules under the dialogue-port class name
+   so existing code keeps working without renaming. Ports are
+   horizontal (inputs on the left edge of the card, outputs on the
+   right), so the connector and name label flow in a row — which
+   is Unity's default layout for horizontal ports. */
 .dialogue-port {
-    flex-direction: column;
+    flex-direction: row;
     align-items:    center;
 }
 
@@ -206,75 +99,9 @@
     border-color: rgb(200, 220, 255);
 }
 
-/* ── Edges ──────────────────────────────────────────────── */
+/* ── Edges ───────────────────────────────────────────────────── */
 
-.edgeControl {
-    --edge-color:          rgba(120, 140, 180, 0.6);
-    --edge-color-selected: rgb(255, 255, 255);
-    --edge-width:          2;
-}
-
-/* Reduce the default tangent aggressiveness.
-   GraphView computes tangent length as a fraction of port distance;
-   capping it keeps short-range connections looking clean. */
 .dialogue-graph-view .edge {
     --edge-control-from-cap-size: 0;
     --edge-control-to-cap-size:   0;
-}
-
-/* ── Resize handles ─────────────────────────────────────── */
-
-.node-resize-handle {
-    position:         absolute;
-    background-color: transparent;
-}
-
-/* Right edge — show a faint vertical line on hover */
-.node-resize-handle-e {
-    cursor: ew-resize;
-    border-right-width: 2px;
-    border-right-color: transparent;
-    border-top-right-radius:    4px;
-    border-bottom-right-radius: 4px;
-}
-
-.node-resize-handle-e:hover {
-    border-right-color: rgba(120, 160, 220, 0.5);
-}
-
-/* Bottom edge */
-.node-resize-handle-s {
-    cursor: ns-resize;
-    border-bottom-width: 2px;
-    border-bottom-color: transparent;
-    border-bottom-left-radius:  4px;
-    border-bottom-right-radius: 4px;
-}
-
-.node-resize-handle-s:hover {
-    border-bottom-color: rgba(120, 160, 220, 0.5);
-}
-
-/* SE corner — diagonal gripper dot */
-.node-resize-handle-se {
-    cursor: nwse-resize;
-    border-bottom-right-radius: 6px;
-}
-
-.node-resize-handle-se:hover {
-    background-color: rgba(120, 160, 220, 0.25);
-}
-
-/* ── Rename field overlay ───────────────────────────────── */
-
-.node-rename-field {
-    position:        absolute;
-    left:            28px;
-    right:           8px;
-    font-size:       11px;
-    background-color: rgb(16, 18, 26);
-    border-color:    rgb(74, 158, 255);
-    border-width:    1px;
-    border-radius:   3px;
-    padding:         2px 4px;
 }

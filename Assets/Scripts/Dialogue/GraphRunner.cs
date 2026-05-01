@@ -7,7 +7,7 @@ using UnityEngine.Events;
 namespace DialogueGraph.Runtime
 {
     /// <summary>
-    /// Base MonoBehaviour that drives execution of a DialogueGraphAsset.
+    /// Base MonoBehaviour that drives execution of a GraphAsset.
     ///
     /// Responsibilities:
     ///   • Clones the blackboard at start for isolated per-run state
@@ -30,7 +30,7 @@ namespace DialogueGraph.Runtime
         // ── Inspector ─────────────────────────────────────────────────────────
 
         [Tooltip("The graph asset to execute.")]
-        public DialogueGraphAsset Graph;
+        public GraphAsset Graph;
 
         [Header("Events")]
         public UnityEvent OnGraphStarted;
@@ -257,7 +257,7 @@ namespace DialogueGraph.Runtime
         /// Override to return the subgraph asset for a RunSubgraph node.
         /// Base implementation always returns null (no inline asset references yet).
         /// </summary>
-        protected virtual DialogueGraphAsset ResolveSubgraphAsset(NodeData node) => null;
+        protected virtual GraphAsset ResolveSubgraphAsset(NodeData node) => null;
 
         /// <summary>
         /// Factory for the sub-runner used by RunSubgraph nodes.

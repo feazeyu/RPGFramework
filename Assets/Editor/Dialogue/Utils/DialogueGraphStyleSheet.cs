@@ -8,9 +8,12 @@ using UnityEditor;
 namespace DialogueGraph.Editor
 {
     /// <summary>
-    /// Provides the shared USS StyleSheet to any editor UI element that needs it.
-    /// Loads from the package's Editor/Utils folder via AssetDatabase or a fallback
-    /// inline style block if the .uss file is not found (e.g. first import).
+    /// Provides the dialogue-system USS StyleSheet (colour/theme overrides)
+    /// layered on top of the shared GraphEditor.uss base sheet.
+    ///
+    /// Search strategy: see GraphEditorStyleSheet — same two-folder lookup
+    /// and same don't-cache-null policy so mid-import misses recover on
+    /// the next call.
     /// </summary>
     public static class DialogueGraphStyleSheet
     {
@@ -21,19 +24,23 @@ namespace DialogueGraph.Editor
 #if UNITY_EDITOR
             if (s_Sheet != null) return s_Sheet;
 
-            // Try to locate the .uss anywhere in the project.
-            var guids = AssetDatabase.FindAssets("DialogueGraph t:StyleSheet");
+            var guids = AssetDatabase.FindAssets(
+                "DialogueGraph t:StyleSheet",
+                new[] { "Assets", "Packages" });
+
             foreach (var guid in guids)
             {
                 var path = AssetDatabase.GUIDToAssetPath(guid);
-                if (path.EndsWith("DialogueGraph.uss"))
+                if (!path.EndsWith("DialogueGraph.uss")) continue;
+
+                var sheet = AssetDatabase.LoadAssetAtPath<StyleSheet>(path);
+                if (sheet != null)
                 {
-                    s_Sheet = AssetDatabase.LoadAssetAtPath<StyleSheet>(path);
-                    if (s_Sheet != null) return s_Sheet;
+                    s_Sheet = sheet;
+                    return s_Sheet;
                 }
             }
 
-            // Fallback: return null (GraphView will still render, just unstyled).
             Debug.LogWarning("[DialogueGraph] Could not find DialogueGraph.uss. " +
                              "Ensure the package is fully imported.");
 #endif

@@ -15,7 +15,7 @@ namespace DialogueGraph.Runtime
         // ── Read-only references ──────────────────────────────────────────────
 
         public GraphRunner          Runner             { get; }
-        public DialogueGraphAsset   Graph              { get; }
+        public GraphAsset   Graph              { get; }
         public Blackboard           RuntimeBlackboard  { get; }
 
         // ── Wired by GraphRunner ──────────────────────────────────────────────
@@ -23,7 +23,7 @@ namespace DialogueGraph.Runtime
         internal Action<string> OnFollow;
         internal Action         OnEnd;
 
-        internal GraphRunContext(GraphRunner runner, DialogueGraphAsset graph, Blackboard bb)
+        internal GraphRunContext(GraphRunner runner, GraphAsset graph, Blackboard bb)
         {
             Runner            = runner;
             Graph             = graph;

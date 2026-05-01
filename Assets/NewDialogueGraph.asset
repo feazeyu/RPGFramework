@@ -28,7 +28,7 @@ MonoBehaviour:
     NodeType: End
     DisplayName: End
     StoryText: 
-    Position: {x: 282, y: 28}
+    Position: {x: 281, y: 21}
     Size: {x: 0, y: 0}
     Ports:
     - PortName: In
@@ -39,7 +39,7 @@ MonoBehaviour:
     NodeType: DialogueLine
     DisplayName: Dialogue Line
     StoryText: 
-    Position: {x: -353, y: -170}
+    Position: {x: -368, y: -158}
     Size: {x: 0, y: 0}
     Ports:
     - PortName: In
@@ -65,7 +65,7 @@ MonoBehaviour:
     NodeType: DialogueLine
     DisplayName: Dialogue Line
     StoryText: 
-    Position: {x: -304, y: 86}
+    Position: {x: -307, y: 88}
     Size: {x: 0, y: 0}
     Ports:
     - PortName: In
@@ -81,50 +81,27 @@ MonoBehaviour:
       LinkedVariableGuid: 
     - FieldName: Text
       TypeName: System.String
-      InlineValue: Thank you :3
+      InlineValue: 
       LinkedVariableGuid: 
     - FieldName: Portrait
       TypeName: UnityEngine.Sprite
       InlineValue: 
       LinkedVariableGuid: 
   m_Edges:
-  - Guid: 2ad1ddba-881d-432c-aeda-a20dddd3452f
+  - Guid: bb559931-9ab1-4182-80b4-b0b65cd40e96
     OutputNodeGuid: 98e6ad52-dc28-4486-9583-8427b5331a9a
     OutputPortName: Out
     InputNodeGuid: 559567f3-6cd6-4818-bbf7-01664ba2dc3c
     InputPortName: In
-  - Guid: 2c049bf4-2c3f-48a0-bb64-5382e7a2312f
+  - Guid: 63631adb-13da-45a6-ae12-48ab12c6dcf8
     OutputNodeGuid: d4ad2048-368d-4879-91d1-11149bf84639
     OutputPortName: Out
     InputNodeGuid: 559567f3-6cd6-4818-bbf7-01664ba2dc3c
     InputPortName: In
-  - Guid: 56d9a9f3-451f-46d4-b23d-66ce71c8bf6a
-    OutputNodeGuid: fd49241c-e82c-4b65-9115-aa86984b023c
-    OutputPortName: Out
-    InputNodeGuid: 98e6ad52-dc28-4486-9583-8427b5331a9a
-    InputPortName: In
   m_Blackboard:
-    m_Variables:
-    - rid: 3869425589960310784
-    - rid: 3869426129174528077
-  ViewTransform: {x: 617, y: 349, z: 0.65751624}
+    m_Variables: []
+  ViewTransform: {x: 696, y: 383, z: 0.8695652}
   BlackboardPosition: {x: 10, y: 60}
   references:
     version: 2
-    RefIds:
-    - rid: 3869425589960310784
-      type: {class: BlackboardVariableString, ns: DialogueGraph.Runtime, asm: Dialogue}
-      data:
-        m_Name: Choice1
-        m_Guid: d79ae5e5-af25-48fb-a36e-ba90c2d80e37
-        m_Exposed: 1
-        m_Shared: 0
-        m_Value: KILL THEM
-    - rid: 3869426129174528077
-      type: {class: BlackboardVariableString, ns: DialogueGraph.Runtime, asm: Dialogue}
-      data:
-        m_Name: Choice2
-        m_Guid: 9029db7d-32ce-4a78-8752-9346974222c7
-        m_Exposed: 1
-        m_Shared: 0
-        m_Value: Save them... for later
+    RefIds: []

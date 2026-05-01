@@ -40,6 +40,7 @@ namespace DialogueGraph.Runtime
         public bool IsWaitingForChoice { get; private set; }
 
         private bool m_WaitingForAdvance;
+        private string m_SelectedPortName;
         private readonly List<(string text, string portName)> m_Choices
             = new List<(string, string)>();
 
@@ -69,13 +70,8 @@ namespace DialogueGraph.Runtime
             if (!IsRunning || !IsWaitingForChoice) return;
             if (index < 0 || index >= m_Choices.Count) return;
 
+            m_SelectedPortName = m_Choices[index].portName;
             IsWaitingForChoice = false;
-            var portName = m_Choices[index].portName;
-            m_Choices.Clear();
-
-            var next = GetNodeConnectedToOutput(m_CurrentNode, portName);
-            if (next != null) AdvanceToNode(next);
-            else              EndGraph();
         }
 
         // ── GraphRunner overrides ─────────────────────────────────────────────
@@ -84,6 +80,7 @@ namespace DialogueGraph.Runtime
         {
             m_WaitingForAdvance = false;
             IsWaitingForChoice  = false;
+            m_SelectedPortName  = null;
             m_Choices.Clear();
         }
 
@@ -138,11 +135,14 @@ namespace DialogueGraph.Runtime
                 var texts = new List<string>();
                 foreach (var c in m_R.m_Choices) texts.Add(c.text);
 
+                m_R.m_SelectedPortName = null;
                 m_R.IsWaitingForChoice = true;
                 m_R.OnChoicesPresented?.Invoke(texts);
 
-                // SelectChoice() will call AdvanceToNode directly.
                 yield return new WaitUntil(() => !m_R.IsWaitingForChoice);
+                var selected = m_R.m_SelectedPortName;
+                m_R.m_Choices.Clear();
+                ctx.Follow(selected);
             }
         }
 

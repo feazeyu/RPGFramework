@@ -1,0 +1,105 @@
+/* ================================================================
+   QuestGraph.uss  —  Quest-system theme overrides
+   Loaded in addition to GraphEditor.uss.
+
+   Mirrors the structure of DialogueGraph.uss — only the colour
+   values differ. The quest palette leans warm (amber canvas tint,
+   gold port borders) so quest graphs are visually distinct from
+   dialogue graphs at a glance.
+   ================================================================ */
+
+/* ── Canvas ──────────────────────────────────────────────────── */
+
+.quest-graph-view {
+    background-color: rgb(24, 20, 16);
+}
+
+.quest-graph-view GridBackground {
+    --grid-background-color: rgb(24, 20, 16);
+    --line-color:             rgba(56, 46, 32, 0.6);
+    --thick-line-color:       rgba(56, 46, 32, 0.9);
+    --spacing:                20;
+}
+
+/* ── Minimap ─────────────────────────────────────────────────── */
+
+.quest-graph-view MiniMap {
+    background-color: rgb(20, 16, 12);
+    border-color:     rgb(46, 38, 26);
+    border-width:     1px;
+    border-radius:    4px;
+}
+
+/* ── Node card ───────────────────────────────────────────────── */
+/* Node cards use the shared .dialogue-node class (the name is
+   legacy — it lives on every node view regardless of graph system).
+   The quest theme tweaks background and border to match the warmer
+   canvas tone. */
+
+.quest-graph-view .dialogue-node {
+    background-color: rgb(32, 26, 20);
+    border-color:     rgb(56, 46, 32);
+    border-width:     1.5px;
+    border-radius:    6px;
+    min-width:        160px;
+    overflow:         visible;
+}
+
+.quest-graph-view .dialogue-node:hover {
+    border-color: rgb(120, 92, 48);
+}
+
+.quest-graph-view .dialogue-node.selected {
+    border-color: rgb(255, 255, 255);
+    border-width: 2px;
+}
+
+.quest-graph-view .dialogue-node #title {
+    background-color:    rgba(255, 220, 160, 0.05);
+    border-bottom-color: rgba(0, 0, 0, 0.25);
+    border-bottom-width: 1px;
+    padding:             6px 8px 6px 14px;
+    flex-direction:      row;
+    align-items:         center;
+}
+
+.quest-graph-view .dialogue-node #contents  { background-color: transparent; }
+.quest-graph-view .dialogue-node #extension { background-color: transparent; padding: 0; }
+
+/* ── Ports ───────────────────────────────────────────────────── */
+
+.quest-graph-view .dialogue-port {
+    flex-direction: row;
+    align-items:    center;
+}
+
+.quest-graph-view .dialogue-port .unity-base-popup-field__arrow {
+    display: none;
+}
+
+.quest-graph-view .dialogue-port #connector {
+    width:            14px;
+    height:           14px;
+    border-radius:    7px;
+    border-width:     2px;
+    background-color: rgb(32, 26, 20);
+}
+
+.quest-graph-view .dialogue-port.input-port #connector {
+    border-color: rgb(140, 110, 60);
+}
+
+.quest-graph-view .dialogue-port.output-port #connector {
+    border-color: rgb(220, 170, 70);
+}
+
+.quest-graph-view .dialogue-port #connector:hover {
+    border-color: rgb(255, 230, 160);
+}
+
+/* ── Edges ───────────────────────────────────────────────────── */
+
+.quest-graph-view .edge {
+    --edge-control-from-cap-size: 0;
+    --edge-control-to-cap-size:   0;
+}

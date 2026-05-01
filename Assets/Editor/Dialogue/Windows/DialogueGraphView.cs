@@ -17,42 +17,47 @@ namespace DialogueGraph.Editor
     public class SoftEdge : Edge { }
 
     /// <summary>
-    /// The main graph canvas. Extends Unity's GraphView so we get built-in:
-    ///   • Node drag, multi-select, rubber-band selection
-    ///   • Edge drawing (port-to-port)
-    ///   • Pan (middle mouse / Alt+drag) and zoom (scroll wheel)
-    ///   • Minimap support
+    /// The graph canvas. Extends Unity's GraphView so we get node drag,
+    /// rubber-band selection, edge drawing, pan/zoom, and minimap for free.
     ///
-    /// We override:
-    ///   • BuildContextualMenu  → right-click "Add Node" menu
-    ///   • GetCompatiblePorts   → port connection rules
-    ///   • Populate / FlushViewState → asset serialisation
+    /// Despite the name, this class is shared by every graph-based editor
+    /// (dialogue, quest, ...). What makes it system-specific is the three
+    /// constructor parameters:
+    /// <list type="bullet">
+    /// <item><description><paramref name="nodeRegistry"/> — populates the "Add Node" context menu</description></item>
+    /// <item><description><paramref name="themeSheet"/> — system-specific colour USS layered over GraphEditor.uss</description></item>
+    /// <item><description><paramref name="rootCssClass"/> — CSS class added to <c>this</c> so the theme sheet's <c>.xxx-graph-view</c> rules apply</description></item>
+    /// </list>
     /// </summary>
     public class DialogueGraphView : GraphView
     {
-        // ── Events ────────────────────────────────────────────────────────────
+        // ── Events ───────────────────────────────────────────────────────────
 
         public Action<NodeData> OnNodeSelected;
         public Action           OnNodeDeselected;
 
         // Fired when a blackboard variable is dropped onto a node field.
-        // Args: (fieldData, variableGuid)  — empty guid = unlink
+        // Args: (fieldData, variableGuid) — empty guid = unlink
         public Action<FieldData, string> OnVariableLinked;
 
-        // ── Internal state ────────────────────────────────────────────────────
+        // ── Internal state ───────────────────────────────────────────────────
 
-        private DialogueGraphAsset m_Asset;
-        private DialogueGraphWindow m_Window;
+        private GraphAsset m_Asset;
 
-        // Maps NodeData.Guid → the GraphView NodeView element.
+        private IReadOnlyDictionary<string, DialogueNodeInfo> m_NodeRegistry;
+
         private readonly Dictionary<string, DialogueNodeView> m_NodeViews
             = new Dictionary<string, DialogueNodeView>();
 
-        // ── Construction ──────────────────────────────────────────────────────
+        // ── Construction ─────────────────────────────────────────────────────
 
-        public DialogueGraphView(DialogueGraphWindow window)
+        public DialogueGraphView(
+            EditorWindow window,
+            IReadOnlyDictionary<string, DialogueNodeInfo> nodeRegistry,
+            StyleSheet themeSheet,
+            string rootCssClass)
         {
-            m_Window = window;
+            m_NodeRegistry = nodeRegistry ?? NodeRegistry.All;
 
             SetupZoom(ContentZoomer.DefaultMinScale, ContentZoomer.DefaultMaxScale);
             this.AddManipulator(new ContentDragger());
@@ -61,13 +66,13 @@ namespace DialogueGraph.Editor
             this.AddManipulator(new FreehandSelector());
 
             // Grid background.
-            var grid = new GridBackground();
-            grid.name = "GraphGrid";
+            var grid = new GridBackground { name = "GraphGrid" };
             Insert(0, grid);
 
-            // Style grid and canvas background to match Unity Behavior's dark theme.
-            styleSheets.Add(DialogueGraphStyleSheet.Get());
-            AddToClassList("dialogue-graph-view");
+            // Layer the system-specific theme on top of the base sheet
+            // (base sheet is already applied to rootVisualElement by the window).
+            if (themeSheet != null) styleSheets.Add(themeSheet);
+            if (!string.IsNullOrEmpty(rootCssClass)) AddToClassList(rootCssClass);
 
             // Minimap (top-right corner, like Unity Behavior).
             var minimap = new MiniMap { anchored = true };
@@ -78,17 +83,25 @@ namespace DialogueGraph.Editor
             graphViewChanged += OnGraphViewChanged;
         }
 
-        // ── GraphView overrides ───────────────────────────────────────────────
-
         /// <summary>
-        /// Use SoftEdge instead of the default Edge so bezier tangents are gentler.
+        /// Swap the "Add Node" palette at runtime. Used by windows whose
+        /// palette depends on properties of the currently loaded asset
+        /// (e.g. <see cref="QuestGraph.Editor.QuestGraphWindow"/> filters
+        /// by <c>QuestKind</c>). Existing node views keep their cached
+        /// <see cref="DialogueNodeInfo"/>; nodes created after this call
+        /// use the new registry.
         /// </summary>
+        public void SetNodeRegistry(IReadOnlyDictionary<string, DialogueNodeInfo> nodeRegistry)
+        {
+            m_NodeRegistry = nodeRegistry ?? NodeRegistry.All;
+        }
+
+        // ── GraphView overrides ──────────────────────────────────────────────
+
+        /// <summary>Use SoftEdge instead of the default Edge so bezier tangents are gentler.</summary>
         public Edge CreateEdge() => new SoftEdge();
 
-        /// <summary>
-        /// Controls which ports can connect to which.
-        /// Rule: Output→Input, matching direction, no self-loops.
-        /// </summary>
+        /// <summary>Rule: Output→Input, matching direction, no self-loops.</summary>
         public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter adapter)
         {
             var compatible = new List<Port>();
@@ -102,18 +115,14 @@ namespace DialogueGraph.Editor
             return compatible;
         }
 
-        /// <summary>
-        /// Right-click → contextual menu with grouped "Add Node" entries,
-        /// plus Cut / Copy / Paste / Delete for selected elements.
-        /// </summary>
+        /// <summary>Right-click → contextual menu populated from the injected registry.</summary>
         public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
         {
-            // ── "Add Node" section ────────────────────────────────────────────
             var mousePos = contentViewContainer.WorldToLocal(evt.mousePosition);
 
-            // Group by Category (mirrors Unity Behavior's category grouping).
+            // Group by Category.
             var byCategory = new Dictionary<string, List<DialogueNodeInfo>>();
-            foreach (var kv in NodeRegistry.All)
+            foreach (var kv in m_NodeRegistry)
             {
                 var cat = kv.Value.Category;
                 if (!byCategory.ContainsKey(cat))
@@ -125,7 +134,6 @@ namespace DialogueGraph.Editor
             {
                 foreach (var info in byCategory[cat])
                 {
-                    // Capture for closure.
                     var captured = info;
                     evt.menu.AppendAction(
                         $"Add Node/{cat}/{captured.Icon} {captured.DisplayName}",
@@ -136,7 +144,6 @@ namespace DialogueGraph.Editor
 
             evt.menu.AppendSeparator();
 
-            // ── Standard edit actions ─────────────────────────────────────────
             if (selection.Count > 0)
             {
                 evt.menu.AppendAction("Delete", _ => DeleteSelectedElements(),
@@ -154,26 +161,22 @@ namespace DialogueGraph.Editor
                     : DropdownMenuAction.AlwaysDisabled);
         }
 
-        // ── Populate from asset ────────────────────────────────────────────────
+        // ── Populate from asset ──────────────────────────────────────────────
 
-        public void Populate(DialogueGraphAsset asset)
+        public void Populate(GraphAsset asset)
         {
             m_Asset = asset;
 
-            // Clear existing UI.
             graphElements.ForEach(e => RemoveElement(e));
             m_NodeViews.Clear();
 
-            // Restore view transform (pan + zoom saved on the asset).
             UpdateViewTransform(
                 new Vector3(asset.ViewTransform.x, asset.ViewTransform.y, 0),
                 Vector3.one * asset.ViewTransform.z);
 
-            // Add node views.
             foreach (var nodeData in asset.Nodes)
                 CreateNodeView(nodeData);
 
-            // Add edges.
             foreach (var edgeData in asset.Edges)
                 CreateEdgeView(edgeData);
         }
@@ -186,7 +189,7 @@ namespace DialogueGraph.Editor
             m_Asset.ViewTransform = new Vector3(t.position.x, t.position.y, t.scale.x);
         }
 
-        // ── Node creation ─────────────────────────────────────────────────────
+        // ── Node creation ────────────────────────────────────────────────────
 
         private void AddNodeAtPosition(DialogueNodeInfo info, Vector2 graphPos)
         {
@@ -195,7 +198,6 @@ namespace DialogueGraph.Editor
             Undo.RecordObject(m_Asset, $"Add {info.DisplayName} Node");
             var nodeData = m_Asset.AddNode(info.TypeId, info.DisplayName, graphPos);
 
-            // Copy default ports and fields from the registry.
             nodeData.Ports.AddRange(info.DefaultPorts);
             nodeData.Fields.AddRange(info.DefaultFields);
 
@@ -205,8 +207,8 @@ namespace DialogueGraph.Editor
 
         private DialogueNodeView CreateNodeView(NodeData data)
         {
-            var view = new DialogueNodeView(data, m_Asset);
-            view.OnSelect  = () => OnNodeSelected?.Invoke(data);
+            var view = new DialogueNodeView(data, m_Asset, m_NodeRegistry);
+            view.OnSelect     = () => OnNodeSelected?.Invoke(data);
             view.OnDeselected = () => OnNodeDeselected?.Invoke();
             view.OnMoved      = pos =>
             {
@@ -221,7 +223,7 @@ namespace DialogueGraph.Editor
             return view;
         }
 
-        // ── Edge creation ─────────────────────────────────────────────────────
+        // ── Edge creation ────────────────────────────────────────────────────
 
         private void CreateEdgeView(EdgeData edgeData)
         {
@@ -237,13 +239,12 @@ namespace DialogueGraph.Editor
             AddElement(edge);
         }
 
-        // ── GraphView change callback ─────────────────────────────────────────
+        // ── GraphView change callback ────────────────────────────────────────
 
         private GraphViewChange OnGraphViewChanged(GraphViewChange change)
         {
             if (m_Asset == null) return change;
 
-            // ── Edges created ─────────────────────────────────────────────────
             if (change.edgesToCreate != null)
             {
                 Undo.RecordObject(m_Asset, "Create Edge");
@@ -261,7 +262,6 @@ namespace DialogueGraph.Editor
                 EditorUtility.SetDirty(m_Asset);
             }
 
-            // ── Elements removed ──────────────────────────────────────────────
             if (change.elementsToRemove != null)
             {
                 Undo.RecordObject(m_Asset, "Remove Graph Elements");
@@ -280,7 +280,6 @@ namespace DialogueGraph.Editor
                 EditorUtility.SetDirty(m_Asset);
             }
 
-            // ── Nodes moved ───────────────────────────────────────────────────
             if (change.movedElements != null)
             {
                 Undo.RecordObject(m_Asset, "Move Nodes");
@@ -295,12 +294,9 @@ namespace DialogueGraph.Editor
             return change;
         }
 
-        // ── Helpers ───────────────────────────────────────────────────────────
+        // ── Helpers ──────────────────────────────────────────────────────────
 
-        private void DeleteSelectedElements()
-        {
-            DeleteSelection();
-        }
+        private void DeleteSelectedElements() => DeleteSelection();
 
         private void DuplicateSelectedNodes()
         {
@@ -324,7 +320,6 @@ namespace DialogueGraph.Editor
 
             EditorUtility.SetDirty(m_Asset);
 
-            // Select the new nodes.
             ClearSelection();
             foreach (var v in newViews) AddToSelection(v);
         }

@@ -8,31 +8,10 @@ using DialogueGraph.Runtime;
 
 namespace DialogueGraph.Editor
 {
-    /// <summary>
-    /// Left-hand panel that displays and edits the Blackboard variables of a
-    /// DialogueGraphAsset. Mirrors the Unity Behavior Blackboard window.
-    ///
-    /// Features:
-    ///   • Add variable (name, type picker, Exposed/Shared toggles)
-    ///   • Delete variable
-    ///   • Inline-edit name, type and default value
-    ///   • Visual indicators: E (Exposed), S (Shared), link count badge
-    ///   • Colour-coded type pill per variable type
-    /// </summary>
     public class BlackboardPanel : VisualElement
     {
-        // ── Style constants ───────────────────────────────────────────────────
-
-        private static readonly Color BgPanel      = new Color(0.13f, 0.14f, 0.18f);
-        private static readonly Color BgHeader     = new Color(0.11f, 0.12f, 0.16f);
-        private static readonly Color BgRow        = new Color(0.15f, 0.16f, 0.20f);
-        private static readonly Color BgRowHover   = new Color(0.18f, 0.20f, 0.26f);
-        private static readonly Color BgRowActive  = new Color(0.17f, 0.22f, 0.30f);
-        private static readonly Color ColText      = new Color(0.82f, 0.86f, 0.95f);
-        private static readonly Color ColMuted     = new Color(0.50f, 0.55f, 0.65f);
-        private static readonly Color ColDivider   = new Color(0.10f, 0.11f, 0.15f);
-
-        // Supported variable types and their accent colours.
+        // Variable types and their accent colours — only the colour is data-driven;
+        // shape/size/layout comes from USS.
         private static readonly (string TypeName, Color Colour)[] VariableTypes =
         {
             ("Boolean",    new Color(0.88f, 0.31f, 0.44f)),
@@ -50,26 +29,42 @@ namespace DialogueGraph.Editor
 
         // ── State ─────────────────────────────────────────────────────────────
 
-        private DialogueGraphAsset   m_Asset;
-        private SerializedObject     m_SerializedAsset;
-        private VisualElement        m_VariableList;
-        private VisualElement        m_AddForm;
-        private TextField            m_NewNameField;
-        private DropdownField        m_NewTypeField;
+        private GraphAsset m_Asset;
+        private SerializedObject   m_SerializedAsset;
+        private VisualElement      m_VariableList;
+        private VisualElement      m_AddForm;
+        private TextField          m_NewNameField;
+        private DropdownField      m_NewTypeField;
 
-        // GUIDs of variables whose detail panel is currently expanded.
-        // Persists across RebuildList() calls so rebuilds restore open rows.
         private readonly HashSet<string> m_ExpandedGuids = new HashSet<string>();
+
+        /// <summary>
+        /// Optional callback wired by <see cref="GraphEditorWindow"/> so
+        /// the blackboard can refresh node views on the canvas (and any
+        /// other dependent UI) after mutations that affect them — in
+        /// particular, deleting a variable that nodes still reference.
+        /// The callback receives the guid of each affected node.
+        /// </summary>
+        private System.Action<string> m_RefreshNodeView;
 
         // ── Construction ──────────────────────────────────────────────────────
 
         public BlackboardPanel()
         {
-            style.backgroundColor = new StyleColor(BgPanel);
-            style.flexDirection   = FlexDirection.Column;
-
+            AddToClassList("bb-panel");
             BuildHeader();
             BuildVariableList();
+        }
+
+        /// <summary>
+        /// Supply a per-guid node-refresh callback so variable deletion
+        /// can cascade into dependent UI (the graph canvas and, via the
+        /// window, the inspector). Called by the owning window after
+        /// construction.
+        /// </summary>
+        public void SetRefreshNodeViewCallback(System.Action<string> refresh)
+        {
+            m_RefreshNodeView = refresh;
         }
 
         // ── Header ────────────────────────────────────────────────────────────
@@ -77,89 +72,55 @@ namespace DialogueGraph.Editor
         private void BuildHeader()
         {
             var header = new VisualElement();
-            header.style.flexDirection   = FlexDirection.Row;
-            header.style.alignItems      = Align.Center;
-            header.style.paddingTop      = 8;
-            header.style.paddingBottom   = 8;
-            header.style.paddingLeft     = 10;
-            header.style.paddingRight    = 10;
-            header.style.backgroundColor = new StyleColor(BgHeader);
-            header.style.borderBottomWidth = 1;
-            header.style.borderBottomColor = new StyleColor(ColDivider);
+            header.AddToClassList("bb-header");
 
             var icon = new Label("▦");
-            icon.style.fontSize   = 12;
-            icon.style.color      = new StyleColor(new Color(0.50f, 0.72f, 0.95f));
-            icon.style.marginRight = 6;
+            icon.AddToClassList("bb-header-icon");
             header.Add(icon);
 
             var title = new Label("Blackboard");
-            title.style.fontSize  = 11;
-            title.style.color     = new StyleColor(ColText);
-            title.style.flexGrow  = 1;
+            title.AddToClassList("bb-header-title");
             header.Add(title);
 
-            // "+" add button.
             var addBtn = new Button(ToggleAddForm) { text = "+" };
             addBtn.AddToClassList("bb-add-btn");
-            addBtn.style.fontSize         = 14;
-            addBtn.style.color            = new StyleColor(new Color(0.34f, 0.78f, 0.34f));
-            addBtn.style.backgroundColor  = new StyleColor(new Color(0.14f, 0.24f, 0.18f));
-            addBtn.style.borderTopLeftRadius     = 4;
-            addBtn.style.borderTopRightRadius    = 4;
-            addBtn.style.borderBottomLeftRadius  = 4;
-            addBtn.style.borderBottomRightRadius = 4;
-            addBtn.style.paddingLeft   = 6;
-            addBtn.style.paddingRight  = 6;
-            addBtn.style.paddingTop    = 0;
-            addBtn.style.paddingBottom = 2;
-            addBtn.style.borderTopWidth = addBtn.style.borderBottomWidth =
-            addBtn.style.borderLeftWidth = addBtn.style.borderRightWidth = 1;
-            addBtn.style.borderTopColor = addBtn.style.borderBottomColor =
-            addBtn.style.borderLeftColor = addBtn.style.borderRightColor =
-                new StyleColor(new Color(0.22f, 0.38f, 0.26f));
             header.Add(addBtn);
 
             Add(header);
-
-            // ── Add-variable form (hidden until "+" is pressed) ───────────────
             BuildAddForm();
         }
 
         private void BuildAddForm()
         {
             m_AddForm = new VisualElement();
-            m_AddForm.style.display         = DisplayStyle.None;
-            m_AddForm.style.flexDirection   = FlexDirection.Column;
-            m_AddForm.style.paddingTop         = 10;
-            m_AddForm.style.paddingLeft = 10;
-            m_AddForm.style.paddingRight = 10;
-            m_AddForm.style.paddingBottom = 10;
-            m_AddForm.style.backgroundColor = new StyleColor(new Color(0.11f, 0.14f, 0.20f));
-            m_AddForm.style.borderBottomWidth = 1;
-            m_AddForm.style.borderBottomColor = new StyleColor(ColDivider);
+            m_AddForm.AddToClassList("bb-add-form");
 
-            // Name field.
-            m_NewNameField = MakeTextField("Variable Name", "NewVariable");
-            m_AddForm.Add(new Label("Name") { style = { fontSize = 9, color = new StyleColor(ColMuted), marginBottom = 3 } });
+            var nameLabel = new Label("Name");
+            nameLabel.AddToClassList("bb-form-label");
+            m_AddForm.Add(nameLabel);
+
+            m_NewNameField = new TextField { value = "NewVariable" };
+            m_NewNameField.AddToClassList("bb-text-field");
             m_AddForm.Add(m_NewNameField);
 
-            // Type dropdown.
-            m_AddForm.Add(new Label("Type") { style = { fontSize = 9, color = new StyleColor(ColMuted), marginTop = 6, marginBottom = 3 } });
+            var typeLabel = new Label("Type");
+            typeLabel.AddToClassList("bb-form-label-gap");
+            m_AddForm.Add(typeLabel);
+
             var typeNames = new List<string>();
             foreach (var (name, _) in VariableTypes) typeNames.Add(name);
+            foreach (var e in BlackboardVariableTypeRegistry.All)
+                if (!typeNames.Contains(e.TypeName)) typeNames.Add(e.TypeName);
             m_NewTypeField = new DropdownField(typeNames, 0);
-            StyleDropdown(m_NewTypeField);
+            m_NewTypeField.AddToClassList("bb-dropdown");
             m_AddForm.Add(m_NewTypeField);
 
-            // Confirm button.
             var confirmBtn = new Button(ConfirmAddVariable) { text = "Add Variable" };
-            StylePrimaryButton(confirmBtn);
+            confirmBtn.AddToClassList("bb-primary-btn");
             m_AddForm.Add(confirmBtn);
 
-            // Cancel link.
             var cancelBtn = new Button(ToggleAddForm) { text = "Cancel" };
-            StyleSecondaryButton(cancelBtn);
+            cancelBtn.AddToClassList("bb-secondary-btn");
             m_AddForm.Add(cancelBtn);
 
             Add(m_AddForm);
@@ -178,7 +139,7 @@ namespace DialogueGraph.Editor
 
         // ── Populate ──────────────────────────────────────────────────────────
 
-        public void Populate(DialogueGraphAsset asset)
+        public void Populate(GraphAsset asset)
         {
             if (m_Asset != null)
                 BlackboardPropertyBridge.Invalidate(m_Asset);
@@ -199,8 +160,7 @@ namespace DialogueGraph.Editor
             if (m_Asset == null)
             {
                 var empty = new Label("No graph loaded.");
-                empty.style.color     = new StyleColor(ColMuted);
-                empty.style.fontSize  = 10;
+                empty.AddToClassList("bb-unserialisable");
                 empty.style.unityTextAlign = TextAnchor.MiddleCenter;
                 empty.style.marginTop = 24;
                 m_VariableList.Add(empty);
@@ -210,8 +170,7 @@ namespace DialogueGraph.Editor
             if (m_Asset.Blackboard.Variables.Count == 0)
             {
                 var empty = new Label("No variables. Click + to add.");
-                empty.style.color    = new StyleColor(ColMuted);
-                empty.style.fontSize = 10;
+                empty.AddToClassList("bb-unserialisable");
                 empty.style.unityTextAlign = TextAnchor.MiddleCenter;
                 empty.style.marginTop = 24;
                 m_VariableList.Add(empty);
@@ -230,70 +189,43 @@ namespace DialogueGraph.Editor
             bool expanded = m_ExpandedGuids.Contains(variable.Guid);
 
             var container = new VisualElement();
-            container.style.borderBottomWidth = 1;
-            container.style.borderBottomColor = new StyleColor(ColDivider);
+            container.AddToClassList("bb-var-container");
 
-            // ── Collapsed header row ──────────────────────────────────────────
             var row = new VisualElement();
-            row.style.flexDirection   = FlexDirection.Row;
-            row.style.alignItems      = Align.Center;
-            row.style.paddingTop      = 7;
-            row.style.paddingBottom   = 7;
-            row.style.paddingLeft     = 10;
-            row.style.paddingRight    = 10;
-            row.style.backgroundColor = new StyleColor(expanded ? BgRowActive : BgRow);
+            row.AddToClassList("bb-var-row");
+            if (expanded) row.AddToClassList("expanded");
 
-            // Colour dot.
+            // Colour dot — background-color is data-driven, shape from USS.
             var dot = new VisualElement();
-            dot.style.width           = 7;
-            dot.style.height          = 7;
-            dot.style.borderTopLeftRadius = dot.style.borderTopRightRadius =
-            dot.style.borderBottomLeftRadius = dot.style.borderBottomRightRadius = 4;
+            dot.AddToClassList("bb-var-dot");
             dot.style.backgroundColor = new StyleColor(typeColor);
-            dot.style.marginRight     = 7;
-            dot.style.flexShrink      = 0;
             row.Add(dot);
 
-            // Variable name.
             var nameLabel = new Label(variable.Name);
-            nameLabel.style.fontSize = 11;
-            nameLabel.style.color    = new StyleColor(ColText);
-            nameLabel.style.flexGrow = 1;
-            nameLabel.style.overflow = Overflow.Hidden;
+            nameLabel.AddToClassList("bb-var-name");
             row.Add(nameLabel);
 
-            // Type pill.
+            // Type pill — color is data-driven, layout from USS.
             var typePill = new Label(GetShortTypeName(variable));
-            typePill.style.fontSize        = 9;
+            typePill.AddToClassList("bb-type-pill");
             typePill.style.color           = new StyleColor(typeColor);
-            typePill.style.backgroundColor = new StyleColor(new Color(typeColor.r, typeColor.g, typeColor.b, 0.12f));
-            typePill.style.borderTopLeftRadius = typePill.style.borderTopRightRadius =
-            typePill.style.borderBottomLeftRadius = typePill.style.borderBottomRightRadius = 3;
-            typePill.style.paddingLeft  = 4;
-            typePill.style.paddingRight = 4;
-            typePill.style.marginLeft   = 4;
+            typePill.style.backgroundColor = new StyleColor(
+                new Color(typeColor.r, typeColor.g, typeColor.b, 0.12f));
             row.Add(typePill);
 
-            // Badge container — holds E and S labels, updated in-place by toggles.
             var badgeContainer = new VisualElement();
-            badgeContainer.style.flexDirection = FlexDirection.Row;
-            badgeContainer.style.alignItems    = Align.Center;
+            badgeContainer.AddToClassList("bb-badge-container");
             row.Add(badgeContainer);
             RefreshBadges(badgeContainer, variable);
 
-            // Expand chevron.
             var chevron = new Label(expanded ? "▾" : "▸");
-            chevron.style.fontSize   = 9;
-            chevron.style.color      = new StyleColor(ColMuted);
-            chevron.style.marginLeft = 6;
+            chevron.AddToClassList("bb-chevron");
             row.Add(chevron);
 
-            // Drag to node field — register this row as a drag source.
-            // We start a DragAndDrop operation carrying the variable GUID.
+            // Drag to node field.
             row.RegisterCallback<MouseDownEvent>(evt =>
             {
                 if (evt.button != 0 || evt.clickCount != 1) return;
-                // Only start drag on a slow/deliberate press — let click still work.
                 row.RegisterCallback<MouseMoveEvent>(OnDragStartMove);
 
                 void OnDragStartMove(MouseMoveEvent moveEvt)
@@ -311,25 +243,20 @@ namespace DialogueGraph.Editor
                 }
             }, TrickleDown.NoTrickleDown);
 
-            // Click header to toggle expand.
+            // Expand/collapse on click.
             row.RegisterCallback<ClickEvent>(_ =>
             {
                 if (m_ExpandedGuids.Contains(variable.Guid))
+                {
                     m_ExpandedGuids.Remove(variable.Guid);
+                    row.RemoveFromClassList("expanded");
+                }
                 else
+                {
                     m_ExpandedGuids.Add(variable.Guid);
+                    row.AddToClassList("expanded");
+                }
                 RebuildList();
-            });
-
-            row.RegisterCallback<MouseEnterEvent>(_ =>
-            {
-                if (!m_ExpandedGuids.Contains(variable.Guid))
-                    row.style.backgroundColor = new StyleColor(BgRowHover);
-            });
-            row.RegisterCallback<MouseLeaveEvent>(_ =>
-            {
-                if (!m_ExpandedGuids.Contains(variable.Guid))
-                    row.style.backgroundColor = new StyleColor(BgRow);
             });
 
             container.Add(row);
@@ -346,41 +273,34 @@ namespace DialogueGraph.Editor
             if (variable.Exposed)
             {
                 var b = new Label("E");
-                b.tooltip          = "Exposed — visible on the DialogueGraphAgent Inspector";
-                b.style.fontSize   = 8;
-                b.style.color      = new StyleColor(new Color(0.29f, 0.61f, 0.78f));
-                b.style.marginLeft = 4;
+                b.AddToClassList("bb-badge");
+                b.AddToClassList("bb-badge-exposed");
+                b.tooltip = "Exposed — visible on the agent Inspector";
                 badgeContainer.Add(b);
             }
             if (variable.Shared)
             {
                 var b = new Label("S");
-                b.tooltip          = "Shared — one instance across all agents";
-                b.style.fontSize   = 8;
-                b.style.color      = new StyleColor(new Color(0.69f, 0.42f, 0.97f));
-                b.style.marginLeft = 3;
+                b.AddToClassList("bb-badge");
+                b.AddToClassList("bb-badge-shared");
+                b.tooltip = "Shared — one instance across all agents";
                 badgeContainer.Add(b);
             }
         }
 
-        // ── Variable detail (expanded) ────────────────────────────────────────
+        // ── Variable detail ───────────────────────────────────────────────────
 
-        private VisualElement BuildVariableDetail(BlackboardVariable variable, Label nameLabel, VisualElement badgeContainer)
+        private VisualElement BuildVariableDetail(BlackboardVariable variable,
+            Label nameLabel, VisualElement badgeContainer)
         {
             var detail = new VisualElement();
-            detail.style.backgroundColor = new StyleColor(new Color(0.11f, 0.12f, 0.17f));
-            detail.style.paddingLeft     = 14;
-            detail.style.paddingRight    = 10;
-            detail.style.paddingTop      = 8;
-            detail.style.paddingBottom   = 10;
+            detail.AddToClassList("bb-detail");
 
-            // Look up the index once for this variable. All field accessors use
-            // the index directly — no repeated GUID scans, no so.Update() calls.
             int idx = m_SerializedAsset != null
                 ? BlackboardPropertyBridge.FindVariableIndex(m_SerializedAsset, variable.Guid)
                 : -1;
 
-            // ── Name ─────────────────────────────────────────────────────────
+            // Name
             detail.Add(MakeDetailLabel("Name"));
             if (idx >= 0)
             {
@@ -389,8 +309,6 @@ namespace DialogueGraph.Editor
                 nameField.Bind(m_SerializedAsset);
                 nameField.RegisterValueChangeCallback(_ =>
                 {
-                    // Apply and update the header label in-place.
-                    // Do NOT call RebuildList — that would redraw on every keystroke.
                     m_SerializedAsset.ApplyModifiedProperties();
                     nameLabel.text = variable.Name;
                 });
@@ -398,7 +316,8 @@ namespace DialogueGraph.Editor
             }
             else
             {
-                var nameField = MakeTextField("", variable.Name);
+                var nameField = new TextField { value = variable.Name };
+                nameField.AddToClassList("bb-text-field");
                 nameField.RegisterValueChangedCallback(evt =>
                 {
                     variable.Name  = evt.newValue;
@@ -408,21 +327,17 @@ namespace DialogueGraph.Editor
                 detail.Add(nameField);
             }
 
-            // ── Type (read-only) ──────────────────────────────────────────────
+            // Type (read-only)
             detail.Add(MakeDetailLabel("Type"));
+            var typeColor = GetTypeColor(variable);
             var typeLabel = new Label(GetShortTypeName(variable));
-            typeLabel.style.fontSize        = 10;
-            typeLabel.style.color           = new StyleColor(GetTypeColor(variable));
-            typeLabel.style.backgroundColor = new StyleColor(new Color(0.10f, 0.11f, 0.16f));
-            typeLabel.style.borderTopLeftRadius = typeLabel.style.borderTopRightRadius =
-            typeLabel.style.borderBottomLeftRadius = typeLabel.style.borderBottomRightRadius = 3;
-            typeLabel.style.paddingLeft  = 5;
-            typeLabel.style.paddingRight = 5;
-            typeLabel.style.paddingTop   = typeLabel.style.paddingBottom = 3;
-            typeLabel.tooltip = "To change type, delete this variable and add a new one.";
+            typeLabel.AddToClassList("bb-type-pill");
+            typeLabel.AddToClassList("bb-detail-type");
+            typeLabel.style.color = new StyleColor(typeColor); // data-driven
+            typeLabel.tooltip = "To change type, delete and re-add.";
             detail.Add(typeLabel);
 
-            // ── Default Value ─────────────────────────────────────────────────
+            // Default Value
             detail.Add(MakeDetailLabel("Default Value"));
             if (idx >= 0)
             {
@@ -431,66 +346,68 @@ namespace DialogueGraph.Editor
                 {
                     var valueField = new PropertyField(valueProp, "");
                     valueField.Bind(m_SerializedAsset);
-                    // PropertyField writes through the SO automatically on edit;
-                    // we just need to apply so the asset gets dirtied.
-                    valueField.RegisterValueChangeCallback(_ =>
-                        m_SerializedAsset.ApplyModifiedProperties());
+                    valueField.RegisterValueChangeCallback(_ => m_SerializedAsset.ApplyModifiedProperties());
                     detail.Add(valueField);
                 }
-                else
-                {
-                    detail.Add(MakeUnserialisableLabel());
-                }
+                else { detail.Add(MakeUnserialisableLabel()); }
             }
-            else
-            {
-                detail.Add(MakeUnserialisableLabel());
-            }
+            else { detail.Add(MakeUnserialisableLabel()); }
 
-            // ── Exposed / Shared toggles ──────────────────────────────────────
+            // Exposed / Shared toggles
             detail.Add(MakeDetailLabel(""));
             detail.Add(BuildBoundToggleAt(idx,
-                "Exposed",
-                "Exposed variables appear in the agent Inspector and can be set per-instance.",
-                new Color(0.29f, 0.61f, 0.78f),
-                variable, "m_Exposed", badgeContainer));
-
+                "Exposed", "Exposed variables appear in the agent Inspector.",
+                "bb-toggle-exposed", variable, "m_Exposed", badgeContainer));
             detail.Add(BuildBoundToggleAt(idx,
-                "Shared",
-                "Shared variables have ONE value across all agents running this graph.",
-                new Color(0.69f, 0.42f, 0.97f),
-                variable, "m_Shared", badgeContainer));
+                "Shared", "Shared variables have ONE value across all agents.",
+                "bb-toggle-shared", variable, "m_Shared", badgeContainer));
 
-            // ── GUID (read-only) ──────────────────────────────────────────────
+            // GUID
             detail.Add(MakeDetailLabel("GUID"));
             var guidField = new TextField { value = variable.Guid, isReadOnly = true };
+            guidField.AddToClassList("bb-text-field");
             guidField.style.fontSize = 8;
-            guidField.style.color    = new StyleColor(ColMuted);
-            StyleTextField(guidField);
             detail.Add(guidField);
 
-            // ── Delete ────────────────────────────────────────────────────────
+            // Delete
             var deleteBtn = new Button(() =>
             {
                 if (m_Asset == null) return;
                 Undo.RecordObject(m_Asset, "Delete Blackboard Variable");
+
+                // Find every node field still linked to this variable
+                // and clear the link. Without this, fields retain a
+                // stale guid pointing at nothing and the node card
+                // keeps rendering as "⟵ ?" indefinitely.
+                var affectedNodeGuids = new HashSet<string>();
+                foreach (var node in m_Asset.Nodes)
+                {
+                    if (node.Fields == null) continue;
+                    foreach (var field in node.Fields)
+                    {
+                        if (field.LinkedVariableGuid == variable.Guid)
+                        {
+                            field.LinkedVariableGuid = null;
+                            affectedNodeGuids.Add(node.Guid);
+                        }
+                    }
+                }
+
                 m_Asset.Blackboard.RemoveVariable(variable.Guid);
                 m_ExpandedGuids.Remove(variable.Guid);
                 EditorUtility.SetDirty(m_Asset);
                 BlackboardPropertyBridge.Invalidate(m_Asset);
                 m_SerializedAsset = BlackboardPropertyBridge.GetSerializedObject(m_Asset);
+
+                // Refresh each affected canvas node view so the stale
+                // "linked" visuals clear. Safe to call with a no-op
+                // callback (checked via ?.Invoke).
+                foreach (var guid in affectedNodeGuids)
+                    m_RefreshNodeView?.Invoke(guid);
+
                 RebuildList();
             }) { text = "Delete Variable" };
-            deleteBtn.style.marginTop       = 10;
-            deleteBtn.style.color           = new StyleColor(new Color(0.88f, 0.31f, 0.44f));
-            deleteBtn.style.backgroundColor = new StyleColor(new Color(0.22f, 0.10f, 0.14f));
-            deleteBtn.style.borderTopWidth = deleteBtn.style.borderBottomWidth =
-            deleteBtn.style.borderLeftWidth = deleteBtn.style.borderRightWidth = 1;
-            deleteBtn.style.borderTopColor = deleteBtn.style.borderBottomColor =
-            deleteBtn.style.borderLeftColor = deleteBtn.style.borderRightColor =
-                new StyleColor(new Color(0.40f, 0.14f, 0.20f));
-            deleteBtn.style.borderTopLeftRadius = deleteBtn.style.borderTopRightRadius =
-            deleteBtn.style.borderBottomLeftRadius = deleteBtn.style.borderBottomRightRadius = 4;
+            deleteBtn.AddToClassList("bb-delete-btn");
             detail.Add(deleteBtn);
 
             return detail;
@@ -499,26 +416,17 @@ namespace DialogueGraph.Editor
         private static Label MakeUnserialisableLabel()
         {
             var l = new Label("⚠  Not serialisable — set value at runtime.");
-            l.style.fontSize   = 9;
-            l.style.color      = new StyleColor(new Color(0.94f, 0.65f, 0.20f));
-            l.style.whiteSpace = WhiteSpace.Normal;
-            l.style.marginTop  = 2;
+            l.AddToClassList("bb-unserialisable");
             return l;
         }
 
-        /// <summary>
-        /// Toggle bound to a bool field. On change it updates the badge container
-        /// in-place — no RebuildList, so the rest of the panel is untouched.
-        /// </summary>
         private Toggle BuildBoundToggleAt(int idx, string label, string tooltip,
-            Color colour, BlackboardVariable variable, string fieldName,
+            string cssClass, BlackboardVariable variable, string fieldName,
             VisualElement badgeContainer)
         {
             var toggle = new Toggle(label);
-            toggle.tooltip        = tooltip;
-            toggle.style.fontSize = 10;
-            toggle.style.color    = new StyleColor(colour);
-            toggle.style.marginTop = 5;
+            toggle.AddToClassList(cssClass);
+            toggle.tooltip = tooltip;
 
             if (m_SerializedAsset != null && idx >= 0)
             {
@@ -535,14 +443,12 @@ namespace DialogueGraph.Editor
                             p.boolValue = evt.newValue;
                             m_SerializedAsset.ApplyModifiedProperties();
                         }
-                        // Update badge row in-place — no full rebuild needed.
                         RefreshBadges(badgeContainer, variable);
                     });
                     return toggle;
                 }
             }
 
-            // Fallback: no SO available.
             toggle.RegisterValueChangedCallback(evt =>
             {
                 if (fieldName == "m_Exposed") variable.Exposed = evt.newValue;
@@ -553,7 +459,7 @@ namespace DialogueGraph.Editor
             return toggle;
         }
 
-        // ── Add variable form logic ───────────────────────────────────────────
+        // ── Add-form logic ────────────────────────────────────────────────────
 
         private void ToggleAddForm()
         {
@@ -574,7 +480,6 @@ namespace DialogueGraph.Editor
             if (string.IsNullOrEmpty(name)) return;
 
             string typeName = m_NewTypeField.value;
-
             Undo.RecordObject(m_Asset, "Add Blackboard Variable");
 
             BlackboardVariable newVar = typeName switch
@@ -589,7 +494,7 @@ namespace DialogueGraph.Editor
                 "Color"      => new BlackboardVariableColor(),
                 "Sprite"     => new BlackboardVariableSprite(),
                 "AudioClip"  => new BlackboardVariableAudioClip(),
-                _            => new BlackboardVariableString(),
+                _            => CreateExtensionOrDefault(typeName),
             };
 
             newVar.Name    = name;
@@ -598,34 +503,34 @@ namespace DialogueGraph.Editor
 
             m_Asset.Blackboard.AddVariable(newVar);
             EditorUtility.SetDirty(m_Asset);
-
-            // Sync the SerializedObject so the new variable's index is visible
-            // to FindVariableIndex before RebuildList runs.
             m_SerializedAsset?.Update();
 
             m_AddForm.style.display = DisplayStyle.None;
             RebuildList();
         }
 
-        // ── Utilities ─────────────────────────────────────────────────────────
+        // ── Helpers ───────────────────────────────────────────────────────────
 
-        private void MarkDirty()
-        {
-            if (m_Asset) EditorUtility.SetDirty(m_Asset);
-        }
+        private void MarkDirty() { if (m_Asset) EditorUtility.SetDirty(m_Asset); }
 
         private Color GetTypeColor(BlackboardVariable v)
         {
-            var short_ = GetShortTypeName(v);
+            var s = GetShortTypeName(v);
             foreach (var (name, col) in VariableTypes)
-                if (name == short_) return col;
+                if (name == s) return col;
+
+            // Extension types (Quest, QuestGraph, etc.) carry their
+            // accent on the registry entry.
+            var ext = BlackboardVariableTypeRegistry.Find(s);
+            if (ext.HasValue) return ext.Value.AccentColour;
+
             return Color.gray;
         }
 
         private static string GetShortTypeName(BlackboardVariable v)
         {
             if (v == null) return "Unknown";
-            return v switch
+            var builtIn = v switch
             {
                 BlackboardVariableBool       _ => "Boolean",
                 BlackboardVariableInt        _ => "Integer",
@@ -638,91 +543,38 @@ namespace DialogueGraph.Editor
                 BlackboardVariableColor      _ => "Color",
                 BlackboardVariableSprite     _ => "Sprite",
                 BlackboardVariableAudioClip  _ => "AudioClip",
-                _                            => v.ValueType?.Name ?? "Unknown",
+                _                            => null,
             };
+            if (builtIn != null) return builtIn;
+
+            // Not a built-in — defer to the extension registry so Quest /
+            // QuestGraph / etc. types contributed by other assemblies get
+            // the right display name.
+            var ext = BlackboardVariableTypeRegistry.FindFor(v);
+            if (ext.HasValue) return ext.Value.TypeName;
+
+            return v.ValueType?.Name ?? "Unknown";
         }
 
-        // ── Style helpers ─────────────────────────────────────────────────────
-
-        private static TextField MakeTextField(string placeholder, string value)
+        /// <summary>
+        /// Factory fallback for types not in the built-in switch. Looks
+        /// the name up in <see cref="BlackboardVariableTypeRegistry"/>;
+        /// if found, invokes the factory. Falls back to a String
+        /// variable if nothing matches so the picker never produces
+        /// <c>null</c>.
+        /// </summary>
+        private static BlackboardVariable CreateExtensionOrDefault(string typeName)
         {
-            var tf = new TextField { value = value };
-            StyleTextField(tf);
-            return tf;
-        }
-
-        private static void StyleTextField(TextField tf)
-        {
-            tf.style.fontSize         = 10;
-            tf.style.color            = new StyleColor(new Color(0.82f, 0.86f, 0.95f));
-            tf.style.backgroundColor  = new StyleColor(new Color(0.10f, 0.11f, 0.16f));
-            tf.style.borderTopWidth = tf.style.borderBottomWidth =
-            tf.style.borderLeftWidth = tf.style.borderRightWidth = 1;
-            tf.style.borderTopColor = tf.style.borderBottomColor =
-            tf.style.borderLeftColor = tf.style.borderRightColor =
-                new StyleColor(new Color(0.20f, 0.22f, 0.30f));
-            tf.style.borderTopLeftRadius = tf.style.borderTopRightRadius =
-            tf.style.borderBottomLeftRadius = tf.style.borderBottomRightRadius = 3;
-            tf.style.paddingLeft   = 5;
-            tf.style.paddingRight  = 5;
-            tf.style.paddingTop    = 3;
-            tf.style.paddingBottom = 3;
-        }
-
-        private static void StyleDropdown(DropdownField dd)
-        {
-            dd.style.fontSize        = 10;
-            dd.style.color           = new StyleColor(new Color(0.82f, 0.86f, 0.95f));
-            dd.style.backgroundColor = new StyleColor(new Color(0.10f, 0.11f, 0.16f));
-            dd.style.borderTopWidth = dd.style.borderBottomWidth =
-            dd.style.borderLeftWidth = dd.style.borderRightWidth = 1;
-            dd.style.borderTopColor = dd.style.borderBottomColor =
-            dd.style.borderLeftColor = dd.style.borderRightColor =
-                new StyleColor(new Color(0.20f, 0.22f, 0.30f));
-            dd.style.borderTopLeftRadius = dd.style.borderTopRightRadius =
-            dd.style.borderBottomLeftRadius = dd.style.borderBottomRightRadius = 3;
+            var entry = BlackboardVariableTypeRegistry.Find(typeName);
+            if (entry.HasValue) return entry.Value.Factory();
+            return new BlackboardVariableString();
         }
 
         private static Label MakeDetailLabel(string text)
         {
             var l = new Label(text);
-            l.style.fontSize   = 9;
-            l.style.color      = new StyleColor(new Color(0.50f, 0.55f, 0.65f));
-            l.style.marginTop  = 6;
-            l.style.marginBottom = 3;
+            l.AddToClassList("bb-detail-label");
             return l;
-        }
-
-        private static void StylePrimaryButton(Button btn)
-        {
-            btn.style.marginTop          = 10;
-            btn.style.fontSize           = 10;
-            btn.style.color              = new StyleColor(new Color(0.20f, 0.85f, 0.60f));
-            btn.style.backgroundColor    = new StyleColor(new Color(0.12f, 0.28f, 0.22f));
-            btn.style.borderTopWidth = btn.style.borderBottomWidth =
-            btn.style.borderLeftWidth = btn.style.borderRightWidth = 1;
-            btn.style.borderTopColor = btn.style.borderBottomColor =
-            btn.style.borderLeftColor = btn.style.borderRightColor =
-                new StyleColor(new Color(0.18f, 0.42f, 0.32f));
-            btn.style.borderTopLeftRadius = btn.style.borderTopRightRadius =
-            btn.style.borderBottomLeftRadius = btn.style.borderBottomRightRadius = 4;
-            btn.style.paddingTop = btn.style.paddingBottom = 5;
-        }
-
-        private static void StyleSecondaryButton(Button btn)
-        {
-            btn.style.marginTop          = 5;
-            btn.style.fontSize           = 10;
-            btn.style.color              = new StyleColor(new Color(0.55f, 0.60f, 0.70f));
-            btn.style.backgroundColor    = new StyleColor(new Color(0.14f, 0.15f, 0.20f));
-            btn.style.borderTopWidth = btn.style.borderBottomWidth =
-            btn.style.borderLeftWidth = btn.style.borderRightWidth = 1;
-            btn.style.borderTopColor = btn.style.borderBottomColor =
-            btn.style.borderLeftColor = btn.style.borderRightColor =
-                new StyleColor(new Color(0.22f, 0.24f, 0.32f));
-            btn.style.borderTopLeftRadius = btn.style.borderTopRightRadius =
-            btn.style.borderBottomLeftRadius = btn.style.borderBottomRightRadius = 4;
-            btn.style.paddingTop = btn.style.paddingBottom = 4;
         }
     }
 }
