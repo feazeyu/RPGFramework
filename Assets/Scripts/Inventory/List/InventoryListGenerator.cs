@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Game.Utils;
-using UnityEngine.EventSystems;
 using UnityEditor;
 namespace Game.Inventory
 {

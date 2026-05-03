@@ -3,7 +3,6 @@ using Game.Core.Utilities;
 using Game.Items;
 using System;
 using System.Collections.Generic;
-using UnityEditor.Toolbars;
 using UnityEngine;
 
 namespace Game.Inventory

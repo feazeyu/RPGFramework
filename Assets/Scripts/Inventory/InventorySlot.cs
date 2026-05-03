@@ -177,6 +177,12 @@ namespace Game.Inventory
             anchorPosition = new Vector2Int(-1, -1);
             return true;
         }
+
+        public virtual void EditorOnlySetState(int itemId, Vector2Int anchor)
+        {
+            ItemId = itemId;
+            anchorPosition = anchor;
+        }
 #endif
 
         /// <summary>

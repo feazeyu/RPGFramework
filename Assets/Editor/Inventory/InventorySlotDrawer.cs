@@ -13,12 +13,6 @@ namespace Game.Inventory
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            // Before drawing, force IsEnabled default if unset
-            var isEnabledProp = property.FindPropertyRelative("IsEnabled");
- 
-                isEnabledProp.boolValue = true;
-            
-
             EditorGUI.PropertyField(position, property, label, true);
         }
     }

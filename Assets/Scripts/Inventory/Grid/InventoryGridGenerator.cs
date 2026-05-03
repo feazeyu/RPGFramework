@@ -3,7 +3,6 @@ using Game.Core.Utilities;
 using Game.Items;
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting.YamlDotNet.Core.Tokens;
 using UnityEditor;
 using UnityEngine;
 namespace Game.Inventory
@@ -145,16 +144,17 @@ namespace Game.Inventory
             if (item != null)
             {
                 var itemInstance = Instantiate(slot.target.GetItem(slot.position), slot.transform);
-                if (itemInstance == null) // Check to make the compiler happy
+                if (itemInstance == null)
                 {
                     Debug.LogError($"InventoryUIGenerator: Item at {slot.position} failed to instantiate... how?");
                     return;
                 }
                 var canvas = itemInstance.AddComponent<Canvas>();
                 canvas.overrideSorting = true;
+                canvas.sortingOrder = (target != null ? target.sortingOrder : 0)
+                    + slot.position.x + slot.position.y * grid.columns + 1;
                 itemInstance.GetComponent<Item>().CalculatePivot();
                 InventoryHelper.CreateUIDragHandler(slot.gameObject);
-
             }
             else if (anchor != new Vector2Int(-1, -1))
             {

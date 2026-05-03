@@ -24,11 +24,13 @@ namespace Game.Inventory
             RedrawContents();
         }
 
-        /// <summary>
-        /// If true, suppresses automatic addition of the UI generator component.
-        /// </summary>
         [HideInInspector]
         public bool suppressAutoAddUI = false;
+
+#if UNITY_EDITOR
+        [HideInInspector]
+        public bool persistPlayModeChanges = false;
+#endif
 
         /// <summary>
         /// Number of rows in the inventory grid.

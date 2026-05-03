@@ -2,9 +2,11 @@ using Game.Core.Utilities;
 using Game.Items;
 using Game.Utils;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace Game.Inventory
@@ -131,14 +133,12 @@ namespace Game.Inventory
         /// <param name="eventData">Pointer event data.</param>
         public virtual void OnDrag(PointerEventData eventData)
         {
-            if (canvas == null)
-            {
-                return;
-            }
-
+            if (canvas == null) return;
+            var pointer = Pointer.current;
+            if (pointer == null) return;
             RectTransformUtility.ScreenPointToLocalPointInRectangle(
                 canvas.transform as RectTransform,
-                eventData.position,
+                pointer.position.ReadValue(),
                 eventData.pressEventCamera,
                 out Vector2 localPoint
             );
@@ -158,7 +158,6 @@ namespace Game.Inventory
                 if (dragTarget.GetComponent<EventRedirector>() != null)
                 {
                     _target = dragTarget.GetComponent<EventRedirector>().redirectTarget.GetComponent<IItemContainer>();
-                    Debug.Log($"Redirecting");
                 }
                 else
                 {
@@ -248,7 +247,7 @@ namespace Game.Inventory
         /// </summary>
         /// <param name="eventData">Pointer event data.</param>
         /// <returns>Coroutine enumerator.</returns>
-        private IEnumerator<WaitForSeconds> DisplayTooltip(PointerEventData eventData)
+        private IEnumerator DisplayTooltip(PointerEventData eventData)
         {
             yield return new WaitForSeconds(0.5f);
             if (cursorInside)

@@ -95,6 +95,14 @@ namespace Game.Inventory
             }
 
             GUILayout.EndHorizontal();
+
+            GUILayout.Space(10);
+            EditorGUILayout.LabelField("Play Mode", EditorStyles.boldLabel);
+            grid.persistPlayModeChanges = EditorGUILayout.Toggle(
+                new GUIContent("Persist on exit", "Items placed during play mode will be saved back to the grid when you exit play mode."),
+                grid.persistPlayModeChanges
+            );
+
             if (GUI.changed)
             {
                 EditorUtility.SetDirty(grid);

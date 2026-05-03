@@ -1,0 +1,296 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &245175737905100463
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4355431942139673529}
+  - component: {fileID: 4725271791266601723}
+  - component: {fileID: 2958161423110956175}
+  m_Layer: 5
+  m_Name: PlayerGridInventory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &4355431942139673529
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 245175737905100463}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &4725271791266601723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 245175737905100463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c545304bdec5aeb47b1ff682dfbf214d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  suppressAutoAddUI: 1
+  persistPlayModeChanges: 1
+  rows: 5
+  columns: 5
+  Cells:
+    rid: 1756202721001865457
+  references:
+    version: 2
+    RefIds:
+    - rid: 1756202721001865291
+      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
+      data:
+        position: {x: 0, y: 0}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756202721001865348
+      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
+      data:
+        position: {x: 1, y: 0}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756202721001865353
+      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
+      data:
+        position: {x: 2, y: 0}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756202721001865360
+      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
+      data:
+        position: {x: 3, y: 0}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756202721001865428
+      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
+      data:
+        position: {x: 0, y: 1}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756202721001865429
+      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
+      data:
+        position: {x: 1, y: 1}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756202721001865430
+      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
+      data:
+        position: {x: 2, y: 1}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756202721001865431
+      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
+      data:
+        position: {x: 3, y: 1}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756202721001865434
+      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
+      data:
+        position: {x: 0, y: 2}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756202721001865435
+      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
+      data:
+        position: {x: 1, y: 2}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756202721001865436
+      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
+      data:
+        position: {x: 2, y: 2}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756202721001865437
+      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
+      data:
+        position: {x: 3, y: 2}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756202721001865440
+      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
+      data:
+        position: {x: 0, y: 3}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756202721001865441
+      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
+      data:
+        position: {x: 1, y: 3}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756202721001865442
+      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
+      data:
+        position: {x: 2, y: 3}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756202721001865443
+      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
+      data:
+        position: {x: 3, y: 3}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756202721001865445
+      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
+      data:
+        position: {x: 0, y: 4}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756202721001865446
+      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
+      data:
+        position: {x: 1, y: 4}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756202721001865447
+      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
+      data:
+        position: {x: 2, y: 4}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756202721001865448
+      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
+      data:
+        position: {x: 3, y: 4}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756202721001865457
+      type: {class: 'Array2D`1[[Game.Inventory.InventorySlot, Inventory]]', ns: Game.Core.Utilities, asm: Core}
+      data:
+        rows: 5
+        columns: 5
+        elements:
+        - rid: 1756202721001865291
+        - rid: 1756202721001865428
+        - rid: 1756202721001865434
+        - rid: 1756202721001865440
+        - rid: 1756202721001865445
+        - rid: 1756202721001865348
+        - rid: 1756202721001865429
+        - rid: 1756202721001865435
+        - rid: 1756202721001865441
+        - rid: 1756202721001865446
+        - rid: 1756202721001865353
+        - rid: 1756202721001865430
+        - rid: 1756202721001865436
+        - rid: 1756202721001865442
+        - rid: 1756202721001865447
+        - rid: 1756202721001865360
+        - rid: 1756202721001865431
+        - rid: 1756202721001865437
+        - rid: 1756202721001865443
+        - rid: 1756202721001865448
+        - rid: 1756202721001865458
+        - rid: 1756202721001865459
+        - rid: 1756202721001865460
+        - rid: 1756202721001865461
+        - rid: 1756202721001865462
+    - rid: 1756202721001865458
+      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
+      data:
+        position: {x: 4, y: 0}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756202721001865459
+      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
+      data:
+        position: {x: 4, y: 1}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756202721001865460
+      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
+      data:
+        position: {x: 4, y: 2}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756202721001865461
+      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
+      data:
+        position: {x: 4, y: 3}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756202721001865462
+      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
+      data:
+        position: {x: 4, y: 4}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+--- !u!114 &2958161423110956175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 245175737905100463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0572384fdac614b419c72cce44844580, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  spacing: {x: 0, y: 0}
+  uiPosition: {x: 0, y: 0}
+  lastGeneratedRoot: {fileID: 0}
+  serializableSlotDictionary:
+    pairs:
+    - Key: InventorySlot
+      Value:
+        cellPrefab: {fileID: 2627398030570870322, guid: 7709090849edab04e8b6a38dca885a40, type: 3}
+        disabledCellPrefab: {fileID: 2627398030570870322, guid: ffe051125558f5e46a65c9f7e8d6a368, type: 3}
+    - Key: LockedInventorySlot
+      Value:
+        cellPrefab: {fileID: 2627398030570870322, guid: 23ad411889ae7694cbd181d15b9ea0ac, type: 3}
+        disabledCellPrefab: {fileID: 2627398030570870322, guid: 23ad411889ae7694cbd181d15b9ea0ac, type: 3}
+    - Key: StackableInventorySlot
+      Value:
+        cellPrefab: {fileID: 2627398030570870322, guid: 23ad411889ae7694cbd181d15b9ea0ac, type: 3}
+        disabledCellPrefab: {fileID: 2627398030570870322, guid: 23ad411889ae7694cbd181d15b9ea0ac, type: 3}
