@@ -2,7 +2,10 @@
     "name": "Quest",
     "rootNamespace": "Game.Quest",
     "references": [
-        "Dialogue"
+        "Dialogue",
+        "Character",
+        "Inventory",
+        "Items"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

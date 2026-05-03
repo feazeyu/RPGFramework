@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Blackboard:
     m_Variables:
     - rid: 4922212706714910792
-  ViewTransform: {x: 434, y: 476, z: 1}
+  ViewTransform: {x: 369, y: 522, z: 1}
   BlackboardPosition: {x: 10, y: 60}
   m_Kind: 1
   references:

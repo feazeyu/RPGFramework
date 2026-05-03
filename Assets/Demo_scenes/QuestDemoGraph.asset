@@ -1,0 +1,202 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e2b2521672df6c408cfa6ce09e9f76d, type: 3}
+  m_Name: QuestDemoGraph
+  m_EditorClassIdentifier: 
+  m_Nodes:
+  - Guid: 6ce3cd94-b32a-4436-9dca-a4135e5dc171
+    NodeType: Start
+    DisplayName: Start
+    StoryText: 
+    Position: {x: -215, y: 200}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: Out
+      Direction: 1
+      Capacity: 0
+    Fields: []
+  - Guid: 2c3bb267-88c9-486a-a353-5398384c3fdf
+    NodeType: obj_kill
+    DisplayName: Kill Enemies
+    StoryText: 
+    Position: {x: 23, y: 209}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Completed
+      Direction: 1
+      Capacity: 0
+    - PortName: Failed
+      Direction: 1
+      Capacity: 0
+    Fields:
+    - FieldName: Title
+      TypeName: System.String
+      InlineValue: Kill 3 Goblins
+      LinkedVariableGuid: 
+    - FieldName: Description
+      TypeName: System.String
+      InlineValue: Defeat the goblins lurking nearby.
+      LinkedVariableGuid: 
+    - FieldName: Tag
+      TypeName: System.String
+      InlineValue: Enemy
+      LinkedVariableGuid: 
+    - FieldName: Count
+      TypeName: System.Int32
+      InlineValue: 3
+      LinkedVariableGuid: 
+    - FieldName: Optional
+      TypeName: System.Boolean
+      InlineValue: False
+      LinkedVariableGuid: 
+  - Guid: c2f68091-b118-4a3d-841e-09bf17150eea
+    NodeType: obj_location
+    DisplayName: Reach Waypoint
+    StoryText: 
+    Position: {x: 470, y: 200}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Completed
+      Direction: 1
+      Capacity: 0
+    - PortName: Failed
+      Direction: 1
+      Capacity: 0
+    - PortName: Out
+      Direction: 1
+      Capacity: 0
+    Fields:
+    - FieldName: Title
+      TypeName: System.String
+      InlineValue: Reach the waypoint
+      LinkedVariableGuid: 
+    - FieldName: Description
+      TypeName: System.String
+      InlineValue: Head to the marked location.
+      LinkedVariableGuid: 
+    - FieldName: Target
+      TypeName: UnityEngine.Transform
+      InlineValue: Waypoint
+      LinkedVariableGuid: 
+    - FieldName: Radius
+      TypeName: System.Single
+      InlineValue: 3
+      LinkedVariableGuid: 
+    - FieldName: Continuous
+      TypeName: System.Boolean
+      InlineValue: False
+      LinkedVariableGuid: 
+    - FieldName: Optional
+      TypeName: System.Boolean
+      InlineValue: False
+      LinkedVariableGuid: 
+  - Guid: 323f7f19-1f97-4539-9d4c-a1f61ee7d70d
+    NodeType: Reward
+    DisplayName: Reward
+    StoryText: 
+    Position: {x: 969, y: 200}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Out
+      Direction: 1
+      Capacity: 0
+    Fields:
+    - FieldName: XP
+      TypeName: System.Int32
+      InlineValue: 100
+      LinkedVariableGuid: 
+    - FieldName: Currency
+      TypeName: System.Int32
+      InlineValue: 50
+      LinkedVariableGuid: 
+    - FieldName: Item
+      TypeName: UnityEngine.ScriptableObject
+      InlineValue: 
+      LinkedVariableGuid: 
+    - FieldName: Quantity
+      TypeName: System.Int32
+      InlineValue: 1
+      LinkedVariableGuid: 
+  - Guid: 94b26783-aa97-4abe-a1b8-3cb298625aa9
+    NodeType: CompleteQuest
+    DisplayName: Complete Quest
+    StoryText: 
+    Position: {x: 1197, y: 200}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    Fields: []
+  - Guid: c94e9803-327c-4a45-b655-1f9e0f820ece
+    NodeType: FailQuest
+    DisplayName: Fail Quest
+    StoryText: 
+    Position: {x: 1001, y: 642}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    Fields:
+    - FieldName: Reason
+      TypeName: System.String
+      InlineValue: An objective failed.
+      LinkedVariableGuid: 
+  m_Edges:
+  - Guid: cb89a4ea-292a-415c-86a6-1a23715acf67
+    OutputNodeGuid: 6ce3cd94-b32a-4436-9dca-a4135e5dc171
+    OutputPortName: Out
+    InputNodeGuid: 2c3bb267-88c9-486a-a353-5398384c3fdf
+    InputPortName: In
+  - Guid: db57e56d-d620-4534-8217-26b0e456420b
+    OutputNodeGuid: 2c3bb267-88c9-486a-a353-5398384c3fdf
+    OutputPortName: Completed
+    InputNodeGuid: c2f68091-b118-4a3d-841e-09bf17150eea
+    InputPortName: In
+  - Guid: 812fe193-0b7f-440a-a60d-af0576f55b04
+    OutputNodeGuid: 2c3bb267-88c9-486a-a353-5398384c3fdf
+    OutputPortName: Failed
+    InputNodeGuid: c94e9803-327c-4a45-b655-1f9e0f820ece
+    InputPortName: In
+  - Guid: 9bdac0ba-4179-4215-99ff-07a7feed7f6d
+    OutputNodeGuid: c2f68091-b118-4a3d-841e-09bf17150eea
+    OutputPortName: Completed
+    InputNodeGuid: 323f7f19-1f97-4539-9d4c-a1f61ee7d70d
+    InputPortName: In
+  - Guid: 44ebc023-7ede-47d3-9c13-c36f37541531
+    OutputNodeGuid: c2f68091-b118-4a3d-841e-09bf17150eea
+    OutputPortName: Failed
+    InputNodeGuid: c94e9803-327c-4a45-b655-1f9e0f820ece
+    InputPortName: In
+  - Guid: 912f002f-0e51-4c8f-89ba-bcd916b33358
+    OutputNodeGuid: 323f7f19-1f97-4539-9d4c-a1f61ee7d70d
+    OutputPortName: Out
+    InputNodeGuid: 94b26783-aa97-4abe-a1b8-3cb298625aa9
+    InputPortName: In
+  m_Blackboard:
+    m_Variables: []
+  ViewTransform: {x: -319, y: 129, z: 1}
+  BlackboardPosition: {x: 10, y: 60}
+  m_Kind: 0
+  references:
+    version: 2
+    RefIds: []

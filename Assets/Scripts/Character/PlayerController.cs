@@ -26,10 +26,10 @@ namespace Game.Character
         private Vector2 aimInput;
         private bool isShooting;
         private SpriteRenderer sr;
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             rb = GetComponent<Rigidbody2D>();
-            GetResourceComponents();
             if (mainCamera == null)
                 mainCamera = Camera.main;
             if (weaponRotationHandler == null)

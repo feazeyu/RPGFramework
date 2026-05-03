@@ -1,6 +1,7 @@
 ﻿#nullable enable
 
 using UnityEngine;
+using UnityEngine.Events;
 using Game.Core.Utilities;
 using System;
 namespace Game.Character
@@ -33,14 +34,19 @@ namespace Game.Character
         [Tooltip("Spells inherit the rotation of this")]
         public Transform? castingRotationReference;
 
+        [Header("Events")]
+        public UnityEvent OnDeath;
+
         /// <summary>
         /// Initializes the entity's resources and spell cooldowns.
         /// </summary>
-        private void Awake()
+        protected virtual void Awake()
         {
             resources = new SerializableDictionary<ResourceTypes, Resource>();
             spellCooldowns = new SerializableDictionary<SpellInfo, DateTime>();
             GetResourceComponents();
+            if (resources != null && resources.TryGetValue(ResourceTypes.Health, out var healthRes))
+                healthRes.onResourceReachesZero += () => OnDeath?.Invoke();
         }
 
         /// <summary>

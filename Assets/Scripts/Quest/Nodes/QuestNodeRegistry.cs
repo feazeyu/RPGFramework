@@ -72,6 +72,12 @@ namespace QuestGraph.Runtime
         public const string TypeCompleteQuest  = "CompleteQuest";
         public const string TypeFailQuest      = "FailQuest";
 
+        // Concrete objective node types
+        public const string TypeObjKill      = "obj_kill";
+        public const string TypeObjLocation  = "obj_location";
+        public const string TypeObjCollect   = "obj_collect";
+        public const string TypeObjDeliver   = "obj_deliver";
+
         // ── Accent colours ───────────────────────────────────────────────────
 
         public static readonly Color ColFlow      = NodeRegistry.ColFlow;
@@ -100,6 +106,7 @@ namespace QuestGraph.Runtime
             TypeTriggerEvent, TypeWaitForEvent,
             TypeObjective, TypeReward,
             TypeCompleteQuest, TypeFailQuest,
+            TypeObjKill, TypeObjLocation, TypeObjCollect, TypeObjDeliver,
         };
 
         private static readonly HashSet<string> s_ChainPalette = new HashSet<string>
@@ -353,6 +360,103 @@ namespace QuestGraph.Runtime
                 DefaultFields = new List<FieldData>
                 {
                     new FieldData { FieldName = "Reason", TypeName = "System.String" },
+                }
+            });
+
+            // ── Concrete objective nodes ──────────────────────────────────────
+
+            Register(new DialogueNodeInfo
+            {
+                TypeId = TypeObjKill, DisplayName = "Kill Count", Category = "Objectives",
+                Description = "Completes once the player kills the required number of enemies " +
+                              "with the given tag. Connect sequentially to chain objectives.",
+                AccentColor = ColObjective, Icon = "⚔",
+                DefaultPorts = new List<PortData>
+                {
+                    new PortData { PortName = "In",        Direction = PortDirection.Input,  Capacity = PortCapacity.Multi  },
+                    new PortData { PortName = "Completed", Direction = PortDirection.Output, Capacity = PortCapacity.Single },
+                    new PortData { PortName = "Failed",    Direction = PortDirection.Output, Capacity = PortCapacity.Single },
+                },
+                DefaultFields = new List<FieldData>
+                {
+                    new FieldData { FieldName = "Title",       TypeName = "System.String", InlineValue = "Kill enemies" },
+                    new FieldData { FieldName = "Description", TypeName = "System.String" },
+                    new FieldData { FieldName = "Tag",         TypeName = "System.String", InlineValue = "Enemy" },
+                    new FieldData { FieldName = "Count",       TypeName = "System.Int32",  InlineValue = "5" },
+                    new FieldData { FieldName = "Optional",    TypeName = "System.Boolean", InlineValue = "False" },
+                }
+            });
+
+            Register(new DialogueNodeInfo
+            {
+                TypeId = TypeObjLocation, DisplayName = "Reach Location", Category = "Objectives",
+                Description = "Completes once the player is within Radius of Target. " +
+                              "Continuous=true: follows Out immediately and monitors in background — " +
+                              "if player leaves the area, the quest fails.",
+                AccentColor = ColObjective, Icon = "◉",
+                DefaultPorts = new List<PortData>
+                {
+                    new PortData { PortName = "In",        Direction = PortDirection.Input,  Capacity = PortCapacity.Multi  },
+                    new PortData { PortName = "Completed", Direction = PortDirection.Output, Capacity = PortCapacity.Single },
+                    new PortData { PortName = "Failed",    Direction = PortDirection.Output, Capacity = PortCapacity.Single },
+                    new PortData { PortName = "Out",       Direction = PortDirection.Output, Capacity = PortCapacity.Single },
+                },
+                DefaultFields = new List<FieldData>
+                {
+                    new FieldData { FieldName = "Title",       TypeName = "System.String",  InlineValue = "Reach location" },
+                    new FieldData { FieldName = "Description", TypeName = "System.String" },
+                    new FieldData { FieldName = "Target",      TypeName = "UnityEngine.Transform" },
+                    new FieldData { FieldName = "Radius",      TypeName = "System.Single",  InlineValue = "2" },
+                    new FieldData { FieldName = "Continuous",  TypeName = "System.Boolean", InlineValue = "False" },
+                    new FieldData { FieldName = "Optional",    TypeName = "System.Boolean", InlineValue = "False" },
+                }
+            });
+
+            Register(new DialogueNodeInfo
+            {
+                TypeId = TypeObjCollect, DisplayName = "Collect Item", Category = "Objectives",
+                Description = "Completes once the player carries at least Count of the specified item. " +
+                              "Continuous=true: follows Out immediately and monitors in background — " +
+                              "if the player loses the item, the quest fails.",
+                AccentColor = ColObjective, Icon = "⬡",
+                DefaultPorts = new List<PortData>
+                {
+                    new PortData { PortName = "In",        Direction = PortDirection.Input,  Capacity = PortCapacity.Multi  },
+                    new PortData { PortName = "Completed", Direction = PortDirection.Output, Capacity = PortCapacity.Single },
+                    new PortData { PortName = "Failed",    Direction = PortDirection.Output, Capacity = PortCapacity.Single },
+                    new PortData { PortName = "Out",       Direction = PortDirection.Output, Capacity = PortCapacity.Single },
+                },
+                DefaultFields = new List<FieldData>
+                {
+                    new FieldData { FieldName = "Title",       TypeName = "System.String", InlineValue = "Collect item" },
+                    new FieldData { FieldName = "Description", TypeName = "System.String" },
+                    new FieldData { FieldName = "ItemId",      TypeName = "System.Int32",  InlineValue = "0" },
+                    new FieldData { FieldName = "Count",       TypeName = "System.Int32",  InlineValue = "1" },
+                    new FieldData { FieldName = "Continuous",  TypeName = "System.Boolean", InlineValue = "False" },
+                    new FieldData { FieldName = "Optional",    TypeName = "System.Boolean", InlineValue = "False" },
+                }
+            });
+
+            Register(new DialogueNodeInfo
+            {
+                TypeId = TypeObjDeliver, DisplayName = "Deliver Item", Category = "Objectives",
+                Description = "Completes when the player interacts with the NPC while carrying " +
+                              "at least Count of the item. Items are removed from inventory on delivery.",
+                AccentColor = ColObjective, Icon = "↗",
+                DefaultPorts = new List<PortData>
+                {
+                    new PortData { PortName = "In",        Direction = PortDirection.Input,  Capacity = PortCapacity.Multi  },
+                    new PortData { PortName = "Completed", Direction = PortDirection.Output, Capacity = PortCapacity.Single },
+                    new PortData { PortName = "Failed",    Direction = PortDirection.Output, Capacity = PortCapacity.Single },
+                },
+                DefaultFields = new List<FieldData>
+                {
+                    new FieldData { FieldName = "Title",       TypeName = "System.String", InlineValue = "Deliver item" },
+                    new FieldData { FieldName = "Description", TypeName = "System.String" },
+                    new FieldData { FieldName = "ItemId",      TypeName = "System.Int32",  InlineValue = "0" },
+                    new FieldData { FieldName = "Count",       TypeName = "System.Int32",  InlineValue = "1" },
+                    new FieldData { FieldName = "NPC",         TypeName = "UnityEngine.GameObject" },
+                    new FieldData { FieldName = "Optional",    TypeName = "System.Boolean", InlineValue = "False" },
                 }
             });
         }

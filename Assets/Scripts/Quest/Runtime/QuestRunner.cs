@@ -4,15 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using DialogueGraph.Runtime;
+using QuestGraph.Nodes;
 
 namespace QuestGraph.Runtime
 {
-    /// <summary>
-    /// Outcome of a <see cref="QuestRunner"/> run. Set by the terminal
-    /// node (<c>CompleteQuest</c> / <c>FailQuest</c>) and readable after
-    /// <c>OnQuestEnded</c> fires. <see cref="InProgress"/> while the graph
-    /// is still running.
-    /// </summary>
     public enum QuestResult
     {
         InProgress = 0,
@@ -21,10 +16,6 @@ namespace QuestGraph.Runtime
         Aborted    = 3,
     }
 
-    /// <summary>
-    /// Snapshot of an active objective, passed to UI via
-    /// <see cref="QuestRunner.OnObjectiveStarted"/>.
-    /// </summary>
     [Serializable]
     public struct ObjectiveInfo
     {
@@ -34,11 +25,6 @@ namespace QuestGraph.Runtime
         public bool   Optional;
     }
 
-    /// <summary>
-    /// Payload fired when a <c>Reward</c> node executes. All fields
-    /// come from the node's Reward fields, resolved through the context
-    /// (so blackboard-linked values work too).
-    /// </summary>
     [Serializable]
     public struct RewardInfo
     {
@@ -49,65 +35,51 @@ namespace QuestGraph.Runtime
     }
 
     /// <summary>
-    /// Subclass of <see cref="GraphRunner"/> that executes a Single
-    /// quest graph. Handles:
-    ///   • Objective — fires <see cref="OnObjectiveStarted"/>, holds
-    ///     until <see cref="CompleteObjective"/> / <see cref="FailObjective"/>,
-    ///     follows "Completed" or "Failed".
-    ///   • Reward — fires <see cref="OnRewardGranted"/>, follows "Out".
-    ///   • CompleteQuest — sets <see cref="Result"/>=Completed and ends.
-    ///   • FailQuest — sets Result=Failed with reason, ends.
+    /// Executes a Single quest graph. Supports any number of simultaneously
+    /// active objectives (needed for continuous-mode parallel objectives).
     ///
-    /// Shared flow nodes (Start/End/Condition/SetVariable/Sequence/
-    /// Selector) are handled by the base <see cref="GraphRunner"/>.
-    ///
-    /// The runner refuses to start a graph whose asset is a
-    /// <see cref="QuestKind.Chain"/> (chain graphs are owned by
-    /// <see cref="QuestChainRunner"/>, which doesn't walk them).
-    ///
-    /// ── Minimal setup ────────────────────────────────────────────────
-    ///   1. Add this component to a persistent quest-state GameObject.
-    ///   2. Assign a Single <see cref="QuestGraphAsset"/> to Graph.
-    ///   3. Wire UI:
-    ///        OnObjectiveStarted → show HUD entry, capture NodeGuid
-    ///        OnRewardGranted    → award to player inventory
-    ///        OnQuestEnded       → check Result, update log
-    ///   4. When the player satisfies an objective, call
-    ///        runner.CompleteObjective(nodeGuid)
-    ///      (or FailObjective(nodeGuid) on failure).
-    ///   5. Call runner.StartQuest() to begin.
+    /// Objective node handlers call RegisterObjective / UnregisterObjective
+    /// directly; external code still calls CompleteObjective / FailObjective
+    /// by GUID as before.
     /// </summary>
     public class QuestRunner : GraphRunner
     {
-        // ── Inspector events ─────────────────────────────────────────────────
+        // ── Inspector events ──────────────────────────────────────────────────
 
         [Header("Quest Events")]
-        public ObjectiveEvent       OnObjectiveStarted;
-        public ObjectiveEvent       OnObjectiveCompleted;
-        public ObjectiveEvent       OnObjectiveFailed;
-        public RewardEvent          OnRewardGranted;
-        public UnityEvent           OnQuestCompleted;
-        public FailedEvent          OnQuestFailed;
-        /// <summary>Fires on any end — Completed, Failed, or Aborted.</summary>
-        public ResultEvent          OnQuestEnded;
+        public ObjectiveEvent  OnObjectiveStarted;
+        public ObjectiveEvent  OnObjectiveCompleted;
+        public ObjectiveEvent  OnObjectiveFailed;
+        public RewardEvent     OnRewardGranted;
+        public UnityEvent      OnQuestCompleted;
+        public FailedEvent     OnQuestFailed;
+        public ResultEvent     OnQuestEnded;
 
-        // ── Public state ─────────────────────────────────────────────────────
+        // ── Public state ──────────────────────────────────────────────────────
 
         public QuestResult Result        { get; private set; } = QuestResult.InProgress;
         public string      FailureReason { get; private set; }
 
-        /// <summary>The currently awaiting objective, if any — null otherwise.</summary>
-        public ObjectiveInfo? ActiveObjective => m_ActiveObjective;
+        // Backward-compat: returns the first active objective if any.
+        public ObjectiveInfo? ActiveObjective
+        {
+            get
+            {
+                foreach (var v in m_ActiveObjectives.Values) return v;
+                return null;
+            }
+        }
 
-        // ── Internal state ───────────────────────────────────────────────────
+        public IReadOnlyCollection<ObjectiveInfo> ActiveObjectives => m_ActiveObjectives.Values;
 
-        private ObjectiveInfo? m_ActiveObjective;
-        // Outcome signal flipped by CompleteObjective / FailObjective
-        // so the coroutine in ObjectiveHandler can resume.
-        // null = still awaiting, true = complete, false = fail.
-        private bool?          m_ObjectiveOutcome;
+        // ── Internal state ────────────────────────────────────────────────────
 
-        // ── Lifecycle ────────────────────────────────────────────────────────
+        // nodeGuid → info for every currently-active objective
+        private readonly Dictionary<string, ObjectiveInfo> m_ActiveObjectives  = new();
+        // nodeGuid → null (pending) | true (complete) | false (failed)
+        private readonly Dictionary<string, bool?>         m_ObjectiveOutcomes = new();
+
+        // ── Lifecycle ─────────────────────────────────────────────────────────
 
         protected override void Awake()
         {
@@ -116,9 +88,13 @@ namespace QuestGraph.Runtime
             RegisterHandler(new RewardHandler(this));
             RegisterHandler(new CompleteQuestHandler(this));
             RegisterHandler(new FailQuestHandler(this));
+            RegisterHandler(new KillCountObjectiveHandler());
+            RegisterHandler(new ReachLocationObjectiveHandler());
+            RegisterHandler(new CollectItemObjectiveHandler());
+            RegisterHandler(new DeliverItemObjectiveHandler());
         }
 
-        // ── Public API ───────────────────────────────────────────────────────
+        // ── Public API ────────────────────────────────────────────────────────
 
         public void StartQuest()
         {
@@ -130,36 +106,41 @@ namespace QuestGraph.Runtime
                 return;
             }
 
-            Result         = QuestResult.InProgress;
-            FailureReason  = null;
-            m_ActiveObjective  = null;
-            m_ObjectiveOutcome = null;
+            Result        = QuestResult.InProgress;
+            FailureReason = null;
+            m_ActiveObjectives.Clear();
+            m_ObjectiveOutcomes.Clear();
 
             StartGraph();
         }
 
-        /// <summary>
-        /// Signal that the currently active objective is satisfied.
-        /// Matched by <see cref="ObjectiveInfo.NodeGuid"/>; calls with
-        /// a mismatched guid are ignored (stale UI callback after the
-        /// active objective already changed).
-        /// </summary>
+        /// <summary>Signal that the named objective was satisfied.</summary>
         public void CompleteObjective(string nodeGuid)
         {
-            if (m_ActiveObjective == null) return;
-            if (m_ActiveObjective.Value.NodeGuid != nodeGuid) return;
-            m_ObjectiveOutcome = true;
+            if (!m_ActiveObjectives.ContainsKey(nodeGuid)) return;
+            m_ObjectiveOutcomes[nodeGuid] = true;
         }
 
-        /// <summary>Signal that the currently active objective has failed.</summary>
+        /// <summary>Signal that the named objective has failed.</summary>
         public void FailObjective(string nodeGuid)
         {
-            if (m_ActiveObjective == null) return;
-            if (m_ActiveObjective.Value.NodeGuid != nodeGuid) return;
-            m_ObjectiveOutcome = false;
+            if (!m_ActiveObjectives.ContainsKey(nodeGuid)) return;
+            m_ObjectiveOutcomes[nodeGuid] = false;
         }
 
-        /// <summary>Force-terminate the quest as aborted (e.g. player quits).</summary>
+        /// <summary>
+        /// Immediately fail the quest (e.g., a continuous guard lost its condition).
+        /// Safe to call from any coroutine running on this runner.
+        /// </summary>
+        public void ForceFailQuest(string reason)
+        {
+            if (!IsRunning) return;
+            Result        = QuestResult.Failed;
+            FailureReason = reason;
+            OnQuestFailed?.Invoke(reason);
+            StopGraph();
+        }
+
         public void AbortQuest()
         {
             if (!IsRunning) return;
@@ -167,23 +148,50 @@ namespace QuestGraph.Runtime
             StopGraph();
         }
 
-        // ── GraphRunner overrides ────────────────────────────────────────────
+        // ── Methods for objective node handlers ───────────────────────────────
+
+        /// <summary>
+        /// Called by objective node handlers at the start of execution.
+        /// Fires OnObjectiveStarted so the HUD can show the new objective.
+        /// </summary>
+        public void RegisterObjective(ObjectiveInfo info)
+        {
+            m_ActiveObjectives[info.NodeGuid]  = info;
+            m_ObjectiveOutcomes[info.NodeGuid] = null;
+            OnObjectiveStarted?.Invoke(info);
+        }
+
+        /// <summary>
+        /// Called by objective node handlers when they conclude (complete, fail,
+        /// or continuous monitor ends). Fires the appropriate event.
+        /// </summary>
+        public void UnregisterObjective(string nodeGuid, bool? outcome = null)
+        {
+            if (!m_ActiveObjectives.TryGetValue(nodeGuid, out var info)) return;
+            m_ActiveObjectives.Remove(nodeGuid);
+            m_ObjectiveOutcomes.Remove(nodeGuid);
+            if (outcome == true)  OnObjectiveCompleted?.Invoke(info);
+            if (outcome == false) OnObjectiveFailed?.Invoke(info);
+        }
+
+        /// <summary>Returns the pending outcome for an active objective, or null if still waiting.</summary>
+        public bool? GetObjectiveOutcome(string nodeGuid)
+            => m_ObjectiveOutcomes.TryGetValue(nodeGuid, out var v) ? v : null;
+
+        // ── GraphRunner overrides ─────────────────────────────────────────────
 
         protected override void OnGraphStop()
         {
-            // If the graph ended without hitting a terminal node, report
-            // as Aborted so downstream listeners always see a definitive
-            // result rather than InProgress.
             if (Result == QuestResult.InProgress)
                 Result = QuestResult.Aborted;
 
-            m_ActiveObjective  = null;
-            m_ObjectiveOutcome = null;
+            m_ActiveObjectives.Clear();
+            m_ObjectiveOutcomes.Clear();
 
             OnQuestEnded?.Invoke(Result);
         }
 
-        // ── Node handlers ────────────────────────────────────────────────────
+        // ── Built-in node handlers ────────────────────────────────────────────
 
         private class ObjectiveHandler : IGraphNodeHandler
         {
@@ -201,15 +209,14 @@ namespace QuestGraph.Runtime
                     Optional    = ParseBool(ctx.ResolveString(node, "Optional")),
                 };
 
-                m_R.m_ActiveObjective  = info;
-                m_R.m_ObjectiveOutcome = null;
-                m_R.OnObjectiveStarted?.Invoke(info);
+                m_R.RegisterObjective(info);
 
-                yield return new WaitUntil(() => m_R.m_ObjectiveOutcome.HasValue);
+                yield return new WaitUntil(() =>
+                    m_R.m_ObjectiveOutcomes.TryGetValue(info.NodeGuid, out var v) && v.HasValue);
 
-                bool completed = m_R.m_ObjectiveOutcome.Value;
-                m_R.m_ActiveObjective  = null;
-                m_R.m_ObjectiveOutcome = null;
+                bool completed = m_R.m_ObjectiveOutcomes[info.NodeGuid].Value;
+                m_R.m_ActiveObjectives.Remove(info.NodeGuid);
+                m_R.m_ObjectiveOutcomes.Remove(info.NodeGuid);
 
                 if (completed)
                 {
@@ -223,8 +230,7 @@ namespace QuestGraph.Runtime
                 }
             }
 
-            private static bool ParseBool(string s)
-                => bool.TryParse(s, out var b) && b;
+            private static bool ParseBool(string s) => bool.TryParse(s, out var b) && b;
         }
 
         private class RewardHandler : IGraphNodeHandler
@@ -240,9 +246,6 @@ namespace QuestGraph.Runtime
                 int.TryParse(ctx.ResolveString(node, "Quantity"), out var quantity);
                 if (quantity <= 0) quantity = 1;
 
-                // Inline Item field can't hold a ScriptableObject reference
-                // directly — it must be linked to a blackboard variable of
-                // type UnityEngine.ScriptableObject. Try that route.
                 ScriptableObject item = null;
                 var itemGuid = ctx.GetLinkedGuid(node, "Item");
                 if (!string.IsNullOrEmpty(itemGuid))
@@ -287,8 +290,8 @@ namespace QuestGraph.Runtime
 
             public IEnumerator Execute(NodeData node, GraphRunContext ctx)
             {
-                var reason = ctx.ResolveString(node, "Reason");
-                m_R.Result        = QuestResult.Failed;
+                var reason       = ctx.ResolveString(node, "Reason");
+                m_R.Result       = QuestResult.Failed;
                 m_R.FailureReason = reason;
                 m_R.OnQuestFailed?.Invoke(reason);
                 ctx.End();
@@ -297,7 +300,7 @@ namespace QuestGraph.Runtime
         }
     }
 
-    // ── UnityEvent types ─────────────────────────────────────────────────────
+    // ── UnityEvent types ──────────────────────────────────────────────────────
 
     [Serializable] public class ObjectiveEvent : UnityEvent<ObjectiveInfo> { }
     [Serializable] public class RewardEvent    : UnityEvent<RewardInfo>    { }
