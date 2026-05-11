@@ -1,0 +1,376 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e2b2521672df6c408cfa6ce09e9f76d, type: 3}
+  m_Name: QuestDemoGraph
+  m_EditorClassIdentifier: 
+  m_Nodes:
+  - Guid: 6ce3cd94-b32a-4436-9dca-a4135e5dc171
+    NodeType: Start
+    DisplayName: Start
+    StoryText: 
+    Position: {x: -1182, y: 276}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: Out
+      Direction: 1
+      Capacity: 0
+    Fields: []
+  - Guid: 2c3bb267-88c9-486a-a353-5398384c3fdf
+    NodeType: obj_kill
+    DisplayName: Kill Enemies
+    StoryText: 
+    Position: {x: -116, y: 150}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Completed
+      Direction: 1
+      Capacity: 0
+    - PortName: Failed
+      Direction: 1
+      Capacity: 0
+    Fields:
+    - FieldName: Title
+      TypeName: System.String
+      InlineValue: Kill 3 Goblins
+      LinkedVariableGuid: 
+    - FieldName: Description
+      TypeName: System.String
+      InlineValue: Defeat the goblins lurking nearby.
+      LinkedVariableGuid: 
+    - FieldName: Tag
+      TypeName: System.String
+      InlineValue: Enemy
+      LinkedVariableGuid: 
+    - FieldName: Count
+      TypeName: System.Int32
+      InlineValue: 3
+      LinkedVariableGuid: 
+    - FieldName: Optional
+      TypeName: System.Boolean
+      InlineValue: False
+      LinkedVariableGuid: 
+  - Guid: c2f68091-b118-4a3d-841e-09bf17150eea
+    NodeType: obj_location
+    DisplayName: Reach Waypoint
+    StoryText: 
+    Position: {x: 443, y: 154}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Completed
+      Direction: 1
+      Capacity: 0
+    - PortName: Failed
+      Direction: 1
+      Capacity: 0
+    - PortName: Out
+      Direction: 1
+      Capacity: 0
+    Fields:
+    - FieldName: Title
+      TypeName: System.String
+      InlineValue: Reach the waypoint
+      LinkedVariableGuid: 
+    - FieldName: Description
+      TypeName: System.String
+      InlineValue: Head to the marked location.
+      LinkedVariableGuid: 
+    - FieldName: Target
+      TypeName: UnityEngine.Transform
+      InlineValue: Waypoint
+      LinkedVariableGuid: 
+    - FieldName: Radius
+      TypeName: System.Single
+      InlineValue: 3
+      LinkedVariableGuid: 
+    - FieldName: Continuous
+      TypeName: System.Boolean
+      InlineValue: False
+      LinkedVariableGuid: 
+    - FieldName: Optional
+      TypeName: System.Boolean
+      InlineValue: False
+      LinkedVariableGuid: 
+  - Guid: 94b26783-aa97-4abe-a1b8-3cb298625aa9
+    NodeType: CompleteQuest
+    DisplayName: Complete Quest
+    StoryText: 
+    Position: {x: 1846, y: 172}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    Fields: []
+  - Guid: c94e9803-327c-4a45-b655-1f9e0f820ece
+    NodeType: FailQuest
+    DisplayName: Fail Quest
+    StoryText: 
+    Position: {x: 1001, y: 642}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    Fields:
+    - FieldName: Reason
+      TypeName: System.String
+      InlineValue: An objective failed.
+      LinkedVariableGuid: 
+  - Guid: eb36cabb-be95-4415-8a8f-86b9723525d4
+    NodeType: find_object
+    DisplayName: Find Object
+    StoryText: 
+    Position: {x: -924, y: 266}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Found
+      Direction: 1
+      Capacity: 0
+    - PortName: NotFound
+      Direction: 1
+      Capacity: 0
+    Fields:
+    - FieldName: Mode
+      TypeName: System.String
+      InlineValue: ByName
+      LinkedVariableGuid: 
+    - FieldName: Value
+      TypeName: System.String
+      InlineValue: PlayerGridInventory
+      LinkedVariableGuid: 
+    - FieldName: Target
+      TypeName: UnityEngine.GameObject
+      InlineValue: 
+      LinkedVariableGuid: 81d956a8-fd85-498b-b10c-b9d94514ae10
+  - Guid: de4b5a99-b4b1-489d-b604-53bf8f24a604
+    NodeType: debug_log
+    DisplayName: Debug Log
+    StoryText: 
+    Position: {x: -282, y: 538}
+    Size: {x: 278, y: 124}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Out
+      Direction: 1
+      Capacity: 0
+    Fields:
+    - FieldName: Message
+      TypeName: System.String
+      InlineValue: Failed to find player
+      LinkedVariableGuid: 
+  - Guid: 52298d93-e901-4b12-b7a5-62d33a9259d7
+    NodeType: End
+    DisplayName: End
+    StoryText: 
+    Position: {x: 96, y: 565}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    Fields: []
+  - Guid: 0d8cacf7-27a6-4d04-ba16-eb9083cb15f7
+    NodeType: debug_log
+    DisplayName: Debug Log
+    StoryText: 
+    Position: {x: -561, y: 225}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Out
+      Direction: 1
+      Capacity: 0
+    Fields:
+    - FieldName: Message
+      TypeName: System.String
+      InlineValue: Found Player
+      LinkedVariableGuid: 
+  - Guid: b44583ee-9ea6-4834-a634-7936697fe939
+    NodeType: debug_log
+    DisplayName: Debug Log
+    StoryText: 
+    Position: {x: 921, y: 172}
+    Size: {x: 207, y: 124}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Out
+      Direction: 1
+      Capacity: 0
+    Fields:
+    - FieldName: Message
+      TypeName: System.String
+      InlineValue: Spawning item
+      LinkedVariableGuid: 
+  - Guid: cc0f7275-3815-4d78-9ff3-9d522002500b
+    NodeType: debug_log
+    DisplayName: Debug Log
+    StoryText: 
+    Position: {x: 1540, y: 92}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Out
+      Direction: 1
+      Capacity: 0
+    Fields:
+    - FieldName: Message
+      TypeName: System.String
+      InlineValue: Success
+      LinkedVariableGuid: 
+  - Guid: 7b35bcb3-da08-493b-a771-493269e87fcd
+    NodeType: debug_log
+    DisplayName: Debug Log
+    StoryText: 
+    Position: {x: 1501, y: 295}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Out
+      Direction: 1
+      Capacity: 0
+    Fields:
+    - FieldName: Message
+      TypeName: System.String
+      InlineValue: Failure
+      LinkedVariableGuid: 
+  - Guid: f106470f-c2d7-4e04-bf95-51258c7a4d14
+    NodeType: spawn_item
+    DisplayName: Spawn Item
+    StoryText: 
+    Position: {x: 1207, y: 172}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Success
+      Direction: 1
+      Capacity: 0
+    - PortName: Failure
+      Direction: 1
+      Capacity: 0
+    Fields:
+    - FieldName: ItemId
+      TypeName: System.Int32
+      InlineValue: 5
+      LinkedVariableGuid: 
+    - FieldName: Target
+      TypeName: UnityEngine.GameObject
+      InlineValue: 
+      LinkedVariableGuid: 81d956a8-fd85-498b-b10c-b9d94514ae10
+  m_Edges:
+  - Guid: 812fe193-0b7f-440a-a60d-af0576f55b04
+    OutputNodeGuid: 2c3bb267-88c9-486a-a353-5398384c3fdf
+    OutputPortName: Failed
+    InputNodeGuid: c94e9803-327c-4a45-b655-1f9e0f820ece
+    InputPortName: In
+  - Guid: 44ebc023-7ede-47d3-9c13-c36f37541531
+    OutputNodeGuid: c2f68091-b118-4a3d-841e-09bf17150eea
+    OutputPortName: Failed
+    InputNodeGuid: c94e9803-327c-4a45-b655-1f9e0f820ece
+    InputPortName: In
+  - Guid: b5d84bb9-dc45-4597-8450-85737181e1a1
+    OutputNodeGuid: 6ce3cd94-b32a-4436-9dca-a4135e5dc171
+    OutputPortName: Out
+    InputNodeGuid: eb36cabb-be95-4415-8a8f-86b9723525d4
+    InputPortName: In
+  - Guid: dee16e8e-07ce-4bcc-a07a-6e26f3693776
+    OutputNodeGuid: eb36cabb-be95-4415-8a8f-86b9723525d4
+    OutputPortName: NotFound
+    InputNodeGuid: de4b5a99-b4b1-489d-b604-53bf8f24a604
+    InputPortName: In
+  - Guid: e42a132e-0e9b-49d5-8a68-75565b828651
+    OutputNodeGuid: de4b5a99-b4b1-489d-b604-53bf8f24a604
+    OutputPortName: Out
+    InputNodeGuid: 52298d93-e901-4b12-b7a5-62d33a9259d7
+    InputPortName: In
+  - Guid: 951da7fb-19bb-4b6d-8654-e49ff835d0a4
+    OutputNodeGuid: eb36cabb-be95-4415-8a8f-86b9723525d4
+    OutputPortName: Found
+    InputNodeGuid: 0d8cacf7-27a6-4d04-ba16-eb9083cb15f7
+    InputPortName: In
+  - Guid: d519963d-a482-4d8a-8d22-f17eb4ba7b31
+    OutputNodeGuid: 0d8cacf7-27a6-4d04-ba16-eb9083cb15f7
+    OutputPortName: Out
+    InputNodeGuid: 2c3bb267-88c9-486a-a353-5398384c3fdf
+    InputPortName: In
+  - Guid: e98fddb1-26f9-458f-b2b3-26422b3b4dde
+    OutputNodeGuid: c2f68091-b118-4a3d-841e-09bf17150eea
+    OutputPortName: Completed
+    InputNodeGuid: b44583ee-9ea6-4834-a634-7936697fe939
+    InputPortName: In
+  - Guid: f0e27c43-f32d-466d-b0a6-5223cd4215d4
+    OutputNodeGuid: cc0f7275-3815-4d78-9ff3-9d522002500b
+    OutputPortName: Out
+    InputNodeGuid: 94b26783-aa97-4abe-a1b8-3cb298625aa9
+    InputPortName: In
+  - Guid: d12788ef-b024-40b5-87af-6a7293bda4bb
+    OutputNodeGuid: 7b35bcb3-da08-493b-a771-493269e87fcd
+    OutputPortName: Out
+    InputNodeGuid: 94b26783-aa97-4abe-a1b8-3cb298625aa9
+    InputPortName: In
+  - Guid: f9ee03b2-1cf1-484a-8889-6d1453d22060
+    OutputNodeGuid: b44583ee-9ea6-4834-a634-7936697fe939
+    OutputPortName: Out
+    InputNodeGuid: f106470f-c2d7-4e04-bf95-51258c7a4d14
+    InputPortName: In
+  - Guid: ed2f8c57-321b-4be6-bbca-582c46594e8d
+    OutputNodeGuid: f106470f-c2d7-4e04-bf95-51258c7a4d14
+    OutputPortName: Success
+    InputNodeGuid: cc0f7275-3815-4d78-9ff3-9d522002500b
+    InputPortName: In
+  - Guid: 46548378-b1e0-4f27-acd1-b64b9791da53
+    OutputNodeGuid: f106470f-c2d7-4e04-bf95-51258c7a4d14
+    OutputPortName: Failure
+    InputNodeGuid: 7b35bcb3-da08-493b-a771-493269e87fcd
+    InputPortName: In
+  - Guid: 135dedc2-889c-401d-84b1-edfa8bc03e1a
+    OutputNodeGuid: 2c3bb267-88c9-486a-a353-5398384c3fdf
+    OutputPortName: Completed
+    InputNodeGuid: c2f68091-b118-4a3d-841e-09bf17150eea
+    InputPortName: In
+  m_Blackboard:
+    m_Variables:
+    - rid: 1756202809859506275
+  ViewTransform: {x: -682, y: 150, z: 1}
+  BlackboardPosition: {x: 10, y: 60}
+  m_Kind: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 1756202809859506275
+      type: {class: BlackboardVariableGameObject, ns: DialogueGraph.Runtime, asm: Dialogue}
+      data:
+        m_Name: Inventory
+        m_Guid: 81d956a8-fd85-498b-b10c-b9d94514ae10
+        m_Exposed: 1
+        m_Shared: 0
+        m_Value: {fileID: 0}

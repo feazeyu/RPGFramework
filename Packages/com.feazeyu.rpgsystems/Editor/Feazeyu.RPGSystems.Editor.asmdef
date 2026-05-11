@@ -1,0 +1,23 @@
+{
+    "name": "Feazeyu.RPGSystems.Editor",
+    "rootNamespace": "Feazeyu.RPGSystems.Editor",
+    "references": [
+        "Feazeyu.RPGSystems.Core",
+        "Feazeyu.RPGSystems.Items",
+        "Feazeyu.RPGSystems.Character",
+        "Feazeyu.RPGSystems.Dialogue",
+        "Feazeyu.RPGSystems.Inventory",
+        "Feazeyu.RPGSystems.Quest"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

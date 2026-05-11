@@ -1,0 +1,19 @@
+{
+    "name": "Feazeyu.RPGSystems.Quest",
+    "rootNamespace": "Feazeyu.RPGSystems.Quest",
+    "references": [
+        "Feazeyu.RPGSystems.Dialogue",
+        "Feazeyu.RPGSystems.Character",
+        "Feazeyu.RPGSystems.Inventory",
+        "Feazeyu.RPGSystems.Items"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

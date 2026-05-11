@@ -1,0 +1,22 @@
+﻿
+using UnityEditor;
+using UnityEngine;
+namespace Feazeyu.RPGSystems.Inventory
+{
+    [CustomEditor(typeof(InventoryManager))]
+    class InventoryManagerEditor : Editor
+    {
+        [Tooltip("Path to the folder containing item prefabs")]
+        public string resourcePath = "Items";
+        public override void OnInspectorGUI()
+        {
+            DrawDefaultInspector();
+            //Button c:
+            if (GUILayout.Button($"Reload items in Resources/{resourcePath}"))
+            {
+                ((InventoryManager)target).ReloadItems(resourcePath);
+            }
+        }
+    }
+}
+
