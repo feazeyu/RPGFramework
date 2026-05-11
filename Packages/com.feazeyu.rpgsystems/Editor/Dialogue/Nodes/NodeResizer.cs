@@ -1,8 +1,8 @@
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace DialogueGraph.Editor
+namespace Feazeyu.RPGSystems.EditorTools
 {
     /// <summary>
     /// Adds resize handles to a VisualElement (the node card).

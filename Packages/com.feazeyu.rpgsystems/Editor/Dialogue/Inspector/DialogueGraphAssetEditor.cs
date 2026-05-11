@@ -1,8 +1,8 @@
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
-using DialogueGraph.Runtime;
+using Feazeyu.RPGSystems.Dialogue;
 
-namespace DialogueGraph.Editor
+namespace Feazeyu.RPGSystems.EditorTools
 {
     /// <summary>
     /// Custom Inspector for DialogueGraphAsset (shown in the Project window

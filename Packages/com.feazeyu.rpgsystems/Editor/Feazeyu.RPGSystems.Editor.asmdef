@@ -1,6 +1,6 @@
 {
     "name": "Feazeyu.RPGSystems.Editor",
-    "rootNamespace": "Feazeyu.RPGSystems.Editor",
+    "rootNamespace": "Feazeyu.RPGSystems.EditorTools",
     "references": [
         "Feazeyu.RPGSystems.Core",
         "Feazeyu.RPGSystems.Items",

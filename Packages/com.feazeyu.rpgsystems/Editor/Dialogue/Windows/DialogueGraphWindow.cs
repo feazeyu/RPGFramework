@@ -1,10 +1,10 @@
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 using System.Collections.Generic;
-using DialogueGraph.Runtime;
+using Feazeyu.RPGSystems.Dialogue;
 
-namespace DialogueGraph.Editor
+namespace Feazeyu.RPGSystems.EditorTools
 {
     /// <summary>
     /// Dialogue-system graph editor window.
@@ -19,7 +19,7 @@ namespace DialogueGraph.Editor
         // ── Template-method overrides ────────────────────────────────────────
 
         protected override string WindowTitle     => "Dialogue Graph";
-        protected override string PrefKeyPrefix   => "DialogueGraph.Editor";
+        protected override string PrefKeyPrefix   => "Feazeyu.RPGSystems.Editor";
         protected override string NewAssetName    => "NewDialogueGraph";
         protected override string SaveDialogTitle => "New Dialogue Graph";
         protected override string WindowIcon      => "◈";

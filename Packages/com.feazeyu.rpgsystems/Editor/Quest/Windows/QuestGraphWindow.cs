@@ -1,12 +1,12 @@
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 using System.Collections.Generic;
-using DialogueGraph.Runtime;
-using DialogueGraph.Editor;
+using Feazeyu.RPGSystems.Dialogue;
+using Feazeyu.RPGSystems.EditorTools;
 using QuestGraph.Runtime;
 
-namespace QuestGraph.Editor
+namespace Feazeyu.RPGSystems.EditorTools
 {
     /// <summary>
     /// Quest-system graph editor window. Sibling of

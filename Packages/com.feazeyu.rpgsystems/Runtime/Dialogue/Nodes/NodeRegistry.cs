@@ -1,8 +1,8 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DialogueGraph.Runtime
+namespace Feazeyu.RPGSystems.Dialogue
 {
     /// <summary>
     /// Metadata record for a single node type, registered via [DialogueNode] attribute.
@@ -269,7 +269,7 @@ namespace DialogueGraph.Runtime
                 },
                 DefaultFields = new List<FieldData>
                 {
-                    new FieldData { FieldName = "Graph", TypeName = "DialogueGraph.Runtime.DialogueGraphAsset" },
+                    new FieldData { FieldName = "Graph", TypeName = "Feazeyu.RPGSystems.Dialogue.DialogueGraphAsset" },
                 }
             });
 

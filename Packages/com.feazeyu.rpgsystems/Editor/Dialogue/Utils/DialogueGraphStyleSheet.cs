@@ -1,11 +1,11 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UIElements;
 
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
-namespace DialogueGraph.Editor
+namespace Feazeyu.RPGSystems.EditorTools
 {
     /// <summary>
     /// Provides the dialogue-system USS StyleSheet (colour/theme overrides)

@@ -49,216 +49,216 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c545304bdec5aeb47b1ff682dfbf214d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  suppressAutoAddUI: 1
-  persistPlayModeChanges: 1
+  suppressAutoAddUI: 0
+  persistPlayModeChanges: 0
   rows: 5
   columns: 5
   Cells:
-    rid: 1756202721001865457
+    rid: 1756202908938403987
   references:
     version: 2
     RefIds:
-    - rid: 1756202721001865291
-      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
+    - rid: 1756202908938403987
+      type: {class: 'Array2D`1[[Feazeyu.RPGSystems.Inventory.InventorySlot, Feazeyu.RPGSystems.Inventory]]', ns: Feazeyu.RPGSystems.Core.Utilities, asm: Feazeyu.RPGSystems.Core}
+      data:
+        rows: 5
+        columns: 5
+        elements:
+        - rid: 1756202908938403988
+        - rid: 1756202908938403989
+        - rid: 1756202908938403990
+        - rid: 1756202908938403991
+        - rid: 1756202908938403992
+        - rid: 1756202908938403993
+        - rid: 1756202908938403994
+        - rid: 1756202908938403995
+        - rid: 1756202908938403996
+        - rid: 1756202908938403997
+        - rid: 1756202908938403998
+        - rid: 1756202908938403999
+        - rid: 1756202908938404000
+        - rid: 1756202908938404001
+        - rid: 1756202908938404002
+        - rid: 1756202908938404003
+        - rid: 1756202908938404004
+        - rid: 1756202908938404005
+        - rid: 1756202908938404006
+        - rid: 1756202908938404007
+        - rid: 1756202908938404008
+        - rid: 1756202908938404009
+        - rid: 1756202908938404010
+        - rid: 1756202908938404011
+        - rid: 1756202908938404012
+    - rid: 1756202908938403988
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
       data:
         position: {x: 0, y: 0}
         anchorPosition: {x: -1, y: -1}
         IsEnabled: 1
         _itemId: -1
-    - rid: 1756202721001865348
-      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
-      data:
-        position: {x: 1, y: 0}
-        anchorPosition: {x: -1, y: -1}
-        IsEnabled: 1
-        _itemId: -1
-    - rid: 1756202721001865353
-      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
-      data:
-        position: {x: 2, y: 0}
-        anchorPosition: {x: -1, y: -1}
-        IsEnabled: 1
-        _itemId: -1
-    - rid: 1756202721001865360
-      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
-      data:
-        position: {x: 3, y: 0}
-        anchorPosition: {x: -1, y: -1}
-        IsEnabled: 1
-        _itemId: -1
-    - rid: 1756202721001865428
-      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
+    - rid: 1756202908938403989
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
       data:
         position: {x: 0, y: 1}
         anchorPosition: {x: -1, y: -1}
         IsEnabled: 1
         _itemId: -1
-    - rid: 1756202721001865429
-      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
-      data:
-        position: {x: 1, y: 1}
-        anchorPosition: {x: -1, y: -1}
-        IsEnabled: 1
-        _itemId: -1
-    - rid: 1756202721001865430
-      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
-      data:
-        position: {x: 2, y: 1}
-        anchorPosition: {x: -1, y: -1}
-        IsEnabled: 1
-        _itemId: -1
-    - rid: 1756202721001865431
-      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
-      data:
-        position: {x: 3, y: 1}
-        anchorPosition: {x: -1, y: -1}
-        IsEnabled: 1
-        _itemId: -1
-    - rid: 1756202721001865434
-      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
+    - rid: 1756202908938403990
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
       data:
         position: {x: 0, y: 2}
         anchorPosition: {x: -1, y: -1}
         IsEnabled: 1
         _itemId: -1
-    - rid: 1756202721001865435
-      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
-      data:
-        position: {x: 1, y: 2}
-        anchorPosition: {x: -1, y: -1}
-        IsEnabled: 1
-        _itemId: -1
-    - rid: 1756202721001865436
-      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
-      data:
-        position: {x: 2, y: 2}
-        anchorPosition: {x: -1, y: -1}
-        IsEnabled: 1
-        _itemId: -1
-    - rid: 1756202721001865437
-      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
-      data:
-        position: {x: 3, y: 2}
-        anchorPosition: {x: -1, y: -1}
-        IsEnabled: 1
-        _itemId: -1
-    - rid: 1756202721001865440
-      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
+    - rid: 1756202908938403991
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
       data:
         position: {x: 0, y: 3}
         anchorPosition: {x: -1, y: -1}
         IsEnabled: 1
         _itemId: -1
-    - rid: 1756202721001865441
-      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
-      data:
-        position: {x: 1, y: 3}
-        anchorPosition: {x: -1, y: -1}
-        IsEnabled: 1
-        _itemId: -1
-    - rid: 1756202721001865442
-      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
-      data:
-        position: {x: 2, y: 3}
-        anchorPosition: {x: -1, y: -1}
-        IsEnabled: 1
-        _itemId: -1
-    - rid: 1756202721001865443
-      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
-      data:
-        position: {x: 3, y: 3}
-        anchorPosition: {x: -1, y: -1}
-        IsEnabled: 1
-        _itemId: -1
-    - rid: 1756202721001865445
-      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
+    - rid: 1756202908938403992
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
       data:
         position: {x: 0, y: 4}
         anchorPosition: {x: -1, y: -1}
         IsEnabled: 1
         _itemId: -1
-    - rid: 1756202721001865446
-      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
+    - rid: 1756202908938403993
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 1, y: 0}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756202908938403994
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 1, y: 1}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756202908938403995
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 1, y: 2}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756202908938403996
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 1, y: 3}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756202908938403997
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
       data:
         position: {x: 1, y: 4}
         anchorPosition: {x: -1, y: -1}
         IsEnabled: 1
         _itemId: -1
-    - rid: 1756202721001865447
-      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
+    - rid: 1756202908938403998
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 2, y: 0}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756202908938403999
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 2, y: 1}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756202908938404000
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 2, y: 2}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756202908938404001
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 2, y: 3}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756202908938404002
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
       data:
         position: {x: 2, y: 4}
         anchorPosition: {x: -1, y: -1}
         IsEnabled: 1
         _itemId: -1
-    - rid: 1756202721001865448
-      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
+    - rid: 1756202908938404003
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 3, y: 0}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756202908938404004
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 3, y: 1}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756202908938404005
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 3, y: 2}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756202908938404006
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 3, y: 3}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756202908938404007
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
       data:
         position: {x: 3, y: 4}
         anchorPosition: {x: -1, y: -1}
         IsEnabled: 1
         _itemId: -1
-    - rid: 1756202721001865457
-      type: {class: 'Array2D`1[[Game.Inventory.InventorySlot, Inventory]]', ns: Game.Core.Utilities, asm: Core}
-      data:
-        rows: 5
-        columns: 5
-        elements:
-        - rid: 1756202721001865291
-        - rid: 1756202721001865428
-        - rid: 1756202721001865434
-        - rid: 1756202721001865440
-        - rid: 1756202721001865445
-        - rid: 1756202721001865348
-        - rid: 1756202721001865429
-        - rid: 1756202721001865435
-        - rid: 1756202721001865441
-        - rid: 1756202721001865446
-        - rid: 1756202721001865353
-        - rid: 1756202721001865430
-        - rid: 1756202721001865436
-        - rid: 1756202721001865442
-        - rid: 1756202721001865447
-        - rid: 1756202721001865360
-        - rid: 1756202721001865431
-        - rid: 1756202721001865437
-        - rid: 1756202721001865443
-        - rid: 1756202721001865448
-        - rid: 1756202721001865458
-        - rid: 1756202721001865459
-        - rid: 1756202721001865460
-        - rid: 1756202721001865461
-        - rid: 1756202721001865462
-    - rid: 1756202721001865458
-      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
+    - rid: 1756202908938404008
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
       data:
         position: {x: 4, y: 0}
         anchorPosition: {x: -1, y: -1}
         IsEnabled: 1
         _itemId: -1
-    - rid: 1756202721001865459
-      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
+    - rid: 1756202908938404009
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
       data:
         position: {x: 4, y: 1}
         anchorPosition: {x: -1, y: -1}
         IsEnabled: 1
         _itemId: -1
-    - rid: 1756202721001865460
-      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
+    - rid: 1756202908938404010
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
       data:
         position: {x: 4, y: 2}
         anchorPosition: {x: -1, y: -1}
         IsEnabled: 1
         _itemId: -1
-    - rid: 1756202721001865461
-      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
+    - rid: 1756202908938404011
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
       data:
         position: {x: 4, y: 3}
         anchorPosition: {x: -1, y: -1}
         IsEnabled: 1
         _itemId: -1
-    - rid: 1756202721001865462
-      type: {class: InventorySlot, ns: Game.Inventory, asm: Inventory}
+    - rid: 1756202908938404012
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
       data:
         position: {x: 4, y: 4}
         anchorPosition: {x: -1, y: -1}

@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
-using DialogueGraph.Runtime;
-using DialogueGraph.UI;
+using Feazeyu.RPGSystems.Dialogue;
+using Feazeyu.RPGSystems.Dialogue;
 using Feazeyu.RPGSystems.Character;
 
-namespace DialogueGraph.Demo
+namespace Feazeyu.RPGSystems.Demo
 {
     [RequireComponent(typeof(Interactable))]
     public class NPCDialogueTrigger : MonoBehaviour

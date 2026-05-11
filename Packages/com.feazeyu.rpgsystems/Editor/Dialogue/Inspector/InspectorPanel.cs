@@ -1,11 +1,11 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
-using DialogueGraph.Runtime;
+using Feazeyu.RPGSystems.Dialogue;
 
-namespace DialogueGraph.Editor
+namespace Feazeyu.RPGSystems.EditorTools
 {
     public class InspectorPanel : VisualElement
     {

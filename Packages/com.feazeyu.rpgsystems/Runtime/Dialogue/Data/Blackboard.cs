@@ -1,8 +1,8 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DialogueGraph.Runtime
+namespace Feazeyu.RPGSystems.Dialogue
 {
     /// <summary>
     /// Holds the master list of BlackboardVariables for a DialogueGraphAsset.

@@ -1,5 +1,5 @@
-using UnityEngine;
-using DialogueGraph.Runtime;
+﻿using UnityEngine;
+using Feazeyu.RPGSystems.Dialogue;
 
 namespace QuestGraph.Runtime
 {

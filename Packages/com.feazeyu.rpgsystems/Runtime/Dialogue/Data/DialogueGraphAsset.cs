@@ -1,6 +1,6 @@
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace DialogueGraph.Runtime
+namespace Feazeyu.RPGSystems.Dialogue
 {
     /// <summary>
     /// The dialogue-system ScriptableObject asset. All fields and CRUD

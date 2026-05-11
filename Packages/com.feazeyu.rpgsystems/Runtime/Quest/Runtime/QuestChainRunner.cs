@@ -1,8 +1,8 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using DialogueGraph.Runtime;
+using Feazeyu.RPGSystems.Dialogue;
 
 namespace QuestGraph.Runtime
 {

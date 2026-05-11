@@ -1,10 +1,10 @@
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
-using DialogueGraph.Editor;
-using DialogueGraph.Runtime;
+using Feazeyu.RPGSystems.EditorTools;
+using Feazeyu.RPGSystems.Dialogue;
 using QuestGraph.Runtime;
 
-namespace QuestGraph.Editor
+namespace Feazeyu.RPGSystems.EditorTools
 {
     /// <summary>
     /// Registers Quest and QuestGraph with the blackboard variable

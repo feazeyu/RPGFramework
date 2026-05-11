@@ -1,8 +1,8 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DialogueGraph.Runtime
+namespace Feazeyu.RPGSystems.Dialogue
 {
     // ── Port / Field / Node / Edge ──────────────────────────────────────────────
     // These data types were previously declared in DialogueGraphAsset.cs.
@@ -57,7 +57,7 @@ namespace DialogueGraph.Runtime
     /// <summary>
     /// Common serialised data and CRUD for every graph-based system
     /// (Dialogue, Quest, and any future graph editor built on top of
-    /// <see cref="DialogueGraph.Editor"/>'s window pipeline).
+    /// <see cref="Feazeyu.RPGSystems.Editor"/>'s window pipeline).
     ///
     /// Concrete subclasses (<see cref="DialogueGraphAsset"/>,
     /// <see cref="QuestGraphAsset"/>) exist only to carry a
@@ -65,7 +65,7 @@ namespace DialogueGraph.Runtime
     /// entry under <b>Assets → Create</b>.
     ///
     /// Serialisation layout — <b>do not change</b> without a migration step.
-    /// <see cref="DialogueGraph.Editor.BlackboardPropertyBridge"/> walks
+    /// <see cref="Feazeyu.RPGSystems.EditorTools.BlackboardPropertyBridge"/> walks
     /// <c>m_Blackboard.m_Variables</c> via absolute SerializedProperty paths;
     /// any rename here silently breaks the inspector's bound fields.
     /// </summary>

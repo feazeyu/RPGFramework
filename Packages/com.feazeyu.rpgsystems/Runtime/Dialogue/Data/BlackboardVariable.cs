@@ -1,7 +1,7 @@
-using System;
+﻿using System;
 using UnityEngine;
 
-namespace DialogueGraph.Runtime
+namespace Feazeyu.RPGSystems.Dialogue
 {
     /// <summary>
     /// Abstract base — holds Name, Guid, Exposed, Shared metadata.

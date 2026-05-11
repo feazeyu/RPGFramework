@@ -1,10 +1,10 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using DialogueGraph.Runtime;
+using Feazeyu.RPGSystems.Dialogue;
 
-namespace DialogueGraph.UI
+namespace Feazeyu.RPGSystems.Dialogue
 {
     public class DialogueUI : MonoBehaviour
     {

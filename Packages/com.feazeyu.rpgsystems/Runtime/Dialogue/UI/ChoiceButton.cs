@@ -1,7 +1,7 @@
-using UnityEngine;
-using DialogueGraph.Runtime;
+﻿using UnityEngine;
+using Feazeyu.RPGSystems.Dialogue;
 
-namespace DialogueGraph.UI
+namespace Feazeyu.RPGSystems.Dialogue
 {
     [RequireComponent(typeof(UnityEngine.UI.Button))]
     public class ChoiceButton : MonoBehaviour

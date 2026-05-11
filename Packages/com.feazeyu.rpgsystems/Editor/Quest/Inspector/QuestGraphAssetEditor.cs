@@ -1,8 +1,8 @@
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 using QuestGraph.Runtime;
 
-namespace QuestGraph.Editor
+namespace Feazeyu.RPGSystems.EditorTools
 {
     /// <summary>
     /// Custom Inspector for <see cref="QuestGraphAsset"/> (shown in the

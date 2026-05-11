@@ -1,6 +1,6 @@
-using System.Collections;
+﻿using System.Collections;
 
-namespace DialogueGraph.Runtime
+namespace Feazeyu.RPGSystems.Dialogue
 {
     /// <summary>
     /// Implement this interface to define what happens when the graph runner

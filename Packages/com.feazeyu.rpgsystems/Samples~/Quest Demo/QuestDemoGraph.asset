@@ -1,4 +1,4 @@
-%YAML 1.1
+﻿%YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!114 &11400000
 MonoBehaviour:
@@ -17,7 +17,7 @@ MonoBehaviour:
     NodeType: Start
     DisplayName: Start
     StoryText: 
-    Position: {x: -1182, y: 276}
+    Position: {x: -1626, y: 143}
     Size: {x: 0, y: 0}
     Ports:
     - PortName: Out
@@ -65,7 +65,7 @@ MonoBehaviour:
     NodeType: obj_location
     DisplayName: Reach Waypoint
     StoryText: 
-    Position: {x: 443, y: 154}
+    Position: {x: 306, y: 65}
     Size: {x: 0, y: 0}
     Ports:
     - PortName: In
@@ -109,7 +109,7 @@ MonoBehaviour:
     NodeType: CompleteQuest
     DisplayName: Complete Quest
     StoryText: 
-    Position: {x: 1846, y: 172}
+    Position: {x: 1895, y: 228}
     Size: {x: 0, y: 0}
     Ports:
     - PortName: In
@@ -120,7 +120,7 @@ MonoBehaviour:
     NodeType: FailQuest
     DisplayName: Fail Quest
     StoryText: 
-    Position: {x: 1001, y: 642}
+    Position: {x: 1512, y: 667}
     Size: {x: 0, y: 0}
     Ports:
     - PortName: In
@@ -135,7 +135,7 @@ MonoBehaviour:
     NodeType: find_object
     DisplayName: Find Object
     StoryText: 
-    Position: {x: -924, y: 266}
+    Position: {x: -1171, y: 274}
     Size: {x: 0, y: 0}
     Ports:
     - PortName: In
@@ -193,7 +193,7 @@ MonoBehaviour:
     NodeType: debug_log
     DisplayName: Debug Log
     StoryText: 
-    Position: {x: -561, y: 225}
+    Position: {x: -430, y: 224}
     Size: {x: 0, y: 0}
     Ports:
     - PortName: In
@@ -211,7 +211,7 @@ MonoBehaviour:
     NodeType: debug_log
     DisplayName: Debug Log
     StoryText: 
-    Position: {x: 921, y: 172}
+    Position: {x: 830, y: 158}
     Size: {x: 207, y: 124}
     Ports:
     - PortName: In
@@ -265,7 +265,7 @@ MonoBehaviour:
     NodeType: spawn_item
     DisplayName: Spawn Item
     StoryText: 
-    Position: {x: 1207, y: 172}
+    Position: {x: 1109, y: 133}
     Size: {x: 0, y: 0}
     Ports:
     - PortName: In
@@ -292,16 +292,6 @@ MonoBehaviour:
     OutputPortName: Failed
     InputNodeGuid: c94e9803-327c-4a45-b655-1f9e0f820ece
     InputPortName: In
-  - Guid: 44ebc023-7ede-47d3-9c13-c36f37541531
-    OutputNodeGuid: c2f68091-b118-4a3d-841e-09bf17150eea
-    OutputPortName: Failed
-    InputNodeGuid: c94e9803-327c-4a45-b655-1f9e0f820ece
-    InputPortName: In
-  - Guid: b5d84bb9-dc45-4597-8450-85737181e1a1
-    OutputNodeGuid: 6ce3cd94-b32a-4436-9dca-a4135e5dc171
-    OutputPortName: Out
-    InputNodeGuid: eb36cabb-be95-4415-8a8f-86b9723525d4
-    InputPortName: In
   - Guid: dee16e8e-07ce-4bcc-a07a-6e26f3693776
     OutputNodeGuid: eb36cabb-be95-4415-8a8f-86b9723525d4
     OutputPortName: NotFound
@@ -321,11 +311,6 @@ MonoBehaviour:
     OutputNodeGuid: 0d8cacf7-27a6-4d04-ba16-eb9083cb15f7
     OutputPortName: Out
     InputNodeGuid: 2c3bb267-88c9-486a-a353-5398384c3fdf
-    InputPortName: In
-  - Guid: e98fddb1-26f9-458f-b2b3-26422b3b4dde
-    OutputNodeGuid: c2f68091-b118-4a3d-841e-09bf17150eea
-    OutputPortName: Completed
-    InputNodeGuid: b44583ee-9ea6-4834-a634-7936697fe939
     InputPortName: In
   - Guid: f0e27c43-f32d-466d-b0a6-5223cd4215d4
     OutputNodeGuid: cc0f7275-3815-4d78-9ff3-9d522002500b
@@ -357,17 +342,42 @@ MonoBehaviour:
     OutputPortName: Completed
     InputNodeGuid: c2f68091-b118-4a3d-841e-09bf17150eea
     InputPortName: In
+  - Guid: 9a886be8-13c5-4ebb-b0f8-f961e4eb7248
+    OutputNodeGuid: 2c3bb267-88c9-486a-a353-5398384c3fdf
+    OutputPortName: Completed
+    InputNodeGuid: c2f68091-b118-4a3d-841e-09bf17150eea
+    InputPortName: In
+  - Guid: a45a7812-8c17-44f2-9ef4-d4d667d29ee1
+    OutputNodeGuid: 2c3bb267-88c9-486a-a353-5398384c3fdf
+    OutputPortName: Failed
+    InputNodeGuid: c94e9803-327c-4a45-b655-1f9e0f820ece
+    InputPortName: In
+  - Guid: b90793ca-6fca-4f5d-bd7c-bb374a3f1cda
+    OutputNodeGuid: 6ce3cd94-b32a-4436-9dca-a4135e5dc171
+    OutputPortName: Out
+    InputNodeGuid: eb36cabb-be95-4415-8a8f-86b9723525d4
+    InputPortName: In
+  - Guid: b7adb4df-435e-46dc-a6a6-c6d497d1985f
+    OutputNodeGuid: c2f68091-b118-4a3d-841e-09bf17150eea
+    OutputPortName: Completed
+    InputNodeGuid: b44583ee-9ea6-4834-a634-7936697fe939
+    InputPortName: In
+  - Guid: 6893da18-94ec-49a3-be02-7431e943dc40
+    OutputNodeGuid: c2f68091-b118-4a3d-841e-09bf17150eea
+    OutputPortName: Failed
+    InputNodeGuid: c94e9803-327c-4a45-b655-1f9e0f820ece
+    InputPortName: In
   m_Blackboard:
     m_Variables:
     - rid: 1756202809859506275
-  ViewTransform: {x: -682, y: 150, z: 1}
+  ViewTransform: {x: 2004, y: 69, z: 1}
   BlackboardPosition: {x: 10, y: 60}
   m_Kind: 0
   references:
     version: 2
     RefIds:
     - rid: 1756202809859506275
-      type: {class: BlackboardVariableGameObject, ns: DialogueGraph.Runtime, asm: Dialogue}
+      type: {class: BlackboardVariableGameObject, ns: Feazeyu.RPGSystems.Dialogue, asm: Feazeyu.RPGSystems.Dialogue}
       data:
         m_Name: Inventory
         m_Guid: 81d956a8-fd85-498b-b10c-b9d94514ae10

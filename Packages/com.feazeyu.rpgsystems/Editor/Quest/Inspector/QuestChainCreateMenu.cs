@@ -1,10 +1,10 @@
-using System.IO;
+﻿using System.IO;
 using UnityEditor;
 using UnityEditor.ProjectWindowCallback;
 using UnityEngine;
 using QuestGraph.Runtime;
 
-namespace QuestGraph.Editor
+namespace Feazeyu.RPGSystems.EditorTools
 {
     /// <summary>
     /// Adds a second entry under <b>Assets → Create → Quest → Quest Chain</b>

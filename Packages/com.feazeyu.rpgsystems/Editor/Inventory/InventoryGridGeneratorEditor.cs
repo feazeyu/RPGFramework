@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 namespace Feazeyu.RPGSystems.Inventory
 {

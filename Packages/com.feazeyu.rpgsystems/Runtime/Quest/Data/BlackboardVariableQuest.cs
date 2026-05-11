@@ -1,5 +1,5 @@
-using System;
-using DialogueGraph.Runtime;
+﻿using System;
+using Feazeyu.RPGSystems.Dialogue;
 
 namespace QuestGraph.Runtime
 {

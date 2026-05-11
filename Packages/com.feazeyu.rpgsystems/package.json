@@ -2,7 +2,7 @@
   "name": "com.feazeyu.rpgsystems",
   "version": "0.1.0",
   "displayName": "RPG Systems",
-  "description": "Graph-based dialogue and quest systems, inventory, and character combat for 2D top-down RPGs in Unity.",
+  "description": "Graph-based dialogue and quest systems and inventory for RPGs in Unity.",
   "unity": "6000.0",
   "unityRelease": "43f1",
   "author": {

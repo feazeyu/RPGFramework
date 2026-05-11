@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DialogueGraph.Runtime;
+using Feazeyu.RPGSystems.Dialogue;
 using QuestGraph.Runtime;
 using Feazeyu.RPGSystems.Character;
 

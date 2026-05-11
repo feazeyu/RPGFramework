@@ -1,7 +1,7 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
-namespace DialogueGraph.Runtime
+namespace Feazeyu.RPGSystems.Dialogue
 {
     [DialogueNode("debug_log", "Debug Log", "Debug",
         "Prints a message to the Unity console and continues.")]

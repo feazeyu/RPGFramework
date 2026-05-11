@@ -1,12 +1,12 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
-using DialogueGraph.Runtime;
+using Feazeyu.RPGSystems.Dialogue;
 
-namespace DialogueGraph.Editor
+namespace Feazeyu.RPGSystems.EditorTools
 {
     /// <summary>
     /// Marker Edge subclass. Used so ConnectTo&lt;SoftEdge&gt; creates consistently
@@ -86,7 +86,7 @@ namespace DialogueGraph.Editor
         /// <summary>
         /// Swap the "Add Node" palette at runtime. Used by windows whose
         /// palette depends on properties of the currently loaded asset
-        /// (e.g. <see cref="QuestGraph.Editor.QuestGraphWindow"/> filters
+        /// (e.g. <see cref="Feazeyu.RPGSystems.EditorTools.QuestGraphWindow"/> filters
         /// by <c>QuestKind</c>). Existing node views keep their cached
         /// <see cref="DialogueNodeInfo"/>; nodes created after this call
         /// use the new registry.

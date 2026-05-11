@@ -1,12 +1,12 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
-using DialogueGraph.Runtime;
+using Feazeyu.RPGSystems.Dialogue;
 using UnityEditor;
 
-namespace DialogueGraph.Editor
+namespace Feazeyu.RPGSystems.EditorTools
 {
     /// <summary>
     /// Visual representation of a single <see cref="NodeData"/> inside the

@@ -2,7 +2,7 @@
 using UnityEngine.InputSystem;
 using Feazeyu.RPGSystems.Character;
 
-namespace DialogueGraph.Demo
+namespace Feazeyu.RPGSystems.Demo
 {
     [RequireComponent(typeof(Rigidbody2D), typeof(Interactor))]
     public class DemoPlayer : MonoBehaviour

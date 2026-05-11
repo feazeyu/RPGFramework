@@ -1,17 +1,17 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UIElements;
 
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
-namespace QuestGraph.Editor
+namespace Feazeyu.RPGSystems.EditorTools
 {
     /// <summary>
     /// Provides the quest-system USS StyleSheet (colour/theme overrides)
     /// layered on top of the shared <c>GraphEditor.uss</c> base sheet.
     ///
-    /// Mirrors <see cref="DialogueGraph.Editor.DialogueGraphStyleSheet"/>:
+    /// Mirrors <see cref="Feazeyu.RPGSystems.EditorTools.DialogueGraphStyleSheet"/>:
     /// two-folder lookup across both <c>Assets/</c> and <c>Packages/</c>,
     /// and no caching of null so mid-import misses recover on the next call.
     /// </summary>

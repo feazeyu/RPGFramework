@@ -72,7 +72,7 @@ namespace Feazeyu.RPGSystems.Inventory
                 target = UIObject.AddComponent<InventoryListUI>();
                 target.gameObject.AddComponent<RectTransform>();
 
-                Utils.EventRedirector.AddEventRedirector(UIObject, UIObject);
+                EventRedirector.AddEventRedirector(UIObject, UIObject);
             }
             else
             {

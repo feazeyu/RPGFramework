@@ -2,7 +2,7 @@
 using Feazeyu.RPGSystems.Inventory;
 using UnityEngine;
 
-namespace DialogueGraph.Runtime
+namespace Feazeyu.RPGSystems.Dialogue
 {
     /// <summary>
     /// Dialogue node that tries to add an item to an IItemContainer.

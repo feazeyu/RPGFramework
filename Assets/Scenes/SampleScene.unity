@@ -1,4 +1,4 @@
-%YAML 1.1
+﻿%YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!29 &1
 OcclusionCullingSettings:
@@ -1761,7 +1761,7 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 651837777}
-        m_TargetAssemblyTypeName: Game.Character.PlayerController, Character
+        m_TargetAssemblyTypeName: Feazeyu.RPGSystems.Character.PlayerController, Feazeyu.RPGSystems.Character
         m_MethodName: OnMove
         m_Mode: 0
         m_Arguments:
@@ -1777,7 +1777,7 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 651837777}
-        m_TargetAssemblyTypeName: Game.Character.PlayerController, Character
+        m_TargetAssemblyTypeName: Feazeyu.RPGSystems.Character.PlayerController, Feazeyu.RPGSystems.Character
         m_MethodName: OnLook
         m_Mode: 0
         m_Arguments:
@@ -1793,7 +1793,7 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 651837777}
-        m_TargetAssemblyTypeName: Game.Character.PlayerController, Character
+        m_TargetAssemblyTypeName: Feazeyu.RPGSystems.Character.PlayerController, Feazeyu.RPGSystems.Character
         m_MethodName: OnAttack
         m_Mode: 0
         m_Arguments:
@@ -1809,7 +1809,7 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 651837777}
-        m_TargetAssemblyTypeName: Game.Character.PlayerController, Character
+        m_TargetAssemblyTypeName: Feazeyu.RPGSystems.Character.PlayerController, Feazeyu.RPGSystems.Character
         m_MethodName: OnInteract
         m_Mode: 0
         m_Arguments:
@@ -4930,7 +4930,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1453801879}
-        m_TargetAssemblyTypeName: Game.Inventory.InventoryList, Inventory
+        m_TargetAssemblyTypeName: Feazeyu.RPGSystems.Inventory.InventoryList, Feazeyu.RPGSystems.Inventory
         m_MethodName: ToggleInventory
         m_Mode: 1
         m_Arguments:
@@ -4948,7 +4948,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1453801879}
-        m_TargetAssemblyTypeName: Game.Inventory.InventoryList, Inventory
+        m_TargetAssemblyTypeName: Feazeyu.RPGSystems.Inventory.InventoryList, Feazeyu.RPGSystems.Inventory
         m_MethodName: CloseInventory
         m_Mode: 1
         m_Arguments:
@@ -5580,7 +5580,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1604252554}
-        m_TargetAssemblyTypeName: DialogueGraph.Runtime.DialogueRunner, Dialogue
+        m_TargetAssemblyTypeName: Feazeyu.RPGSystems.Dialogue.DialogueRunner, Feazeyu.RPGSystems.Dialogue
         m_MethodName: StartDialogue
         m_Mode: 1
         m_Arguments:
@@ -5592,7 +5592,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1604252554}
-        m_TargetAssemblyTypeName: DialogueGraph.Runtime.DialogueRunner, Dialogue
+        m_TargetAssemblyTypeName: Feazeyu.RPGSystems.Dialogue.DialogueRunner, Feazeyu.RPGSystems.Dialogue
         m_MethodName: Advance
         m_Mode: 1
         m_Arguments:
@@ -7035,11 +7035,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4725271791266601723, guid: 06eccbef175da0f4ea9b45d83d22d131, type: 3}
       propertyPath: 'managedReferences[1756202809859506253]'
-      value: Inventory Game.Inventory.LockedInventorySlot
+      value: Feazeyu.RPGSystems.Inventory Feazeyu.RPGSystems.Inventory.LockedInventorySlot
       objectReference: {fileID: 0}
     - target: {fileID: 4725271791266601723, guid: 06eccbef175da0f4ea9b45d83d22d131, type: 3}
       propertyPath: 'managedReferences[1756202809859506254]'
-      value: Inventory Game.Inventory.InventorySlot
+      value: Feazeyu.RPGSystems.Inventory Feazeyu.RPGSystems.Inventory.InventorySlot
       objectReference: {fileID: 0}
     - target: {fileID: 4725271791266601723, guid: 06eccbef175da0f4ea9b45d83d22d131, type: 3}
       propertyPath: managedReferences[1756202721001865430]._itemId

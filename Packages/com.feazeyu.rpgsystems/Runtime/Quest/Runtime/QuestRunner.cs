@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using DialogueGraph.Runtime;
+using Feazeyu.RPGSystems.Dialogue;
 using QuestGraph.Nodes;
 using Feazeyu.RPGSystems.Inventory;
 
