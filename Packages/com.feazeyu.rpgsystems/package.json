@@ -19,5 +19,17 @@
   "dependencies": {
     "com.unity.ugui": "2.0.0",
     "com.unity.inputsystem": "1.13.1"
-  }
+  },
+  "samples": [
+    {
+      "displayName": "Dialogue Demo",
+      "description": "An interactive NPC dialogue scene using the graph-based dialogue system.",
+      "path": "Samples~/Dialogue Demo"
+    },
+    {
+      "displayName": "Quest Demo",
+      "description": "A quest with objectives, enemies, and rewards using the quest graph system.",
+      "path": "Samples~/Quest Demo"
+    }
+  ]
 }

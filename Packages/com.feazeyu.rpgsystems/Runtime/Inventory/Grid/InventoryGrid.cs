@@ -21,7 +21,7 @@ namespace Feazeyu.RPGSystems.Inventory
         /// Called when the script instance is being loaded.
         /// Initializes the inventory UI contents.
         /// </summary>
-        private void Awake()
+        protected virtual void Awake()
         {
             RedrawContents();
         }
@@ -131,7 +131,7 @@ namespace Feazeyu.RPGSystems.Inventory
         /// Called when the script is loaded or a value changes in the Inspector (Editor only).
         /// Ensures the UI generator is added if needed.
         /// </summary>
-        private void OnValidate()
+        protected virtual void OnValidate()
         {
 #if UNITY_EDITOR
             //Ensure the generator UI is only added once
@@ -168,7 +168,7 @@ namespace Feazeyu.RPGSystems.Inventory
         /// </summary>
         /// <param name="position">The grid position.</param>
         /// <returns>The result of the removal operation, or -1 if no item was present.</returns>
-        public int RemoveItem(Vector2Int position)
+        public virtual int RemoveItem(Vector2Int position)
         {
             if (!Cells.TryGet(position.x, position.y, out var cell) || cell.Item == null)
                 return -1;
@@ -198,7 +198,7 @@ namespace Feazeyu.RPGSystems.Inventory
         /// <param name="position">The grid position.</param>
         /// <param name="item">The item GameObject.</param>
         /// <returns>True if the item was placed successfully; otherwise, false.</returns>
-        public bool PutItem(Vector2Int position, GameObject item)
+        public virtual bool PutItem(Vector2Int position, GameObject item)
         {
             ItemInfo itemInfo = item.GetComponent<Item>().info;
             Vector2Int center = item.GetComponent<Item>().GetAnchorSlot();
@@ -260,7 +260,9 @@ namespace Feazeyu.RPGSystems.Inventory
             return true;
         }
 
-        bool IItemContainer.PutItem(GameObject item)
+        bool IItemContainer.PutItem(GameObject item) => AutoPlaceItem(item);
+
+        protected virtual bool AutoPlaceItem(GameObject item)
         {
             var itemComp = item.GetComponent<Item>();
             if (itemComp == null) return false;
@@ -295,7 +297,7 @@ namespace Feazeyu.RPGSystems.Inventory
         /// <summary>
         /// Regenerates the inventory UI contents.
         /// </summary>
-        public void RedrawContents()
+        public virtual void RedrawContents()
         {
             if (uiGenerator == null)
             {
@@ -383,7 +385,7 @@ namespace Feazeyu.RPGSystems.Inventory
         /// <summary>
         /// Toggles the active state of the inventory UI.
         /// </summary>
-        public void ToggleInventory()
+        public virtual void ToggleInventory()
         {
             if (uiGenerator)
                 uiGenerator.ToggleInventoryActiveState();
@@ -392,7 +394,7 @@ namespace Feazeyu.RPGSystems.Inventory
         /// <summary>
         /// Enables the inventory UI.
         /// </summary>
-        public void OpenInventory()
+        public virtual void OpenInventory()
         {
             if (uiGenerator)
                 uiGenerator.SetInventoryActiveState(true);
@@ -401,7 +403,7 @@ namespace Feazeyu.RPGSystems.Inventory
         /// <summary>
         /// Disables the inventory UI.
         /// </summary>
-        public void CloseInventory()
+        public virtual void CloseInventory()
         {
             if (uiGenerator)
                 uiGenerator.SetInventoryActiveState(false);

@@ -1,4 +1,4 @@
-﻿%YAML 1.1
+%YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!29 &1
 OcclusionCullingSettings:
@@ -1236,6 +1236,297 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 760572441}
   m_CullTransparentMesh: 1
+--- !u!1 &762634993
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 762634994}
+  - component: {fileID: 762634996}
+  - component: {fileID: 762634995}
+  m_Layer: 0
+  m_Name: PlayerInventory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &762634994
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 762634993}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.1764705, y: 1.1764705, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1848969210}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &762634995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 762634993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0572384fdac614b419c72cce44844580, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1743128806}
+  spacing: {x: 0, y: 0}
+  anchorPosition: 0
+  uiPosition: {x: 0, y: 0}
+  lastGeneratedRoot: {fileID: 0}
+  serializableSlotDictionary:
+    pairs:
+    - Key: InventorySlot
+      Value:
+        cellPrefab: {fileID: 2627398030570870322, guid: 7709090849edab04e8b6a38dca885a40, type: 3}
+        disabledCellPrefab: {fileID: 2627398030570870322, guid: ffe051125558f5e46a65c9f7e8d6a368, type: 3}
+    - Key: LockedInventorySlot
+      Value:
+        cellPrefab: {fileID: 0}
+        disabledCellPrefab: {fileID: 0}
+    - Key: StackableInventorySlot
+      Value:
+        cellPrefab: {fileID: 0}
+        disabledCellPrefab: {fileID: 0}
+--- !u!114 &762634996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 762634993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c545304bdec5aeb47b1ff682dfbf214d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  suppressAutoAddUI: 1
+  persistPlayModeChanges: 0
+  rows: 5
+  columns: 5
+  Cells:
+    rid: 1756203013541462090
+  references:
+    version: 2
+    RefIds:
+    - rid: 1756203013541462090
+      type: {class: 'Array2D`1[[Feazeyu.RPGSystems.Inventory.InventorySlot, Feazeyu.RPGSystems.Inventory]]', ns: Feazeyu.RPGSystems.Core.Utilities, asm: Feazeyu.RPGSystems.Core}
+      data:
+        rows: 5
+        columns: 5
+        elements:
+        - rid: 1756203013541462091
+        - rid: 1756203013541462092
+        - rid: 1756203013541462093
+        - rid: 1756203013541462094
+        - rid: 1756203013541462095
+        - rid: 1756203013541462096
+        - rid: 1756203013541462097
+        - rid: 1756203013541462098
+        - rid: 1756203013541462099
+        - rid: 1756203013541462100
+        - rid: 1756203013541462101
+        - rid: 1756203013541462102
+        - rid: 1756203013541462103
+        - rid: 1756203013541462104
+        - rid: 1756203013541462105
+        - rid: 1756203013541462106
+        - rid: 1756203013541462107
+        - rid: 1756203013541462108
+        - rid: 1756203013541462109
+        - rid: 1756203013541462110
+        - rid: 1756203013541462111
+        - rid: 1756203013541462112
+        - rid: 1756203013541462113
+        - rid: 1756203013541462114
+        - rid: 1756203013541462115
+    - rid: 1756203013541462091
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 0, y: 0}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462092
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 0, y: 1}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462093
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 0, y: 2}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462094
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 0, y: 3}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462095
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 0, y: 4}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462096
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 1, y: 0}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462097
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 1, y: 1}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462098
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 1, y: 2}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462099
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 1, y: 3}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462100
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 1, y: 4}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462101
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 2, y: 0}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462102
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 2, y: 1}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462103
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 2, y: 2}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462104
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 2, y: 3}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462105
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 2, y: 4}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462106
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 3, y: 0}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462107
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 3, y: 1}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462108
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 3, y: 2}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462109
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 3, y: 3}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462110
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 3, y: 4}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462111
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 4, y: 0}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462112
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 4, y: 1}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462113
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 4, y: 2}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462114
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 4, y: 3}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462115
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 4, y: 4}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
 --- !u!1 &776367012
 GameObject:
   m_ObjectHideFlags: 0
@@ -1468,9 +1759,9 @@ MonoBehaviour:
   m_text: '[ E ]  Talk'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 1528573306}
   m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
+  m_fontMaterial: {fileID: 1528573306}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
@@ -1487,7 +1778,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -1562,7 +1853,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: 1528573306}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1603,6 +1894,73 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 1}
   m_SizeDelta: {x: 4, y: 0.7}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!21 &1528573306
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: LiberationSans SDF Material (Instance)
+  m_Shader: {fileID: 4800000, guid: fe393ace9b354375a9cb14cdbbc28be4, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 1
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 28684132378477856, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _ColorMask: 15
+    - _CullMode: 0
+    - _FaceDilate: 0
+    - _GradientScale: 10
+    - _MaskSoftnessX: 0
+    - _MaskSoftnessY: 0
+    - _OutlineSoftness: 0
+    - _OutlineWidth: 0
+    - _PerspectiveFilter: 0.875
+    - _ScaleRatioA: 0.9
+    - _ScaleRatioB: 1
+    - _ScaleRatioC: 0.73125
+    - _ScaleX: 1
+    - _ScaleY: 1
+    - _ShaderFlags: 0
+    - _Sharpness: 0
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _TextureHeight: 1024
+    - _TextureWidth: 1024
+    - _UnderlayDilate: 0
+    - _UnderlayOffsetX: 0
+    - _UnderlayOffsetY: 0
+    - _UnderlaySoftness: 0
+    - _VertexOffsetX: 0
+    - _VertexOffsetY: 0
+    - _WeightBold: 0.75
+    - _WeightNormal: 0
+    m_Colors:
+    - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
+    - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!1 &1530013572
 GameObject:
   m_ObjectHideFlags: 0
@@ -1616,7 +1974,9 @@ GameObject:
   - component: {fileID: 1530013576}
   - component: {fileID: 1530013575}
   - component: {fileID: 1530013574}
-  - component: {fileID: 1530013573}
+  - component: {fileID: 1530013580}
+  - component: {fileID: 1530013581}
+  - component: {fileID: 1530013582}
   m_Layer: 0
   m_Name: NPC_Merchant
   m_TagString: Untagged
@@ -1624,21 +1984,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1530013573
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1530013572}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f83c5dcd207bc104ba075de6e540d688, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_DialogueRunner: {fileID: 1530013574}
-  m_DialogueUI: {fileID: 1743128808}
-  m_InteractPrompt: {fileID: 1425447886}
 --- !u!114 &1530013574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1685,10 +2030,10 @@ MonoBehaviour:
   OnInteract:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1530013573}
+      - m_Target: {fileID: 1530013582}
         m_TargetAssemblyTypeName: Feazeyu.RPGSystems.Demo.NPCDialogueTrigger, Assembly-CSharp
         m_MethodName: StartDialogue
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: 
@@ -1697,6 +2042,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnAreaEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAreaExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!58 &1530013576
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1805,6 +2156,326 @@ Transform:
   - {fileID: 251516175}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1530013580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1530013572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0572384fdac614b419c72cce44844580, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1743128806}
+  spacing: {x: 0, y: 0}
+  anchorPosition: 2
+  uiPosition: {x: -500, y: 0}
+  lastGeneratedRoot: {fileID: 0}
+  serializableSlotDictionary:
+    pairs:
+    - Key: InventorySlot
+      Value:
+        cellPrefab: {fileID: 2627398030570870322, guid: 7709090849edab04e8b6a38dca885a40, type: 3}
+        disabledCellPrefab: {fileID: 2627398030570870322, guid: ffe051125558f5e46a65c9f7e8d6a368, type: 3}
+    - Key: LockedInventorySlot
+      Value:
+        cellPrefab: {fileID: 0}
+        disabledCellPrefab: {fileID: 0}
+    - Key: StackableInventorySlot
+      Value:
+        cellPrefab: {fileID: 0}
+        disabledCellPrefab: {fileID: 0}
+--- !u!114 &1530013581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1530013572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8c5d0c509b9bd1409639336489b4337, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  suppressAutoAddUI: 0
+  persistPlayModeChanges: 0
+  rows: 5
+  columns: 5
+  Cells:
+    rid: 1756203013541462128
+  shopInventory: {fileID: 11400000, guid: b35f01f32ca878f4f9b2e9644f823c62, type: 2}
+  _currencyProvider: {fileID: 0}
+  priceLabelPrefab: {fileID: 2577657971906905602, guid: 224aa1f16a4611748a522adaa8a22ee0, type: 3}
+  references:
+    version: 2
+    RefIds:
+    - rid: 1756203013541462128
+      type: {class: 'Array2D`1[[Feazeyu.RPGSystems.Inventory.InventorySlot, Feazeyu.RPGSystems.Inventory]]', ns: Feazeyu.RPGSystems.Core.Utilities, asm: Feazeyu.RPGSystems.Core}
+      data:
+        rows: 5
+        columns: 5
+        elements:
+        - rid: 1756203013541462129
+        - rid: 1756203013541462130
+        - rid: 1756203013541462131
+        - rid: 1756203013541462132
+        - rid: 1756203013541462133
+        - rid: 1756203013541462134
+        - rid: 1756203013541462135
+        - rid: 1756203013541462136
+        - rid: 1756203013541462137
+        - rid: 1756203013541462138
+        - rid: 1756203013541462139
+        - rid: 1756203013541462140
+        - rid: 1756203013541462141
+        - rid: 1756203013541462142
+        - rid: 1756203013541462143
+        - rid: 1756203013541462144
+        - rid: 1756203013541462145
+        - rid: 1756203013541462146
+        - rid: 1756203013541462147
+        - rid: 1756203013541462148
+        - rid: 1756203013541462149
+        - rid: 1756203013541462150
+        - rid: 1756203013541462151
+        - rid: 1756203013541462152
+        - rid: 1756203013541462153
+    - rid: 1756203013541462129
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 0, y: 0}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462130
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 0, y: 1}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462131
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 0, y: 2}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462132
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 0, y: 3}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462133
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 0, y: 4}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462134
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 1, y: 0}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462135
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 1, y: 1}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462136
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 1, y: 2}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462137
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 1, y: 3}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462138
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 1, y: 4}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462139
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 2, y: 0}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462140
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 2, y: 1}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462141
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 2, y: 2}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462142
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 2, y: 3}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462143
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 2, y: 4}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462144
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 3, y: 0}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462145
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 3, y: 1}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462146
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 3, y: 2}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462147
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 3, y: 3}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462148
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 3, y: 4}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462149
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 4, y: 0}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462150
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 4, y: 1}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462151
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 4, y: 2}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462152
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 4, y: 3}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+    - rid: 1756203013541462153
+      type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
+      data:
+        position: {x: 4, y: 4}
+        anchorPosition: {x: -1, y: -1}
+        IsEnabled: 1
+        _itemId: -1
+--- !u!114 &1530013582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1530013572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f83c5dcd207bc104ba075de6e540d688, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_DialogueRunner: {fileID: 1530013574}
+  m_DialogueUI: {fileID: 1743128808}
+  m_InteractPrompt: {fileID: 1425447886}
+--- !u!1 &1591698314
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1591698315}
+  - component: {fileID: 1591698316}
+  m_Layer: 5
+  m_Name: DragLayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1591698315
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1591698314}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1743128807}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1591698316
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1591698314}
+  m_CullTransparentMesh: 1
 --- !u!1 &1613622464
 GameObject:
   m_ObjectHideFlags: 0
@@ -1976,6 +2647,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2066050074}
+  - {fileID: 1591698315}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2094,6 +2766,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1828887962
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1828887964}
+  - component: {fileID: 1828887963}
+  m_Layer: 0
+  m_Name: InventoryManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1828887963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1828887962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 508ac39a3017d574fa22e072a3c96623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items:
+    pairs:
+    - Key: 5
+      Value: {fileID: 6436931869100709939, guid: 0d74e9b9b6d36aa40840b9b64c592cee, type: 3}
+    - Key: 4
+      Value: {fileID: 6436931869100709939, guid: 2afb96bf6a65b824289d6fc283dbd26f, type: 3}
+    - Key: 1
+      Value: {fileID: 6436931869100709939, guid: e3aa05d070e41484f930398e4f5598ac, type: 3}
+  cellSize: {x: 100, y: 100}
+--- !u!4 &1828887964
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1828887962}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1848969204
 GameObject:
   m_ObjectHideFlags: 0
@@ -2108,6 +2833,7 @@ GameObject:
   - component: {fileID: 1848969207}
   - component: {fileID: 1848969206}
   - component: {fileID: 1848969205}
+  - component: {fileID: 1848969211}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2271,9 +2997,23 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.85, y: 0.85, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 762634994}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1848969211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848969204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40a6b891960ecb442972f36843bfbf1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _balance: 100
 --- !u!1 &2065743880
 GameObject:
   m_ObjectHideFlags: 0
@@ -2716,3 +3456,4 @@ SceneRoots:
   - {fileID: 1530013578}
   - {fileID: 1743128807}
   - {fileID: 572323947}
+  - {fileID: 1828887964}

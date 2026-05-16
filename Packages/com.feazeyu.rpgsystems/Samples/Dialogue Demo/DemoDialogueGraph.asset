@@ -1,0 +1,421 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c46074447551644d84d2cff096592b0, type: 3}
+  m_Name: DemoDialogueGraph
+  m_EditorClassIdentifier:
+  m_Nodes:
+  - Guid: 48cd376c-e3fa-4adb-9b77-56886f28785c
+    NodeType: Start
+    DisplayName: Start
+    StoryText:
+    Position: {x: -245, y: 300}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: Out
+      Direction: 1
+      Capacity: 0
+    Fields: []
+  - Guid: 68ceb2e0-d726-461e-8339-9ecd315adabe
+    NodeType: DialogueLine
+    DisplayName: Merchant
+    StoryText:
+    Position: {x: 17, y: 300}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Out
+      Direction: 1
+      Capacity: 0
+    Fields:
+    - FieldName: Speaker
+      TypeName: System.String
+      InlineValue: Merchant
+      LinkedVariableGuid:
+    - FieldName: Text
+      TypeName: System.String
+      InlineValue: Welcome, traveler! Are you looking to trade today?
+      LinkedVariableGuid:
+    - FieldName: Portrait
+      TypeName: UnityEngine.Sprite
+      InlineValue:
+      LinkedVariableGuid:
+  - Guid: 09bc1231-10c5-4570-be80-8d9cb6eaa629
+    NodeType: ChoiceBranch
+    DisplayName: Trade Choice
+    StoryText:
+    Position: {x: 498, y: 300}
+    Size: {x: 330, y: 360}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Choice 1
+      Direction: 1
+      Capacity: 0
+    - PortName: Choice 2
+      Direction: 1
+      Capacity: 0
+    - PortName: Choice 3
+      Direction: 1
+      Capacity: 0
+    - PortName: Choice 4
+      Direction: 1
+      Capacity: 0
+    Fields:
+    - FieldName: Choice 1 Text
+      TypeName: System.String
+      InlineValue: Browse your wares
+      LinkedVariableGuid:
+    - FieldName: Choice 2 Text
+      TypeName: System.String
+      InlineValue: Pay 30g for a hint
+      LinkedVariableGuid:
+    - FieldName: Choice 3 Text
+      TypeName: System.String
+      InlineValue: Take this 20g reward
+      LinkedVariableGuid:
+    - FieldName: Choice 4 Text
+      TypeName: System.String
+      InlineValue: No, just passing through.
+      LinkedVariableGuid:
+  - Guid: 3201d9b8-772f-4c2d-a8fd-9b3444c0b705
+    NodeType: find_object
+    DisplayName: Find Merchant
+    StoryText:
+    Position: {x: 920, y: 80}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Found
+      Direction: 1
+      Capacity: 0
+    - PortName: NotFound
+      Direction: 1
+      Capacity: 0
+    Fields:
+    - FieldName: Mode
+      TypeName: System.String
+      InlineValue: ByName
+      LinkedVariableGuid:
+    - FieldName: Value
+      TypeName: System.String
+      InlineValue: NPC_Merchant
+      LinkedVariableGuid:
+    - FieldName: Target
+      TypeName: UnityEngine.GameObject
+      InlineValue:
+      LinkedVariableGuid: 9fec2eea-122b-4493-a76e-0f7f32481c27
+  - Guid: 2d540ce1-5254-46c9-84bb-2bbbe114fb87
+    NodeType: open_shop
+    DisplayName: Open Shop
+    StoryText:
+    Position: {x: 1200, y: 80}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Out
+      Direction: 1
+      Capacity: 0
+    Fields:
+    - FieldName: Target
+      TypeName: UnityEngine.GameObject
+      InlineValue:
+      LinkedVariableGuid: 9fec2eea-122b-4493-a76e-0f7f32481c27
+  - Guid: 90d6bce9-4a1a-490d-b231-96514a52862e
+    NodeType: check_currency
+    DisplayName: Check 30g
+    StoryText:
+    Position: {x: 920, y: 330}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Enough
+      Direction: 1
+      Capacity: 0
+    - PortName: NotEnough
+      Direction: 1
+      Capacity: 0
+    Fields:
+    - FieldName: Amount
+      TypeName: System.Int32
+      InlineValue: 30
+      LinkedVariableGuid:
+  - Guid: 4297622f-1d43-495f-aa96-b9319ceeb568
+    NodeType: remove_currency
+    DisplayName: Remove 30g
+    StoryText:
+    Position: {x: 1200, y: 260}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Success
+      Direction: 1
+      Capacity: 0
+    - PortName: Failure
+      Direction: 1
+      Capacity: 0
+    Fields:
+    - FieldName: Amount
+      TypeName: System.Int32
+      InlineValue: 30
+      LinkedVariableGuid:
+  - Guid: de45ae42-2b04-4b55-8df9-44c36952d0f5
+    NodeType: DialogueLine
+    DisplayName: Hint
+    StoryText:
+    Position: {x: 1520, y: 200}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Out
+      Direction: 1
+      Capacity: 0
+    Fields:
+    - FieldName: Speaker
+      TypeName: System.String
+      InlineValue: Merchant
+      LinkedVariableGuid:
+    - FieldName: Text
+      TypeName: System.String
+      InlineValue: 'Pro tip: complete quests to unlock rare gear!'
+      LinkedVariableGuid:
+    - FieldName: Portrait
+      TypeName: UnityEngine.Sprite
+      InlineValue:
+      LinkedVariableGuid:
+  - Guid: b7ed571d-ea84-4254-862f-d1bfb6472ca8
+    NodeType: DialogueLine
+    DisplayName: Too Poor
+    StoryText:
+    Position: {x: 1200, y: 420}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Out
+      Direction: 1
+      Capacity: 0
+    Fields:
+    - FieldName: Speaker
+      TypeName: System.String
+      InlineValue: Merchant
+      LinkedVariableGuid:
+    - FieldName: Text
+      TypeName: System.String
+      InlineValue: You need 30 gold for that information.
+      LinkedVariableGuid:
+    - FieldName: Portrait
+      TypeName: UnityEngine.Sprite
+      InlineValue:
+      LinkedVariableGuid:
+  - Guid: bc684b00-bd21-424c-9b52-c1dd9f6f48af
+    NodeType: add_currency
+    DisplayName: Add 20g
+    StoryText:
+    Position: {x: 920, y: 560}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Out
+      Direction: 1
+      Capacity: 0
+    Fields:
+    - FieldName: Amount
+      TypeName: System.Int32
+      InlineValue: 20
+      LinkedVariableGuid:
+  - Guid: 701a574f-8770-4639-aace-9808f6da38a1
+    NodeType: DialogueLine
+    DisplayName: Bonus
+    StoryText:
+    Position: {x: 1200, y: 560}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Out
+      Direction: 1
+      Capacity: 0
+    Fields:
+    - FieldName: Speaker
+      TypeName: System.String
+      InlineValue: Merchant
+      LinkedVariableGuid:
+    - FieldName: Text
+      TypeName: System.String
+      InlineValue: "There you go — a bonus from the house!"
+      LinkedVariableGuid:
+    - FieldName: Portrait
+      TypeName: UnityEngine.Sprite
+      InlineValue:
+      LinkedVariableGuid:
+  - Guid: c37dbe63-aab2-4592-896d-a16e5cd79292
+    NodeType: DialogueLine
+    DisplayName: Farewell
+    StoryText:
+    Position: {x: 920, y: 720}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Out
+      Direction: 1
+      Capacity: 0
+    Fields:
+    - FieldName: Speaker
+      TypeName: System.String
+      InlineValue: Merchant
+      LinkedVariableGuid:
+    - FieldName: Text
+      TypeName: System.String
+      InlineValue: Safe travels then! Mind the wolves on the northern road.
+      LinkedVariableGuid:
+    - FieldName: Portrait
+      TypeName: UnityEngine.Sprite
+      InlineValue:
+      LinkedVariableGuid:
+  - Guid: 85ec7b19-1011-493d-8184-3b5fac4b18c8
+    NodeType: End
+    DisplayName: End
+    StoryText:
+    Position: {x: 1800, y: 400}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    Fields: []
+  m_Edges:
+  - Guid: 66024ef0-e326-4885-a0c5-788cf9a9d263
+    OutputNodeGuid: 48cd376c-e3fa-4adb-9b77-56886f28785c
+    OutputPortName: Out
+    InputNodeGuid: 68ceb2e0-d726-461e-8339-9ecd315adabe
+    InputPortName: In
+  - Guid: 75106103-22dc-48e2-ac06-9e6a4b6aa0a9
+    OutputNodeGuid: 68ceb2e0-d726-461e-8339-9ecd315adabe
+    OutputPortName: Out
+    InputNodeGuid: 09bc1231-10c5-4570-be80-8d9cb6eaa629
+    InputPortName: In
+  - Guid: 7900f440-b79d-4d55-9b26-5e24094ffcec
+    OutputNodeGuid: 09bc1231-10c5-4570-be80-8d9cb6eaa629
+    OutputPortName: Choice 1
+    InputNodeGuid: 3201d9b8-772f-4c2d-a8fd-9b3444c0b705
+    InputPortName: In
+  - Guid: e255c950-2f93-47c9-9914-0f57d45faf04
+    OutputNodeGuid: 3201d9b8-772f-4c2d-a8fd-9b3444c0b705
+    OutputPortName: Found
+    InputNodeGuid: 2d540ce1-5254-46c9-84bb-2bbbe114fb87
+    InputPortName: In
+  - Guid: 977854ef-39f8-428b-9124-3512b0b2d58e
+    OutputNodeGuid: 3201d9b8-772f-4c2d-a8fd-9b3444c0b705
+    OutputPortName: NotFound
+    InputNodeGuid: 85ec7b19-1011-493d-8184-3b5fac4b18c8
+    InputPortName: In
+  - Guid: 843d7a17-79c0-45a9-b6b9-046a9cf50c8b
+    OutputNodeGuid: 2d540ce1-5254-46c9-84bb-2bbbe114fb87
+    OutputPortName: Out
+    InputNodeGuid: 85ec7b19-1011-493d-8184-3b5fac4b18c8
+    InputPortName: In
+  - Guid: 55377593-4d96-48d5-8ef0-017f18105e36
+    OutputNodeGuid: 09bc1231-10c5-4570-be80-8d9cb6eaa629
+    OutputPortName: Choice 2
+    InputNodeGuid: 90d6bce9-4a1a-490d-b231-96514a52862e
+    InputPortName: In
+  - Guid: 26444bfa-4f94-47b6-8c59-c26fe9c8c905
+    OutputNodeGuid: 90d6bce9-4a1a-490d-b231-96514a52862e
+    OutputPortName: Enough
+    InputNodeGuid: 4297622f-1d43-495f-aa96-b9319ceeb568
+    InputPortName: In
+  - Guid: 73afedb3-2216-454c-b564-42f88a75e449
+    OutputNodeGuid: 90d6bce9-4a1a-490d-b231-96514a52862e
+    OutputPortName: NotEnough
+    InputNodeGuid: b7ed571d-ea84-4254-862f-d1bfb6472ca8
+    InputPortName: In
+  - Guid: 5218030b-2c72-4caf-86c9-06305b497657
+    OutputNodeGuid: 4297622f-1d43-495f-aa96-b9319ceeb568
+    OutputPortName: Success
+    InputNodeGuid: de45ae42-2b04-4b55-8df9-44c36952d0f5
+    InputPortName: In
+  - Guid: 1cb85c31-adcf-40c7-af8e-6aa00f5b3b7a
+    OutputNodeGuid: 4297622f-1d43-495f-aa96-b9319ceeb568
+    OutputPortName: Failure
+    InputNodeGuid: 85ec7b19-1011-493d-8184-3b5fac4b18c8
+    InputPortName: In
+  - Guid: 40987614-870e-44a8-a78f-0bff1b547014
+    OutputNodeGuid: de45ae42-2b04-4b55-8df9-44c36952d0f5
+    OutputPortName: Out
+    InputNodeGuid: 85ec7b19-1011-493d-8184-3b5fac4b18c8
+    InputPortName: In
+  - Guid: 91f2e566-acc1-4eb1-ad33-daac403f3163
+    OutputNodeGuid: b7ed571d-ea84-4254-862f-d1bfb6472ca8
+    OutputPortName: Out
+    InputNodeGuid: 85ec7b19-1011-493d-8184-3b5fac4b18c8
+    InputPortName: In
+  - Guid: a919ddf6-d40d-4948-8c7b-81e530a7fe6c
+    OutputNodeGuid: 09bc1231-10c5-4570-be80-8d9cb6eaa629
+    OutputPortName: Choice 3
+    InputNodeGuid: bc684b00-bd21-424c-9b52-c1dd9f6f48af
+    InputPortName: In
+  - Guid: 5b70fd12-2cb0-4e44-bbbc-55b440035e5d
+    OutputNodeGuid: bc684b00-bd21-424c-9b52-c1dd9f6f48af
+    OutputPortName: Out
+    InputNodeGuid: 701a574f-8770-4639-aace-9808f6da38a1
+    InputPortName: In
+  - Guid: 10fb2668-49d8-49d2-9308-56e3161c6a56
+    OutputNodeGuid: 701a574f-8770-4639-aace-9808f6da38a1
+    OutputPortName: Out
+    InputNodeGuid: 85ec7b19-1011-493d-8184-3b5fac4b18c8
+    InputPortName: In
+  - Guid: 577f27b0-0a66-4030-b60d-a835e7ab278b
+    OutputNodeGuid: 09bc1231-10c5-4570-be80-8d9cb6eaa629
+    OutputPortName: Choice 4
+    InputNodeGuid: c37dbe63-aab2-4592-896d-a16e5cd79292
+    InputPortName: In
+  - Guid: af749d3c-6a50-485f-aeca-1e7ea556c96e
+    OutputNodeGuid: c37dbe63-aab2-4592-896d-a16e5cd79292
+    OutputPortName: Out
+    InputNodeGuid: 85ec7b19-1011-493d-8184-3b5fac4b18c8
+    InputPortName: In
+  m_Blackboard:
+    m_Variables:
+    - rid: 7685950460498878627
+  ViewTransform: {x: 410, y: -19, z: 1}
+  BlackboardPosition: {x: 10, y: 60}
+  references:
+    version: 2
+    RefIds:
+    - rid: 7685950460498878627
+      type: {class: BlackboardVariableGameObject, ns: Feazeyu.RPGSystems.Dialogue,
+        asm: Feazeyu.RPGSystems.Dialogue}
+      data:
+        m_Name: merchant
+        m_Guid: 9fec2eea-122b-4493-a76e-0f7f32481c27
+        m_Exposed: 0
+        m_Shared: 0
+        m_Value: {fileID: 0}

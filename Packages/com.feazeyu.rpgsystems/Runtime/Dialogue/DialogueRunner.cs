@@ -56,6 +56,10 @@ namespace Feazeyu.RPGSystems.Dialogue
             RegisterHandler(new GiveItemNodeHandler());
             RegisterHandler(new DebugLogNodeHandler());
             RegisterHandler(new FindObjectNodeHandler());
+            RegisterHandler(new CheckCurrencyNodeHandler());
+            RegisterHandler(new AddCurrencyNodeHandler());
+            RegisterHandler(new RemoveCurrencyNodeHandler());
+            RegisterHandler(new OpenShopNodeHandler());
         }
 
         // ── Public API ────────────────────────────────────────────────────────

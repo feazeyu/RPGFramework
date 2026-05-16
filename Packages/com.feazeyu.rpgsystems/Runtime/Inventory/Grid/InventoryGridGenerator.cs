@@ -21,11 +21,13 @@ namespace Feazeyu.RPGSystems.Inventory
         public Vector2 spacing = new(0, 0);
 
         [Header("UI Position Settings")]
-        [Tooltip("Position of the generated UI from the top left (in pixels)")]
+        [HideInInspector]
+        public TextAnchor anchorPosition = TextAnchor.UpperLeft;
+        [Tooltip("Anchored position of the generated UI relative to the selected anchor point (Unity convention: positive Y = up)")]
         public Vector2 uiPosition = new(0, 0);
 
         [HideInInspector, SerializeField]
-        private GameObject? lastGeneratedRoot;
+        internal GameObject? lastGeneratedRoot;
 
         [SerializeField, HideInInspector]
         private SerializableDictionary<string, SlotUIDefinition>? serializableSlotDictionary;
@@ -79,11 +81,11 @@ namespace Feazeyu.RPGSystems.Inventory
             var parentTransform = target.transform;
             rootRect.SetParent(parentTransform != null ? parentTransform : transform, false);
 
-            // Set anchors to top-left, but position with uiPosition
-            rootRect.anchorMin = new Vector2(0, 1);
-            rootRect.anchorMax = new Vector2(0, 1);
-            rootRect.pivot = new Vector2(0, 1);
-            rootRect.anchoredPosition = new Vector2(uiPosition.x, -uiPosition.y); // Y is negative for top-left origin
+            var anchorVec = AnchorVector(anchorPosition);
+            rootRect.anchorMin = anchorVec;
+            rootRect.anchorMax = anchorVec;
+            rootRect.pivot = anchorVec;
+            rootRect.anchoredPosition = uiPosition;
 
             var grid = root.AddComponent<UnityEngine.UI.GridLayoutGroup>();
             grid.cellSize = InventoryManager.Instance.cellSize;
@@ -163,6 +165,12 @@ namespace Feazeyu.RPGSystems.Inventory
                 var redirect = InventoryHelper.CreateUIDragHandler(slot.gameObject, true);
                 redirect.GetComponent<InventoryItemUIRedirectingHandler>().targetPosition = anchor;
             }
+        }
+
+        private static Vector2 AnchorVector(TextAnchor anchor)
+        {
+            int val = (int)anchor;
+            return new Vector2((val % 3) * 0.5f, 1f - (val / 3) * 0.5f);
         }
 
         /// <summary>

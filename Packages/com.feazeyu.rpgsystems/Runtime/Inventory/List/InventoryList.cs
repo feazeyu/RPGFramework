@@ -63,7 +63,7 @@ namespace Feazeyu.RPGSystems.Inventory
         /// Unity callback invoked when the script is loaded or a value changes in the Inspector.
         /// Ensures the UI generator is added only once in the editor.
         /// </summary>
-        private void OnValidate()
+        protected virtual void OnValidate()
         {
 #if UNITY_EDITOR
             // Ensure the generator UI is only added once
@@ -84,7 +84,7 @@ namespace Feazeyu.RPGSystems.Inventory
         /// <summary>
         /// Toggles the active state of the inventory UI.
         /// </summary>
-        public void ToggleInventory()
+        public virtual void ToggleInventory()
         {
             if (uiGenerator)
                 uiGenerator.ToggleInventoryActiveState();
@@ -93,7 +93,7 @@ namespace Feazeyu.RPGSystems.Inventory
         /// <summary>
         /// Opens the inventory UI.
         /// </summary>
-        public void OpenInventory()
+        public virtual void OpenInventory()
         {
             if (uiGenerator)
                 uiGenerator.SetInventoryActiveState(true);
@@ -102,7 +102,7 @@ namespace Feazeyu.RPGSystems.Inventory
         /// <summary>
         /// Closes the inventory UI.
         /// </summary>
-        public void CloseInventory()
+        public virtual void CloseInventory()
         {
             if (uiGenerator)
                 uiGenerator.SetInventoryActiveState(false);

@@ -61,6 +61,12 @@ namespace Feazeyu.RPGSystems.Inventory
         public string inventoryName = "Inventory";
 
         /// <summary>
+        /// Anchor point on the canvas to attach the generated UI to.
+        /// </summary>
+        [HideInInspector]
+        public TextAnchor anchorPosition = TextAnchor.UpperLeft;
+
+        /// <summary>
         /// Generates the inventory UI object, either from a prefab or as a new GameObject.
         /// </summary>
         private void GenerateInventoryObject()
@@ -85,6 +91,15 @@ namespace Feazeyu.RPGSystems.Inventory
 #endif
                 target = UIObject.GetComponent<InventoryListUI>();
             }
+            var rect = UIObject.GetComponent<RectTransform>();
+            if (rect != null)
+            {
+                var anchorVec = AnchorVector(anchorPosition);
+                rect.anchorMin = anchorVec;
+                rect.anchorMax = anchorVec;
+                rect.pivot = anchorVec;
+            }
+
             if (target != null)
             {
                 target.list = list;
@@ -92,6 +107,12 @@ namespace Feazeyu.RPGSystems.Inventory
                 target.margin = margin;
                 target.firstElementPosition = firstElementPosition;
             }
+        }
+
+        private static Vector2 AnchorVector(TextAnchor anchor)
+        {
+            int val = (int)anchor;
+            return new Vector2((val % 3) * 0.5f, 1f - (val / 3) * 0.5f);
         }
 
         /// <summary>

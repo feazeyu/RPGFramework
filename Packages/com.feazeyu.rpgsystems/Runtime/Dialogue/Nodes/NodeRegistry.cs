@@ -326,6 +326,72 @@ namespace Feazeyu.RPGSystems.Dialogue
                     new FieldData { FieldName = "Target",  TypeName = "UnityEngine.GameObject" },
                 }
             });
+
+            Register(new DialogueNodeInfo
+            {
+                TypeId = "check_currency", DisplayName = "Check Currency", Category = "Shop",
+                Description = "Routes Enough or NotEnough based on the player's wallet balance.",
+                AccentColor = new Color(1.0f, 0.84f, 0.0f), Icon = "💰",
+                DefaultPorts = new List<PortData>
+                {
+                    new PortData { PortName = "In",        Direction = PortDirection.Input,  Capacity = PortCapacity.Multi  },
+                    new PortData { PortName = "Enough",    Direction = PortDirection.Output, Capacity = PortCapacity.Single },
+                    new PortData { PortName = "NotEnough", Direction = PortDirection.Output, Capacity = PortCapacity.Single },
+                },
+                DefaultFields = new List<FieldData>
+                {
+                    new FieldData { FieldName = "Amount", TypeName = "System.Int32", InlineValue = "0" },
+                }
+            });
+
+            Register(new DialogueNodeInfo
+            {
+                TypeId = "add_currency", DisplayName = "Add Currency", Category = "Shop",
+                Description = "Adds money to the player's wallet and continues.",
+                AccentColor = new Color(0.20f, 0.72f, 0.42f), Icon = "+$",
+                DefaultPorts = new List<PortData>
+                {
+                    new PortData { PortName = "In",  Direction = PortDirection.Input,  Capacity = PortCapacity.Multi  },
+                    new PortData { PortName = "Out", Direction = PortDirection.Output, Capacity = PortCapacity.Single },
+                },
+                DefaultFields = new List<FieldData>
+                {
+                    new FieldData { FieldName = "Amount", TypeName = "System.Int32", InlineValue = "0" },
+                }
+            });
+
+            Register(new DialogueNodeInfo
+            {
+                TypeId = "remove_currency", DisplayName = "Remove Currency", Category = "Shop",
+                Description = "Deducts money from the player's wallet. Routes Success or Failure.",
+                AccentColor = new Color(0.88f, 0.31f, 0.44f), Icon = "-$",
+                DefaultPorts = new List<PortData>
+                {
+                    new PortData { PortName = "In",      Direction = PortDirection.Input,  Capacity = PortCapacity.Multi  },
+                    new PortData { PortName = "Success", Direction = PortDirection.Output, Capacity = PortCapacity.Single },
+                    new PortData { PortName = "Failure", Direction = PortDirection.Output, Capacity = PortCapacity.Single },
+                },
+                DefaultFields = new List<FieldData>
+                {
+                    new FieldData { FieldName = "Amount", TypeName = "System.Int32", InlineValue = "0" },
+                }
+            });
+
+            Register(new DialogueNodeInfo
+            {
+                TypeId = "open_shop", DisplayName = "Open Shop", Category = "Shop",
+                Description = "Opens the shop UI on the target Shopkeep/ShopGridUI GameObject and continues.",
+                AccentColor = new Color(0.29f, 0.61f, 0.78f), Icon = "🛒",
+                DefaultPorts = new List<PortData>
+                {
+                    new PortData { PortName = "In",  Direction = PortDirection.Input,  Capacity = PortCapacity.Multi  },
+                    new PortData { PortName = "Out", Direction = PortDirection.Output, Capacity = PortCapacity.Single },
+                },
+                DefaultFields = new List<FieldData>
+                {
+                    new FieldData { FieldName = "Target", TypeName = "UnityEngine.GameObject" },
+                }
+            });
         }
 
         /// <summary>
