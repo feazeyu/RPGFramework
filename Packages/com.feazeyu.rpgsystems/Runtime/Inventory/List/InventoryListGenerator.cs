@@ -120,6 +120,16 @@ namespace Feazeyu.RPGSystems.Inventory
         /// </summary>
         public void DrawContents()
         {
+            if (targetCanvas == null)
+            {
+                targetCanvas = FindFirstObjectByType<Canvas>();
+                if (targetCanvas == null)
+                {
+                    Debug.LogError("InventoryListGenerator: Target Canvas is not set and no Canvas was found in the scene.");
+                    return;
+                }
+                Debug.LogWarning($"InventoryListGenerator on '{name}': Target Canvas is not set. Using '{targetCanvas.name}' found in the scene.", this);
+            }
             DestroyImmediate(UIObject);
             GenerateInventoryObject();
 

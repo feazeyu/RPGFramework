@@ -14,7 +14,7 @@ namespace QuestGraph.Runtime
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
     public class QuestNodeAttribute : Attribute
     {
-        public string TypeId      { get; }
+        public string NodeTypeID      { get; }
         public string DisplayName { get; }
         public string Category    { get; }
         public string Description { get; }
@@ -27,7 +27,7 @@ namespace QuestGraph.Runtime
             string description = "",
             string icon        = "")
         {
-            TypeId      = typeId;
+            NodeTypeID      = typeId;
             DisplayName = displayName;
             Category    = category;
             Description = description;
@@ -536,11 +536,11 @@ namespace QuestGraph.Runtime
                     var attr = (QuestNodeAttribute)Attribute.GetCustomAttribute(
                         type, typeof(QuestNodeAttribute));
                     if (attr == null) continue;
-                    if (s_Registry.ContainsKey(attr.TypeId)) continue;
+                    if (s_Registry.ContainsKey(attr.NodeTypeID)) continue;
 
                     Register(new DialogueNodeInfo
                     {
-                        TypeId      = attr.TypeId,
+                        TypeId      = attr.NodeTypeID,
                         DisplayName = attr.DisplayName,
                         Category    = attr.Category,
                         Description = attr.Description,

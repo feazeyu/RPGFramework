@@ -14,7 +14,7 @@ namespace Feazeyu.RPGSystems.Dialogue
     /// are unchanged — they just live on the base now.
     /// </summary>
     [CreateAssetMenu(
-        menuName = "Dialogue/Dialogue Graph",
+        menuName = "RPGFramework/Dialogue/Dialogue Graph",
         fileName = "NewDialogueGraph",
         order    = 1)]
     public class DialogueGraphAsset : GraphAsset { }

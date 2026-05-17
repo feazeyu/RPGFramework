@@ -1610,18 +1610,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Feazeyu.RPGSystems.Dialogue.DialogueUI, Feazeyu.RPGSystems.Dialogue
-        m_MethodName: OnContinueClicked
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1743128808}
         m_TargetAssemblyTypeName: Feazeyu.RPGSystems.Dialogue.DialogueUI, Feazeyu.RPGSystems.Dialogue
         m_MethodName: OnContinueClicked
@@ -1976,7 +1964,7 @@ GameObject:
   - component: {fileID: 1530013574}
   - component: {fileID: 1530013580}
   - component: {fileID: 1530013581}
-  - component: {fileID: 1530013582}
+  - component: {fileID: 1530013583}
   m_Layer: 0
   m_Name: NPC_Merchant
   m_TagString: Untagged
@@ -1996,7 +1984,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e36ca3275683664194c3050e649e806, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Graph: {fileID: 11400000, guid: 37e8f4737d7918e45b0062f6613bc8dc, type: 2}
+  Graph: {fileID: 11400000, guid: 1e1d2b5b00dfec445a5426c1b9280425, type: 2}
   OnGraphStarted:
     m_PersistentCalls:
       m_Calls: []
@@ -2030,13 +2018,13 @@ MonoBehaviour:
   OnInteract:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1530013582}
-        m_TargetAssemblyTypeName: Feazeyu.RPGSystems.Demo.NPCDialogueTrigger, Assembly-CSharp
+      - m_Target: {fileID: 1530013583}
+        m_TargetAssemblyTypeName: Feazeyu.RPGSystems.Demo.NPCDialogueTrigger, Feazeyu.RPGSystems.Samples.DialogueDemo
         m_MethodName: StartDialogue
-        m_Mode: 0
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2205,9 +2193,10 @@ MonoBehaviour:
   columns: 5
   Cells:
     rid: 1756203013541462128
-  shopInventory: {fileID: 11400000, guid: b35f01f32ca878f4f9b2e9644f823c62, type: 2}
+  shopInventory: {fileID: 11400000, guid: 0da84229f89be184ab5eb80e2437f917, type: 2}
   _currencyProvider: {fileID: 0}
-  priceLabelPrefab: {fileID: 2577657971906905602, guid: 224aa1f16a4611748a522adaa8a22ee0, type: 3}
+  _sellRatio: 0.5
+  priceLabelPrefab: {fileID: 2577657971906905602, guid: 115c4b5f8e32e0340bb45dcbb98d1c79, type: 3}
   references:
     version: 2
     RefIds:
@@ -2417,7 +2406,7 @@ MonoBehaviour:
         anchorPosition: {x: -1, y: -1}
         IsEnabled: 1
         _itemId: -1
---- !u!114 &1530013582
+--- !u!114 &1530013583
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2426,7 +2415,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1530013572}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f83c5dcd207bc104ba075de6e540d688, type: 3}
+  m_Script: {fileID: 11500000, guid: 0e768d06820f8e547b6412615b1d3eca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_DialogueRunner: {fileID: 1530013574}
@@ -2832,8 +2821,8 @@ GameObject:
   - component: {fileID: 1848969208}
   - component: {fileID: 1848969207}
   - component: {fileID: 1848969206}
-  - component: {fileID: 1848969205}
   - component: {fileID: 1848969211}
+  - component: {fileID: 1848969212}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2841,19 +2830,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1848969205
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1848969204}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 032a7ac5df9a1294a9ecd3245074b1a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MoveSpeed: 5
 --- !u!114 &1848969206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3014,6 +2990,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _balance: 100
+--- !u!114 &1848969212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848969204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34f1862f0c11af14fbee7bce15760240, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MoveSpeed: 5
 --- !u!1 &2065743880
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,12 +17,6 @@ namespace Feazeyu.RPGSystems.Character
         public SerializableDictionary<ResourceTypes, Resource>? resources;
 
         /// <summary>
-        /// The cooldowns for each spell, mapped by spell info.
-        /// </summary>
-        [HideInInspector]
-        public SerializableDictionary<SpellInfo, DateTime>? spellCooldowns;
-
-        /// <summary>
         /// The transform where spells are spawned when cast.
         /// </summary>
         [Tooltip("Spells spawn here")]
@@ -43,7 +37,6 @@ namespace Feazeyu.RPGSystems.Character
         protected virtual void Awake()
         {
             resources = new SerializableDictionary<ResourceTypes, Resource>();
-            spellCooldowns = new SerializableDictionary<SpellInfo, DateTime>();
             GetResourceComponents();
             if (resources != null && resources.TryGetValue(ResourceTypes.Health, out var healthRes))
                 healthRes.onResourceReachesZero += () => OnDeath?.Invoke();
@@ -73,52 +66,6 @@ namespace Feazeyu.RPGSystems.Character
                     resources.Add(resource.resourceType, resource);
                 }
             }
-        }
-
-        /// <summary>
-        /// Attempts to cast the specified spell, deducting resources and handling cooldowns.
-        /// </summary>
-        /// <param name="spell">The spell to cast.</param>
-        /// <returns>
-        /// The instantiated spell <see cref="GameObject"/> if the cast is successful; otherwise, <c>null</c>.
-        /// </returns>
-        public GameObject? Cast(SpellInfo spell)
-        {
-            if (resources == null || spellCooldowns == null || castingPosition==null || castingRotationReference==null)
-            {
-                return null;
-            }
-            if (!spellCooldowns.TryGetValue(spell, out var cooldown))
-            {
-                spellCooldowns[spell] = DateTime.Now;
-            }
-            if (cooldown > DateTime.Now)
-            {
-                return null; // Spell is on cooldown
-            }
-
-            foreach (var resourceCost in spell.resourceCosts)
-            {
-                if (!resources.TryGetValue(resourceCost.Key, out var resource) || resource.Points < resourceCost.Value)
-                {
-                    Debug.LogWarning($"Not enough {resourceCost.Key} to cast {spell.name}");
-                    return null; // Not enough resources
-                }
-            }
-            // Has enough, deduct and cast.
-            foreach (var resourceCost in spell.resourceCosts)
-            {
-                if (resources.TryGetValue(resourceCost.Key, out var resource))
-                {
-                    resource.Points -= resourceCost.Value;
-                }
-            }
-            var SpellObject = Instantiate(spell.prefab);
-            spellCooldowns[spell] = DateTime.Now.AddMilliseconds(spell.cooldown);
-
-            SpellObject.transform.position = castingPosition.position;
-            SpellObject.transform.rotation = castingRotationReference.rotation;
-            return SpellObject;
         }
     }
 }

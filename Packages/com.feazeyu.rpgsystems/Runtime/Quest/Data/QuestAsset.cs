@@ -30,7 +30,7 @@ namespace QuestGraph.Runtime
     /// to begin from a clean slate.
     /// </summary>
     [CreateAssetMenu(
-        menuName = "Quest/Simple Quest",
+        menuName = "RPGFramework/Quest/Simple Quest",
         fileName = "NewSimpleQuest",
         order    = 3)]
     public class QuestAsset : ScriptableObject

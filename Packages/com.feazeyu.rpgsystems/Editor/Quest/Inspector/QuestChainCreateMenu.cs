@@ -21,7 +21,7 @@ namespace Feazeyu.RPGSystems.EditorTools
     /// </summary>
     public static class QuestChainCreateMenu
     {
-        [MenuItem("Assets/Create/Quest/Quest Chain", priority = 2)]
+        [MenuItem("Assets/Create/RPGFramework/Quest/Quest Chain", priority = 2)]
         private static void CreateQuestChain()
         {
             var icon = EditorGUIUtility.IconContent("d_ScriptableObject Icon").image as Texture2D;

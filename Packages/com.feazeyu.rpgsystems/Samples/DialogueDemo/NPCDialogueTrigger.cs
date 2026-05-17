@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using Feazeyu.RPGSystems.Dialogue;
-using Feazeyu.RPGSystems.Dialogue;
 using Feazeyu.RPGSystems.Character;
 
 namespace Feazeyu.RPGSystems.Demo

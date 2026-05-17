@@ -19,6 +19,11 @@ namespace Feazeyu.RPGSystems.Inventory
         [Tooltip("MonoBehaviour implementing IShopCurrency. Falls back to PlayerWallet singleton if null.")]
         [SerializeField] private MonoBehaviour _currencyProvider;
 
+        [Header("Selling")]
+        [Tooltip("Fraction of buy price refunded when selling an item to this shop (0 = no refund, 1 = full price).")]
+        [Range(0f, 1f)]
+        [SerializeField] private float _sellRatio = 0.5f;
+
         [Header("Price Label")]
         [Tooltip("Optional prefab for the price tag. Must contain a TMP_Text (or a child named 'Price' with one). If null, a procedural label is generated.")]
         public GameObject priceLabelPrefab;
@@ -133,23 +138,52 @@ namespace Feazeyu.RPGSystems.Inventory
 
         void IPositionalItemContainer.ReturnItem(Vector2Int position, GameObject item)
         {
+            // Item is returning to its slot in the shop after a failed drop elsewhere — undo the purchase.
             ConsumePendingRefund(item.GetComponent<Item>()?.info?.id ?? -1);
-            PutItem(position, item);
+            base.PutItem(position, item);
         }
 
         public override bool PutItem(Vector2Int position, GameObject item)
         {
-            bool placed = base.PutItem(position, item);
-            if (placed)
-                ConsumePendingRefund(item.GetComponent<Item>()?.info?.id ?? -1);
-            return placed;
+            int itemId = item.GetComponent<Item>()?.info?.id ?? -1;
+
+            if (_pendingRefundItemId == itemId)
+            {
+                // Intentional return of an item just bought from this shop — full refund.
+                bool placed = base.PutItem(position, item);
+                if (placed) ConsumePendingRefund(itemId);
+                return placed;
+            }
+
+            return TrySellToShop(item, itemId, () => base.PutItem(position, item));
         }
 
         protected override bool AutoPlaceItem(GameObject item)
         {
-            bool placed = base.AutoPlaceItem(item);
+            int itemId = item.GetComponent<Item>()?.info?.id ?? -1;
+
+            if (_pendingRefundItemId == itemId)
+            {
+                bool placed = base.AutoPlaceItem(item);
+                if (placed) ConsumePendingRefund(itemId);
+                return placed;
+            }
+
+            return TrySellToShop(item, itemId, () => base.AutoPlaceItem(item));
+        }
+
+        private bool TrySellToShop(GameObject item, int itemId, System.Func<bool> placeFn)
+        {
+            int buyPrice = GetPrice(itemId);
+            if (buyPrice <= 0) return false; // item not in this shop's listings — reject
+
+            bool placed = placeFn();
             if (placed)
-                ConsumePendingRefund(item.GetComponent<Item>()?.info?.id ?? -1);
+            {
+                Currency.Add(Mathf.FloorToInt(buyPrice * _sellRatio));
+                shopInventory?.listings.FirstOrDefault(s => s.itemId == itemId)?.UndoSell();
+                RedrawContents();
+            }
             return placed;
         }
 

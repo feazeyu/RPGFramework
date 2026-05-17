@@ -36,7 +36,7 @@ namespace QuestGraph.Runtime
     /// and the runtime behaviour both switch on it.
     /// </summary>
     [CreateAssetMenu(
-        menuName = "Quest/Quest Graph",
+        menuName = "RPGFramework/Quest/Quest Graph",
         fileName = "NewQuestGraph",
         order    = 1)]
     public class QuestGraphAsset : GraphAsset

@@ -14,8 +14,6 @@ namespace Feazeyu.RPGSystems.Character
         public Camera mainCamera;
         [Tooltip("(Optional) Component of a gameobject that will get rotated when aiming")]
         public RotateTowardsPoint weaponRotationHandler;
-        [Tooltip("(Optional) Weapon component used for attacks")]
-        public Weapon weapon;
         [Tooltip("Flip the sprite when aiming left")]
         public bool flipOnAimLeft = true;
         [Tooltip("(Optional) Interactor component reference")]
@@ -34,8 +32,6 @@ namespace Feazeyu.RPGSystems.Character
                 mainCamera = Camera.main;
             if (weaponRotationHandler == null)
                 weaponRotationHandler = GetComponentInChildren<RotateTowardsPoint>();
-            if (weapon == null)
-                weapon = GetComponentInChildren<Weapon>();
             sr = GetComponent<SpriteRenderer>();
             Health health = resources[ResourceTypes.Health] as Health;
             if (health != null)
@@ -56,7 +52,6 @@ namespace Feazeyu.RPGSystems.Character
         public void Update()
         {
             HandleAiming();
-            HandleAttack();
         }
 
         private void FixedUpdate()
@@ -111,16 +106,6 @@ namespace Feazeyu.RPGSystems.Character
             }
 
         }
-
-        // --- Attacks ---
-        private void HandleAttack()
-        {
-            if (isShooting)
-            {
-                weapon.Attack();
-            }
-        }
-
 
         private void Die()
         {

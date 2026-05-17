@@ -75,8 +75,13 @@ namespace Feazeyu.RPGSystems.Inventory
             var rootRect = root.AddComponent<RectTransform>();
             if (target == null)
             {
-                Debug.LogError("InventoryUIGenerator: Target Canvas is not set.");
-                return;
+                target = FindFirstObjectByType<Canvas>();
+                if (target == null)
+                {
+                    Debug.LogError("InventoryGridGenerator: Target Canvas is not set and no Canvas was found in the scene.");
+                    return;
+                }
+                Debug.LogWarning($"InventoryGridGenerator on '{name}': Target Canvas is not set. Using '{target.name}' found in the scene.", this);
             }
             var parentTransform = target.transform;
             rootRect.SetParent(parentTransform != null ? parentTransform : transform, false);
