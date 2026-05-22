@@ -1,0 +1,71 @@
+@startuml Editor
+title Feazeyu.RPGSystems.Editor
+note "Editor-only assembly — all classes extend Unity Editor types\n(EditorWindow, Editor, VisualElement, etc.)"
+
+namespace Feazeyu.RPGSystems.EditorTools {
+
+    ' ── Graph Editor ───────────────────────────────────────
+    class DialogueGraphWindow {
+        + {static} Open(asset : DialogueGraphAsset) : void
+        + CreateGUI() : void
+    }
+
+    class DialogueGraphView {
+        + Load(asset : DialogueGraphAsset) : void
+        + Save() : void
+        + AddNode(typeId : string, pos : Vector2) : void
+        + DeleteSelection() : void
+    }
+
+    class BlackboardPanel {
+        + Bind(blackboard : Blackboard, graph : GraphAsset) : void
+    }
+
+    class NodeSearchWindow {
+        + Configure(graphView : DialogueGraphView, registry : IEnumerable<DialogueNodeInfo>) : void
+    }
+
+    class InspectorPanel {
+        + Inspect(node : NodeData, asset : GraphAsset) : void
+    }
+
+    class DialogueNodeView {
+        + Guid : string
+        + NodeData : NodeData
+        + RefreshPorts() : void
+        + Sync(data : NodeData) : void
+    }
+
+    ' ── Quest Graph Editor ─────────────────────────────────
+    class QuestGraphWindow {
+        + {static} Open(asset : QuestGraphAsset) : void
+        + CreateGUI() : void
+    }
+
+    class QuestGraphAssetEditor {
+        + OnInspectorGUI() : void
+    }
+
+    ' ── Inventory Editors ──────────────────────────────────
+    class InventoryManagerEditor {
+        + OnInspectorGUI() : void
+    }
+
+    class InventoryGridEditor {
+        + OnInspectorGUI() : void
+        + GenerateGridUI(grid : InventoryGrid) : void
+    }
+
+    class InventoryListHierarchyContext {
+        + AddItemsToMenu(menu : GenericMenu) : void
+    }
+}
+
+' Relationships
+Feazeyu.RPGSystems.EditorTools.DialogueGraphWindow --> Feazeyu.RPGSystems.EditorTools.DialogueGraphView
+Feazeyu.RPGSystems.EditorTools.DialogueGraphWindow --> Feazeyu.RPGSystems.EditorTools.BlackboardPanel
+Feazeyu.RPGSystems.EditorTools.DialogueGraphWindow --> Feazeyu.RPGSystems.EditorTools.InspectorPanel
+Feazeyu.RPGSystems.EditorTools.DialogueGraphView --> Feazeyu.RPGSystems.EditorTools.DialogueNodeView
+Feazeyu.RPGSystems.EditorTools.DialogueGraphView --> Feazeyu.RPGSystems.EditorTools.NodeSearchWindow
+
+@enduml

@@ -1,0 +1,195 @@
+@startuml Quest
+title Feazeyu.RPGSystems.Quest
+
+namespace QuestGraph {
+
+    ' ── Enums ──────────────────────────────────────────────
+    enum QuestState {
+        NotStarted = 0
+        Active = 1
+        Completed = 2
+        Failed = 3
+    }
+
+    enum QuestKind {
+        Single = 0
+        Chain = 1
+    }
+
+    enum QuestResult {
+        InProgress = 0
+        Completed = 1
+        Failed = 2
+        Aborted = 3
+    }
+
+    enum QuestEntryState {
+        Locked = 0
+        Available = 1
+        Active = 2
+        Completed = 3
+        Failed = 4
+    }
+
+    enum QuestSource {
+        None = 0
+        Graph = 1
+        Simple = 2
+    }
+
+    ' ── Data ───────────────────────────────────────────────
+    class QuestAsset {
+        + Title : string
+        + Description : string
+        + State : QuestState
+        + IsCompleted : bool
+        + IsFailed : bool
+        + IsActive : bool
+        + OnStarted : UnityEvent
+        + OnCompleted : UnityEvent
+        + OnFailed : UnityEvent
+        + OnReset : UnityEvent
+        + Start() : void
+        + Complete() : void
+        + Fail() : void
+        + Reset() : void
+    }
+
+    class QuestGraphAsset {
+        + Kind : QuestKind
+    }
+
+    class ObjectiveInfo <<struct>> {
+        + NodeGuid : string
+        + Title : string
+        + Description : string
+        + Optional : bool
+    }
+
+    class RewardInfo <<struct>> {
+        + xp : int
+        + currency : int
+        + item : ScriptableObject
+        + quantity : int
+    }
+
+    class QuestEntry <<struct>> {
+        + ChainNodeGuid : string
+        + Source : QuestSource
+        + GraphQuest : QuestGraphAsset
+        + SimpleQuest : QuestAsset
+        + State : QuestEntryState
+        + DisplayName : string
+    }
+
+    ' ── Runners ────────────────────────────────────────────
+    class QuestRunner {
+        + Result : QuestResult
+        + FailureReason : string
+        + ActiveObjective : ObjectiveInfo?
+        + ActiveObjectives : IReadOnlyCollection<ObjectiveInfo>
+        + OnObjectiveStarted : ObjectiveEvent
+        + OnObjectiveCompleted : ObjectiveEvent
+        + OnObjectiveFailed : ObjectiveEvent
+        + OnRewardGranted : RewardEvent
+        + OnQuestCompleted : UnityEvent
+        + OnQuestFailed : FailedEvent
+        + OnQuestEnded : ResultEvent
+        + StartQuest() : void
+        + CompleteObjective(guid : string) : void
+        + FailObjective(guid : string) : void
+        + ForceFailQuest(reason : string) : void
+        + AbortQuest() : void
+        + RegisterObjective(info : ObjectiveInfo) : void
+        + UnregisterObjective(guid : string, outcome : bool?) : void
+        + GetObjectiveOutcome(guid : string) : bool?
+    }
+
+    class QuestChainRunner {
+        + Chain : QuestGraphAsset
+        + AutoStart : bool
+        + IsStarted : bool
+        + ActiveRunner : QuestRunner
+        + OnAvailableQuestsChanged : ChainReadyEvent
+        + OnQuestStarted : ChainQuestEvent
+        + OnQuestCompleted : ChainQuestEvent
+        + OnQuestFailed : ChainQuestFailedEvent
+        + OnChainCompleted : UnityEvent
+        + StartChain() : void
+        + GetAvailableQuests() : List<QuestEntry>
+        + GetAllEntries() : IEnumerable<QuestEntry>
+        + StartQuest(nodeGuid : string) : void
+        + NotifyExternalQuestCompleted(nodeGuid : string) : void
+        + NotifyExternalQuestFailed(nodeGuid : string, reason : string) : void
+        + AbortActiveQuest() : void
+    }
+
+    ' ── Objectives ─────────────────────────────────────────
+    abstract class QuestObjectiveBase {
+        + objectiveTitle : string
+        + questRunner : QuestRunner
+        + StartTracking(info : ObjectiveInfo) : void
+        + StopTracking() : void
+        + Complete() : void
+        + Fail() : void
+    }
+
+    class KillCountObjective {
+        + enemyTag : string
+        + requiredKills : int
+        + trackNewEnemies : bool
+        + StartTracking(info : ObjectiveInfo) : void
+        + StopTracking() : void
+    }
+
+    class CollectItemObjective
+    class DeliverItemObjective
+    class ReachLocationObjective
+
+    ' ── Registry ───────────────────────────────────────────
+    class QuestNodeRegistry <<static>> {
+        + {static} TypeObjective : string
+        + {static} TypeReward : string
+        + {static} TypeCompleteQuest : string
+        + {static} TypeFailQuest : string
+        + {static} TypeSpawnItem : string
+        + {static} TypeKillCountObjective : string
+        + {static} TypeReachLocationObjective : string
+        + {static} TypeCollectItemObjective : string
+        + {static} TypeDeliverItemObjective : string
+        + {static} TypeRunSubgraph : string
+    }
+
+    ' ── Blackboard Variables ───────────────────────────────
+    class BlackboardVariableQuestGraph <<sealed>>
+    class BlackboardVariableQuest <<sealed>>
+
+    ' ── Events ─────────────────────────────────────────────
+    class ObjectiveEvent
+    class RewardEvent
+    class ResultEvent
+    class FailedEvent
+    class ChainReadyEvent
+    class ChainQuestEvent
+    class ChainQuestFailedEvent
+}
+
+' Inheritance
+QuestGraph.QuestRunner --|> "GraphRunner (Dialogue)"
+QuestGraph.QuestGraphAsset --|> "GraphAsset (Dialogue)"
+QuestGraph.KillCountObjective --|> QuestGraph.QuestObjectiveBase
+QuestGraph.CollectItemObjective --|> QuestGraph.QuestObjectiveBase
+QuestGraph.DeliverItemObjective --|> QuestGraph.QuestObjectiveBase
+QuestGraph.ReachLocationObjective --|> QuestGraph.QuestObjectiveBase
+
+' Associations
+QuestGraph.QuestChainRunner --> QuestGraph.QuestGraphAsset
+QuestGraph.QuestChainRunner --> QuestGraph.QuestRunner
+QuestGraph.QuestRunner --> QuestGraph.ObjectiveInfo
+QuestGraph.QuestEntry --> QuestGraph.QuestGraphAsset
+QuestGraph.QuestEntry --> QuestGraph.QuestAsset
+QuestGraph.QuestAsset --> QuestGraph.QuestState
+QuestGraph.QuestGraphAsset --> QuestGraph.QuestKind
+QuestGraph.QuestObjectiveBase --> QuestGraph.QuestRunner
+
+@enduml

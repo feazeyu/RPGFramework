@@ -254,6 +254,21 @@ namespace Feazeyu.RPGSystems.EditorTools
                 linkLabel.AddToClassList("inspector-link-label");
                 valueRow.Add(linkLabel);
             }
+            else if (DialogueNodeView.IsOperatorField(field))
+            {
+                var ops     = DialogueNodeView.ConditionalOperators;
+                var current = ops.Contains(field.InlineValue) ? field.InlineValue : ops[0];
+                var dropdown = new DropdownField(ops, current);
+                dropdown.AddToClassList("inspector-text-field");
+                dropdown.style.flexGrow = 1;
+                dropdown.RegisterValueChangedCallback(evt =>
+                {
+                    field.InlineValue = evt.newValue;
+                    if (asset) EditorUtility.SetDirty(asset);
+                    m_RefreshNodeView?.Invoke(m_Node?.Guid ?? "");
+                });
+                valueRow.Add(dropdown);
+            }
             else
             {
                 var valueField = new TextField { value = field.InlineValue ?? "" };

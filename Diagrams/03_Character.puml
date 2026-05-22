@@ -1,0 +1,76 @@
+@startuml Character
+title Feazeyu.RPGSystems.Character
+
+namespace Feazeyu.RPGSystems.Character {
+
+    enum ResourceTypes {
+        None
+        Health
+        Mana
+        Stamina
+    }
+
+    abstract class Resource {
+        + maxAmount : float
+        + resourceType : ResourceTypes
+        + Points : float
+        + Percent : float
+        + onResourceReachesZero : event
+        + onResourceLost : event
+        + onResourceGained : event
+        + onResourceChanged : event
+    }
+
+    class Health {
+        + Start() : void
+        + OnDestroy() : void
+    }
+
+    class Mana
+    class Stamina
+
+    class Entity {
+        + resources : SerializableDictionary<ResourceTypes, Resource>
+        + castingPosition : Transform
+        + castingRotationReference : Transform
+        + OnDeath : UnityEvent
+        + Awake() : void
+        + GetResourceComponents() : void
+    }
+
+    class PlayerController {
+        + moveSpeed : float
+        + mainCamera : Camera
+        + weaponRotationHandler : RotateTowardsPoint
+        + flipOnAimLeft : bool
+        + interactor : Interactor
+        + OnMove(ctx : InputAction.CallbackContext) : void
+        + OnLook(ctx : InputAction.CallbackContext) : void
+        + OnInteract(ctx : InputAction.CallbackContext) : void
+        + OnAttack(ctx : InputAction.CallbackContext) : void
+    }
+
+    class Interactable {
+        + OnInteract : UnityEvent
+        + OnAreaEnter : UnityEvent
+        + OnAreaExit : UnityEvent
+        + Interact() : void
+        + OnTriggerEnter2D(other : Collider2D) : void
+        + OnTriggerExit2D(other : Collider2D) : void
+    }
+
+    class Interactor {
+        + interactables : List<Interactable>
+        + InteractWithClosest() : bool
+    }
+}
+
+Feazeyu.RPGSystems.Character.Health --|> Feazeyu.RPGSystems.Character.Resource
+Feazeyu.RPGSystems.Character.Mana --|> Feazeyu.RPGSystems.Character.Resource
+Feazeyu.RPGSystems.Character.Stamina --|> Feazeyu.RPGSystems.Character.Resource
+Feazeyu.RPGSystems.Character.PlayerController --|> Feazeyu.RPGSystems.Character.Entity
+Feazeyu.RPGSystems.Character.Entity --> Feazeyu.RPGSystems.Character.Resource
+Feazeyu.RPGSystems.Character.PlayerController --> Feazeyu.RPGSystems.Character.Interactor
+Feazeyu.RPGSystems.Character.Interactor --> Feazeyu.RPGSystems.Character.Interactable
+
+@enduml

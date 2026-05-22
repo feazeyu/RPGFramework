@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Feazeyu.RPGSystems.Inventory.GridUISlot" Collapsed="true">
+    <Position X="16.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAEAACAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Packages\com.feazeyu.rpgsystems\Runtime\Inventory\Grid\GridUISlot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Feazeyu.RPGSystems.Inventory.InventoryGrid" Collapsed="true">
+    <Position X="14" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAKQACAAAQgMAAACNQAoAAABAAgAAEWgAQAEBAAME=</HashCode>
+      <FileName>Packages\com.feazeyu.rpgsystems\Runtime\Inventory\Grid\InventoryGrid.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Feazeyu.RPGSystems.Inventory.InventoryGridGenerator" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14" Y="6.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>mAAAAQCAAEAgAIAAIAAIAAAAAABAAEgAAAAAAAAQCEE=</HashCode>
+      <FileName>Packages\com.feazeyu.rpgsystems\Runtime\Inventory\Grid\InventoryGridGenerator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Feazeyu.RPGSystems.Inventory.InventoryHelper" Collapsed="true">
+    <Position X="20.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAQAAAAggAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Packages\com.feazeyu.rpgsystems\Runtime\Inventory\InventoryHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Feazeyu.RPGSystems.Inventory.InventoryItemUIHandler" Collapsed="true">
+    <Position X="13.75" Y="1.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>IAAEAAQAACACAAAAQBBAkAICQAC0ACAIgAAAAQAAAAA=</HashCode>
+      <FileName>Packages\com.feazeyu.rpgsystems\Runtime\Inventory\InventoryItemUIHandler.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Feazeyu.RPGSystems.Inventory.InventoryItemUIRedirectingHandler" Collapsed="true">
+    <Position X="13.5" Y="3" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Packages\com.feazeyu.rpgsystems\Runtime\Inventory\InventoryItemUIRedirectingHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Feazeyu.RPGSystems.Inventory.InventoryManager" Collapsed="true">
+    <Position X="19" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAEAAAAAAAAAgAQEACAAAAAAAAQAAAAAAAAEA=</HashCode>
+      <FileName>Packages\com.feazeyu.rpgsystems\Runtime\Inventory\InventoryManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Feazeyu.RPGSystems.Inventory.InventorySlot" Collapsed="true">
+    <Position X="7.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACACCQgAAAAAAoAEAIAAEAAABEAAEAAAAgCAAAAA=</HashCode>
+      <FileName>Packages\com.feazeyu.rpgsystems\Runtime\Inventory\InventorySlot.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Feazeyu.RPGSystems.Inventory.LockedInventorySlot" Collapsed="true">
+    <Position X="6" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAQgAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Packages\com.feazeyu.rpgsystems\Runtime\Inventory\InventorySlot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Feazeyu.RPGSystems.Inventory.StackableInventorySlot" Collapsed="true">
+    <Position X="8.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAGAAAQAABAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Packages\com.feazeyu.rpgsystems\Runtime\Inventory\InventorySlot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Feazeyu.RPGSystems.Inventory.InventoryList" Collapsed="true">
+    <Position X="11" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAQIAAAAAAAAAAAACMAAgAAAgAAAAAAUAAAAAAACAA=</HashCode>
+      <FileName>Packages\com.feazeyu.rpgsystems\Runtime\Inventory\List\InventoryList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Feazeyu.RPGSystems.Inventory.InventoryListGenerator" Collapsed="true">
+    <Position X="11" Y="7.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>QAAgAgCgAAAAAgAAIQEAACAAAQAAAEAAAAAAAEAQAAE=</HashCode>
+      <FileName>Packages\com.feazeyu.rpgsystems\Runtime\Inventory\List\InventoryListGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Feazeyu.RPGSystems.Inventory.InventoryListUI" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11" Y="8.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAECgAgACABAMAAAQAIEIEAESAAACQEAAAAAAAAAEA=</HashCode>
+      <FileName>Packages\com.feazeyu.rpgsystems\Runtime\Inventory\List\InventoryListUI.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Feazeyu.RPGSystems.Inventory.PlayerInventoryService" Collapsed="true">
+    <Position X="20.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAACAAAIIgACAAAAAAAAAAAAAAQAAAAAAAAEA=</HashCode>
+      <FileName>Packages\com.feazeyu.rpgsystems\Runtime\Inventory\PlayerInventoryService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Feazeyu.RPGSystems.Inventory.PositionalUISlot" Collapsed="true">
+    <Position X="16.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAQAAAAIAAAIAAEAAAAAAAEAAAAAAAAAEA=</HashCode>
+      <FileName>Packages\com.feazeyu.rpgsystems\Runtime\Inventory\PositionalUISlot.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Feazeyu.RPGSystems.Inventory.PlayerWallet" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="22.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAIAAAAAAAAAAAAAAAgAAAgAAAAAAAAAQAAACAAAAEA=</HashCode>
+      <FileName>Packages\com.feazeyu.rpgsystems\Runtime\Inventory\Shopping\PlayerWallet.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Feazeyu.RPGSystems.Inventory.ShopGridUI" Collapsed="true">
+    <Position X="14" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAACAAACgQAAAAAGAIAaAEACAAgIAAEAgAgAAAAAMA=</HashCode>
+      <FileName>Packages\com.feazeyu.rpgsystems\Runtime\Inventory\Shopping\ShopGridUI.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Feazeyu.RPGSystems.Inventory.ShopInventory" Collapsed="true">
+    <Position X="18.5" Y="6.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Packages\com.feazeyu.rpgsystems\Runtime\Inventory\Shopping\ShopInventory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Feazeyu.RPGSystems.Inventory.Shopkeep" Collapsed="true">
+    <Position X="19" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACCAACAAAACACBAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Packages\com.feazeyu.rpgsystems\Runtime\Inventory\Shopping\Shopkeep.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Feazeyu.RPGSystems.Inventory.ShopListUI" Collapsed="true">
+    <Position X="11" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAACIASAABACCEIAgQACAAgABgAQAAAAIAAAUA=</HashCode>
+      <FileName>Packages\com.feazeyu.rpgsystems\Runtime\Inventory\Shopping\ShopListUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Feazeyu.RPGSystems.Inventory.ShopSlot" Collapsed="true">
+    <Position X="20.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIBAEAAAAGAAAAAAAAAAAAAAAAAAIAAAAAAAIAAAAA=</HashCode>
+      <FileName>Packages\com.feazeyu.rpgsystems\Runtime\Inventory\Shopping\ShopSlot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Feazeyu.RPGSystems.Inventory.ShopSlotHandler" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="22.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABgAEAACgJAAAAAAAAACAAAAAAgAAAAhABCAQAEAAA=</HashCode>
+      <FileName>Packages\com.feazeyu.rpgsystems\Runtime\Inventory\Shopping\ShopSlotHandler.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Feazeyu.RPGSystems.Inventory.TextCountItemRenderer" Collapsed="true">
+    <Position X="11" Y="6.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAAAAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Packages\com.feazeyu.rpgsystems\Runtime\Inventory\TextCountItemRenderer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="Feazeyu.RPGSystems.Inventory.SlotUIDefinition" Collapsed="true">
+    <Position X="19" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAIAAAAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Packages\com.feazeyu.rpgsystems\Runtime\Inventory\Grid\InventoryGridGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Interface Name="Feazeyu.RPGSystems.Inventory.IUIItemContainer" Collapsed="true">
+    <Position X="10.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Packages\com.feazeyu.rpgsystems\Runtime\Inventory\InventoryHelper.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Feazeyu.RPGSystems.Inventory.IItemContainer" Collapsed="true">
+    <Position X="8.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAQAIAAAAAAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Packages\com.feazeyu.rpgsystems\Runtime\Inventory\InventoryHelper.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Feazeyu.RPGSystems.Inventory.ISingleItemContainer" Collapsed="true">
+    <Position X="6.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Packages\com.feazeyu.rpgsystems\Runtime\Inventory\InventoryHelper.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Feazeyu.RPGSystems.Inventory.IPositionalItemContainer" Collapsed="true">
+    <Position X="8.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAQAEAAABAAAAAAAAQAAAAEAAAAAAAAAIA=</HashCode>
+      <FileName>Packages\com.feazeyu.rpgsystems\Runtime\Inventory\InventoryHelper.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Feazeyu.RPGSystems.Inventory.IUIPositionalItemContainer" Collapsed="true">
+    <Position X="8.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Packages\com.feazeyu.rpgsystems\Runtime\Inventory\InventoryHelper.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Feazeyu.RPGSystems.Inventory.IHideInSelections" Collapsed="true">
+    <Position X="19" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Packages\com.feazeyu.rpgsystems\Runtime\Inventory\InventorySlot.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Feazeyu.RPGSystems.Inventory.IShopCurrency" Collapsed="true">
+    <Position X="20.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Packages\com.feazeyu.rpgsystems\Runtime\Inventory\Shopping\IShopCurrency.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

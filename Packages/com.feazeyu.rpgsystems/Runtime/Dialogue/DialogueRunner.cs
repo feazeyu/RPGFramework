@@ -132,6 +132,10 @@ namespace Feazeyu.RPGSystems.Dialogue
                 {
                     if (port.Direction != PortDirection.Output) continue;
                     if (!port.PortName.StartsWith("Choice ")) continue;
+
+                    var nextNode = GetNodeOnOutputPort(node, port.PortName, ctx.Graph);
+                    if (nextNode != null && !AllRequirementsMet(nextNode, ctx)) continue;
+
                     var text = ctx.ResolveString(node, port.PortName + " Text");
                     if (string.IsNullOrEmpty(text)) text = port.PortName;
                     m_R.m_Choices.Add((text, port.PortName));
@@ -150,6 +154,73 @@ namespace Feazeyu.RPGSystems.Dialogue
                 var selected = m_R.m_SelectedPortName;
                 m_R.m_Choices.Clear();
                 ctx.Follow(selected);
+            }
+
+            private static NodeData GetNodeOnOutputPort(NodeData node, string portName, GraphAsset graph)
+            {
+                foreach (var edge in graph.Edges)
+                    if (edge.OutputNodeGuid == node.Guid && edge.OutputPortName == portName)
+                        return graph.GetNode(edge.InputNodeGuid);
+                return null;
+            }
+
+            private static bool AllRequirementsMet(NodeData targetNode, GraphRunContext ctx)
+            {
+                foreach (var edge in ctx.Graph.Edges)
+                {
+                    if (edge.InputNodeGuid != targetNode.Guid) continue;
+                    var source = ctx.Graph.GetNode(edge.OutputNodeGuid);
+                    if (source?.NodeType != NodeRegistry.TypeRequirement) continue;
+                    if (!EvaluateRequirement(source, ctx)) return false;
+                }
+                return true;
+            }
+
+            private static bool EvaluateRequirement(NodeData reqNode, GraphRunContext ctx)
+            {
+                var variableGuid = ctx.GetLinkedGuid(reqNode, "Variable");
+                if (string.IsNullOrEmpty(variableGuid)) return true;
+
+                var bbVar = ctx.RuntimeBlackboard.GetVariable(variableGuid);
+                if (bbVar == null) return true;
+
+                var op  = ctx.ResolveString(reqNode, "Operator");
+                var val = ctx.ResolveString(reqNode, "Value");
+                var lhs = bbVar.ObjectValue;
+
+                if (lhs == null) return false;
+
+                if (double.TryParse(lhs.ToString(), out double lhsN) &&
+                    double.TryParse(val,             out double rhsN))
+                {
+                    return op switch
+                    {
+                        "==" => lhsN == rhsN,
+                        "!=" => lhsN != rhsN,
+                        ">"  => lhsN >  rhsN,
+                        ">=" => lhsN >= rhsN,
+                        "<"  => lhsN <  rhsN,
+                        "<=" => lhsN <= rhsN,
+                        _    => false,
+                    };
+                }
+
+                if (lhs is bool lhsB && bool.TryParse(val, out bool rhsB))
+                {
+                    return op switch
+                    {
+                        "==" => lhsB == rhsB,
+                        "!=" => lhsB != rhsB,
+                        _    => false,
+                    };
+                }
+
+                return op switch
+                {
+                    "==" => string.Equals(lhs.ToString(), val, StringComparison.Ordinal),
+                    "!=" => !string.Equals(lhs.ToString(), val, StringComparison.Ordinal),
+                    _    => false,
+                };
             }
         }
 

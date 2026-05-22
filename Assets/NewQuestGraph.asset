@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e2b2521672df6c408cfa6ce09e9f76d, type: 3}
+  m_Name: NewQuestGraph
+  m_EditorClassIdentifier: 
+  m_Nodes:
+  - Guid: c9de711a-4b39-4174-ad2f-db847641fdd9
+    NodeType: Start
+    DisplayName: Start
+    StoryText: 
+    Position: {x: 80, y: 160}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: Out
+      Direction: 1
+      Capacity: 0
+    Fields: []
+  - Guid: b53da19e-d219-4620-9005-6df05858fda0
+    NodeType: CompleteQuest
+    DisplayName: Complete Quest
+    StoryText: 
+    Position: {x: 698, y: 164}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    Fields: []
+  - Guid: aa2006e3-d349-4b35-b7a9-a2c260664afc
+    NodeType: Condition
+    DisplayName: Condition
+    StoryText: 
+    Position: {x: 276, y: -128}
+    Size: {x: 187, y: 214}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: True
+      Direction: 1
+      Capacity: 0
+    - PortName: False
+      Direction: 1
+      Capacity: 0
+    Fields:
+    - FieldName: Variable
+      TypeName: System.String
+      InlineValue: 
+      LinkedVariableGuid: 
+    - FieldName: Operator
+      TypeName: System.String
+      InlineValue: '!='
+      LinkedVariableGuid: 
+    - FieldName: Value
+      TypeName: System.String
+      InlineValue: 
+      LinkedVariableGuid: 
+  m_Edges: []
+  m_Blackboard:
+    m_Variables: []
+  ViewTransform: {x: 205, y: 329, z: 1}
+  BlackboardPosition: {x: 10, y: 60}
+  m_Kind: 0
+  references:
+    version: 2
+    RefIds: []

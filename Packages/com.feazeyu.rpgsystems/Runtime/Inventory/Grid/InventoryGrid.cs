@@ -283,6 +283,16 @@ namespace Feazeyu.RPGSystems.Inventory
             return false;
         }
 
+        protected bool AutoPlaceItem(int itemId)
+        {
+            var prefab = InventoryManager.Instance?.GetItemById(itemId);
+            if (prefab == null) return false;
+            var instance = Instantiate(prefab);
+            if (AutoPlaceItem(instance)) return true;
+            Destroy(instance);
+            return false;
+        }
+
         /// <summary>
         /// Returns an item to the specified position in the grid.
         /// </summary>
@@ -318,35 +328,13 @@ namespace Feazeyu.RPGSystems.Inventory
         {
             for (int i = 0; i < count; i++)
             {
-                if (!TryPlaceSingleItem(itemId)) return false;
+                if (!AutoPlaceItem(itemId)) return false;
             }
             RedrawContents();
             return true;
         }
 
-        private bool TryPlaceSingleItem(int itemId)
-        {
-            var prefab = InventoryManager.Instance?.GetItemById(itemId);
-            if (prefab == null) return false;
-            var itemComp = prefab.GetComponent<Item>();
-            if (itemComp == null) return false;
-            var anchor = itemComp.GetAnchorSlot();
 
-            for (int y = 0; y < rows; y++)
-            {
-                for (int x = 0; x < columns; x++)
-                {
-                    var pos = new Vector2Int(x, y);
-                    if (IsPlacementValid(pos, itemComp.info, anchor))
-                    {
-                        var instance = Instantiate(prefab);
-                        PutItemUnchecked(pos, instance, itemComp.info, anchor);
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
 
         /// <summary>
         /// Removes and destroys all items in the grid.

@@ -1,0 +1,231 @@
+@startuml Dialogue
+title Feazeyu.RPGSystems.Dialogue
+
+namespace Feazeyu.RPGSystems.Dialogue {
+
+    ' ── Enums ──────────────────────────────────────────────
+    enum PortDirection {
+        Input
+        Output
+    }
+
+    enum PortCapacity {
+        Single
+        Multi
+    }
+
+    ' ── Graph Data Model ───────────────────────────────────
+    class PortData {
+        + PortName : string
+        + Direction : PortDirection
+        + Capacity : PortCapacity
+    }
+
+    class FieldData {
+        + FieldName : string
+        + TypeName : string
+        + InlineValue : string
+        + LinkedVariableGuid : string
+    }
+
+    class NodeData {
+        + Guid : string
+        + NodeType : string
+        + DisplayName : string
+        + StoryText : string
+        + Position : Vector2
+        + Size : Vector2
+        + Ports : List<PortData>
+        + Fields : List<FieldData>
+    }
+
+    class EdgeData {
+        + Guid : string
+        + OutputNodeGuid : string
+        + OutputPortName : string
+        + InputNodeGuid : string
+        + InputPortName : string
+    }
+
+    abstract class GraphAsset {
+        + Nodes : IReadOnlyList<NodeData>
+        + Edges : IReadOnlyList<EdgeData>
+        + Blackboard : Blackboard
+        + AddNode(typeId : string, displayName : string, pos : Vector2) : NodeData
+        + RemoveNode(guid : string) : bool
+        + GetNode(guid : string) : NodeData
+        + AddEdge(outNode : string, outPort : string, inNode : string, inPort : string) : EdgeData
+        + RemoveEdge(guid : string) : bool
+        + FindEntryNode() : NodeData
+    }
+
+    class DialogueGraphAsset
+
+    ' ── Blackboard ─────────────────────────────────────────
+    class Blackboard {
+        + Variables : IReadOnlyList<BlackboardVariable>
+        + AddVariable(variable : BlackboardVariable) : void
+        + RemoveVariable(guid : string) : bool
+        + GetVariable(guid : string) : BlackboardVariable
+        + GetVariable<T>(guid : string) : BlackboardVariable<T>
+        + TryGetValue<T>(guid : string, out value : T) : bool
+        + SetValue<T>(guid : string, value : T) : bool
+        + {static} Clone(sharedSource : Blackboard) : Blackboard
+    }
+
+    abstract class BlackboardVariable {
+        + Name : string
+        + Guid : string
+        + Exposed : bool
+        + Shared : bool
+        + ValueType : Type
+        + ObjectValue : object
+        + OnValueChanged : Action
+        + Clone() : BlackboardVariable
+    }
+
+    abstract class "BlackboardVariable<T>" as BlackboardVariableT {
+        + Value : T
+    }
+
+    class BlackboardVariableBool <<sealed>>
+    class BlackboardVariableInt <<sealed>>
+    class BlackboardVariableFloat <<sealed>>
+    class BlackboardVariableString <<sealed>>
+    class BlackboardVariableVector2 <<sealed>>
+    class BlackboardVariableVector3 <<sealed>>
+    class BlackboardVariableColor <<sealed>>
+    class BlackboardVariableGameObject <<sealed>>
+    class BlackboardVariableTransform <<sealed>>
+    class BlackboardVariableSprite <<sealed>>
+    class BlackboardVariableAudioClip <<sealed>>
+
+    ' ── Runtime ────────────────────────────────────────────
+    interface IGraphNodeHandler {
+        + NodeTypeId : string
+        + Execute(node : NodeData, ctx : GraphRunContext) : IEnumerator
+    }
+
+    abstract class GraphNodeBehaviour {
+        + NodeTypeId : string
+        + Execute(node : NodeData, ctx : GraphRunContext) : IEnumerator
+    }
+
+    class GraphRunContext {
+        + Runner : GraphRunner
+        + Graph : GraphAsset
+        + RuntimeBlackboard : Blackboard
+        + Follow(portName : string) : void
+        + End() : void
+        + ResolveString(node : NodeData, fieldName : string) : string
+        + ResolveSprite(node : NodeData, fieldName : string) : Sprite
+        + GetLinkedGuid(node : NodeData, fieldName : string) : string
+        + GetField(node : NodeData, fieldName : string) : FieldData
+        + GetVariable<T>(guid : string) : T
+        + SetVariable<T>(guid : string, value : T) : void
+    }
+
+    class GraphRunner {
+        + Graph : GraphAsset
+        + IsRunning : bool
+        + OnGraphStarted : UnityEvent
+        + OnGraphEnded : UnityEvent
+        + RegisterHandler(handler : IGraphNodeHandler) : void
+        + StartGraph() : void
+        + StopGraph() : void
+        + ResolveSubgraphAsset(node : NodeData) : GraphAsset
+        + CreateSubRunner(go : GameObject) : GraphRunner
+    }
+
+    class DialogueRunner {
+        + IsWaitingForChoice : bool
+        + OnDialogueLine : DialogueLineEvent
+        + OnChoicesPresented : ChoicesEvent
+        + OnVariableSet : VariableSetEvent
+        + OnEventTriggered : StringEvent
+        + StartDialogue() : void
+        + Advance() : void
+        + SelectChoice(index : int) : void
+    }
+
+    ' ── Node Registry ──────────────────────────────────────
+    class NodeRegistry <<static>> {
+        + {static} Get(typeId : string) : DialogueNodeInfo
+    }
+
+    class DialogueNodeInfo {
+        + TypeId : string
+        + DisplayName : string
+        + Category : string
+        + Description : string
+        + AccentColor : Color
+        + Icon : string
+        + DefaultPorts : List<PortData>
+        + DefaultFields : List<FieldData>
+    }
+
+    ' ── Built-in Node Handlers ──────────────────────────────
+    class DebugLogNodeHandler
+    class FindObjectNodeHandler
+    class GiveItemNodeHandler
+    class CheckCurrencyNodeHandler
+    class AddCurrencyNodeHandler
+    class RemoveCurrencyNodeHandler
+    class OpenShopNodeHandler
+
+    ' ── UI ─────────────────────────────────────────────────
+    class DialogueUI {
+        + IsOpen : bool
+        + Bind(runner : DialogueRunner) : void
+        + OnContinueClicked() : void
+    }
+
+    class ChoiceButton {
+        + Init(runner : DialogueRunner, index : int) : void
+        + Click() : void
+    }
+
+    ' ── Events ─────────────────────────────────────────────
+    class DialogueLineEvent
+    class ChoicesEvent
+    class VariableSetEvent
+    class StringEvent
+    class BoolEvent
+}
+
+' Inheritance
+Feazeyu.RPGSystems.Dialogue.DialogueGraphAsset --|> Feazeyu.RPGSystems.Dialogue.GraphAsset
+Feazeyu.RPGSystems.Dialogue.DialogueRunner --|> Feazeyu.RPGSystems.Dialogue.GraphRunner
+Feazeyu.RPGSystems.Dialogue.GraphNodeBehaviour ..|> Feazeyu.RPGSystems.Dialogue.IGraphNodeHandler
+Feazeyu.RPGSystems.Dialogue.BlackboardVariableT --|> Feazeyu.RPGSystems.Dialogue.BlackboardVariable
+Feazeyu.RPGSystems.Dialogue.BlackboardVariableBool --|> Feazeyu.RPGSystems.Dialogue.BlackboardVariableT
+Feazeyu.RPGSystems.Dialogue.BlackboardVariableInt --|> Feazeyu.RPGSystems.Dialogue.BlackboardVariableT
+Feazeyu.RPGSystems.Dialogue.BlackboardVariableFloat --|> Feazeyu.RPGSystems.Dialogue.BlackboardVariableT
+Feazeyu.RPGSystems.Dialogue.BlackboardVariableString --|> Feazeyu.RPGSystems.Dialogue.BlackboardVariableT
+Feazeyu.RPGSystems.Dialogue.BlackboardVariableVector2 --|> Feazeyu.RPGSystems.Dialogue.BlackboardVariableT
+Feazeyu.RPGSystems.Dialogue.BlackboardVariableVector3 --|> Feazeyu.RPGSystems.Dialogue.BlackboardVariableT
+Feazeyu.RPGSystems.Dialogue.BlackboardVariableColor --|> Feazeyu.RPGSystems.Dialogue.BlackboardVariableT
+Feazeyu.RPGSystems.Dialogue.BlackboardVariableGameObject --|> Feazeyu.RPGSystems.Dialogue.BlackboardVariableT
+Feazeyu.RPGSystems.Dialogue.BlackboardVariableTransform --|> Feazeyu.RPGSystems.Dialogue.BlackboardVariableT
+Feazeyu.RPGSystems.Dialogue.BlackboardVariableSprite --|> Feazeyu.RPGSystems.Dialogue.BlackboardVariableT
+Feazeyu.RPGSystems.Dialogue.BlackboardVariableAudioClip --|> Feazeyu.RPGSystems.Dialogue.BlackboardVariableT
+
+' Node handlers implement interface
+Feazeyu.RPGSystems.Dialogue.DebugLogNodeHandler ..|> Feazeyu.RPGSystems.Dialogue.IGraphNodeHandler
+Feazeyu.RPGSystems.Dialogue.FindObjectNodeHandler ..|> Feazeyu.RPGSystems.Dialogue.IGraphNodeHandler
+Feazeyu.RPGSystems.Dialogue.GiveItemNodeHandler ..|> Feazeyu.RPGSystems.Dialogue.IGraphNodeHandler
+Feazeyu.RPGSystems.Dialogue.CheckCurrencyNodeHandler ..|> Feazeyu.RPGSystems.Dialogue.IGraphNodeHandler
+Feazeyu.RPGSystems.Dialogue.AddCurrencyNodeHandler ..|> Feazeyu.RPGSystems.Dialogue.IGraphNodeHandler
+Feazeyu.RPGSystems.Dialogue.RemoveCurrencyNodeHandler ..|> Feazeyu.RPGSystems.Dialogue.IGraphNodeHandler
+Feazeyu.RPGSystems.Dialogue.OpenShopNodeHandler ..|> Feazeyu.RPGSystems.Dialogue.IGraphNodeHandler
+
+' Associations
+Feazeyu.RPGSystems.Dialogue.GraphRunner --> Feazeyu.RPGSystems.Dialogue.GraphAsset
+Feazeyu.RPGSystems.Dialogue.GraphRunContext --> Feazeyu.RPGSystems.Dialogue.GraphRunner
+Feazeyu.RPGSystems.Dialogue.GraphRunContext --> Feazeyu.RPGSystems.Dialogue.Blackboard
+Feazeyu.RPGSystems.Dialogue.GraphAsset --> Feazeyu.RPGSystems.Dialogue.Blackboard
+Feazeyu.RPGSystems.Dialogue.NodeData --> Feazeyu.RPGSystems.Dialogue.PortData
+Feazeyu.RPGSystems.Dialogue.NodeData --> Feazeyu.RPGSystems.Dialogue.FieldData
+Feazeyu.RPGSystems.Dialogue.DialogueUI --> Feazeyu.RPGSystems.Dialogue.DialogueRunner
+
+@enduml

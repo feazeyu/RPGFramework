@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c46074447551644d84d2cff096592b0, type: 3}
+  m_Name: NewDialogueGraph
+  m_EditorClassIdentifier: 
+  m_Nodes:
+  - Guid: 0089a15c-a14d-4124-9460-c8e19f03dd78
+    NodeType: Start
+    DisplayName: Start
+    StoryText: 
+    Position: {x: 80, y: 160}
+    Size: {x: 0, y: 0}
+    Ports: []
+    Fields: []
+  - Guid: 6a85f20b-a429-4f9d-97cf-d0bbd50d9ecd
+    NodeType: Condition
+    DisplayName: Condition
+    StoryText: 
+    Position: {x: 683, y: 117}
+    Size: {x: 168, y: 210}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: True
+      Direction: 1
+      Capacity: 0
+    - PortName: False
+      Direction: 1
+      Capacity: 0
+    Fields:
+    - FieldName: Variable
+      TypeName: System.String
+      InlineValue: 
+      LinkedVariableGuid: 
+    - FieldName: Operator
+      TypeName: System.String
+      InlineValue: ==
+      LinkedVariableGuid: 
+    - FieldName: Value
+      TypeName: System.String
+      InlineValue: 
+      LinkedVariableGuid: 
+  - Guid: 3f0c1672-c6af-43c7-92a5-07715f806d33
+    NodeType: requirement
+    DisplayName: Requirement
+    StoryText: 
+    Position: {x: 225, y: -88}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: Out
+      Direction: 1
+      Capacity: 0
+    Fields:
+    - FieldName: Variable
+      TypeName: System.String
+      InlineValue: 
+      LinkedVariableGuid: 
+    - FieldName: Operator
+      TypeName: System.String
+      InlineValue: ==
+      LinkedVariableGuid: 
+    - FieldName: Value
+      TypeName: System.String
+      InlineValue: 
+      LinkedVariableGuid: 
+  m_Edges: []
+  m_Blackboard:
+    m_Variables:
+    - rid: 1756203085046743040
+  ViewTransform: {x: 66, y: 282, z: 1}
+  BlackboardPosition: {x: 10, y: 60}
+  references:
+    version: 2
+    RefIds:
+    - rid: 1756203085046743040
+      type: {class: BlackboardVariableQuest, ns: QuestGraph.Runtime, asm: Feazeyu.RPGSystems.Quest}
+      data:
+        m_Name: NewVariable
+        m_Guid: 532eeda5-5d20-4760-aea8-6b29a26f4d1f
+        m_Exposed: 1
+        m_Shared: 0
+        m_Value: {fileID: 0}

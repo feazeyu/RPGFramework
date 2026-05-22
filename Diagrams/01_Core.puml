@@ -1,0 +1,112 @@
+@startuml Core
+title Feazeyu.RPGSystems.Core
+
+namespace Feazeyu.RPGSystems.Core.Interfaces {
+    interface INamed {
+        + Name : string
+    }
+}
+
+namespace Feazeyu.RPGSystems.Core.Stats {
+    enum Stat {
+        MaxHitPoints
+        Armor
+        MagicResistance
+        Damage
+        Range
+        AttackSpeed
+        MovementSpeed
+    }
+
+    enum Scaling {
+        None
+        Linear
+        Multiplicative
+        DiminishingReturns
+    }
+
+    abstract class StatBase<T, TEffect> {
+        + Value : T
+        + Base : T
+        + Effects : IEnumerable<TEffect>
+        + UpdateValue() : void
+        + Apply(effect : TEffect) : void
+        + Remove(effect : TEffect) : void
+        + OnBeforeSerialize() : void
+        + OnAfterDeserialize() : void
+    }
+
+    class StatF <<sealed>> {
+        + StatF(baseValue : float)
+        + UpdateValue() : void
+        + ToString() : string
+    }
+
+    abstract class StatEffect {
+        + Name : string
+        + Stat : Stat
+        + StatEffect(source : INamed, stat : Stat)
+    }
+
+    class StatEffectF {
+        + Flat : float
+        + Multiply : float
+        + Scaling : Scaling
+        + FlatScale : float
+        + MultiplyScale : float
+        + StatEffectF(source : INamed, stat : Stat, flat : float, multiply : float)
+        + {static} CreateFlat(value : float, source : INamed, stat : Stat) : StatEffectF
+        + {static} CreatePercentage(value : float, source : INamed, stat : Stat) : StatEffectF
+    }
+}
+
+namespace Feazeyu.RPGSystems.Core.Utilities {
+    class Array2D<TElement> <<sealed>> {
+        + Rows : int
+        + Columns : int
+        + this[row, col] : TElement
+        + TryGet(row : int, col : int, out value : TElement) : bool
+        + GetEnumerator() : IEnumerator<TElement>
+    }
+
+    class SerializableDictionary<TKey, TValue> {
+        + Keys : ICollection<TKey>
+        + Values : ICollection<TValue>
+        + Count : int
+        + Add(key : TKey, value : TValue) : void
+        + ContainsKey(key : TKey) : bool
+        + TryGetValue(key : TKey, out value : TValue) : bool
+        + Remove(key : TKey) : bool
+        + Clear() : void
+    }
+
+    class "SerializableDictionary.Pair" as Pair <<struct>> {
+        + Key : TKey
+        + Value : TValue
+        + Deconstruct(out key : TKey, out value : TValue) : void
+    }
+
+    class EventRedirector {
+        + redirectTarget : GameObject
+        + {static} AddEventRedirector(source : GameObject, target : GameObject) : void
+    }
+
+    class RotateTowardsPoint {
+        + aimDirection : Vector2
+        + angle : float
+        + RotateTowards(point : Vector2, cam : Camera) : void
+    }
+
+    class RectBoundCheck <<static>> {
+        + {static} IsElementWithinAnother(inner : RectTransform, outer : RectTransform) : bool
+    }
+}
+
+Feazeyu.RPGSystems.Core.Stats.StatF --|> Feazeyu.RPGSystems.Core.Stats.StatBase
+Feazeyu.RPGSystems.Core.Stats.StatEffectF --|> Feazeyu.RPGSystems.Core.Stats.StatEffect
+Feazeyu.RPGSystems.Core.Stats.StatEffect --> Feazeyu.RPGSystems.Core.Stats.Stat
+Feazeyu.RPGSystems.Core.Stats.StatEffectF --> Feazeyu.RPGSystems.Core.Stats.Scaling
+Feazeyu.RPGSystems.Core.Stats.StatF --> Feazeyu.RPGSystems.Core.Stats.StatEffectF
+Feazeyu.RPGSystems.Core.Stats.StatEffect --> Feazeyu.RPGSystems.Core.Interfaces.INamed
+
+@enduml

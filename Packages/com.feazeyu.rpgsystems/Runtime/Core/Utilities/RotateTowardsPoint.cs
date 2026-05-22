@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
 
 namespace Feazeyu.RPGSystems.Core
 {
@@ -8,15 +7,17 @@ namespace Feazeyu.RPGSystems.Core
     {
         public Vector2 aimDirection;
         public float angle;
-        public void RotateTowards(Vector2 point, Camera cam = null) {
+        public void RotateTowards(Vector2 point, Camera cam = null)
+        {
             // Mouse aiming
             if (point == Vector2.zero)
                 return;
             if (Mouse.current != null && Mouse.current.position.IsActuated())
             {
-                if(cam == null)
+                if (cam == null)
                     cam = Camera.main;
-                if (cam == null) { 
+                if (cam == null)
+                {
                     Debug.LogError("No camera found. Either correctly tag a MainCamera or pass one as an argument");
                     return;
                 }

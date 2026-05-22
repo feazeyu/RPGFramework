@@ -139,10 +139,15 @@ namespace Feazeyu.RPGSystems.Dialogue
         // ── Helpers ─────────────────────────────────────────────────────────
 
         /// <summary>
-        /// Finds the entry / Start node (first node with no incoming edges).
+        /// Finds the entry / Start node. Prefers an explicit "Start"-typed node
+        /// so nodes with no incoming edges (e.g. Requirement nodes) are not
+        /// mistaken for the graph entry point.
         /// </summary>
         public NodeData FindEntryNode()
         {
+            var startNode = m_Nodes.Find(n => n.NodeType == "Start");
+            if (startNode != null) return startNode;
+
             var hasIncoming = new HashSet<string>();
             foreach (var e in m_Edges) hasIncoming.Add(e.InputNodeGuid);
             return m_Nodes.Find(n => !hasIncoming.Contains(n.Guid));

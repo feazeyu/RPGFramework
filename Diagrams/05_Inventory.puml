@@ -1,0 +1,208 @@
+@startuml Inventory
+title Feazeyu.RPGSystems.Inventory
+
+namespace Feazeyu.RPGSystems.Inventory {
+
+    ' ── Interfaces ─────────────────────────────────────────
+    interface IItemContainer {
+        + RemoveItem() : int
+        + PutItem(item : GameObject) : bool
+        + ReturnItem(item : GameObject) : void
+        + TryAddItem(itemId : int, quantity : int) : bool
+    }
+
+    interface ISingleItemContainer {
+        + Item : GameObject
+    }
+
+    interface IPositionalItemContainer {
+        + RemoveItem(pos : Vector2Int) : int
+        + PutItem(pos : Vector2Int, item : GameObject) : bool
+        + ReturnItem(pos : Vector2Int, item : GameObject) : void
+        + GetItem(pos : Vector2Int) : GameObject
+    }
+
+    interface IUIItemContainer {
+        + RedrawContents() : void
+    }
+
+    interface IUIPositionalItemContainer {
+        + RedrawContents() : void
+    }
+
+    interface IHideInSelections
+
+    ' ── Slots ──────────────────────────────────────────────
+    class InventorySlot {
+        + position : Vector2Int
+        + anchorPosition : Vector2Int
+        + IsEnabled : bool
+        + ItemId : int
+        + Item : GameObject
+        + Color : Color
+        + EditorUILabel : string
+        + PutItem(item : GameObject) : bool
+        + AcceptsItem() : bool
+        + RemoveItem() : int
+    }
+
+    class LockedInventorySlot <<sealed>> {
+        + AcceptsItem() : bool
+        + PutItem(item : GameObject) : bool
+        + RemoveItem() : int
+    }
+
+    class StackableInventorySlot {
+        + stackSize : int
+        + itemCount : int
+        + PutItem(item : GameObject) : bool
+        + RemoveItem() : int
+    }
+
+    ' ── Manager ────────────────────────────────────────────
+    class InventoryManager {
+        + {static} Instance : InventoryManager
+        + items : SerializableDictionary<int, GameObject>
+        + cellSize : Vector2
+        + ReloadItems(path : string) : void
+        + GetItemById(id : int) : GameObject
+    }
+
+    class InventoryHelper <<static>> {
+        + {static} GetSlotTypeNames() : string[]
+        + {static} GenerateDragLayer(canvas : Canvas) : void
+        + {static} CreateUIDragHandler(item : GameObject, redirectEvents : bool) : GameObject
+    }
+
+    ' ── List Inventory ─────────────────────────────────────
+    class InventoryList {
+        + EnableSlotCapacity : bool
+        + capacity : int
+        + scrollSensitivity : int
+        + contents : List<StackableInventorySlot>
+        + uiGenerator : InventoryListGenerator
+        + ToggleInventory() : void
+        + OpenInventory() : void
+        + CloseInventory() : void
+    }
+
+    class InventoryListUI
+    class InventoryListGenerator
+
+    ' ── Grid Inventory ─────────────────────────────────────
+    class InventoryGrid {
+        + rows : int
+        + columns : int
+        + Cells : Array2D<InventorySlot>
+        + ResizeIfNecessary() : void
+        + TryGetCell(row : int, col : int, out slot : InventorySlot) : bool
+        + DisableAll() : void
+        + EnableAll() : void
+        + RemoveItem(pos : Vector2Int) : int
+        + PutItem(pos : Vector2Int, item : GameObject) : bool
+        + TryAddItem(itemId : int, quantity : int) : bool
+        + GetItem(pos : Vector2Int) : GameObject
+        + ToggleInventory() : void
+        + OpenInventory() : void
+        + CloseInventory() : void
+        + Clear() : void
+        + RedrawContents() : void
+    }
+
+    class InventoryGridUI
+    class InventoryGridGenerator
+    class GridUISlot
+
+    ' ── Shop ───────────────────────────────────────────────
+    interface IShopCurrency {
+        + Balance : int
+        + TrySpend(amount : int) : bool
+        + Add(amount : int) : void
+    }
+
+    class PlayerWallet {
+        + {static} Instance : PlayerWallet
+        + Balance : int
+        + OnBalanceChanged : Action<int>
+        + TrySpend(amount : int) : bool
+        + Add(amount : int) : void
+    }
+
+    class ShopSlot {
+        + itemId : int
+        + price : int
+        + stock : int
+        + IsInfinite : bool
+        + IsAvailable : bool
+        + TrySell() : bool
+        + UndoSell() : void
+    }
+
+    class ShopInventory {
+        + listings : List<ShopSlot>
+    }
+
+    class Shopkeep {
+        + shopInventory : ShopInventory
+        + shopGridUI : ShopGridUI
+        + shopListUI : ShopListUI
+        + closeOnAreaExit : bool
+        + Interact() : void
+        + OnTriggerExit2D(other : Collider2D) : void
+    }
+
+    class ShopListUI
+    class ShopGridUI
+
+    class PlayerInventoryService {
+        + {static} Instance : PlayerInventoryService
+        + CountItem(itemId : int) : int
+        + HasItem(itemId : int, quantity : int) : bool
+        + TryAddItem(itemId : int, quantity : int) : bool
+        + TakeItem(itemId : int, quantity : int) : bool
+    }
+
+    ' ── UI Helpers ─────────────────────────────────────────
+    class PositionalUISlot {
+        + Item : GameObject
+        + PutItem(item : GameObject) : bool
+        + RemoveItem() : int
+        + RedrawContents() : void
+    }
+
+    class TextCountItemRenderer {
+        + CountText : TextMeshProUGUI
+        + ItemText : TextMeshProUGUI
+    }
+}
+
+' Interface hierarchy
+Feazeyu.RPGSystems.Inventory.ISingleItemContainer --|> Feazeyu.RPGSystems.Inventory.IItemContainer
+Feazeyu.RPGSystems.Inventory.IPositionalItemContainer --|> Feazeyu.RPGSystems.Inventory.IItemContainer
+Feazeyu.RPGSystems.Inventory.IUIPositionalItemContainer --|> Feazeyu.RPGSystems.Inventory.IPositionalItemContainer
+
+' Slot inheritance
+Feazeyu.RPGSystems.Inventory.LockedInventorySlot --|> Feazeyu.RPGSystems.Inventory.InventorySlot
+Feazeyu.RPGSystems.Inventory.StackableInventorySlot --|> Feazeyu.RPGSystems.Inventory.InventorySlot
+Feazeyu.RPGSystems.Inventory.InventorySlot ..|> Feazeyu.RPGSystems.Inventory.ISingleItemContainer
+
+' Grid
+Feazeyu.RPGSystems.Inventory.InventoryGrid ..|> Feazeyu.RPGSystems.Inventory.IUIPositionalItemContainer
+Feazeyu.RPGSystems.Inventory.InventoryGrid --> Feazeyu.RPGSystems.Inventory.InventorySlot
+
+' List
+Feazeyu.RPGSystems.Inventory.InventoryList --> Feazeyu.RPGSystems.Inventory.StackableInventorySlot
+Feazeyu.RPGSystems.Inventory.InventoryListUI ..|> Feazeyu.RPGSystems.Inventory.IUIItemContainer
+
+' Shop
+Feazeyu.RPGSystems.Inventory.PlayerWallet ..|> Feazeyu.RPGSystems.Inventory.IShopCurrency
+Feazeyu.RPGSystems.Inventory.ShopInventory --> Feazeyu.RPGSystems.Inventory.ShopSlot
+Feazeyu.RPGSystems.Inventory.Shopkeep --> Feazeyu.RPGSystems.Inventory.ShopInventory
+Feazeyu.RPGSystems.Inventory.ShopListUI ..|> Feazeyu.RPGSystems.Inventory.IUIItemContainer
+Feazeyu.RPGSystems.Inventory.ShopGridUI ..|> Feazeyu.RPGSystems.Inventory.IUIPositionalItemContainer
+
+' Positional
+Feazeyu.RPGSystems.Inventory.PositionalUISlot ..|> Feazeyu.RPGSystems.Inventory.ISingleItemContainer
+Feazeyu.RPGSystems.Inventory.PositionalUISlot ..|> Feazeyu.RPGSystems.Inventory.IUIItemContainer
+
+@enduml

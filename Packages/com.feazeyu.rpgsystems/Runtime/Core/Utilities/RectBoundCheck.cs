@@ -27,5 +27,5 @@ namespace Feazeyu.RPGSystems.Core.Utilities
 
             return true; // All corners are within the canvas
         }
-    }   
+    }
 }

@@ -1,0 +1,23 @@
+@startuml Samples_DialogueDemo
+title Feazeyu.RPGSystems.Samples.DialogueDemo
+
+namespace Feazeyu.RPGSystems.Demo {
+
+    class DemoPlayer {
+        + m_MoveSpeed : float
+        + Update() : void
+        + FixedUpdate() : void
+    }
+
+    class NPCDialogueTrigger {
+        + m_DialogueRunner : DialogueRunner
+        + m_DialogueUI : DialogueUI
+        + m_InteractPrompt : GameObject
+        + StartDialogue() : void
+    }
+}
+
+Feazeyu.RPGSystems.Demo.NPCDialogueTrigger --> "DialogueRunner (Dialogue)"
+Feazeyu.RPGSystems.Demo.NPCDialogueTrigger --> "DialogueUI (Dialogue)"
+
+@enduml

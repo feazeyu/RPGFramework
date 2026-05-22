@@ -81,6 +81,7 @@ namespace Feazeyu.RPGSystems.Dialogue
         public const string TypeEnd           = "End";
         public const string TypeFindObject    = "find_object";
         public const string TypeDebugLog      = "debug_log";
+        public const string TypeRequirement   = "requirement";
 
         // ── Accent colours ───────────────────────────────────────────────────
 
@@ -174,7 +175,7 @@ namespace Feazeyu.RPGSystems.Dialogue
             Register(new DialogueNodeInfo
             {
                 TypeId = TypeChoiceBranch, DisplayName = "Choice Branch", Category = "Dialogue",
-                Description = "Presents player choices. Each output port maps to one choice.",
+                Description = "Presents player choices. Each output port maps to one choice. Connect a Requirement node to the input of the node following a choice to conditionally hide that choice.",
                 AccentColor = ColDialogue, Icon = "⊕",
                 DefaultPorts = new List<PortData>
                 {
@@ -203,7 +204,7 @@ namespace Feazeyu.RPGSystems.Dialogue
                 DefaultFields = new List<FieldData>
                 {
                     new FieldData { FieldName = "Variable", TypeName = "System.String" },
-                    new FieldData { FieldName = "Operator", TypeName = "System.String", InlineValue = "==" },
+                    new FieldData { FieldName = "Operator", TypeName = "conditional_operator", InlineValue = "==" },
                     new FieldData { FieldName = "Value",    TypeName = "System.String" },
                 }
             });
@@ -286,6 +287,23 @@ namespace Feazeyu.RPGSystems.Dialogue
                 DefaultFields = new List<FieldData>
                 {
                     new FieldData { FieldName = "Message", TypeName = "System.String" },
+                }
+            });
+
+            Register(new DialogueNodeInfo
+            {
+                TypeId = TypeRequirement, DisplayName = "Requirement", Category = "Logic",
+                Description = "Hides a Choice Branch option when the condition is not met. Connect 'Out' to the input of the node that follows the choice.",
+                AccentColor = ColLogic, Icon = "✓",
+                DefaultPorts = new List<PortData>
+                {
+                    new PortData { PortName = "Out", Direction = PortDirection.Output, Capacity = PortCapacity.Single },
+                },
+                DefaultFields = new List<FieldData>
+                {
+                    new FieldData { FieldName = "Variable", TypeName = "System.String" },
+                    new FieldData { FieldName = "Operator", TypeName = "conditional_operator", InlineValue = "==" },
+                    new FieldData { FieldName = "Value",    TypeName = "System.String" },
                 }
             });
 

@@ -319,6 +319,19 @@ namespace Feazeyu.RPGSystems.EditorTools
                 linkedLabel.AddToClassList("node-field-linked");
                 row.Add(linkedLabel);
             }
+            else if (IsOperatorField(field))
+            {
+                var ops     = ConditionalOperators;
+                var current = ops.Contains(field.InlineValue) ? field.InlineValue : ops[0];
+                var dropdown = new DropdownField(ops, current);
+                dropdown.AddToClassList("node-field-value");
+                dropdown.RegisterValueChangedCallback(evt =>
+                {
+                    field.InlineValue = evt.newValue;
+                    EditorUtilityHelper.SetDirty(m_Asset);
+                });
+                row.Add(dropdown);
+            }
             else
             {
                 var valueField = new TextField { value = field.InlineValue ?? "" };
@@ -380,6 +393,14 @@ namespace Feazeyu.RPGSystems.EditorTools
 
             return row;
         }
+
+        // ── Operator field helpers ───────────────────────────────────────────
+
+        internal static readonly List<string> ConditionalOperators
+            = new List<string> { "==", "!=", ">", ">=", "<", "<=" };
+
+        internal static bool IsOperatorField(FieldData field)
+            => field.TypeName == "conditional_operator" || field.FieldName == "Operator";
 
         // ── Public API ───────────────────────────────────────────────────────
 

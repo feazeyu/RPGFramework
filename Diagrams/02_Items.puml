@@ -1,0 +1,64 @@
+@startuml Items
+title Feazeyu.RPGSystems.Items
+
+namespace Feazeyu.RPGSystems.Items {
+
+    enum ItemTarget <<flags>> {
+        Player = 1
+        Tower = 2
+    }
+
+    class ItemInfo {
+        + id : int
+        + Name : string
+        + Icon : Sprite
+        + Target : ItemTarget
+        + Tier : int
+        + Description : string
+        + Shape : ItemShape
+        + StatEffects : IEnumerable<StatEffect>
+    }
+
+    class Item {
+        + info : ItemInfo
+        + descriptionOverride : GameObject
+        + CalculatePivot() : void
+        + GetAnchorSlot() : Vector2Int
+        + DisplayTooltip(parent : Transform) : GameObject
+        + HideTooltip() : void
+    }
+
+    class ItemDescription {
+        + iconImage : Image
+        + nameText : TextMeshProUGUI
+        + rarityText : TextMeshProUGUI
+        + descriptionText : TextMeshProUGUI
+    }
+
+    class ItemShape <<struct>> {
+        + Positions : Vector2Int[]
+        + GetBoolGrid(tier : int) : bool[,]
+        + GetOffset() : Vector2Int
+        + GetCenter() : Vector2
+        + Trim() : void
+    }
+
+    class EffectList<T> <<sealed>> {
+        + Count : int
+        + IsReadOnly : bool
+        + this[index] : T
+        + Add(item : T) : void
+        + Insert(index : int, item : T) : void
+        + Remove(item : T) : bool
+        + RemoveAt(index : int) : void
+        + Clear() : void
+        + Contains(item : T) : bool
+        + IndexOf(item : T) : int
+    }
+}
+
+Feazeyu.RPGSystems.Items.Item --> Feazeyu.RPGSystems.Items.ItemInfo
+Feazeyu.RPGSystems.Items.ItemInfo --> Feazeyu.RPGSystems.Items.ItemShape
+Feazeyu.RPGSystems.Items.ItemInfo --> Feazeyu.RPGSystems.Items.ItemTarget
+
+@enduml

@@ -24,7 +24,7 @@ namespace Feazeyu.RPGSystems.Core.Stats
     [Serializable]
     public class StatEffectF : StatEffect
     {
-        public float Flat { get =>_flat; set => _flat = value; }
+        public float Flat { get => _flat; set => _flat = value; }
         [SerializeField]
         private float _flat;
 
