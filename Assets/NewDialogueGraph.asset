@@ -54,7 +54,7 @@ MonoBehaviour:
     NodeType: requirement
     DisplayName: Requirement
     StoryText: 
-    Position: {x: 225, y: -88}
+    Position: {x: 364, y: 107}
     Size: {x: 0, y: 0}
     Ports:
     - PortName: Out
@@ -73,11 +73,16 @@ MonoBehaviour:
       TypeName: System.String
       InlineValue: 
       LinkedVariableGuid: 
-  m_Edges: []
+  m_Edges:
+  - Guid: cae46e89-f913-4589-84b1-1645d8b55a21
+    OutputNodeGuid: 3f0c1672-c6af-43c7-92a5-07715f806d33
+    OutputPortName: Out
+    InputNodeGuid: 6a85f20b-a429-4f9d-97cf-d0bbd50d9ecd
+    InputPortName: In
   m_Blackboard:
     m_Variables:
     - rid: 1756203085046743040
-  ViewTransform: {x: 66, y: 282, z: 1}
+  ViewTransform: {x: -16, y: 233, z: 1}
   BlackboardPosition: {x: 10, y: 60}
   references:
     version: 2

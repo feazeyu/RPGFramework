@@ -5,7 +5,19 @@ namespace Feazeyu.RPGSystems.Inventory
 {
     public class PlayerWallet : MonoBehaviour, IShopCurrency
     {
-        public static PlayerWallet Instance { get; private set; }
+        private static PlayerWallet _instance;
+
+        public static PlayerWallet Instance
+        {
+            get
+            {
+                if (_instance != null) return _instance;
+                _instance = FindFirstObjectByType<PlayerWallet>();
+                if (_instance == null)
+                    _instance = new GameObject("PlayerWallet").AddComponent<PlayerWallet>();
+                return _instance;
+            }
+        }
 
         [SerializeField] private int _balance = 100;
 
@@ -15,8 +27,8 @@ namespace Feazeyu.RPGSystems.Inventory
 
         private void Awake()
         {
-            if (Instance != null && Instance != this) { Destroy(this); return; }
-            Instance = this;
+            if (_instance != null && _instance != this) { Destroy(this); return; }
+            _instance = this;
         }
 
         public bool TrySpend(int amount)

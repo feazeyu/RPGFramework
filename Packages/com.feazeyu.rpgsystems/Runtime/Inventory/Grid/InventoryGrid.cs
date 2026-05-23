@@ -260,9 +260,14 @@ namespace Feazeyu.RPGSystems.Inventory
             return true;
         }
 
-        bool IItemContainer.PutItem(GameObject item) => AutoPlaceItem(item);
+        bool IItemContainer.PutItem(GameObject item)
+        {
+            if (!TryAddItem(item)) return false;
+            RedrawContents();
+            return true;
+        }
 
-        protected virtual bool AutoPlaceItem(GameObject item)
+        protected virtual bool TryAddItem(GameObject item)
         {
             var itemComp = item.GetComponent<Item>();
             if (itemComp == null) return false;
@@ -275,7 +280,6 @@ namespace Feazeyu.RPGSystems.Inventory
                     if (IsPlacementValid(pos, itemComp.info, anchor))
                     {
                         PutItemUnchecked(pos, item, itemComp.info, anchor);
-                        RedrawContents();
                         return true;
                     }
                 }
@@ -283,14 +287,21 @@ namespace Feazeyu.RPGSystems.Inventory
             return false;
         }
 
-        protected bool AutoPlaceItem(int itemId)
+        public bool TryAddItem(int itemId, int count = 1)
         {
             var prefab = InventoryManager.Instance?.GetItemById(itemId);
             if (prefab == null) return false;
-            var instance = Instantiate(prefab);
-            if (AutoPlaceItem(instance)) return true;
-            Destroy(instance);
-            return false;
+            for (int i = 0; i < count; i++)
+            {
+                var instance = Instantiate(prefab);
+                if (!TryAddItem(instance))
+                {
+                    Destroy(instance);
+                    return false;
+                }
+            }
+            RedrawContents();
+            return true;
         }
 
         /// <summary>
@@ -319,19 +330,6 @@ namespace Feazeyu.RPGSystems.Inventory
                 }
             }
             uiGenerator.GenerateUI();
-        }
-
-        /// <summary>
-        /// Tries to find a free position for the item and place it. Returns false if no space.
-        /// </summary>
-        public bool TryAddItem(int itemId, int count = 1)
-        {
-            for (int i = 0; i < count; i++)
-            {
-                if (!AutoPlaceItem(itemId)) return false;
-            }
-            RedrawContents();
-            return true;
         }
 
 

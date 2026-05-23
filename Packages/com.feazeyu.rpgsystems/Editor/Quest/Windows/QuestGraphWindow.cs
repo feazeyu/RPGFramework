@@ -101,7 +101,7 @@ namespace Feazeyu.RPGSystems.EditorTools
         [UnityEditor.Callbacks.OnOpenAsset]
         public static bool OnOpenAsset(int instanceID, int line)
         {
-            var asset = EditorUtility.InstanceIDToObject(instanceID) as QuestGraphAsset;
+            var asset = EditorUtility.EntityIdToObject(instanceID) as QuestGraphAsset;
             if (asset == null) return false;
             QuestGraphWindow.Open(asset);
             return true;

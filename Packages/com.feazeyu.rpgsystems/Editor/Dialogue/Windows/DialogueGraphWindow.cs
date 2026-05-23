@@ -55,7 +55,7 @@ namespace Feazeyu.RPGSystems.EditorTools
         [UnityEditor.Callbacks.OnOpenAsset]
         public static bool OnOpenAsset(int instanceID, int line)
         {
-            var asset = EditorUtility.InstanceIDToObject(instanceID) as DialogueGraphAsset;
+            var asset = EditorUtility.EntityIdToObject(instanceID) as DialogueGraphAsset;
             if (asset == null) return false;
             DialogueGraphWindow.Open(asset);
             return true;

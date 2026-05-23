@@ -158,18 +158,18 @@ namespace Feazeyu.RPGSystems.Inventory
             return TrySellToShop(item, itemId, () => base.PutItem(position, item));
         }
 
-        protected override bool AutoPlaceItem(GameObject item)
+        protected override bool TryAddItem(GameObject item)
         {
             int itemId = item.GetComponent<Item>()?.info?.id ?? -1;
 
             if (_pendingRefundItemId == itemId)
             {
-                bool placed = base.AutoPlaceItem(item);
+                bool placed = base.TryAddItem(item);
                 if (placed) ConsumePendingRefund(itemId);
                 return placed;
             }
 
-            return TrySellToShop(item, itemId, () => base.AutoPlaceItem(item));
+            return TrySellToShop(item, itemId, () => base.TryAddItem(item));
         }
 
         private bool TrySellToShop(GameObject item, int itemId, System.Func<bool> placeFn)

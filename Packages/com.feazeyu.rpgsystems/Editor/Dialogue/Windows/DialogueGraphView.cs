@@ -185,8 +185,8 @@ namespace Feazeyu.RPGSystems.EditorTools
         public void FlushViewState()
         {
             if (m_Asset == null) return;
-            var t = viewTransform;
-            m_Asset.ViewTransform = new Vector3(t.position.x, t.position.y, t.scale.x);
+            var cv = contentViewContainer;
+            m_Asset.ViewTransform = new Vector3(cv.resolvedStyle.translate.x, cv.resolvedStyle.translate.y, cv.resolvedStyle.scale.value.x);
         }
 
         // ── Node creation ────────────────────────────────────────────────────
