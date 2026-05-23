@@ -78,7 +78,7 @@ namespace Feazeyu.RPGSystems.Inventory
                 target = UIObject.AddComponent<InventoryListUI>();
                 target.gameObject.AddComponent<RectTransform>();
 
-                EventRedirector.AddEventRedirector(UIObject, UIObject);
+                EventRedirector.AddEventRedirector(UIObject, list.gameObject);
             }
             else
             {
@@ -149,6 +149,17 @@ namespace Feazeyu.RPGSystems.Inventory
         {
             if (UIObject)
                 UIObject.SetActive(active);
+        }
+
+        /// <summary>
+        /// Lightweight refresh — redraws slot UI without recreating the container object.
+        /// Called by <see cref="InventoryList.RedrawContents"/> after data changes.
+        /// </summary>
+        public void GenerateUI()
+        {
+            if (target == null)
+                target = UIObject?.GetComponent<InventoryListUI>();
+            target?.RedrawContents();
         }
 
         /// <summary>

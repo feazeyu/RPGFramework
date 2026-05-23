@@ -30,6 +30,11 @@
       "displayName": "Quest Demo",
       "description": "A quest with objectives, enemies, and rewards using the quest graph system.",
       "path": "Samples~/Quest Demo"
+    },
+    {
+      "displayName": "Inventory Demo",
+      "description": "A player with a grid inventory and three chests with list inventories.",
+      "path": "Samples~/Inventory Demo"
     }
   ]
 }

@@ -11,7 +11,7 @@ namespace Feazeyu.RPGSystems.Inventory
     /// Represents an inventory list that manages inventory slots and interacts with the UI generator.
     /// </summary>
     [Serializable]
-    public class InventoryList : MonoBehaviour
+    public class InventoryList : MonoBehaviour, IUIPositionalItemContainer
     {
         /// <summary>
         /// Indicates whether slot capacity is enabled.
@@ -80,6 +80,80 @@ namespace Feazeyu.RPGSystems.Inventory
             }
 #endif
         }
+
+        // ── IUIPositionalItemContainer ────────────────────────────────────────
+
+        public bool PutItem(Vector2Int position, GameObject item)
+        {
+            contents ??= new();
+
+            // Try the hinted slot first (drag-drop targeting).
+            if (position.y >= 0 && position.y < contents.Count)
+            {
+                if (contents[position.y].PutItem(item))
+                {
+                    RedrawContents();
+                    return true;
+                }
+            }
+
+            // Scan all slots for any that will accept the item.
+            foreach (var slot in contents)
+            {
+                if (slot.PutItem(item))
+                {
+                    RedrawContents();
+                    return true;
+                }
+            }
+
+            var newSlot = new StackableInventorySlot(item);
+            if (EnableSlotCapacity)
+                newSlot.stackSize = capacity;
+            contents.Add(newSlot);
+            RedrawContents();
+            return true;
+        }
+
+        public int RemoveItem(Vector2Int position)
+        {
+            var itemSlot = contents[position.y];
+            if (itemSlot != null)
+            {
+                int itemId = itemSlot.RemoveItem();
+                if (itemSlot.itemCount <= 0)
+                    contents.Remove(itemSlot);
+                RedrawContents();
+                return itemId;
+            }
+            return -1;
+        }
+
+        public GameObject GetItem(Vector2Int position)
+        {
+            if (contents == null || position.y < 0 || position.y >= contents.Count)
+            {
+                Debug.LogError($"InventoryList: Invalid position {position}. Contents count: {contents?.Count ?? 0}");
+                return null;
+            }
+            return contents[position.y].Item;
+        }
+
+        public bool TryAddItem(int itemId, int count = 1)
+        {
+            var prefab = InventoryManager.Instance?.GetItemById(itemId);
+            if (prefab == null) return false;
+            for (int i = 0; i < count; i++)
+                PutItem(new Vector2Int(-1, -1), prefab);
+            return true;
+        }
+
+        public void RedrawContents()
+        {
+            uiGenerator?.GenerateUI();
+        }
+
+        // ── Visibility ────────────────────────────────────────────────────────
 
         /// <summary>
         /// Toggles the active state of the inventory UI.

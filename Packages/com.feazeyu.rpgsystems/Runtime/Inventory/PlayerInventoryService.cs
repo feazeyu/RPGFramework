@@ -26,7 +26,15 @@ namespace Feazeyu.RPGSystems.Inventory
         private void Start()
         {
             if (m_InventoryList == null)
-                m_InventoryList = FindFirstObjectByType<InventoryList>();
+            {
+                foreach (var go in GameObject.FindGameObjectsWithTag("Player"))
+                {
+                    m_InventoryList = go.GetComponent<InventoryList>();
+                    if (m_InventoryList != null) break;
+                }
+                if (m_InventoryList == null)
+                    Debug.LogError("[PlayerInventoryService] No InventoryList found on a 'Player'-tagged GameObject. HasItem / CountItem / TakeItem will not work. Tag the player's inventory GameObject as 'Player'.");
+            }
         }
 
         // ── Read (list-based) ────────────────────────────────────────────────
@@ -50,16 +58,31 @@ namespace Feazeyu.RPGSystems.Inventory
 
         /// <summary>
         /// Tries to add <paramref name="count"/> copies of <paramref name="itemId"/> to
-        /// the first inventory in the scene that accepts it. Tries InventoryGrid instances
-        /// first, then InventoryListUI instances.
+        /// the player's inventory. Only considers InventoryGrid and InventoryList components
+        /// on GameObjects tagged "Player" to prevent accidentally filling chest, shop, or
+        /// enemy inventories.
         /// </summary>
         public bool TryAddItem(int itemId, int count = 1)
         {
-            foreach (var grid in FindObjectsByType<InventoryGrid>(FindObjectsSortMode.None))
-                if (grid.TryAddItem(itemId, count)) return true;
-            foreach (var list in FindObjectsByType<InventoryListUI>(FindObjectsSortMode.None))
-                if (list.TryAddItem(itemId, count)) return true;
-            Debug.LogWarning($"[PlayerInventoryService] No inventory accepted item {itemId}.");
+            var playerObjects = GameObject.FindGameObjectsWithTag("Player");
+            if (playerObjects.Length == 0)
+            {
+                Debug.LogError($"[PlayerInventoryService] TryAddItem({itemId} ×{count}): no GameObjects with tag 'Player' exist in the scene. Tag the player's inventory GameObject as 'Player'.");
+                return false;
+            }
+
+            foreach (var go in playerObjects)
+            {
+                var grid = go.GetComponent<InventoryGrid>();
+                if (grid != null && grid.TryAddItem(itemId, count)) return true;
+            }
+            foreach (var go in playerObjects)
+            {
+                var list = go.GetComponent<InventoryList>();
+                if (list != null && list.TryAddItem(itemId, count)) return true;
+            }
+
+            Debug.LogError($"[PlayerInventoryService] TryAddItem({itemId} ×{count}): no InventoryGrid or InventoryList on a 'Player'-tagged GameObject accepted the item. Check that the player inventory has space and the item ID is valid.");
             return false;
         }
 

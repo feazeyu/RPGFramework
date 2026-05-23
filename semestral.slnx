@@ -73,6 +73,7 @@
   <Project Path="Unity.Bindings.OpenImageIO.Editor.csproj" />
   <Project Path="Unity.Behavior.Serialization.Editor.csproj" />
   <Project Path="Unity.2D.PixelPerfect.csproj" />
+  <Project Path="Feazeyu.RPGSystems.Samples.InventoryDemo.csproj" />
   <Project Path="Unity.InputSystem.DocCodeSamples.csproj" />
   <Project Path="Feazeyu.RPGSystems.Samples.DialogueDemo.csproj" />
   <Project Path="Unity.AppUI.InternalAPIBridge.csproj" />

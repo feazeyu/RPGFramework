@@ -13,7 +13,7 @@ namespace Feazeyu.RPGSystems.Inventory
     /// Manages the UI for an inventory list, including slot creation, drawing, scrolling, and item manipulation.
     /// </summary>
     [Serializable]
-    public class InventoryListUI : MonoBehaviour, IScrollHandler, IUIPositionalItemContainer
+    public class InventoryListUI : MonoBehaviour, IScrollHandler, IItemContainer
     {
         /// <summary>
         /// The inventory list data source.
@@ -173,6 +173,10 @@ namespace Feazeyu.RPGSystems.Inventory
             }
         }
 
+        public bool PutItem(GameObject item) => list != null && list.PutItem(new Vector2Int(-1, -1), item);
+        public int RemoveItem() => -1;
+        public void ReturnItem(GameObject item) => list?.PutItem(new Vector2Int(-1, -1), item);
+
         /// <summary>
         /// Draws a single inventory slot UI element.
         /// </summary>
@@ -189,7 +193,7 @@ namespace Feazeyu.RPGSystems.Inventory
 #endif
                 slotUIElement.GetComponent<RectTransform>().anchoredPosition = new Vector3(margin.x * offset, -offset * slotPrefab.transform.GetComponent<RectTransform>().sizeDelta.y - offset * margin.y, 0);
                 PositionalUISlot positional = slotUIElement.AddComponent<PositionalUISlot>();
-                positional.target = this;
+                positional.target = list;
                 positional.position = new Vector2Int(0, offset);
                 slot.position = new Vector2Int(0, offset);
                 if (slotUIElement.TryGetComponent<TextCountItemRenderer>(out var text))
@@ -201,92 +205,5 @@ namespace Feazeyu.RPGSystems.Inventory
             }
         }
 
-        /// <summary>
-        /// Attempts to put an item into the inventory at the specified position.
-        /// </summary>
-        /// <param name="position">The position to put the item.</param>
-        /// <param name="item">The item GameObject to add.</param>
-        /// <returns>True if the item was added; otherwise, false.</returns>
-        public bool TryAddItem(int itemId, int count = 1)
-        {
-            var prefab = InventoryManager.Instance?.GetItemById(itemId);
-            if (prefab == null) return false;
-            for (int i = 0; i < count; i++)
-                PutItem(new Vector2Int(-1, -1), prefab);
-            return true;
-        }
-
-        public bool PutItem(Vector2Int position, GameObject item)
-        {
-            list.contents ??= new();
-            if (list.EnableSlotCapacity)
-            {
-                StackableInventorySlot existingSlot = null;
-                if (position.y >= 0 && position.y < list.contents.Count)
-                {
-                    existingSlot = list.contents[position.y];
-                }
-                if (existingSlot != null && existingSlot.PutItem(item))
-                {
-                    RedrawContents();
-                    return true;
-                }
-            }
-            else
-            {
-                foreach (var slot in list.contents)
-                {
-                    if (slot.PutItem(item))
-                    {
-                        RedrawContents();
-                        return true;
-                    }
-                }
-            }
-            StackableInventorySlot newSlot = new StackableInventorySlot(item);
-            if (list.EnableSlotCapacity)
-            {
-                newSlot.stackSize = list.capacity;
-            }
-            list.contents.Add(newSlot);
-            RedrawContents();
-            return true;
-        }
-
-        /// <summary>
-        /// Removes an item from the inventory at the specified position.
-        /// </summary>
-        /// <param name="position">The position to remove the item from.</param>
-        /// <returns>The ID of the removed item, or -1 if removal failed.</returns>
-        public int RemoveItem(Vector2Int position)
-        {
-            var itemSlot = list.contents[position.y];
-            if (itemSlot != null)
-            {
-                int itemId = itemSlot.RemoveItem();
-                if (itemSlot.itemCount <= 0)
-                {
-                    list.contents.Remove(itemSlot);
-                }
-                RedrawContents();
-                return itemId;
-            }
-            return -1;
-        }
-
-        /// <summary>
-        /// Gets the item GameObject at the specified position in the inventory.
-        /// </summary>
-        /// <param name="position">The position to retrieve the item from.</param>
-        /// <returns>The item GameObject, or null if not found.</returns>
-        public GameObject GetItem(Vector2Int position)
-        {
-            if (list.contents == null || position.y < 0 || position.y >= list.contents.Count)
-            {
-                Debug.LogError($"InventoryList: Invalid position {position}. Contents count: {list.contents?.Count ?? 0}");
-                return null;
-            }
-            return list.contents[position.y].Item;
-        }
     }
 }
