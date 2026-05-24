@@ -493,6 +493,7 @@ namespace QuestGraph.Runtime
                     new FieldData { FieldName = "Description", TypeName = "System.String" },
                     new FieldData { FieldName = "ItemId",      TypeName = "System.Int32",  InlineValue = "0" },
                     new FieldData { FieldName = "Count",       TypeName = "System.Int32",  InlineValue = "1" },
+                    new FieldData { FieldName = "Inventory",   TypeName = "UnityEngine.GameObject" },
                     new FieldData { FieldName = "Continuous",  TypeName = "System.Boolean", InlineValue = "False" },
                     new FieldData { FieldName = "Optional",    TypeName = "System.Boolean", InlineValue = "False" },
                 }
@@ -517,6 +518,7 @@ namespace QuestGraph.Runtime
                     new FieldData { FieldName = "ItemId",      TypeName = "System.Int32",  InlineValue = "0" },
                     new FieldData { FieldName = "Count",       TypeName = "System.Int32",  InlineValue = "1" },
                     new FieldData { FieldName = "NPC",         TypeName = "UnityEngine.GameObject" },
+                    new FieldData { FieldName = "Inventory",   TypeName = "UnityEngine.GameObject" },
                     new FieldData { FieldName = "Optional",    TypeName = "System.Boolean", InlineValue = "False" },
                 }
             });

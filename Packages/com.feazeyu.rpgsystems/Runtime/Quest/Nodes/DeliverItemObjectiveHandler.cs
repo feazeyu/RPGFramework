@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 using Feazeyu.RPGSystems.Dialogue;
 using QuestGraph.Runtime;
@@ -10,13 +10,13 @@ namespace QuestGraph.Nodes
     /// <summary>
     /// Handler for the Deliver Item objective node (typeId = "obj_deliver").
     ///
-    /// Waits for the player to interact with the specified NPC while carrying
-    /// at least Count of ItemId. On success the items are removed from the
-    /// player's inventory and the node follows "Completed".
+    /// Waits for the player to interact with the specified NPC while the linked
+    /// Inventory contains at least Count of ItemId. On success the items are removed
+    /// and the node follows "Completed".
     ///
-    /// <b>NPC resolution</b> (first match wins):
-    ///   1. Blackboard variable of type GameObject linked to the NPC field.
-    ///   2. Inline value treated as a scene object name (GameObject.Find).
+    /// <b>Field resolution</b> (first match wins):
+    ///   NPC       — blackboard GameObject variable, or inline scene object name (GameObject.Find).
+    ///   Inventory — blackboard GameObject variable with an IItemContainer component.
     ///
     /// The NPC's Interactable.OnInteract event is used for delivery — make
     /// sure the NPC has an Interactable component.
@@ -48,11 +48,21 @@ namespace QuestGraph.Nodes
                 Optional    = optional,
             };
 
-            // ── Resolve NPC ───────────────────────────────────────────────────
+            // ── Resolve NPC and inventory ─────────────────────────────────────
             var interactable = ResolveNPC(node, ctx);
             if (interactable == null)
             {
                 Debug.LogWarning($"[DeliverItemObjectiveHandler] No Interactable resolved for node '{title}'.");
+                runner.RegisterObjective(info);
+                runner.UnregisterObjective(node.Guid, outcome: false);
+                ctx.Follow("Failed");
+                yield break;
+            }
+
+            var container = ResolveContainer(node, ctx);
+            if (container == null)
+            {
+                Debug.LogWarning($"[DeliverItemObjectiveHandler] No IItemContainer resolved for '{title}'. Link an Inventory field.");
                 runner.RegisterObjective(info);
                 runner.UnregisterObjective(node.Guid, outcome: false);
                 ctx.Follow("Failed");
@@ -67,14 +77,13 @@ namespace QuestGraph.Nodes
             void OnInteract()
             {
                 if (delivered) return;
-                var svc = PlayerInventoryService.Instance;
-                if (svc == null || !svc.HasItem(itemId, count))
+                if (container.CountItem(itemId) < count)
                 {
                     Debug.Log($"[DeliverItemObjectiveHandler] Need {count}x item#{itemId}, " +
-                              $"have {svc?.CountItem(itemId) ?? 0}.");
+                              $"have {container.CountItem(itemId)}.");
                     return;
                 }
-                svc.TakeItem(itemId, count);
+                container.RemoveItem(itemId, count);
                 delivered = true;
             }
 
@@ -98,10 +107,8 @@ namespace QuestGraph.Nodes
             if (!string.IsNullOrEmpty(guid))
             {
                 var v = ctx.RuntimeBlackboard.GetVariable(guid);
-                if (v?.ObjectValue is GameObject go)
-                {
-                    if (go.TryGetComponent<Interactable>(out var i)) return i;
-                }
+                if (v?.ObjectValue is GameObject go && go.TryGetComponent<Interactable>(out var i))
+                    return i;
             }
 
             var name = ctx.ResolveString(node, "NPC");
@@ -112,6 +119,14 @@ namespace QuestGraph.Nodes
             }
 
             return null;
+        }
+
+        private static IItemContainer ResolveContainer(NodeData node, GraphRunContext ctx)
+        {
+            var field = ctx.GetField(node, "Inventory");
+            if (field == null || string.IsNullOrEmpty(field.LinkedVariableGuid)) return null;
+            var v = ctx.RuntimeBlackboard.GetVariable(field.LinkedVariableGuid);
+            return (v?.ObjectValue as GameObject)?.GetComponent<IItemContainer>();
         }
     }
 }

@@ -304,6 +304,38 @@ namespace Feazeyu.RPGSystems.Inventory
             return true;
         }
 
+        int IItemContainer.CountItem(int itemId)
+        {
+            int count = 0;
+            for (int x = 0; x < Cells.Columns; x++)
+                for (int y = 0; y < Cells.Rows; y++)
+                    if (Cells.TryGet(x, y, out var cell) && cell.ItemId == itemId
+                        && cell.anchorPosition == new Vector2Int(-1, -1))
+                        count++;
+            return count;
+        }
+
+        bool IItemContainer.RemoveItem(int itemId, int count = 1)
+        {
+            if (((IItemContainer)this).CountItem(itemId) < count) return false;
+
+            int remaining = count;
+            for (int x = 0; x < Cells.Columns && remaining > 0; x++)
+            {
+                for (int y = 0; y < Cells.Rows && remaining > 0; y++)
+                {
+                    if (Cells.TryGet(x, y, out var cell) && cell.ItemId == itemId
+                        && cell.anchorPosition == new Vector2Int(-1, -1))
+                    {
+                        RemoveItem(new Vector2Int(x, y));
+                        remaining--;
+                    }
+                }
+            }
+            RedrawContents();
+            return true;
+        }
+
         /// <summary>
         /// Returns an item to the specified position in the grid.
         /// </summary>

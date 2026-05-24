@@ -174,7 +174,6 @@ namespace Feazeyu.RPGSystems.Inventory
         }
 
         public bool PutItem(GameObject item) => list != null && list.PutItem(new Vector2Int(-1, -1), item);
-        public int RemoveItem() => -1;
         public void ReturnItem(GameObject item) => list?.PutItem(new Vector2Int(-1, -1), item);
 
         /// <summary>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -216,13 +217,41 @@ namespace Feazeyu.RPGSystems.Dialogue
 
             try
             {
-                bbVar.ObjectValue = Convert.ChangeType(valueStr, bbVar.ValueType);
+                bbVar.ObjectValue = ParseValueForType(valueStr, bbVar.ValueType);
                 OnVariableChanged(bbVar.Name, valueStr);
             }
             catch
             {
                 Debug.LogWarning($"[GraphRunner] Could not convert '{valueStr}' to {bbVar.ValueType} for variable '{bbVar.Name}'.");
             }
+        }
+
+        private static object ParseValueForType(string valueStr, Type type)
+        {
+            if (string.IsNullOrEmpty(valueStr)) return null;
+
+            if (type == typeof(Vector2))
+            {
+                var p = valueStr.Split(',');
+                float.TryParse(p.Length > 0 ? p[0].Trim() : "0", NumberStyles.Float, CultureInfo.InvariantCulture, out float x);
+                float.TryParse(p.Length > 1 ? p[1].Trim() : "0", NumberStyles.Float, CultureInfo.InvariantCulture, out float y);
+                return new Vector2(x, y);
+            }
+            if (type == typeof(Vector3))
+            {
+                var p = valueStr.Split(',');
+                float.TryParse(p.Length > 0 ? p[0].Trim() : "0", NumberStyles.Float, CultureInfo.InvariantCulture, out float x);
+                float.TryParse(p.Length > 1 ? p[1].Trim() : "0", NumberStyles.Float, CultureInfo.InvariantCulture, out float y);
+                float.TryParse(p.Length > 2 ? p[2].Trim() : "0", NumberStyles.Float, CultureInfo.InvariantCulture, out float z);
+                return new Vector3(x, y, z);
+            }
+            if (type == typeof(Color))
+            {
+                ColorUtility.TryParseHtmlString(valueStr, out Color c);
+                return c;
+            }
+
+            return Convert.ChangeType(valueStr, type, CultureInfo.InvariantCulture);
         }
 
         private IEnumerator ProcessRunSubgraph(NodeData node)

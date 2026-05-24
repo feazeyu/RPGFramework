@@ -119,10 +119,15 @@ namespace Feazeyu.RPGSystems.Inventory
     public interface IItemContainer
     {
         /// <summary>
-        /// Removes an item from the container.
+        /// Removes <paramref name="count"/> items with <paramref name="itemId"/> from the container.
+        /// Returns false if not enough items are present (no-op in that case).
         /// </summary>
-        /// <returns>The number of items removed.</returns>
-        int RemoveItem();
+        bool RemoveItem(int itemId, int count = 1) => false;
+
+        /// <summary>
+        /// Returns the total number of items with <paramref name="itemId"/> in the container.
+        /// </summary>
+        int CountItem(int itemId) => 0;
 
         /// <summary>
         /// Puts an item into the container.
@@ -156,13 +161,15 @@ namespace Feazeyu.RPGSystems.Inventory
         /// Gets the item in the container, or null if empty.
         /// </summary>
         GameObject? Item { get; }
+
+        /// <summary>
+        /// Removes the item from this single-item slot.
+        /// </summary>
+        /// <returns>The item ID that was removed, or -1 if empty.</returns>
+        int RemoveItem();
     }
     public interface IPositionalItemContainer : IItemContainer
     {
-        int IItemContainer.RemoveItem()
-        {
-            return RemoveItem(Vector2Int.zero);
-        }
         int RemoveItem(Vector2Int position);
 
         bool IItemContainer.PutItem(GameObject item)

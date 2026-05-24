@@ -27,12 +27,14 @@ namespace Feazeyu.RPGSystems.Inventory
         public UnityEvent<ShopSlot> OnPurchaseFailed;
 
         private IShopCurrency _currency;
+        private IItemContainer _buyerInventory;
         private Color _defaultHighlightColor;
 
-        public void Setup(ShopSlot shopSlot, IShopCurrency currency)
+        public void Setup(ShopSlot shopSlot, IShopCurrency currency, IItemContainer buyerInventory)
         {
             slot = shopSlot;
             _currency = currency;
+            _buyerInventory = buyerInventory;
             if (highlight != null)
                 _defaultHighlightColor = highlight.color;
             Refresh();
@@ -73,7 +75,7 @@ namespace Feazeyu.RPGSystems.Inventory
                 return;
             }
 
-            if (PlayerInventoryService.Instance == null || !PlayerInventoryService.Instance.TryAddItem(slot.itemId))
+            if (_buyerInventory == null || !_buyerInventory.TryAddItem(slot.itemId))
             {
                 currency.Add(slot.price); // refund — inventory was full
                 OnPurchaseFailed.Invoke(slot);

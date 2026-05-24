@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using QuestGraph.Runtime;
 using Feazeyu.RPGSystems.Character;
 using Feazeyu.RPGSystems.Items;
@@ -8,15 +8,15 @@ namespace QuestGraph.Objectives
 {
     /// <summary>
     /// Objective driver: the player must interact with <see cref="deliveryTarget"/>
-    /// while carrying at least <see cref="requiredCount"/> of <see cref="itemInfo"/>.
-    /// On a successful delivery the items are removed from inventory and the
-    /// objective completes.
+    /// while the target inventory holds at least <see cref="requiredCount"/> of
+    /// <see cref="itemInfo"/>. On a successful delivery the items are removed and
+    /// the objective completes.
     ///
     /// Setup:
     ///   1. Place on the same GameObject as your QuestRunner.
     ///   2. Set objectiveTitle to match the Objective node Title in the graph.
-    ///   3. Assign itemInfo and deliveryTarget (an Interactable in the scene).
-    ///   4. Ensure a PlayerInventoryService exists in the scene.
+    ///   3. Assign itemInfo, deliveryTarget, and inventory.
+    ///   4. inventory must be a GameObject with an IItemContainer component.
     /// </summary>
     [AddComponentMenu("Quest/Objectives/Deliver Item")]
     public class DeliverItemObjective : QuestObjectiveBase
@@ -30,8 +30,13 @@ namespace QuestGraph.Objectives
         [Tooltip("The NPC or object the player interacts with to hand in the items.")]
         [SerializeField] public Interactable deliveryTarget;
 
+        [Tooltip("The inventory to take items from. Must implement IItemContainer.")]
+        [SerializeField] private MonoBehaviour m_InventoryRef;
+
         [Tooltip("Log a message when the player tries to deliver without enough items.")]
         [SerializeField] public bool logMissingItems = true;
+
+        private IItemContainer Inventory => m_InventoryRef as IItemContainer;
 
         protected override void StartTracking(ObjectiveInfo info)
         {
@@ -47,19 +52,17 @@ namespace QuestGraph.Objectives
 
         private void OnDeliveryAttempt()
         {
-            if (!m_IsActive || itemInfo == null) return;
-            var svc = PlayerInventoryService.Instance;
-            if (svc == null) return;
+            if (!m_IsActive || itemInfo == null || Inventory == null) return;
 
-            if (!svc.HasItem(itemInfo.id, requiredCount))
+            int have = Inventory.CountItem(itemInfo.id);
+            if (have < requiredCount)
             {
                 if (logMissingItems)
-                    Debug.Log($"[DeliverItemObjective] Need {requiredCount}x {itemInfo.Name}, " +
-                              $"have {svc.CountItem(itemInfo.id)}.");
+                    Debug.Log($"[DeliverItemObjective] Need {requiredCount}x {itemInfo.Name}, have {have}.");
                 return;
             }
 
-            svc.TakeItem(itemInfo.id, requiredCount);
+            Inventory.RemoveItem(itemInfo.id, requiredCount);
             Complete();
         }
     }

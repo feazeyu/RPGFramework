@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 using Feazeyu.RPGSystems.Dialogue;
 using QuestGraph.Runtime;
@@ -10,14 +10,16 @@ namespace QuestGraph.Nodes
     /// Handler for the Collect Item objective node (typeId = "obj_collect").
     ///
     /// <b>Normal mode</b> (Continuous = false):
-    ///   Waits until PlayerInventoryService reports Count of ItemId in inventory,
-    ///   then follows "Completed".
+    ///   Waits until the linked Inventory container has Count of ItemId, then follows "Completed".
     ///
     /// <b>Continuous mode</b> (Continuous = true):
     ///   Follows "Out" immediately. A background monitor checks every half-second;
-    ///   if the player drops below Count items, the quest fails.
+    ///   if the container drops below Count items, the quest fails.
     ///   Example use: "Kill 5 slimes while carrying the magic sword."
     ///   Graph: [Collect Item (sword, continuous)] --Out--> [Kill Count (5 slimes)]
+    ///
+    /// Fields:
+    ///   Inventory — blackboard GameObject variable with an IItemContainer component
     /// </summary>
     [QuestNode(QuestNodeRegistry.TypeObjCollect, "Collect Item", "Objectives",
         "Have N of an item. Continuous=true monitors in background for 'while carrying' quests.")]
@@ -41,6 +43,14 @@ namespace QuestGraph.Nodes
             bool.TryParse(ctx.ResolveString(node, "Optional"),   out bool optional);
             if (count <= 0) count = 1;
 
+            var container = ResolveContainer(node, ctx);
+            if (container == null)
+            {
+                Debug.LogWarning($"[CollectItemObjectiveHandler] No IItemContainer resolved for '{title}'. Link an Inventory field.");
+                ctx.Follow("Failed");
+                yield break;
+            }
+
             var info = new ObjectiveInfo
             {
                 NodeGuid    = node.Guid,
@@ -52,12 +62,12 @@ namespace QuestGraph.Nodes
             // ── Dispatch ──────────────────────────────────────────────────────
             if (continuous)
             {
-                runner.StartCoroutine(ContinuousMonitor(runner, info, itemId, count));
+                runner.StartCoroutine(ContinuousMonitor(runner, info, itemId, count, container));
                 ctx.Follow("Out");
                 yield break;
             }
 
-            // Normal: wait until player has enough items
+            // Normal: wait until the container has enough items
             runner.RegisterObjective(info);
 
             float nextCheck = 0f;
@@ -66,8 +76,7 @@ namespace QuestGraph.Nodes
                 if (Time.time >= nextCheck)
                 {
                     nextCheck = Time.time + k_CheckInterval;
-                    var svc = PlayerInventoryService.Instance;
-                    if (svc != null && svc.HasItem(itemId, count))
+                    if (container.CountItem(itemId) >= count)
                         break;
                 }
                 yield return null;
@@ -82,7 +91,7 @@ namespace QuestGraph.Nodes
         // ── Continuous background monitor ─────────────────────────────────────
 
         private static IEnumerator ContinuousMonitor(
-            QuestRunner runner, ObjectiveInfo info, int itemId, int count)
+            QuestRunner runner, ObjectiveInfo info, int itemId, int count, IItemContainer container)
         {
             runner.RegisterObjective(info);
 
@@ -92,8 +101,7 @@ namespace QuestGraph.Nodes
                 if (Time.time >= nextCheck)
                 {
                     nextCheck = Time.time + k_CheckInterval;
-                    var svc = PlayerInventoryService.Instance;
-                    if (svc != null && !svc.HasItem(itemId, count))
+                    if (container.CountItem(itemId) < count)
                     {
                         runner.UnregisterObjective(info.NodeGuid, outcome: false);
                         runner.ForceFailQuest($"Lost required item: {info.Title}");
@@ -104,6 +112,16 @@ namespace QuestGraph.Nodes
             }
 
             runner.UnregisterObjective(info.NodeGuid, outcome: true);
+        }
+
+        // ── Helpers ───────────────────────────────────────────────────────────
+
+        private static IItemContainer ResolveContainer(NodeData node, GraphRunContext ctx)
+        {
+            var field = ctx.GetField(node, "Inventory");
+            if (field == null || string.IsNullOrEmpty(field.LinkedVariableGuid)) return null;
+            var v = ctx.RuntimeBlackboard.GetVariable(field.LinkedVariableGuid);
+            return (v?.ObjectValue as GameObject)?.GetComponent<IItemContainer>();
         }
     }
 }

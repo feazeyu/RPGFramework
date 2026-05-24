@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using UnityEditor;
 using UnityEditor.Experimental.GraphView;
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Feazeyu.RPGSystems.Dialogue;
-using UnityEditor;
 
 namespace Feazeyu.RPGSystems.EditorTools
 {
@@ -334,14 +336,25 @@ namespace Feazeyu.RPGSystems.EditorTools
             }
             else
             {
-                var valueField = new TextField { value = field.InlineValue ?? "" };
-                valueField.AddToClassList("node-field-value");
-                valueField.RegisterValueChangedCallback(evt =>
+                VisualElement input;
+                if (Data.NodeType == NodeRegistry.TypeSetVariable && field.FieldName == "Value")
                 {
-                    field.InlineValue = evt.newValue;
-                    EditorUtilityHelper.SetDirty(m_Asset);
-                });
-                row.Add(valueField);
+                    var targetType = GetSetVariableTargetType(Data, m_Asset);
+                    input = BuildTypedInlineControl(field, targetType,
+                        () => EditorUtilityHelper.SetDirty(m_Asset));
+                }
+                else
+                {
+                    var tf = new TextField { value = field.InlineValue ?? "" };
+                    tf.RegisterValueChangedCallback(evt =>
+                    {
+                        field.InlineValue = evt.newValue;
+                        EditorUtilityHelper.SetDirty(m_Asset);
+                    });
+                    input = tf;
+                }
+                input.AddToClassList("node-field-value");
+                row.Add(input);
             }
 
             var dot = new VisualElement();
@@ -401,6 +414,120 @@ namespace Feazeyu.RPGSystems.EditorTools
 
         internal static bool IsOperatorField(FieldData field)
             => field.TypeName == "conditional_operator" || field.FieldName == "Operator";
+
+        // ── SetVariable typed-input helpers ──────────────────────────────────
+
+        /// <summary>
+        /// Returns the ValueType of the blackboard variable linked to the
+        /// "Variable" field of a SetVariable node, or null if not yet linked.
+        /// </summary>
+        internal static Type GetSetVariableTargetType(NodeData node, GraphAsset asset)
+        {
+            if (node == null || asset == null) return null;
+            var varField = node.Fields?.Find(f => f.FieldName == "Variable");
+            if (varField == null || string.IsNullOrEmpty(varField.LinkedVariableGuid)) return null;
+            return asset.Blackboard.GetVariable(varField.LinkedVariableGuid)?.ValueType;
+        }
+
+        /// <summary>
+        /// Returns a type-appropriate inline control for a field.
+        /// Handles bool, int, float, Vector2, Vector3, Color, and string.
+        /// UnityObject types return a hint label (must be blackboard-linked).
+        /// </summary>
+        internal static VisualElement BuildTypedInlineControl(
+            FieldData field, Type type, Action onChanged)
+        {
+            if (type == typeof(bool))
+            {
+                bool.TryParse(field.InlineValue, out bool v);
+                var ctrl = new Toggle { value = v };
+                ctrl.RegisterValueChangedCallback(evt =>
+                {
+                    field.InlineValue = evt.newValue.ToString();
+                    onChanged?.Invoke();
+                });
+                return ctrl;
+            }
+            if (type == typeof(int))
+            {
+                int.TryParse(field.InlineValue, out int v);
+                var ctrl = new IntegerField { value = v };
+                ctrl.RegisterValueChangedCallback(evt =>
+                {
+                    field.InlineValue = evt.newValue.ToString(CultureInfo.InvariantCulture);
+                    onChanged?.Invoke();
+                });
+                return ctrl;
+            }
+            if (type == typeof(float))
+            {
+                float.TryParse(field.InlineValue, NumberStyles.Float, CultureInfo.InvariantCulture, out float v);
+                var ctrl = new FloatField { value = v };
+                ctrl.RegisterValueChangedCallback(evt =>
+                {
+                    field.InlineValue = evt.newValue.ToString(CultureInfo.InvariantCulture);
+                    onChanged?.Invoke();
+                });
+                return ctrl;
+            }
+            if (type == typeof(Vector2))
+            {
+                var parts = (field.InlineValue ?? "").Split(',');
+                float.TryParse(parts.Length > 0 ? parts[0].Trim() : "", NumberStyles.Float, CultureInfo.InvariantCulture, out float x);
+                float.TryParse(parts.Length > 1 ? parts[1].Trim() : "", NumberStyles.Float, CultureInfo.InvariantCulture, out float y);
+                var ctrl = new Vector2Field { value = new Vector2(x, y) };
+                ctrl.RegisterValueChangedCallback(evt =>
+                {
+                    field.InlineValue = evt.newValue.x.ToString(CultureInfo.InvariantCulture)
+                                      + "," + evt.newValue.y.ToString(CultureInfo.InvariantCulture);
+                    onChanged?.Invoke();
+                });
+                return ctrl;
+            }
+            if (type == typeof(Vector3))
+            {
+                var parts = (field.InlineValue ?? "").Split(',');
+                float.TryParse(parts.Length > 0 ? parts[0].Trim() : "", NumberStyles.Float, CultureInfo.InvariantCulture, out float x);
+                float.TryParse(parts.Length > 1 ? parts[1].Trim() : "", NumberStyles.Float, CultureInfo.InvariantCulture, out float y);
+                float.TryParse(parts.Length > 2 ? parts[2].Trim() : "", NumberStyles.Float, CultureInfo.InvariantCulture, out float z);
+                var ctrl = new Vector3Field { value = new Vector3(x, y, z) };
+                ctrl.RegisterValueChangedCallback(evt =>
+                {
+                    field.InlineValue = evt.newValue.x.ToString(CultureInfo.InvariantCulture)
+                                      + "," + evt.newValue.y.ToString(CultureInfo.InvariantCulture)
+                                      + "," + evt.newValue.z.ToString(CultureInfo.InvariantCulture);
+                    onChanged?.Invoke();
+                });
+                return ctrl;
+            }
+            if (type == typeof(Color))
+            {
+                if (!ColorUtility.TryParseHtmlString(field.InlineValue ?? "", out Color c))
+                    c = Color.white;
+                var ctrl = new ColorField { value = c };
+                ctrl.RegisterValueChangedCallback(evt =>
+                {
+                    field.InlineValue = "#" + ColorUtility.ToHtmlStringRGBA(evt.newValue);
+                    onChanged?.Invoke();
+                });
+                return ctrl;
+            }
+            if (type != null && (type == typeof(GameObject) || type == typeof(Transform)
+                || type == typeof(Sprite) || type == typeof(AudioClip)))
+            {
+                var hint = new Label("← link a blackboard variable");
+                hint.AddToClassList("node-field-hint");
+                return hint;
+            }
+            // string / unknown / null → default TextField
+            var tf = new TextField { value = field.InlineValue ?? "" };
+            tf.RegisterValueChangedCallback(evt =>
+            {
+                field.InlineValue = evt.newValue;
+                onChanged?.Invoke();
+            });
+            return tf;
+        }
 
         // ── Public API ───────────────────────────────────────────────────────
 

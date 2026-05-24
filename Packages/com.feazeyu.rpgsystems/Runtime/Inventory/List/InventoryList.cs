@@ -148,6 +148,43 @@ namespace Feazeyu.RPGSystems.Inventory
             return true;
         }
 
+        int IItemContainer.CountItem(int itemId)
+        {
+            if (contents == null) return 0;
+            int total = 0;
+            foreach (var slot in contents)
+                if (slot.ItemId == itemId)
+                    total += Mathf.Max(slot.itemCount, 0);
+            return total;
+        }
+
+        bool IItemContainer.RemoveItem(int itemId, int count = 1)
+        {
+            if (((IItemContainer)this).CountItem(itemId) < count) return false;
+
+            int remaining = count;
+            var toRemove = new List<StackableInventorySlot>();
+
+            foreach (var slot in contents)
+            {
+                if (slot.ItemId != itemId || slot.itemCount <= 0) continue;
+                while (remaining > 0 && slot.itemCount > 0)
+                {
+                    slot.RemoveItem();
+                    remaining--;
+                }
+                if (slot.itemCount <= 0)
+                    toRemove.Add(slot);
+                if (remaining == 0) break;
+            }
+
+            foreach (var s in toRemove)
+                contents.Remove(s);
+
+            RedrawContents();
+            return true;
+        }
+
         public void RedrawContents()
         {
             uiGenerator?.GenerateUI();

@@ -32,7 +32,11 @@ namespace Feazeyu.RPGSystems.Inventory
         [Tooltip("MonoBehaviour implementing IShopCurrency. Falls back to PlayerWallet singleton if null.")]
         [SerializeField] private MonoBehaviour _currencyProvider;
 
+        [Tooltip("The buyer's inventory (must implement IItemContainer). Items go here on purchase.")]
+        [SerializeField] private MonoBehaviour _buyerInventoryRef;
+
         private IShopCurrency Currency => (_currencyProvider as IShopCurrency) ?? PlayerWallet.Instance;
+        private IItemContainer BuyerInventory => _buyerInventoryRef as IItemContainer;
 
         private GameObject _root;
 
@@ -111,7 +115,7 @@ namespace Feazeyu.RPGSystems.Inventory
             if (handler.highlight == null)
                 handler.highlight = row.GetComponent<Graphic>();
 
-            handler.Setup(slot, Currency);
+            handler.Setup(slot, Currency, BuyerInventory);
         }
 
         private GameObject BuildDefaultRow(Transform parent)

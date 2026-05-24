@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Feazeyu.RPGSystems.Dialogue;
@@ -271,16 +272,30 @@ namespace Feazeyu.RPGSystems.EditorTools
             }
             else
             {
-                var valueField = new TextField { value = field.InlineValue ?? "" };
-                valueField.AddToClassList("inspector-text-field");
-                valueField.style.flexGrow = 1;
-                valueField.RegisterValueChangedCallback(evt =>
+                VisualElement input;
+                if (m_Node?.NodeType == NodeRegistry.TypeSetVariable && field.FieldName == "Value")
                 {
-                    field.InlineValue = evt.newValue;
-                    if (asset) EditorUtility.SetDirty(asset);
-                    m_RefreshNodeView?.Invoke(m_Node?.Guid ?? "");
-                });
-                valueRow.Add(valueField);
+                    var targetType = DialogueNodeView.GetSetVariableTargetType(m_Node, asset);
+                    input = DialogueNodeView.BuildTypedInlineControl(field, targetType, () =>
+                    {
+                        if (asset) EditorUtility.SetDirty(asset);
+                        m_RefreshNodeView?.Invoke(m_Node?.Guid ?? "");
+                    });
+                }
+                else
+                {
+                    var tf = new TextField { value = field.InlineValue ?? "" };
+                    tf.RegisterValueChangedCallback(evt =>
+                    {
+                        field.InlineValue = evt.newValue;
+                        if (asset) EditorUtility.SetDirty(asset);
+                        m_RefreshNodeView?.Invoke(m_Node?.Guid ?? "");
+                    });
+                    input = tf;
+                }
+                input.AddToClassList("inspector-text-field");
+                input.style.flexGrow = 1;
+                valueRow.Add(input);
             }
 
             var linkBtn = new Button(() => ShowLinkMenu(field, asset, valueRow)) { text = linked ? "◉" : "◯" };
