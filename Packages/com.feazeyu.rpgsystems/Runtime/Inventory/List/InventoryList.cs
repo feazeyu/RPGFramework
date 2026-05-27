@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 #endif
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Feazeyu.RPGSystems.Inventory
 {
@@ -11,7 +12,7 @@ namespace Feazeyu.RPGSystems.Inventory
     /// Represents an inventory list that manages inventory slots and interacts with the UI generator.
     /// </summary>
     [Serializable]
-    public class InventoryList : MonoBehaviour, IUIPositionalItemContainer
+    public class InventoryList : MonoBehaviour, IUIPositionalItemContainer, IDropHandler
     {
         /// <summary>
         /// Indicates whether slot capacity is enabled.
@@ -188,6 +189,15 @@ namespace Feazeyu.RPGSystems.Inventory
         public void RedrawContents()
         {
             uiGenerator?.GenerateUI();
+        }
+
+        public void OnDrop(PointerEventData eventData)
+        {
+            var handler = eventData.pointerDrag?.GetComponent<InventoryItemUIHandler>();
+            if (handler == null || handler.DropHandled) return;
+            var item = InventoryManager.Instance.GetItemById(handler.DraggedId);
+            if (item != null && ((IItemContainer)this).PutItem(item))
+                handler.DropHandled = true;
         }
 
         // ── Visibility ────────────────────────────────────────────────────────

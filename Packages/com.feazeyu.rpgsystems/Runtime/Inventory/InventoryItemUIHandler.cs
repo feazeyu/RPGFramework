@@ -1,9 +1,7 @@
 ﻿using Feazeyu.RPGSystems.Core.Utilities;
 using Feazeyu.RPGSystems.Items;
-using Feazeyu.RPGSystems.Core;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -43,11 +41,6 @@ namespace Feazeyu.RPGSystems.Inventory
         private CanvasGroup canvasGroup;
 
         /// <summary>
-        /// The target container for item drop.
-        /// </summary>
-        private IItemContainer _target;
-
-        /// <summary>
         /// The transform used for dragging items.
         /// </summary>
         private Transform dragLayer;
@@ -56,6 +49,9 @@ namespace Feazeyu.RPGSystems.Inventory
         /// The ID of the item being dragged.
         /// </summary>
         private int draggedId;
+
+        public int DraggedId => draggedId;
+        public bool DropHandled { get; set; }
 
         /// <summary>
         /// Indicates if the cursor is inside the item area.
@@ -146,28 +142,19 @@ namespace Feazeyu.RPGSystems.Inventory
         }
 
         /// <summary>
-        /// Called when dragging ends. Attempts to place the item in the target container or returns it to the original slot.
+        /// Called when dragging ends. Waits one frame for OnDrop to fire, then returns the item if no drop was handled.
         /// </summary>
         /// <param name="eventData">Pointer event data.</param>
         public virtual void OnEndDrag(PointerEventData eventData)
         {
-            GameObject dragTarget = GetDragTarget(eventData);
+            StartCoroutine(FinalizeDrop());
+        }
 
-            if (dragTarget != null)
-            {
-                if (dragTarget.GetComponent<EventRedirector>() != null)
-                {
-                    _target = dragTarget.GetComponent<EventRedirector>().redirectTarget.GetComponent<IItemContainer>();
-                }
-                else
-                {
-                    _target = dragTarget.GetComponent<IItemContainer>();
-                }
-            }
-            if (_target == null || !_target.PutItem(InventoryManager.Instance.GetItemById(draggedId)))
-            {
-                _slot.ReturnItem(InventoryManager.Instance.GetItemById(draggedId)); // Return item to original slot
-            }
+        private IEnumerator FinalizeDrop()
+        {
+            yield return null;
+            if (!DropHandled)
+                _slot.ReturnItem(InventoryManager.Instance.GetItemById(draggedId));
             Destroy(gameObject);
         }
 
@@ -190,26 +177,6 @@ namespace Feazeyu.RPGSystems.Inventory
             //TODO Remove magic multiplier
             draggedItem.GetComponent<RectTransform>().sizeDelta = draggedItem.GetComponent<Image>().sprite.rect.size *100/32;
             canvasGroup.blocksRaycasts = false;
-        }
-
-        /// <summary>
-        /// Determines the target GameObject for the drag operation.
-        /// </summary>
-        /// <param name="eventData">Pointer event data.</param>
-        /// <returns>The target GameObject, or null if none found.</returns>
-        protected GameObject GetDragTarget(PointerEventData eventData)
-        {
-            if (canvas == null)
-                return null;
-            var results = new List<RaycastResult>();
-            EventSystem.current.RaycastAll(eventData, results);
-            foreach (var result in results)
-            {
-                if (result.gameObject != null && result.isValid && result.gameObject.GetComponent<InventoryItemUIHandler>() == null)
-                    return result.gameObject;
-            }
-
-            return null;
         }
 
         /// <summary>

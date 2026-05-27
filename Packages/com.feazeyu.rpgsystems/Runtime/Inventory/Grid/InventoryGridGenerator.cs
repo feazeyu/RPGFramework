@@ -67,7 +67,10 @@ namespace Feazeyu.RPGSystems.Inventory
             // Clean up previous UI
             if (lastGeneratedRoot != null)
             {
-                DestroyImmediate(lastGeneratedRoot);
+                if (Application.isPlaying)
+                    Destroy(lastGeneratedRoot);
+                else
+                    DestroyImmediate(lastGeneratedRoot);
             }
 
             // Create root container

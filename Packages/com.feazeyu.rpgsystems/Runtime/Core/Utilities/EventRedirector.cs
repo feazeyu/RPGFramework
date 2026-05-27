@@ -12,7 +12,7 @@ namespace Feazeyu.RPGSystems.Core
         IPointerEnterHandler, IPointerExitHandler,
         IPointerDownHandler, IPointerUpHandler,
         IPointerClickHandler,
-        IBeginDragHandler, IDragHandler, IEndDragHandler,
+        IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler,
         IScrollHandler
     {
         [Tooltip("Target GameObject to receive redirected events.")]
@@ -56,6 +56,11 @@ namespace Feazeyu.RPGSystems.Core
         public void OnEndDrag(PointerEventData eventData)
         {
             Redirect<IEndDragHandler>(eventData, ExecuteEvents.endDragHandler);
+        }
+
+        public void OnDrop(PointerEventData eventData)
+        {
+            Redirect<IDropHandler>(eventData, ExecuteEvents.dropHandler);
         }
 
         public void OnScroll(PointerEventData eventData)

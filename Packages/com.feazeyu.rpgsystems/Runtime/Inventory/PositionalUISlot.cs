@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Feazeyu.RPGSystems.Items;
 
 namespace Feazeyu.RPGSystems.Inventory
 {
     [Serializable]
-    internal class PositionalUISlot : MonoBehaviour, IUIItemContainer, ISingleItemContainer
+    internal class PositionalUISlot : MonoBehaviour, IUIItemContainer, ISingleItemContainer, IDropHandler
     {
         public Vector2Int position;
         public IUIPositionalItemContainer target;
@@ -24,9 +25,9 @@ namespace Feazeyu.RPGSystems.Inventory
         }
         public bool PutItem(GameObject item)
         {
-            Debug.Log($"Putting to {position}");
             bool success = target.PutItem(position, item);
-            RedrawContents();
+            if (success)
+                RedrawContents();
             return success;
         }
 
@@ -45,6 +46,15 @@ namespace Feazeyu.RPGSystems.Inventory
         public virtual void RedrawContents()
         {
             target.RedrawContents();
+        }
+
+        public void OnDrop(PointerEventData eventData)
+        {
+            var handler = eventData.pointerDrag?.GetComponent<InventoryItemUIHandler>();
+            if (handler == null || handler.DropHandled) return;
+            var item = InventoryManager.Instance.GetItemById(handler.DraggedId);
+            if (item != null && PutItem(item))
+                handler.DropHandled = true;
         }
     }
 }

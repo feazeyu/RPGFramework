@@ -13,7 +13,7 @@ namespace Feazeyu.RPGSystems.Inventory
     /// Manages the UI for an inventory list, including slot creation, drawing, scrolling, and item manipulation.
     /// </summary>
     [Serializable]
-    public class InventoryListUI : MonoBehaviour, IScrollHandler, IItemContainer
+    public class InventoryListUI : MonoBehaviour, IScrollHandler, IItemContainer, IDropHandler
     {
         /// <summary>
         /// The inventory list data source.
@@ -76,13 +76,13 @@ namespace Feazeyu.RPGSystems.Inventory
             RedrawContents();
         }
 
-        /// <summary>
-        /// Handles the end of a drag event. (Currently not implemented.)
-        /// </summary>
-        /// <param name="eventData">Pointer event data.</param>
-        public void OnEndDrag(PointerEventData eventData)
+        public void OnDrop(PointerEventData eventData)
         {
-            //Debug.Log($"End drag event on {gameObject.name} at position {eventData.position} with delta {eventData.delta}");
+            var handler = eventData.pointerDrag?.GetComponent<InventoryItemUIHandler>();
+            if (handler == null || handler.DropHandled) return;
+            var item = InventoryManager.Instance.GetItemById(handler.DraggedId);
+            if (item != null && PutItem(item))
+                handler.DropHandled = true;
         }
 
         /// <summary>

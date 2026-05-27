@@ -6,6 +6,5 @@ namespace Feazeyu.RPGSystems.Items
     public enum ItemTarget
     {
         Player = 0b1,
-        Tower = 0b10,
     }
 }
