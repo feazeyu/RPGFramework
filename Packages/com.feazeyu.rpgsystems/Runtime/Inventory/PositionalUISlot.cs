@@ -6,8 +6,23 @@ using Feazeyu.RPGSystems.Items;
 
 namespace Feazeyu.RPGSystems.Inventory
 {
+    /// <summary>
+    /// A reusable UI cell that bridges a single drawn slot to an
+    /// <see cref="IUIPositionalItemContainer"/>. It is both the drag source
+    /// (<see cref="ISingleItemContainer"/>) and the drop target
+    /// (<see cref="IDropHandler"/>) for the item rendered in that cell, so any
+    /// inventory — grid, list, or a custom layout — gets drag-and-drop by
+    /// attaching one of these per cell.
+    ///
+    /// Wire it in code (the <see cref="target"/> field is an interface and so is
+    /// not Inspector-serializable): add the component, then set
+    /// <see cref="target"/> to your container and <see cref="position"/> to the
+    /// cell's address. Build the item visual with
+    /// <see cref="InventoryHelper.CreateUIDragHandler"/> and ensure a DragLayer
+    /// exists via <see cref="InventoryHelper.GenerateDragLayer"/>.
+    /// </summary>
     [Serializable]
-    internal class PositionalUISlot : MonoBehaviour, IUIItemContainer, ISingleItemContainer, IDropHandler
+    public class PositionalUISlot : MonoBehaviour, IUIItemContainer, ISingleItemContainer, IDropHandler
     {
         public Vector2Int position;
         public IUIPositionalItemContainer target;

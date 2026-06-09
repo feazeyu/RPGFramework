@@ -8,7 +8,15 @@ using UnityEngine.EventSystems;
 
 namespace Feazeyu.RPGSystems.Inventory
 {
-    internal class InventoryItemUIRedirectingHandler : InventoryItemUIHandler
+    /// <summary>
+    /// Drag handler for a non-anchor (satellite) cell of a multi-cell item.
+    /// Resolves the real owning slot through <see cref="targetPosition"/> so the
+    /// drag originates from, and drops resolve to, the item's anchor cell. Use
+    /// this instead of <see cref="InventoryItemUIHandler"/> on satellite cells of
+    /// shaped items; <see cref="InventoryHelper.CreateUIDragHandler"/> attaches it
+    /// when <c>redirector: true</c>.
+    /// </summary>
+    public class InventoryItemUIRedirectingHandler : InventoryItemUIHandler
     {
         public Vector2Int targetPosition;
         protected override GameObject GetOriginalParent()

@@ -182,7 +182,7 @@ MonoBehaviour:
     NodeType: DialogueLine
     DisplayName: Hint
     StoryText: 
-    Position: {x: 1520, y: 200}
+    Position: {x: 1526, y: 197}
     Size: {x: 0, y: 0}
     Ports:
     - PortName: In
@@ -198,7 +198,7 @@ MonoBehaviour:
       LinkedVariableGuid: 
     - FieldName: Text
       TypeName: System.String
-      InlineValue: 'Pro tip: complete quests to unlock rare gear!'
+      InlineValue: Thanks for the money, sucker!
       LinkedVariableGuid: 
     - FieldName: Portrait
       TypeName: UnityEngine.Sprite
@@ -548,7 +548,7 @@ MonoBehaviour:
     - rid: 1756203194680606801
     - rid: 1756203194680606809
     - rid: 1756203194680606810
-  ViewTransform: {x: -392, y: -66, z: 0.8695652}
+  ViewTransform: {x: -586, y: -4, z: 0.8695652}
   BlackboardPosition: {x: 10, y: 60}
   references:
     version: 2
