@@ -234,7 +234,7 @@ MonoBehaviour:
     NodeType: add_currency
     DisplayName: Add 20g
     StoryText: 
-    Position: {x: 867, y: 684}
+    Position: {x: 906, y: 657}
     Size: {x: 0, y: 0}
     Ports:
     - PortName: In
@@ -304,7 +304,7 @@ MonoBehaviour:
     NodeType: End
     DisplayName: End
     StoryText: 
-    Position: {x: 1838, y: 479}
+    Position: {x: 2686, y: 64}
     Size: {x: 0, y: 0}
     Ports:
     - PortName: In
@@ -337,7 +337,7 @@ MonoBehaviour:
     NodeType: requirement
     DisplayName: Requirement
     StoryText: 
-    Position: {x: 409, y: 719}
+    Position: {x: 535, y: 719}
     Size: {x: 0, y: 0}
     Ports:
     - PortName: Out
@@ -354,7 +354,7 @@ MonoBehaviour:
       LinkedVariableGuid: 
     - FieldName: Value
       TypeName: System.String
-      InlineValue: false
+      InlineValue: False
       LinkedVariableGuid: 
   - Guid: a38c89ab-1aec-44bd-b572-fc57d7831cd2
     NodeType: Condition
@@ -389,7 +389,7 @@ MonoBehaviour:
     NodeType: debug_log
     DisplayName: Debug Log
     StoryText: 
-    Position: {x: 1687, y: 684}
+    Position: {x: 1687, y: 673}
     Size: {x: 0, y: 0}
     Ports:
     - PortName: In
@@ -401,7 +401,7 @@ MonoBehaviour:
     Fields:
     - FieldName: Message
       TypeName: System.String
-      InlineValue: False
+      InlineValue: True
       LinkedVariableGuid: 
   - Guid: 79acc449-64b6-4559-b16d-d0b70088a59a
     NodeType: debug_log
@@ -512,11 +512,6 @@ MonoBehaviour:
     OutputPortName: Out
     InputNodeGuid: 0a665ec2-7f11-40db-952f-6b8c94496413
     InputPortName: In
-  - Guid: b18767c0-a3e9-4625-a2d3-e7a1f69f35a8
-    OutputNodeGuid: 0797f90d-2586-4af3-b4cd-d91cce50f272
-    OutputPortName: Out
-    InputNodeGuid: bc684b00-bd21-424c-9b52-c1dd9f6f48af
-    InputPortName: In
   - Guid: 5aba1b10-111c-4c9a-a4c8-e98ffc52db6a
     OutputNodeGuid: 0a665ec2-7f11-40db-952f-6b8c94496413
     OutputPortName: Out
@@ -542,13 +537,18 @@ MonoBehaviour:
     OutputPortName: Out
     InputNodeGuid: 701a574f-8770-4639-aace-9808f6da38a1
     InputPortName: In
+  - Guid: e1b1e578-6632-486b-808c-cef2d956c416
+    OutputNodeGuid: 0797f90d-2586-4af3-b4cd-d91cce50f272
+    OutputPortName: Out
+    InputNodeGuid: bc684b00-bd21-424c-9b52-c1dd9f6f48af
+    InputPortName: In
   m_Blackboard:
     m_Variables:
     - rid: 7685950460498878627
     - rid: 1756203194680606801
     - rid: 1756203194680606809
     - rid: 1756203194680606810
-  ViewTransform: {x: -505, y: -209, z: 1}
+  ViewTransform: {x: -392, y: -66, z: 0.8695652}
   BlackboardPosition: {x: 10, y: 60}
   references:
     version: 2

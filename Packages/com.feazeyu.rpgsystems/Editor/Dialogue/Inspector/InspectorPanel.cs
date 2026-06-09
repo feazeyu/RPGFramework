@@ -273,9 +273,9 @@ namespace Feazeyu.RPGSystems.EditorTools
             else
             {
                 VisualElement input;
-                if (m_Node?.NodeType == NodeRegistry.TypeSetVariable && field.FieldName == "Value")
+                if (DialogueNodeView.IsTypedValueField(m_Node, field))
                 {
-                    var targetType = DialogueNodeView.GetSetVariableTargetType(m_Node, asset);
+                    var targetType = DialogueNodeView.GetLinkedVariableType(m_Node, asset);
                     input = DialogueNodeView.BuildTypedInlineControl(field, targetType, () =>
                     {
                         if (asset) EditorUtility.SetDirty(asset);

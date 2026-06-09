@@ -5,9 +5,11 @@ using UnityEngine;
 namespace Feazeyu.RPGSystems.Dialogue
 {
     /// <summary>
-    /// Holds the master list of BlackboardVariables for a DialogueGraphAsset.
-    /// At runtime, DialogueGraphAgent clones this for per-agent isolation,
-    /// except for Shared variables which stay on the source asset.
+    /// Holds the master (authored) list of BlackboardVariables for a DialogueGraphAsset.
+    /// At runtime a runner builds its own working copy via <see cref="CloneForRuntime"/>:
+    /// non-shared variables are deep-cloned per runner, Shared variables resolve to a
+    /// global instance in <see cref="SharedBlackboardStore"/>. The authored values here
+    /// are never mutated at runtime — they are the defaults restored when play mode ends.
     /// </summary>
     [Serializable]
     public class Blackboard
@@ -56,23 +58,30 @@ namespace Feazeyu.RPGSystems.Dialogue
             return true;
         }
 
-        // ── Cloning (per-agent isolation) ───────────────────────────────────
+        // ── Runtime instantiation ───────────────────────────────────────────
 
         /// <summary>
-        /// Returns a deep clone. Shared variables are NOT cloned — both the
-        /// original and the clone reference the same BlackboardVariable object
-        /// so all agents see the same value.
+        /// Builds the working blackboard for a single runner from these authored values.
+        ///
+        /// Non-shared variables are deep-cloned, giving the runner its own isolated
+        /// copy. A runner keeps this copy for its whole lifetime, so a non-shared value
+        /// set during one dialogue persists into later dialogues with the same runner;
+        /// it resets to the authored default only when the runner (and play mode) ends.
+        ///
+        /// Shared variables resolve to a single global instance per Guid via
+        /// <see cref="SharedBlackboardStore"/>, so all runners read and write the same
+        /// value across dialogues.
+        ///
+        /// In neither case is the authored asset variable mutated.
         /// </summary>
-        public Blackboard Clone(Blackboard sharedSource)
+        public Blackboard CloneForRuntime()
         {
             var clone = new Blackboard();
             foreach (var v in m_Variables)
             {
-                if (v.Shared)
-                    // Point at the master variable so changes broadcast everywhere.
-                    clone.m_Variables.Add(sharedSource.GetVariable(v.Guid) ?? v);
-                else
-                    clone.m_Variables.Add(v.Clone());
+                clone.m_Variables.Add(v.Shared
+                    ? SharedBlackboardStore.Resolve(v)   // global, by Guid; asset untouched
+                    : v.Clone());                        // per-runner isolated copy
             }
             return clone;
         }

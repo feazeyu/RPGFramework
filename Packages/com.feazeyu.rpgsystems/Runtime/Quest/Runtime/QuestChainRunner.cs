@@ -166,7 +166,7 @@ namespace QuestGraph.Runtime
             }
             if (m_Started) return;
 
-            m_RuntimeBlackboard = Chain.Blackboard.Clone(Chain.Blackboard);
+            m_RuntimeBlackboard = Chain.Blackboard.CloneForRuntime();
             BuildEntries();
             BuildPrerequisiteMap();
             RecomputeFrontier();

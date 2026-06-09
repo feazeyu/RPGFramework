@@ -337,9 +337,9 @@ namespace Feazeyu.RPGSystems.EditorTools
             else
             {
                 VisualElement input;
-                if (Data.NodeType == NodeRegistry.TypeSetVariable && field.FieldName == "Value")
+                if (IsTypedValueField(Data, field))
                 {
-                    var targetType = GetSetVariableTargetType(Data, m_Asset);
+                    var targetType = GetLinkedVariableType(Data, m_Asset);
                     input = BuildTypedInlineControl(field, targetType,
                         () => EditorUtilityHelper.SetDirty(m_Asset));
                 }
@@ -415,13 +415,26 @@ namespace Feazeyu.RPGSystems.EditorTools
         internal static bool IsOperatorField(FieldData field)
             => field.TypeName == "conditional_operator" || field.FieldName == "Operator";
 
-        // ── SetVariable typed-input helpers ──────────────────────────────────
+        // ── Typed "Value" input helpers (SetVariable / Condition / Requirement) ──
 
         /// <summary>
-        /// Returns the ValueType of the blackboard variable linked to the
-        /// "Variable" field of a SetVariable node, or null if not yet linked.
+        /// True when <paramref name="field"/> is the "Value" field of a node whose value
+        /// is interpreted against a linked blackboard variable's type — SetVariable (the
+        /// assigned value) and Condition/Requirement (the right-hand side of the comparison).
+        /// These render a type-appropriate inline control instead of a raw text field.
         /// </summary>
-        internal static Type GetSetVariableTargetType(NodeData node, GraphAsset asset)
+        internal static bool IsTypedValueField(NodeData node, FieldData field)
+            => field?.FieldName == "Value"
+               && (node?.NodeType == NodeRegistry.TypeSetVariable
+                || node?.NodeType == NodeRegistry.TypeCondition
+                || node?.NodeType == NodeRegistry.TypeRequirement);
+
+        /// <summary>
+        /// Returns the ValueType of the blackboard variable linked to the "Variable"
+        /// field of the node, or null if not yet linked. Used to choose the inline
+        /// control type for a SetVariable assignment or a Condition/Requirement comparison.
+        /// </summary>
+        internal static Type GetLinkedVariableType(NodeData node, GraphAsset asset)
         {
             if (node == null || asset == null) return null;
             var varField = node.Fields?.Find(f => f.FieldName == "Variable");

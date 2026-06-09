@@ -11,7 +11,8 @@ namespace Feazeyu.RPGSystems.Dialogue
     /// Base MonoBehaviour that drives execution of a GraphAsset.
     ///
     /// Responsibilities:
-    ///   • Clones the blackboard at start for isolated per-run state
+    ///   • Builds the runtime blackboard once (reused across runs so non-shared
+    ///     state persists; Shared variables are global via SharedBlackboardStore)
     ///   • Walks the graph along edges
     ///   • Dispatches each node to a registered IGraphNodeHandler
     ///   • Handles structural built-in nodes: Start, End, Condition,
@@ -88,7 +89,11 @@ namespace Feazeyu.RPGSystems.Dialogue
                 return;
             }
 
-            m_RuntimeBlackboard = Graph.Blackboard.Clone(Graph.Blackboard);
+            // Build the runtime blackboard once and reuse it for every run on this
+            // runner, so non-shared variable values persist across repeated dialogues.
+            // It is a pure runtime field (not serialized), so it is rebuilt from the
+            // asset's authored defaults when the runner is recreated — i.e. on play exit.
+            m_RuntimeBlackboard ??= Graph.Blackboard.CloneForRuntime();
 
             m_Context           = new GraphRunContext(this, Graph, m_RuntimeBlackboard);
             m_Context.OnFollow  = portName => FollowOutputPort(m_CurrentNode, portName);

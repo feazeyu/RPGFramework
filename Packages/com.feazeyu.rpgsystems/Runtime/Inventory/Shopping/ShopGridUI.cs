@@ -210,8 +210,18 @@ namespace Feazeyu.RPGSystems.Inventory
             ResizeIfNecessary();
             foreach (var listing in shopInventory.listings)
             {
-                if (listing.IsAvailable)
-                    TryAddItem(listing.itemId);
+                if (!listing.IsAvailable) continue;
+
+                // Stock the shop with its own inventory. This must NOT go through the
+                // overridden TryAddItem, which treats an incoming item as a player
+                // *selling* to the shop and pays out via Currency.Add. Place directly
+                // through the base grid so populating the shop costs the player nothing.
+                var prefab = InventoryManager.Instance?.GetItemById(listing.itemId);
+                if (prefab == null) continue;
+
+                var instance = Instantiate(prefab);
+                if (!base.TryAddItem(instance))
+                    Destroy(instance);
             }
         }
 
