@@ -217,7 +217,8 @@ namespace Feazeyu.RPGSystems.Inventory
         /// <returns>True if the item was placed.</returns>
         private bool PutItemUnchecked(Vector2Int position, GameObject item, ItemInfo itemInfo, Vector2Int center)
         {
-            Cells[position.x, position.y].PutItem(item);
+            if (!Cells[position.x, position.y].PutItem(item))
+                return false;
             SetAnchors(position, itemInfo, center);
             return true;
         }
@@ -252,7 +253,7 @@ namespace Feazeyu.RPGSystems.Inventory
             foreach (Vector2Int otherPosition in itemInfo.Shape.Positions)
             {
                 Cells.TryGet(position.x + otherPosition.x - center.x, position.y + otherPosition.y - center.y, out var cell);
-                if (cell == null || !cell.AcceptsItem())
+                if (cell == null || !cell.AcceptsItem(itemInfo))
                 {
                     return false;
                 }
@@ -277,9 +278,9 @@ namespace Feazeyu.RPGSystems.Inventory
                 for (int x = 0; x < columns; x++)
                 {
                     var pos = new Vector2Int(x, y);
-                    if (IsPlacementValid(pos, itemComp.info, anchor))
+                    if (IsPlacementValid(pos, itemComp.info, anchor)
+                        && PutItemUnchecked(pos, item, itemComp.info, anchor))
                     {
-                        PutItemUnchecked(pos, item, itemComp.info, anchor);
                         return true;
                     }
                 }

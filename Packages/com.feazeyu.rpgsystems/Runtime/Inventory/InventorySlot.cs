@@ -193,13 +193,14 @@ namespace Feazeyu.RPGSystems.Inventory
         public virtual bool PutItem(GameObject item)
         {
             if (item == null) return false;
-            if (!AcceptsItem()) return false;
+            if (!AcceptsItem(item.GetComponent<Item>().info)) return false;
             ItemId = item.GetComponent<Item>().info.id;
             return true;
         }
 
         /// <summary>
-        /// Determines whether the slot can accept a new item.
+        /// Determines whether the slot can accept a new item, irrespective of which item it is.
+        /// This is the structural check (empty, enabled, not a non-anchor cell).
         /// </summary>
         /// <returns>True if the slot can accept an item; otherwise, false.</returns>
         public virtual bool AcceptsItem()
@@ -207,6 +208,17 @@ namespace Feazeyu.RPGSystems.Inventory
             if (ItemId != -1 || !IsEnabled || anchorPosition != new Vector2Int(-1, -1)) return false;
             return true;
         }
+
+        /// <summary>
+        /// Determines whether the slot can accept the specified item. Override this to filter
+        /// by item type, category, <see cref="ItemTarget"/>, etc. The grid placement path and the
+        /// base <see cref="PutItem(GameObject)"/> both call this overload, so a filter declared here
+        /// is enforced at placement time. Defaults to the item-agnostic <see cref="AcceptsItem()"/>
+        /// check so existing slots keep their behavior.
+        /// </summary>
+        /// <param name="item">The info of the item being placed.</param>
+        /// <returns>True if the slot can accept the item; otherwise, false.</returns>
+        public virtual bool AcceptsItem(ItemInfo item) => AcceptsItem();
 
         /// <summary>
         /// Removes the item from the slot.

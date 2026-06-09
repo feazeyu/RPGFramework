@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -15,6 +17,23 @@ namespace Feazeyu.RPGSystems.Inventory
     public static class InventoryHelper
     {
         private static string[]? slotNames;
+        private static Type[]? slotTypes;
+
+        /// <summary>
+        /// Gets all non-abstract <see cref="InventorySlot"/> types (including <see cref="InventorySlot"/>
+        /// itself) from every loaded assembly, excluding any marked <see cref="IHideInSelections"/>.
+        /// This allows slot types defined in external assemblies (e.g. a game's own asmdef) to be discovered.
+        /// </summary>
+        /// <returns>The discovered slot types.</returns>
+        public static Type[] GetSlotTypes()
+        {
+            return slotTypes ??= AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(SafeGetTypes)
+                .Where(t => typeof(InventorySlot).IsAssignableFrom(t)
+                            && !t.IsAbstract
+                            && !typeof(IHideInSelections).IsAssignableFrom(t))
+                .ToArray();
+        }
 
         /// <summary>
         /// Gets the names of all non-abstract <see cref="InventorySlot"/> types that are not hidden in selections.
@@ -22,11 +41,36 @@ namespace Feazeyu.RPGSystems.Inventory
         /// <returns>An array of slot type names.</returns>
         public static string[] GetSlotTypeNames()
         {
-            return slotNames ??= Assembly.GetAssembly(typeof(InventorySlot))
-                .GetTypes()
-                .Where(t => ((t.IsSubclassOf(typeof(InventorySlot)) || t.IsAssignableFrom(typeof(InventorySlot))) && !t.IsAbstract) && !t.GetInterfaces().Contains(typeof(IHideInSelections)))
-                .Select(t => t.Name)
-                .ToArray();
+            return slotNames ??= GetSlotTypes().Select(t => t.Name).ToArray();
+        }
+
+        /// <summary>
+        /// Resolves a slot type by its simple type name across all loaded assemblies.
+        /// Use this instead of <see cref="Type.GetType(string)"/> so slot types in any
+        /// namespace or assembly resolve correctly. If two discovered slot types share a
+        /// simple name, the first one found wins.
+        /// </summary>
+        /// <param name="name">The simple (non-namespaced) type name.</param>
+        /// <returns>The matching slot <see cref="Type"/>, or null if none is found.</returns>
+        public static Type? ResolveSlotType(string name)
+        {
+            return Array.Find(GetSlotTypes(), t => t.Name == name);
+        }
+
+        /// <summary>
+        /// Returns the loadable types from an assembly, tolerating assemblies that fail to
+        /// fully load their type list (returns the types that did load).
+        /// </summary>
+        private static IEnumerable<Type> SafeGetTypes(Assembly assembly)
+        {
+            try
+            {
+                return assembly.GetTypes();
+            }
+            catch (ReflectionTypeLoadException e)
+            {
+                return e.Types.OfType<Type>();
+            }
         }
 
         /// <summary>

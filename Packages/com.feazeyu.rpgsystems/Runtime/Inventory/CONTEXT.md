@@ -53,13 +53,22 @@ All are `[Serializable]`. Key fields:
 - `IsEnabled` (bool)
 
 Key methods:
-- `PutItem(GameObject)` — checks `AcceptsItem()` first; returns bool.
+- `PutItem(GameObject)` — checks `AcceptsItem(ItemInfo)` first; returns bool.
 - `RemoveItem()` — returns the removed ID or -1.
-- `AcceptsItem()` — false if occupied, disabled, or anchorPosition ≠ (-1,-1).
+- `AcceptsItem()` — structural check: false if occupied, disabled, or anchorPosition ≠ (-1,-1).
+- `AcceptsItem(ItemInfo)` — item-aware acceptance; **override this to filter a slot by item type/category/`ItemTarget`**. Defaults to `AcceptsItem()`. The grid's placement validation (`IsPlacementValid`) and the base `PutItem` both call this overload, so the filter is enforced at placement time (including multi-cell shapes and drag-drop).
 
 `StackableInventorySlot` additionally has `stackSize` (-1 = unlimited) and `itemCount`.
 
 `IHideInSelections` marker interface excludes a slot type from editor slot-type dropdowns.
+
+### Adding a custom slot type
+
+1. Subclass `InventorySlot` (a `[Serializable]` class, **not** a MonoBehaviour). Override `AcceptsItem(ItemInfo)` / `PutItem` / `RemoveItem` / `BaseColor` as needed.
+2. The type is auto-discovered by `InventoryHelper.GetSlotTypes()` / `GetSlotTypeNames()`, which scan **all loaded assemblies** — so a slot defined in your own game asmdef appears in the grid editor's slot-type dropdown. Mark it `IHideInSelections` to hide it.
+3. Assign UI prefabs for the new type in `InventoryGridGenerator.slotDefinitions` (keyed by the slot's simple type name).
+
+The editor resolves a slot name back to its `Type` via `InventoryHelper.ResolveSlotType(name)` (namespace/assembly-agnostic). If two slot types share a simple name, the first discovered wins — keep slot type names unique.
 
 ---
 

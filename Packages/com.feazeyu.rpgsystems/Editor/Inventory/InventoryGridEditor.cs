@@ -148,7 +148,13 @@ namespace Feazeyu.RPGSystems.Inventory
                         }
                         if (cell.GetType().Name != AvailableTypes[SelectedType])
                         {
-                            cell = (InventorySlot)Activator.CreateInstance(Type.GetType($"Feazeyu.RPGSystems.Inventory.{AvailableTypes[SelectedType]}"));
+                            Type slotType = InventoryHelper.ResolveSlotType(AvailableTypes[SelectedType]);
+                            if (slotType == null)
+                            {
+                                Debug.LogError($"Could not resolve slot type '{AvailableTypes[SelectedType]}'.");
+                                continue;
+                            }
+                            cell = (InventorySlot)Activator.CreateInstance(slotType);
                             grid.Cells[x, y] = cell;
                         }
                         else
