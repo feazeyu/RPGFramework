@@ -22,7 +22,7 @@ namespace Feazeyu.RPGSystems.Character
         private Rigidbody2D rb;
         private Vector2 moveInput;
         private Vector2 aimInput;
-        private bool isShooting;
+        public bool IsShooting { get; private set; }
         private SpriteRenderer sr;
         protected override void Awake()
         {
@@ -83,8 +83,8 @@ namespace Feazeyu.RPGSystems.Character
 
         public void OnAttack(InputAction.CallbackContext ctx)
         {
-            if (ctx.started) isShooting = true;
-            if (ctx.canceled) isShooting = false;
+            if (ctx.started) IsShooting = true;
+            if (ctx.canceled) IsShooting = false;
         }
 
         // --- Movement ---

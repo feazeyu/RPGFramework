@@ -29,7 +29,7 @@ namespace Feazeyu.RPGSystems.Character
         public Transform? castingRotationReference;
 
         [Header("Events")]
-        public UnityEvent OnDeath;
+        public UnityEvent OnDeath = new();
 
         /// <summary>
         /// Initializes the entity's resources and spell cooldowns.

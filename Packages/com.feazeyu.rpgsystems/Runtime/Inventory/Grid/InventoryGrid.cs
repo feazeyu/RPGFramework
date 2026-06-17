@@ -316,7 +316,7 @@ namespace Feazeyu.RPGSystems.Inventory
             return count;
         }
 
-        bool IItemContainer.RemoveItem(int itemId, int count = 1)
+        bool IItemContainer.RemoveItem(int itemId, int count)
         {
             if (((IItemContainer)this).CountItem(itemId) < count) return false;
 
