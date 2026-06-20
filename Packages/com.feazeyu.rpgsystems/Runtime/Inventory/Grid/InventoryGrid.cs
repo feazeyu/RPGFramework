@@ -47,6 +47,15 @@ namespace Feazeyu.RPGSystems.Inventory
         public int columns = 5;
 
         /// <summary>
+        /// When enabled, adding an item that matches an existing stack consolidates into that
+        /// stack (incrementing its count) instead of occupying a new cell. Counts are rendered in
+        /// the bottom-left of the stack's bottom-left cell. Requires the involved cells to be
+        /// <see cref="StackableInventorySlot"/> to hold a count — newly created cells become
+        /// stackable automatically while this is on (see <see cref="CreateEmptyCell"/>).
+        /// </summary>
+        public bool allowStacking = false;
+
+        /// <summary>
         /// 2D array of inventory slots.
         /// </summary>
         [SerializeReference]
@@ -75,12 +84,25 @@ namespace Feazeyu.RPGSystems.Inventory
                         }
                         else
                         {
-                            newStates[x, y] = new(new Vector2Int(x, y));
+                            newStates[x, y] = CreateEmptyCell(new Vector2Int(x, y));
                         }
                     }
                 }
                 Cells = newStates;
             }
+        }
+
+        /// <summary>
+        /// Creates an empty cell for the given position. When <see cref="allowStacking"/> is on,
+        /// new cells are <see cref="StackableInventorySlot"/> so they can hold a stack count.
+        /// </summary>
+        /// <param name="position">The grid coordinate the cell occupies.</param>
+        /// <returns>A new empty <see cref="InventorySlot"/>.</returns>
+        protected virtual InventorySlot CreateEmptyCell(Vector2Int position)
+        {
+            return allowStacking
+                ? new StackableInventorySlot { position = position }
+                : new InventorySlot(position);
         }
 
         /// <summary>
@@ -173,6 +195,10 @@ namespace Feazeyu.RPGSystems.Inventory
             if (!Cells.TryGet(position.x, position.y, out var cell) || cell.Item == null)
                 return -1;
 
+            // A stack deeper than one item keeps its footprint; just take one off the top.
+            if (cell is StackableInventorySlot stack && stack.WouldRemainAfterRemove)
+                return cell.RemoveItem();
+
             var item = cell.Item;
             var itemInfo = item.GetComponent<Item>().info;
             var center = item.GetComponent<Item>().GetAnchorSlot();
@@ -202,6 +228,18 @@ namespace Feazeyu.RPGSystems.Inventory
         {
             ItemInfo itemInfo = item.GetComponent<Item>().info;
             Vector2Int center = item.GetComponent<Item>().GetAnchorSlot();
+
+            // Stack onto the target cell when it already holds a matching, non-full stack.
+            if (allowStacking
+                && Cells.TryGet(position.x, position.y, out var target)
+                && target is StackableInventorySlot stack
+                && stack.anchorPosition == new Vector2Int(-1, -1)
+                && stack.ItemId == itemInfo.id
+                && stack.HasRoom)
+            {
+                return target.PutItem(item);
+            }
+
             bool valid = IsPlacementValid(position, itemInfo, center);
             if (!valid) return false;
             return PutItemUnchecked(position, item, itemInfo, center);
@@ -272,6 +310,11 @@ namespace Feazeyu.RPGSystems.Inventory
         {
             var itemComp = item.GetComponent<Item>();
             if (itemComp == null) return false;
+
+            // Prefer consolidating into an existing matching stack before taking a new cell.
+            if (allowStacking && TryStackInto(itemComp.info.id, item))
+                return true;
+
             var anchor = itemComp.GetAnchorSlot();
             for (int y = 0; y < rows; y++)
             {
@@ -280,6 +323,30 @@ namespace Feazeyu.RPGSystems.Inventory
                     var pos = new Vector2Int(x, y);
                     if (IsPlacementValid(pos, itemComp.info, anchor)
                         && PutItemUnchecked(pos, item, itemComp.info, anchor))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Finds an anchor cell holding a non-full <see cref="StackableInventorySlot"/> of the same
+        /// item and adds one to it. Returns false if no such stack exists.
+        /// </summary>
+        private bool TryStackInto(int itemId, GameObject item)
+        {
+            for (int y = 0; y < rows; y++)
+            {
+                for (int x = 0; x < columns; x++)
+                {
+                    if (Cells.TryGet(x, y, out var cell)
+                        && cell is StackableInventorySlot s
+                        && s.anchorPosition == new Vector2Int(-1, -1)
+                        && s.ItemId == itemId
+                        && s.HasRoom
+                        && cell.PutItem(item))
                     {
                         return true;
                     }
@@ -312,7 +379,7 @@ namespace Feazeyu.RPGSystems.Inventory
                 for (int y = 0; y < Cells.Rows; y++)
                     if (Cells.TryGet(x, y, out var cell) && cell.ItemId == itemId
                         && cell.anchorPosition == new Vector2Int(-1, -1))
-                        count++;
+                        count += cell is StackableInventorySlot s ? Mathf.Max(s.itemCount, 0) : 1;
             return count;
         }
 
@@ -325,10 +392,15 @@ namespace Feazeyu.RPGSystems.Inventory
             {
                 for (int y = 0; y < Cells.Rows && remaining > 0; y++)
                 {
-                    if (Cells.TryGet(x, y, out var cell) && cell.ItemId == itemId
-                        && cell.anchorPosition == new Vector2Int(-1, -1))
+                    if (!Cells.TryGet(x, y, out var cell) || cell.ItemId != itemId
+                        || cell.anchorPosition != new Vector2Int(-1, -1))
+                        continue;
+
+                    // Drain a stack one at a time so a single deep stack can satisfy the request.
+                    var pos = new Vector2Int(x, y);
+                    while (remaining > 0 && cell.ItemId == itemId)
                     {
-                        RemoveItem(new Vector2Int(x, y));
+                        RemoveItem(pos);
                         remaining--;
                     }
                 }
@@ -379,6 +451,12 @@ namespace Feazeyu.RPGSystems.Inventory
                     if (Cells.TryGet(x, y, out var cell) && cell.Item != null)
                     {
                         var item = cell.Item;
+                        // Collapse any stack (and disarm infinite) so a single RemoveItem fully empties it.
+                        if (cell is StackableInventorySlot s)
+                        {
+                            s.itemCount = 1;
+                            s.infinite = false;
+                        }
                         RemoveItem(new Vector2Int(x, y));
 #if UNITY_EDITOR
                         if (UnityEditor.EditorUtility.IsPersistent(item)) continue;

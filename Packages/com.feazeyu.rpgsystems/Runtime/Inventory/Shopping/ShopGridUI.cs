@@ -1,3 +1,4 @@
+using Feazeyu.RPGSystems.Core.Utilities;
 using Feazeyu.RPGSystems.Items;
 using System.Linq;
 using TMPro;
@@ -33,11 +34,34 @@ namespace Feazeyu.RPGSystems.Inventory
         private int _pendingRefundItemId = -1;
         private int _pendingRefundPrice = 0;
 
+        // The working copy the shop actually runs against. Buying/selling mutates ShopSlot.stock,
+        // so we never operate on the authored asset (see ShopInventory.CloneForRuntime).
+        private ShopInventory _runtimeInventory;
+
+        /// <summary>
+        /// Swaps <see cref="shopInventory"/> for a runtime clone if it currently points at an
+        /// authored asset. Called from the populate path so every entry point (Awake, Setup,
+        /// or a direct shopInventory assignment) is covered.
+        /// </summary>
+        private void EnsureRuntimeInventory()
+        {
+            if (shopInventory == null || shopInventory == _runtimeInventory) return;
+            if (_runtimeInventory != null) Destroy(_runtimeInventory);
+            _runtimeInventory = shopInventory.CloneForRuntime();
+            shopInventory = _runtimeInventory;
+        }
+
+        private void OnDestroy()
+        {
+            if (_runtimeInventory != null) Destroy(_runtimeInventory);
+        }
+
         private void ConsumePendingRefund(int itemId)
         {
             if (_pendingRefundItemId != itemId) return;
+            // The stack count is the authoritative stock; returning the item re-stacks it (see
+            // ReturnItem), so the refund only needs to give the player's money back.
             Currency.Add(_pendingRefundPrice);
-            shopInventory?.listings.FirstOrDefault(s => s.itemId == itemId)?.UndoSell();
             _pendingRefundItemId = -1;
             _pendingRefundPrice = 0;
         }
@@ -155,7 +179,7 @@ namespace Feazeyu.RPGSystems.Inventory
                 return placed;
             }
 
-            return TrySellToShop(item, itemId, () => base.PutItem(position, item));
+            return TrySellToShop(item, itemId);
         }
 
         protected override bool TryAddItem(GameObject item)
@@ -169,19 +193,22 @@ namespace Feazeyu.RPGSystems.Inventory
                 return placed;
             }
 
-            return TrySellToShop(item, itemId, () => base.TryAddItem(item));
+            return TrySellToShop(item, itemId);
         }
 
-        private bool TrySellToShop(GameObject item, int itemId, System.Func<bool> placeFn)
+        private bool TrySellToShop(GameObject item, int itemId)
         {
             int buyPrice = GetPrice(itemId);
             if (buyPrice <= 0) return false; // item not in this shop's listings — reject
 
-            bool placed = placeFn();
+            // Route through base.TryAddItem (not a position-specific put) so the sold item always
+            // merges into the listing's existing stack instead of spawning a second slot —
+            // regardless of which cell it was dropped on.
+            bool placed = base.TryAddItem(item);
             if (placed)
             {
+                // The shop's stock (stack count) grows by one instead of duplicating the offering.
                 Currency.Add(Mathf.FloorToInt(buyPrice * _sellRatio));
-                shopInventory?.listings.FirstOrDefault(s => s.itemId == itemId)?.UndoSell();
                 RedrawContents();
             }
             return placed;
@@ -192,8 +219,7 @@ namespace Feazeyu.RPGSystems.Inventory
             if (!Cells.TryGet(position.x, position.y, out var cell) || cell.Item == null)
                 return base.RemoveItem(position);
 
-            var item = cell.Item.GetComponent<Item>();
-            int itemId = item?.info?.id ?? -1;
+            int itemId = cell.Item.GetComponent<Item>()?.info?.id ?? -1;
             int price = GetPrice(itemId);
 
             if (!Currency.TrySpend(price))
@@ -201,16 +227,22 @@ namespace Feazeyu.RPGSystems.Inventory
 
             _pendingRefundItemId = itemId;
             _pendingRefundPrice = price;
-            shopInventory?.listings.FirstOrDefault(s => s.itemId == itemId)?.TrySell();
+
+            // Stock is the stack count: buying takes one off the stack. The base decrements a
+            // deep stack (or clears the last one), and never depletes an infinite stack — so the
+            // offering stays on display with its remaining count until it actually runs out.
             return base.RemoveItem(position);
         }
 
         private void PopulateItems()
         {
+            EnsureRuntimeInventory();
+            allowStacking = true;                          // a listing's stock is its stack depth
+            Cells = new Array2D<InventorySlot>(0, 0);      // force fresh StackableInventorySlot cells
             ResizeIfNecessary();
             foreach (var listing in shopInventory.listings)
             {
-                if (!listing.IsAvailable) continue;
+                if (listing.stock == 0) continue;          // nothing in stock
 
                 // Stock the shop with its own inventory. This must NOT go through the
                 // overridden TryAddItem, which treats an incoming item as a player
@@ -221,7 +253,40 @@ namespace Feazeyu.RPGSystems.Inventory
 
                 var instance = Instantiate(prefab);
                 if (!base.TryAddItem(instance))
+                {
                     Destroy(instance);
+                    continue;
+                }
+                SeedStock(listing);
+            }
+        }
+
+        /// <summary>
+        /// Sets the stack count of the just-placed listing to its stock (negative stock = infinite).
+        /// </summary>
+        private void SeedStock(ShopSlot listing)
+        {
+            for (int y = 0; y < rows; y++)
+            {
+                for (int x = 0; x < columns; x++)
+                {
+                    if (Cells.TryGet(x, y, out var cell)
+                        && cell is StackableInventorySlot s
+                        && s.anchorPosition == new Vector2Int(-1, -1)
+                        && s.ItemId == listing.itemId)
+                    {
+                        if (listing.stock < 0)
+                        {
+                            s.infinite = true;
+                        }
+                        else
+                        {
+                            s.infinite = false;
+                            s.itemCount = listing.stock;
+                        }
+                        return;
+                    }
+                }
             }
         }
 

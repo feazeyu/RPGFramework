@@ -307,6 +307,23 @@ namespace Feazeyu.RPGSystems.Inventory
         /// </summary>
         public int itemCount;
 
+        /// <summary>
+        /// When true the stack never depletes and renders as "∞" (used for infinite shop stock).
+        /// Buying does not decrement it and selling does not change its count.
+        /// </summary>
+        public bool infinite;
+
+        /// <summary>
+        /// True if another item can be added to this stack (empty capacity remaining, or unlimited/infinite).
+        /// </summary>
+        public bool HasRoom => infinite || stackSize == -1 || itemCount < stackSize;
+
+        /// <summary>
+        /// True if removing one item would leave the stack occupied (more than one item, or infinite).
+        /// Used by the grid to decide between decrementing a stack and clearing the item's footprint.
+        /// </summary>
+        public bool WouldRemainAfterRemove => infinite || itemCount > 1;
+
         #region Constructors
         /// <summary>
         /// Initializes a new instance of the <see cref="StackableInventorySlot"/> class.
@@ -349,27 +366,28 @@ namespace Feazeyu.RPGSystems.Inventory
         /// <returns>True if the item was added; otherwise, false.</returns>
         public override bool PutItem(GameObject item)
         {
-            if (!IsEnabled) return false;
-            if ((itemCount < stackSize || stackSize == -1) && (ItemId == -1 || ItemId == item.GetComponent<Item>().info.id))
-            {
-                ItemId = item.GetComponent<Item>().info.id;
-                itemCount++;
-                return true;
-            }
-            return false;
+            if (!IsEnabled || item == null) return false;
+            int incomingId = item.GetComponent<Item>().info.id;
+            if (ItemId != -1 && ItemId != incomingId) return false;
+            if (!HasRoom) return false;
+            ItemId = incomingId;
+            if (!infinite) itemCount++;
+            return true;
         }
 
         /// <summary>
-        /// Removes an item from the stack.
+        /// Removes an item from the stack. Infinite stacks never deplete.
         /// </summary>
         /// <returns>The id of the removed item, or -1 if none was removed.</returns>
         public override int RemoveItem()
         {
-            if (!IsEnabled || itemCount <= 0) return -1;    
+            if (!IsEnabled || ItemId == -1) return -1;
             int removedItemId = ItemId;
+            if (infinite) return removedItemId;
             itemCount--;
             if (itemCount <= 0)
             {
+                itemCount = 0;
                 ItemId = -1;
             }
             return removedItemId;

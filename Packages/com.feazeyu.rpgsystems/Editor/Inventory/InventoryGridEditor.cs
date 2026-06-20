@@ -56,6 +56,11 @@ namespace Feazeyu.RPGSystems.Inventory
             grid.rows = EditorGUILayout.IntSlider("Rows", grid.rows, 1, 20);
             grid.columns = EditorGUILayout.IntSlider("Columns", grid.columns, 1, 20);
 
+            grid.allowStacking = EditorGUILayout.Toggle(
+                new GUIContent("Allow stacking", "Consolidate identical items into a single stackable cell and show a count badge. New cells become StackableInventorySlot while this is on."),
+                grid.allowStacking
+            );
+
             GUILayout.Space(10);
             EditorGUILayout.LabelField("Grid Shape", EditorStyles.boldLabel);
 

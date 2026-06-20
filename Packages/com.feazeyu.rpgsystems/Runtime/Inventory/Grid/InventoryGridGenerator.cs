@@ -6,6 +6,7 @@ using System.Collections.Generic;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
+using TMPro;
 using UnityEngine;
 namespace Feazeyu.RPGSystems.Inventory
 {
@@ -109,7 +110,78 @@ namespace Feazeyu.RPGSystems.Inventory
                 }
             }
             InventoryHelper.GenerateDragLayer(target);
+            AddStackCounts(inventoryGrid, root);
             lastGeneratedRoot = root;
+        }
+
+        /// <summary>
+        /// Renders the stack-count badge in the bottom-left of each stack's bottom-left cell.
+        /// Finite stacks of one show nothing; infinite stacks show "∞".
+        /// </summary>
+        private void AddStackCounts(InventoryGrid grid, GameObject root)
+        {
+            int baseOrder = target != null ? target.sortingOrder : 0;
+            int labelOrder = baseOrder + grid.rows * grid.columns + 2;
+
+            for (int y = 0; y < grid.rows; y++)
+            {
+                for (int x = 0; x < grid.columns; x++)
+                {
+                    if (!grid.Cells.TryGet(x, y, out var cell)
+                        || cell is not StackableInventorySlot s
+                        || s.anchorPosition != new Vector2Int(-1, -1)
+                        || s.ItemId == -1)
+                        continue;
+
+                    string? text = s.infinite ? "∞" : (s.itemCount > 1 ? s.itemCount.ToString() : null);
+                    if (text == null) continue;
+
+                    var itemGo = grid.GetItem(new Vector2Int(x, y));
+                    if (itemGo == null) continue;
+
+                    Vector2Int bl = GetBottomLeftCell(new Vector2Int(x, y), itemGo.GetComponent<Item>());
+                    var cellGo = root.transform.Find($"Cell_{bl.x}_{bl.y}");
+                    if (cellGo == null) continue;
+
+                    AddCountLabel(cellGo.gameObject, text, labelOrder);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Returns the bottom-left-most cell covered by the item anchored at <paramref name="anchor"/>.
+        /// </summary>
+        private static Vector2Int GetBottomLeftCell(Vector2Int anchor, Item item)
+        {
+            var center = item.GetAnchorSlot();
+            var bottomLeft = anchor;
+            foreach (var shapePos in item.info.Shape.Positions)
+            {
+                var gridPos = new Vector2Int(anchor.x + shapePos.x - center.x, anchor.y + shapePos.y - center.y);
+                if (gridPos.y > bottomLeft.y || (gridPos.y == bottomLeft.y && gridPos.x < bottomLeft.x))
+                    bottomLeft = gridPos;
+            }
+            return bottomLeft;
+        }
+
+        private static void AddCountLabel(GameObject slotGo, string text, int sortingOrder)
+        {
+            var labelGo = new GameObject("StackCount");
+            labelGo.transform.SetParent(slotGo.transform, false);
+            var rt = labelGo.AddComponent<RectTransform>();
+            rt.anchorMin = Vector2.zero;
+            rt.anchorMax = Vector2.one;
+            rt.offsetMin = rt.offsetMax = Vector2.zero;
+            var canvas = labelGo.AddComponent<Canvas>();
+            canvas.overrideSorting = true;
+            canvas.sortingOrder = sortingOrder;
+            var label = labelGo.AddComponent<TextMeshProUGUI>();
+            label.text = text;
+            label.fontSize = 12;
+            label.fontStyle = FontStyles.Bold;
+            label.color = Color.white;
+            label.alignment = TextAlignmentOptions.BottomLeft;
+            label.raycastTarget = false;
         }
 
         /// <summary>
@@ -122,7 +194,7 @@ namespace Feazeyu.RPGSystems.Inventory
         private void GenerateSlot(InventoryGrid inventoryGrid, GameObject root, int x, int y)
         {
             InventorySlot cell = inventoryGrid.Cells[x, y];
-            SlotUIDefinition definition = slotDefinitions[cell.GetType().Name];
+            SlotUIDefinition definition = ResolveDefinition(cell.GetType());
 
             if (definition.cellPrefab == null || definition.disabledCellPrefab == null)
             {
@@ -141,6 +213,22 @@ namespace Feazeyu.RPGSystems.Inventory
             slot.target = inventoryGrid;
             slot.position = new Vector2Int(x, y);
             CreateSlotItem(inventoryGrid, slot);
+        }
+
+        /// <summary>
+        /// Resolves the slot UI prefabs for a slot type, falling back up the type hierarchy when a
+        /// subtype has no prefabs assigned (e.g. a <see cref="StackableInventorySlot"/> cell renders
+        /// with the <see cref="InventorySlot"/> prefab if no stackable-specific one was configured).
+        /// </summary>
+        private SlotUIDefinition ResolveDefinition(System.Type slotType)
+        {
+            for (System.Type t = slotType; t != null && typeof(InventorySlot).IsAssignableFrom(t); t = t.BaseType)
+            {
+                if (slotDefinitions.TryGetValue(t.Name, out var def)
+                    && def.cellPrefab != null && def.disabledCellPrefab != null)
+                    return def;
+            }
+            return default;
         }
 
         /// <summary>

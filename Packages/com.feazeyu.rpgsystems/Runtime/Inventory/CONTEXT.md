@@ -58,7 +58,7 @@ Key methods:
 - `AcceptsItem()` — structural check: false if occupied, disabled, or anchorPosition ≠ (-1,-1).
 - `AcceptsItem(ItemInfo)` — item-aware acceptance; **override this to filter a slot by item type/category/`ItemTarget`**. Defaults to `AcceptsItem()`. The grid's placement validation (`IsPlacementValid`) and the base `PutItem` both call this overload, so the filter is enforced at placement time (including multi-cell shapes and drag-drop).
 
-`StackableInventorySlot` additionally has `stackSize` (-1 = unlimited) and `itemCount`.
+`StackableInventorySlot` additionally has `stackSize` (-1 = unlimited), `itemCount`, and `infinite` (never depletes; renders as `∞` — used for infinite shop stock). Helpers: `HasRoom`, `WouldRemainAfterRemove`.
 
 `IHideInSelections` marker interface excludes a slot type from editor slot-type dropdowns.
 
@@ -105,6 +105,8 @@ Key API:
 - `ToggleInventory() / OpenInventory() / CloseInventory()` — delegate to generator.
 
 `OnValidate` auto-adds `InventoryGridGenerator` via `Undo.AddComponent` (deferred, edit-mode only). The `suppressAutoAddUI` flag prevents duplicate adds.
+
+**Stacking:** `allowStacking` (bool). When on, `TryAddItem` first consolidates into an existing matching `StackableInventorySlot` (via `TryStackInto`) before taking a new cell, `PutItem(pos)` stacks when the target cell already holds a matching non-full stack, and `RemoveItem(pos)` only decrements a deep stack (keeping its footprint) — clearing the footprint just for the last item. Newly created empty cells become `StackableInventorySlot` (`CreateEmptyCell`) so they can hold a count. `CountItem`/`RemoveItem(itemId,count)` are stack-depth aware. The generator renders the count (or `∞` for `infinite` stacks) in the bottom-left of the stack's bottom-left cell when >1, and falls back up the slot type hierarchy for a cell prefab (`ResolveDefinition`), so a stackable cell renders with the `InventorySlot` prefab if no stackable-specific one is set.
 
 ### InventoryGridGenerator
 

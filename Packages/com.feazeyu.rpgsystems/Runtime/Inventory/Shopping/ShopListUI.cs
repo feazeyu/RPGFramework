@@ -40,6 +40,27 @@ namespace Feazeyu.RPGSystems.Inventory
 
         private GameObject _root;
 
+        // The working copy the shop runs against. Click-to-buy mutates ShopSlot.stock, so we
+        // never operate on the authored asset (see ShopInventory.CloneForRuntime).
+        private ShopInventory _runtimeInventory;
+
+        /// <summary>
+        /// Swaps <see cref="shopInventory"/> for a runtime clone if it currently points at an
+        /// authored asset, so purchases never persist back into the asset.
+        /// </summary>
+        private void EnsureRuntimeInventory()
+        {
+            if (shopInventory == null || shopInventory == _runtimeInventory) return;
+            if (_runtimeInventory != null) Destroy(_runtimeInventory);
+            _runtimeInventory = shopInventory.CloneForRuntime();
+            shopInventory = _runtimeInventory;
+        }
+
+        private void OnDestroy()
+        {
+            if (_runtimeInventory != null) Destroy(_runtimeInventory);
+        }
+
         private void Awake()
         {
             if (shopInventory != null)
@@ -67,6 +88,7 @@ namespace Feazeyu.RPGSystems.Inventory
         {
             if (_root != null) Destroy(_root);
             if (shopInventory == null) return;
+            EnsureRuntimeInventory();
 
             var parent = targetCanvas != null
                 ? targetCanvas.transform
