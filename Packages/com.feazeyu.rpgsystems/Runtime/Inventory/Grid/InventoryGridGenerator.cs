@@ -115,7 +115,7 @@ namespace Feazeyu.RPGSystems.Inventory
         }
 
         /// <summary>
-        /// Renders the stack-count badge in the bottom-left of each stack's bottom-left cell.
+        /// Renders the stack-count badge in the bottom-right of each stack's bottom-left cell.
         /// Finite stacks of one show nothing; infinite stacks show "∞".
         /// </summary>
         private void AddStackCounts(InventoryGrid grid, GameObject root)
@@ -177,10 +177,10 @@ namespace Feazeyu.RPGSystems.Inventory
             canvas.sortingOrder = sortingOrder;
             var label = labelGo.AddComponent<TextMeshProUGUI>();
             label.text = text;
-            label.fontSize = 12;
+            label.fontSize = 20;
             label.fontStyle = FontStyles.Bold;
             label.color = Color.white;
-            label.alignment = TextAlignmentOptions.BottomLeft;
+            label.alignment = TextAlignmentOptions.BottomRight;
             label.raycastTarget = false;
         }
 

@@ -289,6 +289,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -345,6 +346,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -366,9 +369,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!213 &338437922
 Sprite:
@@ -389,7 +394,6 @@ Sprite:
   m_Pivot: {x: 0.5, y: 0.5}
   m_Extrude: 0
   m_IsPolygon: 0
-  m_AtlasName: 
   m_PackingTag: 
   m_RenderDataKey:
     00000000000000000000000000000000: 0
@@ -742,6 +746,7 @@ GameObject:
   m_IsActive: 1
 --- !u!212 &458565672
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -760,6 +765,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -781,9 +788,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -10
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 338437922}
   m_Color: {r: 0.16, g: 0.19, b: 0.23, a: 1}
   m_FlipX: 0
@@ -793,7 +802,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &458565673
 Transform:
@@ -1059,6 +1067,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -1195,6 +1204,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -1316,6 +1326,7 @@ MonoBehaviour:
   persistPlayModeChanges: 0
   rows: 5
   columns: 5
+  allowStacking: 0
   Cells:
     rid: 1756203013541462090
   references:
@@ -1671,7 +1682,7 @@ Texture2D:
     serializedVersion: 2
     Hash: 00000000000000000000000000000000
   m_IsAlphaChannelOptional: 0
-  serializedVersion: 3
+  serializedVersion: 4
   m_Width: 4
   m_Height: 4
   m_CompleteImageSize: 64
@@ -1782,6 +1793,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -1838,6 +1850,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1859,9 +1873,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!224 &1425447889
 RectTransform:
@@ -1965,6 +1981,8 @@ GameObject:
   - component: {fileID: 1530013580}
   - component: {fileID: 1530013581}
   - component: {fileID: 1530013583}
+  - component: {fileID: 1530013584}
+  - component: {fileID: 1530013585}
   m_Layer: 0
   m_Name: NPC_Merchant
   m_TagString: Untagged
@@ -2074,6 +2092,7 @@ CircleCollider2D:
   m_Radius: 2.5
 --- !u!212 &1530013577
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2092,6 +2111,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2113,9 +2134,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 338437922}
   m_Color: {r: 0.92, g: 0.62, b: 0.18, a: 1}
   m_FlipX: 0
@@ -2125,7 +2148,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1530013578
 Transform:
@@ -2191,8 +2213,9 @@ MonoBehaviour:
   persistPlayModeChanges: 0
   rows: 5
   columns: 5
+  allowStacking: 0
   Cells:
-    rid: 1756203013541462128
+    rid: 5852939448246599883
   shopInventory: {fileID: 11400000, guid: 0da84229f89be184ab5eb80e2437f917, type: 2}
   _currencyProvider: {fileID: 0}
   _sellRatio: 0.5
@@ -2200,37 +2223,6 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 1756203013541462128
-      type: {class: 'Array2D`1[[Feazeyu.RPGSystems.Inventory.InventorySlot, Feazeyu.RPGSystems.Inventory]]', ns: Feazeyu.RPGSystems.Core.Utilities, asm: Feazeyu.RPGSystems.Core}
-      data:
-        rows: 5
-        columns: 5
-        elements:
-        - rid: 1756203013541462129
-        - rid: 1756203013541462130
-        - rid: 1756203013541462131
-        - rid: 1756203013541462132
-        - rid: 1756203013541462133
-        - rid: 1756203013541462134
-        - rid: 1756203013541462135
-        - rid: 1756203013541462136
-        - rid: 1756203013541462137
-        - rid: 1756203013541462138
-        - rid: 1756203013541462139
-        - rid: 1756203013541462140
-        - rid: 1756203013541462141
-        - rid: 1756203013541462142
-        - rid: 1756203013541462143
-        - rid: 1756203013541462144
-        - rid: 1756203013541462145
-        - rid: 1756203013541462146
-        - rid: 1756203013541462147
-        - rid: 1756203013541462148
-        - rid: 1756203013541462149
-        - rid: 1756203013541462150
-        - rid: 1756203013541462151
-        - rid: 1756203013541462152
-        - rid: 1756203013541462153
     - rid: 1756203013541462129
       type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
       data:
@@ -2328,7 +2320,7 @@ MonoBehaviour:
         position: {x: 2, y: 3}
         anchorPosition: {x: -1, y: -1}
         IsEnabled: 1
-        _itemId: -1
+        _itemId: 1
     - rid: 1756203013541462143
       type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
       data:
@@ -2336,70 +2328,101 @@ MonoBehaviour:
         anchorPosition: {x: -1, y: -1}
         IsEnabled: 1
         _itemId: -1
-    - rid: 1756203013541462144
+    - rid: 5852939448246599834
       type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
       data:
         position: {x: 3, y: 0}
         anchorPosition: {x: -1, y: -1}
         IsEnabled: 1
         _itemId: -1
-    - rid: 1756203013541462145
+    - rid: 5852939448246599835
       type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
       data:
         position: {x: 3, y: 1}
         anchorPosition: {x: -1, y: -1}
         IsEnabled: 1
         _itemId: -1
-    - rid: 1756203013541462146
+    - rid: 5852939448246599836
       type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
       data:
         position: {x: 3, y: 2}
-        anchorPosition: {x: -1, y: -1}
+        anchorPosition: {x: 2, y: 3}
         IsEnabled: 1
         _itemId: -1
-    - rid: 1756203013541462147
+    - rid: 5852939448246599837
       type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
       data:
         position: {x: 3, y: 3}
         anchorPosition: {x: -1, y: -1}
         IsEnabled: 1
         _itemId: -1
-    - rid: 1756203013541462148
+    - rid: 5852939448246599838
       type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
       data:
         position: {x: 3, y: 4}
-        anchorPosition: {x: -1, y: -1}
+        anchorPosition: {x: 2, y: 3}
         IsEnabled: 1
         _itemId: -1
-    - rid: 1756203013541462149
+    - rid: 5852939448246599883
+      type: {class: 'Array2D`1[[Feazeyu.RPGSystems.Inventory.InventorySlot, Feazeyu.RPGSystems.Inventory]]', ns: Feazeyu.RPGSystems.Core.Utilities, asm: Feazeyu.RPGSystems.Core}
+      data:
+        rows: 5
+        columns: 5
+        elements:
+        - rid: 1756203013541462129
+        - rid: 1756203013541462130
+        - rid: 1756203013541462131
+        - rid: 1756203013541462132
+        - rid: 1756203013541462133
+        - rid: 1756203013541462134
+        - rid: 1756203013541462135
+        - rid: 1756203013541462136
+        - rid: 1756203013541462137
+        - rid: 1756203013541462138
+        - rid: 1756203013541462139
+        - rid: 1756203013541462140
+        - rid: 1756203013541462141
+        - rid: 1756203013541462142
+        - rid: 1756203013541462143
+        - rid: 5852939448246599834
+        - rid: 5852939448246599835
+        - rid: 5852939448246599836
+        - rid: 5852939448246599837
+        - rid: 5852939448246599838
+        - rid: 5852939448246599884
+        - rid: 5852939448246599885
+        - rid: 5852939448246599886
+        - rid: 5852939448246599887
+        - rid: 5852939448246599888
+    - rid: 5852939448246599884
       type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
       data:
         position: {x: 4, y: 0}
         anchorPosition: {x: -1, y: -1}
         IsEnabled: 1
         _itemId: -1
-    - rid: 1756203013541462150
+    - rid: 5852939448246599885
       type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
       data:
         position: {x: 4, y: 1}
         anchorPosition: {x: -1, y: -1}
         IsEnabled: 1
         _itemId: -1
-    - rid: 1756203013541462151
+    - rid: 5852939448246599886
       type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
       data:
         position: {x: 4, y: 2}
         anchorPosition: {x: -1, y: -1}
         IsEnabled: 1
         _itemId: -1
-    - rid: 1756203013541462152
+    - rid: 5852939448246599887
       type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
       data:
         position: {x: 4, y: 3}
-        anchorPosition: {x: -1, y: -1}
+        anchorPosition: {x: 2, y: 3}
         IsEnabled: 1
         _itemId: -1
-    - rid: 1756203013541462153
+    - rid: 5852939448246599888
       type: {class: InventorySlot, ns: Feazeyu.RPGSystems.Inventory, asm: Feazeyu.RPGSystems.Inventory}
       data:
         position: {x: 4, y: 4}
@@ -2421,6 +2444,47 @@ MonoBehaviour:
   m_DialogueRunner: {fileID: 1530013574}
   m_DialogueUI: {fileID: 1743128808}
   m_InteractPrompt: {fileID: 1425447886}
+--- !u!114 &1530013584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1530013572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d10b31a23e41276459b2148f0dc8a764, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Feazeyu.RPGSystems.Inventory::Feazeyu.RPGSystems.Inventory.ShopListUI
+  EnableSlotCapacity: 0
+  capacity: 20
+  scrollSensitivity: 10
+  contents: []
+  _uiGenerator: {fileID: 1530013585}
+  shopInventory: {fileID: 11400000, guid: 0da84229f89be184ab5eb80e2437f917, type: 2}
+  _currencyProvider: {fileID: 0}
+  _sellRatio: 0.5
+--- !u!114 &1530013585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1530013572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b503098275430854a88e2ad91528df75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Feazeyu.RPGSystems.Inventory::Feazeyu.RPGSystems.Inventory.InventoryListGenerator
+  list: {fileID: 1530013584}
+  slotPrefab: {fileID: 6909569672574216487, guid: ca2974eb2b1bcd34aaf0150ea3f01a89, type: 3}
+  targetCanvas: {fileID: 1743128806}
+  UIObject: {fileID: 0}
+  inventoryContainerOverride: {fileID: 7481346189191518307, guid: 5fda91875c45f7c4993feaabcb36e2bd, type: 3}
+  firstElementPosition: {x: 0, y: 0}
+  margin: {x: 0, y: 0}
+  inventoryName: ShopList
+  anchorPosition: 2
 --- !u!1 &1591698314
 GameObject:
   m_ObjectHideFlags: 0
@@ -2908,6 +2972,7 @@ Rigidbody2D:
   m_Constraints: 4
 --- !u!212 &1848969209
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2926,6 +2991,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2947,9 +3014,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 338437922}
   m_Color: {r: 0.28, g: 0.55, b: 0.96, a: 1}
   m_FlipX: 0
@@ -2959,7 +3028,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1848969210
 Transform:
@@ -2989,7 +3057,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40a6b891960ecb442972f36843bfbf1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _balance: 100
+  _balance: 200
 --- !u!114 &1848969212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3079,6 +3147,7 @@ MonoBehaviour:
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -3297,6 +3366,7 @@ MonoBehaviour:
   m_VerticalAlignment: 4096
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0

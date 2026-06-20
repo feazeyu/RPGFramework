@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Feazeyu.RPGSystems.Items;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -84,7 +85,7 @@ namespace Feazeyu.RPGSystems.Inventory
 
         // ── IUIPositionalItemContainer ────────────────────────────────────────
 
-        public bool PutItem(Vector2Int position, GameObject item)
+        public virtual bool PutItem(Vector2Int position, GameObject item)
         {
             contents ??= new();
 
@@ -116,7 +117,7 @@ namespace Feazeyu.RPGSystems.Inventory
             return true;
         }
 
-        public int RemoveItem(Vector2Int position)
+        public virtual int RemoveItem(Vector2Int position)
         {
             var itemSlot = contents[position.y];
             if (itemSlot != null)
@@ -189,6 +190,16 @@ namespace Feazeyu.RPGSystems.Inventory
         public void RedrawContents()
         {
             uiGenerator?.GenerateUI();
+        }
+
+        /// <summary>
+        /// The text shown for a slot's item in the list UI. Defaults to the item's name; subclasses
+        /// (e.g. <see cref="ShopListUI"/>) override this to append extra info such as a price.
+        /// </summary>
+        public virtual string GetItemLabel(StackableInventorySlot slot)
+        {
+            var item = slot.Item != null ? slot.Item.GetComponent<Item>() : null;
+            return item != null ? item.info.Name : string.Empty;
         }
 
         public void OnDrop(PointerEventData eventData)

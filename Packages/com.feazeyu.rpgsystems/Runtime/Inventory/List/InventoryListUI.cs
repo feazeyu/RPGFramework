@@ -197,8 +197,8 @@ namespace Feazeyu.RPGSystems.Inventory
                 slot.position = new Vector2Int(0, offset);
                 if (slotUIElement.TryGetComponent<TextCountItemRenderer>(out var text))
                 {
-                    text.CountText.text = slot.itemCount.ToString();
-                    text.ItemText.text = slot.Item.GetComponent<Item>().info.Name;
+                    text.CountText.text = slot.infinite ? "∞" : slot.itemCount.ToString();
+                    text.ItemText.text = list.GetItemLabel(slot);
                 }
                 InventoryHelper.CreateUIDragHandler(slotUIElement);
             }

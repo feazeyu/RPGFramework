@@ -3,6 +3,7 @@ using Feazeyu.RPGSystems.Items;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Feazeyu.RPGSystems.Inventory
 {
@@ -34,6 +35,9 @@ namespace Feazeyu.RPGSystems.Inventory
         private int _pendingRefundItemId = -1;
         private int _pendingRefundPrice = 0;
 
+        // Tracks whether the shop UI is currently open, so Esc only closes it while visible.
+        private bool _isOpen;
+
         // The working copy the shop actually runs against. Buying/selling mutates ShopSlot.stock,
         // so we never operate on the authored asset (see ShopInventory.CloneForRuntime).
         private ShopInventory _runtimeInventory;
@@ -55,6 +59,16 @@ namespace Feazeyu.RPGSystems.Inventory
         {
             if (_runtimeInventory != null) Destroy(_runtimeInventory);
         }
+
+        private void Update()
+        {
+            if (_isOpen && Keyboard.current != null && Keyboard.current[Key.Escape].wasPressedThisFrame)
+                CloseInventory();
+        }
+
+        public override void OpenInventory() { base.OpenInventory(); _isOpen = true; }
+        public override void CloseInventory() { base.CloseInventory(); _isOpen = false; }
+        public override void ToggleInventory() { base.ToggleInventory(); _isOpen = !_isOpen; }
 
         private void ConsumePendingRefund(int itemId)
         {

@@ -1,52 +1,86 @@
-using TMPro;
+using Feazeyu.RPGSystems.Items;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 namespace Feazeyu.RPGSystems.Inventory
 {
     /// <summary>
-    /// Generates a scrollable list-based shop UI from a ShopInventory.
-    /// Assign a rowPrefab (with ShopSlotHandler) for custom row appearance,
-    /// or leave null for the procedural fallback (Name | Stock | Price columns).
+    /// A shop rendered as a scrollable list. It is an <see cref="InventoryList"/> pre-stocked from a
+    /// <see cref="ShopInventory"/>, so it reuses the standard list rendering and drag-and-drop
+    /// (<see cref="InventoryListGenerator"/> / <see cref="InventoryListUI"/>) — mirroring how
+    /// <see cref="ShopGridUI"/> builds on <see cref="InventoryGrid"/>.
     ///
-    /// Initialization: call Setup() or assign shopInventory then call GenerateUI().
-    /// Driven by Shopkeep when placed as its shopListUI reference.
+    /// A listing's stock is its slot's stack depth: dragging an item out buys one (charging the
+    /// player), dragging an item in sells it back (paying the player). Infinite-stock listings never
+    /// deplete and render as "∞". Each instance runs against a <see cref="ShopInventory.CloneForRuntime"/>
+    /// copy, so buying/selling never mutates the authored asset.
+    ///
+    /// Requires an <see cref="InventoryListGenerator"/> on the same GameObject (added automatically via
+    /// the base OnValidate); set its slotPrefab (with a <see cref="TextCountItemRenderer"/>) and canvas.
     /// </summary>
     public class ShopListUI : InventoryList
     {
-        [Header("Data")]
+        [Header("Shop")]
         public ShopInventory shopInventory;
-
-        [Header("Layout")]
-        [Tooltip("Canvas to parent the list to. Defaults to nearest parent Canvas.")]
-        public Canvas targetCanvas;
-        public Vector2 rowSize = new(300, 40);
-        public float rowSpacing = 4f;
-        public Vector2 uiPosition = new(0, 0);
-
-        [Header("Prefab")]
-        [Tooltip("Row prefab with ShopSlotHandler. Auto-wires children named Name/Price/Stock/Icon. Leave null for procedural fallback.")]
-        public GameObject rowPrefab;
 
         [Header("Currency")]
         [Tooltip("MonoBehaviour implementing IShopCurrency. Falls back to PlayerWallet singleton if null.")]
         [SerializeField] private MonoBehaviour _currencyProvider;
 
-        [Tooltip("The buyer's inventory (must implement IItemContainer). Items go here on purchase.")]
-        [SerializeField] private MonoBehaviour _buyerInventoryRef;
+        [Header("Selling")]
+        [Tooltip("Fraction of buy price refunded when selling an item to this shop (0 = no refund, 1 = full price).")]
+        [Range(0f, 1f)]
+        [SerializeField] private float _sellRatio = 0.5f;
 
         private IShopCurrency Currency => (_currencyProvider as IShopCurrency) ?? PlayerWallet.Instance;
-        private IItemContainer BuyerInventory => _buyerInventoryRef as IItemContainer;
 
-        private GameObject _root;
+        private int _pendingRefundItemId = -1;
+        private int _pendingRefundPrice = 0;
 
-        // The working copy the shop runs against. Click-to-buy mutates ShopSlot.stock, so we
-        // never operate on the authored asset (see ShopInventory.CloneForRuntime).
+        // Tracks whether the shop UI is currently open, so Esc only closes it while visible.
+        private bool _isOpen;
+
+        // The working copy the shop runs against. Buying/selling mutates stack depth, so we never
+        // operate on the authored asset (see ShopInventory.CloneForRuntime).
         private ShopInventory _runtimeInventory;
 
+        protected override void OnValidate()
+        {
+            // Keep the base behaviour (auto-adds an InventoryListGenerator for this list).
+            base.OnValidate();
+        }
+
+        private void Awake()
+        {
+            if (shopInventory != null)
+                Rebuild();
+        }
+
+        private void OnDestroy()
+        {
+            if (_runtimeInventory != null) Destroy(_runtimeInventory);
+        }
+
+        private void Update()
+        {
+            if (_isOpen && Keyboard.current != null && Keyboard.current[Key.Escape].wasPressedThisFrame)
+                CloseInventory();
+        }
+
+        public override void OpenInventory() { base.OpenInventory(); _isOpen = true; }
+        public override void CloseInventory() { base.CloseInventory(); _isOpen = false; }
+        public override void ToggleInventory() { base.ToggleInventory(); _isOpen = !_isOpen; }
+
+        /// <summary>Points the shop at a new inventory and rebuilds it. Called by <see cref="Shopkeep"/>.</summary>
+        public void Setup(ShopInventory inventory)
+        {
+            shopInventory = inventory;
+            Rebuild();
+        }
+
         /// <summary>
-        /// Swaps <see cref="shopInventory"/> for a runtime clone if it currently points at an
-        /// authored asset, so purchases never persist back into the asset.
+        /// Swaps <see cref="shopInventory"/> for a runtime clone if it currently points at an authored asset.
         /// </summary>
         private void EnsureRuntimeInventory()
         {
@@ -56,129 +90,117 @@ namespace Feazeyu.RPGSystems.Inventory
             shopInventory = _runtimeInventory;
         }
 
-        private void OnDestroy()
+        /// <summary>
+        /// Clones the inventory, stocks the list from its listings, then generates the list UI (closed).
+        /// </summary>
+        private void Rebuild()
         {
-            if (_runtimeInventory != null) Destroy(_runtimeInventory);
-        }
-
-        private void Awake()
-        {
-            if (shopInventory != null)
-                GenerateUI();
-        }
-
-#if UNITY_EDITOR
-        protected override void OnValidate()
-        {
-            // Do not call base — suppress auto-add of InventoryListGenerator.
-        }
-#endif
-
-        public override void OpenInventory() => _root?.SetActive(true);
-        public override void CloseInventory() => _root?.SetActive(false);
-        public override void ToggleInventory() { if (_root != null) _root.SetActive(!_root.activeSelf); }
-
-        public void Setup(ShopInventory inventory)
-        {
-            shopInventory = inventory;
-            GenerateUI();
-        }
-
-        public void GenerateUI()
-        {
-            if (_root != null) Destroy(_root);
-            if (shopInventory == null) return;
             EnsureRuntimeInventory();
+            StockListings();
 
-            var parent = targetCanvas != null
-                ? targetCanvas.transform
-                : GetComponentInParent<Canvas>()?.transform ?? transform;
+            var gen = uiGenerator;
+            if (gen == null)
+            {
+                Debug.LogWarning("[ShopListUI] No InventoryListGenerator found — cannot render the list shop.", this);
+                return;
+            }
 
-            _root = new GameObject("ShopList_Root");
-            var rootRect = _root.AddComponent<RectTransform>();
-            rootRect.SetParent(parent, false);
-            rootRect.anchorMin = new Vector2(0, 1);
-            rootRect.anchorMax = new Vector2(0, 1);
-            rootRect.pivot = new Vector2(0, 1);
-            rootRect.anchoredPosition = new Vector2(uiPosition.x, -uiPosition.y);
-
-            var layout = _root.AddComponent<VerticalLayoutGroup>();
-            layout.spacing = rowSpacing;
-            layout.childForceExpandWidth = false;
-            layout.childForceExpandHeight = false;
-            layout.childAlignment = TextAnchor.UpperLeft;
-
-            var fitter = _root.AddComponent<ContentSizeFitter>();
-            fitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
-            fitter.horizontalFit = ContentSizeFitter.FitMode.PreferredSize;
-
-            foreach (var slot in shopInventory.listings)
-                CreateRow(slot);
-
-            _root.SetActive(false);
+            // DrawContents (re)creates the list UI object and draws the current contents; the editor's
+            // "Generate Inventory UI" button does the same. A DragLayer is required for drag-to-buy.
+            gen.DrawContents();
+            if (gen.targetCanvas != null)
+                InventoryHelper.GenerateDragLayer(gen.targetCanvas);
+            CloseInventory();
         }
 
-        private void CreateRow(ShopSlot slot)
+        /// <summary>
+        /// Fills <see cref="InventoryList.contents"/> with one stack per in-stock listing. A listing's
+        /// stock becomes the stack's <c>itemCount</c>; negative stock makes the stack infinite.
+        /// </summary>
+        private void StockListings()
         {
-            GameObject row = rowPrefab != null
-                ? Instantiate(rowPrefab, _root.transform)
-                : BuildDefaultRow(_root.transform);
+            contents = new();
+            if (shopInventory == null) return;
 
-            var handler = row.GetComponent<ShopSlotHandler>() ?? row.AddComponent<ShopSlotHandler>();
+            foreach (var listing in shopInventory.listings)
+            {
+                if (listing.stock == 0) continue;                       // nothing in stock
+                if (InventoryManager.Instance?.GetItemById(listing.itemId) == null) continue;
 
-            if (handler.nameText == null)
-                handler.nameText = row.transform.Find("Name")?.GetComponent<TMP_Text>();
-            if (handler.priceText == null)
-                handler.priceText = row.transform.Find("Price")?.GetComponent<TMP_Text>();
-            if (handler.stockText == null)
-                handler.stockText = row.transform.Find("Stock")?.GetComponent<TMP_Text>();
-            if (handler.iconImage == null)
-                handler.iconImage = row.transform.Find("Icon")?.GetComponent<Image>();
-            if (handler.highlight == null)
-                handler.highlight = row.GetComponent<Graphic>();
-
-            handler.Setup(slot, Currency, BuyerInventory);
+                var slot = new StackableInventorySlot(listing.itemId);  // ctor sets itemCount = 1
+                if (listing.stock < 0)
+                    slot.infinite = true;
+                else
+                    slot.itemCount = listing.stock;
+                contents.Add(slot);
+            }
         }
 
-        private GameObject BuildDefaultRow(Transform parent)
+        // ── Buying / selling ──────────────────────────────────────────────────
+
+        public override int RemoveItem(Vector2Int position)
         {
-            var row = new GameObject("ShopRow", typeof(RectTransform));
-            row.transform.SetParent(parent, false);
+            if (contents == null || position.y < 0 || position.y >= contents.Count)
+                return -1;
 
-            var bg = row.AddComponent<Image>();
-            bg.color = new Color(0.15f, 0.15f, 0.18f, 0.92f);
+            int itemId = contents[position.y].ItemId;
+            int price = GetPrice(itemId);
 
-            var le = row.AddComponent<LayoutElement>();
-            le.preferredWidth = rowSize.x;
-            le.preferredHeight = rowSize.y;
+            // Dragging an item out is a purchase: charge first, block the drag if unaffordable.
+            if (!Currency.TrySpend(price))
+                return -1;
 
-            var hLayout = row.AddComponent<HorizontalLayoutGroup>();
-            hLayout.childAlignment = TextAnchor.MiddleLeft;
-            hLayout.spacing = 8;
-            hLayout.padding = new RectOffset(8, 8, 4, 4);
-            hLayout.childForceExpandWidth = false;
-            hLayout.childForceExpandHeight = true;
+            _pendingRefundItemId = itemId;
+            _pendingRefundPrice = price;
 
-            AddTextCell(row.transform, "Name", 130, 14, Color.white, TextAlignmentOptions.MidlineLeft);
-            AddTextCell(row.transform, "Stock", 40, 12, new Color(0.7f, 0.7f, 0.7f), TextAlignmentOptions.Center);
-            AddTextCell(row.transform, "Price", 70, 12, Color.yellow, TextAlignmentOptions.MidlineRight);
-
-            return row;
+            // Base decrements the stack (or drops it at 0); infinite stacks never deplete.
+            return base.RemoveItem(position);
         }
 
-        private static void AddTextCell(Transform parent, string childName, float width, float fontSize, Color color, TextAlignmentOptions alignment)
+        public override bool PutItem(Vector2Int position, GameObject item)
         {
-            var obj = new GameObject(childName, typeof(RectTransform));
-            obj.transform.SetParent(parent, false);
-            var cellLe = obj.AddComponent<LayoutElement>();
-            cellLe.preferredWidth = width;
-            var text = obj.AddComponent<TextMeshProUGUI>();
-            text.fontSize = fontSize;
-            text.color = color;
-            text.alignment = alignment;
+            int itemId = item.GetComponent<Item>()?.info?.id ?? -1;
+
+            if (_pendingRefundItemId == itemId)
+            {
+                // The item just bought from this shop is being returned (failed drop) — full refund.
+                bool placed = base.PutItem(position, item);
+                if (placed) ConsumePendingRefund(itemId);
+                return placed;
+            }
+
+            // Otherwise the player is selling to the shop.
+            int buyPrice = GetPrice(itemId);
+            if (buyPrice <= 0) return false; // item not in this shop's listings — reject
+
+            bool sold = base.PutItem(position, item);
+            if (sold)
+                Currency.Add(Mathf.FloorToInt(buyPrice * _sellRatio));
+            return sold;
         }
 
-        public void SetActive(bool active) => _root?.SetActive(active);
-        public void Toggle() { if (_root != null) _root.SetActive(!_root.activeSelf); }
+        private void ConsumePendingRefund(int itemId)
+        {
+            if (_pendingRefundItemId != itemId) return;
+            // The stack already got the item back via base.PutItem; only the money needs returning.
+            Currency.Add(_pendingRefundPrice);
+            _pendingRefundItemId = -1;
+            _pendingRefundPrice = 0;
+        }
+
+        // ── Display ─────────────────────────────────────────────────────────────
+
+        public override string GetItemLabel(StackableInventorySlot slot)
+        {
+            int price = GetPrice(slot.ItemId);
+            string name = base.GetItemLabel(slot);
+            return price > 0 ? $"{name}  -  {price}g" : name;
+        }
+
+        private int GetPrice(int itemId)
+        {
+            if (shopInventory == null) return 0;
+            return shopInventory.listings.FirstOrDefault(s => s.itemId == itemId)?.price ?? 0;
+        }
     }
 }

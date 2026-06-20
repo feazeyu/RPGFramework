@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   listings:
   - itemId: 5
-    price: 30
-    stock: -1
+    price: 10
+    stock: 2
   - itemId: 4
-    price: 80
+    price: 20
     stock: 1
   - itemId: 1
-    price: 150
+    price: 50
     stock: 1
