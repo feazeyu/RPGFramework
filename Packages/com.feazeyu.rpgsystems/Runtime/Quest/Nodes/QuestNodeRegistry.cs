@@ -53,7 +53,7 @@ namespace QuestGraph.Runtime
     {
         private static readonly QuestNodeRegistry s_Instance = new QuestNodeRegistry();
 
-        public static IReadOnlyDictionary<string, DialogueNodeInfo> All => s_Instance.AllNodes;
+        public static IReadOnlyDictionary<string, NodeInfo> All => s_Instance.AllNodes;
 
         // ── Quest-specific type IDs ──────────────────────────────────────────
         // Shared flow/logic type-ids (Start, End, Condition, RunSubgraph, …)
@@ -113,11 +113,11 @@ namespace QuestGraph.Runtime
         /// graph of the given kind. The window's "Add Node" context
         /// menu is populated from this.
         /// </summary>
-        public static IReadOnlyDictionary<string, DialogueNodeInfo> ForKind(QuestKind kind)
+        public static IReadOnlyDictionary<string, NodeInfo> ForKind(QuestKind kind)
         {
             var allow = kind == QuestKind.Chain ? s_ChainPalette : s_SinglePalette;
 
-            var filtered = new Dictionary<string, DialogueNodeInfo>();
+            var filtered = new Dictionary<string, NodeInfo>();
             foreach (var kv in s_Instance.AllNodes)
                 if (allow.Contains(kv.Key))
                     filtered[kv.Key] = kv.Value;
@@ -138,7 +138,7 @@ namespace QuestGraph.Runtime
             RegisterCommonNodes();
             RegisterQuestFlow();
             RegisterQuestSpecific();
-            RegisterAttributeNodes<QuestNodeAttribute>(attr => new DialogueNodeInfo
+            RegisterAttributeNodes<QuestNodeAttribute>(attr => new NodeInfo
             {
                 TypeId      = attr.NodeTypeID,
                 DisplayName = attr.DisplayName,
@@ -156,7 +156,7 @@ namespace QuestGraph.Runtime
         /// </summary>
         private void RegisterQuestFlow()
         {
-            Register(new DialogueNodeInfo
+            Register(new NodeInfo
             {
                 TypeId = TypeCondition, DisplayName = "Condition", Category = "Logic",
                 Description = "Evaluates a blackboard variable. Routes to True or False output.",
@@ -175,7 +175,7 @@ namespace QuestGraph.Runtime
                 }
             });
 
-            Register(new DialogueNodeInfo
+            Register(new NodeInfo
             {
                 TypeId = TypeRunSubgraph, DisplayName = "Quest Reference", Category = "Quest",
                 Description = "References another quest asset. In a chain graph, edges between " +
@@ -201,7 +201,7 @@ namespace QuestGraph.Runtime
 
         private void RegisterQuestSpecific()
         {
-            Register(new DialogueNodeInfo
+            Register(new NodeInfo
             {
                 TypeId = TypeObjective, DisplayName = "Objective", Category = "Quest",
                 Description = "A single quest objective. Completes when the runner calls " +
@@ -222,7 +222,7 @@ namespace QuestGraph.Runtime
                 }
             });
 
-            Register(new DialogueNodeInfo
+            Register(new NodeInfo
             {
                 TypeId = TypeReward, DisplayName = "Reward", Category = "Quest",
                 Description = "Grants rewards to the player (items, XP, currency). " +
@@ -242,7 +242,7 @@ namespace QuestGraph.Runtime
                 }
             });
 
-            Register(new DialogueNodeInfo
+            Register(new NodeInfo
             {
                 TypeId = TypeCompleteQuest, DisplayName = "Complete Quest", Category = "Quest",
                 Description = "Terminal node. Marks the quest as successfully completed and ends the graph.",
@@ -253,7 +253,7 @@ namespace QuestGraph.Runtime
                 }
             });
 
-            Register(new DialogueNodeInfo
+            Register(new NodeInfo
             {
                 TypeId = TypeFailQuest, DisplayName = "Fail Quest", Category = "Quest",
                 Description = "Terminal node. Marks the quest as failed and ends the graph.",
@@ -268,7 +268,7 @@ namespace QuestGraph.Runtime
                 }
             });
 
-            Register(new DialogueNodeInfo
+            Register(new NodeInfo
             {
                 TypeId = TypeSpawnItem, DisplayName = "Spawn Item", Category = "Quest",
                 Description = "Instantiates an item prefab and places it into an IItemContainer " +
@@ -289,7 +289,7 @@ namespace QuestGraph.Runtime
 
             // ── Concrete objective nodes ──────────────────────────────────────
 
-            Register(new DialogueNodeInfo
+            Register(new NodeInfo
             {
                 TypeId = TypeObjKill, DisplayName = "Kill Count", Category = "Objectives",
                 Description = "Completes once the player kills the required number of enemies " +
@@ -311,7 +311,7 @@ namespace QuestGraph.Runtime
                 }
             });
 
-            Register(new DialogueNodeInfo
+            Register(new NodeInfo
             {
                 TypeId = TypeObjLocation, DisplayName = "Reach Location", Category = "Objectives",
                 Description = "Completes once the player is within Radius of Target. " +
@@ -336,7 +336,7 @@ namespace QuestGraph.Runtime
                 }
             });
 
-            Register(new DialogueNodeInfo
+            Register(new NodeInfo
             {
                 TypeId = TypeObjCollect, DisplayName = "Collect Item", Category = "Objectives",
                 Description = "Completes once the player carries at least Count of the specified item. " +
@@ -362,7 +362,7 @@ namespace QuestGraph.Runtime
                 }
             });
 
-            Register(new DialogueNodeInfo
+            Register(new NodeInfo
             {
                 TypeId = TypeObjDeliver, DisplayName = "Deliver Item", Category = "Objectives",
                 Description = "Completes when the player interacts with the NPC while carrying " +
@@ -387,6 +387,6 @@ namespace QuestGraph.Runtime
             });
         }
 
-        public static DialogueNodeInfo Get(string typeId) => s_Instance.GetNode(typeId);
+        public static NodeInfo Get(string typeId) => s_Instance.GetNode(typeId);
     }
 }

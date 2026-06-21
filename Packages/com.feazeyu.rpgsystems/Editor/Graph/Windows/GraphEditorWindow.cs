@@ -39,7 +39,7 @@ namespace Feazeyu.RPGSystems.EditorTools
         protected virtual string WindowIcon      => "◈";
 
         /// <summary>"Add Node" palette for this graph system.</summary>
-        protected virtual IReadOnlyDictionary<string, DialogueNodeInfo> NodeRegistrySource
+        protected virtual IReadOnlyDictionary<string, NodeInfo> NodeRegistrySource
             => DialogueNodeRegistry.All;
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Feazeyu.RPGSystems.EditorTools
         /// asset (e.g. QuestGraphWindow filters by QuestKind). The default
         /// returns <see cref="NodeRegistrySource"/>.
         /// </summary>
-        protected virtual IReadOnlyDictionary<string, DialogueNodeInfo> GetNodeRegistryForAsset(GraphAsset asset)
+        protected virtual IReadOnlyDictionary<string, NodeInfo> GetNodeRegistryForAsset(GraphAsset asset)
             => NodeRegistrySource;
 
         /// <summary>System-specific theme sheet, layered on top of <c>GraphEditor.uss</c>.</summary>
@@ -65,7 +65,7 @@ namespace Feazeyu.RPGSystems.EditorTools
 
         protected GraphAsset m_Asset;
 
-        private DialogueGraphView m_GraphView;
+        private GraphCanvasView m_GraphView;
         private BlackboardPanel   m_BlackboardPanel;
         private InspectorPanel    m_InspectorPanel;
         private Label             m_AssetLabel;
@@ -147,7 +147,7 @@ namespace Feazeyu.RPGSystems.EditorTools
             m_BlackboardPanel.AddToClassList("graph-blackboard-wrapper");
             body.Add(m_BlackboardPanel);
 
-            m_GraphView = new DialogueGraphView(
+            m_GraphView = new GraphCanvasView(
                 this,
                 NodeRegistrySource,
                 ThemeStyleSheet,

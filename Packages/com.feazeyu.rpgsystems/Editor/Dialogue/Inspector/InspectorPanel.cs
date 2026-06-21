@@ -255,11 +255,25 @@ namespace Feazeyu.RPGSystems.EditorTools
                 linkLabel.AddToClassList("inspector-link-label");
                 valueRow.Add(linkLabel);
             }
-            else if (DialogueNodeView.IsOperatorField(field))
+            else if (GraphNodeView.IsOperatorField(field))
             {
-                var ops     = DialogueNodeView.ConditionalOperators;
+                var ops     = GraphNodeView.ConditionalOperators;
                 var current = ops.Contains(field.InlineValue) ? field.InlineValue : ops[0];
                 var dropdown = new DropdownField(ops, current);
+                dropdown.AddToClassList("inspector-text-field");
+                dropdown.style.flexGrow = 1;
+                dropdown.RegisterValueChangedCallback(evt =>
+                {
+                    field.InlineValue = evt.newValue;
+                    if (asset) EditorUtility.SetDirty(asset);
+                    m_RefreshNodeView?.Invoke(m_Node?.Guid ?? "");
+                });
+                valueRow.Add(dropdown);
+            }
+            else if (GraphNodeView.TryGetChoiceOptions(m_Node, field, out var choices))
+            {
+                var current = choices.Contains(field.InlineValue) ? field.InlineValue : choices[0];
+                var dropdown = new DropdownField(choices, current);
                 dropdown.AddToClassList("inspector-text-field");
                 dropdown.style.flexGrow = 1;
                 dropdown.RegisterValueChangedCallback(evt =>
@@ -273,10 +287,10 @@ namespace Feazeyu.RPGSystems.EditorTools
             else
             {
                 VisualElement input;
-                if (DialogueNodeView.IsTypedValueField(m_Node, field))
+                if (GraphNodeView.IsTypedValueField(m_Node, field))
                 {
-                    var targetType = DialogueNodeView.GetLinkedVariableType(m_Node, asset);
-                    input = DialogueNodeView.BuildTypedInlineControl(field, targetType, () =>
+                    var targetType = GraphNodeView.GetLinkedVariableType(m_Node, asset);
+                    input = GraphNodeView.BuildTypedInlineControl(field, targetType, () =>
                     {
                         if (asset) EditorUtility.SetDirty(asset);
                         m_RefreshNodeView?.Invoke(m_Node?.Guid ?? "");

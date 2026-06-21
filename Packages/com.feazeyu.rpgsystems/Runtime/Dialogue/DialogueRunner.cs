@@ -60,6 +60,7 @@ namespace Feazeyu.RPGSystems.Dialogue
             RegisterHandler(new AddCurrencyNodeHandler());
             RegisterHandler(new RemoveCurrencyNodeHandler());
             RegisterHandler(new OpenShopNodeHandler());
+            RegisterHandler(new CloseShopNodeHandler());
         }
 
         // ── Public API ────────────────────────────────────────────────────────

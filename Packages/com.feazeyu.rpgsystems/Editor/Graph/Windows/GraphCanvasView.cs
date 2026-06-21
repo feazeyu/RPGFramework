@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
@@ -17,19 +17,18 @@ namespace Feazeyu.RPGSystems.EditorTools
     public class SoftEdge : Edge { }
 
     /// <summary>
-    /// The graph canvas. Extends Unity's GraphView so we get node drag,
+    /// The shared graph canvas. Extends Unity's GraphView so we get node drag,
     /// rubber-band selection, edge drawing, pan/zoom, and minimap for free.
     ///
-    /// Despite the name, this class is shared by every graph-based editor
-    /// (dialogue, quest, ...). What makes it system-specific is the three
-    /// constructor parameters:
+    /// System-agnostic — used by every graph-based editor (dialogue, quest, ...).
+    /// What makes it system-specific is the three constructor parameters:
     /// <list type="bullet">
     /// <item><description><paramref name="nodeRegistry"/> — populates the "Add Node" context menu</description></item>
     /// <item><description><paramref name="themeSheet"/> — system-specific colour USS layered over GraphEditor.uss</description></item>
     /// <item><description><paramref name="rootCssClass"/> — CSS class added to <c>this</c> so the theme sheet's <c>.xxx-graph-view</c> rules apply</description></item>
     /// </list>
     /// </summary>
-    public class DialogueGraphView : GraphView
+    public class GraphCanvasView : GraphView
     {
         // ── Events ───────────────────────────────────────────────────────────
 
@@ -44,20 +43,26 @@ namespace Feazeyu.RPGSystems.EditorTools
 
         private GraphAsset m_Asset;
 
-        private IReadOnlyDictionary<string, DialogueNodeInfo> m_NodeRegistry;
+        // Fallback when no registry is supplied: an empty palette rather than a
+        // system-specific one, so the canvas stays system-agnostic. Callers
+        // (the graph windows) always pass a real registry.
+        private static readonly IReadOnlyDictionary<string, NodeInfo> s_EmptyRegistry
+            = new Dictionary<string, NodeInfo>();
 
-        private readonly Dictionary<string, DialogueNodeView> m_NodeViews
-            = new Dictionary<string, DialogueNodeView>();
+        private IReadOnlyDictionary<string, NodeInfo> m_NodeRegistry;
+
+        private readonly Dictionary<string, GraphNodeView> m_NodeViews
+            = new Dictionary<string, GraphNodeView>();
 
         // ── Construction ─────────────────────────────────────────────────────
 
-        public DialogueGraphView(
+        public GraphCanvasView(
             EditorWindow window,
-            IReadOnlyDictionary<string, DialogueNodeInfo> nodeRegistry,
+            IReadOnlyDictionary<string, NodeInfo> nodeRegistry,
             StyleSheet themeSheet,
             string rootCssClass)
         {
-            m_NodeRegistry = nodeRegistry ?? DialogueNodeRegistry.All;
+            m_NodeRegistry = nodeRegistry ?? s_EmptyRegistry;
 
             SetupZoom(ContentZoomer.DefaultMinScale, ContentZoomer.DefaultMaxScale);
             this.AddManipulator(new ContentDragger());
@@ -88,12 +93,12 @@ namespace Feazeyu.RPGSystems.EditorTools
         /// palette depends on properties of the currently loaded asset
         /// (e.g. <see cref="Feazeyu.RPGSystems.EditorTools.QuestGraphWindow"/> filters
         /// by <c>QuestKind</c>). Existing node views keep their cached
-        /// <see cref="DialogueNodeInfo"/>; nodes created after this call
+        /// <see cref="NodeInfo"/>; nodes created after this call
         /// use the new registry.
         /// </summary>
-        public void SetNodeRegistry(IReadOnlyDictionary<string, DialogueNodeInfo> nodeRegistry)
+        public void SetNodeRegistry(IReadOnlyDictionary<string, NodeInfo> nodeRegistry)
         {
-            m_NodeRegistry = nodeRegistry ?? DialogueNodeRegistry.All;
+            m_NodeRegistry = nodeRegistry ?? s_EmptyRegistry;
         }
 
         // ── GraphView overrides ──────────────────────────────────────────────
@@ -121,12 +126,12 @@ namespace Feazeyu.RPGSystems.EditorTools
             var mousePos = contentViewContainer.WorldToLocal(evt.mousePosition);
 
             // Group by Category.
-            var byCategory = new Dictionary<string, List<DialogueNodeInfo>>();
+            var byCategory = new Dictionary<string, List<NodeInfo>>();
             foreach (var kv in m_NodeRegistry)
             {
                 var cat = kv.Value.Category;
                 if (!byCategory.ContainsKey(cat))
-                    byCategory[cat] = new List<DialogueNodeInfo>();
+                    byCategory[cat] = new List<NodeInfo>();
                 byCategory[cat].Add(kv.Value);
             }
 
@@ -191,7 +196,7 @@ namespace Feazeyu.RPGSystems.EditorTools
 
         // ── Node creation ────────────────────────────────────────────────────
 
-        private void AddNodeAtPosition(DialogueNodeInfo info, Vector2 graphPos)
+        private void AddNodeAtPosition(NodeInfo info, Vector2 graphPos)
         {
             if (m_Asset == null) return;
 
@@ -205,9 +210,9 @@ namespace Feazeyu.RPGSystems.EditorTools
             CreateNodeView(nodeData);
         }
 
-        private DialogueNodeView CreateNodeView(NodeData data)
+        private GraphNodeView CreateNodeView(NodeData data)
         {
-            var view = new DialogueNodeView(data, m_Asset, m_NodeRegistry);
+            var view = new GraphNodeView(data, m_Asset, m_NodeRegistry);
             view.OnSelect     = () => OnNodeSelected?.Invoke(data);
             view.OnDeselected = () => OnNodeDeselected?.Invoke();
             view.OnMoved      = pos =>
@@ -250,8 +255,8 @@ namespace Feazeyu.RPGSystems.EditorTools
                 Undo.RecordObject(m_Asset, "Create Edge");
                 foreach (var edge in change.edgesToCreate)
                 {
-                    var outNode = (edge.output.node as DialogueNodeView)?.Data;
-                    var inNode  = (edge.input.node  as DialogueNodeView)?.Data;
+                    var outNode = (edge.output.node as GraphNodeView)?.Data;
+                    var inNode  = (edge.input.node  as GraphNodeView)?.Data;
                     if (outNode == null || inNode == null) continue;
 
                     var edgeData = m_Asset.AddEdge(
@@ -267,7 +272,7 @@ namespace Feazeyu.RPGSystems.EditorTools
                 Undo.RecordObject(m_Asset, "Remove Graph Elements");
                 foreach (var elem in change.elementsToRemove)
                 {
-                    if (elem is DialogueNodeView nv)
+                    if (elem is GraphNodeView nv)
                     {
                         m_Asset.RemoveNode(nv.Data.Guid);
                         m_NodeViews.Remove(nv.Data.Guid);
@@ -285,7 +290,7 @@ namespace Feazeyu.RPGSystems.EditorTools
                 Undo.RecordObject(m_Asset, "Move Nodes");
                 foreach (var elem in change.movedElements)
                 {
-                    if (elem is DialogueNodeView nv)
+                    if (elem is GraphNodeView nv)
                         nv.Data.Position = nv.GetPosition().position;
                 }
                 EditorUtility.SetDirty(m_Asset);
@@ -304,11 +309,11 @@ namespace Feazeyu.RPGSystems.EditorTools
             Undo.RecordObject(m_Asset, "Duplicate Nodes");
 
             var offset = new Vector2(30, 30);
-            var newViews = new List<DialogueNodeView>();
+            var newViews = new List<GraphNodeView>();
 
             foreach (var sel in selection)
             {
-                if (sel is not DialogueNodeView nv) continue;
+                if (sel is not GraphNodeView nv) continue;
                 var src = nv.Data;
                 var dup = m_Asset.AddNode(src.NodeType, src.DisplayName, src.Position + offset);
                 foreach (var port in src.Ports)
@@ -325,7 +330,7 @@ namespace Feazeyu.RPGSystems.EditorTools
         }
 
         // Public accessor so InspectorPanel can request a node view refresh.
-        public DialogueNodeView GetNodeView(string guid)
+        public GraphNodeView GetNodeView(string guid)
             => m_NodeViews.TryGetValue(guid, out var v) ? v : null;
 
         public void RefreshNodeView(string guid)

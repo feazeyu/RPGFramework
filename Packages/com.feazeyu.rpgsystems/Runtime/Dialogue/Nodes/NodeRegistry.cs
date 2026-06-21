@@ -9,7 +9,7 @@ namespace Feazeyu.RPGSystems.Dialogue
     /// the right-click "Add Node" menu and to generate default ports/fields when
     /// a node is created. Shared by every graph system (dialogue, quest, …).
     /// </summary>
-    public class DialogueNodeInfo
+    public class NodeInfo
     {
         public string   TypeId;          // unique key stored in NodeData.NodeType
         public string   DisplayName;
@@ -68,28 +68,28 @@ namespace Feazeyu.RPGSystems.Dialogue
 
         // ── Lookup table ─────────────────────────────────────────────────────
 
-        private Dictionary<string, DialogueNodeInfo> _registry;
+        private Dictionary<string, NodeInfo> _registry;
 
         /// <summary>All node types this registry exposes, built on first access.</summary>
-        protected IReadOnlyDictionary<string, DialogueNodeInfo> AllNodes
+        protected IReadOnlyDictionary<string, NodeInfo> AllNodes
         {
             get { EnsureBuilt(); return _registry; }
         }
 
         /// <summary>Look up a single node type, or <c>null</c> if not registered.</summary>
-        protected DialogueNodeInfo GetNode(string typeId)
+        protected NodeInfo GetNode(string typeId)
         {
             EnsureBuilt();
             return _registry.TryGetValue(typeId, out var info) ? info : null;
         }
 
         /// <summary>Add (or overwrite) a node type in the table.</summary>
-        protected void Register(DialogueNodeInfo info) => _registry[info.TypeId] = info;
+        protected void Register(NodeInfo info) => _registry[info.TypeId] = info;
 
         private void EnsureBuilt()
         {
             if (_registry != null) return;
-            _registry = new Dictionary<string, DialogueNodeInfo>();
+            _registry = new Dictionary<string, NodeInfo>();
             Build();
         }
 
@@ -110,7 +110,7 @@ namespace Feazeyu.RPGSystems.Dialogue
         /// </summary>
         protected void RegisterCommonNodes()
         {
-            Register(new DialogueNodeInfo
+            Register(new NodeInfo
             {
                 TypeId = TypeStart, DisplayName = "Start", Category = "Flow",
                 Description = "Entry point. Execution begins here.",
@@ -121,7 +121,7 @@ namespace Feazeyu.RPGSystems.Dialogue
                 }
             });
 
-            Register(new DialogueNodeInfo
+            Register(new NodeInfo
             {
                 TypeId = TypeEnd, DisplayName = "End", Category = "Flow",
                 Description = "Terminates graph execution.",
@@ -132,7 +132,7 @@ namespace Feazeyu.RPGSystems.Dialogue
                 }
             });
 
-            Register(new DialogueNodeInfo
+            Register(new NodeInfo
             {
                 TypeId = TypeSetVariable, DisplayName = "Set Variable", Category = "Logic",
                 Description = "Writes a value to a Blackboard variable.",
@@ -149,7 +149,7 @@ namespace Feazeyu.RPGSystems.Dialogue
                 }
             });
 
-            Register(new DialogueNodeInfo
+            Register(new NodeInfo
             {
                 TypeId = TypeTriggerEvent, DisplayName = "Trigger Event", Category = "Events",
                 Description = "Fires a game event channel.",
@@ -165,7 +165,7 @@ namespace Feazeyu.RPGSystems.Dialogue
                 }
             });
 
-            Register(new DialogueNodeInfo
+            Register(new NodeInfo
             {
                 TypeId = TypeWaitForEvent, DisplayName = "Wait For Event", Category = "Events",
                 Description = "Suspends execution until a game event is received.",
@@ -181,7 +181,7 @@ namespace Feazeyu.RPGSystems.Dialogue
                 }
             });
 
-            Register(new DialogueNodeInfo
+            Register(new NodeInfo
             {
                 TypeId = TypeDebugLog, DisplayName = "Debug Log", Category = "Debug",
                 Description = "Prints a message to the Unity console and continues.",
@@ -197,7 +197,7 @@ namespace Feazeyu.RPGSystems.Dialogue
                 }
             });
 
-            Register(new DialogueNodeInfo
+            Register(new NodeInfo
             {
                 TypeId = TypeFindObject, DisplayName = "Find Object", Category = "Scene",
                 Description = "Finds a scene GameObject by name or tag and stores it in a blackboard variable.",
@@ -219,11 +219,11 @@ namespace Feazeyu.RPGSystems.Dialogue
 
         /// <summary>
         /// Scans all loaded assemblies for classes tagged with <typeparamref name="TAttr"/>
-        /// and registers the <see cref="DialogueNodeInfo"/> produced by <paramref name="factory"/>.
+        /// and registers the <see cref="NodeInfo"/> produced by <paramref name="factory"/>.
         /// Types whose id is already registered (built-ins) are skipped, as are
         /// factories that return <c>null</c>.
         /// </summary>
-        protected void RegisterAttributeNodes<TAttr>(Func<TAttr, DialogueNodeInfo> factory)
+        protected void RegisterAttributeNodes<TAttr>(Func<TAttr, NodeInfo> factory)
             where TAttr : Attribute
         {
             foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())

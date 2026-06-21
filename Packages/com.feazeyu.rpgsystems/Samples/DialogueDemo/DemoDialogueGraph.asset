@@ -17,7 +17,7 @@ MonoBehaviour:
     NodeType: Start
     DisplayName: Start
     StoryText: 
-    Position: {x: -245, y: 300}
+    Position: {x: -923, y: 309}
     Size: {x: 0, y: 0}
     Ports:
     - PortName: Out
@@ -54,8 +54,8 @@ MonoBehaviour:
     NodeType: ChoiceBranch
     DisplayName: Trade Choice
     StoryText: 
-    Position: {x: 498, y: 300}
-    Size: {x: 330, y: 360}
+    Position: {x: 511, y: 233}
+    Size: {x: 324, y: 397}
     Ports:
     - PortName: In
       Direction: 0
@@ -93,7 +93,7 @@ MonoBehaviour:
     NodeType: find_object
     DisplayName: Find Merchant
     StoryText: 
-    Position: {x: 887, y: -40}
+    Position: {x: -651, y: 276}
     Size: {x: 0, y: 0}
     Ports:
     - PortName: In
@@ -233,7 +233,7 @@ MonoBehaviour:
     NodeType: DialogueLine
     DisplayName: Hint
     StoryText: 
-    Position: {x: 2194, y: 404}
+    Position: {x: 2167, y: 331}
     Size: {x: 0, y: 0}
     Ports:
     - PortName: In
@@ -355,7 +355,7 @@ MonoBehaviour:
     NodeType: End
     DisplayName: End
     StoryText: 
-    Position: {x: 2137, y: -20}
+    Position: {x: 1822, y: 0}
     Size: {x: 0, y: 0}
     Ports:
     - PortName: In
@@ -476,7 +476,36 @@ MonoBehaviour:
     NodeType: End
     DisplayName: End
     StoryText: 
-    Position: {x: 3079, y: 620}
+    Position: {x: 2473, y: 620}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    Fields: []
+  - Guid: 8bcf3316-b3ea-41ea-8b92-9d202f5dd0ef
+    NodeType: close_shop
+    DisplayName: Close Shop
+    StoryText: 
+    Position: {x: -269, y: 300}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Out
+      Direction: 1
+      Capacity: 0
+    Fields:
+    - FieldName: Target
+      TypeName: UnityEngine.GameObject
+      InlineValue: 
+      LinkedVariableGuid: 9fec2eea-122b-4493-a76e-0f7f32481c27
+  - Guid: 3efd5e39-e627-497f-a781-55893acd520b
+    NodeType: End
+    DisplayName: End
+    StoryText: 
+    Position: {x: -415, y: 573}
     Size: {x: 0, y: 0}
     Ports:
     - PortName: In
@@ -484,25 +513,10 @@ MonoBehaviour:
       Capacity: 1
     Fields: []
   m_Edges:
-  - Guid: 66024ef0-e326-4885-a0c5-788cf9a9d263
-    OutputNodeGuid: 48cd376c-e3fa-4adb-9b77-56886f28785c
-    OutputPortName: Out
-    InputNodeGuid: 68ceb2e0-d726-461e-8339-9ecd315adabe
-    InputPortName: In
   - Guid: 75106103-22dc-48e2-ac06-9e6a4b6aa0a9
     OutputNodeGuid: 68ceb2e0-d726-461e-8339-9ecd315adabe
     OutputPortName: Out
     InputNodeGuid: 09bc1231-10c5-4570-be80-8d9cb6eaa629
-    InputPortName: In
-  - Guid: 7900f440-b79d-4d55-9b26-5e24094ffcec
-    OutputNodeGuid: 09bc1231-10c5-4570-be80-8d9cb6eaa629
-    OutputPortName: Choice 1
-    InputNodeGuid: 3201d9b8-772f-4c2d-a8fd-9b3444c0b705
-    InputPortName: In
-  - Guid: e255c950-2f93-47c9-9914-0f57d45faf04
-    OutputNodeGuid: 3201d9b8-772f-4c2d-a8fd-9b3444c0b705
-    OutputPortName: Found
-    InputNodeGuid: c1a2b3c4-0001-4001-8001-000000000001
     InputPortName: In
   - Guid: ed000001-0001-4001-8001-000000000011
     OutputNodeGuid: c1a2b3c4-0001-4001-8001-000000000001
@@ -517,11 +531,6 @@ MonoBehaviour:
   - Guid: ed000003-0003-4003-8003-000000000013
     OutputNodeGuid: c1a2b3c4-0002-4002-8002-000000000002
     OutputPortName: Out
-    InputNodeGuid: 85ec7b19-1011-493d-8184-3b5fac4b18c8
-    InputPortName: In
-  - Guid: 977854ef-39f8-428b-9124-3512b0b2d58e
-    OutputNodeGuid: 3201d9b8-772f-4c2d-a8fd-9b3444c0b705
-    OutputPortName: NotFound
     InputNodeGuid: 85ec7b19-1011-493d-8184-3b5fac4b18c8
     InputPortName: In
   - Guid: 843d7a17-79c0-45a9-b6b9-046a9cf50c8b
@@ -619,13 +628,38 @@ MonoBehaviour:
     OutputPortName: Out
     InputNodeGuid: 3eb798e8-7f7d-4dbf-9c8b-d8509b011bcf
     InputPortName: In
+  - Guid: ec757db1-bc63-4fcf-864b-0616653f5fd2
+    OutputNodeGuid: 8bcf3316-b3ea-41ea-8b92-9d202f5dd0ef
+    OutputPortName: Out
+    InputNodeGuid: 68ceb2e0-d726-461e-8339-9ecd315adabe
+    InputPortName: In
+  - Guid: a47009f2-17b0-47f8-94b8-9ac6357eeb10
+    OutputNodeGuid: 3201d9b8-772f-4c2d-a8fd-9b3444c0b705
+    OutputPortName: NotFound
+    InputNodeGuid: 3efd5e39-e627-497f-a781-55893acd520b
+    InputPortName: In
+  - Guid: 2df5ea74-69b9-444c-8e95-133d907a5bca
+    OutputNodeGuid: 09bc1231-10c5-4570-be80-8d9cb6eaa629
+    OutputPortName: Choice 1
+    InputNodeGuid: c1a2b3c4-0001-4001-8001-000000000001
+    InputPortName: In
+  - Guid: c3b435ae-bfb2-42b0-9375-10e34714893a
+    OutputNodeGuid: 48cd376c-e3fa-4adb-9b77-56886f28785c
+    OutputPortName: Out
+    InputNodeGuid: 3201d9b8-772f-4c2d-a8fd-9b3444c0b705
+    InputPortName: In
+  - Guid: d1f3a712-5b95-4904-bc8c-a87acdc27678
+    OutputNodeGuid: 3201d9b8-772f-4c2d-a8fd-9b3444c0b705
+    OutputPortName: Found
+    InputNodeGuid: 8bcf3316-b3ea-41ea-8b92-9d202f5dd0ef
+    InputPortName: In
   m_Blackboard:
     m_Variables:
     - rid: 7685950460498878627
     - rid: 1756203194680606801
     - rid: 1756203194680606809
     - rid: 1756203194680606810
-  ViewTransform: {x: -596, y: -154, z: 1}
+  ViewTransform: {x: 522, y: -312, z: 1}
   BlackboardPosition: {x: 10, y: 60}
   references:
     version: 2

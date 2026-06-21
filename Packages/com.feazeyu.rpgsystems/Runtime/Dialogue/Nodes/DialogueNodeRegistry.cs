@@ -45,10 +45,10 @@ namespace Feazeyu.RPGSystems.Dialogue
         private static readonly DialogueNodeRegistry s_Instance = new DialogueNodeRegistry();
 
         /// <summary>All dialogue node types, built on first access.</summary>
-        public static IReadOnlyDictionary<string, DialogueNodeInfo> All => s_Instance.AllNodes;
+        public static IReadOnlyDictionary<string, NodeInfo> All => s_Instance.AllNodes;
 
         /// <summary>Look up a dialogue node type, or <c>null</c> if not registered.</summary>
-        public static DialogueNodeInfo Get(string typeId) => s_Instance.GetNode(typeId);
+        public static NodeInfo Get(string typeId) => s_Instance.GetNode(typeId);
 
         // ── Dialogue-specific type IDs ───────────────────────────────────────
 
@@ -66,7 +66,7 @@ namespace Feazeyu.RPGSystems.Dialogue
         {
             RegisterCommonNodes();
             RegisterDialogueNodes();
-            RegisterAttributeNodes<DialogueNodeAttribute>(attr => new DialogueNodeInfo
+            RegisterAttributeNodes<DialogueNodeAttribute>(attr => new NodeInfo
             {
                 TypeId      = attr.TypeId,
                 DisplayName = attr.DisplayName,
@@ -79,7 +79,7 @@ namespace Feazeyu.RPGSystems.Dialogue
 
         private void RegisterDialogueNodes()
         {
-            Register(new DialogueNodeInfo
+            Register(new NodeInfo
             {
                 TypeId = TypeDialogueLine, DisplayName = "Dialogue Line", Category = "Dialogue",
                 Description = "Displays a single line of dialogue from a speaker.",
@@ -97,7 +97,7 @@ namespace Feazeyu.RPGSystems.Dialogue
                 }
             });
 
-            Register(new DialogueNodeInfo
+            Register(new NodeInfo
             {
                 TypeId = TypeChoiceBranch, DisplayName = "Choice Branch", Category = "Dialogue",
                 Description = "Presents player choices. Each output port maps to one choice. Connect a Requirement node to the input of the node following a choice to conditionally hide that choice.",
@@ -115,7 +115,7 @@ namespace Feazeyu.RPGSystems.Dialogue
                 }
             });
 
-            Register(new DialogueNodeInfo
+            Register(new NodeInfo
             {
                 TypeId = TypeCondition, DisplayName = "Condition", Category = "Logic",
                 Description = "Evaluates a blackboard variable. Routes to True or False output.",
@@ -134,7 +134,7 @@ namespace Feazeyu.RPGSystems.Dialogue
                 }
             });
 
-            Register(new DialogueNodeInfo
+            Register(new NodeInfo
             {
                 TypeId = TypeRunSubgraph, DisplayName = "Run Subgraph", Category = "Flow",
                 Description = "Executes another DialogueGraphAsset inline.",
@@ -150,7 +150,7 @@ namespace Feazeyu.RPGSystems.Dialogue
                 }
             });
 
-            Register(new DialogueNodeInfo
+            Register(new NodeInfo
             {
                 TypeId = TypeRequirement, DisplayName = "Requirement", Category = "Logic",
                 Description = "Hides a Choice Branch option when the condition is not met. Connect 'Out' to the input of the node that follows the choice.",
@@ -167,7 +167,7 @@ namespace Feazeyu.RPGSystems.Dialogue
                 }
             });
 
-            Register(new DialogueNodeInfo
+            Register(new NodeInfo
             {
                 TypeId = "give_item", DisplayName = "Give Item", Category = "Inventory",
                 Description = "Tries to add an item to an inventory. Routes to Success or Failure.",
@@ -186,7 +186,7 @@ namespace Feazeyu.RPGSystems.Dialogue
                 }
             });
 
-            Register(new DialogueNodeInfo
+            Register(new NodeInfo
             {
                 TypeId = "check_currency", DisplayName = "Check Currency", Category = "Shop",
                 Description = "Routes Enough or NotEnough based on the player's wallet balance.",
@@ -203,7 +203,7 @@ namespace Feazeyu.RPGSystems.Dialogue
                 }
             });
 
-            Register(new DialogueNodeInfo
+            Register(new NodeInfo
             {
                 TypeId = "add_currency", DisplayName = "Add Currency", Category = "Shop",
                 Description = "Adds money to the player's wallet and continues.",
@@ -219,7 +219,7 @@ namespace Feazeyu.RPGSystems.Dialogue
                 }
             });
 
-            Register(new DialogueNodeInfo
+            Register(new NodeInfo
             {
                 TypeId = "remove_currency", DisplayName = "Remove Currency", Category = "Shop",
                 Description = "Deducts money from the player's wallet. Routes Success or Failure.",
@@ -236,11 +236,27 @@ namespace Feazeyu.RPGSystems.Dialogue
                 }
             });
 
-            Register(new DialogueNodeInfo
+            Register(new NodeInfo
             {
                 TypeId = "open_shop", DisplayName = "Open Shop", Category = "Shop",
                 Description = "Opens the shop UI on the target Shopkeep/ShopGridUI GameObject and continues.",
                 AccentColor = new Color(0.29f, 0.61f, 0.78f), Icon = "🛒",
+                DefaultPorts = new List<PortData>
+                {
+                    new PortData { PortName = "In",  Direction = PortDirection.Input,  Capacity = PortCapacity.Multi  },
+                    new PortData { PortName = "Out", Direction = PortDirection.Output, Capacity = PortCapacity.Single },
+                },
+                DefaultFields = new List<FieldData>
+                {
+                    new FieldData { FieldName = "Target", TypeName = "UnityEngine.GameObject" },
+                }
+            });
+
+            Register(new NodeInfo
+            {
+                TypeId = "close_shop", DisplayName = "Close Shop", Category = "Shop",
+                Description = "Closes the shop UI on the target Shopkeep/ShopGridUI GameObject and continues.",
+                AccentColor = new Color(0.75f, 0.35f, 0.35f), Icon = "🚪",
                 DefaultPorts = new List<PortData>
                 {
                     new PortData { PortName = "In",  Direction = PortDirection.Input,  Capacity = PortCapacity.Multi  },

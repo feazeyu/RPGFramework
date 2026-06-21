@@ -36,11 +36,11 @@ namespace Feazeyu.RPGSystems.EditorTools
         // Fallback palette used only when no asset is loaded (the "New"
         // button creates a Single by default, so Single is the sensible
         // fallback).
-        protected override IReadOnlyDictionary<string, DialogueNodeInfo> NodeRegistrySource
+        protected override IReadOnlyDictionary<string, NodeInfo> NodeRegistrySource
             => QuestNodeRegistry.ForKind(QuestKind.Single);
 
         /// <summary>Narrow the palette to what's valid for this asset's kind.</summary>
-        protected override IReadOnlyDictionary<string, DialogueNodeInfo> GetNodeRegistryForAsset(GraphAsset asset)
+        protected override IReadOnlyDictionary<string, NodeInfo> GetNodeRegistryForAsset(GraphAsset asset)
         {
             var kind = (asset is QuestGraphAsset qga) ? qga.Kind : QuestKind.Single;
             return QuestNodeRegistry.ForKind(kind);
@@ -86,7 +86,7 @@ namespace Feazeyu.RPGSystems.EditorTools
             }
         }
 
-        private static void CopyDefaults(NodeData node, DialogueNodeInfo info)
+        private static void CopyDefaults(NodeData node, NodeInfo info)
         {
             if (info == null) return;
             node.Ports.AddRange(info.DefaultPorts);

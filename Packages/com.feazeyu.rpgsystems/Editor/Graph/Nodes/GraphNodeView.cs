@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using UnityEditor;
@@ -27,7 +27,7 @@ namespace Feazeyu.RPGSystems.EditorTools
     ///   │       ● Output port(s)           │  ← out ports at bottom
     ///   └──────────────────────────────────┘
     /// </summary>
-    public class DialogueNodeView : Node
+    public class GraphNodeView : Node
     {
         // ── Events ───────────────────────────────────────────────────────────
 
@@ -40,16 +40,16 @@ namespace Feazeyu.RPGSystems.EditorTools
         public NodeData Data { get; }
 
         private readonly GraphAsset                                   m_Asset;
-        private readonly IReadOnlyDictionary<string, DialogueNodeInfo> m_NodeRegistry;
-        private readonly DialogueNodeInfo                             m_Info;
+        private readonly IReadOnlyDictionary<string, NodeInfo> m_NodeRegistry;
+        private readonly NodeInfo                             m_Info;
         private readonly Dictionary<string, Port>                     m_Ports = new Dictionary<string, Port>();
 
         // ── Construction ─────────────────────────────────────────────────────
 
-        public DialogueNodeView(
+        public GraphNodeView(
             NodeData data,
             GraphAsset asset,
-            IReadOnlyDictionary<string, DialogueNodeInfo> nodeRegistry)
+            IReadOnlyDictionary<string, NodeInfo> nodeRegistry)
         {
             Data           = data;
             m_Asset        = asset;
@@ -309,6 +309,10 @@ namespace Feazeyu.RPGSystems.EditorTools
         {
             var row = new VisualElement();
             row.AddToClassList("node-field-row");
+            // Tag the row with its field name so field decorators (e.g.
+            // ChoiceBranchDecorator) can find and replace specific base-built
+            // rows instead of rendering duplicates alongside them.
+            row.userData = field.FieldName;
 
             var nameLabel = new Label(field.FieldName);
             nameLabel.AddToClassList("node-field-name");
@@ -326,6 +330,18 @@ namespace Feazeyu.RPGSystems.EditorTools
                 var ops     = ConditionalOperators;
                 var current = ops.Contains(field.InlineValue) ? field.InlineValue : ops[0];
                 var dropdown = new DropdownField(ops, current);
+                dropdown.AddToClassList("node-field-value");
+                dropdown.RegisterValueChangedCallback(evt =>
+                {
+                    field.InlineValue = evt.newValue;
+                    EditorUtilityHelper.SetDirty(m_Asset);
+                });
+                row.Add(dropdown);
+            }
+            else if (TryGetChoiceOptions(Data, field, out var choices))
+            {
+                var current = choices.Contains(field.InlineValue) ? field.InlineValue : choices[0];
+                var dropdown = new DropdownField(choices, current);
                 dropdown.AddToClassList("node-field-value");
                 dropdown.RegisterValueChangedCallback(evt =>
                 {
@@ -414,6 +430,28 @@ namespace Feazeyu.RPGSystems.EditorTools
 
         internal static bool IsOperatorField(FieldData field)
             => field.TypeName == "conditional_operator" || field.FieldName == "Operator";
+
+        // ── Choice (enum-like) field helpers ─────────────────────────────────
+
+        /// <summary>
+        /// Returns the fixed set of options for a field that should render as a
+        /// dropdown of predefined string values instead of a free-text field.
+        /// Keyed by node type + field name; returns false for free-form fields.
+        /// Add new entries here as more nodes gain enumerated fields.
+        /// </summary>
+        internal static bool TryGetChoiceOptions(NodeData node, FieldData field, out List<string> options)
+        {
+            options = null;
+            if (node == null || field == null) return false;
+
+            if (node.NodeType == NodeRegistry.TypeFindObject && field.FieldName == "Mode")
+            {
+                options = new List<string> { "ByName", "ByTag" };
+                return true;
+            }
+
+            return false;
+        }
 
         // ── Typed "Value" input helpers (SetVariable / Condition / Requirement) ──
 

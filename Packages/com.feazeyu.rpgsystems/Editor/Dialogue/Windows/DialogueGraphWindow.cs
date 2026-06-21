@@ -24,7 +24,7 @@ namespace Feazeyu.RPGSystems.EditorTools
         protected override string SaveDialogTitle => "New Dialogue Graph";
         protected override string WindowIcon      => "◈";
 
-        protected override IReadOnlyDictionary<string, DialogueNodeInfo> NodeRegistrySource
+        protected override IReadOnlyDictionary<string, NodeInfo> NodeRegistrySource
             => DialogueNodeRegistry.All;
 
         protected override StyleSheet ThemeStyleSheet => DialogueGraphStyleSheet.Get();
