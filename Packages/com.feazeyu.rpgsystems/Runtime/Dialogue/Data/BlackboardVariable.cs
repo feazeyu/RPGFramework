@@ -145,4 +145,18 @@ namespace Feazeyu.RPGSystems.Dialogue
         public BlackboardVariableAudioClip(AudioClip v) : base(v) { }
         public override BlackboardVariable Clone() => new BlackboardVariableAudioClip(m_Value) { Name = Name, Guid = Guid, Exposed = Exposed, Shared = Shared };
     }
+
+    /// <summary>
+    /// Holds a reference to a <see cref="DialogueGraphAsset"/> so a dialogue
+    /// graph can store another graph as a variable — e.g. linked to a Run
+    /// Subgraph node's "Graph" field (asset references can't be stored inline,
+    /// so this is the only way to feed a graph to that node). Mirrors the
+    /// QuestGraph variable in the quest system.
+    /// </summary>
+    [Serializable] public sealed class BlackboardVariableDialogueGraph : BlackboardVariable<DialogueGraphAsset>
+    {
+        public BlackboardVariableDialogueGraph() { }
+        public BlackboardVariableDialogueGraph(DialogueGraphAsset v) : base(v) { }
+        public override BlackboardVariable Clone() => new BlackboardVariableDialogueGraph(m_Value) { Name = Name, Guid = Guid, Exposed = Exposed, Shared = Shared };
+    }
 }

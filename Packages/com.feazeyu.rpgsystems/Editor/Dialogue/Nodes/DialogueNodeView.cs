@@ -427,7 +427,7 @@ namespace Feazeyu.RPGSystems.EditorTools
             => field?.FieldName == "Value"
                && (node?.NodeType == NodeRegistry.TypeSetVariable
                 || node?.NodeType == NodeRegistry.TypeCondition
-                || node?.NodeType == NodeRegistry.TypeRequirement);
+                || node?.NodeType == DialogueNodeRegistry.TypeRequirement);
 
         /// <summary>
         /// Returns the ValueType of the blackboard variable linked to the "Variable"

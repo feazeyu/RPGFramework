@@ -23,8 +23,9 @@ namespace Feazeyu.RPGSystems.EditorTools
             ("Vector2",    new Color(0.88f, 0.62f, 0.29f)),
             ("Vector3",    new Color(0.88f, 0.47f, 0.29f)),
             ("Color",      new Color(0.98f, 0.60f, 0.80f)),
-            ("Sprite",     new Color(0.80f, 0.78f, 0.29f)),
-            ("AudioClip",  new Color(0.48f, 0.76f, 0.96f)),
+            ("Sprite",        new Color(0.80f, 0.78f, 0.29f)),
+            ("AudioClip",     new Color(0.48f, 0.76f, 0.96f)),
+            ("DialogueGraph", new Color(0.18f, 0.62f, 0.48f)), // matches Run Subgraph accent
         };
 
         // ── State ─────────────────────────────────────────────────────────────
@@ -513,9 +514,10 @@ namespace Feazeyu.RPGSystems.EditorTools
                 "Vector2"    => new BlackboardVariableVector2(),
                 "Vector3"    => new BlackboardVariableVector3(),
                 "Color"      => new BlackboardVariableColor(),
-                "Sprite"     => new BlackboardVariableSprite(),
-                "AudioClip"  => new BlackboardVariableAudioClip(),
-                _            => CreateExtensionOrDefault(typeName),
+                "Sprite"        => new BlackboardVariableSprite(),
+                "AudioClip"     => new BlackboardVariableAudioClip(),
+                "DialogueGraph" => new BlackboardVariableDialogueGraph(),
+                _               => CreateExtensionOrDefault(typeName),
             };
 
             newVar.Name    = name;
@@ -562,9 +564,10 @@ namespace Feazeyu.RPGSystems.EditorTools
                 BlackboardVariableVector2    _ => "Vector2",
                 BlackboardVariableVector3    _ => "Vector3",
                 BlackboardVariableColor      _ => "Color",
-                BlackboardVariableSprite     _ => "Sprite",
-                BlackboardVariableAudioClip  _ => "AudioClip",
-                _                            => null,
+                BlackboardVariableSprite        _ => "Sprite",
+                BlackboardVariableAudioClip     _ => "AudioClip",
+                BlackboardVariableDialogueGraph _ => "DialogueGraph",
+                _                                 => null,
             };
             if (builtIn != null) return builtIn;
 

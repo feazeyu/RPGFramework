@@ -126,7 +126,7 @@ namespace Feazeyu.RPGSystems.EditorTools
         private void ShowNodeView(NodeData node, GraphAsset asset)
         {
             m_Content.Clear();
-            var info = NodeRegistry.Get(node.NodeType);
+            var info = DialogueNodeRegistry.Get(node.NodeType);
 
             // Node header card — tinted with accent color (stays inline, data-driven).
             var headerCard = new VisualElement();

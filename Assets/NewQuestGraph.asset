@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Edges: []
   m_Blackboard:
     m_Variables: []
-  ViewTransform: {x: 205, y: 329, z: 1}
+  ViewTransform: {x: -85, y: 242, z: 1}
   BlackboardPosition: {x: 10, y: 60}
   m_Kind: 0
   references:

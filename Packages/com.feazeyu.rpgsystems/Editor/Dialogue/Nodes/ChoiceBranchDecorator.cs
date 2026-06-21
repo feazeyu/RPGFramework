@@ -19,7 +19,7 @@ namespace Feazeyu.RPGSystems.EditorTools
     {
         static ChoiceBranchDecorator()
         {
-            NodeViewDecoratorRegistry.Register(NodeRegistry.TypeChoiceBranch, Decorate);
+            NodeViewDecoratorRegistry.Register(DialogueNodeRegistry.TypeChoiceBranch, Decorate);
         }
 
         private static void Decorate(

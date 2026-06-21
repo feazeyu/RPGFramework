@@ -40,7 +40,7 @@ namespace Feazeyu.RPGSystems.EditorTools
 
         /// <summary>"Add Node" palette for this graph system.</summary>
         protected virtual IReadOnlyDictionary<string, DialogueNodeInfo> NodeRegistrySource
-            => NodeRegistry.All;
+            => DialogueNodeRegistry.All;
 
         /// <summary>
         /// Per-asset registry hook — called on every <see cref="LoadAsset"/>.

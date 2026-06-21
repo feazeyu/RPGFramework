@@ -49,7 +49,7 @@ MonoBehaviour:
     - FieldName: Portrait
       TypeName: UnityEngine.Sprite
       InlineValue: 
-      LinkedVariableGuid: 
+      LinkedVariableGuid: 49553c24-6421-4032-8943-678323cffcd2
   - Guid: 09bc1231-10c5-4570-be80-8d9cb6eaa629
     NodeType: ChoiceBranch
     DisplayName: Trade Choice
@@ -93,7 +93,7 @@ MonoBehaviour:
     NodeType: find_object
     DisplayName: Find Merchant
     StoryText: 
-    Position: {x: 811, y: -40}
+    Position: {x: 887, y: -40}
     Size: {x: 0, y: 0}
     Ports:
     - PortName: In
@@ -122,7 +122,7 @@ MonoBehaviour:
     NodeType: open_shop
     DisplayName: Open Grid Shop
     StoryText: 
-    Position: {x: 1480, y: -40}
+    Position: {x: 1492, y: -148}
     Size: {x: 0, y: 0}
     Ports:
     - PortName: In
@@ -166,7 +166,7 @@ MonoBehaviour:
     NodeType: ChoiceBranch
     DisplayName: Grid or List?
     StoryText: 
-    Position: {x: 1139, y: -40}
+    Position: {x: 1134, y: -40}
     Size: {x: 279, y: 286}
     Ports:
     - PortName: In
@@ -191,7 +191,7 @@ MonoBehaviour:
     NodeType: check_currency
     DisplayName: Check 30g
     StoryText: 
-    Position: {x: 920, y: 330}
+    Position: {x: 925, y: 330}
     Size: {x: 0, y: 0}
     Ports:
     - PortName: In
@@ -233,7 +233,7 @@ MonoBehaviour:
     NodeType: DialogueLine
     DisplayName: Hint
     StoryText: 
-    Position: {x: 2194, y: 403}
+    Position: {x: 2194, y: 404}
     Size: {x: 0, y: 0}
     Ports:
     - PortName: In
@@ -254,7 +254,7 @@ MonoBehaviour:
     - FieldName: Portrait
       TypeName: UnityEngine.Sprite
       InlineValue: 
-      LinkedVariableGuid: 
+      LinkedVariableGuid: 49553c24-6421-4032-8943-678323cffcd2
   - Guid: b7ed571d-ea84-4254-862f-d1bfb6472ca8
     NodeType: DialogueLine
     DisplayName: Too Poor
@@ -280,7 +280,7 @@ MonoBehaviour:
     - FieldName: Portrait
       TypeName: UnityEngine.Sprite
       InlineValue: 
-      LinkedVariableGuid: 
+      LinkedVariableGuid: 49553c24-6421-4032-8943-678323cffcd2
   - Guid: bc684b00-bd21-424c-9b52-c1dd9f6f48af
     NodeType: add_currency
     DisplayName: Add 20g
@@ -324,7 +324,7 @@ MonoBehaviour:
     - FieldName: Portrait
       TypeName: UnityEngine.Sprite
       InlineValue: 
-      LinkedVariableGuid: 
+      LinkedVariableGuid: 49553c24-6421-4032-8943-678323cffcd2
   - Guid: c37dbe63-aab2-4592-896d-a16e5cd79292
     NodeType: DialogueLine
     DisplayName: Farewell
@@ -345,12 +345,12 @@ MonoBehaviour:
       LinkedVariableGuid: 
     - FieldName: Text
       TypeName: System.String
-      InlineValue: Safe travels then! Mind the wolves on the northern road.
+      InlineValue: Safe travels then!
       LinkedVariableGuid: 
     - FieldName: Portrait
       TypeName: UnityEngine.Sprite
       InlineValue: 
-      LinkedVariableGuid: 
+      LinkedVariableGuid: 49553c24-6421-4032-8943-678323cffcd2
   - Guid: 85ec7b19-1011-493d-8184-3b5fac4b18c8
     NodeType: End
     DisplayName: End
@@ -625,7 +625,7 @@ MonoBehaviour:
     - rid: 1756203194680606801
     - rid: 1756203194680606809
     - rid: 1756203194680606810
-  ViewTransform: {x: -1043, y: 307, z: 1}
+  ViewTransform: {x: -596, y: -154, z: 1}
   BlackboardPosition: {x: 10, y: 60}
   references:
     version: 2
@@ -649,11 +649,11 @@ MonoBehaviour:
     - rid: 1756203194680606810
       type: {class: BlackboardVariableSprite, ns: Feazeyu.RPGSystems.Dialogue, asm: Feazeyu.RPGSystems.Dialogue}
       data:
-        m_Name: NewVariable
+        m_Name: Portrait
         m_Guid: 49553c24-6421-4032-8943-678323cffcd2
         m_Exposed: 1
         m_Shared: 0
-        m_Value: {fileID: 0}
+        m_Value: {fileID: 21300000, guid: 5777391bd8ed8a04d981d1ed394ab768, type: 3}
     - rid: 7685950460498878627
       type: {class: BlackboardVariableGameObject, ns: Feazeyu.RPGSystems.Dialogue, asm: Feazeyu.RPGSystems.Dialogue}
       data:

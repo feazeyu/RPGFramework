@@ -11,13 +11,6 @@ namespace Feazeyu.RPGSystems.EditorTools
     /// Loads the shared GraphEditor.uss base stylesheet.
     /// Every graph editor window loads this first, then loads its own
     /// system-specific theme sheet (e.g. DialogueGraph.uss).
-    ///
-    /// Search strategy:
-    ///   1. AssetDatabase.FindAssets with both "Assets" and "Packages"
-    ///      search folders (AssetDatabase only indexes Packages/ when the
-    ///      folder list includes it explicitly).
-    ///   2. On miss, don't cache — a later import may produce the asset
-    ///      and we should pick it up on the next call.
     /// </summary>
     public static class GraphEditorStyleSheet
     {

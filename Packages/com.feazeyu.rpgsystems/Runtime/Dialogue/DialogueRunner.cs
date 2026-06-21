@@ -13,8 +13,8 @@ namespace Feazeyu.RPGSystems.Dialogue
     ///   • TriggerEvent  — fires OnEventTriggered
     ///   • WaitForEvent  — stubbed (logs a warning)
     ///
-    /// All structural nodes (Start, End, Condition, SetVariable, Sequence,
-    /// Selector, RunSubgraph) are handled by the base GraphRunner.
+    /// All structural nodes (Start, End, Condition, SetVariable, RunSubgraph)
+    /// are handled by the base GraphRunner.
     ///
     /// ── Minimal setup ────────────────────────────────────────────────────
     ///   1. Add this component to the NPC/interactable GameObject.
@@ -97,12 +97,24 @@ namespace Feazeyu.RPGSystems.Dialogue
         protected override GraphRunner CreateSubRunner(GameObject go)
             => go.AddComponent<DialogueRunner>();
 
+        /// <summary>
+        /// Resolves a Run Subgraph node's "Graph" field. The field links to a
+        /// DialogueGraph blackboard variable (asset references can't be stored
+        /// inline), so the sub-asset comes from that variable's value.
+        /// </summary>
+        protected override GraphAsset ResolveSubgraphAsset(NodeData node)
+        {
+            var guid = m_Context.GetLinkedGuid(node, "Graph");
+            if (string.IsNullOrEmpty(guid)) return null;
+            return m_RuntimeBlackboard.GetVariable(guid)?.ObjectValue as DialogueGraphAsset;
+        }
+
         // ── Inner handler classes ─────────────────────────────────────────────
 
         private class DialogueLineHandler : IGraphNodeHandler
         {
             private readonly DialogueRunner m_R;
-            public string NodeTypeId => NodeRegistry.TypeDialogueLine;
+            public string NodeTypeId => DialogueNodeRegistry.TypeDialogueLine;
             public DialogueLineHandler(DialogueRunner r) => m_R = r;
 
             public IEnumerator Execute(NodeData node, GraphRunContext ctx)
@@ -121,7 +133,7 @@ namespace Feazeyu.RPGSystems.Dialogue
         private class ChoiceBranchHandler : IGraphNodeHandler
         {
             private readonly DialogueRunner m_R;
-            public string NodeTypeId => NodeRegistry.TypeChoiceBranch;
+            public string NodeTypeId => DialogueNodeRegistry.TypeChoiceBranch;
             public ChoiceBranchHandler(DialogueRunner r) => m_R = r;
 
             public IEnumerator Execute(NodeData node, GraphRunContext ctx)
@@ -170,7 +182,7 @@ namespace Feazeyu.RPGSystems.Dialogue
                 {
                     if (edge.InputNodeGuid != targetNode.Guid) continue;
                     var source = ctx.Graph.GetNode(edge.OutputNodeGuid);
-                    if (source?.NodeType != NodeRegistry.TypeRequirement) continue;
+                    if (source?.NodeType != DialogueNodeRegistry.TypeRequirement) continue;
                     if (!EvaluateRequirement(source, ctx)) return false;
                 }
                 return true;

@@ -25,7 +25,7 @@ namespace Feazeyu.RPGSystems.EditorTools
         protected override string WindowIcon      => "◈";
 
         protected override IReadOnlyDictionary<string, DialogueNodeInfo> NodeRegistrySource
-            => NodeRegistry.All;
+            => DialogueNodeRegistry.All;
 
         protected override StyleSheet ThemeStyleSheet => DialogueGraphStyleSheet.Get();
 

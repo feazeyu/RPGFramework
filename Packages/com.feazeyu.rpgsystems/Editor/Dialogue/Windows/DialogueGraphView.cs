@@ -57,7 +57,7 @@ namespace Feazeyu.RPGSystems.EditorTools
             StyleSheet themeSheet,
             string rootCssClass)
         {
-            m_NodeRegistry = nodeRegistry ?? NodeRegistry.All;
+            m_NodeRegistry = nodeRegistry ?? DialogueNodeRegistry.All;
 
             SetupZoom(ContentZoomer.DefaultMinScale, ContentZoomer.DefaultMaxScale);
             this.AddManipulator(new ContentDragger());
@@ -93,7 +93,7 @@ namespace Feazeyu.RPGSystems.EditorTools
         /// </summary>
         public void SetNodeRegistry(IReadOnlyDictionary<string, DialogueNodeInfo> nodeRegistry)
         {
-            m_NodeRegistry = nodeRegistry ?? NodeRegistry.All;
+            m_NodeRegistry = nodeRegistry ?? DialogueNodeRegistry.All;
         }
 
         // ── GraphView overrides ──────────────────────────────────────────────

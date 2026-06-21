@@ -36,39 +36,29 @@ namespace QuestGraph.Runtime
     }
 
     /// <summary>
-    /// Parallel to <see cref="NodeRegistry"/> but scoped to the Quest
-    /// editor's "Add Node" menu. Contains every node type either flavour
-    /// of quest graph can use; the window filters by
-    /// <see cref="QuestGraphAsset.Kind"/> via <see cref="ForKind"/>.
+    /// Node registry for the Quest graph system. Derives from
+    /// <see cref="NodeRegistry"/>, so the shared flow/logic nodes come from
+    /// <see cref="NodeRegistry.RegisterCommonNodes"/>; this class adds the
+    /// quest-specific palette (Objective, Reward, terminals, objectives) and the
+    /// quest flavour of Condition and Quest Reference (Run Subgraph). Contains
+    /// every node type either flavour of quest graph can use; the window filters
+    /// by <see cref="QuestGraphAsset.Kind"/> via <see cref="ForKind"/>.
     ///
     /// Type-id constants for shared flow/logic nodes mirror
     /// <see cref="NodeRegistry"/> so a node's stored <c>NodeType</c>
     /// string is universal — a "Start" node means the same thing
     /// regardless of which graph system it lives in.
     /// </summary>
-    public static class QuestNodeRegistry
+    public sealed class QuestNodeRegistry : NodeRegistry
     {
-        private static Dictionary<string, DialogueNodeInfo> s_Registry;
+        private static readonly QuestNodeRegistry s_Instance = new QuestNodeRegistry();
 
-        public static IReadOnlyDictionary<string, DialogueNodeInfo> All
-        {
-            get { EnsureBuilt(); return s_Registry; }
-        }
+        public static IReadOnlyDictionary<string, DialogueNodeInfo> All => s_Instance.AllNodes;
 
-        // ── Built-in type IDs ────────────────────────────────────────────────
-
-        public const string TypeStart          = NodeRegistry.TypeStart;
-        public const string TypeEnd            = NodeRegistry.TypeEnd;
-        public const string TypeSequence       = NodeRegistry.TypeSequence;
-        public const string TypeSelector       = NodeRegistry.TypeSelector;
-        public const string TypeCondition      = NodeRegistry.TypeCondition;
-        public const string TypeSetVariable    = NodeRegistry.TypeSetVariable;
-        public const string TypeTriggerEvent   = NodeRegistry.TypeTriggerEvent;
-        public const string TypeWaitForEvent   = NodeRegistry.TypeWaitForEvent;
-        public const string TypeRunSubgraph    = NodeRegistry.TypeRunSubgraph;
-
-        public const string TypeFindObject     = NodeRegistry.TypeFindObject;
-        public const string TypeDebugLog       = NodeRegistry.TypeDebugLog;
+        // ── Quest-specific type IDs ──────────────────────────────────────────
+        // Shared flow/logic type-ids (Start, End, Condition, RunSubgraph, …)
+        // are inherited from NodeRegistry — QuestNodeRegistry.TypeStart resolves
+        // to the base constant, keeping the stored NodeType strings universal.
 
         public const string TypeObjective      = "Objective";
         public const string TypeReward         = "Reward";
@@ -82,14 +72,9 @@ namespace QuestGraph.Runtime
         public const string TypeObjCollect   = "obj_collect";
         public const string TypeObjDeliver   = "obj_deliver";
 
-        // ── Accent colours ───────────────────────────────────────────────────
-
-        public static readonly Color ColFlow      = NodeRegistry.ColFlow;
-        public static readonly Color ColLogic     = NodeRegistry.ColLogic;
-        public static readonly Color ColEvent     = NodeRegistry.ColEvent;
-        public static readonly Color ColVariable  = NodeRegistry.ColVariable;
-        public static readonly Color ColStart     = NodeRegistry.ColStart;
-        public static readonly Color ColEnd       = NodeRegistry.ColEnd;
+        // ── Quest accent colours ─────────────────────────────────────────────
+        // Shared colours (ColFlow, ColLogic, ColStart, …) are inherited from
+        // NodeRegistry.
 
         public static readonly Color ColObjective = new Color(0.95f, 0.72f, 0.24f); // amber
         public static readonly Color ColReward    = new Color(0.90f, 0.80f, 0.30f); // gold
@@ -105,7 +90,6 @@ namespace QuestGraph.Runtime
         private static readonly HashSet<string> s_SinglePalette = new HashSet<string>
         {
             TypeStart, TypeEnd,
-            TypeSequence, TypeSelector,
             TypeCondition, TypeSetVariable,
             TypeTriggerEvent, TypeWaitForEvent,
             TypeFindObject, TypeDebugLog,
@@ -131,11 +115,10 @@ namespace QuestGraph.Runtime
         /// </summary>
         public static IReadOnlyDictionary<string, DialogueNodeInfo> ForKind(QuestKind kind)
         {
-            EnsureBuilt();
             var allow = kind == QuestKind.Chain ? s_ChainPalette : s_SinglePalette;
 
             var filtered = new Dictionary<string, DialogueNodeInfo>();
-            foreach (var kv in s_Registry)
+            foreach (var kv in s_Instance.AllNodes)
                 if (allow.Contains(kv.Key))
                     filtered[kv.Key] = kv.Value;
             return filtered;
@@ -150,65 +133,29 @@ namespace QuestGraph.Runtime
 
         // ── Build ────────────────────────────────────────────────────────────
 
-        private static void EnsureBuilt()
+        protected override void Build()
         {
-            if (s_Registry != null) return;
-            s_Registry = new Dictionary<string, DialogueNodeInfo>();
-            RegisterSharedFlow();
+            RegisterCommonNodes();
+            RegisterQuestFlow();
             RegisterQuestSpecific();
-            RegisterAttributeNodes();
+            RegisterAttributeNodes<QuestNodeAttribute>(attr => new DialogueNodeInfo
+            {
+                TypeId      = attr.NodeTypeID,
+                DisplayName = attr.DisplayName,
+                Category    = attr.Category,
+                Description = attr.Description,
+                Icon        = attr.Icon,
+                AccentColor = Color.gray,
+            });
         }
 
-        private static void Register(DialogueNodeInfo info) => s_Registry[info.TypeId] = info;
-
-        private static void RegisterSharedFlow()
+        /// <summary>
+        /// Quest-specific variants of nodes whose layout differs from the shared
+        /// defaults: a plain-string Condition operator, and Run Subgraph
+        /// re-themed as a Quest Reference.
+        /// </summary>
+        private void RegisterQuestFlow()
         {
-            Register(new DialogueNodeInfo
-            {
-                TypeId = TypeStart, DisplayName = "Start", Category = "Flow",
-                Description = "Entry point. Execution begins here.",
-                AccentColor = ColStart, Icon = "▶",
-                DefaultPorts = new List<PortData>
-                {
-                    new PortData { PortName = "Out", Direction = PortDirection.Output, Capacity = PortCapacity.Single }
-                }
-            });
-
-            Register(new DialogueNodeInfo
-            {
-                TypeId = TypeEnd, DisplayName = "End", Category = "Flow",
-                Description = "Terminates graph execution.",
-                AccentColor = ColEnd, Icon = "■",
-                DefaultPorts = new List<PortData>
-                {
-                    new PortData { PortName = "In", Direction = PortDirection.Input, Capacity = PortCapacity.Multi }
-                }
-            });
-
-            Register(new DialogueNodeInfo
-            {
-                TypeId = TypeSequence, DisplayName = "Sequence", Category = "Flow",
-                Description = "Runs children in order. Fails on first child failure.",
-                AccentColor = ColFlow, Icon = "→",
-                DefaultPorts = new List<PortData>
-                {
-                    new PortData { PortName = "In",  Direction = PortDirection.Input,  Capacity = PortCapacity.Multi },
-                    new PortData { PortName = "Out", Direction = PortDirection.Output, Capacity = PortCapacity.Single }
-                }
-            });
-
-            Register(new DialogueNodeInfo
-            {
-                TypeId = TypeSelector, DisplayName = "Selector", Category = "Flow",
-                Description = "Tries children in order; succeeds on first child success.",
-                AccentColor = ColFlow, Icon = "?",
-                DefaultPorts = new List<PortData>
-                {
-                    new PortData { PortName = "In",  Direction = PortDirection.Input,  Capacity = PortCapacity.Multi },
-                    new PortData { PortName = "Out", Direction = PortDirection.Output, Capacity = PortCapacity.Single }
-                }
-            });
-
             Register(new DialogueNodeInfo
             {
                 TypeId = TypeCondition, DisplayName = "Condition", Category = "Logic",
@@ -225,90 +172,6 @@ namespace QuestGraph.Runtime
                     new FieldData { FieldName = "Variable", TypeName = "System.String" },
                     new FieldData { FieldName = "Operator", TypeName = "System.String", InlineValue = "==" },
                     new FieldData { FieldName = "Value",    TypeName = "System.String" },
-                }
-            });
-
-            Register(new DialogueNodeInfo
-            {
-                TypeId = TypeSetVariable, DisplayName = "Set Variable", Category = "Logic",
-                Description = "Writes a value to a Blackboard variable.",
-                AccentColor = ColVariable, Icon = "✎",
-                DefaultPorts = new List<PortData>
-                {
-                    new PortData { PortName = "In",  Direction = PortDirection.Input,  Capacity = PortCapacity.Multi },
-                    new PortData { PortName = "Out", Direction = PortDirection.Output, Capacity = PortCapacity.Single }
-                },
-                DefaultFields = new List<FieldData>
-                {
-                    new FieldData { FieldName = "Variable", TypeName = "System.String" },
-                    new FieldData { FieldName = "Value",    TypeName = "System.String" },
-                }
-            });
-
-            Register(new DialogueNodeInfo
-            {
-                TypeId = TypeTriggerEvent, DisplayName = "Trigger Event", Category = "Events",
-                Description = "Fires a game event channel.",
-                AccentColor = ColEvent, Icon = "⚡",
-                DefaultPorts = new List<PortData>
-                {
-                    new PortData { PortName = "In",  Direction = PortDirection.Input,  Capacity = PortCapacity.Multi },
-                    new PortData { PortName = "Out", Direction = PortDirection.Output, Capacity = PortCapacity.Single }
-                },
-                DefaultFields = new List<FieldData>
-                {
-                    new FieldData { FieldName = "Event Channel", TypeName = "UnityEngine.ScriptableObject" },
-                }
-            });
-
-            Register(new DialogueNodeInfo
-            {
-                TypeId = TypeWaitForEvent, DisplayName = "Wait For Event", Category = "Events",
-                Description = "Suspends execution until a game event is received.",
-                AccentColor = ColEvent, Icon = "⏳",
-                DefaultPorts = new List<PortData>
-                {
-                    new PortData { PortName = "In",  Direction = PortDirection.Input,  Capacity = PortCapacity.Multi },
-                    new PortData { PortName = "Out", Direction = PortDirection.Output, Capacity = PortCapacity.Single }
-                },
-                DefaultFields = new List<FieldData>
-                {
-                    new FieldData { FieldName = "Event Channel", TypeName = "UnityEngine.ScriptableObject" },
-                }
-            });
-
-            Register(new DialogueNodeInfo
-            {
-                TypeId = TypeDebugLog, DisplayName = "Debug Log", Category = "Debug",
-                Description = "Prints a message to the Unity console and continues.",
-                AccentColor = new Color(0.55f, 0.55f, 0.55f), Icon = "⬛",
-                DefaultPorts = new List<PortData>
-                {
-                    new PortData { PortName = "In",  Direction = PortDirection.Input,  Capacity = PortCapacity.Multi  },
-                    new PortData { PortName = "Out", Direction = PortDirection.Output, Capacity = PortCapacity.Single },
-                },
-                DefaultFields = new List<FieldData>
-                {
-                    new FieldData { FieldName = "Message", TypeName = "System.String" },
-                }
-            });
-
-            Register(new DialogueNodeInfo
-            {
-                TypeId = TypeFindObject, DisplayName = "Find Object", Category = "Scene",
-                Description = "Finds a scene GameObject by name or tag and stores it in a blackboard variable.",
-                AccentColor = ColVariable, Icon = "⌖",
-                DefaultPorts = new List<PortData>
-                {
-                    new PortData { PortName = "In",       Direction = PortDirection.Input,  Capacity = PortCapacity.Multi  },
-                    new PortData { PortName = "Found",    Direction = PortDirection.Output, Capacity = PortCapacity.Single },
-                    new PortData { PortName = "NotFound", Direction = PortDirection.Output, Capacity = PortCapacity.Single },
-                },
-                DefaultFields = new List<FieldData>
-                {
-                    new FieldData { FieldName = "Mode",   TypeName = "System.String",            InlineValue = "ByName" },
-                    new FieldData { FieldName = "Value",  TypeName = "System.String" },
-                    new FieldData { FieldName = "Target", TypeName = "UnityEngine.GameObject" },
                 }
             });
 
@@ -336,7 +199,7 @@ namespace QuestGraph.Runtime
             });
         }
 
-        private static void RegisterQuestSpecific()
+        private void RegisterQuestSpecific()
         {
             Register(new DialogueNodeInfo
             {
@@ -524,39 +387,6 @@ namespace QuestGraph.Runtime
             });
         }
 
-        private static void RegisterAttributeNodes()
-        {
-            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
-            {
-                Type[] types;
-                try { types = assembly.GetTypes(); }
-                catch (System.Reflection.ReflectionTypeLoadException e) { types = e.Types; }
-
-                foreach (var type in types)
-                {
-                    if (type == null) continue;
-                    var attr = (QuestNodeAttribute)Attribute.GetCustomAttribute(
-                        type, typeof(QuestNodeAttribute));
-                    if (attr == null) continue;
-                    if (s_Registry.ContainsKey(attr.NodeTypeID)) continue;
-
-                    Register(new DialogueNodeInfo
-                    {
-                        TypeId      = attr.NodeTypeID,
-                        DisplayName = attr.DisplayName,
-                        Category    = attr.Category,
-                        Description = attr.Description,
-                        Icon        = attr.Icon,
-                        AccentColor = Color.gray,
-                    });
-                }
-            }
-        }
-
-        public static DialogueNodeInfo Get(string typeId)
-        {
-            EnsureBuilt();
-            return s_Registry.TryGetValue(typeId, out var info) ? info : null;
-        }
+        public static DialogueNodeInfo Get(string typeId) => s_Instance.GetNode(typeId);
     }
 }

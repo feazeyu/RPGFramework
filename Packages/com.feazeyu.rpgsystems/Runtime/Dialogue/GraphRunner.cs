@@ -16,7 +16,7 @@ namespace Feazeyu.RPGSystems.Dialogue
     ///   • Walks the graph along edges
     ///   • Dispatches each node to a registered IGraphNodeHandler
     ///   • Handles structural built-in nodes: Start, End, Condition,
-    ///     SetVariable, Sequence, Selector (no system-specific knowledge)
+    ///     SetVariable, RunSubgraph (no system-specific knowledge)
     ///
     /// To add a new graph-based system (quest, cutscene, …):
     ///   1. Subclass GraphRunner.
@@ -37,6 +37,15 @@ namespace Feazeyu.RPGSystems.Dialogue
         [Header("Events")]
         public UnityEvent OnGraphStarted;
         public UnityEvent OnGraphEnded;
+
+        // Per-instance initial-value overrides for Exposed (non-Shared) blackboard
+        // variables, edited via GraphRunnerEditor. Each entry is a clone of an
+        // authored variable carrying the overridden value, matched back by Guid.
+        // Hidden from the default inspector — the custom editor renders these.
+        // Authored asset values are never mutated; overrides are applied onto the
+        // runtime blackboard when it is first built (see StartGraph).
+        [SerializeReference, HideInInspector]
+        private List<BlackboardVariable> m_Overrides = new List<BlackboardVariable>();
 
         // ── State ─────────────────────────────────────────────────────────────
 
@@ -93,7 +102,11 @@ namespace Feazeyu.RPGSystems.Dialogue
             // runner, so non-shared variable values persist across repeated dialogues.
             // It is a pure runtime field (not serialized), so it is rebuilt from the
             // asset's authored defaults when the runner is recreated — i.e. on play exit.
-            m_RuntimeBlackboard ??= Graph.Blackboard.CloneForRuntime();
+            if (m_RuntimeBlackboard == null)
+            {
+                m_RuntimeBlackboard = Graph.Blackboard.CloneForRuntime();
+                ApplyExposedOverrides();
+            }
 
             m_Context           = new GraphRunContext(this, Graph, m_RuntimeBlackboard);
             m_Context.OnFollow  = portName => FollowOutputPort(m_CurrentNode, portName);
@@ -121,6 +134,36 @@ namespace Feazeyu.RPGSystems.Dialogue
             if (!IsRunning) return;
             StopAllCoroutines();
             EndGraph();
+        }
+
+        /// <summary>
+        /// Applies this instance's per-runner overrides onto the freshly built
+        /// runtime blackboard. Only Exposed, non-Shared variables are overridden:
+        /// Shared variables resolve to a single global instance, so a per-instance
+        /// override would stomp shared state. Stale entries (variable deleted,
+        /// un-exposed, or made Shared after the override was authored) are skipped.
+        /// </summary>
+        private void ApplyExposedOverrides()
+        {
+            if (m_Overrides == null || m_RuntimeBlackboard == null) return;
+
+            foreach (var ov in m_Overrides)
+            {
+                if (ov == null || string.IsNullOrEmpty(ov.Guid)) continue;
+
+                var authored = Graph.Blackboard.GetVariable(ov.Guid);
+                if (authored == null || !authored.Exposed || authored.Shared) continue;
+
+                var target = m_RuntimeBlackboard.GetVariable(ov.Guid);
+                if (target == null) continue;
+
+                try { target.ObjectValue = ov.ObjectValue; }
+                catch (Exception e)
+                {
+                    Debug.LogWarning(
+                        $"[GraphRunner] Failed to apply exposed override for '{ov.Name}': {e.Message}", this);
+                }
+            }
         }
 
         // ── Traversal ─────────────────────────────────────────────────────────
@@ -164,11 +207,6 @@ namespace Feazeyu.RPGSystems.Dialogue
 
                 case NodeRegistry.TypeSetVariable:
                     ProcessSetVariable(node);
-                    FollowOutputPort(node, "Out");
-                    yield break;
-
-                case NodeRegistry.TypeSequence:
-                case NodeRegistry.TypeSelector:
                     FollowOutputPort(node, "Out");
                     yield break;
 
