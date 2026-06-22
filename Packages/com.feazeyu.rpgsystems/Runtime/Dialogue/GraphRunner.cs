@@ -41,7 +41,7 @@ namespace Feazeyu.RPGSystems.Dialogue
         // Per-instance initial-value overrides for Exposed (non-Shared) blackboard
         // variables, edited via GraphRunnerEditor. Each entry is a clone of an
         // authored variable carrying the overridden value, matched back by Guid.
-        // Hidden from the default inspector — the custom editor renders these.
+        // Hidden from the default inspector, the custom editor renders these.
         // Authored asset values are never mutated; overrides are applied onto the
         // runtime blackboard when it is first built (see StartGraph).
         [SerializeReference, HideInInspector]
@@ -251,10 +251,16 @@ namespace Feazeyu.RPGSystems.Dialogue
         private void ProcessSetVariable(NodeData node)
         {
             var variableGuid = m_Context.GetLinkedGuid(node, "Variable");
-            if (string.IsNullOrEmpty(variableGuid)) return;
+            if (string.IsNullOrEmpty(variableGuid)) {
+                Debug.LogWarning($"[GraphRunner] Tried to set a null/empty variable");
+                return;
+            }
 
             var bbVar = m_RuntimeBlackboard.GetVariable(variableGuid);
-            if (bbVar == null) return;
+            if (bbVar == null) {
+                Debug.LogWarning($"[GraphRunner] Variable with guid: {variableGuid} was not found, and nothing was set.");
+                return;
+            }
 
             var valueStr = m_Context.ResolveString(node, "Value");
 

@@ -56,6 +56,7 @@ namespace Feazeyu.RPGSystems.Dialogue
         public const string TypeRunSubgraph  = "RunSubgraph";
         public const string TypeFindObject   = "find_object";
         public const string TypeDebugLog     = "debug_log";
+        public const string TypeSpawnPrefab  = "spawn_prefab";
 
         // ── Shared accent colours ────────────────────────────────────────────
 
@@ -213,6 +214,27 @@ namespace Feazeyu.RPGSystems.Dialogue
                     new FieldData { FieldName = "Mode",   TypeName = "System.String",            InlineValue = "ByName" },
                     new FieldData { FieldName = "Value",  TypeName = "System.String" },
                     new FieldData { FieldName = "Target", TypeName = "UnityEngine.GameObject" },
+                }
+            });
+
+            Register(new NodeInfo
+            {
+                TypeId = TypeSpawnPrefab, DisplayName = "Spawn Prefab", Category = "Scene",
+                Description = "Instantiates a prefab (from a blackboard GameObject variable), optionally under " +
+                              "a parent Transform, and continues. Optionally stores the spawned instance in a " +
+                              "blackboard variable. Routes to Failure when no prefab is linked.",
+                AccentColor = new Color(0.20f, 0.72f, 0.42f), Icon = "✚",
+                DefaultPorts = new List<PortData>
+                {
+                    new PortData { PortName = "In",      Direction = PortDirection.Input,  Capacity = PortCapacity.Multi  },
+                    new PortData { PortName = "Out",     Direction = PortDirection.Output, Capacity = PortCapacity.Single },
+                    new PortData { PortName = "Failure", Direction = PortDirection.Output, Capacity = PortCapacity.Single },
+                },
+                DefaultFields = new List<FieldData>
+                {
+                    new FieldData { FieldName = "Prefab", TypeName = "UnityEngine.GameObject" },
+                    new FieldData { FieldName = "Parent", TypeName = "UnityEngine.Transform" },
+                    new FieldData { FieldName = "Result", TypeName = "UnityEngine.GameObject" },
                 }
             });
         }

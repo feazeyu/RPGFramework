@@ -38,7 +38,6 @@ namespace Feazeyu.RPGSystems.Inventory
         private int _pendingRefundItemId = -1;
         private int _pendingRefundPrice = 0;
 
-        // Tracks whether the shop UI is currently open, so Esc only closes it while visible.
         private bool _isOpen;
 
         // The working copy the shop runs against. Buying/selling mutates stack depth, so we never

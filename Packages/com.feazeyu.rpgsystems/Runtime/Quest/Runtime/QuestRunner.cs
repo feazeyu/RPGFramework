@@ -96,6 +96,7 @@ namespace QuestGraph.Runtime
             RegisterHandler(new SpawnItemHandler());
             RegisterHandler(new DebugLogNodeHandler());
             RegisterHandler(new FindObjectNodeHandler());
+            RegisterHandler(new SpawnPrefabNodeHandler());
         }
 
         // ── Public API ────────────────────────────────────────────────────────

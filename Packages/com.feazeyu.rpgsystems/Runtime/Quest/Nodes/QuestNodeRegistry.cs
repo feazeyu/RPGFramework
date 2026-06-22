@@ -92,7 +92,7 @@ namespace QuestGraph.Runtime
             TypeStart, TypeEnd,
             TypeCondition, TypeSetVariable,
             TypeTriggerEvent, TypeWaitForEvent,
-            TypeFindObject, TypeDebugLog,
+            TypeFindObject, TypeDebugLog, TypeSpawnPrefab,
             TypeObjective, TypeReward,
             TypeCompleteQuest, TypeFailQuest,
             TypeSpawnItem,

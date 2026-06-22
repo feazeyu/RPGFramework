@@ -35,10 +35,6 @@ namespace Feazeyu.RPGSystems.EditorTools
         public Action<NodeData> OnNodeSelected;
         public Action           OnNodeDeselected;
 
-        // Fired when a blackboard variable is dropped onto a node field.
-        // Args: (fieldData, variableGuid) — empty guid = unlink
-        public Action<FieldData, string> OnVariableLinked;
-
         // ── Internal state ───────────────────────────────────────────────────
 
         private GraphAsset m_Asset;
@@ -103,9 +99,6 @@ namespace Feazeyu.RPGSystems.EditorTools
 
         // ── GraphView overrides ──────────────────────────────────────────────
 
-        /// <summary>Use SoftEdge instead of the default Edge so bezier tangents are gentler.</summary>
-        public Edge CreateEdge() => new SoftEdge();
-
         /// <summary>Rule: Output→Input, matching direction, no self-loops.</summary>
         public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter adapter)
         {
@@ -151,7 +144,7 @@ namespace Feazeyu.RPGSystems.EditorTools
 
             if (selection.Count > 0)
             {
-                evt.menu.AppendAction("Delete", _ => DeleteSelectedElements(),
+                evt.menu.AppendAction("Delete", _ => DeleteSelection(),
                     DropdownMenuAction.AlwaysEnabled);
                 evt.menu.AppendAction("Duplicate", _ => DuplicateSelectedNodes(),
                     DropdownMenuAction.AlwaysEnabled);
@@ -299,9 +292,7 @@ namespace Feazeyu.RPGSystems.EditorTools
             return change;
         }
 
-        // ── Helpers ──────────────────────────────────────────────────────────
-
-        private void DeleteSelectedElements() => DeleteSelection();
+        // ── Helpers ─────────────────────────────────────────────────────────
 
         private void DuplicateSelectedNodes()
         {
@@ -328,10 +319,6 @@ namespace Feazeyu.RPGSystems.EditorTools
             ClearSelection();
             foreach (var v in newViews) AddToSelection(v);
         }
-
-        // Public accessor so InspectorPanel can request a node view refresh.
-        public GraphNodeView GetNodeView(string guid)
-            => m_NodeViews.TryGetValue(guid, out var v) ? v : null;
 
         public void RefreshNodeView(string guid)
         {

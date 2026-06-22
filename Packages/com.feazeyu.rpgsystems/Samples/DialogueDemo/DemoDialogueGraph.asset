@@ -17,7 +17,7 @@ MonoBehaviour:
     NodeType: Start
     DisplayName: Start
     StoryText: 
-    Position: {x: -923, y: 309}
+    Position: {x: -925, y: 300}
     Size: {x: 0, y: 0}
     Ports:
     - PortName: Out
@@ -55,7 +55,7 @@ MonoBehaviour:
     DisplayName: Trade Choice
     StoryText: 
     Position: {x: 511, y: 233}
-    Size: {x: 324, y: 397}
+    Size: {x: 325, y: 321}
     Ports:
     - PortName: In
       Direction: 0
@@ -93,7 +93,7 @@ MonoBehaviour:
     NodeType: find_object
     DisplayName: Find Merchant
     StoryText: 
-    Position: {x: -651, y: 276}
+    Position: {x: -665, y: 300}
     Size: {x: 0, y: 0}
     Ports:
     - PortName: In
@@ -476,7 +476,7 @@ MonoBehaviour:
     NodeType: End
     DisplayName: End
     StoryText: 
-    Position: {x: 2473, y: 620}
+    Position: {x: 2590, y: 356}
     Size: {x: 0, y: 0}
     Ports:
     - PortName: In
@@ -506,6 +506,39 @@ MonoBehaviour:
     DisplayName: End
     StoryText: 
     Position: {x: -415, y: 573}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    Fields: []
+  - Guid: 25103a91-c8e6-46e9-9926-55453ab6fdb2
+    NodeType: End
+    DisplayName: End
+    StoryText: 
+    Position: {x: 1200, y: 972}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    Fields: []
+  - Guid: 9d992227-83e6-4087-9dd0-cdeef6e3b094
+    NodeType: End
+    DisplayName: End
+    StoryText: 
+    Position: {x: 1590, y: 420}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    Fields: []
+  - Guid: 12833540-9c29-4ab1-88bb-081c0834d474
+    NodeType: End
+    DisplayName: End
+    StoryText: 
+    Position: {x: 2416, y: 831}
     Size: {x: 0, y: 0}
     Ports:
     - PortName: In
@@ -603,29 +636,9 @@ MonoBehaviour:
     OutputPortName: Out
     InputNodeGuid: bc684b00-bd21-424c-9b52-c1dd9f6f48af
     InputPortName: In
-  - Guid: 840ef6ef-2d01-455d-bf29-92591629c872
-    OutputNodeGuid: de45ae42-2b04-4b55-8df9-44c36952d0f5
-    OutputPortName: Out
-    InputNodeGuid: 3eb798e8-7f7d-4dbf-9c8b-d8509b011bcf
-    InputPortName: In
-  - Guid: 6ce2c285-2341-4b38-ad5b-253ef4755dd0
-    OutputNodeGuid: 701a574f-8770-4639-aace-9808f6da38a1
-    OutputPortName: Out
-    InputNodeGuid: 3eb798e8-7f7d-4dbf-9c8b-d8509b011bcf
-    InputPortName: In
   - Guid: 436af12a-3b5b-4738-8dd8-cda9c631d9b1
     OutputNodeGuid: 4297622f-1d43-495f-aa96-b9319ceeb568
     OutputPortName: Failure
-    InputNodeGuid: 3eb798e8-7f7d-4dbf-9c8b-d8509b011bcf
-    InputPortName: In
-  - Guid: 1540f103-dfd3-4159-9a6b-2877881c8144
-    OutputNodeGuid: c37dbe63-aab2-4592-896d-a16e5cd79292
-    OutputPortName: Out
-    InputNodeGuid: 3eb798e8-7f7d-4dbf-9c8b-d8509b011bcf
-    InputPortName: In
-  - Guid: 813e9ead-86f2-466f-94d9-97852bb7645f
-    OutputNodeGuid: b7ed571d-ea84-4254-862f-d1bfb6472ca8
-    OutputPortName: Out
     InputNodeGuid: 3eb798e8-7f7d-4dbf-9c8b-d8509b011bcf
     InputPortName: In
   - Guid: ec757db1-bc63-4fcf-864b-0616653f5fd2
@@ -653,13 +666,34 @@ MonoBehaviour:
     OutputPortName: Found
     InputNodeGuid: 8bcf3316-b3ea-41ea-8b92-9d202f5dd0ef
     InputPortName: In
+  - Guid: e427a010-568e-40b9-a935-adfa0730ade1
+    OutputNodeGuid: c37dbe63-aab2-4592-896d-a16e5cd79292
+    OutputPortName: Out
+    InputNodeGuid: 25103a91-c8e6-46e9-9926-55453ab6fdb2
+    InputPortName: In
+  - Guid: 29f9097d-6036-4007-9a15-4e652e652f09
+    OutputNodeGuid: b7ed571d-ea84-4254-862f-d1bfb6472ca8
+    OutputPortName: Out
+    InputNodeGuid: 9d992227-83e6-4087-9dd0-cdeef6e3b094
+    InputPortName: In
+  - Guid: 29e3d4c1-7bf4-4974-ad11-12f18b8ee5d1
+    OutputNodeGuid: 701a574f-8770-4639-aace-9808f6da38a1
+    OutputPortName: Out
+    InputNodeGuid: 12833540-9c29-4ab1-88bb-081c0834d474
+    InputPortName: In
+  - Guid: 00d08081-071a-4cf8-964b-8e3b02ef8c50
+    OutputNodeGuid: de45ae42-2b04-4b55-8df9-44c36952d0f5
+    OutputPortName: Out
+    InputNodeGuid: 3eb798e8-7f7d-4dbf-9c8b-d8509b011bcf
+    InputPortName: In
   m_Blackboard:
     m_Variables:
     - rid: 7685950460498878627
     - rid: 1756203194680606801
     - rid: 1756203194680606809
     - rid: 1756203194680606810
-  ViewTransform: {x: 522, y: -312, z: 1}
+    - rid: 5852939471150907591
+  ViewTransform: {x: 186, y: 110, z: 0.7561437}
   BlackboardPosition: {x: 10, y: 60}
   references:
     version: 2
@@ -688,6 +722,14 @@ MonoBehaviour:
         m_Exposed: 1
         m_Shared: 0
         m_Value: {fileID: 21300000, guid: 5777391bd8ed8a04d981d1ed394ab768, type: 3}
+    - rid: 5852939471150907591
+      type: {class: BlackboardVariableGameObject, ns: Feazeyu.RPGSystems.Dialogue, asm: Feazeyu.RPGSystems.Dialogue}
+      data:
+        m_Name: Prefab
+        m_Guid: 0ef30034-aaf8-4bff-8da0-3e4a88de0608
+        m_Exposed: 1
+        m_Shared: 0
+        m_Value: {fileID: 817262420744814111, guid: 0b2f104811d2db74085294450ecd0de1, type: 3}
     - rid: 7685950460498878627
       type: {class: BlackboardVariableGameObject, ns: Feazeyu.RPGSystems.Dialogue, asm: Feazeyu.RPGSystems.Dialogue}
       data:

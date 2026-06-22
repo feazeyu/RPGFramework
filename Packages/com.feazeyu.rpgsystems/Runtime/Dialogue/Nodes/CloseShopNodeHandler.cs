@@ -28,7 +28,7 @@ namespace Feazeyu.RPGSystems.Dialogue
                 var v = ctx.RuntimeBlackboard.GetVariable(field.LinkedVariableGuid);
                 var go = v?.ObjectValue as GameObject;
                 if (go != null)
-                    CloseShopOn(go, ctx.ResolveString(node, "Mode"));
+                    CloseShopOn(go);
                 else
                     Debug.LogWarning("[CloseShop] Target blackboard variable held no GameObject.");
             }
@@ -41,18 +41,11 @@ namespace Feazeyu.RPGSystems.Dialogue
             yield break;
         }
 
-        private static void CloseShopOn(GameObject go, string mode)
+        private static void CloseShopOn(GameObject go)
         {
-            // An empty / "Both" mode closes whichever UIs are present; "Grid"/"List" restrict to one.
-            bool both = string.IsNullOrEmpty(mode)
-                        || mode.Equals("Both", System.StringComparison.OrdinalIgnoreCase);
-            bool closeGrid = both || mode.Equals("Grid", System.StringComparison.OrdinalIgnoreCase);
-            bool closeList = both || mode.Equals("List", System.StringComparison.OrdinalIgnoreCase);
 
-            // Search on the target and its children — handles both direct UI components
-            // and the case where the Shopkeep holds the UI references as children.
-            if (closeGrid) go.GetComponentInChildren<ShopGridUI>(true)?.CloseInventory();
-            if (closeList) go.GetComponentInChildren<ShopListUI>(true)?.CloseInventory();
+            go.GetComponentInChildren<ShopGridUI>(true)?.CloseInventory();
+            go.GetComponentInChildren<ShopListUI>(true)?.CloseInventory();
         }
     }
 }
