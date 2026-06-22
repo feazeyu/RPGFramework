@@ -152,9 +152,10 @@ namespace Feazeyu.RPGSystems.EditorTools
                 NodeRegistrySource,
                 ThemeStyleSheet,
                 GraphViewCssClass);
-            m_GraphView.style.flexGrow   = 1;
-            m_GraphView.OnNodeSelected   = OnNodeSelected;
-            m_GraphView.OnNodeDeselected = OnNodeDeselected;
+            m_GraphView.style.flexGrow      = 1;
+            m_GraphView.OnNodeSelected      = OnNodeSelected;
+            m_GraphView.OnNodeDeselected    = OnNodeDeselected;
+            m_GraphView.OnNodeFieldsChanged = OnCanvasNodeFieldsChanged;
             body.Add(m_GraphView);
 
             // Now that the graph view exists, wire its refresh hook into
@@ -239,6 +240,18 @@ namespace Feazeyu.RPGSystems.EditorTools
         private void OnNodeDeselected()
         {
             m_InspectorPanel.InspectAsset(m_Asset);
+        }
+
+        /// <summary>
+        /// Invoked when a node's field data is mutated from the canvas (e.g. a
+        /// blackboard variable linked/unlinked via drag-drop). Re-renders the
+        /// inspector if it's currently showing that node, so its linked-state
+        /// display stays in sync with the node card.
+        /// </summary>
+        private void OnCanvasNodeFieldsChanged(NodeData node)
+        {
+            if (m_InspectorPanel.CurrentNodeGuid == node.Guid)
+                m_InspectorPanel.RefreshCurrent();
         }
 
         /// <summary>

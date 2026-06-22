@@ -35,6 +35,11 @@ namespace Feazeyu.RPGSystems.EditorTools
         public Action<NodeData> OnNodeSelected;
         public Action           OnNodeDeselected;
 
+        // Fired when a node's field data is mutated from the canvas (e.g. a
+        // blackboard variable linked/unlinked via drag-drop). Lets the window
+        // refresh an open inspector showing that node.
+        public Action<NodeData> OnNodeFieldsChanged;
+
         // ── Internal state ───────────────────────────────────────────────────
 
         private GraphAsset m_Asset;
@@ -206,8 +211,9 @@ namespace Feazeyu.RPGSystems.EditorTools
         private GraphNodeView CreateNodeView(NodeData data)
         {
             var view = new GraphNodeView(data, m_Asset, m_NodeRegistry);
-            view.OnSelect     = () => OnNodeSelected?.Invoke(data);
-            view.OnDeselected = () => OnNodeDeselected?.Invoke();
+            view.OnSelect        = () => OnNodeSelected?.Invoke(data);
+            view.OnDeselected    = () => OnNodeDeselected?.Invoke();
+            view.OnFieldsChanged = () => OnNodeFieldsChanged?.Invoke(data);
             view.OnMoved      = pos =>
             {
                 if (m_Asset == null) return;

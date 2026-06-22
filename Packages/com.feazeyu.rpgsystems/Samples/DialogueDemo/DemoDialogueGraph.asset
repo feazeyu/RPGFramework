@@ -538,7 +538,7 @@ MonoBehaviour:
     NodeType: End
     DisplayName: End
     StoryText: 
-    Position: {x: 2416, y: 831}
+    Position: {x: 2430, y: 831}
     Size: {x: 0, y: 0}
     Ports:
     - PortName: In
@@ -693,7 +693,7 @@ MonoBehaviour:
     - rid: 1756203194680606809
     - rid: 1756203194680606810
     - rid: 5852939471150907591
-  ViewTransform: {x: 186, y: 110, z: 0.7561437}
+  ViewTransform: {x: -1265, y: -433, z: 1}
   BlackboardPosition: {x: 10, y: 60}
   references:
     version: 2

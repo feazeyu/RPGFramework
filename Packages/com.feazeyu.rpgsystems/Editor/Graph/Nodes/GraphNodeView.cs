@@ -34,6 +34,10 @@ namespace Feazeyu.RPGSystems.EditorTools
         public Action          OnSelect;
         public Action          OnDeselected;
         public Action<Vector2> OnMoved;
+        // Fired when the node's field data changes from the canvas (e.g. a
+        // blackboard variable linked/unlinked via drag-drop or the link dot),
+        // so an open inspector showing this node can re-render.
+        public Action          OnFieldsChanged;
 
         // ── Data ─────────────────────────────────────────────────────────────
 
@@ -46,7 +50,7 @@ namespace Feazeyu.RPGSystems.EditorTools
 
         // ── Construction ─────────────────────────────────────────────────────
 
-        public GraphNodeView(
+        public  GraphNodeView(
             NodeData data,
             GraphAsset asset,
             IReadOnlyDictionary<string, NodeInfo> nodeRegistry)
@@ -318,76 +322,87 @@ namespace Feazeyu.RPGSystems.EditorTools
             nameLabel.AddToClassList("node-field-name");
             row.Add(nameLabel);
 
+            row.Add(BuildFieldValue(field));
+            WireFieldLinking(row, field);
+
+            return row;
+        }
+
+        /// <summary>
+        /// Picks the value control for a field: a read-only label when linked to a
+        /// blackboard variable, an operator/choice dropdown for enumerated fields,
+        /// a type-appropriate inline control for typed "Value" fields, or a plain
+        /// text field otherwise.
+        /// </summary>
+        private VisualElement BuildFieldValue(FieldData field)
+        {
             if (!string.IsNullOrEmpty(field.LinkedVariableGuid))
             {
                 var bbVar = m_Asset.Blackboard.GetVariable(field.LinkedVariableGuid);
                 var linkedLabel = new Label("⟵ " + (bbVar?.Name ?? "?"));
                 linkedLabel.AddToClassList("node-field-linked");
-                row.Add(linkedLabel);
+                return linkedLabel;
             }
-            else if (IsOperatorField(field))
-            {
-                var ops     = ConditionalOperators;
-                var current = ops.Contains(field.InlineValue) ? field.InlineValue : ops[0];
-                var dropdown = new DropdownField(ops, current);
-                dropdown.AddToClassList("node-field-value");
-                dropdown.RegisterValueChangedCallback(evt =>
-                {
-                    field.InlineValue = evt.newValue;
-                    EditorUtilityHelper.SetDirty(m_Asset);
-                });
-                row.Add(dropdown);
-            }
+
+            VisualElement value;
+            if (IsOperatorField(field))
+                value = BuildDropdown(field, ConditionalOperators);
             else if (TryGetChoiceOptions(Data, field, out var choices))
-            {
-                var current = choices.Contains(field.InlineValue) ? field.InlineValue : choices[0];
-                var dropdown = new DropdownField(choices, current);
-                dropdown.AddToClassList("node-field-value");
-                dropdown.RegisterValueChangedCallback(evt =>
-                {
-                    field.InlineValue = evt.newValue;
-                    EditorUtilityHelper.SetDirty(m_Asset);
-                });
-                row.Add(dropdown);
-            }
+                value = BuildDropdown(field, choices);
+            else if (IsTypedValueField(Data, field))
+                value = BuildTypedInlineControl(field, GetLinkedVariableType(Data, m_Asset),
+                    () => EditorUtilityHelper.SetDirty(m_Asset));
             else
             {
-                VisualElement input;
-                if (IsTypedValueField(Data, field))
+                var tf = new TextField { value = field.InlineValue ?? "" };
+                tf.RegisterValueChangedCallback(evt =>
                 {
-                    var targetType = GetLinkedVariableType(Data, m_Asset);
-                    input = BuildTypedInlineControl(field, targetType,
-                        () => EditorUtilityHelper.SetDirty(m_Asset));
-                }
-                else
-                {
-                    var tf = new TextField { value = field.InlineValue ?? "" };
-                    tf.RegisterValueChangedCallback(evt =>
-                    {
-                        field.InlineValue = evt.newValue;
-                        EditorUtilityHelper.SetDirty(m_Asset);
-                    });
-                    input = tf;
-                }
-                input.AddToClassList("node-field-value");
-                row.Add(input);
+                    field.InlineValue = evt.newValue;
+                    EditorUtilityHelper.SetDirty(m_Asset);
+                });
+                value = tf;
             }
+
+            value.AddToClassList("node-field-value");
+            return value;
+        }
+
+        /// <summary>Dropdown over a fixed option set, defaulting to the first when the stored value is unknown.</summary>
+        private DropdownField BuildDropdown(FieldData field, List<string> options)
+        {
+            var current = options.Contains(field.InlineValue) ? field.InlineValue : options[0];
+            var dropdown = new DropdownField(options, current);
+            dropdown.RegisterValueChangedCallback(evt =>
+            {
+                field.InlineValue = evt.newValue;
+                EditorUtilityHelper.SetDirty(m_Asset);
+            });
+            return dropdown;
+        }
+
+        /// <summary>
+        /// Adds the link indicator dot and the blackboard drag-and-drop behaviour
+        /// shared by every field row: click the dot to unlink, drop a variable to link.
+        /// </summary>
+        private void WireFieldLinking(VisualElement row, FieldData field)
+        {
+            bool linked = !string.IsNullOrEmpty(field.LinkedVariableGuid);
 
             var dot = new VisualElement();
             dot.AddToClassList("node-field-link-dot");
-            if (!string.IsNullOrEmpty(field.LinkedVariableGuid))
-                dot.AddToClassList("linked");
+            if (linked) dot.AddToClassList("linked");
+            dot.tooltip = linked
+                ? "Linked — click to unlink"
+                : "Drag a Blackboard variable here to link";
             row.Add(dot);
 
-            dot.tooltip = string.IsNullOrEmpty(field.LinkedVariableGuid)
-                ? "Drag a Blackboard variable here to link"
-                : "Linked — click to unlink";
             dot.RegisterCallback<ClickEvent>(evt =>
             {
                 if (string.IsNullOrEmpty(field.LinkedVariableGuid)) return;
                 field.LinkedVariableGuid = null;
                 EditorUtilityHelper.SetDirty(m_Asset);
                 Refresh();
+                OnFieldsChanged?.Invoke();
                 evt.StopPropagation();
             });
 
@@ -416,11 +431,10 @@ namespace Feazeyu.RPGSystems.EditorTools
                 field.LinkedVariableGuid = guid;
                 EditorUtilityHelper.SetDirty(m_Asset);
                 Refresh();
+                OnFieldsChanged?.Invoke();
                 evt.StopPropagation();
             });
             row.RegisterCallback<DragExitedEvent>(_ => row.RemoveFromClassList("drag-over"));
-
-            return row;
         }
 
         // ── Operator field helpers ───────────────────────────────────────────
@@ -489,80 +503,18 @@ namespace Feazeyu.RPGSystems.EditorTools
             FieldData field, Type type, Action onChanged)
         {
             if (type == typeof(bool))
-            {
-                bool.TryParse(field.InlineValue, out bool v);
-                var ctrl = new Toggle { value = v };
-                ctrl.RegisterValueChangedCallback(evt =>
-                {
-                    field.InlineValue = evt.newValue.ToString();
-                    onChanged?.Invoke();
-                });
-                return ctrl;
-            }
+                return Bind(new Toggle(),       Inline.Bool(field.InlineValue),  Inline.Str, field, onChanged);
             if (type == typeof(int))
-            {
-                int.TryParse(field.InlineValue, out int v);
-                var ctrl = new IntegerField { value = v };
-                ctrl.RegisterValueChangedCallback(evt =>
-                {
-                    field.InlineValue = evt.newValue.ToString(CultureInfo.InvariantCulture);
-                    onChanged?.Invoke();
-                });
-                return ctrl;
-            }
+                return Bind(new IntegerField(), Inline.Int(field.InlineValue),   Inline.Str, field, onChanged);
             if (type == typeof(float))
-            {
-                float.TryParse(field.InlineValue, NumberStyles.Float, CultureInfo.InvariantCulture, out float v);
-                var ctrl = new FloatField { value = v };
-                ctrl.RegisterValueChangedCallback(evt =>
-                {
-                    field.InlineValue = evt.newValue.ToString(CultureInfo.InvariantCulture);
-                    onChanged?.Invoke();
-                });
-                return ctrl;
-            }
+                return Bind(new FloatField(),   Inline.Float(field.InlineValue), Inline.Str, field, onChanged);
             if (type == typeof(Vector2))
-            {
-                var parts = (field.InlineValue ?? "").Split(',');
-                float.TryParse(parts.Length > 0 ? parts[0].Trim() : "", NumberStyles.Float, CultureInfo.InvariantCulture, out float x);
-                float.TryParse(parts.Length > 1 ? parts[1].Trim() : "", NumberStyles.Float, CultureInfo.InvariantCulture, out float y);
-                var ctrl = new Vector2Field { value = new Vector2(x, y) };
-                ctrl.RegisterValueChangedCallback(evt =>
-                {
-                    field.InlineValue = evt.newValue.x.ToString(CultureInfo.InvariantCulture)
-                                      + "," + evt.newValue.y.ToString(CultureInfo.InvariantCulture);
-                    onChanged?.Invoke();
-                });
-                return ctrl;
-            }
+                return Bind(new Vector2Field(), Inline.Vec2(field.InlineValue),  Inline.Str, field, onChanged);
             if (type == typeof(Vector3))
-            {
-                var parts = (field.InlineValue ?? "").Split(',');
-                float.TryParse(parts.Length > 0 ? parts[0].Trim() : "", NumberStyles.Float, CultureInfo.InvariantCulture, out float x);
-                float.TryParse(parts.Length > 1 ? parts[1].Trim() : "", NumberStyles.Float, CultureInfo.InvariantCulture, out float y);
-                float.TryParse(parts.Length > 2 ? parts[2].Trim() : "", NumberStyles.Float, CultureInfo.InvariantCulture, out float z);
-                var ctrl = new Vector3Field { value = new Vector3(x, y, z) };
-                ctrl.RegisterValueChangedCallback(evt =>
-                {
-                    field.InlineValue = evt.newValue.x.ToString(CultureInfo.InvariantCulture)
-                                      + "," + evt.newValue.y.ToString(CultureInfo.InvariantCulture)
-                                      + "," + evt.newValue.z.ToString(CultureInfo.InvariantCulture);
-                    onChanged?.Invoke();
-                });
-                return ctrl;
-            }
+                return Bind(new Vector3Field(), Inline.Vec3(field.InlineValue),  Inline.Str, field, onChanged);
             if (type == typeof(Color))
-            {
-                if (!ColorUtility.TryParseHtmlString(field.InlineValue ?? "", out Color c))
-                    c = Color.white;
-                var ctrl = new ColorField { value = c };
-                ctrl.RegisterValueChangedCallback(evt =>
-                {
-                    field.InlineValue = "#" + ColorUtility.ToHtmlStringRGBA(evt.newValue);
-                    onChanged?.Invoke();
-                });
-                return ctrl;
-            }
+                return Bind(new ColorField(),   Inline.Col(field.InlineValue),   Inline.Str, field, onChanged);
+
             if (type != null && (type == typeof(GameObject) || type == typeof(Transform)
                 || type == typeof(Sprite) || type == typeof(AudioClip)))
             {
@@ -570,14 +522,64 @@ namespace Feazeyu.RPGSystems.EditorTools
                 hint.AddToClassList("node-field-hint");
                 return hint;
             }
+
             // string / unknown / null → default TextField
-            var tf = new TextField { value = field.InlineValue ?? "" };
-            tf.RegisterValueChangedCallback(evt =>
+            return Bind(new TextField(), field.InlineValue ?? "", s => s, field, onChanged);
+        }
+
+        /// <summary>
+        /// Seeds a typed UIElements control with <paramref name="initial"/> and writes the
+        /// serialized form back to <see cref="FieldData.InlineValue"/> on every change.
+        /// Removes the repeated parse→create→callback boilerplate across inline controls.
+        /// </summary>
+        private static TCtrl Bind<TCtrl, TVal>(
+            TCtrl ctrl, TVal initial, Func<TVal, string> serialize,
+            FieldData field, Action onChanged)
+            where TCtrl : VisualElement, INotifyValueChanged<TVal>
+        {
+            ctrl.SetValueWithoutNotify(initial);
+            ctrl.RegisterValueChangedCallback(evt =>
             {
-                field.InlineValue = evt.newValue;
+                field.InlineValue = serialize(evt.newValue);
                 onChanged?.Invoke();
             });
-            return tf;
+            return ctrl;
+        }
+
+        /// <summary>
+        /// Invariant-culture conversion between <see cref="FieldData.InlineValue"/> (a single
+        /// serialized string) and the typed values its inline controls expect. Centralised here
+        /// so the culture handling lives in one place rather than per control branch.
+        /// </summary>
+        private static class Inline
+        {
+            private static readonly CultureInfo Inv = CultureInfo.InvariantCulture;
+
+            public static bool  Bool(string s)  { bool.TryParse(s, out var v); return v; }
+            public static int   Int(string s)   { int.TryParse(s, out var v); return v; }
+            public static float Float(string s) { float.TryParse(s, NumberStyles.Float, Inv, out var v); return v; }
+            public static Vector2 Vec2(string s) { var p = Split(s, 2); return new Vector2(Float(p[0]), Float(p[1])); }
+            public static Vector3 Vec3(string s) { var p = Split(s, 3); return new Vector3(Float(p[0]), Float(p[1]), Float(p[2])); }
+            public static Color Col(string s)
+                => ColorUtility.TryParseHtmlString(s ?? "", out var c) ? c : UnityEngine.Color.white;
+
+            public static string Str(bool v)    => v.ToString();
+            public static string Str(int v)     => v.ToString(Inv);
+            public static string Str(float v)   => v.ToString(Inv);
+            public static string Str(Vector2 v) => $"{v.x.ToString(Inv)},{v.y.ToString(Inv)}";
+            public static string Str(Vector3 v) => $"{v.x.ToString(Inv)},{v.y.ToString(Inv)},{v.z.ToString(Inv)}";
+            public static string Str(Color v)   => "#" + ColorUtility.ToHtmlStringRGBA(v);
+
+            // Splits the comma-separated value into exactly <paramref name="count"/> trimmed
+            // components, padding with empty strings so callers can index without bounds checks.
+            private static string[] Split(string s, int count)
+            {
+                var src = (s ?? "").Split(',');
+                var outp = new string[count];
+                for (int i = 0; i < count; i++)
+                    outp[i] = i < src.Length ? src[i].Trim() : "";
+                return outp;
+            }
         }
 
         // ── Public API ───────────────────────────────────────────────────────
