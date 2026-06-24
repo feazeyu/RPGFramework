@@ -581,11 +581,6 @@ MonoBehaviour:
     OutputPortName: Enough
     InputNodeGuid: 4297622f-1d43-495f-aa96-b9319ceeb568
     InputPortName: In
-  - Guid: 73afedb3-2216-454c-b564-42f88a75e449
-    OutputNodeGuid: 90d6bce9-4a1a-490d-b231-96514a52862e
-    OutputPortName: NotEnough
-    InputNodeGuid: b7ed571d-ea84-4254-862f-d1bfb6472ca8
-    InputPortName: In
   - Guid: 5218030b-2c72-4caf-86c9-06305b497657
     OutputNodeGuid: 4297622f-1d43-495f-aa96-b9319ceeb568
     OutputPortName: Success
@@ -686,6 +681,11 @@ MonoBehaviour:
     OutputPortName: Out
     InputNodeGuid: 3eb798e8-7f7d-4dbf-9c8b-d8509b011bcf
     InputPortName: In
+  - Guid: 64573b5a-a208-412a-ae88-f46b3464d99b
+    OutputNodeGuid: 90d6bce9-4a1a-490d-b231-96514a52862e
+    OutputPortName: NotEnough
+    InputNodeGuid: b7ed571d-ea84-4254-862f-d1bfb6472ca8
+    InputPortName: In
   m_Blackboard:
     m_Variables:
     - rid: 7685950460498878627
@@ -693,7 +693,8 @@ MonoBehaviour:
     - rid: 1756203194680606809
     - rid: 1756203194680606810
     - rid: 5852939471150907591
-  ViewTransform: {x: -1265, y: -433, z: 1}
+    - rid: 5852939497342238808
+  ViewTransform: {x: -467, y: -47, z: 1}
   BlackboardPosition: {x: 10, y: 60}
   references:
     version: 2
@@ -730,6 +731,14 @@ MonoBehaviour:
         m_Exposed: 1
         m_Shared: 0
         m_Value: {fileID: 817262420744814111, guid: 0b2f104811d2db74085294450ecd0de1, type: 3}
+    - rid: 5852939497342238808
+      type: {class: BlackboardVariableColor, ns: Feazeyu.RPGSystems.Dialogue, asm: Feazeyu.RPGSystems.Dialogue}
+      data:
+        m_Name: Color
+        m_Guid: 30a70499-6782-43ea-9abe-a58767c1db25
+        m_Exposed: 1
+        m_Shared: 0
+        m_Value: {r: 0, g: 0, b: 0, a: 0}
     - rid: 7685950460498878627
       type: {class: BlackboardVariableGameObject, ns: Feazeyu.RPGSystems.Dialogue, asm: Feazeyu.RPGSystems.Dialogue}
       data:

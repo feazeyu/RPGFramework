@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
@@ -135,39 +136,44 @@ namespace Feazeyu.RPGSystems.EditorTools
         private void BuildPorts()
         {
             foreach (var portData in Data.Ports)
+                AddPort(portData);
+        }
+
+        /// <summary>Instantiates a single port, registers it in <see cref="m_Ports"/>, and appends it to its container.</summary>
+        private Port AddPort(PortData portData)
+        {
+            var dir      = portData.Direction == PortDirection.Input ? Direction.Input : Direction.Output;
+            var capacity = portData.Capacity  == PortCapacity.Single ? Port.Capacity.Single : Port.Capacity.Multi;
+
+            // Horizontal orientation: inputs on the left edge of the
+            // card, outputs on the right. Unity's EdgeControl derives
+            // bezier tangents from the port orientation — horizontal
+            // tangents produce smooth left-to-right curves regardless
+            // of vertical offset between connected nodes. Vertical
+            // ports (what this used to be) produce a characteristic
+            // steep-ends / flat-middle S-curve whenever the two nodes
+            // have any horizontal offset, because the short vertical
+            // tangents don't reach far enough to keep the curve round.
+            var port = InstantiatePort(Orientation.Horizontal, dir, capacity, typeof(bool));
+            port.portName  = portData.PortName;
+            port.portColor = m_Info != null ? m_Info.AccentColor : Color.gray;
+            port.userData  = portData;
+
+            port.AddToClassList("dialogue-port");
+
+            if (dir == Direction.Input)
             {
-                var dir      = portData.Direction == PortDirection.Input ? Direction.Input : Direction.Output;
-                var capacity = portData.Capacity  == PortCapacity.Single ? Port.Capacity.Single : Port.Capacity.Multi;
-
-                // Horizontal orientation: inputs on the left edge of the
-                // card, outputs on the right. Unity's EdgeControl derives
-                // bezier tangents from the port orientation — horizontal
-                // tangents produce smooth left-to-right curves regardless
-                // of vertical offset between connected nodes. Vertical
-                // ports (what this used to be) produce a characteristic
-                // steep-ends / flat-middle S-curve whenever the two nodes
-                // have any horizontal offset, because the short vertical
-                // tangents don't reach far enough to keep the curve round.
-                var port = InstantiatePort(Orientation.Horizontal, dir, capacity, typeof(bool));
-                port.portName  = portData.PortName;
-                port.portColor = m_Info != null ? m_Info.AccentColor : Color.gray;
-                port.userData  = portData;
-
-                port.AddToClassList("dialogue-port");
-
-                if (dir == Direction.Input)
-                {
-                    port.AddToClassList("input-port");
-                    inputContainer.Add(port);
-                }
-                else
-                {
-                    port.AddToClassList("output-port");
-                    outputContainer.Add(port);
-                }
-
-                m_Ports[portData.PortName] = port;
+                port.AddToClassList("input-port");
+                inputContainer.Add(port);
             }
+            else
+            {
+                port.AddToClassList("output-port");
+                outputContainer.Add(port);
+            }
+
+            m_Ports[portData.PortName] = port;
+            return port;
         }
 
         private void BuildFields()
@@ -194,114 +200,50 @@ namespace Feazeyu.RPGSystems.EditorTools
         }
 
         /// <summary>
-        /// Rebuilds ports and fields in-place.
+        /// Rebuilds ports and fields in-place after the node's data changes
+        /// (e.g. a decorator added or removed an output port).
         ///
-        /// The tricky part: GraphView Edge elements hold direct references to Port
-        /// VisualElements. When we call outputContainer.Clear() those port objects are
-        /// detached from the hierarchy, so every edge that was connected to ANY port on
-        /// this node loses its visual anchor — not just the deleted one.
-        ///
-        /// Strategy:
-        ///   1. Before clearing, snapshot all edges connected to this node's outputs,
-        ///      keyed by port name.
-        ///   2. Identify which port names are being deleted; fully disconnect those edges.
-        ///   3. Clear and rebuild ports/fields.
-        ///   4. Re-connect surviving edges to their corresponding new port objects.
+        /// Ports are diffed against <see cref="NodeData.Ports"/> rather than cleared and
+        /// rebuilt wholesale. GraphView Edge elements hold direct references to Port
+        /// VisualElements, so a full <c>Clear()</c> would detach every port and strand the
+        /// edges anchored to them. By keeping surviving ports' VisualElement identity, their
+        /// edges stay connected with no bookkeeping: we only remove ports that disappeared
+        /// (deleting their edges) and instantiate ports that newly appeared, then reorder the
+        /// containers to match the authored order.
         /// </summary>
         private void RebuildPortsAndFields()
         {
             var graphView = GetFirstAncestorOfType<UnityEditor.Experimental.GraphView.GraphView>();
 
-            var survivingOut = new HashSet<string>();
-            var survivingIn  = new HashSet<string>();
-            foreach (var pd in Data.Ports)
+            var desired = new HashSet<string>(Data.Ports.Select(p => p.PortName));
+
+            // Remove ports that no longer exist, deleting any edges anchored to them.
+            foreach (var name in m_Ports.Keys.Where(n => !desired.Contains(n)).ToList())
             {
-                if (pd.Direction == PortDirection.Output) survivingOut.Add(pd.PortName);
-                else                                       survivingIn.Add(pd.PortName);
-            }
-
-            var outEdgesByPort = new Dictionary<string, List<UnityEditor.Experimental.GraphView.Edge>>();
-            var inEdgesByPort  = new Dictionary<string, List<UnityEditor.Experimental.GraphView.Edge>>();
-            var edgesToDelete  = new List<UnityEditor.Experimental.GraphView.Edge>();
-
-            if (graphView != null)
-            {
-                graphView.edges.ForEach(edge =>
-                {
-                    if (edge.output?.node == this)
-                    {
-                        var pName = edge.output.portName;
-                        if (survivingOut.Contains(pName))
-                        {
-                            if (!outEdgesByPort.ContainsKey(pName))
-                                outEdgesByPort[pName] = new List<UnityEditor.Experimental.GraphView.Edge>();
-                            outEdgesByPort[pName].Add(edge);
-                        }
-                        else
-                        {
-                            edgesToDelete.Add(edge);
-                        }
-                        return;
-                    }
-
-                    if (edge.input?.node == this)
-                    {
-                        var pName = edge.input.portName;
-                        if (survivingIn.Contains(pName))
-                        {
-                            if (!inEdgesByPort.ContainsKey(pName))
-                                inEdgesByPort[pName] = new List<UnityEditor.Experimental.GraphView.Edge>();
-                            inEdgesByPort[pName].Add(edge);
-                        }
-                        else
-                        {
-                            edgesToDelete.Add(edge);
-                        }
-                    }
-                });
-
-                foreach (var edge in edgesToDelete)
+                var port = m_Ports[name];
+                foreach (var edge in port.connections.ToList())
                 {
                     edge.output?.Disconnect(edge);
                     edge.input?.Disconnect(edge);
-                    graphView.RemoveElement(edge);
+                    graphView?.RemoveElement(edge);
                 }
-
-                foreach (var kvp in outEdgesByPort)
-                    foreach (var edge in kvp.Value)
-                        edge.output?.Disconnect(edge);
-
-                foreach (var kvp in inEdgesByPort)
-                    foreach (var edge in kvp.Value)
-                        edge.input?.Disconnect(edge);
+                port.RemoveFromHierarchy();
+                m_Ports.Remove(name);
             }
 
-            inputContainer.Clear();
-            outputContainer.Clear();
-            m_Ports.Clear();
-            BuildPorts();
+            // Instantiate ports that appeared since the last build.
+            foreach (var portData in Data.Ports)
+                if (!m_Ports.ContainsKey(portData.PortName))
+                    AddPort(portData);
 
-            if (graphView != null)
+            // Reorder each container to match the authored port order — a decorator may
+            // insert a port anywhere in the list, not just append. Re-adding an element that
+            // is already parented to the container simply moves it, leaving its edges intact.
+            foreach (var portData in Data.Ports)
             {
-                foreach (var kvp in outEdgesByPort)
-                {
-                    if (!m_Ports.TryGetValue(kvp.Key, out var newPort)) continue;
-                    foreach (var edge in kvp.Value)
-                    {
-                        edge.output = newPort;
-                        newPort.Connect(edge);
-                    }
-                }
-
-                foreach (var kvp in inEdgesByPort)
-                {
-                    if (!m_Ports.TryGetValue(kvp.Key, out var newPort)) continue;
-                    foreach (var edge in kvp.Value)
-                    {
-                        edge.input = newPort;
-                        newPort.Connect(edge);
-                    }
-                }
+                if (!m_Ports.TryGetValue(portData.PortName, out var port)) continue;
+                if (portData.Direction == PortDirection.Input) inputContainer.Add(port);
+                else                                            outputContainer.Add(port);
             }
 
             BuildFields();

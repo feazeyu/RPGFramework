@@ -25,7 +25,6 @@ namespace Feazeyu.RPGSystems.EditorTools
             ("Color",      new Color(0.98f, 0.60f, 0.80f)),
             ("Sprite",        new Color(0.80f, 0.78f, 0.29f)),
             ("AudioClip",     new Color(0.48f, 0.76f, 0.96f)),
-            ("DialogueGraph", new Color(0.18f, 0.62f, 0.48f)), // matches Run Subgraph accent
         };
 
         // ── State ─────────────────────────────────────────────────────────────
@@ -516,7 +515,6 @@ namespace Feazeyu.RPGSystems.EditorTools
                 "Color"      => new BlackboardVariableColor(),
                 "Sprite"        => new BlackboardVariableSprite(),
                 "AudioClip"     => new BlackboardVariableAudioClip(),
-                "DialogueGraph" => new BlackboardVariableDialogueGraph(),
                 _               => CreateExtensionOrDefault(typeName),
             };
 
@@ -566,7 +564,6 @@ namespace Feazeyu.RPGSystems.EditorTools
                 BlackboardVariableColor      _ => "Color",
                 BlackboardVariableSprite        _ => "Sprite",
                 BlackboardVariableAudioClip     _ => "AudioClip",
-                BlackboardVariableDialogueGraph _ => "DialogueGraph",
                 _                                 => null,
             };
             if (builtIn != null) return builtIn;

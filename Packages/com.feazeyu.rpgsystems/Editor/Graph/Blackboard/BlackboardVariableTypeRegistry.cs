@@ -23,10 +23,14 @@ namespace Feazeyu.RPGSystems.EditorTools
     /// });
     /// </code>
     ///
-    /// The built-in dialogue types (Boolean, Integer, Float, etc.)
+    /// The built-in primitive types (Boolean, Integer, Float, etc.)
     /// are not registered here — they live directly in
-    /// <see cref="BlackboardPanel"/>. The registry is checked after
-    /// the built-in list so built-ins always take precedence on
+    /// <see cref="BlackboardPanel"/>. Graph-specific reference types
+    /// (DialogueGraph, Quest, QuestGraph) register here from their own
+    /// systems (see <see cref="DialogueBlackboardTypeRegistrar"/> /
+    /// <see cref="QuestBlackboardTypeRegistrar"/>) so the panel stays
+    /// graph-system-agnostic. The registry is checked after the
+    /// built-in list so built-ins always take precedence on
     /// name/type collision.
     /// </summary>
     public static class BlackboardVariableTypeRegistry
