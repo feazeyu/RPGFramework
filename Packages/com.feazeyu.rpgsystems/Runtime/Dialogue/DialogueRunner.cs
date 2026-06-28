@@ -29,11 +29,14 @@ namespace Feazeyu.RPGSystems.Dialogue
     {
         // ── Dialogue events ───────────────────────────────────────────────────
 
+        // Initialised inline so they are non-null when a DialogueRunner is created
+        // at runtime via AddComponent (e.g. a quest's Run Dialogue node), where
+        // Unity does not deserialize serialized fields.
         [Header("Dialogue Events")]
-        public DialogueLineEvent OnDialogueLine;
-        public ChoicesEvent      OnChoicesPresented;
-        public VariableSetEvent  OnVariableSet;
-        public StringEvent       OnEventTriggered;
+        public DialogueLineEvent OnDialogueLine      = new();
+        public ChoicesEvent      OnChoicesPresented  = new();
+        public VariableSetEvent  OnVariableSet       = new();
+        public StringEvent       OnEventTriggered    = new();
 
         // ── State ─────────────────────────────────────────────────────────────
 
@@ -122,9 +125,9 @@ namespace Feazeyu.RPGSystems.Dialogue
             public IEnumerator Execute(NodeData node, GraphRunContext ctx)
             {
                 m_R.OnDialogueLine?.Invoke(
-                    ctx.ResolveString(node, "Speaker"),
-                    ctx.ResolveString(node, "Text"),
-                    ctx.ResolveSprite(node,  "Portrait"));
+                    ctx.ResolveText(node, "Speaker"),
+                    ctx.ResolveText(node, "Text"),
+                    ctx.ResolveSprite(node, "Portrait"));
 
                 m_R.m_WaitingForAdvance = true;
                 yield return new WaitUntil(() => !m_R.m_WaitingForAdvance);
@@ -150,7 +153,7 @@ namespace Feazeyu.RPGSystems.Dialogue
                     var nextNode = GetNodeOnOutputPort(node, port.PortName, ctx.Graph);
                     if (nextNode != null && !AllRequirementsMet(nextNode, ctx)) continue;
 
-                    var text = ctx.ResolveString(node, port.PortName + " Text");
+                    var text = ctx.ResolveText(node, port.PortName + " Text");
                     if (string.IsNullOrEmpty(text)) text = port.PortName;
                     m_R.m_Choices.Add((text, port.PortName));
                 }

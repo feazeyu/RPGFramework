@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -24,10 +25,17 @@ namespace QuestGraph.Runtime
     /// observes via
     /// <see cref="QuestChainRunner.NotifyExternalQuestCompleted"/>.
     ///
-    /// State lives on the ScriptableObject, so it persists across
-    /// scene loads in the editor and at runtime. Call
-    /// <see cref="Reset"/> in game-start logic if you want runs
-    /// to begin from a clean slate.
+    /// State lives on the ScriptableObject (it is the shared,
+    /// inspector-wired identity that both the chain runner and external
+    /// game code mutate, so it cannot be cloned per-runner the way a
+    /// <see cref="Blackboard"/> is). Because mutating a serialized asset
+    /// during play leaves the in-memory copy dirty after exiting play
+    /// mode, the runtime state (<see cref="m_State"/>) is reset to
+    /// <see cref="QuestState.NotStarted"/> automatically at the start of
+    /// every play session — see <see cref="ResetRuntimeStateOnPlay"/> and
+    /// <see cref="OnEnable"/> — so editor runs always begin from a clean
+    /// slate without any explicit game-start cleanup. <see cref="Reset"/>
+    /// remains available for manually re-arming a quest mid-session.
     /// </summary>
     [CreateAssetMenu(
         menuName = "RPGFramework/Quest/Simple Quest",
@@ -54,6 +62,36 @@ namespace QuestGraph.Runtime
         public bool       IsCompleted => m_State == QuestState.Completed;
         public bool       IsFailed    => m_State == QuestState.Failed;
         public bool       IsActive    => m_State == QuestState.Active;
+
+        // ── Runtime-state reset (editor play-session hygiene) ────────────────
+
+        // Every loaded QuestAsset registers here so its mutable runtime state
+        // can be wiped at the start of a play session. In a built player the
+        // asset reloads fresh from disk each launch, but in the editor the
+        // in-memory asset stays dirty after exiting play mode, leaking state
+        // into the next run. Mirrors SharedBlackboardStore's play-start reset.
+        private static readonly HashSet<QuestAsset> s_Live = new HashSet<QuestAsset>();
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        private static void ResetRuntimeStateOnPlay()
+        {
+            // Covers "Enter Play Mode without domain reload": OnEnable won't
+            // re-fire for already-loaded assets, but this hook still runs and
+            // the registry is already populated from the previous session.
+            foreach (var q in s_Live)
+                if (q != null) q.m_State = QuestState.NotStarted;
+        }
+
+        private void OnEnable()
+        {
+            s_Live.Add(this);
+            // Covers the default case (domain reload on play): OnEnable fires
+            // as the asset deserializes, clearing any state carried over from
+            // the previous play session before scenes/listeners load.
+            m_State = QuestState.NotStarted;
+        }
+
+        private void OnDisable() => s_Live.Remove(this);
 
         // ── Lifecycle ────────────────────────────────────────────────────────
 

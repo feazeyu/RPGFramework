@@ -1,0 +1,22 @@
+{
+    "name": "Feazeyu.RPGSystems.Samples.QuestDemo",
+    "rootNamespace": "QuestGraph.Demo",
+    "references": [
+        "Feazeyu.RPGSystems.Quest",
+        "Feazeyu.RPGSystems.Dialogue",
+        "Feazeyu.RPGSystems.Character",
+        "Feazeyu.RPGSystems.Inventory",
+        "Feazeyu.RPGSystems.Items",
+        "Feazeyu.RPGSystems.Core",
+        "Unity.TextMeshPro"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

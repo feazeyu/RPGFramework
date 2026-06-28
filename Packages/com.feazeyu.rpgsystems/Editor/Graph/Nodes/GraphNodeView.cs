@@ -273,8 +273,9 @@ namespace Feazeyu.RPGSystems.EditorTools
         /// <summary>
         /// Picks the value control for a field: a read-only label when linked to a
         /// blackboard variable, an operator/choice dropdown for enumerated fields,
-        /// a type-appropriate inline control for typed "Value" fields, or a plain
-        /// text field otherwise.
+        /// a type-appropriate inline control for typed "Value" fields and for any
+        /// field with a concrete value type (int/float/bool/Vector2/Vector3/Color),
+        /// or a plain text field otherwise (string / unknown).
         /// </summary>
         private VisualElement BuildFieldValue(FieldData field)
         {
@@ -293,6 +294,9 @@ namespace Feazeyu.RPGSystems.EditorTools
                 value = BuildDropdown(field, choices);
             else if (IsTypedValueField(Data, field))
                 value = BuildTypedInlineControl(field, GetLinkedVariableType(Data, m_Asset),
+                    () => EditorUtilityHelper.SetDirty(m_Asset));
+            else if (TryGetInlineValueType(field, out var inlineType))
+                value = BuildTypedInlineControl(field, inlineType,
                     () => EditorUtilityHelper.SetDirty(m_Asset));
             else
             {
@@ -413,15 +417,41 @@ namespace Feazeyu.RPGSystems.EditorTools
 
         /// <summary>
         /// True when <paramref name="field"/> is the "Value" field of a node whose value
-        /// is interpreted against a linked blackboard variable's type — SetVariable (the
-        /// assigned value) and Condition/Requirement (the right-hand side of the comparison).
-        /// These render a type-appropriate inline control instead of a raw text field.
+        /// is interpreted against a linked blackboard variable's type — i.e. any node that
+        /// pairs a "Variable" field with a "Value" field: SetVariable (the assigned value),
+        /// Condition/Requirement, and the Flag Gate (the right-hand side of the comparison).
+        /// These render a type-appropriate inline control, keyed off the linked variable's
+        /// type, instead of a raw text field. Detected structurally (presence of a sibling
+        /// "Variable" field) so it covers every such node without coupling this shared editor
+        /// to each graph system's node registry. Find Object's "Value" (no "Variable"
+        /// sibling) is correctly excluded and stays a plain text field.
         /// </summary>
         internal static bool IsTypedValueField(NodeData node, FieldData field)
             => field?.FieldName == "Value"
-               && (node?.NodeType == NodeRegistry.TypeSetVariable
-                || node?.NodeType == NodeRegistry.TypeCondition
-                || node?.NodeType == DialogueNodeRegistry.TypeRequirement);
+               && node?.Fields != null
+               && node.Fields.Exists(f => f.FieldName == "Variable");
+
+        /// <summary>
+        /// Maps a field's declared <see cref="FieldData.TypeName"/> to the concrete value
+        /// type whose inline control should edit it. Lets a single-typed field (an int
+        /// Count, a float Radius, a bool Optional, …) render a proper typed editor that
+        /// writes to <see cref="FieldData.InlineValue"/> instead of accepting an arbitrary
+        /// string. Returns false for string, object-reference, and unknown types, which
+        /// keep their existing rendering (text field / blackboard link).
+        /// </summary>
+        internal static bool TryGetInlineValueType(FieldData field, out Type type)
+        {
+            switch (field?.TypeName)
+            {
+                case "System.Boolean":      type = typeof(bool);    return true;
+                case "System.Int32":        type = typeof(int);     return true;
+                case "System.Single":       type = typeof(float);   return true;
+                case "UnityEngine.Vector2": type = typeof(Vector2); return true;
+                case "UnityEngine.Vector3": type = typeof(Vector3); return true;
+                case "UnityEngine.Color":   type = typeof(Color);   return true;
+                default:                    type = null;            return false;
+            }
+        }
 
         /// <summary>
         /// Returns the ValueType of the blackboard variable linked to the "Variable"
@@ -538,6 +568,24 @@ namespace Feazeyu.RPGSystems.EditorTools
             RebuildPortsAndFields();
             var titleLabel = titleContainer.Q<Label>(className: "node-header-title");
             if (titleLabel != null) titleLabel.text = Data.DisplayName;
+        }
+
+        /// <summary>
+        /// Re-runs the expand/port refresh once the node is attached to a panel.
+        ///
+        /// <see cref="BuildVisuals"/> calls <c>RefreshExpandedState</c>/<c>RefreshPorts</c>
+        /// from the constructor — before the node is parented to the canvas. When a graph
+        /// is populated during the window's <c>OnEnable</c> (opening or creating a graph),
+        /// that pre-attach refresh doesn't take, and the node card renders blank until the
+        /// first relayout. Selecting a node forced that relayout (hence "only renders when
+        /// highlighted"); this schedules it explicitly instead. The canvas calls this right
+        /// after <c>AddElement</c> so it fires on the next panel tick, once layout settles.
+        /// </summary>
+        internal void RefreshAfterAttach()
+        {
+            RefreshExpandedState();
+            RefreshPorts();
+            MarkDirtyRepaint();
         }
 
         // ── Selection ────────────────────────────────────────────────────────

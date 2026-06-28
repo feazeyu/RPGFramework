@@ -108,43 +108,26 @@ namespace QuestGraph {
     class QuestChainRunner {
         + Chain : QuestGraphAsset
         + AutoStart : bool
+        + MaxActiveQuests : int
         + IsStarted : bool
-        + ActiveRunner : QuestRunner
+        + ActiveQuestCount : int
+        + ActiveRunners : IReadOnlyCollection<QuestRunner>
         + OnAvailableQuestsChanged : ChainReadyEvent
         + OnQuestStarted : ChainQuestEvent
         + OnQuestCompleted : ChainQuestEvent
         + OnQuestFailed : ChainQuestFailedEvent
+        + OnQuestAborted : ChainQuestEvent
         + OnChainCompleted : UnityEvent
         + StartChain() : void
         + GetAvailableQuests() : List<QuestEntry>
         + GetAllEntries() : IEnumerable<QuestEntry>
+        + GetActiveRunner(nodeGuid : string) : QuestRunner
         + StartQuest(nodeGuid : string) : void
         + NotifyExternalQuestCompleted(nodeGuid : string) : void
         + NotifyExternalQuestFailed(nodeGuid : string, reason : string) : void
+        + AbortQuest(nodeGuid : string) : void
         + AbortActiveQuest() : void
     }
-
-    ' ── Objectives ─────────────────────────────────────────
-    abstract class QuestObjectiveBase {
-        + objectiveTitle : string
-        + questRunner : QuestRunner
-        + StartTracking(info : ObjectiveInfo) : void
-        + StopTracking() : void
-        + Complete() : void
-        + Fail() : void
-    }
-
-    class KillCountObjective {
-        + enemyTag : string
-        + requiredKills : int
-        + trackNewEnemies : bool
-        + StartTracking(info : ObjectiveInfo) : void
-        + StopTracking() : void
-    }
-
-    class CollectItemObjective
-    class DeliverItemObjective
-    class ReachLocationObjective
 
     ' ── Registry ───────────────────────────────────────────
     class QuestNodeRegistry <<static>> {
@@ -177,10 +160,6 @@ namespace QuestGraph {
 ' Inheritance
 QuestGraph.QuestRunner --|> "GraphRunner (Dialogue)"
 QuestGraph.QuestGraphAsset --|> "GraphAsset (Dialogue)"
-QuestGraph.KillCountObjective --|> QuestGraph.QuestObjectiveBase
-QuestGraph.CollectItemObjective --|> QuestGraph.QuestObjectiveBase
-QuestGraph.DeliverItemObjective --|> QuestGraph.QuestObjectiveBase
-QuestGraph.ReachLocationObjective --|> QuestGraph.QuestObjectiveBase
 
 ' Associations
 QuestGraph.QuestChainRunner --> QuestGraph.QuestGraphAsset
@@ -190,6 +169,5 @@ QuestGraph.QuestEntry --> QuestGraph.QuestGraphAsset
 QuestGraph.QuestEntry --> QuestGraph.QuestAsset
 QuestGraph.QuestAsset --> QuestGraph.QuestState
 QuestGraph.QuestGraphAsset --> QuestGraph.QuestKind
-QuestGraph.QuestObjectiveBase --> QuestGraph.QuestRunner
 
 @enduml

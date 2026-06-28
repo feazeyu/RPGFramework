@@ -197,6 +197,21 @@ namespace Feazeyu.RPGSystems.Inventory
         bool TryAddItem(int itemId, int count = 1) => false;
     }
     /// <summary>
+    /// Optional capability for an <see cref="IItemContainer"/> that announces
+    /// content changes. Lets observers (e.g. an Accumulate Item quest objective)
+    /// count items gained and lost exactly, instead of polling
+    /// <see cref="IItemContainer.CountItem"/>. Tracking both directions makes
+    /// "net acquired" robust: dropping then re-collecting nets to one count.
+    /// </summary>
+    public interface IItemCountNotifier
+    {
+        /// <summary>Raised after item(s) are added to the container: (itemId, count).</summary>
+        event System.Action<int, int> OnItemAdded;
+
+        /// <summary>Raised after item(s) are removed from the container: (itemId, count).</summary>
+        event System.Action<int, int> OnItemRemoved;
+    }
+    /// <summary>
     /// Represents a container that holds a single item.
     /// </summary>
     public interface ISingleItemContainer : IItemContainer

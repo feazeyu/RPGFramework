@@ -13,8 +13,20 @@ namespace Feazeyu.RPGSystems.Inventory
     /// Represents an inventory list that manages inventory slots and interacts with the UI generator.
     /// </summary>
     [Serializable]
-    public class InventoryList : MonoBehaviour, IUIPositionalItemContainer, IDropHandler
+    public class InventoryList : MonoBehaviour, IUIPositionalItemContainer, IDropHandler, IItemCountNotifier
     {
+        /// <summary>Raised after an item is added to the list: (itemId, count).</summary>
+        public event Action<int, int> OnItemAdded;
+
+        /// <summary>Raised after an item is removed from the list: (itemId, count).</summary>
+        public event Action<int, int> OnItemRemoved;
+
+        private void RaiseItemAdded(GameObject item)
+        {
+            var comp = item != null ? item.GetComponent<Item>() : null;
+            if (comp != null) OnItemAdded?.Invoke(comp.info.id, 1);
+        }
+
         /// <summary>
         /// Indicates whether slot capacity is enabled.
         /// </summary>
@@ -88,33 +100,39 @@ namespace Feazeyu.RPGSystems.Inventory
         public virtual bool PutItem(Vector2Int position, GameObject item)
         {
             contents ??= new();
+            bool added = false;
 
             // Try the hinted slot first (drag-drop targeting).
-            if (position.y >= 0 && position.y < contents.Count)
+            if (position.y >= 0 && position.y < contents.Count && contents[position.y].PutItem(item))
             {
-                if (contents[position.y].PutItem(item))
-                {
-                    RedrawContents();
-                    return true;
-                }
+                added = true;
             }
 
             // Scan all slots for any that will accept the item.
-            foreach (var slot in contents)
+            if (!added)
             {
-                if (slot.PutItem(item))
+                foreach (var slot in contents)
                 {
-                    RedrawContents();
-                    return true;
+                    if (slot.PutItem(item)) { added = true; break; }
                 }
             }
 
-            var newSlot = new StackableInventorySlot(item);
-            if (EnableSlotCapacity)
-                newSlot.stackSize = capacity;
-            contents.Add(newSlot);
-            RedrawContents();
-            return true;
+            // Otherwise take a new slot.
+            if (!added)
+            {
+                var newSlot = new StackableInventorySlot(item);
+                if (EnableSlotCapacity)
+                    newSlot.stackSize = capacity;
+                contents.Add(newSlot);
+                added = true;
+            }
+
+            if (added)
+            {
+                RedrawContents();
+                RaiseItemAdded(item);
+            }
+            return added;
         }
 
         public virtual int RemoveItem(Vector2Int position)
@@ -126,6 +144,7 @@ namespace Feazeyu.RPGSystems.Inventory
                 if (itemSlot.itemCount <= 0)
                     contents.Remove(itemSlot);
                 RedrawContents();
+                if (itemId >= 0) OnItemRemoved?.Invoke(itemId, 1);
                 return itemId;
             }
             return -1;
@@ -184,6 +203,7 @@ namespace Feazeyu.RPGSystems.Inventory
                 contents.Remove(s);
 
             RedrawContents();
+            OnItemRemoved?.Invoke(itemId, count);
             return true;
         }
 

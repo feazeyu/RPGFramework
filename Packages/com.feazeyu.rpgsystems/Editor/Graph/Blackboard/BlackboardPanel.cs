@@ -243,6 +243,18 @@ namespace Feazeyu.RPGSystems.EditorTools
                 }
             }, TrickleDown.NoTrickleDown);
 
+            // Right-click: copy / paste this variable's GUID. Pasting a GUID copied
+            // from another graph's variable makes the two resolve to the same
+            // SharedBlackboardStore entry at runtime (both must also be Shared).
+            row.AddManipulator(new ContextualMenuManipulator(evt =>
+            {
+                evt.menu.AppendAction("Copy GUID", _ => CopyGuid(variable));
+                evt.menu.AppendAction("Paste GUID", _ => PasteGuid(variable),
+                    a => System.Guid.TryParse((EditorGUIUtility.systemCopyBuffer ?? string.Empty).Trim(), out _)
+                        ? DropdownMenuAction.Status.Normal
+                        : DropdownMenuAction.Status.Disabled);
+            }));
+
             // Expand/collapse on click.
             row.RegisterCallback<ClickEvent>(_ =>
             {
@@ -527,6 +539,70 @@ namespace Feazeyu.RPGSystems.EditorTools
             m_SerializedAsset?.Update();
 
             m_AddForm.style.display = DisplayStyle.None;
+            RebuildList();
+        }
+
+        // ── GUID copy / paste ─────────────────────────────────────────────────
+
+        private void CopyGuid(BlackboardVariable variable)
+        {
+            if (variable != null) EditorGUIUtility.systemCopyBuffer = variable.Guid;
+        }
+
+        /// <summary>
+        /// Overwrites a variable's GUID with the one on the clipboard. Used to make
+        /// a variable in this graph share identity with a variable in another graph
+        /// (the runtime <see cref="SharedBlackboardStore"/> keys purely by GUID).
+        /// Re-points every node field linked to the old GUID so existing links
+        /// survive, and refuses to create a duplicate GUID within this blackboard.
+        /// </summary>
+        private void PasteGuid(BlackboardVariable variable)
+        {
+            if (m_Asset == null || variable == null) return;
+
+            var newGuid = (EditorGUIUtility.systemCopyBuffer ?? string.Empty).Trim();
+            if (!System.Guid.TryParse(newGuid, out _))
+            {
+                Debug.LogWarning($"[Blackboard] Clipboard text '{newGuid}' is not a valid GUID.");
+                return;
+            }
+
+            var oldGuid = variable.Guid;
+            if (newGuid == oldGuid) return;
+
+            // Two variables sharing a GUID in one blackboard would make GUID-based
+            // lookups ambiguous — refuse.
+            foreach (var v in m_Asset.Blackboard.Variables)
+                if (v != variable && v.Guid == newGuid)
+                {
+                    Debug.LogWarning(
+                        $"[Blackboard] Variable '{v.Name}' already uses GUID {newGuid}; aborting paste.");
+                    return;
+                }
+
+            Undo.RecordObject(m_Asset, "Set Blackboard Variable GUID");
+            variable.Guid = newGuid;
+
+            // Re-point every node field linked to the old GUID so links don't break.
+            var affectedNodeGuids = new HashSet<string>();
+            foreach (var node in m_Asset.Nodes)
+            {
+                if (node.Fields == null) continue;
+                foreach (var field in node.Fields)
+                    if (field.LinkedVariableGuid == oldGuid)
+                    {
+                        field.LinkedVariableGuid = newGuid;
+                        affectedNodeGuids.Add(node.Guid);
+                    }
+            }
+
+            if (m_ExpandedGuids.Remove(oldGuid)) m_ExpandedGuids.Add(newGuid);
+
+            EditorUtility.SetDirty(m_Asset);
+            BlackboardPropertyBridge.Invalidate(m_Asset);
+            m_SerializedAsset = BlackboardPropertyBridge.GetSerializedObject(m_Asset);
+
+            foreach (var guid in affectedNodeGuids) m_RefreshNodeView?.Invoke(guid);
             RebuildList();
         }
 

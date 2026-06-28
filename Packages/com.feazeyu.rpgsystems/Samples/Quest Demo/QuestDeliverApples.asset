@@ -1,0 +1,331 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e2b2521672df6c408cfa6ce09e9f76d, type: 3}
+  m_Name: QuestDeliverApples
+  m_EditorClassIdentifier: Feazeyu.RPGSystems.Quest::QuestGraph.Runtime.QuestGraphAsset
+  m_Nodes:
+  - Guid: dddddddd-0000-4000-8000-000000000001
+    NodeType: run_dialogue
+    DisplayName: Offer Quest
+    StoryText: 
+    Position: {x: -1480, y: 0}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Out
+      Direction: 1
+      Capacity: 1
+    Fields:
+    - FieldName: Graph
+      TypeName: Feazeyu.RPGSystems.Dialogue.DialogueGraphAsset
+      InlineValue: 
+      LinkedVariableGuid: d0109000-0000-4000-8000-000000000001
+  - Guid: dddddddd-0000-4000-8000-000000000002
+    NodeType: Condition
+    DisplayName: Accepted?
+    StoryText: 
+    Position: {x: -1126, y: 0}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: True
+      Direction: 1
+      Capacity: 1
+    - PortName: False
+      Direction: 1
+      Capacity: 1
+    Fields:
+    - FieldName: Variable
+      TypeName: System.String
+      InlineValue: 
+      LinkedVariableGuid: acce9700-0000-4000-8000-000000000001
+    - FieldName: Operator
+      TypeName: System.String
+      InlineValue: ==
+      LinkedVariableGuid: 
+    - FieldName: Value
+      TypeName: System.String
+      InlineValue: true
+      LinkedVariableGuid: 
+  - Guid: dddddddd-0000-4000-8000-000000000003
+    NodeType: End
+    DisplayName: Declined
+    StoryText: 
+    Position: {x: -693, y: 320}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    Fields: []
+  - Guid: 7fb5e7f1-5e29-4e9f-bca9-3c6d67b8dbcd
+    NodeType: Start
+    DisplayName: Start
+    StoryText: 
+    Position: {x: -1810, y: 23}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: Out
+      Direction: 1
+      Capacity: 1
+    Fields: []
+  - Guid: c69e44a9-d804-4493-a97d-125446aef4c8
+    NodeType: find_object
+    DisplayName: Find Inventory
+    StoryText: 
+    Position: {x: -410, y: 0}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Found
+      Direction: 1
+      Capacity: 1
+    - PortName: NotFound
+      Direction: 1
+      Capacity: 1
+    Fields:
+    - FieldName: Mode
+      TypeName: System.String
+      InlineValue: ByName
+      LinkedVariableGuid: 
+    - FieldName: Value
+      TypeName: System.String
+      InlineValue: PlayerInventory
+      LinkedVariableGuid: 
+    - FieldName: Target
+      TypeName: UnityEngine.GameObject
+      InlineValue: 
+      LinkedVariableGuid: 05fdf6b1-c274-40f3-a082-f778b66c6c4d
+  - Guid: cfcc56e8-1db9-47d6-9fa6-8cfcd7e8617d
+    NodeType: obj_deliver
+    DisplayName: Deliver Apples
+    StoryText: 
+    Position: {x: -109, y: -21}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Completed
+      Direction: 1
+      Capacity: 1
+    - PortName: Failed
+      Direction: 1
+      Capacity: 1
+    Fields:
+    - FieldName: Title
+      TypeName: System.String
+      InlineValue: Deliver 5 apples
+      LinkedVariableGuid: 
+    - FieldName: Description
+      TypeName: System.String
+      InlineValue: Hand 5 apples to the villager.
+      LinkedVariableGuid: 
+    - FieldName: ItemId
+      TypeName: System.Int32
+      InlineValue: 10
+      LinkedVariableGuid: 
+    - FieldName: Count
+      TypeName: System.Int32
+      InlineValue: 5
+      LinkedVariableGuid: 
+    - FieldName: NPC
+      TypeName: System.String
+      InlineValue: NPC
+      LinkedVariableGuid: 97b59492-7498-4760-bd7f-2ad888d25204
+    - FieldName: Inventory
+      TypeName: UnityEngine.GameObject
+      InlineValue: 
+      LinkedVariableGuid: 05fdf6b1-c274-40f3-a082-f778b66c6c4d
+    - FieldName: Optional
+      TypeName: System.Boolean
+      InlineValue: False
+      LinkedVariableGuid: 
+  - Guid: fc14df5e-9465-44cc-a9ca-3f81812dcbe0
+    NodeType: CompleteQuest
+    DisplayName: Complete Quest
+    StoryText: 
+    Position: {x: 260, y: -60}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    Fields: []
+  - Guid: 59bacd3e-403d-4773-8f80-13788c29e74f
+    NodeType: FailQuest
+    DisplayName: Fail Quest
+    StoryText: 
+    Position: {x: 308, y: 186}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    Fields:
+    - FieldName: Reason
+      TypeName: System.String
+      InlineValue: Delivery failed.
+      LinkedVariableGuid: 
+  - Guid: 3bbfc2c3-522a-422c-b3e4-ac56762630e4
+    NodeType: find_object
+    DisplayName: Find Object
+    StoryText: 
+    Position: {x: -714, y: 0}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Found
+      Direction: 1
+      Capacity: 0
+    - PortName: NotFound
+      Direction: 1
+      Capacity: 0
+    Fields:
+    - FieldName: Mode
+      TypeName: System.String
+      InlineValue: ByName
+      LinkedVariableGuid: 
+    - FieldName: Value
+      TypeName: System.String
+      InlineValue: NPC
+      LinkedVariableGuid: 
+    - FieldName: Target
+      TypeName: UnityEngine.GameObject
+      InlineValue: 
+      LinkedVariableGuid: 97b59492-7498-4760-bd7f-2ad888d25204
+  - Guid: 8e78278a-8b04-422b-a8b9-cdfdbcb56bad
+    NodeType: debug_log
+    DisplayName: Debug Log
+    StoryText: 
+    Position: {x: -185, y: 465}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Out
+      Direction: 1
+      Capacity: 0
+    Fields:
+    - FieldName: Message
+      TypeName: System.String
+      InlineValue: Inventory/Npc not found, failing quest
+      LinkedVariableGuid: 
+  m_Edges:
+  - Guid: 0f25b03a-b626-43ee-9753-ec78cda5dbe0
+    OutputNodeGuid: c69e44a9-d804-4493-a97d-125446aef4c8
+    OutputPortName: Found
+    InputNodeGuid: cfcc56e8-1db9-47d6-9fa6-8cfcd7e8617d
+    InputPortName: In
+  - Guid: 4685a441-6064-40ec-b47d-fb0b21a7fd42
+    OutputNodeGuid: cfcc56e8-1db9-47d6-9fa6-8cfcd7e8617d
+    OutputPortName: Completed
+    InputNodeGuid: fc14df5e-9465-44cc-a9ca-3f81812dcbe0
+    InputPortName: In
+  - Guid: 3e21f216-33ac-4e48-81d1-8bf8a867bc86
+    OutputNodeGuid: cfcc56e8-1db9-47d6-9fa6-8cfcd7e8617d
+    OutputPortName: Failed
+    InputNodeGuid: 59bacd3e-403d-4773-8f80-13788c29e74f
+    InputPortName: In
+  - Guid: 157f61c3-29f4-40cd-adf3-7e2b988ae0eb
+    OutputNodeGuid: 7fb5e7f1-5e29-4e9f-bca9-3c6d67b8dbcd
+    OutputPortName: Out
+    InputNodeGuid: dddddddd-0000-4000-8000-000000000001
+    InputPortName: In
+  - Guid: 33333333-d000-4000-8000-000000000001
+    OutputNodeGuid: dddddddd-0000-4000-8000-000000000001
+    OutputPortName: Out
+    InputNodeGuid: dddddddd-0000-4000-8000-000000000002
+    InputPortName: In
+  - Guid: 33333333-d000-4000-8000-000000000002
+    OutputNodeGuid: dddddddd-0000-4000-8000-000000000002
+    OutputPortName: True
+    InputNodeGuid: 3bbfc2c3-522a-422c-b3e4-ac56762630e4
+    InputPortName: In
+  - Guid: 33333333-d000-4000-8000-000000000003
+    OutputNodeGuid: dddddddd-0000-4000-8000-000000000002
+    OutputPortName: False
+    InputNodeGuid: dddddddd-0000-4000-8000-000000000003
+    InputPortName: In
+  - Guid: 633bca40-d9ae-4bf5-a69a-d2c4dfeeabc2
+    OutputNodeGuid: 3bbfc2c3-522a-422c-b3e4-ac56762630e4
+    OutputPortName: Found
+    InputNodeGuid: c69e44a9-d804-4493-a97d-125446aef4c8
+    InputPortName: In
+  - Guid: 69f50c98-f0a1-4205-bee7-926f2da518c8
+    OutputNodeGuid: c69e44a9-d804-4493-a97d-125446aef4c8
+    OutputPortName: NotFound
+    InputNodeGuid: 8e78278a-8b04-422b-a8b9-cdfdbcb56bad
+    InputPortName: In
+  - Guid: 45048f64-6e9e-419e-9c2a-c193e9848d47
+    OutputNodeGuid: 3bbfc2c3-522a-422c-b3e4-ac56762630e4
+    OutputPortName: NotFound
+    InputNodeGuid: 8e78278a-8b04-422b-a8b9-cdfdbcb56bad
+    InputPortName: In
+  - Guid: 320fc2d0-2a31-41bd-bbbf-425e0236d72c
+    OutputNodeGuid: 8e78278a-8b04-422b-a8b9-cdfdbcb56bad
+    OutputPortName: Out
+    InputNodeGuid: 59bacd3e-403d-4773-8f80-13788c29e74f
+    InputPortName: In
+  m_Blackboard:
+    m_Variables:
+    - rid: 5852939566913421393
+    - rid: 5852939566913421405
+    - rid: 1900000000000000010
+    - rid: 1900000000000000011
+  ViewTransform: {x: 666, y: 409, z: 1}
+  BlackboardPosition: {x: 10, y: 60}
+  m_Kind: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 1900000000000000010
+      type: {class: BlackboardVariableBool, ns: Feazeyu.RPGSystems.Dialogue, asm: Feazeyu.RPGSystems.Dialogue}
+      data:
+        m_Name: Accepted
+        m_Guid: acce9700-0000-4000-8000-000000000001
+        m_Exposed: 1
+        m_Shared: 1
+        m_Value: 0
+    - rid: 1900000000000000011
+      type: {class: BlackboardVariableDialogueGraph, ns: Feazeyu.RPGSystems.Dialogue, asm: Feazeyu.RPGSystems.Dialogue}
+      data:
+        m_Name: OfferDialogue
+        m_Guid: d0109000-0000-4000-8000-000000000001
+        m_Exposed: 1
+        m_Shared: 0
+        m_Value: {fileID: 11400000, guid: 0ffe5d1a10ba4e0a9b1c2d3e4f500001, type: 2}
+    - rid: 5852939566913421393
+      type: {class: BlackboardVariableGameObject, ns: Feazeyu.RPGSystems.Dialogue, asm: Feazeyu.RPGSystems.Dialogue}
+      data:
+        m_Name: Inventory
+        m_Guid: 05fdf6b1-c274-40f3-a082-f778b66c6c4d
+        m_Exposed: 1
+        m_Shared: 0
+        m_Value: {fileID: 0}
+    - rid: 5852939566913421405
+      type: {class: BlackboardVariableGameObject, ns: Feazeyu.RPGSystems.Dialogue, asm: Feazeyu.RPGSystems.Dialogue}
+      data:
+        m_Name: Npc
+        m_Guid: 97b59492-7498-4760-bd7f-2ad888d25204
+        m_Exposed: 1
+        m_Shared: 0
+        m_Value: {fileID: 0}

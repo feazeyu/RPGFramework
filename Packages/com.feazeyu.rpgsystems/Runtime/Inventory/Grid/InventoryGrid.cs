@@ -15,8 +15,18 @@ namespace Feazeyu.RPGSystems.Inventory
     /// Represents a grid-based inventory system that manages item placement, removal, and UI generation.
     /// </summary>
     [Serializable]
-    public class InventoryGrid : MonoBehaviour, IUIPositionalItemContainer
+    public class InventoryGrid : MonoBehaviour, IUIPositionalItemContainer, IItemCountNotifier
     {
+        /// <summary>Raised after an item is added to the grid: (itemId, count).</summary>
+        public event Action<int, int> OnItemAdded;
+
+        /// <summary>Raised after an item is removed from the grid: (itemId, count).</summary>
+        public event Action<int, int> OnItemRemoved;
+
+        private void RaiseItemAdded(int itemId) => OnItemAdded?.Invoke(itemId, 1);
+
+        private void RaiseItemRemoved(int itemId) => OnItemRemoved?.Invoke(itemId, 1);
+
         /// <summary>
         /// Called when the script instance is being loaded.
         /// Initializes the inventory UI contents.
@@ -197,7 +207,11 @@ namespace Feazeyu.RPGSystems.Inventory
 
             // A stack deeper than one item keeps its footprint; just take one off the top.
             if (cell is StackableInventorySlot stack && stack.WouldRemainAfterRemove)
-                return cell.RemoveItem();
+            {
+                int removedId = cell.RemoveItem();
+                if (removedId >= 0) RaiseItemRemoved(removedId);
+                return removedId;
+            }
 
             var item = cell.Item;
             var itemInfo = item.GetComponent<Item>().info;
@@ -215,7 +229,9 @@ namespace Feazeyu.RPGSystems.Inventory
             }
 
             // Remove the item from the anchor slot
-            return cell.RemoveItem();
+            int removed = cell.RemoveItem();
+            if (removed >= 0) RaiseItemRemoved(removed);
+            return removed;
         }
 
         /// <summary>
@@ -313,7 +329,10 @@ namespace Feazeyu.RPGSystems.Inventory
 
             // Prefer consolidating into an existing matching stack before taking a new cell.
             if (allowStacking && TryStackInto(itemComp.info.id, item))
+            {
+                RaiseItemAdded(itemComp.info.id);
                 return true;
+            }
 
             var anchor = itemComp.GetAnchorSlot();
             for (int y = 0; y < rows; y++)
@@ -324,6 +343,7 @@ namespace Feazeyu.RPGSystems.Inventory
                     if (IsPlacementValid(pos, itemComp.info, anchor)
                         && PutItemUnchecked(pos, item, itemComp.info, anchor))
                     {
+                        RaiseItemAdded(itemComp.info.id);
                         return true;
                     }
                 }

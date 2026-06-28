@@ -9,23 +9,18 @@ namespace QuestGraph.Nodes
     /// <summary>
     /// Handler for the Reach Location objective node (typeId = "obj_location").
     ///
-    /// <b>Normal mode</b> (Continuous = false):
-    ///   Waits until the player is within Radius of Target, then follows
-    ///   "Completed". Use this to gate the next objective behind arriving
-    ///   somewhere — connect Completed → next objective's In.
-    ///
-    /// <b>Continuous mode</b> (Continuous = true):
-    ///   Follows "Out" immediately and runs a background monitor.
-    ///   If the player leaves the area while the quest is still running,
-    ///   the quest is failed. Use this for "do X while staying in zone Y"
-    ///   by connecting Out → the primary objective node.
+    /// Waits until the player is within Radius of Target, then follows
+    /// "Completed". Use this to gate the next objective behind arriving
+    /// somewhere — connect Completed → next objective's In. For a
+    /// "do X while staying in zone Y" constraint, attach a Location Gate
+    /// to the guarded objective's In port instead.
     ///
     /// <b>Target resolution</b> (first match wins):
     ///   1. Blackboard variable of type Transform linked to the Target field.
     ///   2. Inline value treated as a scene object name (GameObject.Find).
     /// </summary>
     [QuestNode(QuestNodeRegistry.TypeObjLocation, "Reach Location", "Objectives",
-        "Enter a radius around a target. Continuous=true monitors in background.")]
+        "Enter a radius around a target, then follow Completed.")]
     public class ReachLocationObjectiveHandler : IGraphNodeHandler
     {
         public string NodeTypeId => QuestNodeRegistry.TypeObjLocation;
@@ -39,7 +34,6 @@ namespace QuestGraph.Nodes
             var title  = ctx.ResolveString(node, "Title");
             var desc   = ctx.ResolveString(node, "Description");
             float.TryParse(ctx.ResolveString(node, "Radius"), out float radius);
-            bool.TryParse(ctx.ResolveString(node, "Continuous"), out bool continuous);
             bool.TryParse(ctx.ResolveString(node, "Optional"),   out bool optional);
             if (radius <= 0f) radius = 2f;
 
@@ -57,15 +51,7 @@ namespace QuestGraph.Nodes
             // ── Find player ───────────────────────────────────────────────────
             var player = FindPlayer();
 
-            // ── Dispatch ──────────────────────────────────────────────────────
-            if (continuous)
-            {
-                runner.StartCoroutine(ContinuousMonitor(runner, info, player, target, radius));
-                ctx.Follow("Out");
-                yield break;
-            }
-
-            // Normal: wait until player enters the area
+            // Wait until player enters the area
             runner.RegisterObjective(info);
 
             while (runner.IsRunning)
@@ -80,29 +66,6 @@ namespace QuestGraph.Nodes
 
             runner.UnregisterObjective(node.Guid, outcome: true);
             ctx.Follow("Completed");
-        }
-
-        // ── Continuous background monitor ─────────────────────────────────────
-
-        private static IEnumerator ContinuousMonitor(
-            QuestRunner runner, ObjectiveInfo info,
-            Transform player, Transform target, float radius)
-        {
-            runner.RegisterObjective(info);
-
-            while (runner.IsRunning)
-            {
-                if (player == null || target == null ||
-                    Vector2.Distance(player.position, target.position) > radius)
-                {
-                    runner.UnregisterObjective(info.NodeGuid, outcome: false);
-                    runner.ForceFailQuest($"Left required area: {info.Title}");
-                    yield break;
-                }
-                yield return null;
-            }
-
-            runner.UnregisterObjective(info.NodeGuid, outcome: true);
         }
 
         // ── Helpers ───────────────────────────────────────────────────────────

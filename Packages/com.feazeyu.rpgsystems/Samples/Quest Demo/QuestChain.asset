@@ -1,0 +1,344 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e2b2521672df6c408cfa6ce09e9f76d, type: 3}
+  m_Name: QuestChain
+  m_EditorClassIdentifier: Feazeyu.RPGSystems.Quest::QuestGraph.Runtime.QuestGraphAsset
+  m_Nodes:
+  - Guid: 671f6837-ac45-4554-a721-5ed198c2a221
+    NodeType: RunSubgraph
+    DisplayName: Deliver
+    StoryText: 
+    Position: {x: -292, y: 14}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Out
+      Direction: 1
+      Capacity: 1
+    Fields:
+    - FieldName: Quest
+      TypeName: QuestGraph.Runtime.QuestReference
+      InlineValue: 
+      LinkedVariableGuid: d6b24104-c4ca-4594-9955-d153dd2f760a
+  - Guid: 5e1cc434-fb68-426e-98c0-8a089d5884b2
+    NodeType: RunSubgraph
+    DisplayName: Find
+    StoryText: 
+    Position: {x: 380, y: -4}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Out
+      Direction: 1
+      Capacity: 1
+    Fields:
+    - FieldName: Quest
+      TypeName: QuestGraph.Runtime.QuestReference
+      InlineValue: 
+      LinkedVariableGuid: 2ebef9a1-5feb-450c-9be1-ddb4ec3cc0cc
+  - Guid: 02bc7498-d3cc-46c4-bd76-2f67446b4369
+    NodeType: RunSubgraph
+    DisplayName: Final
+    StoryText: 
+    Position: {x: 1584, y: 4}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Out
+      Direction: 1
+      Capacity: 1
+    Fields:
+    - FieldName: Quest
+      TypeName: QuestGraph.Runtime.QuestReference
+      InlineValue: 
+      LinkedVariableGuid: 37011b76-a82a-4b8e-9701-0ed64f7c4d6e
+  - Guid: d31d2c0a-efc2-4651-bcf1-5d0823ee6a34
+    NodeType: Start
+    DisplayName: Start
+    StoryText: 
+    Position: {x: -983, y: 40}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: Out
+      Direction: 1
+      Capacity: 1
+    Fields: []
+  - Guid: 56859305-5936-409a-a3fd-b0727964deda
+    NodeType: End
+    DisplayName: End
+    StoryText: 
+    Position: {x: 1887, y: 4}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    Fields: []
+  - Guid: 5b49508c-94e2-46bc-8d2f-356f18744eb7
+    NodeType: SetVariable
+    DisplayName: Set Variable
+    StoryText: 
+    Position: {x: -666, y: 121}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Out
+      Direction: 1
+      Capacity: 0
+    Fields:
+    - FieldName: Variable
+      TypeName: System.String
+      InlineValue: 
+      LinkedVariableGuid: 216679bd-9a53-4f40-b097-5adc63c1ef4f
+    - FieldName: Value
+      TypeName: System.String
+      InlineValue: I need some apples, can you help?
+      LinkedVariableGuid: 
+  - Guid: c24b5f20-8cf2-4e6b-8bb2-fcfc8df5404b
+    NodeType: SetVariable
+    DisplayName: Set Variable
+    StoryText: 
+    Position: {x: -650, y: -98}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Out
+      Direction: 1
+      Capacity: 0
+    Fields:
+    - FieldName: Variable
+      TypeName: System.String
+      InlineValue: 
+      LinkedVariableGuid: 74d90298-bce3-408c-967e-b72705cfd194
+    - FieldName: Value
+      TypeName: System.String
+      InlineValue: Alright, get me 5 apples please.
+      LinkedVariableGuid: 
+  - Guid: 5e8c746d-6203-463c-9465-1b473f709f30
+    NodeType: SetVariable
+    DisplayName: Set Variable
+    StoryText: 
+    Position: {x: -31, y: -225}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Out
+      Direction: 1
+      Capacity: 0
+    Fields:
+    - FieldName: Variable
+      TypeName: System.String
+      InlineValue: 
+      LinkedVariableGuid: 74d90298-bce3-408c-967e-b72705cfd194
+    - FieldName: Value
+      TypeName: System.String
+      InlineValue: Alright, collect 5 of them, quickly!
+      LinkedVariableGuid: 
+  - Guid: cf1d21fd-6e0c-4119-93cd-48cfbe29cbba
+    NodeType: SetVariable
+    DisplayName: Set Variable
+    StoryText: 
+    Position: {x: -174, y: 193}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Out
+      Direction: 1
+      Capacity: 0
+    Fields:
+    - FieldName: Variable
+      TypeName: System.String
+      InlineValue: 
+      LinkedVariableGuid: 216679bd-9a53-4f40-b097-5adc63c1ef4f
+    - FieldName: Value
+      TypeName: System.String
+      InlineValue: Some apples have fallen to the ground nearby, can you collect
+        them before they rot? I'd hate to see them go to waste.
+      LinkedVariableGuid: 
+  - Guid: 3cc10b60-23f0-4c00-9117-e3141a8a9508
+    NodeType: SetVariable
+    DisplayName: Set Variable
+    StoryText: 
+    Position: {x: 686, y: 193}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Out
+      Direction: 1
+      Capacity: 0
+    Fields:
+    - FieldName: Variable
+      TypeName: System.String
+      InlineValue: 
+      LinkedVariableGuid: 216679bd-9a53-4f40-b097-5adc63c1ef4f
+    - FieldName: Value
+      TypeName: System.String
+      InlineValue: You see, I've left a fire rune in a chest nearby in the north,
+        could you fetch it and scorch the apples in the southwestern grove?
+      LinkedVariableGuid: 
+  - Guid: 40146760-2832-482b-9668-702542635732
+    NodeType: SetVariable
+    DisplayName: Set Variable
+    StoryText: 
+    Position: {x: 909, y: -221}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Out
+      Direction: 1
+      Capacity: 0
+    Fields:
+    - FieldName: Variable
+      TypeName: System.String
+      InlineValue: 
+      LinkedVariableGuid: 74d90298-bce3-408c-967e-b72705cfd194
+    - FieldName: Value
+      TypeName: System.String
+      InlineValue: Thank you!
+      LinkedVariableGuid: 
+  m_Edges:
+  - Guid: 45f58f6b-edae-49dc-8001-c28ae8d3e658
+    OutputNodeGuid: 02bc7498-d3cc-46c4-bd76-2f67446b4369
+    OutputPortName: Out
+    InputNodeGuid: 56859305-5936-409a-a3fd-b0727964deda
+    InputPortName: In
+  - Guid: 14b291c6-3e40-4ffd-a944-81cba1d4bf53
+    OutputNodeGuid: d31d2c0a-efc2-4651-bcf1-5d0823ee6a34
+    OutputPortName: Out
+    InputNodeGuid: 5b49508c-94e2-46bc-8d2f-356f18744eb7
+    InputPortName: In
+  - Guid: fec9017a-3e48-4d6a-9609-d2d68834b6f5
+    OutputNodeGuid: 5b49508c-94e2-46bc-8d2f-356f18744eb7
+    OutputPortName: Out
+    InputNodeGuid: 671f6837-ac45-4554-a721-5ed198c2a221
+    InputPortName: In
+  - Guid: 3e4c1b8d-afe7-4140-a1e5-36be148e76fc
+    OutputNodeGuid: d31d2c0a-efc2-4651-bcf1-5d0823ee6a34
+    OutputPortName: Out
+    InputNodeGuid: c24b5f20-8cf2-4e6b-8bb2-fcfc8df5404b
+    InputPortName: In
+  - Guid: c0b1b119-7d7d-413b-9693-d8faafac3273
+    OutputNodeGuid: c24b5f20-8cf2-4e6b-8bb2-fcfc8df5404b
+    OutputPortName: Out
+    InputNodeGuid: 671f6837-ac45-4554-a721-5ed198c2a221
+    InputPortName: In
+  - Guid: 1821aee0-222d-4269-ad89-53aa9b42d39b
+    OutputNodeGuid: 671f6837-ac45-4554-a721-5ed198c2a221
+    OutputPortName: Out
+    InputNodeGuid: 5e8c746d-6203-463c-9465-1b473f709f30
+    InputPortName: In
+  - Guid: 7f79dfce-ca2f-4c05-b876-78b68580eb4e
+    OutputNodeGuid: 671f6837-ac45-4554-a721-5ed198c2a221
+    OutputPortName: Out
+    InputNodeGuid: cf1d21fd-6e0c-4119-93cd-48cfbe29cbba
+    InputPortName: In
+  - Guid: a73761fa-42df-4f6e-bade-4e0bc704a3eb
+    OutputNodeGuid: 5e8c746d-6203-463c-9465-1b473f709f30
+    OutputPortName: Out
+    InputNodeGuid: 5e1cc434-fb68-426e-98c0-8a089d5884b2
+    InputPortName: In
+  - Guid: 2bb9949c-3130-4193-931c-5f366ecfa621
+    OutputNodeGuid: cf1d21fd-6e0c-4119-93cd-48cfbe29cbba
+    OutputPortName: Out
+    InputNodeGuid: 5e1cc434-fb68-426e-98c0-8a089d5884b2
+    InputPortName: In
+  - Guid: f22e0799-fff4-4617-8a22-c5235beda9c8
+    OutputNodeGuid: 5e1cc434-fb68-426e-98c0-8a089d5884b2
+    OutputPortName: Out
+    InputNodeGuid: 3cc10b60-23f0-4c00-9117-e3141a8a9508
+    InputPortName: In
+  - Guid: 2a538375-342c-4cf5-bbb0-cfd5dcfe9e9c
+    OutputNodeGuid: 3cc10b60-23f0-4c00-9117-e3141a8a9508
+    OutputPortName: Out
+    InputNodeGuid: 02bc7498-d3cc-46c4-bd76-2f67446b4369
+    InputPortName: In
+  - Guid: dc42f049-d38f-4304-a1c1-8b908d9a82a2
+    OutputNodeGuid: 5e1cc434-fb68-426e-98c0-8a089d5884b2
+    OutputPortName: Out
+    InputNodeGuid: 40146760-2832-482b-9668-702542635732
+    InputPortName: In
+  - Guid: 84756c76-2a1b-4676-a005-8ae5f8440990
+    OutputNodeGuid: 40146760-2832-482b-9668-702542635732
+    OutputPortName: Out
+    InputNodeGuid: 02bc7498-d3cc-46c4-bd76-2f67446b4369
+    InputPortName: In
+  m_Blackboard:
+    m_Variables:
+    - rid: 5852939566913421396
+    - rid: 5852939566913421397
+    - rid: 5852939566913421398
+    - rid: 5852939582843912283
+    - rid: 5852939582843912284
+  ViewTransform: {x: -457, y: 386, z: 1}
+  BlackboardPosition: {x: 10, y: 60}
+  m_Kind: 1
+  references:
+    version: 2
+    RefIds:
+    - rid: 5852939566913421396
+      type: {class: BlackboardVariableQuestGraph, ns: QuestGraph.Runtime, asm: Feazeyu.RPGSystems.Quest}
+      data:
+        m_Name: Quest1
+        m_Guid: d6b24104-c4ca-4594-9955-d153dd2f760a
+        m_Exposed: 1
+        m_Shared: 0
+        m_Value: {fileID: 11400000, guid: a575b08eb8feaed47acfff643accce88, type: 2}
+    - rid: 5852939566913421397
+      type: {class: BlackboardVariableQuestGraph, ns: QuestGraph.Runtime, asm: Feazeyu.RPGSystems.Quest}
+      data:
+        m_Name: Quest2
+        m_Guid: 2ebef9a1-5feb-450c-9be1-ddb4ec3cc0cc
+        m_Exposed: 1
+        m_Shared: 0
+        m_Value: {fileID: 11400000, guid: a530e115a5171db4682b0a569a1b0aa1, type: 2}
+    - rid: 5852939566913421398
+      type: {class: BlackboardVariableQuestGraph, ns: QuestGraph.Runtime, asm: Feazeyu.RPGSystems.Quest}
+      data:
+        m_Name: Quest3
+        m_Guid: 37011b76-a82a-4b8e-9701-0ed64f7c4d6e
+        m_Exposed: 1
+        m_Shared: 0
+        m_Value: {fileID: 11400000, guid: 95116d88cedc0264d91182d2b75fbff3, type: 2}
+    - rid: 5852939582843912283
+      type: {class: BlackboardVariableString, ns: Feazeyu.RPGSystems.Dialogue, asm: Feazeyu.RPGSystems.Dialogue}
+      data:
+        m_Name: QuestOffer
+        m_Guid: 216679bd-9a53-4f40-b097-5adc63c1ef4f
+        m_Exposed: 1
+        m_Shared: 1
+        m_Value: 
+    - rid: 5852939582843912284
+      type: {class: BlackboardVariableString, ns: Feazeyu.RPGSystems.Dialogue, asm: Feazeyu.RPGSystems.Dialogue}
+      data:
+        m_Name: QuestDescription
+        m_Guid: 74d90298-bce3-408c-967e-b72705cfd194
+        m_Exposed: 1
+        m_Shared: 1
+        m_Value: 

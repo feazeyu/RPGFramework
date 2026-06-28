@@ -1,0 +1,259 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c46074447551644d84d2cff096592b0, type: 3}
+  m_Name: QuestOfferDialogue
+  m_EditorClassIdentifier: 
+  m_Nodes:
+  - Guid: 11111111-0000-4000-8000-000000000001
+    NodeType: Start
+    DisplayName: Start
+    StoryText: 
+    Position: {x: -965, y: -10}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: Out
+      Direction: 1
+      Capacity: 1
+    Fields: []
+  - Guid: 11111111-0000-4000-8000-000000000002
+    NodeType: DialogueLine
+    DisplayName: Offer
+    StoryText: 
+    Position: {x: -667, y: -10}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Out
+      Direction: 1
+      Capacity: 1
+    Fields:
+    - FieldName: Speaker
+      TypeName: System.String
+      InlineValue: Villager
+      LinkedVariableGuid: 
+    - FieldName: Text
+      TypeName: System.String
+      InlineValue: 
+      LinkedVariableGuid: 216679bd-9a53-4f40-b097-5adc63c1ef4f
+    - FieldName: Portrait
+      TypeName: UnityEngine.Sprite
+      InlineValue: 
+      LinkedVariableGuid: 
+  - Guid: 11111111-0000-4000-8000-000000000003
+    NodeType: ChoiceBranch
+    DisplayName: Accept?
+    StoryText: 
+    Position: {x: -121, y: -10}
+    Size: {x: 280, y: 200}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Choice 1
+      Direction: 1
+      Capacity: 1
+    - PortName: Choice 2
+      Direction: 1
+      Capacity: 1
+    Fields:
+    - FieldName: Choice 1 Text
+      TypeName: System.String
+      InlineValue: Accept the quest
+      LinkedVariableGuid: 
+    - FieldName: Choice 2 Text
+      TypeName: System.String
+      InlineValue: Not right now
+      LinkedVariableGuid: 
+  - Guid: 11111111-0000-4000-8000-000000000004
+    NodeType: SetVariable
+    DisplayName: Set Accepted
+    StoryText: 
+    Position: {x: 320, y: -80}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Out
+      Direction: 1
+      Capacity: 1
+    Fields:
+    - FieldName: Variable
+      TypeName: System.String
+      InlineValue: 
+      LinkedVariableGuid: acce9700-0000-4000-8000-000000000001
+    - FieldName: Value
+      TypeName: System.String
+      InlineValue: true
+      LinkedVariableGuid: 
+  - Guid: 11111111-0000-4000-8000-000000000005
+    NodeType: SetVariable
+    DisplayName: Clear Accepted
+    StoryText: 
+    Position: {x: 320, y: 120}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Out
+      Direction: 1
+      Capacity: 1
+    Fields:
+    - FieldName: Variable
+      TypeName: System.String
+      InlineValue: 
+      LinkedVariableGuid: acce9700-0000-4000-8000-000000000001
+    - FieldName: Value
+      TypeName: System.String
+      InlineValue: false
+      LinkedVariableGuid: 
+  - Guid: 11111111-0000-4000-8000-000000000006
+    NodeType: DialogueLine
+    DisplayName: Accepted Line
+    StoryText: 
+    Position: {x: 692, y: -104}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Out
+      Direction: 1
+      Capacity: 1
+    Fields:
+    - FieldName: Speaker
+      TypeName: System.String
+      InlineValue: Villager
+      LinkedVariableGuid: 
+    - FieldName: Text
+      TypeName: System.String
+      InlineValue: '{QuestDescription}'
+      LinkedVariableGuid: 
+    - FieldName: Portrait
+      TypeName: UnityEngine.Sprite
+      InlineValue: 
+      LinkedVariableGuid: 
+  - Guid: 11111111-0000-4000-8000-000000000007
+    NodeType: DialogueLine
+    DisplayName: Declined Line
+    StoryText: 
+    Position: {x: 640, y: 120}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Out
+      Direction: 1
+      Capacity: 1
+    Fields:
+    - FieldName: Speaker
+      TypeName: System.String
+      InlineValue: Villager
+      LinkedVariableGuid: 
+    - FieldName: Text
+      TypeName: System.String
+      InlineValue: No worries. Come back if you change your mind.
+      LinkedVariableGuid: 
+    - FieldName: Portrait
+      TypeName: UnityEngine.Sprite
+      InlineValue: 
+      LinkedVariableGuid: 
+  - Guid: 11111111-0000-4000-8000-000000000008
+    NodeType: End
+    DisplayName: End
+    StoryText: 
+    Position: {x: 1413, y: 20}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    Fields: []
+  m_Edges:
+  - Guid: 22222222-0000-4000-8000-000000000001
+    OutputNodeGuid: 11111111-0000-4000-8000-000000000001
+    OutputPortName: Out
+    InputNodeGuid: 11111111-0000-4000-8000-000000000002
+    InputPortName: In
+  - Guid: 22222222-0000-4000-8000-000000000002
+    OutputNodeGuid: 11111111-0000-4000-8000-000000000002
+    OutputPortName: Out
+    InputNodeGuid: 11111111-0000-4000-8000-000000000003
+    InputPortName: In
+  - Guid: 22222222-0000-4000-8000-000000000003
+    OutputNodeGuid: 11111111-0000-4000-8000-000000000003
+    OutputPortName: Choice 1
+    InputNodeGuid: 11111111-0000-4000-8000-000000000004
+    InputPortName: In
+  - Guid: 22222222-0000-4000-8000-000000000004
+    OutputNodeGuid: 11111111-0000-4000-8000-000000000003
+    OutputPortName: Choice 2
+    InputNodeGuid: 11111111-0000-4000-8000-000000000005
+    InputPortName: In
+  - Guid: 22222222-0000-4000-8000-000000000005
+    OutputNodeGuid: 11111111-0000-4000-8000-000000000004
+    OutputPortName: Out
+    InputNodeGuid: 11111111-0000-4000-8000-000000000006
+    InputPortName: In
+  - Guid: 22222222-0000-4000-8000-000000000006
+    OutputNodeGuid: 11111111-0000-4000-8000-000000000005
+    OutputPortName: Out
+    InputNodeGuid: 11111111-0000-4000-8000-000000000007
+    InputPortName: In
+  - Guid: 22222222-0000-4000-8000-000000000007
+    OutputNodeGuid: 11111111-0000-4000-8000-000000000006
+    OutputPortName: Out
+    InputNodeGuid: 11111111-0000-4000-8000-000000000008
+    InputPortName: In
+  - Guid: 22222222-0000-4000-8000-000000000008
+    OutputNodeGuid: 11111111-0000-4000-8000-000000000007
+    OutputPortName: Out
+    InputNodeGuid: 11111111-0000-4000-8000-000000000008
+    InputPortName: In
+  m_Blackboard:
+    m_Variables:
+    - rid: 1900000000000000001
+    - rid: 5852939582843912281
+    - rid: 5852939582843912282
+  ViewTransform: {x: 544, y: 209, z: 1}
+  BlackboardPosition: {x: 10, y: 60}
+  references:
+    version: 2
+    RefIds:
+    - rid: 1900000000000000001
+      type: {class: BlackboardVariableBool, ns: Feazeyu.RPGSystems.Dialogue, asm: Feazeyu.RPGSystems.Dialogue}
+      data:
+        m_Name: Accepted
+        m_Guid: acce9700-0000-4000-8000-000000000001
+        m_Exposed: 1
+        m_Shared: 1
+        m_Value: 0
+    - rid: 5852939582843912281
+      type: {class: BlackboardVariableString, ns: Feazeyu.RPGSystems.Dialogue, asm: Feazeyu.RPGSystems.Dialogue}
+      data:
+        m_Name: QuestOffer
+        m_Guid: 216679bd-9a53-4f40-b097-5adc63c1ef4f
+        m_Exposed: 1
+        m_Shared: 1
+        m_Value: 
+    - rid: 5852939582843912282
+      type: {class: BlackboardVariableString, ns: Feazeyu.RPGSystems.Dialogue, asm: Feazeyu.RPGSystems.Dialogue}
+      data:
+        m_Name: QuestDescription
+        m_Guid: 74d90298-bce3-408c-967e-b72705cfd194
+        m_Exposed: 1
+        m_Shared: 1
+        m_Value: 

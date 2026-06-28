@@ -104,7 +104,7 @@ namespace Feazeyu.RPGSystems.Inventory
             {
                 firstElementPosition += new Vector2(0, eventData.scrollDelta.y * list.scrollSensitivity);
                 firstElementPosition.y = Mathf.Clamp(firstElementPosition.y, 0, overflowSize);
-                originPoint.transform.localPosition = firstElementPosition;
+                originPoint.transform.localPosition = OriginBase() + (Vector3)firstElementPosition;
             }
         }
 
@@ -133,7 +133,24 @@ namespace Feazeyu.RPGSystems.Inventory
             }
             originPoint = new GameObject("OriginPoint");
             originPoint.transform.SetParent(transform, false);
-            originPoint.transform.localPosition = firstElementPosition;
+            originPoint.transform.localPosition = OriginBase() + (Vector3)firstElementPosition;
+        }
+
+        /// <summary>
+        /// Top-left inside corner of this container's rect, in local space. Item rows
+        /// are laid out downward/rightward from here, so they stay inside the
+        /// RectMask2D no matter which corner the inventory is anchored/pivoted to.
+        /// (Previously the origin sat at the pivot, so only top-anchored layouts
+        /// drew their rows inside the mask.)
+        /// </summary>
+        private Vector3 OriginBase()
+        {
+            if (transform is RectTransform rt)
+            {
+                var r = rt.rect;
+                return new Vector3(r.xMin, r.yMax, 0f);
+            }
+            return Vector3.zero;
         }
 
         /// <summary>

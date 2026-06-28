@@ -65,12 +65,21 @@ namespace QuestGraph.Runtime
         public const string TypeCompleteQuest  = "CompleteQuest";
         public const string TypeFailQuest      = "FailQuest";
         public const string TypeSpawnItem      = "spawn_item";
+        public const string TypeRunDialogue    = "run_dialogue";
 
         // Concrete objective node types
-        public const string TypeObjKill      = "obj_kill";
-        public const string TypeObjLocation  = "obj_location";
-        public const string TypeObjCollect   = "obj_collect";
-        public const string TypeObjDeliver   = "obj_deliver";
+        public const string TypeObjKill       = "obj_kill";
+        public const string TypeObjLocation   = "obj_location";
+        public const string TypeObjCollect    = "obj_collect";
+        public const string TypeObjAccumulate = "obj_accumulate";
+        public const string TypeObjDeliver    = "obj_deliver";
+
+        // Composable modifier / flow node types
+        public const string TypeTimer         = "timer";
+        public const string TypeResetProgress = "reset_progress";
+        public const string TypeGateFlag      = "gate_flag";
+        public const string TypeGateLocation  = "gate_location";
+        public const string TypeGateItem      = "gate_item";
 
         // ── Quest accent colours ─────────────────────────────────────────────
         // Shared colours (ColFlow, ColLogic, ColStart, …) are inherited from
@@ -95,16 +104,22 @@ namespace QuestGraph.Runtime
             TypeFindObject, TypeDebugLog, TypeSpawnPrefab,
             TypeObjective, TypeReward,
             TypeCompleteQuest, TypeFailQuest,
-            TypeSpawnItem,
-            TypeObjKill, TypeObjLocation, TypeObjCollect, TypeObjDeliver,
+            TypeSpawnItem, TypeRunDialogue,
+            TypeObjKill, TypeObjLocation, TypeObjCollect, TypeObjAccumulate, TypeObjDeliver,
+            TypeTimer, TypeResetProgress,
+            TypeGateFlag, TypeGateLocation, TypeGateItem,
         };
 
+        // Only nodes the QuestChainRunner actually acts on belong in a Chain graph:
+        // RunSubgraph (the quests), Condition (availability gates), SetVariable
+        // (per-quest blackboard side-effects), plus Start/End as structural markers.
+        // Flow nodes the chain never executes (TriggerEvent, FindObject, DebugLog,
+        // …) are intentionally excluded so the palette only offers nodes that do
+        // something.
         private static readonly HashSet<string> s_ChainPalette = new HashSet<string>
         {
             TypeStart, TypeEnd,
             TypeCondition, TypeSetVariable,
-            TypeTriggerEvent,
-            TypeFindObject, TypeDebugLog,
             TypeRunSubgraph,
         };
 
@@ -287,6 +302,25 @@ namespace QuestGraph.Runtime
                 }
             });
 
+            Register(new NodeInfo
+            {
+                TypeId = TypeRunDialogue, DisplayName = "Run Dialogue", Category = "Quest",
+                Description = "Runs a DialogueGraphAsset inline as a subgraph (e.g. an NPC offering " +
+                              "the quest). Link the Graph field to a DialogueGraph blackboard variable. " +
+                              "The dialogue can write a Shared blackboard variable the quest then reads " +
+                              "with a Condition node (e.g. accept/decline). Follows Out when it ends.",
+                AccentColor = ColSubgraph, Icon = "💬",
+                DefaultPorts = new List<PortData>
+                {
+                    new PortData { PortName = "In",  Direction = PortDirection.Input,  Capacity = PortCapacity.Multi  },
+                    new PortData { PortName = "Out", Direction = PortDirection.Output, Capacity = PortCapacity.Single },
+                },
+                DefaultFields = new List<FieldData>
+                {
+                    new FieldData { FieldName = "Graph", TypeName = "Feazeyu.RPGSystems.Dialogue.DialogueGraphAsset" },
+                }
+            });
+
             // ── Concrete objective nodes ──────────────────────────────────────
 
             Register(new NodeInfo
@@ -315,15 +349,14 @@ namespace QuestGraph.Runtime
             {
                 TypeId = TypeObjLocation, DisplayName = "Reach Location", Category = "Objectives",
                 Description = "Completes once the player is within Radius of Target. " +
-                              "Continuous=true: follows Out immediately and monitors in background — " +
-                              "if player leaves the area, the quest fails.",
+                              "For a 'stay in zone' constraint, attach a Location Gate to the " +
+                              "guarded objective's In port instead.",
                 AccentColor = ColObjective, Icon = "◉",
                 DefaultPorts = new List<PortData>
                 {
                     new PortData { PortName = "In",        Direction = PortDirection.Input,  Capacity = PortCapacity.Multi  },
                     new PortData { PortName = "Completed", Direction = PortDirection.Output, Capacity = PortCapacity.Single },
                     new PortData { PortName = "Failed",    Direction = PortDirection.Output, Capacity = PortCapacity.Single },
-                    new PortData { PortName = "Out",       Direction = PortDirection.Output, Capacity = PortCapacity.Single },
                 },
                 DefaultFields = new List<FieldData>
                 {
@@ -331,7 +364,6 @@ namespace QuestGraph.Runtime
                     new FieldData { FieldName = "Description", TypeName = "System.String" },
                     new FieldData { FieldName = "Target",      TypeName = "UnityEngine.Transform" },
                     new FieldData { FieldName = "Radius",      TypeName = "System.Single",  InlineValue = "2" },
-                    new FieldData { FieldName = "Continuous",  TypeName = "System.Boolean", InlineValue = "False" },
                     new FieldData { FieldName = "Optional",    TypeName = "System.Boolean", InlineValue = "False" },
                 }
             });
@@ -339,16 +371,16 @@ namespace QuestGraph.Runtime
             Register(new NodeInfo
             {
                 TypeId = TypeObjCollect, DisplayName = "Collect Item", Category = "Objectives",
-                Description = "Completes once the player carries at least Count of the specified item. " +
-                              "Continuous=true: follows Out immediately and monitors in background — " +
-                              "if the player loses the item, the quest fails.",
+                Description = "Level-based: completes once the player carries at least Count of the specified " +
+                              "item (counts whatever they already had). For 'acquire N from now on' use " +
+                              "Accumulate Item; for a 'while carrying X' constraint attach an Item Gate to " +
+                              "the guarded objective's In port.",
                 AccentColor = ColObjective, Icon = "⬡",
                 DefaultPorts = new List<PortData>
                 {
                     new PortData { PortName = "In",        Direction = PortDirection.Input,  Capacity = PortCapacity.Multi  },
                     new PortData { PortName = "Completed", Direction = PortDirection.Output, Capacity = PortCapacity.Single },
                     new PortData { PortName = "Failed",    Direction = PortDirection.Output, Capacity = PortCapacity.Single },
-                    new PortData { PortName = "Out",       Direction = PortDirection.Output, Capacity = PortCapacity.Single },
                 },
                 DefaultFields = new List<FieldData>
                 {
@@ -357,7 +389,31 @@ namespace QuestGraph.Runtime
                     new FieldData { FieldName = "ItemId",      TypeName = "System.Int32",  InlineValue = "0" },
                     new FieldData { FieldName = "Count",       TypeName = "System.Int32",  InlineValue = "1" },
                     new FieldData { FieldName = "Inventory",   TypeName = "UnityEngine.GameObject" },
-                    new FieldData { FieldName = "Continuous",  TypeName = "System.Boolean", InlineValue = "False" },
+                    new FieldData { FieldName = "Optional",    TypeName = "System.Boolean", InlineValue = "False" },
+                }
+            });
+
+            Register(new NodeInfo
+            {
+                TypeId = TypeObjAccumulate, DisplayName = "Accumulate Item", Category = "Objectives",
+                Description = "Counts items of ItemId acquired after the objective starts (ignores the starting " +
+                              "amount), completing at Count. Net: dropping an item decrements progress, so " +
+                              "drop+re-collect counts once. Exact when the container raises OnItemAdded/Removed, " +
+                              "else polls. Supports Gate (In port), Timer, and Reset Progress modifiers.",
+                AccentColor = ColObjective, Icon = "∑",
+                DefaultPorts = new List<PortData>
+                {
+                    new PortData { PortName = "In",        Direction = PortDirection.Input,  Capacity = PortCapacity.Multi  },
+                    new PortData { PortName = "Completed", Direction = PortDirection.Output, Capacity = PortCapacity.Single },
+                    new PortData { PortName = "Failed",    Direction = PortDirection.Output, Capacity = PortCapacity.Single },
+                },
+                DefaultFields = new List<FieldData>
+                {
+                    new FieldData { FieldName = "Title",       TypeName = "System.String", InlineValue = "Gather items" },
+                    new FieldData { FieldName = "Description", TypeName = "System.String" },
+                    new FieldData { FieldName = "ItemId",      TypeName = "System.Int32",  InlineValue = "0" },
+                    new FieldData { FieldName = "Count",       TypeName = "System.Int32",  InlineValue = "1" },
+                    new FieldData { FieldName = "Inventory",   TypeName = "UnityEngine.GameObject" },
                     new FieldData { FieldName = "Optional",    TypeName = "System.Boolean", InlineValue = "False" },
                 }
             });
@@ -383,6 +439,105 @@ namespace QuestGraph.Runtime
                     new FieldData { FieldName = "NPC",         TypeName = "UnityEngine.GameObject" },
                     new FieldData { FieldName = "Inventory",   TypeName = "UnityEngine.GameObject" },
                     new FieldData { FieldName = "Optional",    TypeName = "System.Boolean", InlineValue = "False" },
+                }
+            });
+
+            RegisterModifierNodes();
+        }
+
+        /// <summary>
+        /// Composable modifier / flow nodes: the Timer and Reset Progress flow
+        /// nodes, and the Gate decorators that attach to an objective's In port.
+        /// </summary>
+        private void RegisterModifierNodes()
+        {
+            Register(new NodeInfo
+            {
+                TypeId = TypeTimer, DisplayName = "Timer", Category = "Flow",
+                Description = "Starts when a token enters Begin; fires Timeout after Seconds. " +
+                              "AutoRestart re-arms as a perpetual watchdog. Wire Timeout to whatever " +
+                              "should happen (e.g. Reset Progress).",
+                AccentColor = ColFlow, Icon = "⏱",
+                DefaultPorts = new List<PortData>
+                {
+                    new PortData { PortName = "Begin",   Direction = PortDirection.Input,  Capacity = PortCapacity.Multi },
+                    new PortData { PortName = "Timeout", Direction = PortDirection.Output, Capacity = PortCapacity.Multi },
+                },
+                DefaultFields = new List<FieldData>
+                {
+                    new FieldData { FieldName = "Seconds",     TypeName = "System.Single",  InlineValue = "30" },
+                    new FieldData { FieldName = "AutoRestart", TypeName = "System.Boolean", InlineValue = "False" },
+                }
+            });
+
+            Register(new NodeInfo
+            {
+                TypeId = TypeResetProgress, DisplayName = "Reset Progress", Category = "Flow",
+                Description = "When triggered, wipes the progress of every objective its Target output " +
+                              "is wired to (reference-only — never re-runs them), then follows Out.",
+                AccentColor = ColFlow, Icon = "↺",
+                DefaultPorts = new List<PortData>
+                {
+                    new PortData { PortName = "In",     Direction = PortDirection.Input,  Capacity = PortCapacity.Multi },
+                    new PortData { PortName = "Target", Direction = PortDirection.Output, Capacity = PortCapacity.Multi },
+                    new PortData { PortName = "Out",    Direction = PortDirection.Output, Capacity = PortCapacity.Multi },
+                },
+            });
+
+            Register(new NodeInfo
+            {
+                TypeId = TypeGateFlag, DisplayName = "Flag Gate", Category = "Gates",
+                Description = "Objective decorator: wire Out into an objective's In. Progress only counts " +
+                              "while the blackboard variable satisfies the comparison. Covers 'while wearing X' " +
+                              "and collider-driven zone flags (see ZoneFlag).",
+                AccentColor = ColLogic, Icon = "⚑",
+                DefaultPorts = new List<PortData>
+                {
+                    new PortData { PortName = "Out", Direction = PortDirection.Output, Capacity = PortCapacity.Multi },
+                },
+                DefaultFields = new List<FieldData>
+                {
+                    new FieldData { FieldName = "Variable", TypeName = "System.String" },
+                    new FieldData { FieldName = "Operator", TypeName = "System.String", InlineValue = "==" },
+                    new FieldData { FieldName = "Value",    TypeName = "System.String", InlineValue = "True" },
+                }
+            });
+
+            Register(new NodeInfo
+            {
+                TypeId = TypeGateLocation, DisplayName = "Location Gate", Category = "Gates",
+                Description = "Objective decorator: progress only counts while the actor is within Radius of " +
+                              "Target. Subject='Player' (default) tests the player; 'Subject' tests the event's " +
+                              "subject (e.g. where the enemy died).",
+                AccentColor = ColLogic, Icon = "◎",
+                DefaultPorts = new List<PortData>
+                {
+                    new PortData { PortName = "Out", Direction = PortDirection.Output, Capacity = PortCapacity.Multi },
+                },
+                DefaultFields = new List<FieldData>
+                {
+                    new FieldData { FieldName = "Target",  TypeName = "UnityEngine.Transform" },
+                    new FieldData { FieldName = "Radius",  TypeName = "System.Single", InlineValue = "2" },
+                    new FieldData { FieldName = "Subject", TypeName = "System.String", InlineValue = "Player" },
+                }
+            });
+
+            Register(new NodeInfo
+            {
+                TypeId = TypeGateItem, DisplayName = "Item Gate", Category = "Gates",
+                Description = "Objective decorator: progress only counts while an inventory holds the required " +
+                              "count of ItemId. Resolves the event subject's inventory, falling back to the " +
+                              "player (with a warning) when the subject has none.",
+                AccentColor = ColLogic, Icon = "⬡",
+                DefaultPorts = new List<PortData>
+                {
+                    new PortData { PortName = "Out", Direction = PortDirection.Output, Capacity = PortCapacity.Multi },
+                },
+                DefaultFields = new List<FieldData>
+                {
+                    new FieldData { FieldName = "ItemId",   TypeName = "System.Int32",  InlineValue = "0" },
+                    new FieldData { FieldName = "Count",    TypeName = "System.Int32",  InlineValue = "1" },
+                    new FieldData { FieldName = "Operator", TypeName = "System.String", InlineValue = ">=" },
                 }
             });
         }

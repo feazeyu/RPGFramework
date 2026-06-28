@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 using UnityEngine.Events;
 using Feazeyu.RPGSystems.Dialogue;
@@ -115,26 +116,54 @@ namespace QuestGraph.Runtime
         [Tooltip("If set, chain progress auto-starts in Awake.")]
         public bool AutoStart = false;
 
+        [Tooltip("Maximum number of quests allowed to be active simultaneously. " +
+                 "-1 = unlimited; otherwise the chain refuses to start another quest " +
+                 "once this many are active. Default 1 (one quest at a time).")]
+        public int MaxActiveQuests = 1;
+
         [Header("Chain Events")]
         public ChainReadyEvent        OnAvailableQuestsChanged;
         public ChainQuestEvent        OnQuestStarted;
         public ChainQuestEvent        OnQuestCompleted;
         public ChainQuestFailedEvent  OnQuestFailed;
+        [Tooltip("Fired when an active quest ends Aborted (e.g. its offer dialogue " +
+                 "was declined) and returns to the Available frontier. No completion/" +
+                 "failure occurred — listeners tracking the active quest should reset.")]
+        public ChainQuestEvent        OnQuestAborted;
         public UnityEvent             OnChainCompleted;
 
         // ── State ────────────────────────────────────────────────────────────
 
         private readonly Dictionary<string, QuestEntry> m_Entries = new Dictionary<string, QuestEntry>();
-        private readonly Dictionary<string, HashSet<string>> m_Prereqs
-            = new Dictionary<string, HashSet<string>>();
 
-        private Blackboard  m_RuntimeBlackboard;
-        private bool        m_Started;
-        private QuestRunner m_ActiveRunner;
-        private string      m_ActiveEntryGuid;
+        // chainNodeGuid → child runner for each active *graph* quest. Simple quests
+        // are active (entry.State == Active) but have no runner, so they show up only
+        // as an Active entry, never in this map.
+        private readonly Dictionary<string, QuestRunner> m_ActiveRunners = new Dictionary<string, QuestRunner>();
 
-        public bool        IsStarted     => m_Started;
-        public QuestRunner ActiveRunner  => m_ActiveRunner;
+        private Blackboard m_RuntimeBlackboard;
+        private bool       m_Started;
+
+        public bool IsStarted => m_Started;
+
+        /// <summary>Number of quests currently in the Active state (graph + simple).</summary>
+        public int ActiveQuestCount
+        {
+            get
+            {
+                int n = 0;
+                foreach (var e in m_Entries.Values)
+                    if (e.State == QuestEntryState.Active) n++;
+                return n;
+            }
+        }
+
+        /// <summary>The child runners of all currently-active graph quests.</summary>
+        public IReadOnlyCollection<QuestRunner> ActiveRunners => m_ActiveRunners.Values;
+
+        /// <summary>The runner for a specific active graph quest, or null (simple / not active).</summary>
+        public QuestRunner GetActiveRunner(string chainNodeGuid)
+            => m_ActiveRunners.TryGetValue(chainNodeGuid, out var r) ? r : null;
 
         // ── Lifecycle ────────────────────────────────────────────────────────
 
@@ -145,7 +174,9 @@ namespace QuestGraph.Runtime
 
         private void OnDestroy()
         {
-            if (m_ActiveRunner != null) Destroy(m_ActiveRunner.gameObject);
+            foreach (var r in m_ActiveRunners.Values)
+                if (r != null) Destroy(r.gameObject);
+            m_ActiveRunners.Clear();
         }
 
         // ── Public API ───────────────────────────────────────────────────────
@@ -168,7 +199,6 @@ namespace QuestGraph.Runtime
 
             m_RuntimeBlackboard = Chain.Blackboard.CloneForRuntime();
             BuildEntries();
-            BuildPrerequisiteMap();
             RecomputeFrontier();
 
             m_Started = true;
@@ -197,7 +227,8 @@ namespace QuestGraph.Runtime
         /// <item><description>Simple quest → transition the entry to
         /// Active and wait for external notification.</description></item>
         /// </list>
-        /// Only one quest runs at a time per chain.
+        /// Up to <see cref="MaxActiveQuests"/> quests may run in parallel
+        /// (-1 = unlimited); the call is refused once that cap is reached.
         /// </summary>
         public void StartQuest(string chainNodeGuid)
         {
@@ -226,33 +257,46 @@ namespace QuestGraph.Runtime
                 return;
             }
 
-            if (m_ActiveRunner != null || !string.IsNullOrEmpty(m_ActiveEntryGuid))
+            if (MaxActiveQuests >= 0 && ActiveQuestCount >= MaxActiveQuests)
             {
                 Debug.LogWarning(
-                    $"[QuestChainRunner] Quest '{m_ActiveEntryGuid}' is already active. " +
-                    "Complete or abort it before starting another.", this);
+                    $"[QuestChainRunner] Active quest cap reached ({ActiveQuestCount}/{MaxActiveQuests}). " +
+                    "Complete or abort an active quest before starting another.", this);
                 return;
             }
 
             // Transition state before firing events so listeners see a consistent world.
             entry.State = QuestEntryState.Active;
             m_Entries[chainNodeGuid] = entry;
-            m_ActiveEntryGuid = chainNodeGuid;
 
-            OnQuestStarted?.Invoke(entry);
+            // Apply the Set Variable nodes wired into this quest (e.g. per-quest offer
+            // text on Shared blackboard variables) before the quest — and its Run
+            // Dialogue subgraph — runs, so the dialogue reads the freshly-set values.
+            ApplyEntrySetVariables(chainNodeGuid);
 
+            // Spawn the runner (so it is live) *before* firing OnQuestStarted, so
+            // listeners that bind to the runner (e.g. the HUD) catch every event —
+            // including the very first Run Dialogue / objective. The graph itself is only
+            // walked by the deferred StartQuest() call after the event.
+            QuestRunner spawned = null;
             switch (entry.Source)
             {
                 case QuestSource.Graph:
-                    StartGraphQuest(entry);
+                    spawned = SpawnGraphQuest(entry);
                     break;
                 case QuestSource.Simple:
                     StartSimpleQuest(entry);
                     break;
             }
+
+            OnQuestStarted?.Invoke(entry);
+
+            // Begin walking the graph after listeners are bound. (Start yields a frame,
+            // so no node has executed yet at this point.)
+            spawned?.StartQuest();
         }
 
-        private void StartGraphQuest(QuestEntry entry)
+        private QuestRunner SpawnGraphQuest(QuestEntry entry)
         {
             var go = new GameObject($"Quest:{entry.GraphQuest.name}");
             go.transform.SetParent(transform, false);
@@ -262,8 +306,73 @@ namespace QuestGraph.Runtime
             var captured = entry.ChainNodeGuid;
             runner.OnQuestEnded.AddListener(r => OnGraphQuestEnded(captured, r));
 
-            m_ActiveRunner = runner;
-            runner.StartQuest();
+            m_ActiveRunners[entry.ChainNodeGuid] = runner;
+            return runner;
+        }
+
+        // ── Set Variable nodes wired into a quest ─────────────────────────────
+
+        /// <summary>
+        /// Executes the SetVariable nodes that feed into a quest node — i.e. the
+        /// SetVariable nodes reachable by walking backward from it through flow
+        /// edges, stopping at any other quest (RunSubgraph) node or the Start.
+        /// This lets a Chain graph stage per-quest blackboard values (e.g. offer
+        /// text on a Shared variable the quest's Run Dialogue reads) even though the
+        /// chain is a dependency graph, not an executed flow.
+        /// </summary>
+        private void ApplyEntrySetVariables(string questNodeGuid)
+        {
+            if (m_RuntimeBlackboard == null) return;
+
+            // Backward DFS collecting SetVariable predecessors, not crossing quests.
+            var setters = new List<NodeData>();
+            var visited = new HashSet<string>();
+            var stack   = new Stack<string>();
+
+            foreach (var e in Chain.Edges)
+                if (e.InputNodeGuid == questNodeGuid && IsEdgeLive(e)) stack.Push(e.OutputNodeGuid);
+
+            while (stack.Count > 0)
+            {
+                var g = stack.Pop();
+                if (!visited.Add(g)) continue;
+
+                var n = Chain.GetNode(g);
+                if (n == null || n.NodeType == QuestNodeRegistry.TypeRunSubgraph) continue; // stop at quests
+
+                if (n.NodeType == NodeRegistry.TypeSetVariable) setters.Add(n);
+
+                foreach (var e in Chain.Edges)
+                    if (e.InputNodeGuid == g && IsEdgeLive(e)) stack.Push(e.OutputNodeGuid);
+            }
+
+            // Discovered nearest-first; apply farthest-first so chained sets land in order.
+            for (int i = setters.Count - 1; i >= 0; i--)
+                ExecuteSetVariable(setters[i]);
+        }
+
+        private void ExecuteSetVariable(NodeData node)
+        {
+            var varField = node.Fields?.Find(f => f.FieldName == "Variable");
+            var guid     = varField?.LinkedVariableGuid;
+            if (string.IsNullOrEmpty(guid)) return;
+
+            var v = m_RuntimeBlackboard.GetVariable(guid);
+            if (v == null) return;
+
+            var valueStr = node.Fields?.Find(f => f.FieldName == "Value")?.InlineValue ?? string.Empty;
+
+            try
+            {
+                v.ObjectValue = v.ValueType == typeof(string)
+                    ? valueStr
+                    : Convert.ChangeType(valueStr, v.ValueType, CultureInfo.InvariantCulture);
+            }
+            catch (Exception ex)
+            {
+                Debug.LogWarning(
+                    $"[QuestChainRunner] Could not set '{v.Name}' to '{valueStr}': {ex.Message}", this);
+            }
         }
 
         private void StartSimpleQuest(QuestEntry entry)
@@ -308,25 +417,42 @@ namespace QuestGraph.Runtime
             ResolveEntry(chainNodeGuid, result, reason);
         }
 
-        /// <summary>Abort the currently active quest (if any).</summary>
+        /// <summary>Abort a specific active quest by its chain node guid.</summary>
+        public void AbortQuest(string chainNodeGuid)
+        {
+            if (!m_Entries.TryGetValue(chainNodeGuid, out var entry)) return;
+            if (entry.State != QuestEntryState.Active) return;
+
+            // Graph quest: drive the abort through the runner so its OnQuestEnded
+            // (Aborted) → OnGraphQuestEnded → ResolveEntry path runs as usual.
+            if (m_ActiveRunners.TryGetValue(chainNodeGuid, out var runner) && runner != null)
+            {
+                runner.AbortQuest();
+                return;
+            }
+            // Simple quest: no runner to drive the abort, resolve it directly.
+            NotifyExternalQuestFailed(chainNodeGuid, "aborted");
+        }
+
+        /// <summary>Abort every currently active quest.</summary>
         public void AbortActiveQuest()
         {
-            if (m_ActiveRunner != null) { m_ActiveRunner.AbortQuest(); return; }
-            if (!string.IsNullOrEmpty(m_ActiveEntryGuid))
-                NotifyExternalQuestFailed(m_ActiveEntryGuid, "aborted");
+            // Snapshot first: aborting mutates m_Entries via ResolveEntry.
+            var active = new List<string>();
+            foreach (var kv in m_Entries)
+                if (kv.Value.State == QuestEntryState.Active) active.Add(kv.Key);
+
+            foreach (var guid in active) AbortQuest(guid);
         }
 
         // ── Internal: child runner callback ──────────────────────────────────
 
         private void OnGraphQuestEnded(string chainNodeGuid, QuestResult result)
         {
-            // Tear down the child GameObject next frame so we don't
-            // destroy it mid-event-invocation.
-            if (m_ActiveRunner != null)
+            if (m_ActiveRunners.TryGetValue(chainNodeGuid, out var runner) && runner != null)
             {
-                var toDestroy = m_ActiveRunner.gameObject;
-                m_ActiveRunner = null;
-                Destroy(toDestroy);
+                m_ActiveRunners.Remove(chainNodeGuid);
+                Destroy(runner.gameObject);
             }
 
             ResolveEntry(chainNodeGuid, result,
@@ -337,12 +463,22 @@ namespace QuestGraph.Runtime
         {
             if (!m_Entries.TryGetValue(chainNodeGuid, out var entry)) return;
 
+            // Aborted ≠ failed: the player declined (or the quest was aborted) before
+            // committing. Return the entry to the frontier so it can be re-offered
+            // (e.g. talk to the NPC again), without firing a failure.
+            if (result == QuestResult.Aborted)
+            {
+                entry.State       = QuestEntryState.Available;
+                m_Entries[chainNodeGuid] = entry;
+                OnQuestAborted?.Invoke(entry);
+                OnAvailableQuestsChanged?.Invoke(GetAvailableQuests());
+                return;
+            }
+
             entry.State = result == QuestResult.Completed
                 ? QuestEntryState.Completed
                 : QuestEntryState.Failed;
             m_Entries[chainNodeGuid] = entry;
-
-            m_ActiveEntryGuid = null;
 
             if (result == QuestResult.Completed)
                 OnQuestCompleted?.Invoke(entry);
@@ -413,57 +549,10 @@ namespace QuestGraph.Runtime
         }
 
         /// <summary>
-        /// For each RunSubgraph node X, collect the set of RunSubgraph
-        /// nodes reachable by walking backward along edges (transitively
-        /// through non-RunSubgraph flow nodes — Condition, Start, etc.
-        /// don't count as prerequisites, only the upstream quests do).
-        /// </summary>
-        private void BuildPrerequisiteMap()
-        {
-            m_Prereqs.Clear();
-            foreach (var entryGuid in m_Entries.Keys)
-                m_Prereqs[entryGuid] = new HashSet<string>();
-
-            var incoming = new Dictionary<string, List<string>>();
-            foreach (var edge in Chain.Edges)
-            {
-                if (!incoming.TryGetValue(edge.InputNodeGuid, out var list))
-                    incoming[edge.InputNodeGuid] = list = new List<string>();
-                list.Add(edge.OutputNodeGuid);
-            }
-
-            foreach (var entry in m_Entries.Values)
-            {
-                var prereqs = m_Prereqs[entry.ChainNodeGuid];
-                var visited = new HashSet<string>();
-                var queue   = new Queue<string>();
-
-                if (incoming.TryGetValue(entry.ChainNodeGuid, out var seeds))
-                    foreach (var s in seeds) queue.Enqueue(s);
-
-                while (queue.Count > 0)
-                {
-                    var cur = queue.Dequeue();
-                    if (!visited.Add(cur)) continue;
-
-                    var curNode = Chain.GetNode(cur);
-                    if (curNode == null) continue;
-
-                    if (curNode.NodeType == QuestNodeRegistry.TypeRunSubgraph)
-                    {
-                        prereqs.Add(cur);
-                        continue;
-                    }
-
-                    if (incoming.TryGetValue(cur, out var ups))
-                        foreach (var u in ups) queue.Enqueue(u);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Transition Locked entries whose prereqs are all Completed
-        /// into Available. Idempotent; called after every state change.
+        /// Transition Locked entries that are currently unlockable into Available.
+        /// Re-evaluated every state change, so live <see cref="NodeRegistry.TypeCondition"/>
+        /// gates (which read the chain's runtime blackboard) can open or hold quests
+        /// as the chain progresses. Idempotent; promotion only (never demotes).
         /// </summary>
         private void RecomputeFrontier()
         {
@@ -475,7 +564,7 @@ namespace QuestGraph.Runtime
                 {
                     var e = m_Entries[guid];
                     if (e.State != QuestEntryState.Locked) continue;
-                    if (!PrereqsSatisfied(guid)) continue;
+                    if (!IsUnlockable(guid)) continue;
 
                     e.State = QuestEntryState.Available;
                     m_Entries[guid] = e;
@@ -484,15 +573,103 @@ namespace QuestGraph.Runtime
             } while (changed);
         }
 
-        private bool PrereqsSatisfied(string entryGuid)
+        /// <summary>
+        /// Whether a quest node is currently unlockable: it must be <b>rooted</b>
+        /// (reachable from Start, or from a prerequisite quest, along <b>live</b>
+        /// edges) and every prerequisite quest on those live paths must be Completed.
+        /// An edge leaving a Condition node is live only on the branch matching the
+        /// gate's current evaluation, so a quest behind a not-yet-true Condition
+        /// stays Locked. Walks backward, stopping at the first quest on each path
+        /// (those are the prerequisites — AND semantics, as before).
+        /// </summary>
+        private bool IsUnlockable(string questNodeGuid)
         {
-            if (!m_Prereqs.TryGetValue(entryGuid, out var prereqs)) return true;
-            foreach (var p in prereqs)
+            var prereqs = new HashSet<string>();
+            var visited = new HashSet<string>();
+            var stack   = new Stack<string>();
+
+            bool hasIncoming = false;
+            foreach (var e in Chain.Edges)
+                if (e.InputNodeGuid == questNodeGuid)
+                {
+                    hasIncoming = true;
+                    if (IsEdgeLive(e)) stack.Push(e.OutputNodeGuid);
+                }
+
+            // No incoming edges → a root quest, available from the start.
+            bool rooted = !hasIncoming;
+
+            while (stack.Count > 0)
             {
-                if (!m_Entries.TryGetValue(p, out var pe)) return false;
-                if (pe.State != QuestEntryState.Completed) return false;
+                var g = stack.Pop();
+                if (!visited.Add(g)) continue;
+
+                var n = Chain.GetNode(g);
+                if (n == null) continue;
+
+                if (n.NodeType == QuestNodeRegistry.TypeRunSubgraph) { prereqs.Add(g); rooted = true; continue; }
+                if (n.NodeType == NodeRegistry.TypeStart)            { rooted = true; continue; }
+
+                foreach (var e in Chain.Edges)
+                    if (e.InputNodeGuid == g && IsEdgeLive(e))
+                        stack.Push(e.OutputNodeGuid);
             }
+
+            if (!rooted) return false;   // all paths gated off by Conditions
+
+            foreach (var p in prereqs)
+                if (!m_Entries.TryGetValue(p, out var pe) || pe.State != QuestEntryState.Completed)
+                    return false;
             return true;
+        }
+
+        /// <summary>
+        /// An edge is "live" unless it leaves a Condition node on the branch the
+        /// gate does not currently take. Used by frontier and SetVariable walks so
+        /// the chain honours Condition gates without otherwise executing the graph.
+        /// </summary>
+        private bool IsEdgeLive(EdgeData edge)
+        {
+            var src = Chain.GetNode(edge.OutputNodeGuid);
+            if (src != null && src.NodeType == NodeRegistry.TypeCondition)
+                return EvaluateGate(src) == (edge.OutputPortName == "True");
+            return true;
+        }
+
+        /// <summary>Evaluates a chain Condition node against the runtime blackboard.</summary>
+        private bool EvaluateGate(NodeData node)
+        {
+            var guid = node.Fields?.Find(f => f.FieldName == "Variable")?.LinkedVariableGuid;
+            if (string.IsNullOrEmpty(guid)) return false;
+
+            var v = m_RuntimeBlackboard?.GetVariable(guid);
+            if (v?.ObjectValue == null) return false;
+
+            var op  = node.Fields?.Find(f => f.FieldName == "Operator")?.InlineValue ?? "==";
+            var val = node.Fields?.Find(f => f.FieldName == "Value")?.InlineValue ?? string.Empty;
+            return CompareValue(v.ObjectValue, op, val);
+        }
+
+        private static bool CompareValue(object lhs, string op, string rhs)
+        {
+            if (double.TryParse(lhs.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out double ln) &&
+                double.TryParse(rhs,            NumberStyles.Any, CultureInfo.InvariantCulture, out double rn))
+                return op switch
+                {
+                    "==" => ln == rn, "!=" => ln != rn,
+                    ">"  => ln >  rn, ">=" => ln >= rn,
+                    "<"  => ln <  rn, "<=" => ln <= rn, _ => false,
+                };
+
+            if (lhs is bool lb && bool.TryParse(rhs, out bool rb))
+                return op switch { "==" => lb == rb, "!=" => lb != rb, _ => false };
+
+            return op switch
+            {
+                "==" => string.Equals(lhs.ToString(), rhs, StringComparison.Ordinal),
+                "!=" => !string.Equals(lhs.ToString(), rhs, StringComparison.Ordinal),
+                _    => false,
+            };
         }
 
         private bool IsChainCompleted()

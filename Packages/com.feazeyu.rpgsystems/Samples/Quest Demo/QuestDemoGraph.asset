@@ -77,30 +77,23 @@ MonoBehaviour:
     - PortName: Failed
       Direction: 1
       Capacity: 0
-    - PortName: Out
-      Direction: 1
-      Capacity: 0
     Fields:
     - FieldName: Title
       TypeName: System.String
       InlineValue: Reach the waypoint
-      LinkedVariableGuid: 
+      LinkedVariableGuid:
     - FieldName: Description
       TypeName: System.String
       InlineValue: Head to the marked location.
-      LinkedVariableGuid: 
+      LinkedVariableGuid:
     - FieldName: Target
       TypeName: UnityEngine.Transform
       InlineValue: Waypoint
-      LinkedVariableGuid: 
+      LinkedVariableGuid:
     - FieldName: Radius
       TypeName: System.Single
       InlineValue: 3
-      LinkedVariableGuid: 
-    - FieldName: Continuous
-      TypeName: System.Boolean
-      InlineValue: False
-      LinkedVariableGuid: 
+      LinkedVariableGuid:
     - FieldName: Optional
       TypeName: System.Boolean
       InlineValue: False

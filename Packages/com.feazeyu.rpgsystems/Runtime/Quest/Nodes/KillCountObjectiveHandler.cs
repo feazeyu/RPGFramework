@@ -1,6 +1,7 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Feazeyu.RPGSystems.Dialogue;
 using QuestGraph.Runtime;
 using Feazeyu.RPGSystems.Character;
@@ -13,6 +14,12 @@ namespace QuestGraph.Nodes
     /// Waits until the player has killed <c>Count</c> entities tagged with
     /// <c>Tag</c>, then follows "Completed". Entities spawned after activation
     /// are picked up automatically every second.
+    ///
+    /// Each kill is offered to a shared <see cref="ObjectiveProgress"/> as a
+    /// <see cref="ProgressEvent"/> (subject = the slain enemy), so composable
+    /// modifiers apply: attach Gate nodes to the In port to require conditions
+    /// (in a zone, while wearing X, while carrying Y), and a Timer + Reset
+    /// Progress pair to enforce a time window that wipes progress on expiry.
     ///
     /// Sequential chaining: connect the "Completed" port to the next
     /// objective node's "In" port.
@@ -47,31 +54,44 @@ namespace QuestGraph.Nodes
 
             runner.RegisterObjective(info);
 
+            // Shared, resettable, gated progress counter for this objective.
+            var progress = runner.RegisterProgress(node.Guid, required);
+            progress.Gate = ObjectiveGates.Compose(node, ctx);
+
             // ── Subscribe to existing and future enemies ───────────────────────
-            int kills = 0;
-            var tracked   = new List<Entity>();
+            bool done = false;
+            var callbacks = new Dictionary<Entity, UnityAction>();
             float nextScan = 0f;
 
-            void OnEntityDied()
+            void OnEntityDied(Entity e)
             {
-                kills++;
+                var evt = new ProgressEvent
+                {
+                    Subject     = e != null ? e.gameObject : null,
+                    Position    = e != null ? e.transform.position : Vector3.zero,
+                    HasPosition = e != null,
+                };
+                if (progress.TryAdd(evt)) done = true;
+            }
+
+            void Track(Entity e)
+            {
+                if (callbacks.ContainsKey(e)) return;
+                UnityAction cb = () => OnEntityDied(e);
+                e.OnDeath.AddListener(cb);
+                callbacks[e] = cb;
             }
 
             void ScanEnemies()
             {
                 foreach (var go in GameObject.FindGameObjectsWithTag(tag))
-                {
-                    if (!go.TryGetComponent<Entity>(out var e)) continue;
-                    if (tracked.Contains(e)) continue;
-                    e.OnDeath.AddListener(OnEntityDied);
-                    tracked.Add(e);
-                }
+                    if (go.TryGetComponent<Entity>(out var e)) Track(e);
             }
 
             ScanEnemies();
 
             // ── Wait for kill target ──────────────────────────────────────────
-            while (kills < required && runner.IsRunning)
+            while (!done && runner.IsRunning)
             {
                 if (Time.time >= nextScan)
                 {
@@ -82,9 +102,10 @@ namespace QuestGraph.Nodes
             }
 
             // ── Cleanup ───────────────────────────────────────────────────────
-            foreach (var e in tracked)
-                if (e != null) e.OnDeath.RemoveListener(OnEntityDied);
-            tracked.Clear();
+            foreach (var kv in callbacks)
+                if (kv.Key != null) kv.Key.OnDeath.RemoveListener(kv.Value);
+            callbacks.Clear();
+            runner.UnregisterProgress(node.Guid);
 
             if (!runner.IsRunning) yield break;
 

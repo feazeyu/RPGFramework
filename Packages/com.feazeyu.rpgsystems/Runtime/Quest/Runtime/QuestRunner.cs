@@ -47,14 +47,24 @@ namespace QuestGraph.Runtime
     {
         // ── Inspector events ──────────────────────────────────────────────────
 
+        // Initialized inline so the events are non-null even when the runner is
+        // created at runtime via AddComponent (e.g. QuestChainRunner spawning a
+        // child runner), where Unity does not deserialize serialized fields.
         [Header("Quest Events")]
-        public ObjectiveEvent  OnObjectiveStarted;
-        public ObjectiveEvent  OnObjectiveCompleted;
-        public ObjectiveEvent  OnObjectiveFailed;
-        public RewardEvent     OnRewardGranted;
-        public UnityEvent      OnQuestCompleted;
-        public FailedEvent     OnQuestFailed;
-        public ResultEvent     OnQuestEnded;
+        public ObjectiveEvent  OnObjectiveStarted  = new();
+        public ObjectiveEvent  OnObjectiveCompleted = new();
+        public ObjectiveEvent  OnObjectiveFailed   = new();
+        public RewardEvent     OnRewardGranted     = new();
+        public UnityEvent      OnQuestCompleted    = new();
+        public FailedEvent     OnQuestFailed       = new();
+        public ResultEvent     OnQuestEnded        = new();
+
+        [Tooltip("Fired each time any Timer node in the graph times out.")]
+        public UnityEvent      OnTimerTimeout      = new();
+
+        [Tooltip("Fired when a Run Dialogue node spawns a DialogueRunner. " +
+                 "Wire a DialogueUI to bind to it (the demo HUD does this).")]
+        public DialogueRunnerEvent OnDialogueStarted = new();
 
         // ── Public state ──────────────────────────────────────────────────────
 
@@ -79,6 +89,12 @@ namespace QuestGraph.Runtime
         private readonly Dictionary<string, ObjectiveInfo> m_ActiveObjectives  = new();
         // nodeGuid → null (pending) | true (complete) | false (failed)
         private readonly Dictionary<string, bool?>         m_ObjectiveOutcomes = new();
+        // nodeGuid → resettable progress counter shared with attached modifiers
+        private readonly Dictionary<string, ObjectiveProgress> m_Progress     = new();
+
+        // Wall-clock end time of the most recently (re)armed Timer node window,
+        // so a HUD can show a live countdown. -1 when no timer is armed.
+        private float m_TimerEndTime = -1f;
 
         // ── Lifecycle ─────────────────────────────────────────────────────────
 
@@ -92,11 +108,15 @@ namespace QuestGraph.Runtime
             RegisterHandler(new KillCountObjectiveHandler());
             RegisterHandler(new ReachLocationObjectiveHandler());
             RegisterHandler(new CollectItemObjectiveHandler());
+            RegisterHandler(new AccumulateItemObjectiveHandler());
             RegisterHandler(new DeliverItemObjectiveHandler());
             RegisterHandler(new SpawnItemHandler());
+            RegisterHandler(new RunDialogueHandler(this));
             RegisterHandler(new DebugLogNodeHandler());
             RegisterHandler(new FindObjectNodeHandler());
             RegisterHandler(new SpawnPrefabNodeHandler());
+            RegisterHandler(new TimerNodeHandler());
+            RegisterHandler(new ResetProgressNodeHandler());
         }
 
         // ── Public API ────────────────────────────────────────────────────────
@@ -115,6 +135,7 @@ namespace QuestGraph.Runtime
             FailureReason = null;
             m_ActiveObjectives.Clear();
             m_ObjectiveOutcomes.Clear();
+            m_Progress.Clear();
 
             StartGraph();
         }
@@ -183,6 +204,49 @@ namespace QuestGraph.Runtime
         public bool? GetObjectiveOutcome(string nodeGuid)
             => m_ObjectiveOutcomes.TryGetValue(nodeGuid, out var v) ? v : null;
 
+        // ── Objective progress (gated/timed objectives) ───────────────────────
+
+        /// <summary>
+        /// Creates (or replaces) the resettable progress counter for an objective
+        /// node. Objective handlers call this at activation, then attach a composed
+        /// gate predicate. Timer/Reset nodes act on the same counter by node guid.
+        /// </summary>
+        public ObjectiveProgress RegisterProgress(string nodeGuid, int required)
+        {
+            var p = new ObjectiveProgress { NodeGuid = nodeGuid, Required = required };
+            m_Progress[nodeGuid] = p;
+            return p;
+        }
+
+        public void UnregisterProgress(string nodeGuid) => m_Progress.Remove(nodeGuid);
+
+        public ObjectiveProgress GetProgress(string nodeGuid)
+            => m_Progress.TryGetValue(nodeGuid, out var p) ? p : null;
+
+        /// <summary>Wipe an objective's accumulated progress (used by Reset Progress nodes).</summary>
+        public void ResetObjectiveProgress(string nodeGuid)
+        {
+            if (m_Progress.TryGetValue(nodeGuid, out var p)) p.Reset();
+        }
+
+        /// <summary>Fires <see cref="OnTimerTimeout"/> (called by Timer node handlers).</summary>
+        public void RaiseTimerTimeout() => OnTimerTimeout?.Invoke();
+
+        // ── Timer countdown (for HUD display) ─────────────────────────────────
+
+        /// <summary>True while a Timer node window is armed and the quest is running.</summary>
+        public bool HasActiveTimer => IsRunning && m_TimerEndTime >= 0f;
+
+        /// <summary>Seconds left in the current Timer window (0 once elapsed).</summary>
+        public float TimerRemaining => Mathf.Max(0f, m_TimerEndTime - Time.time);
+
+        /// <summary>
+        /// Called by a Timer node each time it (re)arms, so the HUD can show a
+        /// live countdown. The latest call wins (single shared window display).
+        /// </summary>
+        public void SetTimerWindow(float seconds)
+            => m_TimerEndTime = Time.time + Mathf.Max(0f, seconds);
+
         // ── GraphRunner overrides ─────────────────────────────────────────────
 
         protected override void OnGraphStop()
@@ -192,6 +256,8 @@ namespace QuestGraph.Runtime
 
             m_ActiveObjectives.Clear();
             m_ObjectiveOutcomes.Clear();
+            m_Progress.Clear();
+            m_TimerEndTime = -1f;
 
             OnQuestEnded?.Invoke(Result);
         }
@@ -339,12 +405,61 @@ namespace QuestGraph.Runtime
                 yield break;
             }
         }
+
+        /// <summary>
+        /// Runs a DialogueGraphAsset inline as a subgraph. Spawns a child
+        /// <see cref="DialogueRunner"/>, fires <see cref="OnDialogueStarted"/> so a
+        /// DialogueUI can bind to it, waits for the dialogue to end, then follows Out.
+        /// The dialogue communicates back through Shared blackboard variables that a
+        /// downstream Condition node reads (e.g. an accept/decline flag).
+        /// </summary>
+        private class RunDialogueHandler : IGraphNodeHandler
+        {
+            private readonly QuestRunner m_R;
+            public string NodeTypeId => QuestNodeRegistry.TypeRunDialogue;
+            public RunDialogueHandler(QuestRunner r) => m_R = r;
+
+            public IEnumerator Execute(NodeData node, GraphRunContext ctx)
+            {
+                DialogueGraphAsset dlg = null;
+                var guid = ctx.GetLinkedGuid(node, "Graph");
+                if (!string.IsNullOrEmpty(guid))
+                    dlg = ctx.RuntimeBlackboard.GetVariable(guid)?.ObjectValue as DialogueGraphAsset;
+
+                if (dlg == null)
+                {
+                    Debug.LogWarning("[QuestRunner] Run Dialogue: 'Graph' field is not linked to a " +
+                                     "DialogueGraph variable. Skipping.", m_R);
+                    ctx.Follow("Out");
+                    yield break;
+                }
+
+                var go = new GameObject($"QuestDialogue:{dlg.name}");
+                go.transform.SetParent(m_R.transform, false);
+                var dialogue = go.AddComponent<DialogueRunner>();
+                dialogue.Graph = dlg;
+
+                m_R.OnDialogueStarted?.Invoke(dialogue);
+
+                bool done = false;
+                dialogue.OnGraphEnded.AddListener(() => done = true);
+                dialogue.StartDialogue();
+
+                yield return new WaitUntil(() => done || !m_R.IsRunning);
+
+                if (go != null) Destroy(go);
+                if (!m_R.IsRunning) yield break;
+
+                ctx.Follow("Out");
+            }
+        }
     }
 
     // ── UnityEvent types ──────────────────────────────────────────────────────
 
-    [Serializable] public class ObjectiveEvent : UnityEvent<ObjectiveInfo> { }
-    [Serializable] public class RewardEvent    : UnityEvent<RewardInfo>    { }
-    [Serializable] public class ResultEvent    : UnityEvent<QuestResult>   { }
-    [Serializable] public class FailedEvent    : UnityEvent<string>        { }
+    [Serializable] public class ObjectiveEvent     : UnityEvent<ObjectiveInfo> { }
+    [Serializable] public class RewardEvent        : UnityEvent<RewardInfo>    { }
+    [Serializable] public class ResultEvent        : UnityEvent<QuestResult>   { }
+    [Serializable] public class FailedEvent        : UnityEvent<string>        { }
+    [Serializable] public class DialogueRunnerEvent : UnityEvent<DialogueRunner> { }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
@@ -13,10 +13,20 @@ namespace Feazeyu.RPGSystems.Dialogue
     /// Responsibilities:
     ///   • Builds the runtime blackboard once (reused across runs so non-shared
     ///     state persists; Shared variables are global via SharedBlackboardStore)
-    ///   • Walks the graph along edges
+    ///   • Walks the graph along edges using independent <b>flow tokens</b>
     ///   • Dispatches each node to a registered IGraphNodeHandler
     ///   • Handles structural built-in nodes: Start, End, Condition,
     ///     SetVariable, RunSubgraph (no system-specific knowledge)
+    ///
+    /// ── Parallel flow ────────────────────────────────────────────────────
+    /// Execution is carried by one or more <see cref="FlowToken"/>s, each an
+    /// independent cursor with its own current node and context. An output
+    /// port wired to several nodes <b>auto-forks</b>: one token per edge.
+    /// A token ends when its node dead-ends or hits an End node; the graph
+    /// ends when the last token finishes or a handler calls <c>ctx.End()</c>
+    /// (the terminal path used by quest Complete/Fail nodes). Single-edge
+    /// graphs (all existing dialogue/quest content) run as exactly one token,
+    /// so behaviour is unchanged.
     ///
     /// To add a new graph-based system (quest, cutscene, …):
     ///   1. Subclass GraphRunner.
@@ -34,9 +44,12 @@ namespace Feazeyu.RPGSystems.Dialogue
         [Tooltip("The graph asset to execute.")]
         public GraphAsset Graph;
 
+        // Initialised inline so the events are non-null even when the runner is
+        // created at runtime via AddComponent (e.g. a Run Dialogue node spawning a
+        // child DialogueRunner), where Unity does not deserialize serialized fields.
         [Header("Events")]
-        public UnityEvent OnGraphStarted;
-        public UnityEvent OnGraphEnded;
+        public UnityEvent OnGraphStarted = new();
+        public UnityEvent OnGraphEnded   = new();
 
         // Per-instance initial-value overrides for Exposed (non-Shared) blackboard
         // variables, edited via GraphRunnerEditor. Each entry is a clone of an
@@ -52,14 +65,24 @@ namespace Feazeyu.RPGSystems.Dialogue
         public bool IsRunning { get; private set; }
 
         protected Blackboard      m_RuntimeBlackboard;
-        protected NodeData        m_CurrentNode;
+        // Shared, token-independent context used for field/blackboard resolution
+        // (ResolveString, GetLinkedGuid, …) by built-in nodes and subclasses.
+        // Per-token Follow/Fork/End live on each token's own context instead.
         protected GraphRunContext m_Context;
 
         private readonly Dictionary<string, IGraphNodeHandler> m_Handlers
             = new Dictionary<string, IGraphNodeHandler>();
 
-        // Prevents FollowOutputPort being called more than once per node step.
-        private bool m_Advancing;
+        // Number of live flow tokens. When it reaches zero the graph ends.
+        private int m_ActiveTokens;
+
+        /// <summary>One independent cursor walking the graph.</summary>
+        private sealed class FlowToken
+        {
+            public NodeData        Node;
+            public bool            Advanced;   // guards double Follow/End per step
+            public GraphRunContext Context;
+        }
 
         // ── Lifecycle ─────────────────────────────────────────────────────────
 
@@ -108,12 +131,11 @@ namespace Feazeyu.RPGSystems.Dialogue
                 ApplyExposedOverrides();
             }
 
-            m_Context           = new GraphRunContext(this, Graph, m_RuntimeBlackboard);
-            m_Context.OnFollow  = portName => FollowOutputPort(m_CurrentNode, portName);
-            m_Context.OnEnd     = EndGraph;
+            // Token-independent resolution context (field/blackboard access only).
+            m_Context = new GraphRunContext(this, Graph, m_RuntimeBlackboard);
 
-            IsRunning   = true;
-            m_Advancing = false;
+            IsRunning      = true;
+            m_ActiveTokens = 0;
 
             OnGraphStarted?.Invoke();
             OnGraphStart();
@@ -126,14 +148,37 @@ namespace Feazeyu.RPGSystems.Dialogue
                 return;
             }
 
-            AdvanceToNode(startNode);
+            StartToken(startNode);
         }
 
         public void StopGraph()
         {
             if (!IsRunning) return;
-            StopAllCoroutines();
             EndGraph();
+        }
+
+        /// <summary>
+        /// Sets the value of a runtime blackboard variable by name. Used by scene
+        /// components (e.g. ZoneFlag triggers) to feed world state into gates.
+        /// No-op until the graph has started and built its runtime blackboard.
+        /// </summary>
+        public void SetBlackboardValue(string variableName, object value)
+        {
+            if (m_RuntimeBlackboard == null || string.IsNullOrEmpty(variableName)) return;
+            foreach (var v in Graph.Blackboard.Variables)
+            {
+                if (v.Name != variableName) continue;
+                var rt = m_RuntimeBlackboard.GetVariable(v.Guid);
+                if (rt != null)
+                {
+                    try { rt.ObjectValue = value; }
+                    catch (Exception e)
+                    {
+                        Debug.LogWarning($"[GraphRunner] SetBlackboardValue('{variableName}') failed: {e.Message}", this);
+                    }
+                }
+                return;
+            }
         }
 
         /// <summary>
@@ -168,69 +213,112 @@ namespace Feazeyu.RPGSystems.Dialogue
 
         // ── Traversal ─────────────────────────────────────────────────────────
 
-        protected void AdvanceToNode(NodeData node)
+        /// <summary>Spawns and starts a new flow token at the given node.</summary>
+        private void StartToken(NodeData node)
         {
-            m_CurrentNode = node;
-            m_Advancing   = false;
-            StartCoroutine(ProcessNode(node));
+            if (!IsRunning || node == null) return;
+
+            var token = new FlowToken { Node = node };
+            token.Context = new GraphRunContext(this, Graph, m_RuntimeBlackboard)
+            {
+                OnFollow = port => FollowPort(token, port),
+                OnFork   = port => ForkPort(token, port),
+                OnEnd    = EndGraph,
+            };
+
+            m_ActiveTokens++;
+            StartCoroutine(RunToken(token));
         }
 
-        protected void FollowOutputPort(NodeData node, string portName)
+        private IEnumerator RunToken(FlowToken token)
         {
-            if (m_Advancing) return;   // guard against double-advance
-            m_Advancing = true;
+            yield return ProcessNode(token);
 
-            var next = GetNodeConnectedToOutput(node, portName);
-            if (next != null)
-                AdvanceToNode(next);
-            else
+            // Token finished. If it was the last one and nothing terminated the
+            // graph explicitly, the graph is done.
+            m_ActiveTokens--;
+            if (IsRunning && m_ActiveTokens <= 0)
                 EndGraph();
         }
 
-        private IEnumerator ProcessNode(NodeData node)
+        /// <summary>Advance a token along a port (one-shot; auto-forks on multi-edge).</summary>
+        private void FollowPort(FlowToken token, string portName)
         {
+            if (token.Advanced) return;   // guard against double-advance
+            token.Advanced = true;
+            SpawnSuccessors(token.Node, portName);
+        }
+
+        /// <summary>
+        /// Spawn token(s) down a port without consuming the calling token. The
+        /// caller keeps running (used by the auto-restarting Timer node).
+        /// </summary>
+        private void ForkPort(FlowToken token, string portName)
+        {
+            SpawnSuccessors(token.Node, portName);
+        }
+
+        /// <summary>Starts one token per edge leaving (node, portName).</summary>
+        private void SpawnSuccessors(NodeData node, string portName)
+        {
+            if (!IsRunning) return;
+            foreach (var edge in Graph.Edges)
+            {
+                if (edge.OutputNodeGuid != node.Guid || edge.OutputPortName != portName) continue;
+                var next = Graph.GetNode(edge.InputNodeGuid);
+                if (next != null) StartToken(next);
+            }
+        }
+
+        private IEnumerator ProcessNode(FlowToken token)
+        {
+            var node = token.Node;
+
             // ── Built-in structural nodes ─────────────────────────────────────
             switch (node.NodeType)
             {
                 case NodeRegistry.TypeStart:
                     yield return null;
-                    FollowOutputPort(node, "Out");
+                    FollowPort(token, "Out");
                     yield break;
 
                 case NodeRegistry.TypeEnd:
-                    EndGraph();
+                    // Under parallel flow an End node terminates only its own
+                    // token; the graph ends when the last token drains (or a
+                    // terminal handler calls ctx.End()).
                     yield break;
 
                 case NodeRegistry.TypeCondition:
-                    ProcessCondition(node);
+                    ProcessCondition(token);
                     yield break;
 
                 case NodeRegistry.TypeSetVariable:
                     ProcessSetVariable(node);
-                    FollowOutputPort(node, "Out");
+                    FollowPort(token, "Out");
                     yield break;
 
                 case NodeRegistry.TypeRunSubgraph:
-                    yield return ProcessRunSubgraph(node);
+                    yield return ProcessRunSubgraph(token);
                     yield break;
             }
 
             // ── Registered handlers ───────────────────────────────────────────
             if (m_Handlers.TryGetValue(node.NodeType, out var handler))
             {
-                yield return handler.Execute(node, m_Context);
+                yield return handler.Execute(node, token.Context);
                 yield break;
             }
 
             // ── Unknown node — warn and skip forward ──────────────────────────
             Debug.LogWarning($"[GraphRunner] No handler registered for node type '{node.NodeType}'. Skipping.");
-            FollowOutputPort(node, "Out");
+            FollowPort(token, "Out");
         }
 
         // ── Built-in node logic ───────────────────────────────────────────────
 
-        private void ProcessCondition(NodeData node)
+        private void ProcessCondition(FlowToken token)
         {
+            var node         = token.Node;
             var variableGuid = m_Context.GetLinkedGuid(node, "Variable");
             bool result      = false;
 
@@ -245,7 +333,7 @@ namespace Feazeyu.RPGSystems.Dialogue
                 }
             }
 
-            FollowOutputPort(node, result ? "True" : "False");
+            FollowPort(token, result ? "True" : "False");
         }
 
         private void ProcessSetVariable(NodeData node)
@@ -303,13 +391,14 @@ namespace Feazeyu.RPGSystems.Dialogue
             return Convert.ChangeType(valueStr, type, CultureInfo.InvariantCulture);
         }
 
-        private IEnumerator ProcessRunSubgraph(NodeData node)
+        private IEnumerator ProcessRunSubgraph(FlowToken token)
         {
-            var subAsset = ResolveSubgraphAsset(node);
+            var node      = token.Node;
+            var subAsset  = ResolveSubgraphAsset(node);
             if (subAsset == null)
             {
                 Debug.LogWarning("[GraphRunner] RunSubgraph: could not resolve a graph asset. Skipping.");
-                FollowOutputPort(node, "Out");
+                FollowPort(token, "Out");
                 yield break;
             }
 
@@ -328,7 +417,7 @@ namespace Feazeyu.RPGSystems.Dialogue
             yield return new WaitUntil(() => done);
 
             Destroy(subGO);
-            FollowOutputPort(node, "Out");
+            FollowPort(token, "Out");
         }
 
         /// <summary>
@@ -363,9 +452,9 @@ namespace Feazeyu.RPGSystems.Dialogue
         protected void EndGraph()
         {
             if (!IsRunning) return;
-            IsRunning     = false;
-            m_Advancing   = false;
-            m_CurrentNode = null;
+            IsRunning      = false;
+            StopAllCoroutines();   // tear down every remaining flow token
+            m_ActiveTokens = 0;
             OnGraphStop();
             OnGraphEnded?.Invoke();
         }

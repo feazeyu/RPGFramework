@@ -1,0 +1,380 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e2b2521672df6c408cfa6ce09e9f76d, type: 3}
+  m_Name: QuestFinal
+  m_EditorClassIdentifier: Feazeyu.RPGSystems.Quest::QuestGraph.Runtime.QuestGraphAsset
+  m_Nodes:
+  - Guid: eeeeeeee-0000-4000-8000-000000000001
+    NodeType: run_dialogue
+    DisplayName: Offer Quest
+    StoryText: 
+    Position: {x: -1294, y: 0}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Out
+      Direction: 1
+      Capacity: 1
+    Fields:
+    - FieldName: Graph
+      TypeName: Feazeyu.RPGSystems.Dialogue.DialogueGraphAsset
+      InlineValue: 
+      LinkedVariableGuid: d0109000-0000-4000-8000-000000000003
+  - Guid: eeeeeeee-0000-4000-8000-000000000002
+    NodeType: Condition
+    DisplayName: Accepted?
+    StoryText: 
+    Position: {x: -790, y: -40}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: True
+      Direction: 1
+      Capacity: 1
+    - PortName: False
+      Direction: 1
+      Capacity: 1
+    Fields:
+    - FieldName: Variable
+      TypeName: System.String
+      InlineValue: 
+      LinkedVariableGuid: acce9700-0000-4000-8000-000000000001
+    - FieldName: Operator
+      TypeName: System.String
+      InlineValue: ==
+      LinkedVariableGuid: 
+    - FieldName: Value
+      TypeName: System.String
+      InlineValue: true
+      LinkedVariableGuid: 
+  - Guid: eeeeeeee-0000-4000-8000-000000000003
+    NodeType: End
+    DisplayName: Declined
+    StoryText: 
+    Position: {x: -427, y: 433}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    Fields: []
+  - Guid: 8a9d97ec-0a92-4b06-a9b7-596dbac2f50e
+    NodeType: Start
+    DisplayName: Start
+    StoryText: 
+    Position: {x: -1510, y: 26}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: Out
+      Direction: 1
+      Capacity: 1
+    Fields: []
+  - Guid: b178a65f-66a4-42b4-978a-f6ec609a6bc2
+    NodeType: find_object
+    DisplayName: Find Inventory
+    StoryText: 
+    Position: {x: -480, y: 0}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Found
+      Direction: 1
+      Capacity: 1
+    - PortName: NotFound
+      Direction: 1
+      Capacity: 1
+    Fields:
+    - FieldName: Mode
+      TypeName: System.String
+      InlineValue: ByName
+      LinkedVariableGuid: 
+    - FieldName: Value
+      TypeName: System.String
+      InlineValue: PlayerInventory
+      LinkedVariableGuid: 
+    - FieldName: Target
+      TypeName: UnityEngine.GameObject
+      InlineValue: 
+      LinkedVariableGuid: 26d84182-416b-49ea-8514-a97c81f87401
+  - Guid: 714a8e3b-c81d-48dd-8af3-ac370e7321bc
+    NodeType: obj_accumulate
+    DisplayName: Get Burn
+    StoryText: 
+    Position: {x: -214, y: 138}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Completed
+      Direction: 1
+      Capacity: 1
+    - PortName: Failed
+      Direction: 1
+      Capacity: 1
+    Fields:
+    - FieldName: Title
+      TypeName: System.String
+      InlineValue: Take the Burn from the chest
+      LinkedVariableGuid: 
+    - FieldName: Description
+      TypeName: System.String
+      InlineValue: Open the chest and take the Burn item.
+      LinkedVariableGuid: 
+    - FieldName: ItemId
+      TypeName: System.Int32
+      InlineValue: 5
+      LinkedVariableGuid: 
+    - FieldName: Count
+      TypeName: System.Int32
+      InlineValue: 1
+      LinkedVariableGuid: 
+    - FieldName: Inventory
+      TypeName: UnityEngine.GameObject
+      InlineValue: 
+      LinkedVariableGuid: 26d84182-416b-49ea-8514-a97c81f87401
+    - FieldName: Optional
+      TypeName: System.Boolean
+      InlineValue: False
+      LinkedVariableGuid: 
+  - Guid: 3f03236f-cf94-4480-a3f3-d5b629228dfd
+    NodeType: obj_accumulate
+    DisplayName: Far Apples
+    StoryText: 
+    Position: {x: 701, y: -24}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Completed
+      Direction: 1
+      Capacity: 1
+    - PortName: Failed
+      Direction: 1
+      Capacity: 1
+    Fields:
+    - FieldName: Title
+      TypeName: System.String
+      InlineValue: Gather 5 apples from the far grove
+      LinkedVariableGuid: 
+    - FieldName: Description
+      TypeName: System.String
+      InlineValue: Only apples taken in the far grove count.
+      LinkedVariableGuid: 
+    - FieldName: ItemId
+      TypeName: System.Int32
+      InlineValue: 10
+      LinkedVariableGuid: 
+    - FieldName: Count
+      TypeName: System.Int32
+      InlineValue: 5
+      LinkedVariableGuid: 
+    - FieldName: Inventory
+      TypeName: UnityEngine.GameObject
+      InlineValue: 
+      LinkedVariableGuid: 26d84182-416b-49ea-8514-a97c81f87401
+    - FieldName: Optional
+      TypeName: System.Boolean
+      InlineValue: False
+      LinkedVariableGuid: 
+  - Guid: 5691a6f7-976a-4216-9369-59489b6e0abd
+    NodeType: gate_location
+    DisplayName: Far Grove
+    StoryText: 
+    Position: {x: -134, y: -347}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: Out
+      Direction: 1
+      Capacity: 1
+    Fields:
+    - FieldName: Target
+      TypeName: UnityEngine.Transform
+      InlineValue: FarArea
+      LinkedVariableGuid: 
+    - FieldName: Radius
+      TypeName: Single
+      InlineValue: 6
+      LinkedVariableGuid: 
+    - FieldName: Subject
+      TypeName: System.String
+      InlineValue: Player
+      LinkedVariableGuid: 
+  - Guid: 53704357-d559-4b76-95c1-8df3b88ed9cf
+    NodeType: timer
+    DisplayName: Window
+    StoryText: 
+    Position: {x: 282, y: 212}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: Begin
+      Direction: 0
+      Capacity: 1
+    - PortName: Timeout
+      Direction: 1
+      Capacity: 1
+    Fields:
+    - FieldName: Seconds
+      TypeName: Single
+      InlineValue: 30
+      LinkedVariableGuid: 
+    - FieldName: AutoRestart
+      TypeName: System.Boolean
+      InlineValue: False
+      LinkedVariableGuid: 
+  - Guid: 6a75bd6e-fe12-4946-a75c-f13bba4b581f
+    NodeType: CompleteQuest
+    DisplayName: Complete Quest
+    StoryText: 
+    Position: {x: 810, y: -141}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    Fields: []
+  - Guid: ce273a76-10aa-4fb2-a134-58d07309e1b1
+    NodeType: FailQuest
+    DisplayName: Fail Quest
+    StoryText: 
+    Position: {x: 579, y: 401}
+    Size: {x: 245, y: 129}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    Fields:
+    - FieldName: Reason
+      TypeName: System.String
+      InlineValue: You ran out of time
+      LinkedVariableGuid: 
+  - Guid: 0440bef3-9c11-421d-b586-db15b52883a8
+    NodeType: gate_item
+    DisplayName: Item Gate
+    StoryText: 
+    Position: {x: -130, y: -117}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: Out
+      Direction: 1
+      Capacity: 1
+    Fields:
+    - FieldName: ItemId
+      TypeName: System.Int32
+      InlineValue: 5
+      LinkedVariableGuid: 
+    - FieldName: Count
+      TypeName: System.Int32
+      InlineValue: 1
+      LinkedVariableGuid: 
+    - FieldName: Operator
+      TypeName: System.String
+      InlineValue: '>='
+      LinkedVariableGuid: 
+  m_Edges:
+  - Guid: dcf0853d-caf8-487b-93e3-20e8794d247a
+    OutputNodeGuid: 8a9d97ec-0a92-4b06-a9b7-596dbac2f50e
+    OutputPortName: Out
+    InputNodeGuid: eeeeeeee-0000-4000-8000-000000000001
+    InputPortName: In
+  - Guid: 33333333-e000-4000-8000-000000000001
+    OutputNodeGuid: eeeeeeee-0000-4000-8000-000000000001
+    OutputPortName: Out
+    InputNodeGuid: eeeeeeee-0000-4000-8000-000000000002
+    InputPortName: In
+  - Guid: 33333333-e000-4000-8000-000000000002
+    OutputNodeGuid: eeeeeeee-0000-4000-8000-000000000002
+    OutputPortName: True
+    InputNodeGuid: b178a65f-66a4-42b4-978a-f6ec609a6bc2
+    InputPortName: In
+  - Guid: 33333333-e000-4000-8000-000000000003
+    OutputNodeGuid: eeeeeeee-0000-4000-8000-000000000002
+    OutputPortName: False
+    InputNodeGuid: eeeeeeee-0000-4000-8000-000000000003
+    InputPortName: In
+  - Guid: c9efd46b-75c8-4a0b-9359-8db6589f3507
+    OutputNodeGuid: b178a65f-66a4-42b4-978a-f6ec609a6bc2
+    OutputPortName: Found
+    InputNodeGuid: 714a8e3b-c81d-48dd-8af3-ac370e7321bc
+    InputPortName: In
+  - Guid: db030f4e-c8cc-4a8e-ab01-d55df5ab69f6
+    OutputNodeGuid: 714a8e3b-c81d-48dd-8af3-ac370e7321bc
+    OutputPortName: Completed
+    InputNodeGuid: 3f03236f-cf94-4480-a3f3-d5b629228dfd
+    InputPortName: In
+  - Guid: ebd9b5d6-355f-4c04-a2d8-07ebd1c7cbfa
+    OutputNodeGuid: 714a8e3b-c81d-48dd-8af3-ac370e7321bc
+    OutputPortName: Completed
+    InputNodeGuid: 53704357-d559-4b76-95c1-8df3b88ed9cf
+    InputPortName: Begin
+  - Guid: 2de96376-ca76-4c93-af56-d28c1d846def
+    OutputNodeGuid: 5691a6f7-976a-4216-9369-59489b6e0abd
+    OutputPortName: Out
+    InputNodeGuid: 3f03236f-cf94-4480-a3f3-d5b629228dfd
+    InputPortName: In
+  - Guid: ab16d769-9844-4d59-85ed-0d38eb7e07aa
+    OutputNodeGuid: 3f03236f-cf94-4480-a3f3-d5b629228dfd
+    OutputPortName: Completed
+    InputNodeGuid: 6a75bd6e-fe12-4946-a75c-f13bba4b581f
+    InputPortName: In
+  - Guid: edcec32d-dc3b-476a-80e4-f3b3cbb8ce63
+    OutputNodeGuid: 53704357-d559-4b76-95c1-8df3b88ed9cf
+    OutputPortName: Timeout
+    InputNodeGuid: ce273a76-10aa-4fb2-a134-58d07309e1b1
+    InputPortName: In
+  - Guid: abce608e-ee3e-4854-a56e-dbfb057bf9bc
+    OutputNodeGuid: 0440bef3-9c11-421d-b586-db15b52883a8
+    OutputPortName: Out
+    InputNodeGuid: 3f03236f-cf94-4480-a3f3-d5b629228dfd
+    InputPortName: In
+  m_Blackboard:
+    m_Variables:
+    - rid: 5852939566913421395
+    - rid: 1900000000000000010
+    - rid: 1900000000000000011
+  ViewTransform: {x: 228, y: 529, z: 1}
+  BlackboardPosition: {x: 10, y: 60}
+  m_Kind: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 1900000000000000010
+      type: {class: BlackboardVariableBool, ns: Feazeyu.RPGSystems.Dialogue, asm: Feazeyu.RPGSystems.Dialogue}
+      data:
+        m_Name: Accepted
+        m_Guid: acce9700-0000-4000-8000-000000000001
+        m_Exposed: 1
+        m_Shared: 1
+        m_Value: 0
+    - rid: 1900000000000000011
+      type: {class: BlackboardVariableDialogueGraph, ns: Feazeyu.RPGSystems.Dialogue, asm: Feazeyu.RPGSystems.Dialogue}
+      data:
+        m_Name: OfferDialogue
+        m_Guid: d0109000-0000-4000-8000-000000000003
+        m_Exposed: 1
+        m_Shared: 0
+        m_Value: {fileID: 11400000, guid: 0ffe5d1a10ba4e0a9b1c2d3e4f500001, type: 2}
+    - rid: 5852939566913421395
+      type: {class: BlackboardVariableGameObject, ns: Feazeyu.RPGSystems.Dialogue, asm: Feazeyu.RPGSystems.Dialogue}
+      data:
+        m_Name: Inventory
+        m_Guid: 26d84182-416b-49ea-8514-a97c81f87401
+        m_Exposed: 1
+        m_Shared: 0
+        m_Value: {fileID: 0}

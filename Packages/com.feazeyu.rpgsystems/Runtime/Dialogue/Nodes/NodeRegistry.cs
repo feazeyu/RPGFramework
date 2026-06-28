@@ -114,11 +114,12 @@ namespace Feazeyu.RPGSystems.Dialogue
             Register(new NodeInfo
             {
                 TypeId = TypeStart, DisplayName = "Start", Category = "Flow",
-                Description = "Entry point. Execution begins here.",
+                Description = "Entry point. Execution begins here. Wire Out to multiple nodes to " +
+                              "fork concurrent flow branches.",
                 AccentColor = ColStart, Icon = "▶",
                 DefaultPorts = new List<PortData>
                 {
-                    new PortData { PortName = "Out", Direction = PortDirection.Output, Capacity = PortCapacity.Single }
+                    new PortData { PortName = "Out", Direction = PortDirection.Output, Capacity = PortCapacity.Multi }
                 }
             });
 

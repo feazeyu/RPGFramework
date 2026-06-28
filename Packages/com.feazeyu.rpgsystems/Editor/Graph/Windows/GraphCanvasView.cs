@@ -224,6 +224,11 @@ namespace Feazeyu.RPGSystems.EditorTools
 
             AddElement(view);
             m_NodeViews[data.Guid] = view;
+
+            // Force a relayout once the node is attached to the panel. Without this,
+            // nodes added while the window is initialising (OnEnable → Populate) render
+            // blank until the first interaction relayout — see RefreshAfterAttach.
+            view.schedule.Execute(view.RefreshAfterAttach);
             return view;
         }
 

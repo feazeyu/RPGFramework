@@ -9,20 +9,20 @@ namespace QuestGraph.Nodes
     /// <summary>
     /// Handler for the Collect Item objective node (typeId = "obj_collect").
     ///
-    /// <b>Normal mode</b> (Continuous = false):
-    ///   Waits until the linked Inventory container has Count of ItemId, then follows "Completed".
+    /// <b>Level-based</b>: completes once the linked Inventory container holds at
+    /// least Count of ItemId — it checks the absolute amount, so whatever the
+    /// player already carried counts. For "acquire N from now on, ignoring the
+    /// starting amount" (and gate/timer support) use <b>Accumulate Item</b>.
     ///
-    /// <b>Continuous mode</b> (Continuous = true):
-    ///   Follows "Out" immediately. A background monitor checks every half-second;
-    ///   if the container drops below Count items, the quest fails.
-    ///   Example use: "Kill 5 slimes while carrying the magic sword."
-    ///   Graph: [Collect Item (sword, continuous)] --Out--> [Kill Count (5 slimes)]
+    /// Waits until the container has Count of ItemId, then follows "Completed".
+    /// For a "while carrying X" constraint, attach an Item Gate to the guarded
+    /// objective's In port instead.
     ///
     /// Fields:
     ///   Inventory — blackboard GameObject variable with an IItemContainer component
     /// </summary>
     [QuestNode(QuestNodeRegistry.TypeObjCollect, "Collect Item", "Objectives",
-        "Have N of an item. Continuous=true monitors in background for 'while carrying' quests.")]
+        "Have N of an item, then follow Completed.")]
     public class CollectItemObjectiveHandler : IGraphNodeHandler
     {
         public string NodeTypeId => QuestNodeRegistry.TypeObjCollect;
@@ -39,7 +39,6 @@ namespace QuestGraph.Nodes
             var desc   = ctx.ResolveString(node, "Description");
             int.TryParse(ctx.ResolveString(node, "ItemId"),     out int itemId);
             int.TryParse(ctx.ResolveString(node, "Count"),      out int count);
-            bool.TryParse(ctx.ResolveString(node, "Continuous"), out bool continuous);
             bool.TryParse(ctx.ResolveString(node, "Optional"),   out bool optional);
             if (count <= 0) count = 1;
 
@@ -59,15 +58,7 @@ namespace QuestGraph.Nodes
                 Optional    = optional,
             };
 
-            // ── Dispatch ──────────────────────────────────────────────────────
-            if (continuous)
-            {
-                runner.StartCoroutine(ContinuousMonitor(runner, info, itemId, count, container));
-                ctx.Follow("Out");
-                yield break;
-            }
-
-            // Normal: wait until the container has enough items
+            // Wait until the container has enough items
             runner.RegisterObjective(info);
 
             float nextCheck = 0f;
@@ -86,32 +77,6 @@ namespace QuestGraph.Nodes
 
             runner.UnregisterObjective(node.Guid, outcome: true);
             ctx.Follow("Completed");
-        }
-
-        // ── Continuous background monitor ─────────────────────────────────────
-
-        private static IEnumerator ContinuousMonitor(
-            QuestRunner runner, ObjectiveInfo info, int itemId, int count, IItemContainer container)
-        {
-            runner.RegisterObjective(info);
-
-            float nextCheck = 0f;
-            while (runner.IsRunning)
-            {
-                if (Time.time >= nextCheck)
-                {
-                    nextCheck = Time.time + k_CheckInterval;
-                    if (container.CountItem(itemId) < count)
-                    {
-                        runner.UnregisterObjective(info.NodeGuid, outcome: false);
-                        runner.ForceFailQuest($"Lost required item: {info.Title}");
-                        yield break;
-                    }
-                }
-                yield return null;
-            }
-
-            runner.UnregisterObjective(info.NodeGuid, outcome: true);
         }
 
         // ── Helpers ───────────────────────────────────────────────────────────

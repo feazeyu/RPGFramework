@@ -296,6 +296,14 @@ namespace Feazeyu.RPGSystems.EditorTools
                         m_RefreshNodeView?.Invoke(m_Node?.Guid ?? "");
                     });
                 }
+                else if (GraphNodeView.TryGetInlineValueType(field, out var inlineType))
+                {
+                    input = GraphNodeView.BuildTypedInlineControl(field, inlineType, () =>
+                    {
+                        if (asset) EditorUtility.SetDirty(asset);
+                        m_RefreshNodeView?.Invoke(m_Node?.Guid ?? "");
+                    });
+                }
                 else
                 {
                     var tf = new TextField { value = field.InlineValue ?? "" };
