@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -65,6 +65,7 @@ namespace Feazeyu.RPGSystems.Core.Utilities
             return dictionary;
         }
 
+        /// <summary>Flattens the runtime dictionary into the serialized <see cref="pairs"/> array.</summary>
         public void OnBeforeSerialize()
         {
             dictionary ??= new();
@@ -84,6 +85,7 @@ namespace Feazeyu.RPGSystems.Core.Utilities
             }
         }
 
+        /// <summary>Rebuilds the runtime dictionary from the serialized <see cref="pairs"/> array.</summary>
         public void OnAfterDeserialize()
         {
             dictionary ??= new();
@@ -138,8 +140,10 @@ namespace Feazeyu.RPGSystems.Core.Utilities
         [Serializable]
         private struct Pair
         {
+            /// <summary>Key.</summary>
             [SerializeField]
             public TKey Key;
+            /// <summary>Value.</summary>
             [SerializeField]
             public TValue Value;
 

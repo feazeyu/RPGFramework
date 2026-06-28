@@ -1,4 +1,4 @@
-﻿using Feazeyu.RPGSystems.Core.Utilities;
+using Feazeyu.RPGSystems.Core.Utilities;
 using Feazeyu.RPGSystems.Items;
 using System;
 using System.Collections;
@@ -50,7 +50,9 @@ namespace Feazeyu.RPGSystems.Inventory
         /// </summary>
         private int draggedId;
 
+        /// <summary>Dragged id.</summary>
         public int DraggedId => draggedId;
+        /// <summary>Drop handled.</summary>
         public bool DropHandled { get; set; }
 
         /// <summary>
@@ -85,7 +87,6 @@ namespace Feazeyu.RPGSystems.Inventory
             if (_slot == null)
                 Debug.LogWarning($"InventoryItem {gameObject.name} is not in an inventory");
 
-            // Find DragLayer
             dragLayer = canvas.transform.Find("DragLayer");
             if (dragLayer == null)
             {
@@ -119,7 +120,7 @@ namespace Feazeyu.RPGSystems.Inventory
             }
             else
             {
-                eventData.pointerDrag = null; // Prevents the item from being dragged if it cannot be removed
+                eventData.pointerDrag = null;
             }
         }
 
@@ -174,7 +175,6 @@ namespace Feazeyu.RPGSystems.Inventory
             draggedItem.transform.localPosition = Vector3.zero;
             draggedItem.GetComponent<RectTransform>().offsetMin = Vector2.zero;
             draggedItem.GetComponent<RectTransform>().offsetMax = Vector2.zero;
-            //TODO Remove magic multiplier
             draggedItem.GetComponent<RectTransform>().sizeDelta = draggedItem.GetComponent<Image>().sprite.rect.size *100/32;
             canvasGroup.blocksRaycasts = false;
         }
@@ -187,7 +187,7 @@ namespace Feazeyu.RPGSystems.Inventory
         {
             if (_slot == null)
             {
-                return; // No item to display tooltip for
+                return;
             }
             cursorInside = true;
             tooltipDisplayCoroutine = StartCoroutine(DisplayTooltip(eventData));

@@ -2,6 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
+/// <summary>Adds a GameObject menu entry for creating an inventory list in the scene.</summary>
 public static class InventoryListHierarchyContext
 {
     [MenuItem("GameObject/RPGFramework/Inventory/Create Inventory List", false, 10)]
@@ -10,7 +11,6 @@ public static class InventoryListHierarchyContext
         GameObject go = new GameObject("InventoryList");
         Undo.RegisterCreatedObjectUndo(go, "Create InventoryList");
 
-        // If right-clicked on another GameObject, parent under it
         GameObject context = menuCommand.context as GameObject;
         if (context != null)
         {

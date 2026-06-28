@@ -11,16 +11,22 @@ namespace Feazeyu.RPGSystems.Dialogue
     /// </summary>
     public class NodeInfo
     {
-        public string   TypeId;          // unique key stored in NodeData.NodeType
+        /// <summary>Type id.</summary>
+        public string   TypeId;
+        /// <summary>Display name.</summary>
         public string   DisplayName;
-        public string   Category;        // used to group entries in the context menu
+        /// <summary>Category.</summary>
+        public string   Category;
+        /// <summary>Description.</summary>
         public string   Description;
+        /// <summary>Accent color.</summary>
         public Color    AccentColor;
-        public string   Icon;            // unicode glyph or resource path
+        /// <summary>Icon.</summary>
+        public string   Icon;
 
-        // Default port layout – editor uses these when creating a new node.
+        /// <summary>Default ports.</summary>
         public List<PortData> DefaultPorts = new List<PortData>();
-        // Default field layout.
+        /// <summary>Default fields.</summary>
         public List<FieldData> DefaultFields = new List<FieldData>();
     }
 
@@ -44,30 +50,42 @@ namespace Feazeyu.RPGSystems.Dialogue
     /// </summary>
     public abstract class NodeRegistry
     {
-        // ── Shared built-in type IDs ─────────────────────────────────────────
-        // Universal across all graph systems.
 
+        /// <summary>Type start.</summary>
         public const string TypeStart        = "Start";
+        /// <summary>Type end.</summary>
         public const string TypeEnd          = "End";
+        /// <summary>Type condition.</summary>
         public const string TypeCondition    = "Condition";
+        /// <summary>Type set variable.</summary>
         public const string TypeSetVariable  = "SetVariable";
+        /// <summary>Type trigger event.</summary>
         public const string TypeTriggerEvent = "TriggerEvent";
+        /// <summary>Type wait for event.</summary>
         public const string TypeWaitForEvent = "WaitForEvent";
+        /// <summary>Type run subgraph.</summary>
         public const string TypeRunSubgraph  = "RunSubgraph";
+        /// <summary>Type find object.</summary>
         public const string TypeFindObject   = "find_object";
+        /// <summary>Type debug log.</summary>
         public const string TypeDebugLog     = "debug_log";
+        /// <summary>Type spawn prefab.</summary>
         public const string TypeSpawnPrefab  = "spawn_prefab";
 
-        // ── Shared accent colours ────────────────────────────────────────────
 
+        /// <summary>Col flow.</summary>
         public static readonly Color ColFlow      = new Color(0.18f, 0.62f, 0.48f);
+        /// <summary>Col logic.</summary>
         public static readonly Color ColLogic     = new Color(0.94f, 0.65f, 0.20f);
+        /// <summary>Col event.</summary>
         public static readonly Color ColEvent     = new Color(0.88f, 0.31f, 0.44f);
+        /// <summary>Col variable.</summary>
         public static readonly Color ColVariable  = new Color(0.69f, 0.42f, 0.97f);
+        /// <summary>Col start.</summary>
         public static readonly Color ColStart     = new Color(0.34f, 0.78f, 0.34f);
+        /// <summary>Col end.</summary>
         public static readonly Color ColEnd       = new Color(0.75f, 0.25f, 0.25f);
 
-        // ── Lookup table ─────────────────────────────────────────────────────
 
         private Dictionary<string, NodeInfo> _registry;
 
@@ -101,7 +119,6 @@ namespace Feazeyu.RPGSystems.Dialogue
         /// </summary>
         protected abstract void Build();
 
-        // ── Shared built-in nodes ────────────────────────────────────────────
 
         /// <summary>
         /// Registers the flow/logic/scene/event nodes that every graph system

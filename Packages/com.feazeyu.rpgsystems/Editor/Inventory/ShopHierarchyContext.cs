@@ -2,6 +2,7 @@ using Feazeyu.RPGSystems.Inventory;
 using UnityEditor;
 using UnityEngine;
 
+/// <summary>Adds a GameObject menu entry for creating a shop in the scene.</summary>
 public static class ShopHierarchyContext
 {
     [MenuItem("GameObject/RPGFramework/Shop/Create Shop Grid", false, 10)]

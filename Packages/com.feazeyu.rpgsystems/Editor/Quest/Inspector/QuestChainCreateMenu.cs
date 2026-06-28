@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using UnityEditor;
 using UnityEditor.ProjectWindowCallback;
 using UnityEngine;
@@ -41,6 +41,7 @@ namespace Feazeyu.RPGSystems.EditorTools
         /// </summary>
         private class CreateChainEndAction : EndNameEditAction
         {
+            /// <inheritdoc/>
             public override void Action(int instanceId, string pathName, string resourceFile)
             {
                 var asset = ScriptableObject.CreateInstance<QuestGraphAsset>();
@@ -49,7 +50,6 @@ namespace Feazeyu.RPGSystems.EditorTools
                 AssetDatabase.SaveAssets();
                 AssetDatabase.Refresh();
 
-                // Select and ping the new asset to match native UX.
                 Selection.activeObject = asset;
                 EditorGUIUtility.PingObject(asset);
             }

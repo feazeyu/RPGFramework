@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine.UIElements;
 using Feazeyu.RPGSystems.Dialogue;
@@ -27,6 +27,7 @@ namespace Feazeyu.RPGSystems.EditorTools
     /// </summary>
     public static class NodeViewDecoratorRegistry
     {
+        /// <summary>Decorator.</summary>
         public delegate void Decorator(
             VisualElement container,
             NodeData      node,

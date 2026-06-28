@@ -18,8 +18,6 @@ namespace Feazeyu.RPGSystems.Dialogue
     /// </summary>
     public static class SharedBlackboardStore
     {
-        // Keyed by variable Guid. Clone() preserves the Guid, so the shared
-        // instance stays findable via Blackboard.GetVariable(guid).
         private static readonly Dictionary<string, BlackboardVariable> s_Shared
             = new Dictionary<string, BlackboardVariable>();
 
@@ -41,7 +39,6 @@ namespace Feazeyu.RPGSystems.Dialogue
             if (authored == null) return null;
 
             var key = authored.Guid;
-            // No stable identity to share on — fall back to an isolated clone.
             if (string.IsNullOrEmpty(key)) return authored.Clone();
 
             if (!s_Shared.TryGetValue(key, out var shared))

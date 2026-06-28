@@ -18,9 +18,7 @@ namespace Feazeyu.RPGSystems.EditorTools
     [InitializeOnLoad]
     public static class QuestBlackboardTypeRegistrar
     {
-        // Violet matches Quest Reference node accent in QuestNodeRegistry.
         private static readonly Color QuestGraphColour = new Color(0.62f, 0.55f, 0.88f);
-        // Amber matches Objective node accent — "a quest in abstract".
         private static readonly Color QuestColour      = new Color(0.95f, 0.72f, 0.24f);
 
         static QuestBlackboardTypeRegistrar()

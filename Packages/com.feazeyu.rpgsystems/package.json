@@ -5,6 +5,7 @@
   "description": "Graph-based dialogue and quest systems and inventory for RPGs in Unity.",
   "unity": "6000.0",
   "unityRelease": "43f1",
+  "license": "MIT",
   "author": {
     "name": "feazeyu"
   },

@@ -13,8 +13,10 @@ namespace Feazeyu.RPGSystems.Dialogue
         "Adds money to the player's wallet and continues.")]
     public class AddCurrencyNodeHandler : IGraphNodeHandler
     {
+        /// <inheritdoc/>
         public string NodeTypeId => "add_currency";
 
+        /// <inheritdoc/>
         public IEnumerator Execute(NodeData node, GraphRunContext ctx)
         {
             int.TryParse(ctx.ResolveString(node, "Amount"), out int amount);

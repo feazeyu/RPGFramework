@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -19,7 +19,6 @@ namespace Feazeyu.RPGSystems.EditorTools
     /// </summary>
     public static class BlackboardPropertyBridge
     {
-        // ── Index lookup ──────────────────────────────────────────────────────
 
         /// <summary>
         /// Returns the array index of the variable with the given GUID, or -1.
@@ -60,32 +59,37 @@ namespace Feazeyu.RPGSystems.EditorTools
             return map;
         }
 
-        // ── Field accessors ───────────────────────────────────────────────────
 
+        /// <summary>Find variable property.</summary>
         public static SerializedProperty FindVariableProperty(SerializedObject so, string guid)
         {
             int i = FindVariableIndex(so, guid);
             return i < 0 ? null : so.FindProperty($"m_Blackboard.m_Variables.Array.data[{i}]");
         }
 
+        /// <summary>Find value property.</summary>
         public static SerializedProperty FindValueProperty(SerializedObject so, string guid)
         {
             int i = FindVariableIndex(so, guid);
             return i < 0 ? null : so.FindProperty($"m_Blackboard.m_Variables.Array.data[{i}].m_Value");
         }
 
+        /// <summary>Find value property at.</summary>
         public static SerializedProperty FindValuePropertyAt(SerializedObject so, int index)
             => so.FindProperty($"m_Blackboard.m_Variables.Array.data[{index}].m_Value");
 
+        /// <summary>Find variable field.</summary>
         public static SerializedProperty FindVariableField(SerializedObject so, string guid, string fieldName)
         {
             int i = FindVariableIndex(so, guid);
             return i < 0 ? null : so.FindProperty($"m_Blackboard.m_Variables.Array.data[{i}].{fieldName}");
         }
 
+        /// <summary>Find variable field at.</summary>
         public static SerializedProperty FindVariableFieldAt(SerializedObject so, int index, string fieldName)
             => so.FindProperty($"m_Blackboard.m_Variables.Array.data[{index}].{fieldName}");
 
+        /// <summary>Static.</summary>
         public static (SerializedProperty element, SerializedProperty value)
             FindBoth(SerializedObject so, string guid)
         {
@@ -97,11 +101,11 @@ namespace Feazeyu.RPGSystems.EditorTools
             );
         }
 
-        // ── SerializedObject cache ────────────────────────────────────────────
 
         private static readonly Dictionary<int, SerializedObject> s_Cache
             = new Dictionary<int, SerializedObject>();
 
+        /// <summary>Get serialized object.</summary>
         public static SerializedObject GetSerializedObject(UnityEngine.Object asset)
         {
             if (asset == null) return null;
@@ -113,12 +117,14 @@ namespace Feazeyu.RPGSystems.EditorTools
             return so;
         }
 
+        /// <summary>Invalidate.</summary>
         public static void Invalidate(UnityEngine.Object asset)
         {
             if (asset == null) return;
             s_Cache.Remove(asset.GetInstanceID());
         }
 
+        /// <summary>Invalidate all.</summary>
         public static void InvalidateAll() => s_Cache.Clear();
     }
 }

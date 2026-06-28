@@ -20,11 +20,11 @@ namespace Feazeyu.RPGSystems.Dialogue
     ///       public override IEnumerator Execute(NodeData node, GraphRunContext ctx)
     ///       {
     ///           m_Count = 0;
-    ///           // EnemyManager fires an event; subscribe here
+    ///
     ///           EnemyManager.OnKill += OnKill;
     ///           yield return new WaitUntil(() => m_Count >= Required);
     ///           EnemyManager.OnKill -= OnKill;
-    ///           ctx.Follow("Out");   // advance the graph
+    ///           ctx.Follow("Out");
     ///       }
     ///
     ///       private void OnKill() => m_Count++;

@@ -127,13 +127,11 @@ namespace Feazeyu.RPGSystems.Items
             GUI.BeginGroup(position);
             position.width -= position.x;
 
-            // Effect rows
             for (int i = 0; i < list.Count; i++)
             {
                 StatEffectF effect = list[i];
                 Rect row = position.CropHeight(EditorHelper.LineHeight);
 
-                // Remove button
                 Rect buttonRect = row.PushRight(row.width - EditorHelper.LineHeight * 1.5f);
                 if (GUI.Button(buttonRect, EditorHelper.TrashIcon))
                 {
@@ -147,21 +145,18 @@ namespace Feazeyu.RPGSystems.Items
 
                 EditorGUI.DrawRect(position.Push(-Margin, Margin / 2f).Crop(1f, EditorHelper.LineHeight * 2f), Color.white);
 
-                // Stat selection
                 Rect statRect = row.CropWidth(position.width * 0.3f);
                 effect.Stat = (Stat)EditorGUI.EnumPopup(statRect, effect.Stat);
                 row = row.PushRight(statRect.width);
 
                 float inputWidth = (row.width - (2f * Space) - (3f * SignWidth)) / 2f;
 
-                // Flat
                 row = row.PushRight(Space);
                 EditorGUI.LabelField(row, "+");
                 row = row.PushRight(SignWidth);
                 effect.Flat = EditorGUI.FloatField(row.CropWidth(inputWidth), effect.Flat);
                 row = row.PushRight(inputWidth + Space);
 
-                // Percentage
                 EditorGUI.LabelField(row, "+");
                 row = row.PushRight(SignWidth);
                 effect.Multiply = EditorGUI.FloatField(row.CropWidth(inputWidth), (effect.Multiply + 1f) * 100f) / 100f - 1f;
@@ -174,7 +169,6 @@ namespace Feazeyu.RPGSystems.Items
                 Vector2 labelSize = EditorHelper.Label(row, "Scaling");
                 row = row.PushRight(labelSize.x + Margin);
 
-                // Scaling
                 effect.Scaling = (Scaling)EditorGUI.EnumPopup(row.CropWidth(row.width * 0.3f), effect.Scaling);
                 row = row.PushRight(row.width * 0.3f + Margin);
 
@@ -183,7 +177,6 @@ namespace Feazeyu.RPGSystems.Items
                 position = position.PushDown(EditorHelper.LineHeight + Margin);
             }
 
-            // Add button
             if (GUI.Button(position.SliceCenter(position.width * 0.6f), "Add Effect"))
             {
                 list.Add(new StatEffectF((INamed)property.serializedObject.targetObject, Stat.MaxHitPoints));

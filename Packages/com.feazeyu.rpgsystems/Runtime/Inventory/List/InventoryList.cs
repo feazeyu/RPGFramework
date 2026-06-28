@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Feazeyu.RPGSystems.Items;
 #if UNITY_EDITOR
@@ -80,7 +80,6 @@ namespace Feazeyu.RPGSystems.Inventory
         protected virtual void OnValidate()
         {
 #if UNITY_EDITOR
-            // Ensure the generator UI is only added once
             if (!suppressAutoAddUI && GetComponent<InventoryListGenerator>() == null)
             {
                 EditorApplication.delayCall += () => {
@@ -95,20 +94,18 @@ namespace Feazeyu.RPGSystems.Inventory
 #endif
         }
 
-        // ── IUIPositionalItemContainer ────────────────────────────────────────
 
+        /// <summary>Put item.</summary>
         public virtual bool PutItem(Vector2Int position, GameObject item)
         {
             contents ??= new();
             bool added = false;
 
-            // Try the hinted slot first (drag-drop targeting).
             if (position.y >= 0 && position.y < contents.Count && contents[position.y].PutItem(item))
             {
                 added = true;
             }
 
-            // Scan all slots for any that will accept the item.
             if (!added)
             {
                 foreach (var slot in contents)
@@ -117,7 +114,6 @@ namespace Feazeyu.RPGSystems.Inventory
                 }
             }
 
-            // Otherwise take a new slot.
             if (!added)
             {
                 var newSlot = new StackableInventorySlot(item);
@@ -135,6 +131,7 @@ namespace Feazeyu.RPGSystems.Inventory
             return added;
         }
 
+        /// <summary>Remove item.</summary>
         public virtual int RemoveItem(Vector2Int position)
         {
             var itemSlot = contents[position.y];
@@ -150,6 +147,7 @@ namespace Feazeyu.RPGSystems.Inventory
             return -1;
         }
 
+        /// <summary>Get item.</summary>
         public GameObject GetItem(Vector2Int position)
         {
             if (contents == null || position.y < 0 || position.y >= contents.Count)
@@ -160,6 +158,7 @@ namespace Feazeyu.RPGSystems.Inventory
             return contents[position.y].Item;
         }
 
+        /// <summary>Try add item.</summary>
         public bool TryAddItem(int itemId, int count = 1)
         {
             var prefab = InventoryManager.Instance?.GetItemById(itemId);
@@ -207,6 +206,7 @@ namespace Feazeyu.RPGSystems.Inventory
             return true;
         }
 
+        /// <summary>Redraw contents.</summary>
         public void RedrawContents()
         {
             uiGenerator?.GenerateUI();
@@ -222,6 +222,7 @@ namespace Feazeyu.RPGSystems.Inventory
             return item != null ? item.info.Name : string.Empty;
         }
 
+        /// <inheritdoc/>
         public void OnDrop(PointerEventData eventData)
         {
             var handler = eventData.pointerDrag?.GetComponent<InventoryItemUIHandler>();
@@ -231,7 +232,6 @@ namespace Feazeyu.RPGSystems.Inventory
                 handler.DropHandled = true;
         }
 
-        // ── Visibility ────────────────────────────────────────────────────────
 
         /// <summary>
         /// Toggles the active state of the inventory UI.

@@ -1,4 +1,4 @@
-﻿using Feazeyu.RPGSystems.Core.Utilities;
+using Feazeyu.RPGSystems.Core.Utilities;
 using Feazeyu.RPGSystems.Items;
 using System;
 using System.Diagnostics.CodeAnalysis;
@@ -36,10 +36,12 @@ namespace Feazeyu.RPGSystems.Inventory
             RedrawContents();
         }
 
+        /// <summary>Suppress auto add ui.</summary>
         [HideInInspector]
         public bool suppressAutoAddUI = false;
 
 #if UNITY_EDITOR
+        /// <summary>Persist play mode changes.</summary>
         [HideInInspector]
         public bool persistPlayModeChanges = false;
 #endif
@@ -166,7 +168,6 @@ namespace Feazeyu.RPGSystems.Inventory
         protected virtual void OnValidate()
         {
 #if UNITY_EDITOR
-            //Ensure the generator UI is only added once
             if (!suppressAutoAddUI && GetComponent<InventoryGridGenerator>() == null)
             {
                 EditorApplication.delayCall += () => {
@@ -205,7 +206,6 @@ namespace Feazeyu.RPGSystems.Inventory
             if (!Cells.TryGet(position.x, position.y, out var cell) || cell.Item == null)
                 return -1;
 
-            // A stack deeper than one item keeps its footprint; just take one off the top.
             if (cell is StackableInventorySlot stack && stack.WouldRemainAfterRemove)
             {
                 int removedId = cell.RemoveItem();
@@ -217,7 +217,6 @@ namespace Feazeyu.RPGSystems.Inventory
             var itemInfo = item.GetComponent<Item>().info;
             var center = item.GetComponent<Item>().GetAnchorSlot();
 
-            // Remove anchor references for all slots occupied by the item
             foreach (Vector2Int otherPosition in itemInfo.Shape.Positions)
             {
                 int x = position.x + otherPosition.x - center.x;
@@ -228,7 +227,6 @@ namespace Feazeyu.RPGSystems.Inventory
                 }
             }
 
-            // Remove the item from the anchor slot
             int removed = cell.RemoveItem();
             if (removed >= 0) RaiseItemRemoved(removed);
             return removed;
@@ -245,7 +243,6 @@ namespace Feazeyu.RPGSystems.Inventory
             ItemInfo itemInfo = item.GetComponent<Item>().info;
             Vector2Int center = item.GetComponent<Item>().GetAnchorSlot();
 
-            // Stack onto the target cell when it already holds a matching, non-full stack.
             if (allowStacking
                 && Cells.TryGet(position.x, position.y, out var target)
                 && target is StackableInventorySlot stack
@@ -322,12 +319,12 @@ namespace Feazeyu.RPGSystems.Inventory
             return true;
         }
 
+        /// <summary>Try add item.</summary>
         protected virtual bool TryAddItem(GameObject item)
         {
             var itemComp = item.GetComponent<Item>();
             if (itemComp == null) return false;
 
-            // Prefer consolidating into an existing matching stack before taking a new cell.
             if (allowStacking && TryStackInto(itemComp.info.id, item))
             {
                 RaiseItemAdded(itemComp.info.id);
@@ -375,6 +372,7 @@ namespace Feazeyu.RPGSystems.Inventory
             return false;
         }
 
+        /// <summary>Try add item.</summary>
         public bool TryAddItem(int itemId, int count = 1)
         {
             var prefab = InventoryManager.Instance?.GetItemById(itemId);
@@ -416,7 +414,6 @@ namespace Feazeyu.RPGSystems.Inventory
                         || cell.anchorPosition != new Vector2Int(-1, -1))
                         continue;
 
-                    // Drain a stack one at a time so a single deep stack can satisfy the request.
                     var pos = new Vector2Int(x, y);
                     while (remaining > 0 && cell.ItemId == itemId)
                     {
@@ -471,7 +468,6 @@ namespace Feazeyu.RPGSystems.Inventory
                     if (Cells.TryGet(x, y, out var cell) && cell.Item != null)
                     {
                         var item = cell.Item;
-                        // Collapse any stack (and disarm infinite) so a single RemoveItem fully empties it.
                         if (cell is StackableInventorySlot s)
                         {
                             s.itemCount = 1;

@@ -18,8 +18,10 @@ namespace Feazeyu.RPGSystems.Dialogue
         "Opens the shop UI on the target Shopkeep/ShopGridUI GameObject and continues.")]
     public class OpenShopNodeHandler : IGraphNodeHandler
     {
+        /// <inheritdoc/>
         public string NodeTypeId => "open_shop";
 
+        /// <inheritdoc/>
         public IEnumerator Execute(NodeData node, GraphRunContext ctx)
         {
             var field = ctx.GetField(node, "Target");
@@ -43,14 +45,11 @@ namespace Feazeyu.RPGSystems.Dialogue
 
         private static void OpenShopOn(GameObject go, string mode)
         {
-            // An empty / "Both" mode opens whichever UIs are present; "Grid"/"List" restrict to one.
             bool both = string.IsNullOrEmpty(mode)
                         || mode.Equals("Both", System.StringComparison.OrdinalIgnoreCase);
             bool openGrid = both || mode.Equals("Grid", System.StringComparison.OrdinalIgnoreCase);
             bool openList = both || mode.Equals("List", System.StringComparison.OrdinalIgnoreCase);
 
-            // Search on the target and its children — handles both direct UI components
-            // and the case where the Shopkeep holds the UI references as children.
             if (openGrid) go.GetComponentInChildren<ShopGridUI>(true)?.OpenInventory();
             if (openList) go.GetComponentInChildren<ShopListUI>(true)?.OpenInventory();
         }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Feazeyu.RPGSystems.Dialogue;
@@ -35,6 +35,7 @@ namespace Feazeyu.RPGSystems.EditorTools
     /// </summary>
     public static class BlackboardVariableTypeRegistry
     {
+        /// <summary>One registered blackboard variable type: its display name, colour, and factory.</summary>
         public struct Entry
         {
             /// <summary>Short display name — shown in the picker and the type pill.</summary>
@@ -70,6 +71,7 @@ namespace Feazeyu.RPGSystems.EditorTools
             s_Entries.Add(entry);
         }
 
+        /// <summary>All.</summary>
         public static IReadOnlyList<Entry> All => s_Entries;
 
         /// <summary>Look up an entry by type-name. Returns null if no match.</summary>

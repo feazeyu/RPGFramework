@@ -1,4 +1,4 @@
-﻿using UnityEditor;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 using System.Collections.Generic;
@@ -16,26 +16,34 @@ namespace Feazeyu.RPGSystems.EditorTools
     /// </summary>
     public class DialogueGraphWindow : GraphEditorWindow
     {
-        // ── Template-method overrides ────────────────────────────────────────
 
+        /// <inheritdoc/>
         protected override string WindowTitle     => "Dialogue Graph";
+        /// <inheritdoc/>
         protected override string PrefKeyPrefix   => "Feazeyu.RPGSystems.Editor";
+        /// <inheritdoc/>
         protected override string NewAssetName    => "NewDialogueGraph";
+        /// <inheritdoc/>
         protected override string SaveDialogTitle => "New Dialogue Graph";
+        /// <inheritdoc/>
         protected override string WindowIcon      => "◈";
 
+        /// <inheritdoc/>
         protected override IReadOnlyDictionary<string, NodeInfo> NodeRegistrySource
             => DialogueNodeRegistry.All;
 
+        /// <inheritdoc/>
         protected override StyleSheet ThemeStyleSheet => DialogueGraphStyleSheet.Get();
 
+        /// <inheritdoc/>
         protected override string GraphViewCssClass => "dialogue-graph-view";
 
+        /// <inheritdoc/>
         protected override GraphAsset CreateAssetInstance()
             => CreateInstance<DialogueGraphAsset>();
 
-        // ── Open ─────────────────────────────────────────────────────────────
 
+        /// <summary>Open.</summary>
         [MenuItem("Window/Dialogue Graph", priority = 200)]
         public static DialogueGraphWindow Open()
             => GetWindow<DialogueGraphWindow>();
@@ -48,10 +56,11 @@ namespace Feazeyu.RPGSystems.EditorTools
         }
     }
 
-    // ── Asset double-click handler ───────────────────────────────────────────
 
+    /// <summary>Opens a <see cref="DialogueGraphAsset"/> in the graph window when double-clicked in the Project view.</summary>
     public static class DialogueGraphAssetOpener
     {
+        /// <summary>On open asset.</summary>
         [UnityEditor.Callbacks.OnOpenAsset]
         public static bool OnOpenAsset(int instanceID, int line)
         {

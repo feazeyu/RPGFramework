@@ -16,20 +16,28 @@ namespace Feazeyu.RPGSystems.Inventory
     {
         [HideInInspector] public ShopSlot slot;
 
+        /// <summary>Name text.</summary>
         [Header("UI — auto-wired from named children if left null")]
         public TMP_Text nameText;
+        /// <summary>Price text.</summary>
         public TMP_Text priceText;
+        /// <summary>Stock text.</summary>
         public TMP_Text stockText;
+        /// <summary>Icon image.</summary>
         public Image iconImage;
+        /// <summary>Highlight.</summary>
         public Graphic highlight;
 
+        /// <summary>On purchased.</summary>
         public UnityEvent<ShopSlot> OnPurchased;
+        /// <summary>On purchase failed.</summary>
         public UnityEvent<ShopSlot> OnPurchaseFailed;
 
         private IShopCurrency _currency;
         private IItemContainer _buyerInventory;
         private Color _defaultHighlightColor;
 
+        /// <summary>Setup.</summary>
         public void Setup(ShopSlot shopSlot, IShopCurrency currency, IItemContainer buyerInventory)
         {
             slot = shopSlot;
@@ -40,6 +48,7 @@ namespace Feazeyu.RPGSystems.Inventory
             Refresh();
         }
 
+        /// <summary>Refresh.</summary>
         public void Refresh()
         {
             if (slot == null) return;
@@ -60,6 +69,7 @@ namespace Feazeyu.RPGSystems.Inventory
                 iconImage.sprite = item.info.Icon;
         }
 
+        /// <inheritdoc/>
         public void OnPointerClick(PointerEventData eventData)
         {
             if (slot == null || !slot.IsAvailable)
@@ -77,7 +87,7 @@ namespace Feazeyu.RPGSystems.Inventory
 
             if (_buyerInventory == null || !_buyerInventory.TryAddItem(slot.itemId))
             {
-                currency.Add(slot.price); // refund — inventory was full
+                currency.Add(slot.price);
                 OnPurchaseFailed.Invoke(slot);
                 return;
             }
@@ -87,12 +97,14 @@ namespace Feazeyu.RPGSystems.Inventory
             OnPurchased.Invoke(slot);
         }
 
+        /// <inheritdoc/>
         public void OnPointerEnter(PointerEventData eventData)
         {
             if (highlight != null)
                 highlight.color = new Color(1f, 1f, 0.75f, highlight.color.a);
         }
 
+        /// <inheritdoc/>
         public void OnPointerExit(PointerEventData eventData)
         {
             if (highlight != null)

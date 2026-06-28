@@ -89,7 +89,6 @@ namespace Feazeyu.RPGSystems.Inventory
             GUILayout.Space(10);
             GUILayout.BeginHorizontal();
 
-            // Buttons to enable/disable all cells
             if (GUILayout.Button("Disable all", GUILayout.Width(150), GUILayout.Height(25)))
             {
                 grid.DisableAll();
@@ -144,7 +143,6 @@ namespace Feazeyu.RPGSystems.Inventory
                         Debug.LogError($"Error setting cell ({x}, {y}): {e.Message}");
                     }
 
-                    // Draw square button with no label
                     if (GUILayout.Button(hasCell ? cell.EditorUILabel : "", GUILayout.Width(25), GUILayout.Height(25)))
                     {
                         if (!hasCell)
@@ -169,7 +167,7 @@ namespace Feazeyu.RPGSystems.Inventory
 #if UNITY_EDITOR
                         switch (SelectedMode)
                         {
-                            case ActionMode.IgnoreItems: break; // Ignore items, do nothing
+                            case ActionMode.IgnoreItems: break;
                             case ActionMode.RemoveItems: grid.RemoveItem(new Vector2Int(x, y)); break;
                             case ActionMode.SetItems: grid.EditorOnlyPutItem(new Vector2Int(x, y), SelectedItem); break;
                             default: Debug.LogWarning("Unknown item setting mode selected."); break;

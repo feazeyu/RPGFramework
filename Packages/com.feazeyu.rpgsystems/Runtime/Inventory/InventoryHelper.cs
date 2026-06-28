@@ -130,7 +130,7 @@ namespace Feazeyu.RPGSystems.Inventory
             }
             var rect = handler.AddComponent<RectTransform>();
             var img = handler.AddComponent<Image>();
-            img.color = new Color(0, 0, 0, 0); // Transparent background
+            img.color = new Color(0, 0, 0, 0);
             CanvasGroup group = handler.AddComponent<CanvasGroup>();
             group.ignoreParentGroups = true;
             handler.layer = LayerMask.NameToLayer("UI");
@@ -227,8 +227,10 @@ namespace Feazeyu.RPGSystems.Inventory
         /// <returns>The item ID that was removed, or -1 if empty.</returns>
         int RemoveItem();
     }
+    /// <summary>An <see cref="IItemContainer"/> addressable by grid coordinate, with defaults bridging the non-positional API.</summary>
     public interface IPositionalItemContainer : IItemContainer
     {
+        /// <summary>Removes the item at the given position; returns its id or -1 if empty.</summary>
         int RemoveItem(Vector2Int position);
 
         bool IItemContainer.PutItem(GameObject item)

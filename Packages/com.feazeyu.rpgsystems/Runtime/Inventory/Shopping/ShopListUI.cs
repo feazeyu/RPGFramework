@@ -21,6 +21,7 @@ namespace Feazeyu.RPGSystems.Inventory
     /// </summary>
     public class ShopListUI : InventoryList
     {
+        /// <summary>Shop inventory.</summary>
         [Header("Shop")]
         public ShopInventory shopInventory;
 
@@ -40,13 +41,11 @@ namespace Feazeyu.RPGSystems.Inventory
 
         private bool _isOpen;
 
-        // The working copy the shop runs against. Buying/selling mutates stack depth, so we never
-        // operate on the authored asset (see ShopInventory.CloneForRuntime).
         private ShopInventory _runtimeInventory;
 
+        /// <inheritdoc/>
         protected override void OnValidate()
         {
-            // Keep the base behaviour (auto-adds an InventoryListGenerator for this list).
             base.OnValidate();
         }
 
@@ -67,8 +66,11 @@ namespace Feazeyu.RPGSystems.Inventory
                 CloseInventory();
         }
 
+        /// <inheritdoc/>
         public override void OpenInventory() { base.OpenInventory(); _isOpen = true; }
+        /// <inheritdoc/>
         public override void CloseInventory() { base.CloseInventory(); _isOpen = false; }
+        /// <inheritdoc/>
         public override void ToggleInventory() { base.ToggleInventory(); _isOpen = !_isOpen; }
 
         /// <summary>Points the shop at a new inventory and rebuilds it. Called by <see cref="Shopkeep"/>.</summary>
@@ -104,8 +106,6 @@ namespace Feazeyu.RPGSystems.Inventory
                 return;
             }
 
-            // DrawContents (re)creates the list UI object and draws the current contents; the editor's
-            // "Generate Inventory UI" button does the same. A DragLayer is required for drag-to-buy.
             gen.DrawContents();
             if (gen.targetCanvas != null)
                 InventoryHelper.GenerateDragLayer(gen.targetCanvas);
@@ -123,10 +123,10 @@ namespace Feazeyu.RPGSystems.Inventory
 
             foreach (var listing in shopInventory.listings)
             {
-                if (listing.stock == 0) continue;                       // nothing in stock
+                if (listing.stock == 0) continue;
                 if (InventoryManager.Instance?.GetItemById(listing.itemId) == null) continue;
 
-                var slot = new StackableInventorySlot(listing.itemId);  // ctor sets itemCount = 1
+                var slot = new StackableInventorySlot(listing.itemId);
                 if (listing.stock < 0)
                     slot.infinite = true;
                 else
@@ -135,8 +135,8 @@ namespace Feazeyu.RPGSystems.Inventory
             }
         }
 
-        // ── Buying / selling ──────────────────────────────────────────────────
 
+        /// <inheritdoc/>
         public override int RemoveItem(Vector2Int position)
         {
             if (contents == null || position.y < 0 || position.y >= contents.Count)
@@ -145,32 +145,29 @@ namespace Feazeyu.RPGSystems.Inventory
             int itemId = contents[position.y].ItemId;
             int price = GetPrice(itemId);
 
-            // Dragging an item out is a purchase: charge first, block the drag if unaffordable.
             if (!Currency.TrySpend(price))
                 return -1;
 
             _pendingRefundItemId = itemId;
             _pendingRefundPrice = price;
 
-            // Base decrements the stack (or drops it at 0); infinite stacks never deplete.
             return base.RemoveItem(position);
         }
 
+        /// <inheritdoc/>
         public override bool PutItem(Vector2Int position, GameObject item)
         {
             int itemId = item.GetComponent<Item>()?.info?.id ?? -1;
 
             if (_pendingRefundItemId == itemId)
             {
-                // The item just bought from this shop is being returned (failed drop) — full refund.
                 bool placed = base.PutItem(position, item);
                 if (placed) ConsumePendingRefund(itemId);
                 return placed;
             }
 
-            // Otherwise the player is selling to the shop.
             int buyPrice = GetPrice(itemId);
-            if (buyPrice <= 0) return false; // item not in this shop's listings — reject
+            if (buyPrice <= 0) return false;
 
             bool sold = base.PutItem(position, item);
             if (sold)
@@ -181,14 +178,13 @@ namespace Feazeyu.RPGSystems.Inventory
         private void ConsumePendingRefund(int itemId)
         {
             if (_pendingRefundItemId != itemId) return;
-            // The stack already got the item back via base.PutItem; only the money needs returning.
             Currency.Add(_pendingRefundPrice);
             _pendingRefundItemId = -1;
             _pendingRefundPrice = 0;
         }
 
-        // ── Display ─────────────────────────────────────────────────────────────
 
+        /// <inheritdoc/>
         public override string GetItemLabel(StackableInventorySlot slot)
         {
             int price = GetPrice(slot.ItemId);

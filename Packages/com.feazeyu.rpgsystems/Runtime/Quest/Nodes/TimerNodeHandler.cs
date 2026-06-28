@@ -20,8 +20,10 @@ namespace QuestGraph.Nodes
         "Starts on Begin; fires Timeout after Seconds. AutoRestart re-arms as a watchdog.")]
     public class TimerNodeHandler : IGraphNodeHandler
     {
+        /// <inheritdoc/>
         public string NodeTypeId => QuestNodeRegistry.TypeTimer;
 
+        /// <inheritdoc/>
         public IEnumerator Execute(NodeData node, GraphRunContext ctx)
         {
             float.TryParse(ctx.ResolveString(node, "Seconds"),

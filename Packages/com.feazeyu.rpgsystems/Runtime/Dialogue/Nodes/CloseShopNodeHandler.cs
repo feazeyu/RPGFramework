@@ -18,8 +18,10 @@ namespace Feazeyu.RPGSystems.Dialogue
         "Closes the shop UI on the target Shopkeep/ShopGridUI GameObject and continues.")]
     public class CloseShopNodeHandler : IGraphNodeHandler
     {
+        /// <inheritdoc/>
         public string NodeTypeId => "close_shop";
 
+        /// <inheritdoc/>
         public IEnumerator Execute(NodeData node, GraphRunContext ctx)
         {
             var field = ctx.GetField(node, "Target");

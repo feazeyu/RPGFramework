@@ -25,18 +25,13 @@ namespace Feazeyu.RPGSystems.EditorTools
     [CanEditMultipleObjects]
     public class GraphRunnerEditor : Editor
     {
-        // Name of the private serialized field on GraphRunner that holds the
-        // override list. Kept as a string because the field is not visible to
-        // this (editor) assembly.
         private const string OverridesField = "m_Overrides";
 
+        /// <inheritdoc/>
         public override void OnInspectorGUI()
         {
-            // All standard fields, including subclass-specific ones.
             DrawDefaultInspector();
 
-            // Per-instance overrides are keyed by a single graph's variable
-            // Guids, so they only make sense for one runner at a time.
             if (targets.Length != 1)
             {
                 EditorGUILayout.Space();
@@ -81,9 +76,6 @@ namespace Feazeyu.RPGSystems.EditorTools
 
             foreach (var authored in exposed)
             {
-                // A structural change (add/remove) rebuilds the array, so apply
-                // it and bail for this frame instead of drawing against a stale
-                // layout; the inspector repaints with the new state next frame.
                 if (DrawRow(authored, overridesProp))
                 {
                     serializedObject.ApplyModifiedProperties();
@@ -102,7 +94,6 @@ namespace Feazeyu.RPGSystems.EditorTools
 
             EditorGUILayout.BeginHorizontal();
 
-            // Checkbox toggles whether this instance overrides the variable.
             bool wantOverride = EditorGUILayout.Toggle(isOverridden, GUILayout.Width(16));
             var toggleRect = GUILayoutUtility.GetLastRect();
             EditorGUI.LabelField(toggleRect, new GUIContent("", "Override this variable's initial value on this instance."));
@@ -121,8 +112,6 @@ namespace Feazeyu.RPGSystems.EditorTools
 
             EditorGUILayout.EndHorizontal();
 
-            // Apply create/remove only on an explicit toggle change, so merely
-            // viewing the inspector never dirties the scene/prefab.
             if (wantOverride == isOverridden) return false;
 
             if (wantOverride)
@@ -149,8 +138,6 @@ namespace Feazeyu.RPGSystems.EditorTools
                 return;
             }
 
-            // PropertyField renders "type mismatch" for UnityEngine.Object fields
-            // inside [SerializeReference] elements, so use ObjectField directly.
             if (valueProp.propertyType == SerializedPropertyType.ObjectReference)
             {
                 var objType = authored.ValueType ?? typeof(Object);

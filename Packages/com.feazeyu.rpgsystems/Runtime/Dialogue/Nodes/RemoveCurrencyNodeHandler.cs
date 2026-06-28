@@ -14,8 +14,10 @@ namespace Feazeyu.RPGSystems.Dialogue
         "Deducts money from the player's wallet. Routes Success or Failure.")]
     public class RemoveCurrencyNodeHandler : IGraphNodeHandler
     {
+        /// <inheritdoc/>
         public string NodeTypeId => "remove_currency";
 
+        /// <inheritdoc/>
         public IEnumerator Execute(NodeData node, GraphRunContext ctx)
         {
             int.TryParse(ctx.ResolveString(node, "Amount"), out int amount);

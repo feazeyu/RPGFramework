@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,19 +27,19 @@ namespace Feazeyu.RPGSystems.Dialogue
     /// </summary>
     public class DialogueRunner : GraphRunner
     {
-        // ── Dialogue events ───────────────────────────────────────────────────
 
-        // Initialised inline so they are non-null when a DialogueRunner is created
-        // at runtime via AddComponent (e.g. a quest's Run Dialogue node), where
-        // Unity does not deserialize serialized fields.
+        /// <summary>On dialogue line.</summary>
         [Header("Dialogue Events")]
         public DialogueLineEvent OnDialogueLine      = new();
+        /// <summary>On choices presented.</summary>
         public ChoicesEvent      OnChoicesPresented  = new();
+        /// <summary>On variable set.</summary>
         public VariableSetEvent  OnVariableSet       = new();
+        /// <summary>On event triggered.</summary>
         public StringEvent       OnEventTriggered    = new();
 
-        // ── State ─────────────────────────────────────────────────────────────
 
+        /// <summary>Is waiting for choice.</summary>
         public bool IsWaitingForChoice { get; private set; }
 
         private bool m_WaitingForAdvance;
@@ -47,8 +47,8 @@ namespace Feazeyu.RPGSystems.Dialogue
         private readonly List<(string text, string portName)> m_Choices
             = new List<(string, string)>();
 
-        // ── Lifecycle ─────────────────────────────────────────────────────────
 
+        /// <inheritdoc/>
         protected override void Awake()
         {
             base.Awake();
@@ -67,16 +67,18 @@ namespace Feazeyu.RPGSystems.Dialogue
             RegisterHandler(new SpawnPrefabNodeHandler());
         }
 
-        // ── Public API ────────────────────────────────────────────────────────
 
+        /// <summary>Start dialogue.</summary>
         public void StartDialogue() => StartGraph();
 
+        /// <summary>Advance.</summary>
         public void Advance()
         {
             if (!IsRunning || IsWaitingForChoice) return;
             m_WaitingForAdvance = false;
         }
 
+        /// <summary>Select choice.</summary>
         public void SelectChoice(int index)
         {
             if (!IsRunning || !IsWaitingForChoice) return;
@@ -86,8 +88,8 @@ namespace Feazeyu.RPGSystems.Dialogue
             IsWaitingForChoice = false;
         }
 
-        // ── GraphRunner overrides ─────────────────────────────────────────────
 
+        /// <inheritdoc/>
         protected override void OnGraphStop()
         {
             m_WaitingForAdvance = false;
@@ -96,9 +98,11 @@ namespace Feazeyu.RPGSystems.Dialogue
             m_Choices.Clear();
         }
 
+        /// <inheritdoc/>
         protected override void OnVariableChanged(string name, string value)
             => OnVariableSet?.Invoke(name, value);
 
+        /// <inheritdoc/>
         protected override GraphRunner CreateSubRunner(GameObject go)
             => go.AddComponent<DialogueRunner>();
 
@@ -114,14 +118,16 @@ namespace Feazeyu.RPGSystems.Dialogue
             return m_RuntimeBlackboard.GetVariable(guid)?.ObjectValue as DialogueGraphAsset;
         }
 
-        // ── Inner handler classes ─────────────────────────────────────────────
 
         private class DialogueLineHandler : IGraphNodeHandler
         {
             private readonly DialogueRunner m_R;
+            /// <inheritdoc/>
             public string NodeTypeId => DialogueNodeRegistry.TypeDialogueLine;
+            /// <summary>Initializes a new instance of the <see cref="DialogueLineHandler"/> class.</summary>
             public DialogueLineHandler(DialogueRunner r) => m_R = r;
 
+            /// <inheritdoc/>
             public IEnumerator Execute(NodeData node, GraphRunContext ctx)
             {
                 m_R.OnDialogueLine?.Invoke(
@@ -138,9 +144,12 @@ namespace Feazeyu.RPGSystems.Dialogue
         private class ChoiceBranchHandler : IGraphNodeHandler
         {
             private readonly DialogueRunner m_R;
+            /// <inheritdoc/>
             public string NodeTypeId => DialogueNodeRegistry.TypeChoiceBranch;
+            /// <summary>Initializes a new instance of the <see cref="ChoiceBranchHandler"/> class.</summary>
             public ChoiceBranchHandler(DialogueRunner r) => m_R = r;
 
+            /// <inheritdoc/>
             public IEnumerator Execute(NodeData node, GraphRunContext ctx)
             {
                 m_R.m_Choices.Clear();
@@ -244,9 +253,12 @@ namespace Feazeyu.RPGSystems.Dialogue
         private class TriggerEventHandler : IGraphNodeHandler
         {
             private readonly DialogueRunner m_R;
+            /// <inheritdoc/>
             public string NodeTypeId => NodeRegistry.TypeTriggerEvent;
+            /// <summary>Initializes a new instance of the <see cref="TriggerEventHandler"/> class.</summary>
             public TriggerEventHandler(DialogueRunner r) => m_R = r;
 
+            /// <inheritdoc/>
             public IEnumerator Execute(NodeData node, GraphRunContext ctx)
             {
                 m_R.OnEventTriggered?.Invoke(ctx.ResolveString(node, "Event Channel"));
@@ -257,8 +269,10 @@ namespace Feazeyu.RPGSystems.Dialogue
 
         private class WaitForEventHandler : IGraphNodeHandler
         {
+            /// <inheritdoc/>
             public string NodeTypeId => NodeRegistry.TypeWaitForEvent;
 
+            /// <inheritdoc/>
             public IEnumerator Execute(NodeData node, GraphRunContext ctx)
             {
                 Debug.LogWarning("[DialogueRunner] WaitForEvent is not implemented. Skipping.");
@@ -268,7 +282,6 @@ namespace Feazeyu.RPGSystems.Dialogue
         }
     }
 
-    // ── Serialisable UnityEvent types ─────────────────────────────────────────
 
     [Serializable] public class DialogueLineEvent : UnityEvent<string, string, Sprite> { }
     [Serializable] public class ChoicesEvent       : UnityEvent<List<string>>           { }

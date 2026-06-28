@@ -28,14 +28,15 @@ namespace QuestGraph.Nodes
         "Kill N enemies with the given tag. Chain via Completed → next objective.")]
     public class KillCountObjectiveHandler : IGraphNodeHandler
     {
+        /// <inheritdoc/>
         public string NodeTypeId => QuestNodeRegistry.TypeObjKill;
 
+        /// <inheritdoc/>
         public IEnumerator Execute(NodeData node, GraphRunContext ctx)
         {
             var runner = ctx.Runner as QuestRunner;
             if (runner == null) { ctx.Follow("Failed"); yield break; }
 
-            // ── Read fields ───────────────────────────────────────────────────
             var title   = ctx.ResolveString(node, "Title");
             var desc    = ctx.ResolveString(node, "Description");
             var tag     = ctx.ResolveString(node, "Tag");
@@ -54,11 +55,9 @@ namespace QuestGraph.Nodes
 
             runner.RegisterObjective(info);
 
-            // Shared, resettable, gated progress counter for this objective.
             var progress = runner.RegisterProgress(node.Guid, required);
             progress.Gate = ObjectiveGates.Compose(node, ctx);
 
-            // ── Subscribe to existing and future enemies ───────────────────────
             bool done = false;
             var callbacks = new Dictionary<Entity, UnityAction>();
             float nextScan = 0f;
@@ -90,7 +89,6 @@ namespace QuestGraph.Nodes
 
             ScanEnemies();
 
-            // ── Wait for kill target ──────────────────────────────────────────
             while (!done && runner.IsRunning)
             {
                 if (Time.time >= nextScan)
@@ -101,7 +99,6 @@ namespace QuestGraph.Nodes
                 yield return null;
             }
 
-            // ── Cleanup ───────────────────────────────────────────────────────
             foreach (var kv in callbacks)
                 if (kv.Key != null) kv.Key.OnDeath.RemoveListener(kv.Value);
             callbacks.Clear();

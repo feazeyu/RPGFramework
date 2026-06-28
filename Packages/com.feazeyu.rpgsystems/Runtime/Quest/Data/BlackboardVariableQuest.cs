@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Feazeyu.RPGSystems.Dialogue;
 
 namespace QuestGraph.Runtime
@@ -18,9 +18,12 @@ namespace QuestGraph.Runtime
     [Serializable]
     public sealed class BlackboardVariableQuestGraph : BlackboardVariable<QuestGraphAsset>
     {
+        /// <summary>Initializes a new instance of the <see cref="BlackboardVariableQuestGraph"/> class.</summary>
         public BlackboardVariableQuestGraph() { }
+        /// <summary>Initializes a new instance of the <see cref="BlackboardVariableQuestGraph"/> class.</summary>
         public BlackboardVariableQuestGraph(QuestGraphAsset v) : base(v) { }
 
+        /// <inheritdoc/>
         public override BlackboardVariable Clone()
             => new BlackboardVariableQuestGraph(m_Value)
             {
@@ -45,9 +48,12 @@ namespace QuestGraph.Runtime
     [Serializable]
     public sealed class BlackboardVariableQuest : BlackboardVariable<QuestAsset>
     {
+        /// <summary>Initializes a new instance of the <see cref="BlackboardVariableQuest"/> class.</summary>
         public BlackboardVariableQuest() { }
+        /// <summary>Initializes a new instance of the <see cref="BlackboardVariableQuest"/> class.</summary>
         public BlackboardVariableQuest(QuestAsset v) : base(v) { }
 
+        /// <inheritdoc/>
         public override BlackboardVariable Clone()
             => new BlackboardVariableQuest(m_Value)
             {

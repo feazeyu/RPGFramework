@@ -36,7 +36,6 @@ namespace Feazeyu.RPGSystems.EditorTools
             container.Add(addBtn);
         }
 
-        // ── Choice row rebuild ────────────────────────────────────────────────
 
         private static void RebuildChoiceRows(
             VisualElement      container,
@@ -45,11 +44,9 @@ namespace Feazeyu.RPGSystems.EditorTools
             int                choiceCount,
             System.Action      rebuild)
         {
-            // Remove existing choice rows (they were built without remove buttons).
             var toRemove = new List<VisualElement>();
             foreach (var child in container.Children())
             {
-                // Identify choice rows by USS class.
                 if (child.ClassListContains("node-field-row") &&
                     child.userData is string fn &&
                     fn.StartsWith("Choice ") && fn.EndsWith(" Text"))
@@ -59,7 +56,6 @@ namespace Feazeyu.RPGSystems.EditorTools
             }
             foreach (var el in toRemove) container.Remove(el);
 
-            // Re-add them with remove buttons.
             foreach (var field in node.Fields)
             {
                 if (!field.FieldName.StartsWith("Choice ") ||
@@ -78,9 +74,8 @@ namespace Feazeyu.RPGSystems.EditorTools
         {
             var row = new VisualElement();
             row.AddToClassList("node-field-row");
-            row.userData = field.FieldName; // used for identification during rebuild
+            row.userData = field.FieldName;
 
-            // "×" remove button — hidden when only one choice remains.
             var removeBtn = new Button(() =>
             {
                 RemoveChoice(field, node, asset);
@@ -114,7 +109,6 @@ namespace Feazeyu.RPGSystems.EditorTools
                 row.Add(valueField);
             }
 
-            // Link dot with drag-and-drop — same as regular field rows.
             var dot = new VisualElement();
             dot.AddToClassList("node-field-link-dot");
             dot.tooltip = string.IsNullOrEmpty(field.LinkedVariableGuid)
@@ -159,7 +153,6 @@ namespace Feazeyu.RPGSystems.EditorTools
             return row;
         }
 
-        // ── Data mutations ────────────────────────────────────────────────────
 
         private static void AddChoice(NodeData node, GraphAsset asset)
         {

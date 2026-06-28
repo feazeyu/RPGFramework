@@ -1,0 +1,18 @@
+{
+    "name": "Feazeyu.RPGSystems.Samples.DialogueDemo",
+    "rootNamespace": "Feazeyu.RPGSystems.Demo",
+    "references": [
+        "GUID:52e46089bd08c184e874db16e78a1c1b",
+        "GUID:64d855b201eaf6845a7189ef749e4235",
+        "GUID:75469ad4d38634e559750d17036d5f7c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

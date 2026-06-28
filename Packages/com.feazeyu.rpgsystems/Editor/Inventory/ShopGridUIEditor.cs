@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Feazeyu.RPGSystems.Inventory
 {
+    /// <summary>Custom inspector for <see cref="ShopGridUI"/>, extending the grid editor with shop fields.</summary>
     [CustomEditor(typeof(ShopGridUI))]
     public class ShopGridUIEditor : InventoryGridEditor
     {
@@ -11,6 +12,7 @@ namespace Feazeyu.RPGSystems.Inventory
             "shopInventory", "_currencyProvider", "priceLabelPrefab"
         };
 
+        /// <inheritdoc/>
         public override void OnInspectorGUI()
         {
             serializedObject.Update();

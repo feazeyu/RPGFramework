@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 #if UNITY_EDITOR
@@ -19,6 +19,7 @@ namespace Feazeyu.RPGSystems.EditorTools
     {
         private static StyleSheet s_Sheet;
 
+        /// <summary>Get.</summary>
         public static StyleSheet Get()
         {
 #if UNITY_EDITOR

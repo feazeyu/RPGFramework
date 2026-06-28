@@ -14,6 +14,7 @@ namespace Feazeyu.RPGSystems.Inventory
     /// </summary>
     public class ShopGridUI : InventoryGrid, IPositionalItemContainer
     {
+        /// <summary>Shop inventory.</summary>
         [Header("Shop")]
         public ShopInventory shopInventory;
 
@@ -26,6 +27,7 @@ namespace Feazeyu.RPGSystems.Inventory
         [Range(0f, 1f)]
         [SerializeField] private float _sellRatio = 0.5f;
 
+        /// <summary>Price label prefab.</summary>
         [Header("Price Label")]
         [Tooltip("Optional prefab for the price tag. Must contain a TMP_Text (or a child named 'Price' with one). If null, a procedural label is generated.")]
         public GameObject priceLabelPrefab;
@@ -35,11 +37,8 @@ namespace Feazeyu.RPGSystems.Inventory
         private int _pendingRefundItemId = -1;
         private int _pendingRefundPrice = 0;
 
-        // Tracks whether the shop UI is currently open, so Esc only closes it while visible.
         private bool _isOpen;
 
-        // The working copy the shop actually runs against. Buying/selling mutates ShopSlot.stock,
-        // so we never operate on the authored asset (see ShopInventory.CloneForRuntime).
         private ShopInventory _runtimeInventory;
 
         /// <summary>
@@ -66,20 +65,22 @@ namespace Feazeyu.RPGSystems.Inventory
                 CloseInventory();
         }
 
+        /// <inheritdoc/>
         public override void OpenInventory() { base.OpenInventory(); _isOpen = true; }
+        /// <inheritdoc/>
         public override void CloseInventory() { base.CloseInventory(); _isOpen = false; }
+        /// <inheritdoc/>
         public override void ToggleInventory() { base.ToggleInventory(); _isOpen = !_isOpen; }
 
         private void ConsumePendingRefund(int itemId)
         {
             if (_pendingRefundItemId != itemId) return;
-            // The stack count is the authoritative stock; returning the item re-stacks it (see
-            // ReturnItem), so the refund only needs to give the player's money back.
             Currency.Add(_pendingRefundPrice);
             _pendingRefundItemId = -1;
             _pendingRefundPrice = 0;
         }
 
+        /// <inheritdoc/>
         protected override void Awake()
         {
             if (shopInventory != null)
@@ -88,6 +89,7 @@ namespace Feazeyu.RPGSystems.Inventory
             CloseInventory();
         }
 
+        /// <summary>Setup.</summary>
         public void Setup(ShopInventory inventory)
         {
             shopInventory = inventory;
@@ -96,6 +98,7 @@ namespace Feazeyu.RPGSystems.Inventory
             RedrawContents();
         }
 
+        /// <inheritdoc/>
         public override void RedrawContents()
         {
             base.RedrawContents();
@@ -176,18 +179,17 @@ namespace Feazeyu.RPGSystems.Inventory
 
         void IPositionalItemContainer.ReturnItem(Vector2Int position, GameObject item)
         {
-            // Item is returning to its slot in the shop after a failed drop elsewhere — undo the purchase.
             ConsumePendingRefund(item.GetComponent<Item>()?.info?.id ?? -1);
             base.PutItem(position, item);
         }
 
+        /// <inheritdoc/>
         public override bool PutItem(Vector2Int position, GameObject item)
         {
             int itemId = item.GetComponent<Item>()?.info?.id ?? -1;
 
             if (_pendingRefundItemId == itemId)
             {
-                // Intentional return of an item just bought from this shop — full refund.
                 bool placed = base.PutItem(position, item);
                 if (placed) ConsumePendingRefund(itemId);
                 return placed;
@@ -196,6 +198,7 @@ namespace Feazeyu.RPGSystems.Inventory
             return TrySellToShop(item, itemId);
         }
 
+        /// <inheritdoc/>
         protected override bool TryAddItem(GameObject item)
         {
             int itemId = item.GetComponent<Item>()?.info?.id ?? -1;
@@ -213,21 +216,18 @@ namespace Feazeyu.RPGSystems.Inventory
         private bool TrySellToShop(GameObject item, int itemId)
         {
             int buyPrice = GetPrice(itemId);
-            if (buyPrice <= 0) return false; // item not in this shop's listings — reject
+            if (buyPrice <= 0) return false;
 
-            // Route through base.TryAddItem (not a position-specific put) so the sold item always
-            // merges into the listing's existing stack instead of spawning a second slot —
-            // regardless of which cell it was dropped on.
             bool placed = base.TryAddItem(item);
             if (placed)
             {
-                // The shop's stock (stack count) grows by one instead of duplicating the offering.
                 Currency.Add(Mathf.FloorToInt(buyPrice * _sellRatio));
                 RedrawContents();
             }
             return placed;
         }
 
+        /// <inheritdoc/>
         public override int RemoveItem(Vector2Int position)
         {
             if (!Cells.TryGet(position.x, position.y, out var cell) || cell.Item == null)
@@ -242,26 +242,19 @@ namespace Feazeyu.RPGSystems.Inventory
             _pendingRefundItemId = itemId;
             _pendingRefundPrice = price;
 
-            // Stock is the stack count: buying takes one off the stack. The base decrements a
-            // deep stack (or clears the last one), and never depletes an infinite stack — so the
-            // offering stays on display with its remaining count until it actually runs out.
             return base.RemoveItem(position);
         }
 
         private void PopulateItems()
         {
             EnsureRuntimeInventory();
-            allowStacking = true;                          // a listing's stock is its stack depth
-            Cells = new Array2D<InventorySlot>(0, 0);      // force fresh StackableInventorySlot cells
+            allowStacking = true;
+            Cells = new Array2D<InventorySlot>(0, 0);
             ResizeIfNecessary();
             foreach (var listing in shopInventory.listings)
             {
-                if (listing.stock == 0) continue;          // nothing in stock
+                if (listing.stock == 0) continue;
 
-                // Stock the shop with its own inventory. This must NOT go through the
-                // overridden TryAddItem, which treats an incoming item as a player
-                // *selling* to the shop and pays out via Currency.Add. Place directly
-                // through the base grid so populating the shop costs the player nothing.
                 var prefab = InventoryManager.Instance?.GetItemById(listing.itemId);
                 if (prefab == null) continue;
 

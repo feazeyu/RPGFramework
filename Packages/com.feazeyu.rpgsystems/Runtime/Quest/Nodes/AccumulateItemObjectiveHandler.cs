@@ -30,16 +30,17 @@ namespace QuestGraph.Nodes
         "Acquire N of an item after starting (ignores starting amount). Supports Gate/Timer/Reset modifiers.")]
     public class AccumulateItemObjectiveHandler : IGraphNodeHandler
     {
+        /// <inheritdoc/>
         public string NodeTypeId => QuestNodeRegistry.TypeObjAccumulate;
 
         private const float k_CheckInterval = 0.5f;
 
+        /// <inheritdoc/>
         public IEnumerator Execute(NodeData node, GraphRunContext ctx)
         {
             var runner = ctx.Runner as QuestRunner;
             if (runner == null) { ctx.Follow("Failed"); yield break; }
 
-            // ── Read fields ───────────────────────────────────────────────────
             var title = ctx.ResolveString(node, "Title");
             var desc  = ctx.ResolveString(node, "Description");
             int.TryParse(ctx.ResolveString(node, "ItemId"), out int itemId);
@@ -83,9 +84,6 @@ namespace QuestGraph.Nodes
                     if (progress.TryAdd(MakeEvent())) done = true;
             }
 
-            // ── Prefer exact, event-driven net counting ───────────────────────
-            // Adds count through the gate (+); removals decrement unconditionally (−,
-            // may go negative), so dropping then re-collecting nets to one count.
             var notifier = container as IItemCountNotifier;
             Action<int, int> onAdded   = null;
             Action<int, int> onRemoved = null;
@@ -97,8 +95,7 @@ namespace QuestGraph.Nodes
                 notifier.OnItemRemoved += onRemoved;
             }
 
-            // ── Fallback: poll CountItem deltas (net) ─────────────────────────
-            int   lastSeen  = container.CountItem(itemId);   // baseline — does not count
+            int   lastSeen  = container.CountItem(itemId);
             float nextCheck = 0f;
 
             while (!done && runner.IsRunning)
@@ -108,8 +105,8 @@ namespace QuestGraph.Nodes
                     nextCheck = Time.time + k_CheckInterval;
                     int current = container.CountItem(itemId);
                     int delta   = current - lastSeen;
-                    if (delta > 0)      Offer(delta);              // gained (gated)
-                    else if (delta < 0) progress.Subtract(-delta); // dropped
+                    if (delta > 0)      Offer(delta);
+                    else if (delta < 0) progress.Subtract(-delta);
                     lastSeen = current;
                 }
                 yield return null;
@@ -128,7 +125,6 @@ namespace QuestGraph.Nodes
             ctx.Follow("Completed");
         }
 
-        // ── Helpers ───────────────────────────────────────────────────────────
 
         private static GameObject ResolveInventoryObject(NodeData node, GraphRunContext ctx)
         {

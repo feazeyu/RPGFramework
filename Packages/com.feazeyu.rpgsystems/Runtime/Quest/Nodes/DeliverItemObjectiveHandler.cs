@@ -25,14 +25,15 @@ namespace QuestGraph.Nodes
         "Interact with an NPC to hand in N items. Items are removed on delivery.")]
     public class DeliverItemObjectiveHandler : IGraphNodeHandler
     {
+        /// <inheritdoc/>
         public string NodeTypeId => QuestNodeRegistry.TypeObjDeliver;
 
+        /// <inheritdoc/>
         public IEnumerator Execute(NodeData node, GraphRunContext ctx)
         {
             var runner = ctx.Runner as QuestRunner;
             if (runner == null) { ctx.Follow("Failed"); yield break; }
 
-            // ── Read fields ───────────────────────────────────────────────────
             var title = ctx.ResolveString(node, "Title");
             var desc  = ctx.ResolveString(node, "Description");
             int.TryParse(ctx.ResolveString(node, "ItemId"), out int itemId);
@@ -48,7 +49,6 @@ namespace QuestGraph.Nodes
                 Optional    = optional,
             };
 
-            // ── Resolve NPC and inventory ─────────────────────────────────────
             var interactable = ResolveNPC(node, ctx);
             if (interactable == null)
             {
@@ -69,7 +69,6 @@ namespace QuestGraph.Nodes
                 yield break;
             }
 
-            // ── Wait for delivery ─────────────────────────────────────────────
             runner.RegisterObjective(info);
 
             bool delivered = false;
@@ -99,7 +98,6 @@ namespace QuestGraph.Nodes
             ctx.Follow("Completed");
         }
 
-        // ── Helpers ───────────────────────────────────────────────────────────
 
         private static Interactable ResolveNPC(NodeData node, GraphRunContext ctx)
         {

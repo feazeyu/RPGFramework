@@ -20,7 +20,6 @@ namespace Feazeyu.RPGSystems.EditorTools
     [InitializeOnLoad]
     public static class DialogueBlackboardTypeRegistrar
     {
-        // Matches the Run Subgraph node accent.
         private static readonly Color DialogueGraphColour = new Color(0.18f, 0.62f, 0.48f);
 
         static DialogueBlackboardTypeRegistrar()

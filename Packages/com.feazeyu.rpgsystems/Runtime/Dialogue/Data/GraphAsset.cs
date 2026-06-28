@@ -1,58 +1,80 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Feazeyu.RPGSystems.Dialogue
 {
-    // ── Port / Field / Node / Edge ──────────────────────────────────────────────
-    // These data types were previously declared in DialogueGraphAsset.cs.
-    // They live here now so the Quest system (and anything else built on
-    // GraphAsset) can reference them without depending on the dialogue asset.
 
+    /// <summary>Whether a port receives (Input) or emits (Output) edges.</summary>
     public enum PortDirection { Input, Output }
+
+    /// <summary>Whether a port accepts a single edge or many.</summary>
     public enum PortCapacity  { Single, Multi }
 
+    /// <summary>Serialized definition of one node port.</summary>
     [Serializable]
     public class PortData
     {
+        /// <summary>Port identifier, unique within the node.</summary>
         public string        PortName;
+        /// <summary>Whether the port is an input or an output.</summary>
         public PortDirection Direction;
+        /// <summary>How many edges the port may hold.</summary>
         public PortCapacity  Capacity = PortCapacity.Multi;
     }
 
+    /// <summary>Serialized definition of one editable node field, either an inline value or a blackboard link.</summary>
     [Serializable]
     public class FieldData
     {
+        /// <summary>Field identifier, unique within the node.</summary>
         public string FieldName;
-        public string TypeName;           // e.g. "System.String", "UnityEngine.GameObject"
-        public string InlineValue;        // serialised as string when not linked
-        public string LinkedVariableGuid; // GUID of a BlackboardVariable, or empty
+        /// <summary>Fully qualified value type, e.g. "System.String", "UnityEngine.GameObject".</summary>
+        public string TypeName;
+        /// <summary>Literal value, serialized as a string, used when not linked.</summary>
+        public string InlineValue;
+        /// <summary>GUID of a linked <see cref="BlackboardVariable"/>, or empty for an inline value.</summary>
+        public string LinkedVariableGuid;
     }
 
+    /// <summary>Serialized data for one graph node: identity, type, layout, ports, and fields.</summary>
     [Serializable]
     public class NodeData
     {
+        /// <summary>Stable unique identifier for the node.</summary>
         public string          Guid;
-        public string          NodeType;           // e.g. "DialogueLine", "Objective"
+        /// <summary>Node type id, e.g. "DialogueLine", "Objective".</summary>
+        public string          NodeType;
+        /// <summary>Display name shown on the node.</summary>
         public string          DisplayName;
-        public string          StoryText;          // human-readable template
+        /// <summary>Human-readable template/body text.</summary>
+        public string          StoryText;
+        /// <summary>Editor canvas position.</summary>
         public Vector2         Position;
-        public Vector2         Size   = Vector2.zero; // zero = auto (not yet user-resized)
+        /// <summary>Editor size; zero means auto (not user-resized).</summary>
+        public Vector2         Size   = Vector2.zero;
+        /// <summary>The node's ports.</summary>
         public List<PortData>  Ports  = new List<PortData>();
+        /// <summary>The node's editable fields.</summary>
         public List<FieldData> Fields = new List<FieldData>();
     }
 
+    /// <summary>Serialized connection between an output port and an input port.</summary>
     [Serializable]
     public class EdgeData
     {
+        /// <summary>Stable unique identifier for the edge.</summary>
         public string Guid;
+        /// <summary>GUID of the source node.</summary>
         public string OutputNodeGuid;
+        /// <summary>Output port name on the source node.</summary>
         public string OutputPortName;
+        /// <summary>GUID of the destination node.</summary>
         public string InputNodeGuid;
+        /// <summary>Input port name on the destination node.</summary>
         public string InputPortName;
     }
 
-    // ── Graph Asset base ────────────────────────────────────────────────────────
 
     /// <summary>
     /// Common serialised data and CRUD for every graph-based system
@@ -75,17 +97,18 @@ namespace Feazeyu.RPGSystems.Dialogue
         [SerializeField] private   List<EdgeData> m_Edges = new List<EdgeData>();
         [SerializeField] private   Blackboard     m_Blackboard = new Blackboard();
 
-        // Editor-only view state (panning / zoom). Public fields so the editor
-        // can write to them directly via SerializedObject-free paths.
-        [SerializeField] public Vector3 ViewTransform      = Vector3.zero; // xy = pan, z = scale
+        [SerializeField] public Vector3 ViewTransform      = Vector3.zero;
         [SerializeField] public Vector2 BlackboardPosition = new Vector2(10, 60);
 
+        /// <summary>Nodes.</summary>
         public IReadOnlyList<NodeData> Nodes      => m_Nodes;
+        /// <summary>Edges.</summary>
         public IReadOnlyList<EdgeData> Edges      => m_Edges;
+        /// <summary>Blackboard.</summary>
         public Blackboard              Blackboard => m_Blackboard;
 
-        // ── Node CRUD ───────────────────────────────────────────────────────
 
+        /// <summary>Add node.</summary>
         public NodeData AddNode(string nodeType, string displayName, Vector2 position)
         {
             var node = new NodeData
@@ -99,20 +122,21 @@ namespace Feazeyu.RPGSystems.Dialogue
             return node;
         }
 
+        /// <summary>Remove node.</summary>
         public bool RemoveNode(string guid)
         {
             int idx = m_Nodes.FindIndex(n => n.Guid == guid);
             if (idx < 0) return false;
             m_Nodes.RemoveAt(idx);
-            // Clean up all connected edges.
             m_Edges.RemoveAll(e => e.OutputNodeGuid == guid || e.InputNodeGuid == guid);
             return true;
         }
 
+        /// <summary>Get node.</summary>
         public NodeData GetNode(string guid) => m_Nodes.Find(n => n.Guid == guid);
 
-        // ── Edge CRUD ───────────────────────────────────────────────────────
 
+        /// <summary>Add edge.</summary>
         public EdgeData AddEdge(string outputGuid, string outputPort,
                                 string inputGuid,  string inputPort)
         {
@@ -128,6 +152,7 @@ namespace Feazeyu.RPGSystems.Dialogue
             return edge;
         }
 
+        /// <summary>Remove edge.</summary>
         public bool RemoveEdge(string guid)
         {
             int idx = m_Edges.FindIndex(e => e.Guid == guid);
@@ -136,7 +161,6 @@ namespace Feazeyu.RPGSystems.Dialogue
             return true;
         }
 
-        // ── Helpers ─────────────────────────────────────────────────────────
 
         /// <summary>
         /// Finds the entry / Start node. Prefers an explicit "Start"-typed node

@@ -1,15 +1,27 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Feazeyu.RPGSystems.Core
 {
+    /// <summary>
+    /// Rotates the owning transform to face a screen-space point, driven by mouse aiming.
+    /// </summary>
     public class RotateTowardsPoint : MonoBehaviour
     {
+        /// <summary>The most recently computed normalized aim direction.</summary>
         public Vector2 aimDirection;
+
+        /// <summary>The most recently computed aim angle, in degrees.</summary>
         public float angle;
+
+        /// <summary>
+        /// Rotates the transform so its local right axis points toward <paramref name="point"/>.
+        /// No-op when the point is zero or the mouse is inactive.
+        /// </summary>
+        /// <param name="point">Target position in screen space.</param>
+        /// <param name="cam">Camera used to project the transform's world position; falls back to <see cref="Camera.main"/>.</param>
         public void RotateTowards(Vector2 point, Camera cam = null)
         {
-            // Mouse aiming
             if (point == Vector2.zero)
                 return;
             if (Mouse.current != null && Mouse.current.position.IsActuated())

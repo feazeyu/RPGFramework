@@ -1,6 +1,6 @@
 {
     "name": "Feazeyu.RPGSystems.Quest",
-    "rootNamespace": "Feazeyu.RPGSystems.Quest",
+    "rootNamespace": "QuestGraph",
     "references": [
         "Feazeyu.RPGSystems.Dialogue",
         "Feazeyu.RPGSystems.Character",

@@ -14,8 +14,10 @@ namespace Feazeyu.RPGSystems.Dialogue
         "Routes Enough or NotEnough based on the player's wallet balance.")]
     public class CheckCurrencyNodeHandler : IGraphNodeHandler
     {
+        /// <inheritdoc/>
         public string NodeTypeId => "check_currency";
 
+        /// <inheritdoc/>
         public IEnumerator Execute(NodeData node, GraphRunContext ctx)
         {
             int.TryParse(ctx.ResolveString(node, "Amount"), out int amount);

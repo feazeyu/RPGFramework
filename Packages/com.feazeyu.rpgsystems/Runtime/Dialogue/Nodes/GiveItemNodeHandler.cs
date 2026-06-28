@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using Feazeyu.RPGSystems.Inventory;
 using UnityEngine;
 
@@ -17,8 +17,10 @@ namespace Feazeyu.RPGSystems.Dialogue
         "Tries to add an item to an inventory. Routes to Success or Failure.")]
     public class GiveItemNodeHandler : IGraphNodeHandler
     {
+        /// <inheritdoc/>
         public string NodeTypeId => "give_item";
 
+        /// <inheritdoc/>
         public IEnumerator Execute(NodeData node, GraphRunContext ctx)
         {
             int.TryParse(ctx.ResolveString(node, "ItemId"), out int itemId);

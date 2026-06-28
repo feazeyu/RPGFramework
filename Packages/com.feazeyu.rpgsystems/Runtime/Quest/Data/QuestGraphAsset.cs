@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using Feazeyu.RPGSystems.Dialogue;
 
 namespace QuestGraph.Runtime
@@ -44,6 +44,7 @@ namespace QuestGraph.Runtime
         [SerializeField]
         private QuestKind m_Kind = QuestKind.Single;
 
+        /// <summary>Kind.</summary>
         public QuestKind Kind
         {
             get => m_Kind;

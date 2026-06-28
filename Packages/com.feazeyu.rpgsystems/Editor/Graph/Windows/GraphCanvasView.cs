@@ -30,23 +30,18 @@ namespace Feazeyu.RPGSystems.EditorTools
     /// </summary>
     public class GraphCanvasView : GraphView
     {
-        // ── Events ───────────────────────────────────────────────────────────
 
+        /// <summary>On node selected.</summary>
         public Action<NodeData> OnNodeSelected;
+        /// <summary>On node deselected.</summary>
         public Action           OnNodeDeselected;
 
-        // Fired when a node's field data is mutated from the canvas (e.g. a
-        // blackboard variable linked/unlinked via drag-drop). Lets the window
-        // refresh an open inspector showing that node.
+        /// <summary>On node fields changed.</summary>
         public Action<NodeData> OnNodeFieldsChanged;
 
-        // ── Internal state ───────────────────────────────────────────────────
 
         private GraphAsset m_Asset;
 
-        // Fallback when no registry is supplied: an empty palette rather than a
-        // system-specific one, so the canvas stays system-agnostic. Callers
-        // (the graph windows) always pass a real registry.
         private static readonly IReadOnlyDictionary<string, NodeInfo> s_EmptyRegistry
             = new Dictionary<string, NodeInfo>();
 
@@ -55,8 +50,8 @@ namespace Feazeyu.RPGSystems.EditorTools
         private readonly Dictionary<string, GraphNodeView> m_NodeViews
             = new Dictionary<string, GraphNodeView>();
 
-        // ── Construction ─────────────────────────────────────────────────────
 
+        /// <summary>Initializes a new instance of the <see cref="GraphCanvasView"/> class.</summary>
         public GraphCanvasView(
             EditorWindow window,
             IReadOnlyDictionary<string, NodeInfo> nodeRegistry,
@@ -71,21 +66,16 @@ namespace Feazeyu.RPGSystems.EditorTools
             this.AddManipulator(new RectangleSelector());
             this.AddManipulator(new FreehandSelector());
 
-            // Grid background.
             var grid = new GridBackground { name = "GraphGrid" };
             Insert(0, grid);
 
-            // Layer the system-specific theme on top of the base sheet
-            // (base sheet is already applied to rootVisualElement by the window).
             if (themeSheet != null) styleSheets.Add(themeSheet);
             if (!string.IsNullOrEmpty(rootCssClass)) AddToClassList(rootCssClass);
 
-            // Minimap (top-right corner, like Unity Behavior).
             var minimap = new MiniMap { anchored = true };
             minimap.SetPosition(new Rect(10, 30, 160, 100));
             Add(minimap);
 
-            // React to selection changes from the GraphView's internal system.
             graphViewChanged += OnGraphViewChanged;
         }
 
@@ -102,7 +92,6 @@ namespace Feazeyu.RPGSystems.EditorTools
             m_NodeRegistry = nodeRegistry ?? s_EmptyRegistry;
         }
 
-        // ── GraphView overrides ──────────────────────────────────────────────
 
         /// <summary>Rule: Output→Input, matching direction, no self-loops.</summary>
         public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter adapter)
@@ -123,7 +112,6 @@ namespace Feazeyu.RPGSystems.EditorTools
         {
             var mousePos = contentViewContainer.WorldToLocal(evt.mousePosition);
 
-            // Group by Category.
             var byCategory = new Dictionary<string, List<NodeInfo>>();
             foreach (var kv in m_NodeRegistry)
             {
@@ -164,8 +152,8 @@ namespace Feazeyu.RPGSystems.EditorTools
                     : DropdownMenuAction.AlwaysDisabled);
         }
 
-        // ── Populate from asset ──────────────────────────────────────────────
 
+        /// <summary>Populate.</summary>
         public void Populate(GraphAsset asset)
         {
             m_Asset = asset;
@@ -192,7 +180,6 @@ namespace Feazeyu.RPGSystems.EditorTools
             m_Asset.ViewTransform = new Vector3(cv.resolvedStyle.translate.x, cv.resolvedStyle.translate.y, cv.resolvedStyle.scale.value.x);
         }
 
-        // ── Node creation ────────────────────────────────────────────────────
 
         private void AddNodeAtPosition(NodeInfo info, Vector2 graphPos)
         {
@@ -225,14 +212,10 @@ namespace Feazeyu.RPGSystems.EditorTools
             AddElement(view);
             m_NodeViews[data.Guid] = view;
 
-            // Force a relayout once the node is attached to the panel. Without this,
-            // nodes added while the window is initialising (OnEnable → Populate) render
-            // blank until the first interaction relayout — see RefreshAfterAttach.
             view.schedule.Execute(view.RefreshAfterAttach);
             return view;
         }
 
-        // ── Edge creation ────────────────────────────────────────────────────
 
         private void CreateEdgeView(EdgeData edgeData)
         {
@@ -248,7 +231,6 @@ namespace Feazeyu.RPGSystems.EditorTools
             AddElement(edge);
         }
 
-        // ── GraphView change callback ────────────────────────────────────────
 
         private GraphViewChange OnGraphViewChanged(GraphViewChange change)
         {
@@ -303,7 +285,6 @@ namespace Feazeyu.RPGSystems.EditorTools
             return change;
         }
 
-        // ── Helpers ─────────────────────────────────────────────────────────
 
         private void DuplicateSelectedNodes()
         {
@@ -331,6 +312,7 @@ namespace Feazeyu.RPGSystems.EditorTools
             foreach (var v in newViews) AddToSelection(v);
         }
 
+        /// <summary>Refresh node view.</summary>
         public void RefreshNodeView(string guid)
         {
             if (m_NodeViews.TryGetValue(guid, out var v))

@@ -1,4 +1,4 @@
-﻿#nullable enable
+#nullable enable
 using Feazeyu.RPGSystems.Items;
 using System;
 using UnityEngine;
@@ -123,8 +123,6 @@ namespace Feazeyu.RPGSystems.Inventory
                 }
 
                 return "I";
-                // Might have too much performance impact    
-                // return ItemId.ToString();
             }
         }
 
@@ -178,6 +176,7 @@ namespace Feazeyu.RPGSystems.Inventory
             return true;
         }
 
+        /// <summary>Editor only set state.</summary>
         public virtual void EditorOnlySetState(int itemId, Vector2Int anchor)
         {
             ItemId = itemId;

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 #if UNITY_EDITOR
@@ -16,6 +16,7 @@ namespace Feazeyu.RPGSystems.EditorTools
     {
         private static StyleSheet s_Sheet;
 
+        /// <summary>Get.</summary>
         public static StyleSheet Get()
         {
 #if UNITY_EDITOR
@@ -38,14 +39,13 @@ namespace Feazeyu.RPGSystems.EditorTools
                 }
             }
 
-            // Don't cache null — if the user is mid-import, a later call
-            // should succeed once the AssetDatabase catches up.
             Debug.LogWarning("[GraphEditor] Could not find GraphEditor.uss. " +
                              "Ensure the package is fully imported.");
 #endif
             return null;
         }
 
+        /// <summary>Invalidate.</summary>
         public static void Invalidate() => s_Sheet = null;
     }
 }

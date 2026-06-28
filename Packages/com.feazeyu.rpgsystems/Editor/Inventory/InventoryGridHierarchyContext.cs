@@ -2,6 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
+/// <summary>Adds a GameObject menu entry for creating an inventory grid in the scene.</summary>
 public static class InventoryGridHierarchyContext
 {
     [MenuItem("GameObject/RPGFramework/Inventory/Create Inventory Grid", false, 10)]
@@ -10,7 +11,6 @@ public static class InventoryGridHierarchyContext
         GameObject go = new GameObject("InventoryGrid");
         Undo.RegisterCreatedObjectUndo(go, "Create InventoryGrid");
 
-        // If right-clicked on another GameObject, parent under it
         GameObject context = menuCommand.context as GameObject;
         if (context != null)
         {

@@ -30,18 +30,18 @@ namespace Feazeyu.RPGSystems.EditorTools
     /// </summary>
     public class GraphNodeView : Node
     {
-        // ── Events ───────────────────────────────────────────────────────────
 
+        /// <summary>On select.</summary>
         public Action          OnSelect;
+        /// <summary>On deselected.</summary>
         public Action          OnDeselected;
+        /// <summary>On moved.</summary>
         public Action<Vector2> OnMoved;
-        // Fired when the node's field data changes from the canvas (e.g. a
-        // blackboard variable linked/unlinked via drag-drop or the link dot),
-        // so an open inspector showing this node can re-render.
+        /// <summary>On fields changed.</summary>
         public Action          OnFieldsChanged;
 
-        // ── Data ─────────────────────────────────────────────────────────────
 
+        /// <summary>Data.</summary>
         public NodeData Data { get; }
 
         private readonly GraphAsset                                   m_Asset;
@@ -49,8 +49,8 @@ namespace Feazeyu.RPGSystems.EditorTools
         private readonly NodeInfo                             m_Info;
         private readonly Dictionary<string, Port>                     m_Ports = new Dictionary<string, Port>();
 
-        // ── Construction ─────────────────────────────────────────────────────
 
+        /// <summary>Initializes a new instance of the <see cref="GraphNodeView"/> class.</summary>
         public  GraphNodeView(
             NodeData data,
             GraphAsset asset,
@@ -70,7 +70,6 @@ namespace Feazeyu.RPGSystems.EditorTools
 
             BuildVisuals();
 
-            // Restore saved size (zero = not yet user-resized → leave auto).
             if (data.Size.x > 0 && data.Size.y > 0)
             {
                 style.width  = data.Size.x;
@@ -84,7 +83,6 @@ namespace Feazeyu.RPGSystems.EditorTools
             }));
         }
 
-        // ── Build ────────────────────────────────────────────────────────────
 
         private void BuildVisuals()
         {
@@ -145,15 +143,6 @@ namespace Feazeyu.RPGSystems.EditorTools
             var dir      = portData.Direction == PortDirection.Input ? Direction.Input : Direction.Output;
             var capacity = portData.Capacity  == PortCapacity.Single ? Port.Capacity.Single : Port.Capacity.Multi;
 
-            // Horizontal orientation: inputs on the left edge of the
-            // card, outputs on the right. Unity's EdgeControl derives
-            // bezier tangents from the port orientation — horizontal
-            // tangents produce smooth left-to-right curves regardless
-            // of vertical offset between connected nodes. Vertical
-            // ports (what this used to be) produce a characteristic
-            // steep-ends / flat-middle S-curve whenever the two nodes
-            // have any horizontal offset, because the short vertical
-            // tangents don't reach far enough to keep the curve round.
             var port = InstantiatePort(Orientation.Horizontal, dir, capacity, typeof(bool));
             port.portName  = portData.PortName;
             port.portColor = m_Info != null ? m_Info.AccentColor : Color.gray;
@@ -217,7 +206,6 @@ namespace Feazeyu.RPGSystems.EditorTools
 
             var desired = new HashSet<string>(Data.Ports.Select(p => p.PortName));
 
-            // Remove ports that no longer exist, deleting any edges anchored to them.
             foreach (var name in m_Ports.Keys.Where(n => !desired.Contains(n)).ToList())
             {
                 var port = m_Ports[name];
@@ -231,14 +219,10 @@ namespace Feazeyu.RPGSystems.EditorTools
                 m_Ports.Remove(name);
             }
 
-            // Instantiate ports that appeared since the last build.
             foreach (var portData in Data.Ports)
                 if (!m_Ports.ContainsKey(portData.PortName))
                     AddPort(portData);
 
-            // Reorder each container to match the authored port order — a decorator may
-            // insert a port anywhere in the list, not just append. Re-adding an element that
-            // is already parented to the container simply moves it, leaving its edges intact.
             foreach (var portData in Data.Ports)
             {
                 if (!m_Ports.TryGetValue(portData.PortName, out var port)) continue;
@@ -255,9 +239,6 @@ namespace Feazeyu.RPGSystems.EditorTools
         {
             var row = new VisualElement();
             row.AddToClassList("node-field-row");
-            // Tag the row with its field name so field decorators (e.g.
-            // ChoiceBranchDecorator) can find and replace specific base-built
-            // rows instead of rendering duplicates alongside them.
             row.userData = field.FieldName;
 
             var nameLabel = new Label(field.FieldName);
@@ -352,7 +333,6 @@ namespace Feazeyu.RPGSystems.EditorTools
                 evt.StopPropagation();
             });
 
-            // ── Drag & Drop ──────────────────────────────────────────────────
             row.RegisterCallback<DragEnterEvent>(_ =>
             {
                 if (DragAndDrop.GetGenericData("BlackboardVariableGuid") is string)
@@ -383,7 +363,6 @@ namespace Feazeyu.RPGSystems.EditorTools
             row.RegisterCallback<DragExitedEvent>(_ => row.RemoveFromClassList("drag-over"));
         }
 
-        // ── Operator field helpers ───────────────────────────────────────────
 
         internal static readonly List<string> ConditionalOperators
             = new List<string> { "==", "!=", ">", ">=", "<", "<=" };
@@ -391,7 +370,6 @@ namespace Feazeyu.RPGSystems.EditorTools
         internal static bool IsOperatorField(FieldData field)
             => field.TypeName == "conditional_operator" || field.FieldName == "Operator";
 
-        // ── Choice (enum-like) field helpers ─────────────────────────────────
 
         /// <summary>
         /// Returns the fixed set of options for a field that should render as a
@@ -413,7 +391,6 @@ namespace Feazeyu.RPGSystems.EditorTools
             return false;
         }
 
-        // ── Typed "Value" input helpers (SetVariable / Condition / Requirement) ──
 
         /// <summary>
         /// True when <paramref name="field"/> is the "Value" field of a node whose value
@@ -495,7 +472,6 @@ namespace Feazeyu.RPGSystems.EditorTools
                 return hint;
             }
 
-            // string / unknown / null → default TextField
             return Bind(new TextField(), field.InlineValue ?? "", s => s, field, onChanged);
         }
 
@@ -527,23 +503,33 @@ namespace Feazeyu.RPGSystems.EditorTools
         {
             private static readonly CultureInfo Inv = CultureInfo.InvariantCulture;
 
+            /// <summary>Bool.</summary>
             public static bool  Bool(string s)  { bool.TryParse(s, out var v); return v; }
+            /// <summary>Int.</summary>
             public static int   Int(string s)   { int.TryParse(s, out var v); return v; }
+            /// <summary>Float.</summary>
             public static float Float(string s) { float.TryParse(s, NumberStyles.Float, Inv, out var v); return v; }
+            /// <summary>Vec 2.</summary>
             public static Vector2 Vec2(string s) { var p = Split(s, 2); return new Vector2(Float(p[0]), Float(p[1])); }
+            /// <summary>Vec 3.</summary>
             public static Vector3 Vec3(string s) { var p = Split(s, 3); return new Vector3(Float(p[0]), Float(p[1]), Float(p[2])); }
+            /// <summary>Col.</summary>
             public static Color Col(string s)
                 => ColorUtility.TryParseHtmlString(s ?? "", out var c) ? c : UnityEngine.Color.white;
 
+            /// <summary>Str.</summary>
             public static string Str(bool v)    => v.ToString();
+            /// <summary>Str.</summary>
             public static string Str(int v)     => v.ToString(Inv);
+            /// <summary>Str.</summary>
             public static string Str(float v)   => v.ToString(Inv);
+            /// <summary>Str.</summary>
             public static string Str(Vector2 v) => $"{v.x.ToString(Inv)},{v.y.ToString(Inv)}";
+            /// <summary>Str.</summary>
             public static string Str(Vector3 v) => $"{v.x.ToString(Inv)},{v.y.ToString(Inv)},{v.z.ToString(Inv)}";
+            /// <summary>Str.</summary>
             public static string Str(Color v)   => "#" + ColorUtility.ToHtmlStringRGBA(v);
 
-            // Splits the comma-separated value into exactly <paramref name="count"/> trimmed
-            // components, padding with empty strings so callers can index without bounds checks.
             private static string[] Split(string s, int count)
             {
                 var src = (s ?? "").Split(',');
@@ -554,8 +540,8 @@ namespace Feazeyu.RPGSystems.EditorTools
             }
         }
 
-        // ── Public API ───────────────────────────────────────────────────────
 
+        /// <summary>Get port.</summary>
         public Port GetPort(string portName, Direction dir)
         {
             m_Ports.TryGetValue(portName, out var p);
@@ -588,8 +574,8 @@ namespace Feazeyu.RPGSystems.EditorTools
             MarkDirtyRepaint();
         }
 
-        // ── Selection ────────────────────────────────────────────────────────
 
+        /// <inheritdoc/>
         public override void OnSelected()
         {
             base.OnSelected();
@@ -597,6 +583,7 @@ namespace Feazeyu.RPGSystems.EditorTools
             OnSelect?.Invoke();
         }
 
+        /// <inheritdoc/>
         public override void OnUnselected()
         {
             base.OnUnselected();
@@ -604,7 +591,6 @@ namespace Feazeyu.RPGSystems.EditorTools
             OnDeselected?.Invoke();
         }
 
-        // ── Rename ───────────────────────────────────────────────────────────
 
         private void BeginRename(Label titleLabel)
         {
@@ -637,9 +623,10 @@ namespace Feazeyu.RPGSystems.EditorTools
         }
     }
 
-    // Thin shim so Editor code doesn't depend on UnityEditor directly in this file.
+    /// <summary>Editor-only helpers shared by the node view, guarded for runtime builds.</summary>
     internal static class EditorUtilityHelper
     {
+        /// <summary>Marks an object dirty so the editor persists its changes.</summary>
         public static void SetDirty(UnityEngine.Object obj)
         {
 #if UNITY_EDITOR

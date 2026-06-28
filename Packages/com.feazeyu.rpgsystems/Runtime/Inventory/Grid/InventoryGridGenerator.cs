@@ -1,4 +1,4 @@
-﻿#nullable enable
+#nullable enable
 using Feazeyu.RPGSystems.Core.Utilities;
 using Feazeyu.RPGSystems.Items;
 using System;
@@ -10,20 +10,29 @@ using TMPro;
 using UnityEngine;
 namespace Feazeyu.RPGSystems.Inventory
 {
+    /// <summary>
+    /// Builds the runtime UI for an <see cref="InventoryGrid"/>: instantiates a cell prefab
+    /// per slot (by slot type), wires drag handlers, and renders stack counts.
+    /// </summary>
     [ExecuteInEditMode, Serializable]
     public class InventoryGridGenerator : MonoBehaviour, ISerializationCallbackReceiver
     {
+        /// <summary>Slot definitions.</summary>
         [Header("UI Prefab Settings")]
         public Dictionary<string, SlotUIDefinition> slotDefinitions = new();
+        /// <summary>Target.</summary>
         [Tooltip("Canvas to generate to")]
         public Canvas? target;
 
+        /// <summary>Spacing.</summary>
         [Header("Cell Layout Settings")]
         public Vector2 spacing = new(0, 0);
 
+        /// <summary>Anchor position.</summary>
         [Header("UI Position Settings")]
         [HideInInspector]
         public TextAnchor anchorPosition = TextAnchor.UpperLeft;
+        /// <summary>Ui position.</summary>
         [Tooltip("Anchored position of the generated UI relative to the selected anchor point (Unity convention: positive Y = up)")]
         public Vector2 uiPosition = new(0, 0);
 
@@ -33,6 +42,7 @@ namespace Feazeyu.RPGSystems.Inventory
         [SerializeField, HideInInspector]
         private SerializableDictionary<string, SlotUIDefinition>? serializableSlotDictionary;
 
+        /// <summary>On enable.</summary>
         public void OnEnable()
         {
             ReloadSlotTypes();
@@ -65,7 +75,6 @@ namespace Feazeyu.RPGSystems.Inventory
 
             inventoryGrid.ResizeIfNecessary();
 
-            // Clean up previous UI
             if (lastGeneratedRoot != null)
             {
                 if (Application.isPlaying)
@@ -74,7 +83,6 @@ namespace Feazeyu.RPGSystems.Inventory
                     DestroyImmediate(lastGeneratedRoot);
             }
 
-            // Create root container
             var root = new GameObject("GeneratedInventoryUI");
             var rootRect = root.AddComponent<RectTransform>();
             if (target == null)
@@ -311,10 +319,13 @@ namespace Feazeyu.RPGSystems.Inventory
 
 
 
+    /// <summary>Cell prefabs to use for a given slot type, in enabled and disabled states.</summary>
     [Serializable]
     public struct SlotUIDefinition
     {
+        /// <summary>Prefab used for an enabled cell.</summary>
         public GameObject? cellPrefab;
+        /// <summary>Prefab used for a disabled cell.</summary>
         public GameObject? disabledCellPrefab;
     }
 }

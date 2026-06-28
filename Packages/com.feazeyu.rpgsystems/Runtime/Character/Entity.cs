@@ -28,6 +28,7 @@ namespace Feazeyu.RPGSystems.Character
         [Tooltip("Spells inherit the rotation of this")]
         public Transform? castingRotationReference;
 
+        /// <summary>Raised when the entity's Health resource reaches zero.</summary>
         [Header("Events")]
         public UnityEvent OnDeath = new();
 
@@ -56,7 +57,6 @@ namespace Feazeyu.RPGSystems.Character
 
             foreach (var resource in resourceComponents)
             {
-                // Try to parse the ResourceTypes enum from the type name
                 if (System.Enum.TryParse<ResourceTypes>(resource.GetType().Name, out var resourceType))
                 {
                     resources.Add(resourceType, resource);

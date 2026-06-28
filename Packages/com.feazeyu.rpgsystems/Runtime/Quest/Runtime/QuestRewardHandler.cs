@@ -14,6 +14,7 @@ namespace QuestGraph.Runtime
         [Tooltip("The QuestRunner to listen to. Auto-found on this GameObject if empty.")]
         [SerializeField] private QuestRunner m_QuestRunner;
 
+        /// <summary>Awake.</summary>
         protected virtual void Awake()
         {
             if (m_QuestRunner == null)
@@ -32,6 +33,7 @@ namespace QuestGraph.Runtime
                 m_QuestRunner.OnRewardGranted.RemoveListener(OnRewardGranted);
         }
 
+        /// <summary>On reward granted.</summary>
         protected virtual void OnRewardGranted(RewardInfo reward) { }
     }
 }

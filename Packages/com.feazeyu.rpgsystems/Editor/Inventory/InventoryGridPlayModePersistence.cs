@@ -1,14 +1,17 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
 namespace Feazeyu.RPGSystems.Inventory
 {
+    /// <summary>
+    /// Captures and restores inventory grid contents across play-mode transitions in the
+    /// editor, so entering and exiting play mode does not lose authored grid state.
+    /// </summary>
     [InitializeOnLoad]
     public static class InventoryGridPlayModePersistence
     {
-        // key: scene path + full hierarchy path  →  serialized slot states
         private static readonly Dictionary<string, string> s_Captures = new();
 
         static InventoryGridPlayModePersistence()
@@ -47,7 +50,6 @@ namespace Feazeyu.RPGSystems.Inventory
             s_Captures.Clear();
         }
 
-        // Stable key: unchanged as long as the GameObject name and hierarchy don't change.
         private static string HierarchyKey(InventoryGrid grid)
         {
             var parts = new List<string>();
@@ -57,18 +59,22 @@ namespace Feazeyu.RPGSystems.Inventory
             return grid.gameObject.scene.path + ":" + string.Join("/", parts);
         }
 
-        // ── Serialization ────────────────────────────────────────────────────
 
         [Serializable]
         private class GridCapture
         {
+            /// <summary>Serializable snapshot of a single grid cell.</summary>
             [Serializable]
             public struct SlotState
             {
+                /// <summary>Cell coordinates.</summary>
                 public int x, y;
+                /// <summary>Item id in the cell, or -1.</summary>
                 public int itemId;
+                /// <summary>Anchor coordinates for multi-cell items.</summary>
                 public int anchorX, anchorY;
             }
+            /// <summary>Slots.</summary>
             public List<SlotState> slots = new();
         }
 

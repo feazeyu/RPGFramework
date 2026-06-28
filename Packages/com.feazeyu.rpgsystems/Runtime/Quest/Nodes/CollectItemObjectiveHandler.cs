@@ -25,16 +25,17 @@ namespace QuestGraph.Nodes
         "Have N of an item, then follow Completed.")]
     public class CollectItemObjectiveHandler : IGraphNodeHandler
     {
+        /// <inheritdoc/>
         public string NodeTypeId => QuestNodeRegistry.TypeObjCollect;
 
         private const float k_CheckInterval = 0.5f;
 
+        /// <inheritdoc/>
         public IEnumerator Execute(NodeData node, GraphRunContext ctx)
         {
             var runner = ctx.Runner as QuestRunner;
             if (runner == null) { ctx.Follow("Failed"); yield break; }
 
-            // ── Read fields ───────────────────────────────────────────────────
             var title  = ctx.ResolveString(node, "Title");
             var desc   = ctx.ResolveString(node, "Description");
             int.TryParse(ctx.ResolveString(node, "ItemId"),     out int itemId);
@@ -58,7 +59,6 @@ namespace QuestGraph.Nodes
                 Optional    = optional,
             };
 
-            // Wait until the container has enough items
             runner.RegisterObjective(info);
 
             float nextCheck = 0f;
@@ -79,7 +79,6 @@ namespace QuestGraph.Nodes
             ctx.Follow("Completed");
         }
 
-        // ── Helpers ───────────────────────────────────────────────────────────
 
         private static IItemContainer ResolveContainer(NodeData node, GraphRunContext ctx)
         {

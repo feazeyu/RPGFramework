@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 
 namespace Feazeyu.RPGSystems.Dialogue
@@ -18,8 +18,10 @@ namespace Feazeyu.RPGSystems.Dialogue
         "Finds a scene GameObject by name or tag and stores it in a blackboard variable.")]
     public class FindObjectNodeHandler : IGraphNodeHandler
     {
+        /// <inheritdoc/>
         public string NodeTypeId => "find_object";
 
+        /// <inheritdoc/>
         public IEnumerator Execute(NodeData node, GraphRunContext ctx)
         {
             string mode  = ctx.ResolveString(node, "Mode");
@@ -50,7 +52,7 @@ namespace Feazeyu.RPGSystems.Dialogue
         private static GameObject FindByTag(string tag)
         {
             try   { return GameObject.FindWithTag(tag); }
-            catch (UnityException) { return null; } // tag doesn't exist in TagManager
+            catch (UnityException) { return null; }
         }
     }
 }

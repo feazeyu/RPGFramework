@@ -12,12 +12,18 @@ namespace Feazeyu.RPGSystems.Dialogue
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
     public class DialogueNodeAttribute : Attribute
     {
+        /// <summary>Type id.</summary>
         public new string TypeId      { get; }
+        /// <summary>Display name.</summary>
         public string DisplayName { get; }
+        /// <summary>Category.</summary>
         public string Category    { get; }
+        /// <summary>Description.</summary>
         public string Description { get; }
+        /// <summary>Icon.</summary>
         public string Icon        { get; }
 
+        /// <summary>Initializes a new instance of the <see cref="DialogueNodeAttribute"/> class.</summary>
         public DialogueNodeAttribute(
             string typeId,
             string displayName,
@@ -50,18 +56,20 @@ namespace Feazeyu.RPGSystems.Dialogue
         /// <summary>Look up a dialogue node type, or <c>null</c> if not registered.</summary>
         public static NodeInfo Get(string typeId) => s_Instance.GetNode(typeId);
 
-        // ── Dialogue-specific type IDs ───────────────────────────────────────
 
+        /// <summary>Type dialogue line.</summary>
         public const string TypeDialogueLine = "DialogueLine";
+        /// <summary>Type choice branch.</summary>
         public const string TypeChoiceBranch = "ChoiceBranch";
+        /// <summary>Type requirement.</summary>
         public const string TypeRequirement  = "requirement";
 
-        // ── Dialogue accent colour ───────────────────────────────────────────
 
+        /// <summary>Col dialogue.</summary>
         public static readonly Color ColDialogue = new Color(0.29f, 0.61f, 0.78f);
 
-        // ── Build ────────────────────────────────────────────────────────────
 
+        /// <inheritdoc/>
         protected override void Build()
         {
             RegisterCommonNodes();

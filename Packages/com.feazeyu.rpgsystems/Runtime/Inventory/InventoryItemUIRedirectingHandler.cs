@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,7 +18,9 @@ namespace Feazeyu.RPGSystems.Inventory
     /// </summary>
     public class InventoryItemUIRedirectingHandler : InventoryItemUIHandler
     {
+        /// <summary>Target position.</summary>
         public Vector2Int targetPosition;
+        /// <inheritdoc/>
         protected override GameObject GetOriginalParent()
         {
             return transform.parent.parent.Find($"Cell_{targetPosition.x}_{targetPosition.y}").gameObject;

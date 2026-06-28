@@ -19,8 +19,10 @@ namespace QuestGraph.Nodes
         "Resets the progress of the objective(s) its Target output is wired to.")]
     public class ResetProgressNodeHandler : IGraphNodeHandler
     {
+        /// <inheritdoc/>
         public string NodeTypeId => QuestNodeRegistry.TypeResetProgress;
 
+        /// <inheritdoc/>
         public IEnumerator Execute(NodeData node, GraphRunContext ctx)
         {
             if (ctx.Runner is QuestRunner runner)

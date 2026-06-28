@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
 namespace Feazeyu.RPGSystems.Inventory
 {
+    /// <summary>Custom inspector for <see cref="InventoryGridGenerator"/>.</summary>
     [CustomEditor(typeof(InventoryGridGenerator))]
     public class InventoryGridGeneratorEditor : Editor
     {
@@ -14,6 +15,7 @@ namespace Feazeyu.RPGSystems.Inventory
             new("↙", "Lower Left"),   new("↓", "Lower Center"),  new("↘", "Lower Right"),
         };
 
+        /// <inheritdoc/>
         public override void OnInspectorGUI()
         {
             DrawDefaultInspector();
@@ -38,6 +40,7 @@ namespace Feazeyu.RPGSystems.Inventory
             EditorGUILayout.Space(4);
         }
 
+        /// <summary>Generate editor ui.</summary>
         public void GenerateEditorUI()
         {
             GUILayout.Label("Inventory slot prefabs", EditorStyles.boldLabel);

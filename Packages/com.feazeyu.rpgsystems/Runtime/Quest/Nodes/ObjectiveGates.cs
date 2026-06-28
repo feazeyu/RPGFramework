@@ -58,13 +58,10 @@ namespace QuestGraph.Nodes
                 case QuestNodeRegistry.TypeGateFlag:     return FlagGate(gate, ctx);
                 case QuestNodeRegistry.TypeGateLocation: return LocationGate(gate, ctx);
                 case QuestNodeRegistry.TypeGateItem:     return ItemGate(gate, ctx);
-                default:                                 return null;   // not a gate — flow edge, skip
+                default:                                 return null;
             }
         }
 
-        // ── Flag gate ─────────────────────────────────────────────────────────
-        // Compares a blackboard variable. Subject-independent. Covers "while
-        // wearing a blindfold" and collider-driven zone flags (see ZoneFlag).
 
         private static Func<ProgressEvent, bool> FlagGate(NodeData g, GraphRunContext ctx)
         {
@@ -81,9 +78,6 @@ namespace QuestGraph.Nodes
             };
         }
 
-        // ── Location gate ─────────────────────────────────────────────────────
-        // Passes when the actor is within Radius of Target. Actor is the player
-        // by default, or the event subject when Subject = "Subject".
 
         private static Func<ProgressEvent, bool> LocationGate(NodeData g, GraphRunContext ctx)
         {
@@ -109,10 +103,6 @@ namespace QuestGraph.Nodes
             };
         }
 
-        // ── Item gate ─────────────────────────────────────────────────────────
-        // Passes when an actor's inventory holds the required count. Resolves the
-        // event subject's inventory; if the subject has none (e.g. a goblin can't
-        // own a sword), it defaults to the player and warns once.
 
         private static Func<ProgressEvent, bool> ItemGate(NodeData g, GraphRunContext ctx)
         {
@@ -148,7 +138,6 @@ namespace QuestGraph.Nodes
             };
         }
 
-        // ── Shared helpers ────────────────────────────────────────────────────
 
         private static Transform ResolveTransform(NodeData node, GraphRunContext ctx, string field)
         {

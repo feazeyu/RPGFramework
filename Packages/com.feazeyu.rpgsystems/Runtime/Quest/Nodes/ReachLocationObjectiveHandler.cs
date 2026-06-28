@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 using Feazeyu.RPGSystems.Dialogue;
 using QuestGraph.Runtime;
@@ -23,14 +23,15 @@ namespace QuestGraph.Nodes
         "Enter a radius around a target, then follow Completed.")]
     public class ReachLocationObjectiveHandler : IGraphNodeHandler
     {
+        /// <inheritdoc/>
         public string NodeTypeId => QuestNodeRegistry.TypeObjLocation;
 
+        /// <inheritdoc/>
         public IEnumerator Execute(NodeData node, GraphRunContext ctx)
         {
             var runner = ctx.Runner as QuestRunner;
             if (runner == null) { ctx.Follow("Failed"); yield break; }
 
-            // ── Read fields ───────────────────────────────────────────────────
             var title  = ctx.ResolveString(node, "Title");
             var desc   = ctx.ResolveString(node, "Description");
             float.TryParse(ctx.ResolveString(node, "Radius"), out float radius);
@@ -45,13 +46,10 @@ namespace QuestGraph.Nodes
                 Optional    = optional,
             };
 
-            // ── Resolve target transform ──────────────────────────────────────
             Transform target = ResolveTarget(node, ctx);
 
-            // ── Find player ───────────────────────────────────────────────────
             var player = FindPlayer();
 
-            // Wait until player enters the area
             runner.RegisterObjective(info);
 
             while (runner.IsRunning)
@@ -68,7 +66,6 @@ namespace QuestGraph.Nodes
             ctx.Follow("Completed");
         }
 
-        // ── Helpers ───────────────────────────────────────────────────────────
 
         private static Transform ResolveTarget(NodeData node, GraphRunContext ctx)
         {

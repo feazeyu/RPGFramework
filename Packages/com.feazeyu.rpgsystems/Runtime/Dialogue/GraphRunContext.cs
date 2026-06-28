@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Text;
 using UnityEngine;
 
@@ -13,13 +13,14 @@ namespace Feazeyu.RPGSystems.Dialogue
     /// </summary>
     public class GraphRunContext
     {
-        // ── Read-only references ──────────────────────────────────────────────
 
+        /// <summary>Runner.</summary>
         public GraphRunner          Runner             { get; }
+        /// <summary>Graph.</summary>
         public GraphAsset   Graph              { get; }
+        /// <summary>Runtime blackboard.</summary>
         public Blackboard           RuntimeBlackboard  { get; }
 
-        // ── Wired by GraphRunner ──────────────────────────────────────────────
 
         internal Action<string> OnFollow;
         internal Action<string> OnFork;
@@ -32,7 +33,6 @@ namespace Feazeyu.RPGSystems.Dialogue
             RuntimeBlackboard = bb;
         }
 
-        // ── Graph control ─────────────────────────────────────────────────────
 
         /// <summary>
         /// Advance this flow token along the named output port. Spawns one token
@@ -51,7 +51,6 @@ namespace Feazeyu.RPGSystems.Dialogue
         /// <summary>Terminate the entire graph (all tokens) cleanly.</summary>
         public void End() => OnEnd?.Invoke();
 
-        // ── Field resolution ──────────────────────────────────────────────────
 
         /// <summary>
         /// Returns the string value of a field: prefers the linked blackboard
@@ -100,11 +99,10 @@ namespace Feazeyu.RPGSystems.Dialogue
 
                 if (c == '{')
                 {
-                    // Escaped "{{" → literal "{"
                     if (i + 1 < template.Length && template[i + 1] == '{') { sb.Append('{'); i++; continue; }
 
                     int end = template.IndexOf('}', i + 1);
-                    if (end < 0) { sb.Append(template, i, template.Length - i); break; } // unterminated — emit as-is
+                    if (end < 0) { sb.Append(template, i, template.Length - i); break; }
 
                     string name = template.Substring(i + 1, end - i - 1).Trim();
                     sb.Append(LookupVariableString(name));
@@ -112,15 +110,13 @@ namespace Feazeyu.RPGSystems.Dialogue
                 }
                 else if (c == '}' && i + 1 < template.Length && template[i + 1] == '}')
                 {
-                    sb.Append('}'); i++;   // escaped "}}" → literal "}"
+                    sb.Append('}'); i++;
                 }
                 else sb.Append(c);
             }
             return sb.ToString();
         }
 
-        // Resolves a blackboard variable's value to a string by Name (not Guid), for
-        // interpolation. Leaves the token visible when no such variable exists.
         private string LookupVariableString(string name)
         {
             if (RuntimeBlackboard != null && !string.IsNullOrEmpty(name))
@@ -157,8 +153,8 @@ namespace Feazeyu.RPGSystems.Dialogue
             return null;
         }
 
-        // ── Blackboard accessors ──────────────────────────────────────────────
 
+        /// <summary>Variable name.</summary>
         public T GetVariable<T>(string variableName)
         {
             if (RuntimeBlackboard == null) return default;
@@ -171,6 +167,7 @@ namespace Feazeyu.RPGSystems.Dialogue
             return default;
         }
 
+        /// <summary>T.</summary>
         public void SetVariable<T>(string variableName, T value)
         {
             if (RuntimeBlackboard == null) return;

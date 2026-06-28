@@ -20,8 +20,10 @@ namespace Feazeyu.RPGSystems.Dialogue
         "Instantiates a prefab from a blackboard variable, optionally under a parent Transform.")]
     public class SpawnPrefabNodeHandler : IGraphNodeHandler
     {
+        /// <inheritdoc/>
         public string NodeTypeId => "spawn_prefab";
 
+        /// <inheritdoc/>
         public IEnumerator Execute(NodeData node, GraphRunContext ctx)
         {
             var prefab = ResolveGameObject(ctx, node, "Prefab");
@@ -34,14 +36,10 @@ namespace Feazeyu.RPGSystems.Dialogue
 
             var parent = ResolveParent(ctx, node, "Parent");
 
-            // worldPositionStays:false so the instance keeps the prefab's authored
-            // local transform relative to the parent (i.e. it appears at the
-            // parent), which is the least surprising "spawn under parent" behaviour.
             var instance = parent != null
                 ? Object.Instantiate(prefab, parent, false)
                 : Object.Instantiate(prefab);
 
-            // Optionally publish the spawned instance so later nodes can reference it.
             var resultField = ctx.GetField(node, "Result");
             if (resultField != null && !string.IsNullOrEmpty(resultField.LinkedVariableGuid))
             {
@@ -65,7 +63,6 @@ namespace Feazeyu.RPGSystems.Dialogue
             var field = ctx.GetField(node, fieldName);
             if (field == null || string.IsNullOrEmpty(field.LinkedVariableGuid)) return null;
 
-            // Accept either a Transform variable or a GameObject variable.
             var obj = ctx.RuntimeBlackboard.GetVariable(field.LinkedVariableGuid)?.ObjectValue;
             return obj switch
             {

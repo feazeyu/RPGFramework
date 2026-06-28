@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.UIElements;
@@ -8,10 +8,9 @@ using Feazeyu.RPGSystems.Dialogue;
 
 namespace Feazeyu.RPGSystems.EditorTools
 {
+    /// <summary>Graph editor panel for viewing and editing a graph's blackboard variables.</summary>
     public class BlackboardPanel : VisualElement
     {
-        // Variable types and their accent colours — only the colour is data-driven;
-        // shape/size/layout comes from USS.
         private static readonly (string TypeName, Color Colour)[] VariableTypes =
         {
             ("Boolean",    new Color(0.88f, 0.31f, 0.44f)),
@@ -27,7 +26,6 @@ namespace Feazeyu.RPGSystems.EditorTools
             ("AudioClip",     new Color(0.48f, 0.76f, 0.96f)),
         };
 
-        // ── State ─────────────────────────────────────────────────────────────
 
         private GraphAsset m_Asset;
         private SerializedObject   m_SerializedAsset;
@@ -47,8 +45,8 @@ namespace Feazeyu.RPGSystems.EditorTools
         /// </summary>
         private System.Action<string> m_RefreshNodeView;
 
-        // ── Construction ──────────────────────────────────────────────────────
 
+        /// <summary>Initializes a new instance of the <see cref="BlackboardPanel"/> class.</summary>
         public BlackboardPanel()
         {
             AddToClassList("bb-panel");
@@ -67,7 +65,6 @@ namespace Feazeyu.RPGSystems.EditorTools
             m_RefreshNodeView = refresh;
         }
 
-        // ── Header ────────────────────────────────────────────────────────────
 
         private void BuildHeader()
         {
@@ -126,7 +123,6 @@ namespace Feazeyu.RPGSystems.EditorTools
             Add(m_AddForm);
         }
 
-        // ── Variable list ─────────────────────────────────────────────────────
 
         private void BuildVariableList()
         {
@@ -137,8 +133,8 @@ namespace Feazeyu.RPGSystems.EditorTools
             Add(scroll);
         }
 
-        // ── Populate ──────────────────────────────────────────────────────────
 
+        /// <summary>Populate.</summary>
         public void Populate(GraphAsset asset)
         {
             if (m_Asset != null)
@@ -181,7 +177,6 @@ namespace Feazeyu.RPGSystems.EditorTools
                 m_VariableList.Add(BuildVariableRow(variable));
         }
 
-        // ── Variable row ──────────────────────────────────────────────────────
 
         private VisualElement BuildVariableRow(BlackboardVariable variable)
         {
@@ -195,7 +190,6 @@ namespace Feazeyu.RPGSystems.EditorTools
             row.AddToClassList("bb-var-row");
             if (expanded) row.AddToClassList("expanded");
 
-            // Colour dot — background-color is data-driven, shape from USS.
             var dot = new VisualElement();
             dot.AddToClassList("bb-var-dot");
             dot.style.backgroundColor = new StyleColor(typeColor);
@@ -205,7 +199,6 @@ namespace Feazeyu.RPGSystems.EditorTools
             nameLabel.AddToClassList("bb-var-name");
             row.Add(nameLabel);
 
-            // Type pill — color is data-driven, layout from USS.
             var typePill = new Label(GetShortTypeName(variable));
             typePill.AddToClassList("bb-type-pill");
             typePill.style.color           = new StyleColor(typeColor);
@@ -222,7 +215,6 @@ namespace Feazeyu.RPGSystems.EditorTools
             chevron.AddToClassList("bb-chevron");
             row.Add(chevron);
 
-            // Drag to node field.
             row.RegisterCallback<MouseDownEvent>(evt =>
             {
                 if (evt.button != 0 || evt.clickCount != 1) return;
@@ -243,9 +235,6 @@ namespace Feazeyu.RPGSystems.EditorTools
                 }
             }, TrickleDown.NoTrickleDown);
 
-            // Right-click: copy / paste this variable's GUID. Pasting a GUID copied
-            // from another graph's variable makes the two resolve to the same
-            // SharedBlackboardStore entry at runtime (both must also be Shared).
             row.AddManipulator(new ContextualMenuManipulator(evt =>
             {
                 evt.menu.AppendAction("Copy GUID", _ => CopyGuid(variable));
@@ -255,7 +244,6 @@ namespace Feazeyu.RPGSystems.EditorTools
                         : DropdownMenuAction.Status.Disabled);
             }));
 
-            // Expand/collapse on click.
             row.RegisterCallback<ClickEvent>(_ =>
             {
                 if (m_ExpandedGuids.Contains(variable.Guid))
@@ -300,7 +288,6 @@ namespace Feazeyu.RPGSystems.EditorTools
             }
         }
 
-        // ── Variable detail ───────────────────────────────────────────────────
 
         private VisualElement BuildVariableDetail(BlackboardVariable variable,
             Label nameLabel, VisualElement badgeContainer)
@@ -312,7 +299,6 @@ namespace Feazeyu.RPGSystems.EditorTools
                 ? BlackboardPropertyBridge.FindVariableIndex(m_SerializedAsset, variable.Guid)
                 : -1;
 
-            // Name
             detail.Add(MakeDetailLabel("Name"));
             if (idx >= 0)
             {
@@ -339,17 +325,15 @@ namespace Feazeyu.RPGSystems.EditorTools
                 detail.Add(nameField);
             }
 
-            // Type (read-only)
             detail.Add(MakeDetailLabel("Type"));
             var typeColor = GetTypeColor(variable);
             var typeLabel = new Label(GetShortTypeName(variable));
             typeLabel.AddToClassList("bb-type-pill");
             typeLabel.AddToClassList("bb-detail-type");
-            typeLabel.style.color = new StyleColor(typeColor); // data-driven
+            typeLabel.style.color = new StyleColor(typeColor);
             typeLabel.tooltip = "To change type, delete and re-add.";
             detail.Add(typeLabel);
 
-            // Default Value
             detail.Add(MakeDetailLabel("Default Value"));
             if (idx >= 0)
             {
@@ -358,8 +342,6 @@ namespace Feazeyu.RPGSystems.EditorTools
                 {
                     if (valueProp.propertyType == SerializedPropertyType.ObjectReference)
                     {
-                        // PropertyField shows "type mismatch" for UnityEngine.Object fields
-                        // inside [SerializeReference] elements — use ObjectField directly.
                         var objectType = variable.ValueType ?? typeof(UnityEngine.Object);
                         var objField = new ObjectField { objectType = objectType, allowSceneObjects = true };
                         objField.SetValueWithoutNotify(valueProp.objectReferenceValue);
@@ -386,7 +368,6 @@ namespace Feazeyu.RPGSystems.EditorTools
             }
             else { detail.Add(MakeUnserialisableLabel()); }
 
-            // Exposed / Shared toggles
             detail.Add(MakeDetailLabel(""));
             detail.Add(BuildBoundToggleAt(idx,
                 "Exposed", "Exposed variables appear in the agent Inspector.",
@@ -395,23 +376,17 @@ namespace Feazeyu.RPGSystems.EditorTools
                 "Shared", "Shared variables have ONE value across all agents.",
                 "bb-toggle-shared", variable, "m_Shared", badgeContainer));
 
-            // GUID
             detail.Add(MakeDetailLabel("GUID"));
             var guidField = new TextField { value = variable.Guid, isReadOnly = true };
             guidField.AddToClassList("bb-text-field");
             guidField.style.fontSize = 8;
             detail.Add(guidField);
 
-            // Delete
             var deleteBtn = new Button(() =>
             {
                 if (m_Asset == null) return;
                 Undo.RecordObject(m_Asset, "Delete Blackboard Variable");
 
-                // Find every node field still linked to this variable
-                // and clear the link. Without this, fields retain a
-                // stale guid pointing at nothing and the node card
-                // keeps rendering as "⟵ ?" indefinitely.
                 var affectedNodeGuids = new HashSet<string>();
                 foreach (var node in m_Asset.Nodes)
                 {
@@ -432,9 +407,6 @@ namespace Feazeyu.RPGSystems.EditorTools
                 BlackboardPropertyBridge.Invalidate(m_Asset);
                 m_SerializedAsset = BlackboardPropertyBridge.GetSerializedObject(m_Asset);
 
-                // Refresh each affected canvas node view so the stale
-                // "linked" visuals clear. Safe to call with a no-op
-                // callback (checked via ?.Invoke).
                 foreach (var guid in affectedNodeGuids)
                     m_RefreshNodeView?.Invoke(guid);
 
@@ -492,7 +464,6 @@ namespace Feazeyu.RPGSystems.EditorTools
             return toggle;
         }
 
-        // ── Add-form logic ────────────────────────────────────────────────────
 
         private void ToggleAddForm()
         {
@@ -542,7 +513,6 @@ namespace Feazeyu.RPGSystems.EditorTools
             RebuildList();
         }
 
-        // ── GUID copy / paste ─────────────────────────────────────────────────
 
         private void CopyGuid(BlackboardVariable variable)
         {
@@ -570,8 +540,6 @@ namespace Feazeyu.RPGSystems.EditorTools
             var oldGuid = variable.Guid;
             if (newGuid == oldGuid) return;
 
-            // Two variables sharing a GUID in one blackboard would make GUID-based
-            // lookups ambiguous — refuse.
             foreach (var v in m_Asset.Blackboard.Variables)
                 if (v != variable && v.Guid == newGuid)
                 {
@@ -583,7 +551,6 @@ namespace Feazeyu.RPGSystems.EditorTools
             Undo.RecordObject(m_Asset, "Set Blackboard Variable GUID");
             variable.Guid = newGuid;
 
-            // Re-point every node field linked to the old GUID so links don't break.
             var affectedNodeGuids = new HashSet<string>();
             foreach (var node in m_Asset.Nodes)
             {
@@ -606,7 +573,6 @@ namespace Feazeyu.RPGSystems.EditorTools
             RebuildList();
         }
 
-        // ── Helpers ───────────────────────────────────────────────────────────
 
         private void MarkDirty() { if (m_Asset) EditorUtility.SetDirty(m_Asset); }
 
@@ -616,8 +582,6 @@ namespace Feazeyu.RPGSystems.EditorTools
             foreach (var (name, col) in VariableTypes)
                 if (name == s) return col;
 
-            // Extension types (Quest, QuestGraph, etc.) carry their
-            // accent on the registry entry.
             var ext = BlackboardVariableTypeRegistry.Find(s);
             if (ext.HasValue) return ext.Value.AccentColour;
 
@@ -644,9 +608,6 @@ namespace Feazeyu.RPGSystems.EditorTools
             };
             if (builtIn != null) return builtIn;
 
-            // Not a built-in — defer to the extension registry so Quest /
-            // QuestGraph / etc. types contributed by other assemblies get
-            // the right display name.
             var ext = BlackboardVariableTypeRegistry.FindFor(v);
             if (ext.HasValue) return ext.Value.TypeName;
 

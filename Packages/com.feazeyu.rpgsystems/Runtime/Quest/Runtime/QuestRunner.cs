@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,29 +9,47 @@ using Feazeyu.RPGSystems.Inventory;
 
 namespace QuestGraph.Runtime
 {
+    /// <summary>Outcome of a quest run.</summary>
     public enum QuestResult
     {
+        /// <summary>The quest is still running.</summary>
         InProgress = 0,
+        /// <summary>The quest completed successfully.</summary>
         Completed  = 1,
+        /// <summary>The quest failed.</summary>
         Failed     = 2,
+        /// <summary>The quest was aborted (e.g. offer declined or externally cancelled).</summary>
         Aborted    = 3,
     }
 
+    /// <summary>
+    /// Describes an active objective to listeners (HUD/quest log). Carried through the
+    /// runner's objective events; <see cref="NodeGuid"/> keys it to its graph node.
+    /// </summary>
     [Serializable]
     public struct ObjectiveInfo
     {
+        /// <summary>GUID of the objective's graph node.</summary>
         public string NodeGuid;
+        /// <summary>Display title.</summary>
         public string Title;
+        /// <summary>Display description.</summary>
         public string Description;
+        /// <summary>Whether the objective is optional (not required to complete the quest).</summary>
         public bool   Optional;
     }
 
+    /// <summary>Describes a reward granted by a Reward node.</summary>
     [Serializable]
     public struct RewardInfo
     {
+        /// <summary>Experience points granted.</summary>
         public int                xp;
+        /// <summary>Currency granted.</summary>
         public int                currency;
+        /// <summary>Item asset granted, if any.</summary>
         public ScriptableObject   item;
+        /// <summary>Quantity of <see cref="item"/> granted.</summary>
         public int                quantity;
     }
 
@@ -45,33 +63,39 @@ namespace QuestGraph.Runtime
     /// </summary>
     public class QuestRunner : GraphRunner
     {
-        // ── Inspector events ──────────────────────────────────────────────────
 
-        // Initialized inline so the events are non-null even when the runner is
-        // created at runtime via AddComponent (e.g. QuestChainRunner spawning a
-        // child runner), where Unity does not deserialize serialized fields.
+        /// <summary>On objective started.</summary>
         [Header("Quest Events")]
         public ObjectiveEvent  OnObjectiveStarted  = new();
+        /// <summary>On objective completed.</summary>
         public ObjectiveEvent  OnObjectiveCompleted = new();
+        /// <summary>On objective failed.</summary>
         public ObjectiveEvent  OnObjectiveFailed   = new();
+        /// <summary>On reward granted.</summary>
         public RewardEvent     OnRewardGranted     = new();
+        /// <summary>On quest completed.</summary>
         public UnityEvent      OnQuestCompleted    = new();
+        /// <summary>On quest failed.</summary>
         public FailedEvent     OnQuestFailed       = new();
+        /// <summary>On quest ended.</summary>
         public ResultEvent     OnQuestEnded        = new();
 
+        /// <summary>On timer timeout.</summary>
         [Tooltip("Fired each time any Timer node in the graph times out.")]
         public UnityEvent      OnTimerTimeout      = new();
 
+        /// <summary>On dialogue started.</summary>
         [Tooltip("Fired when a Run Dialogue node spawns a DialogueRunner. " +
                  "Wire a DialogueUI to bind to it (the demo HUD does this).")]
         public DialogueRunnerEvent OnDialogueStarted = new();
 
-        // ── Public state ──────────────────────────────────────────────────────
 
+        /// <summary>Result.</summary>
         public QuestResult Result        { get; private set; } = QuestResult.InProgress;
+        /// <summary>Failure reason.</summary>
         public string      FailureReason { get; private set; }
 
-        // Backward-compat: returns the first active objective if any.
+        /// <summary>Active objective.</summary>
         public ObjectiveInfo? ActiveObjective
         {
             get
@@ -81,23 +105,18 @@ namespace QuestGraph.Runtime
             }
         }
 
+        /// <summary>Active objectives.</summary>
         public IReadOnlyCollection<ObjectiveInfo> ActiveObjectives => m_ActiveObjectives.Values;
 
-        // ── Internal state ────────────────────────────────────────────────────
 
-        // nodeGuid → info for every currently-active objective
         private readonly Dictionary<string, ObjectiveInfo> m_ActiveObjectives  = new();
-        // nodeGuid → null (pending) | true (complete) | false (failed)
         private readonly Dictionary<string, bool?>         m_ObjectiveOutcomes = new();
-        // nodeGuid → resettable progress counter shared with attached modifiers
         private readonly Dictionary<string, ObjectiveProgress> m_Progress     = new();
 
-        // Wall-clock end time of the most recently (re)armed Timer node window,
-        // so a HUD can show a live countdown. -1 when no timer is armed.
         private float m_TimerEndTime = -1f;
 
-        // ── Lifecycle ─────────────────────────────────────────────────────────
 
+        /// <inheritdoc/>
         protected override void Awake()
         {
             base.Awake();
@@ -119,8 +138,8 @@ namespace QuestGraph.Runtime
             RegisterHandler(new ResetProgressNodeHandler());
         }
 
-        // ── Public API ────────────────────────────────────────────────────────
 
+        /// <summary>Start quest.</summary>
         public void StartQuest()
         {
             if (Graph is QuestGraphAsset qga && qga.Kind == QuestKind.Chain)
@@ -167,6 +186,7 @@ namespace QuestGraph.Runtime
             StopGraph();
         }
 
+        /// <summary>Abort quest.</summary>
         public void AbortQuest()
         {
             if (!IsRunning) return;
@@ -174,7 +194,6 @@ namespace QuestGraph.Runtime
             StopGraph();
         }
 
-        // ── Methods for objective node handlers ───────────────────────────────
 
         /// <summary>
         /// Called by objective node handlers at the start of execution.
@@ -204,7 +223,6 @@ namespace QuestGraph.Runtime
         public bool? GetObjectiveOutcome(string nodeGuid)
             => m_ObjectiveOutcomes.TryGetValue(nodeGuid, out var v) ? v : null;
 
-        // ── Objective progress (gated/timed objectives) ───────────────────────
 
         /// <summary>
         /// Creates (or replaces) the resettable progress counter for an objective
@@ -218,8 +236,10 @@ namespace QuestGraph.Runtime
             return p;
         }
 
+        /// <summary>Unregister progress.</summary>
         public void UnregisterProgress(string nodeGuid) => m_Progress.Remove(nodeGuid);
 
+        /// <summary>Get progress.</summary>
         public ObjectiveProgress GetProgress(string nodeGuid)
             => m_Progress.TryGetValue(nodeGuid, out var p) ? p : null;
 
@@ -232,7 +252,6 @@ namespace QuestGraph.Runtime
         /// <summary>Fires <see cref="OnTimerTimeout"/> (called by Timer node handlers).</summary>
         public void RaiseTimerTimeout() => OnTimerTimeout?.Invoke();
 
-        // ── Timer countdown (for HUD display) ─────────────────────────────────
 
         /// <summary>True while a Timer node window is armed and the quest is running.</summary>
         public bool HasActiveTimer => IsRunning && m_TimerEndTime >= 0f;
@@ -247,8 +266,8 @@ namespace QuestGraph.Runtime
         public void SetTimerWindow(float seconds)
             => m_TimerEndTime = Time.time + Mathf.Max(0f, seconds);
 
-        // ── GraphRunner overrides ─────────────────────────────────────────────
 
+        /// <inheritdoc/>
         protected override void OnGraphStop()
         {
             if (Result == QuestResult.InProgress)
@@ -262,14 +281,16 @@ namespace QuestGraph.Runtime
             OnQuestEnded?.Invoke(Result);
         }
 
-        // ── Built-in node handlers ────────────────────────────────────────────
 
         private class ObjectiveHandler : IGraphNodeHandler
         {
             private readonly QuestRunner m_R;
+            /// <inheritdoc/>
             public string NodeTypeId => QuestNodeRegistry.TypeObjective;
+            /// <summary>Initializes a new instance of the <see cref="ObjectiveHandler"/> class.</summary>
             public ObjectiveHandler(QuestRunner r) => m_R = r;
 
+            /// <inheritdoc/>
             public IEnumerator Execute(NodeData node, GraphRunContext ctx)
             {
                 var info = new ObjectiveInfo
@@ -307,9 +328,12 @@ namespace QuestGraph.Runtime
         private class RewardHandler : IGraphNodeHandler
         {
             private readonly QuestRunner m_R;
+            /// <inheritdoc/>
             public string NodeTypeId => QuestNodeRegistry.TypeReward;
+            /// <summary>Initializes a new instance of the <see cref="RewardHandler"/> class.</summary>
             public RewardHandler(QuestRunner r) => m_R = r;
 
+            /// <inheritdoc/>
             public IEnumerator Execute(NodeData node, GraphRunContext ctx)
             {
                 int.TryParse(ctx.ResolveString(node, "XP"),       out var xp);
@@ -341,9 +365,12 @@ namespace QuestGraph.Runtime
         private class CompleteQuestHandler : IGraphNodeHandler
         {
             private readonly QuestRunner m_R;
+            /// <inheritdoc/>
             public string NodeTypeId => QuestNodeRegistry.TypeCompleteQuest;
+            /// <summary>Initializes a new instance of the <see cref="CompleteQuestHandler"/> class.</summary>
             public CompleteQuestHandler(QuestRunner r) => m_R = r;
 
+            /// <inheritdoc/>
             public IEnumerator Execute(NodeData node, GraphRunContext ctx)
             {
                 m_R.Result = QuestResult.Completed;
@@ -356,9 +383,12 @@ namespace QuestGraph.Runtime
         private class FailQuestHandler : IGraphNodeHandler
         {
             private readonly QuestRunner m_R;
+            /// <inheritdoc/>
             public string NodeTypeId => QuestNodeRegistry.TypeFailQuest;
+            /// <summary>Initializes a new instance of the <see cref="FailQuestHandler"/> class.</summary>
             public FailQuestHandler(QuestRunner r) => m_R = r;
 
+            /// <inheritdoc/>
             public IEnumerator Execute(NodeData node, GraphRunContext ctx)
             {
                 var reason       = ctx.ResolveString(node, "Reason");
@@ -372,8 +402,10 @@ namespace QuestGraph.Runtime
 
         private class SpawnItemHandler : IGraphNodeHandler
         {
+            /// <inheritdoc/>
             public string NodeTypeId => QuestNodeRegistry.TypeSpawnItem;
 
+            /// <inheritdoc/>
             public IEnumerator Execute(NodeData node, GraphRunContext ctx)
             {
                 int.TryParse(ctx.ResolveString(node, "ItemId"), out int itemId);
@@ -416,9 +448,12 @@ namespace QuestGraph.Runtime
         private class RunDialogueHandler : IGraphNodeHandler
         {
             private readonly QuestRunner m_R;
+            /// <inheritdoc/>
             public string NodeTypeId => QuestNodeRegistry.TypeRunDialogue;
+            /// <summary>Initializes a new instance of the <see cref="RunDialogueHandler"/> class.</summary>
             public RunDialogueHandler(QuestRunner r) => m_R = r;
 
+            /// <inheritdoc/>
             public IEnumerator Execute(NodeData node, GraphRunContext ctx)
             {
                 DialogueGraphAsset dlg = null;
@@ -455,7 +490,6 @@ namespace QuestGraph.Runtime
         }
     }
 
-    // ── UnityEvent types ──────────────────────────────────────────────────────
 
     [Serializable] public class ObjectiveEvent     : UnityEvent<ObjectiveInfo> { }
     [Serializable] public class RewardEvent        : UnityEvent<RewardInfo>    { }

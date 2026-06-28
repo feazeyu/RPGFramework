@@ -3,9 +3,11 @@ using UnityEngine;
 
 namespace Feazeyu.RPGSystems.Inventory
 {
+    /// <summary>Authored asset holding a shop's listings; clone it for runtime use.</summary>
     [CreateAssetMenu(fileName = "NewShopInventory", menuName = "RPGFramework/Shop/ShopInventory")]
     public class ShopInventory : ScriptableObject
     {
+        /// <summary>The shop's listings.</summary>
         public List<ShopSlot> listings = new();
 
         /// <summary>

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Feazeyu.RPGSystems.Dialogue;
@@ -14,12 +14,18 @@ namespace QuestGraph.Runtime
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
     public class QuestNodeAttribute : Attribute
     {
+        /// <summary>Node type id.</summary>
         public string NodeTypeID      { get; }
+        /// <summary>Display name.</summary>
         public string DisplayName { get; }
+        /// <summary>Category.</summary>
         public string Category    { get; }
+        /// <summary>Description.</summary>
         public string Description { get; }
+        /// <summary>Icon.</summary>
         public string Icon        { get; }
 
+        /// <summary>Initializes a new instance of the <see cref="QuestNodeAttribute"/> class.</summary>
         public QuestNodeAttribute(
             string typeId,
             string displayName,
@@ -53,48 +59,57 @@ namespace QuestGraph.Runtime
     {
         private static readonly QuestNodeRegistry s_Instance = new QuestNodeRegistry();
 
+        /// <summary>All.</summary>
         public static IReadOnlyDictionary<string, NodeInfo> All => s_Instance.AllNodes;
 
-        // ── Quest-specific type IDs ──────────────────────────────────────────
-        // Shared flow/logic type-ids (Start, End, Condition, RunSubgraph, …)
-        // are inherited from NodeRegistry — QuestNodeRegistry.TypeStart resolves
-        // to the base constant, keeping the stored NodeType strings universal.
 
+        /// <summary>Type objective.</summary>
         public const string TypeObjective      = "Objective";
+        /// <summary>Type reward.</summary>
         public const string TypeReward         = "Reward";
+        /// <summary>Type complete quest.</summary>
         public const string TypeCompleteQuest  = "CompleteQuest";
+        /// <summary>Type fail quest.</summary>
         public const string TypeFailQuest      = "FailQuest";
+        /// <summary>Type spawn item.</summary>
         public const string TypeSpawnItem      = "spawn_item";
+        /// <summary>Type run dialogue.</summary>
         public const string TypeRunDialogue    = "run_dialogue";
 
-        // Concrete objective node types
+        /// <summary>Type obj kill.</summary>
         public const string TypeObjKill       = "obj_kill";
+        /// <summary>Type obj location.</summary>
         public const string TypeObjLocation   = "obj_location";
+        /// <summary>Type obj collect.</summary>
         public const string TypeObjCollect    = "obj_collect";
+        /// <summary>Type obj accumulate.</summary>
         public const string TypeObjAccumulate = "obj_accumulate";
+        /// <summary>Type obj deliver.</summary>
         public const string TypeObjDeliver    = "obj_deliver";
 
-        // Composable modifier / flow node types
+        /// <summary>Type timer.</summary>
         public const string TypeTimer         = "timer";
+        /// <summary>Type reset progress.</summary>
         public const string TypeResetProgress = "reset_progress";
+        /// <summary>Type gate flag.</summary>
         public const string TypeGateFlag      = "gate_flag";
+        /// <summary>Type gate location.</summary>
         public const string TypeGateLocation  = "gate_location";
+        /// <summary>Type gate item.</summary>
         public const string TypeGateItem      = "gate_item";
 
-        // ── Quest accent colours ─────────────────────────────────────────────
-        // Shared colours (ColFlow, ColLogic, ColStart, …) are inherited from
-        // NodeRegistry.
 
-        public static readonly Color ColObjective = new Color(0.95f, 0.72f, 0.24f); // amber
-        public static readonly Color ColReward    = new Color(0.90f, 0.80f, 0.30f); // gold
-        public static readonly Color ColComplete  = new Color(0.34f, 0.78f, 0.34f); // green
-        public static readonly Color ColFail      = new Color(0.85f, 0.28f, 0.28f); // red
-        public static readonly Color ColSubgraph  = new Color(0.62f, 0.55f, 0.88f); // violet — quest reference
+        /// <summary>Col objective.</summary>
+        public static readonly Color ColObjective = new Color(0.95f, 0.72f, 0.24f);
+        /// <summary>Col reward.</summary>
+        public static readonly Color ColReward    = new Color(0.90f, 0.80f, 0.30f);
+        /// <summary>Col complete.</summary>
+        public static readonly Color ColComplete  = new Color(0.34f, 0.78f, 0.34f);
+        /// <summary>Col fail.</summary>
+        public static readonly Color ColFail      = new Color(0.85f, 0.28f, 0.28f);
+        /// <summary>Col subgraph.</summary>
+        public static readonly Color ColSubgraph  = new Color(0.62f, 0.55f, 0.88f);
 
-        // ── Palette filters ──────────────────────────────────────────────────
-        // Declared by type-id string so the runtime info records stay
-        // kind-agnostic — the info itself is just data, the "where it shows
-        // up" decision is localised here.
 
         private static readonly HashSet<string> s_SinglePalette = new HashSet<string>
         {
@@ -110,12 +125,6 @@ namespace QuestGraph.Runtime
             TypeGateFlag, TypeGateLocation, TypeGateItem,
         };
 
-        // Only nodes the QuestChainRunner actually acts on belong in a Chain graph:
-        // RunSubgraph (the quests), Condition (availability gates), SetVariable
-        // (per-quest blackboard side-effects), plus Start/End as structural markers.
-        // Flow nodes the chain never executes (TriggerEvent, FindObject, DebugLog,
-        // …) are intentionally excluded so the palette only offers nodes that do
-        // something.
         private static readonly HashSet<string> s_ChainPalette = new HashSet<string>
         {
             TypeStart, TypeEnd,
@@ -146,8 +155,8 @@ namespace QuestGraph.Runtime
             return allow.Contains(nodeTypeId);
         }
 
-        // ── Build ────────────────────────────────────────────────────────────
 
+        /// <inheritdoc/>
         protected override void Build()
         {
             RegisterCommonNodes();
@@ -204,11 +213,6 @@ namespace QuestGraph.Runtime
                 },
                 DefaultFields = new List<FieldData>
                 {
-                    // Linked to a blackboard variable of type QuestGraph
-                    // (holds a QuestGraphAsset for graph-based quests) or
-                    // Quest (holds a QuestAsset for simple quests). The
-                    // TypeName here is metadata only — QuestChainRunner
-                    // resolves the actual type at runtime.
                     new FieldData { FieldName = "Quest", TypeName = "QuestGraph.Runtime.QuestReference" },
                 }
             });
@@ -321,7 +325,6 @@ namespace QuestGraph.Runtime
                 }
             });
 
-            // ── Concrete objective nodes ──────────────────────────────────────
 
             Register(new NodeInfo
             {
@@ -542,6 +545,7 @@ namespace QuestGraph.Runtime
             });
         }
 
+        /// <summary>Get.</summary>
         public static NodeInfo Get(string typeId) => s_Instance.GetNode(typeId);
     }
 }

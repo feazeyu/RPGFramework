@@ -3,6 +3,7 @@ using UnityEditor;
 namespace Feazeyu.RPGSystems.Inventory
 {
 
+    /// <summary>Adds a GameObject menu entry for creating an inventory manager in the scene.</summary>
     public static class InventoryManagerHierarchyContext
     {
         [MenuItem("GameObject/RPGFramework/Inventory/Create Inventory Manager", false, 10)]
@@ -11,7 +12,6 @@ namespace Feazeyu.RPGSystems.Inventory
             GameObject go = new GameObject("InventoryManager");
             Undo.RegisterCreatedObjectUndo(go, "Create InventoryManager");
 
-            // If right-clicked on another GameObject, parent under it
             GameObject context = menuCommand.context as GameObject;
             if (context != null)
             {

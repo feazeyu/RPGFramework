@@ -50,34 +50,35 @@ namespace QuestGraph.Runtime
         [Header("State")]
         [SerializeField] private QuestState m_State = QuestState.NotStarted;
 
+        /// <summary>On started.</summary>
         [Header("Events")]
         public UnityEvent OnStarted;
+        /// <summary>On completed.</summary>
         public UnityEvent OnCompleted;
+        /// <summary>On failed.</summary>
         public UnityEvent OnFailed;
+        /// <summary>On reset.</summary>
         public UnityEvent OnReset;
 
+        /// <summary>Title.</summary>
         public string     Title       { get => m_Title;       set => m_Title = value; }
+        /// <summary>Description.</summary>
         public string     Description { get => m_Description; set => m_Description = value; }
+        /// <summary>State.</summary>
         public QuestState State       => m_State;
+        /// <summary>Is completed.</summary>
         public bool       IsCompleted => m_State == QuestState.Completed;
+        /// <summary>Is failed.</summary>
         public bool       IsFailed    => m_State == QuestState.Failed;
+        /// <summary>Is active.</summary>
         public bool       IsActive    => m_State == QuestState.Active;
 
-        // ── Runtime-state reset (editor play-session hygiene) ────────────────
 
-        // Every loaded QuestAsset registers here so its mutable runtime state
-        // can be wiped at the start of a play session. In a built player the
-        // asset reloads fresh from disk each launch, but in the editor the
-        // in-memory asset stays dirty after exiting play mode, leaking state
-        // into the next run. Mirrors SharedBlackboardStore's play-start reset.
         private static readonly HashSet<QuestAsset> s_Live = new HashSet<QuestAsset>();
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         private static void ResetRuntimeStateOnPlay()
         {
-            // Covers "Enter Play Mode without domain reload": OnEnable won't
-            // re-fire for already-loaded assets, but this hook still runs and
-            // the registry is already populated from the previous session.
             foreach (var q in s_Live)
                 if (q != null) q.m_State = QuestState.NotStarted;
         }
@@ -85,15 +86,11 @@ namespace QuestGraph.Runtime
         private void OnEnable()
         {
             s_Live.Add(this);
-            // Covers the default case (domain reload on play): OnEnable fires
-            // as the asset deserializes, clearing any state carried over from
-            // the previous play session before scenes/listeners load.
             m_State = QuestState.NotStarted;
         }
 
         private void OnDisable() => s_Live.Remove(this);
 
-        // ── Lifecycle ────────────────────────────────────────────────────────
 
         /// <summary>Transition to Active. No-op if already completed/failed.</summary>
         public void Start()

@@ -1,4 +1,4 @@
-﻿using UnityEditor;
+using UnityEditor;
 using UnityEngine;
 namespace Feazeyu.RPGSystems.Inventory
 {
@@ -12,6 +12,7 @@ namespace Feazeyu.RPGSystems.Inventory
             new("↙", "Lower Left"),   new("↓", "Lower Center"),  new("↘", "Lower Right"),
         };
 
+        /// <inheritdoc/>
         public override void OnInspectorGUI()
         {
             DrawDefaultInspector();

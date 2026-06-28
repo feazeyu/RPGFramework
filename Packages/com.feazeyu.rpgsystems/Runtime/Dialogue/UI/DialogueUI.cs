@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -6,6 +6,10 @@ using Feazeyu.RPGSystems.Dialogue;
 
 namespace Feazeyu.RPGSystems.Dialogue
 {
+    /// <summary>
+    /// Default dialogue view: binds to a <see cref="DialogueRunner"/>, renders lines and
+    /// choices, and forwards advance/selection input back to the runner.
+    /// </summary>
     public class DialogueUI : MonoBehaviour
     {
         [SerializeField] private GameObject m_Panel;
@@ -19,6 +23,7 @@ namespace Feazeyu.RPGSystems.Dialogue
         private DialogueRunner m_Runner;
         private readonly List<Button> m_ChoiceButtons = new List<Button>();
 
+        /// <summary>Is open.</summary>
         public bool IsOpen => m_Panel != null && m_Panel.activeSelf;
 
         private void Awake()
@@ -27,6 +32,7 @@ namespace Feazeyu.RPGSystems.Dialogue
             if (m_ChoicesContainer != null) m_ChoicesContainer.gameObject.SetActive(false);
         }
 
+        /// <summary>Bind.</summary>
         public void Bind(DialogueRunner runner)
         {
             if (m_Runner != null) Unbind();
@@ -98,6 +104,7 @@ namespace Feazeyu.RPGSystems.Dialogue
                 m_ChoicesContainer.gameObject.SetActive(visible);
         }
 
+        /// <summary>On continue clicked.</summary>
         public void OnContinueClicked()
         {
             m_Runner?.Advance();

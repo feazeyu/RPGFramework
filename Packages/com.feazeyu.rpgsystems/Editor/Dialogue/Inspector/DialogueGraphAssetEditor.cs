@@ -1,4 +1,4 @@
-﻿using UnityEditor;
+using UnityEditor;
 using UnityEngine;
 using Feazeyu.RPGSystems.Dialogue;
 
@@ -14,11 +14,11 @@ namespace Feazeyu.RPGSystems.EditorTools
     {
         private static readonly Color AccentGreen = new Color(0.20f, 0.78f, 0.55f);
 
+        /// <inheritdoc/>
         public override void OnInspectorGUI()
         {
             var asset = (DialogueGraphAsset)target;
 
-            // ── Open button ───────────────────────────────────────────────────
 
             EditorGUILayout.Space(4);
 
@@ -36,7 +36,6 @@ namespace Feazeyu.RPGSystems.EditorTools
 
             EditorGUILayout.Space(8);
 
-            // ── Summary ───────────────────────────────────────────────────────
 
             EditorGUI.BeginDisabledGroup(true);
 
@@ -61,7 +60,6 @@ namespace Feazeyu.RPGSystems.EditorTools
 
             EditorGUILayout.Space(8);
 
-            // ── Danger zone ───────────────────────────────────────────────────
 
             EditorGUILayout.LabelField("Debug", EditorStyles.boldLabel);
             if (GUILayout.Button("Regenerate Runtime Asset (clear + rebuild)"))
@@ -71,7 +69,6 @@ namespace Feazeyu.RPGSystems.EditorTools
                         "This will clear all nodes, edges and variables from the asset. Are you sure?",
                         "Yes, regenerate", "Cancel"))
                 {
-                    // Implement if you add a runtime graph separate from the authoring graph.
                     Debug.Log("[DialogueGraph] Regenerate triggered. Implement as needed.");
                 }
             }

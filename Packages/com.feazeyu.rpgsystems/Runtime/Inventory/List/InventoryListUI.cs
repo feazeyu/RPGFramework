@@ -1,4 +1,4 @@
-﻿using Feazeyu.RPGSystems.Items;
+using Feazeyu.RPGSystems.Items;
 using System;
 using System.Collections.Generic;
 #if UNITY_EDITOR
@@ -76,6 +76,7 @@ namespace Feazeyu.RPGSystems.Inventory
             RedrawContents();
         }
 
+        /// <inheritdoc/>
         public void OnDrop(PointerEventData eventData)
         {
             var handler = eventData.pointerDrag?.GetComponent<InventoryItemUIHandler>();
@@ -179,18 +180,18 @@ namespace Feazeyu.RPGSystems.Inventory
             {
                 if (child.GetComponent<InventoryItemUIHandler>() != null)
                 {
-                    // If the child has a drag handler, it is an inventory slot.
                     Destroy(child.gameObject);
                 }
                 else if (child.GetComponent<PositionalUISlot>() != null)
                 {
-                    // If the child has a PositionalUISlot, it is also an inventory slot.
                     Destroy(child.gameObject);
                 }
             }
         }
 
+        /// <summary>Put item.</summary>
         public bool PutItem(GameObject item) => list != null && list.PutItem(new Vector2Int(-1, -1), item);
+        /// <summary>Return item.</summary>
         public void ReturnItem(GameObject item) => list?.PutItem(new Vector2Int(-1, -1), item);
 
         /// <summary>

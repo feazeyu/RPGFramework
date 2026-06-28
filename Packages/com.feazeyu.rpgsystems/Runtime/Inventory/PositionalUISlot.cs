@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -24,8 +24,11 @@ namespace Feazeyu.RPGSystems.Inventory
     [Serializable]
     public class PositionalUISlot : MonoBehaviour, IUIItemContainer, ISingleItemContainer, IDropHandler
     {
+        /// <summary>Position.</summary>
         public Vector2Int position;
+        /// <summary>Target.</summary>
         public IUIPositionalItemContainer target;
+        /// <summary>Item.</summary>
         public virtual GameObject Item
         {
             get
@@ -38,6 +41,7 @@ namespace Feazeyu.RPGSystems.Inventory
                 return target.GetItem(position);
             }
         }
+        /// <summary>Put item.</summary>
         public bool PutItem(GameObject item)
         {
             bool success = target.PutItem(position, item);
@@ -46,6 +50,7 @@ namespace Feazeyu.RPGSystems.Inventory
             return success;
         }
 
+        /// <summary>Remove item.</summary>
         public int RemoveItem()
         {
             int removedId = target.RemoveItem(position);
@@ -53,16 +58,19 @@ namespace Feazeyu.RPGSystems.Inventory
             return removedId;
         }
 
+        /// <summary>Return item.</summary>
         public void ReturnItem(GameObject item)
         {
             target.ReturnItem(position, item);
             RedrawContents();
         }
+        /// <summary>Redraw contents.</summary>
         public virtual void RedrawContents()
         {
             target.RedrawContents();
         }
 
+        /// <inheritdoc/>
         public void OnDrop(PointerEventData eventData)
         {
             var handler = eventData.pointerDrag?.GetComponent<InventoryItemUIHandler>();

@@ -1,4 +1,4 @@
-﻿using UnityEditor;
+using UnityEditor;
 using UnityEngine;
 using QuestGraph.Runtime;
 
@@ -27,6 +27,7 @@ namespace Feazeyu.RPGSystems.EditorTools
             m_KindProp = serializedObject.FindProperty("m_Kind");
         }
 
+        /// <inheritdoc/>
         public override void OnInspectorGUI()
         {
             var asset = (QuestGraphAsset)target;
@@ -34,7 +35,6 @@ namespace Feazeyu.RPGSystems.EditorTools
 
             EditorGUILayout.Space(4);
 
-            // ── Kind selector ────────────────────────────────────────────────
 
             EditorGUI.BeginChangeCheck();
             EditorGUILayout.PropertyField(m_KindProp, new GUIContent(
@@ -57,7 +57,6 @@ namespace Feazeyu.RPGSystems.EditorTools
 
             EditorGUILayout.Space(6);
 
-            // ── Open button ──────────────────────────────────────────────────
 
             var accent = asset.Kind == QuestKind.Chain ? AccentViolet : AccentAmber;
             var btnStyle = new GUIStyle(GUI.skin.button)
@@ -78,7 +77,6 @@ namespace Feazeyu.RPGSystems.EditorTools
 
             EditorGUILayout.Space(8);
 
-            // ── Summary ──────────────────────────────────────────────────────
 
             EditorGUI.BeginDisabledGroup(true);
 

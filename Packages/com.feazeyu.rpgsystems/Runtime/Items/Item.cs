@@ -37,6 +37,10 @@ namespace Feazeyu.RPGSystems.Items
             CalculatePivot();
         }
 
+        /// <summary>
+        /// Sets the item's <see cref="RectTransform"/> pivot to the center of its anchor slot,
+        /// so the item visual aligns with its grid placement.
+        /// </summary>
         public void CalculatePivot()
         {
             var centerF = info.Shape.GetCenter();
@@ -105,13 +109,10 @@ namespace Feazeyu.RPGSystems.Items
             int gridSize = 5;
             Color trueColor = Color.white;
             Color falseColor = Color.black;
-            // Create a new texture
             Texture2D texture = new Texture2D(gridSize, gridSize);
 
-            // Set filter mode to prevent blurring
             texture.filterMode = FilterMode.Point;
 
-            // Set each pixel based on the bool array
             for (int y = 0; y < gridSize; y++)
             {
                 for (int x = 0; x < gridSize; x++)
@@ -120,15 +121,13 @@ namespace Feazeyu.RPGSystems.Items
                 }
             }
 
-            // Apply all SetPixel calls
             texture.Apply();
 
-            // Create a sprite from the texture
             Sprite sprite = Sprite.Create(
                 texture,
                 new Rect(0, 0, gridSize, gridSize),
-                new Vector2(0.5f, 0.5f), // pivot point
-                gridSize // pixels per unit
+                new Vector2(0.5f, 0.5f),
+                gridSize
             );
 
             return sprite;

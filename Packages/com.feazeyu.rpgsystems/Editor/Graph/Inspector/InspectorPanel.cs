@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.UIElements;
@@ -8,6 +8,7 @@ using Feazeyu.RPGSystems.Dialogue;
 
 namespace Feazeyu.RPGSystems.EditorTools
 {
+    /// <summary>Graph editor panel showing details for the current selection (node or graph).</summary>
     public class InspectorPanel : VisualElement
     {
         private GraphAsset m_Asset;
@@ -17,6 +18,7 @@ namespace Feazeyu.RPGSystems.EditorTools
         private ScrollView    m_Scroll;
         private VisualElement m_Content;
 
+        /// <summary>Initializes a new instance of the <see cref="InspectorPanel"/> class.</summary>
         public InspectorPanel()
         {
             AddToClassList("inspector-panel");
@@ -50,8 +52,8 @@ namespace Feazeyu.RPGSystems.EditorTools
             Add(m_Scroll);
         }
 
-        // ── Public API ────────────────────────────────────────────────────────
 
+        /// <summary>Clear.</summary>
         public new void Clear()
         {
             m_Node  = null;
@@ -59,6 +61,7 @@ namespace Feazeyu.RPGSystems.EditorTools
             ShowEmpty();
         }
 
+        /// <summary>Inspect asset.</summary>
         public void InspectAsset(GraphAsset asset)
         {
             m_Asset = asset;
@@ -67,6 +70,7 @@ namespace Feazeyu.RPGSystems.EditorTools
             ShowAssetView(asset);
         }
 
+        /// <summary>Inspect node.</summary>
         public void InspectNode(NodeData node, GraphAsset asset, Action<string> refreshNodeView)
         {
             m_Node            = node;
@@ -94,7 +98,6 @@ namespace Feazeyu.RPGSystems.EditorTools
             if (m_Node != null && m_Asset != null) ShowNodeView(m_Node, m_Asset);
         }
 
-        // ── Views ─────────────────────────────────────────────────────────────
 
         private void ShowEmpty()
         {
@@ -128,7 +131,6 @@ namespace Feazeyu.RPGSystems.EditorTools
             m_Content.Clear();
             var info = DialogueNodeRegistry.Get(node.NodeType);
 
-            // Node header card — tinted with accent color (stays inline, data-driven).
             var headerCard = new VisualElement();
             headerCard.AddToClassList("inspector-node-header");
             headerCard.style.backgroundColor = info != null
@@ -163,7 +165,6 @@ namespace Feazeyu.RPGSystems.EditorTools
 
             m_Content.Add(headerCard);
 
-            // Node section (display name + GUID)
             var nameSection = MakeSection("Node");
 
             nameSection.Add(MakeFieldLabel("Display Name"));
@@ -186,7 +187,6 @@ namespace Feazeyu.RPGSystems.EditorTools
 
             m_Content.Add(nameSection);
 
-            // Fields section
             if (node.Fields != null && node.Fields.Count > 0)
             {
                 var fieldsSection = MakeSection("Fields");
@@ -195,7 +195,6 @@ namespace Feazeyu.RPGSystems.EditorTools
                 m_Content.Add(fieldsSection);
             }
 
-            // Ports section
             if (node.Ports != null && node.Ports.Count > 0)
             {
                 var portsSection = MakeSection("Ports");
@@ -223,7 +222,6 @@ namespace Feazeyu.RPGSystems.EditorTools
             }
         }
 
-        // ── Field editor ──────────────────────────────────────────────────────
 
         private VisualElement BuildFieldEditor(FieldData field, GraphAsset asset)
         {
@@ -339,9 +337,6 @@ namespace Feazeyu.RPGSystems.EditorTools
                 Undo.RecordObject(asset, "Unlink Field");
                 field.LinkedVariableGuid = null;
                 EditorUtility.SetDirty(asset);
-                // Also refresh the canvas node view — otherwise the node
-                // card keeps rendering the field as linked ("⟵ ...") even
-                // though the data now says it's inline.
                 m_RefreshNodeView?.Invoke(m_Node?.Guid ?? "");
                 ShowNodeView(m_Node, asset);
                 return;
@@ -373,7 +368,6 @@ namespace Feazeyu.RPGSystems.EditorTools
             menu.ShowAsContext();
         }
 
-        // ── Helpers ───────────────────────────────────────────────────────────
 
         private static VisualElement MakeSection(string title)
         {

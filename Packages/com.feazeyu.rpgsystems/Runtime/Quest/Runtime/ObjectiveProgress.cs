@@ -36,9 +36,12 @@ namespace QuestGraph.Runtime
     /// </summary>
     public sealed class ObjectiveProgress
     {
+        /// <summary>Node guid.</summary>
         public string NodeGuid;
+        /// <summary>Required.</summary>
         public int    Required;
 
+        /// <summary>Current.</summary>
         public int Current { get; private set; }
 
         /// <summary>Composed AND of all attached gate predicates; null = always open.</summary>

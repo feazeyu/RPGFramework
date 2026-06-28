@@ -1,4 +1,4 @@
-﻿using UnityEditor;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 using System.Collections.Generic;
@@ -27,15 +27,18 @@ namespace Feazeyu.RPGSystems.EditorTools
     /// </summary>
     public class QuestGraphWindow : GraphEditorWindow
     {
+        /// <inheritdoc/>
         protected override string WindowTitle     => "Quest Graph";
+        /// <inheritdoc/>
         protected override string PrefKeyPrefix   => "QuestGraph.Editor";
+        /// <inheritdoc/>
         protected override string NewAssetName    => "NewQuestGraph";
+        /// <inheritdoc/>
         protected override string SaveDialogTitle => "New Quest Graph";
+        /// <inheritdoc/>
         protected override string WindowIcon      => "✦";
 
-        // Fallback palette used only when no asset is loaded (the "New"
-        // button creates a Single by default, so Single is the sensible
-        // fallback).
+        /// <inheritdoc/>
         protected override IReadOnlyDictionary<string, NodeInfo> NodeRegistrySource
             => QuestNodeRegistry.ForKind(QuestKind.Single);
 
@@ -46,19 +49,23 @@ namespace Feazeyu.RPGSystems.EditorTools
             return QuestNodeRegistry.ForKind(kind);
         }
 
+        /// <inheritdoc/>
         protected override StyleSheet ThemeStyleSheet => QuestGraphStyleSheet.Get();
 
+        /// <inheritdoc/>
         protected override string GraphViewCssClass => "quest-graph-view";
 
+        /// <inheritdoc/>
         protected override GraphAsset CreateAssetInstance()
             => CreateInstance<QuestGraphAsset>();
 
-        // ── Open ─────────────────────────────────────────────────────────────
 
+        /// <summary>Open.</summary>
         [MenuItem("Window/Quest Graph", priority = 201)]
         public static QuestGraphWindow Open()
             => GetWindow<QuestGraphWindow>();
 
+        /// <summary>Open.</summary>
         public static void Open(QuestGraphAsset asset)
         {
             var win = GetWindow<QuestGraphWindow>();
@@ -94,10 +101,11 @@ namespace Feazeyu.RPGSystems.EditorTools
         }
     }
 
-    // ── Asset double-click handler ───────────────────────────────────────────
 
+    /// <summary>Opens a <see cref="QuestGraphAsset"/> in the graph window when double-clicked in the Project view.</summary>
     public static class QuestGraphAssetOpener
     {
+        /// <summary>On open asset.</summary>
         [UnityEditor.Callbacks.OnOpenAsset]
         public static bool OnOpenAsset(int instanceID, int line)
         {

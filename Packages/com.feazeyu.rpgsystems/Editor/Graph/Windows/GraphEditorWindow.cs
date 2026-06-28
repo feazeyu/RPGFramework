@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -30,12 +30,16 @@ namespace Feazeyu.RPGSystems.EditorTools
     /// </summary>
     public class GraphEditorWindow : EditorWindow
     {
-        // ── Template-method hooks ────────────────────────────────────────────
 
+        /// <summary>Window title.</summary>
         protected virtual string WindowTitle     => "Graph Editor";
+        /// <summary>Pref key prefix.</summary>
         protected virtual string PrefKeyPrefix   => "GraphEditor";
+        /// <summary>New asset name.</summary>
         protected virtual string NewAssetName    => "NewGraph";
+        /// <summary>Save dialog title.</summary>
         protected virtual string SaveDialogTitle => "New Graph";
+        /// <summary>Window icon.</summary>
         protected virtual string WindowIcon      => "◈";
 
         /// <summary>"Add Node" palette for this graph system.</summary>
@@ -61,8 +65,8 @@ namespace Feazeyu.RPGSystems.EditorTools
         protected virtual GraphAsset CreateAssetInstance()
             => CreateInstance<DialogueGraphAsset>();
 
-        // ── State ────────────────────────────────────────────────────────────
 
+        /// <summary>Asset.</summary>
         protected GraphAsset m_Asset;
 
         private GraphCanvasView m_GraphView;
@@ -71,8 +75,8 @@ namespace Feazeyu.RPGSystems.EditorTools
         private Label             m_AssetLabel;
         private bool              m_AutoSave = true;
 
-        // ── Lifecycle ────────────────────────────────────────────────────────
 
+        /// <summary>On enable.</summary>
         protected virtual void OnEnable()
         {
             titleContent = new GUIContent(WindowTitle,
@@ -91,19 +95,18 @@ namespace Feazeyu.RPGSystems.EditorTools
             }
         }
 
+        /// <summary>On disable.</summary>
         protected virtual void OnDisable()
         {
             if (m_AutoSave) SaveAsset();
         }
 
-        // ── UI Construction ──────────────────────────────────────────────────
 
         private void BuildUI()
         {
             rootVisualElement.Clear();
             rootVisualElement.AddToClassList("graph-editor-window");
 
-            // Shared base stylesheet (structural styles for every system).
             var baseSheet = GraphEditorStyleSheet.Get();
             if (baseSheet != null) rootVisualElement.styleSheets.Add(baseSheet);
 
@@ -158,13 +161,6 @@ namespace Feazeyu.RPGSystems.EditorTools
             m_GraphView.OnNodeFieldsChanged = OnCanvasNodeFieldsChanged;
             body.Add(m_GraphView);
 
-            // Now that the graph view exists, wire its refresh hook into
-            // the blackboard panel so variable deletion can cascade into
-            // the canvas (stale LinkedVariableGuids on affected nodes
-            // are cleared, and the views rebuild). We route through a
-            // local method so the inspector also picks up the change
-            // when the currently-inspected node is one of the affected
-            // set.
             m_BlackboardPanel.SetRefreshNodeViewCallback(OnBlackboardCascadeToNode);
 
             m_InspectorPanel = new InspectorPanel();
@@ -172,8 +168,8 @@ namespace Feazeyu.RPGSystems.EditorTools
             body.Add(m_InspectorPanel);
         }
 
-        // ── Asset management ─────────────────────────────────────────────────
 
+        /// <summary>Load asset.</summary>
         public void LoadAsset(GraphAsset asset)
         {
             if (asset == null) return;
@@ -183,8 +179,6 @@ namespace Feazeyu.RPGSystems.EditorTools
             m_AssetLabel.text = asset.name;
             EditorPrefs.SetString(PrefKey("lastAssetPath"), AssetDatabase.GetAssetPath(asset));
 
-            // Palette may depend on the asset (e.g. QuestKind) — refresh
-            // before Populate so any auto-created node views pick it up.
             m_GraphView.SetNodeRegistry(GetNodeRegistryForAsset(asset));
 
             m_GraphView.Populate(asset);
@@ -192,6 +186,7 @@ namespace Feazeyu.RPGSystems.EditorTools
             m_InspectorPanel.Clear();
         }
 
+        /// <summary>Save asset.</summary>
         protected void SaveAsset()
         {
             if (m_Asset == null) return;
@@ -268,8 +263,8 @@ namespace Feazeyu.RPGSystems.EditorTools
                 m_InspectorPanel.RefreshCurrent();
         }
 
-        // ── Helpers ──────────────────────────────────────────────────────────
 
+        /// <summary>Pref key.</summary>
         protected string PrefKey(string key) => $"{PrefKeyPrefix}.{key}";
 
         private static VisualElement MakeToolbarSeparator()
