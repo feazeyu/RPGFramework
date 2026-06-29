@@ -1,0 +1,197 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Item\+UIHandler Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_item_u_i_handler}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_item_u_i_handler}\index{Feazeyu.RPGSystems.Inventory.InventoryItemUIHandler@{Feazeyu.RPGSystems.Inventory.InventoryItemUIHandler}}
+
+
+Handles UI interactions for an inventory item, including drag-\/and-\/drop, tooltip display, and pointer events.  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Item\+UIHandler:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=0.700000cm]{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_item_u_i_handler}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_item_u_i_handler_a785a21108931bc32b305a5ee8a87e768}{Start}} ()
+\begin{DoxyCompactList}\small\item\em Initializes the handler, setting up references and validating components. \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_item_u_i_handler_a3002b80bfa8c61580ca0207b34dfac75}{On\+Begin\+Drag}} (Pointer\+Event\+Data event\+Data)
+\begin{DoxyCompactList}\small\item\em Called when dragging begins. Removes the item from its slot and prepares the drag visual. \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_item_u_i_handler_aeadadd43503fd50387ac1fb5be923a6c}{On\+Drag}} (Pointer\+Event\+Data event\+Data)
+\begin{DoxyCompactList}\small\item\em Called during dragging. Updates the item\textquotesingle{}s position to follow the pointer. \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_item_u_i_handler_a1ad26522130a4c73fdc43a38853d4ce0}{On\+End\+Drag}} (Pointer\+Event\+Data event\+Data)
+\begin{DoxyCompactList}\small\item\em Called when dragging ends. Waits one frame for On\+Drop to fire, then returns the item if no drop was handled. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_item_u_i_handler_a80c26a9b151079b476206b104e448893}{On\+Pointer\+Enter}} (Pointer\+Event\+Data event\+Data)
+\begin{DoxyCompactList}\small\item\em Called when the pointer enters the item\textquotesingle{}s area. Starts the tooltip display coroutine. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_item_u_i_handler_aa3cbc34755c75cb1810320b2db5b1bfc}{On\+Pointer\+Exit}} (Pointer\+Event\+Data event\+Data)
+\begin{DoxyCompactList}\small\item\em Called when the pointer exits the item\textquotesingle{}s area. Stops the tooltip display coroutine and hides the tooltip. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual Game\+Object \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_item_u_i_handler_aa95d9b12f85fc6f3db38bae36266083d}{Get\+Original\+Parent}} ()
+\begin{DoxyCompactList}\small\item\em Gets the original parent Game\+Object of this item. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_item_u_i_handler_a5a00e8ddf735b2ef6e6babd3942558ac}{Create\+Dragged\+Item}} (int item\+Id)
+\begin{DoxyCompactList}\small\item\em Instantiates the visual representation of the dragged item. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+int \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_item_u_i_handler_a6a20085949bad7835001ddfe0f3d74d9}{Dragged\+Id}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Dragged id. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_item_u_i_handler_a6fab7b8136749a313ab67d83b610888b}{Drop\+Handled}}\hspace{0.3cm}{\ttfamily  \+[get, set]\+}
+\begin{DoxyCompactList}\small\item\em Drop handled. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Handles UI interactions for an inventory item, including drag-\/and-\/drop, tooltip display, and pointer events. 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_item_u_i_handler_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_item_u_i_handler_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_item_u_i_handler_a5a00e8ddf735b2ef6e6babd3942558ac}\index{Feazeyu.RPGSystems.Inventory.InventoryItemUIHandler@{Feazeyu.RPGSystems.Inventory.InventoryItemUIHandler}!CreateDraggedItem@{CreateDraggedItem}}
+\index{CreateDraggedItem@{CreateDraggedItem}!Feazeyu.RPGSystems.Inventory.InventoryItemUIHandler@{Feazeyu.RPGSystems.Inventory.InventoryItemUIHandler}}
+\doxysubsubsection{\texorpdfstring{CreateDraggedItem()}{CreateDraggedItem()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_item_u_i_handler_a5a00e8ddf735b2ef6e6babd3942558ac} 
+void Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Item\+UIHandler.\+Create\+Dragged\+Item (\begin{DoxyParamCaption}\item[{int}]{item\+Id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Instantiates the visual representation of the dragged item. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em item\+Id} & The ID of the item to create.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_item_u_i_handler_aa95d9b12f85fc6f3db38bae36266083d}\index{Feazeyu.RPGSystems.Inventory.InventoryItemUIHandler@{Feazeyu.RPGSystems.Inventory.InventoryItemUIHandler}!GetOriginalParent@{GetOriginalParent}}
+\index{GetOriginalParent@{GetOriginalParent}!Feazeyu.RPGSystems.Inventory.InventoryItemUIHandler@{Feazeyu.RPGSystems.Inventory.InventoryItemUIHandler}}
+\doxysubsubsection{\texorpdfstring{GetOriginalParent()}{GetOriginalParent()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_item_u_i_handler_aa95d9b12f85fc6f3db38bae36266083d} 
+virtual Game\+Object Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Item\+UIHandler.\+Get\+Original\+Parent (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Gets the original parent Game\+Object of this item. 
+
+\begin{DoxyReturn}{Returns}
+The parent Game\+Object.
+\end{DoxyReturn}
+
+
+Reimplemented in \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_item_u_i_redirecting_handler_a182d2c9def2c3cffeaf922677048a41f}{Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Item\+UIRedirecting\+Handler}}.
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_item_u_i_handler_a3002b80bfa8c61580ca0207b34dfac75}\index{Feazeyu.RPGSystems.Inventory.InventoryItemUIHandler@{Feazeyu.RPGSystems.Inventory.InventoryItemUIHandler}!OnBeginDrag@{OnBeginDrag}}
+\index{OnBeginDrag@{OnBeginDrag}!Feazeyu.RPGSystems.Inventory.InventoryItemUIHandler@{Feazeyu.RPGSystems.Inventory.InventoryItemUIHandler}}
+\doxysubsubsection{\texorpdfstring{OnBeginDrag()}{OnBeginDrag()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_item_u_i_handler_a3002b80bfa8c61580ca0207b34dfac75} 
+virtual void Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Item\+UIHandler.\+On\+Begin\+Drag (\begin{DoxyParamCaption}\item[{Pointer\+Event\+Data}]{event\+Data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Called when dragging begins. Removes the item from its slot and prepares the drag visual. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em event\+Data} & Pointer event data.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_item_u_i_handler_aeadadd43503fd50387ac1fb5be923a6c}\index{Feazeyu.RPGSystems.Inventory.InventoryItemUIHandler@{Feazeyu.RPGSystems.Inventory.InventoryItemUIHandler}!OnDrag@{OnDrag}}
+\index{OnDrag@{OnDrag}!Feazeyu.RPGSystems.Inventory.InventoryItemUIHandler@{Feazeyu.RPGSystems.Inventory.InventoryItemUIHandler}}
+\doxysubsubsection{\texorpdfstring{OnDrag()}{OnDrag()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_item_u_i_handler_aeadadd43503fd50387ac1fb5be923a6c} 
+virtual void Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Item\+UIHandler.\+On\+Drag (\begin{DoxyParamCaption}\item[{Pointer\+Event\+Data}]{event\+Data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Called during dragging. Updates the item\textquotesingle{}s position to follow the pointer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em event\+Data} & Pointer event data.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_item_u_i_handler_a1ad26522130a4c73fdc43a38853d4ce0}\index{Feazeyu.RPGSystems.Inventory.InventoryItemUIHandler@{Feazeyu.RPGSystems.Inventory.InventoryItemUIHandler}!OnEndDrag@{OnEndDrag}}
+\index{OnEndDrag@{OnEndDrag}!Feazeyu.RPGSystems.Inventory.InventoryItemUIHandler@{Feazeyu.RPGSystems.Inventory.InventoryItemUIHandler}}
+\doxysubsubsection{\texorpdfstring{OnEndDrag()}{OnEndDrag()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_item_u_i_handler_a1ad26522130a4c73fdc43a38853d4ce0} 
+virtual void Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Item\+UIHandler.\+On\+End\+Drag (\begin{DoxyParamCaption}\item[{Pointer\+Event\+Data}]{event\+Data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Called when dragging ends. Waits one frame for On\+Drop to fire, then returns the item if no drop was handled. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em event\+Data} & Pointer event data.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_item_u_i_handler_a80c26a9b151079b476206b104e448893}\index{Feazeyu.RPGSystems.Inventory.InventoryItemUIHandler@{Feazeyu.RPGSystems.Inventory.InventoryItemUIHandler}!OnPointerEnter@{OnPointerEnter}}
+\index{OnPointerEnter@{OnPointerEnter}!Feazeyu.RPGSystems.Inventory.InventoryItemUIHandler@{Feazeyu.RPGSystems.Inventory.InventoryItemUIHandler}}
+\doxysubsubsection{\texorpdfstring{OnPointerEnter()}{OnPointerEnter()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_item_u_i_handler_a80c26a9b151079b476206b104e448893} 
+void Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Item\+UIHandler.\+On\+Pointer\+Enter (\begin{DoxyParamCaption}\item[{Pointer\+Event\+Data}]{event\+Data}{}\end{DoxyParamCaption})}
+
+
+
+Called when the pointer enters the item\textquotesingle{}s area. Starts the tooltip display coroutine. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em event\+Data} & Pointer event data.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_item_u_i_handler_aa3cbc34755c75cb1810320b2db5b1bfc}\index{Feazeyu.RPGSystems.Inventory.InventoryItemUIHandler@{Feazeyu.RPGSystems.Inventory.InventoryItemUIHandler}!OnPointerExit@{OnPointerExit}}
+\index{OnPointerExit@{OnPointerExit}!Feazeyu.RPGSystems.Inventory.InventoryItemUIHandler@{Feazeyu.RPGSystems.Inventory.InventoryItemUIHandler}}
+\doxysubsubsection{\texorpdfstring{OnPointerExit()}{OnPointerExit()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_item_u_i_handler_aa3cbc34755c75cb1810320b2db5b1bfc} 
+void Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Item\+UIHandler.\+On\+Pointer\+Exit (\begin{DoxyParamCaption}\item[{Pointer\+Event\+Data}]{event\+Data}{}\end{DoxyParamCaption})}
+
+
+
+Called when the pointer exits the item\textquotesingle{}s area. Stops the tooltip display coroutine and hides the tooltip. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em event\+Data} & Pointer event data.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_item_u_i_handler_a785a21108931bc32b305a5ee8a87e768}\index{Feazeyu.RPGSystems.Inventory.InventoryItemUIHandler@{Feazeyu.RPGSystems.Inventory.InventoryItemUIHandler}!Start@{Start}}
+\index{Start@{Start}!Feazeyu.RPGSystems.Inventory.InventoryItemUIHandler@{Feazeyu.RPGSystems.Inventory.InventoryItemUIHandler}}
+\doxysubsubsection{\texorpdfstring{Start()}{Start()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_item_u_i_handler_a785a21108931bc32b305a5ee8a87e768} 
+void Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Item\+UIHandler.\+Start (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Initializes the handler, setting up references and validating components. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_item_u_i_handler_doc-property-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_item_u_i_handler_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_item_u_i_handler_a6a20085949bad7835001ddfe0f3d74d9}\index{Feazeyu.RPGSystems.Inventory.InventoryItemUIHandler@{Feazeyu.RPGSystems.Inventory.InventoryItemUIHandler}!DraggedId@{DraggedId}}
+\index{DraggedId@{DraggedId}!Feazeyu.RPGSystems.Inventory.InventoryItemUIHandler@{Feazeyu.RPGSystems.Inventory.InventoryItemUIHandler}}
+\doxysubsubsection{\texorpdfstring{DraggedId}{DraggedId}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_item_u_i_handler_a6a20085949bad7835001ddfe0f3d74d9} 
+int Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Item\+UIHandler.\+Dragged\+Id\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Dragged id. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_item_u_i_handler_a6fab7b8136749a313ab67d83b610888b}\index{Feazeyu.RPGSystems.Inventory.InventoryItemUIHandler@{Feazeyu.RPGSystems.Inventory.InventoryItemUIHandler}!DropHandled@{DropHandled}}
+\index{DropHandled@{DropHandled}!Feazeyu.RPGSystems.Inventory.InventoryItemUIHandler@{Feazeyu.RPGSystems.Inventory.InventoryItemUIHandler}}
+\doxysubsubsection{\texorpdfstring{DropHandled}{DropHandled}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_item_u_i_handler_a6fab7b8136749a313ab67d83b610888b} 
+bool Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Item\+UIHandler.\+Drop\+Handled\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Drop handled. 
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Inventory/\+\doxymbox{\hyperlink{_inventory_item_u_i_handler_8cs}{Inventory\+Item\+UIHandler.\+cs}}\end{DoxyCompactItemize}

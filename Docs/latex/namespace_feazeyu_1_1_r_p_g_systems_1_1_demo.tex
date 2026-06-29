@@ -1,0 +1,25 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Demo Namespace Reference}
+\hypertarget{namespace_feazeyu_1_1_r_p_g_systems_1_1_demo}{}\label{namespace_feazeyu_1_1_r_p_g_systems_1_1_demo}\index{Feazeyu.RPGSystems.Demo@{Feazeyu.RPGSystems.Demo}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_demo_1_1_auto_start_quest}{Auto\+Start\+Quest}}
+\begin{DoxyCompactList}\small\item\em Sample helper that starts a quest automatically one frame after the scene loads. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_demo_1_1_chest_controller}{Chest\+Controller}}
+\begin{DoxyCompactList}\small\item\em Sample chest that opens a list inventory when interacted with. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_demo_1_1_demo_enemy}{Demo\+Enemy}}
+\begin{DoxyCompactList}\small\item\em Sample enemy for the \doxylink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest}{Quest} demo:\+ takes damage on interact and dies for kill objectives. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_demo_1_1_demo_player}{Demo\+Player}}
+\begin{DoxyCompactList}\small\item\em Sample player controller for the \doxylink{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue}{Dialogue} demo:\+ simple movement and interaction. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_demo_1_1_inventory_demo_bootstrap}{Inventory\+Demo\+Bootstrap}}
+\begin{DoxyCompactList}\small\item\em Seeds each chest\textquotesingle{}s \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list}{Inventory\+List} with items from the \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_manager}{Inventory\+Manager} at startup. Distributes registered item IDs round-\/robin across the chests. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_demo_1_1_inventory_demo_player}{Inventory\+Demo\+Player}}
+\begin{DoxyCompactList}\small\item\em Controls:\+ WASD /\+ Arrow keys to move, E to interact with nearby chests, I to toggle player inventory. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_demo_1_1_item_pickup}{Item\+Pickup}}
+\begin{DoxyCompactList}\small\item\em World pickup. On interact, adds amount of item item\+Id to a target IItem\+Container (the player\textquotesingle{}s inventory) and despawns. One script serves both the apple pickups and the chest (which simply "{}gives"{} the Burn item on interact). \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_demo_1_1_n_p_c_dialogue_trigger}{NPCDialogue\+Trigger}}
+\begin{DoxyCompactList}\small\item\em Sample NPC component that starts a dialogue when interacted with. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_demo_1_1_quest_demo_u_i}{Quest\+Demo\+UI}}
+\begin{DoxyCompactList}\small\item\em Single-\/\+Mono\+Behaviour quest HUD for the chain demo. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_demo_1_1_quest_giver}{Quest\+Giver}}
+\begin{DoxyCompactList}\small\item\em Replaces the old Quest\+Demo\+Director. Drives the chain demo straight from NPC interaction instead of auto-\/starting quests:\+ \end{DoxyCompactList}\end{DoxyCompactItemize}

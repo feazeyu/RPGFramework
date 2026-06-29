@@ -1,0 +1,210 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+List\+UI Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_u_i}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_u_i}\index{Feazeyu.RPGSystems.Inventory.InventoryListUI@{Feazeyu.RPGSystems.Inventory.InventoryListUI}}
+
+
+Manages the UI for an inventory list, including slot creation, drawing, scrolling, and item manipulation.  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+List\+UI:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=0.972222cm]{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_u_i}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_u_i_a2bdf0f814cac432b2ee7bd17cdfd5a1c}{On\+Drop}} (Pointer\+Event\+Data event\+Data)
+\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_u_i_a2cdcf81867d984150a3e2cc9baf0aa1a}{On\+Scroll}} (Pointer\+Event\+Data event\+Data)
+\begin{DoxyCompactList}\small\item\em Handles scroll events to move the inventory UI vertically. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_u_i_a32791a83c989e9a90b81272bc2e89d9e}{Redraw\+Contents}} ()
+\begin{DoxyCompactList}\small\item\em Redraws the inventory UI contents. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_u_i_a54c8dfdeaaea1909ba22d5e589e81cd9}{Create\+Origin\+Point}} ()
+\begin{DoxyCompactList}\small\item\em Creates or recreates the origin point Game\+Object for slot positioning. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_u_i_aec97639d141032cc9fa69dc0a6b4cdf9}{Generate\+UI}} ()
+\begin{DoxyCompactList}\small\item\em Generates the UI elements for each inventory slot. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_u_i_afe9379d38824888a363c51dec49ed639}{Put\+Item}} (Game\+Object item)
+\begin{DoxyCompactList}\small\item\em Put item. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_u_i_a487a71f22d78dabdcbaee31f3aa1e623}{Return\+Item}} (Game\+Object item)
+\begin{DoxyCompactList}\small\item\em Return item. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_u_i_a9e1d70474c875593d3492ed4cfb63989}{Draw\+Slot\+UI}} (\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot}{Stackable\+Inventory\+Slot}} slot, int offset)
+\begin{DoxyCompactList}\small\item\em Draws a single inventory slot UI element. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_container}{Feazeyu.\+RPGSystems.\+Inventory.\+IItem\+Container}}}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_container_adc3bb2142789ac573bfce23b03556b6f}{Remove\+Item}} (int item\+Id, int count=1)
+\begin{DoxyCompactList}\small\item\em Removes {\itshape count}  items with {\itshape item\+Id}  from the container. Returns false if not enough items are present (no-\/op in that case). \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_container_a37f354146a3b8db38ff8f417a02b317a}{Count\+Item}} (int item\+Id)
+\begin{DoxyCompactList}\small\item\em Returns the total number of items with {\itshape item\+Id}  in the container. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_container_a6c7b3fb8ed2cb756a5dbe37a95d8be77}{Try\+Add\+Item}} (int item\+Id, int count=1)
+\begin{DoxyCompactList}\small\item\em Looks up the item prefab by ID and tries to add {\itshape count}  copies. Returns false if the item is not registered or there is no space. Implementors that support this should override the default. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list}{Inventory\+List}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_u_i_ad334ec2a317e6203188b0ea56f268ceb}{list}}
+\begin{DoxyCompactList}\small\item\em The inventory list data source. \end{DoxyCompactList}\item 
+Game\+Object \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_u_i_a3f8d8069ed52bccc0c98ff40175f4245}{slot\+Prefab}}
+\begin{DoxyCompactList}\small\item\em Prefab for the background behind the item name. \end{DoxyCompactList}\item 
+Vector2 \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_u_i_a978ce1992cd20e1e69e3554dc74310c9}{first\+Element\+Position}} = new Vector2(0, 0)
+\begin{DoxyCompactList}\small\item\em The position of the first element in the inventory UI. \end{DoxyCompactList}\item 
+Vector2 \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_u_i_a6bf6e9cc45ac080fafcbb05e09831dd9}{margin}} = new Vector2(0, 0)
+\begin{DoxyCompactList}\small\item\em Margin between inventory slots. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Manages the UI for an inventory list, including slot creation, drawing, scrolling, and item manipulation. 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_u_i_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_u_i_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_u_i_a54c8dfdeaaea1909ba22d5e589e81cd9}\index{Feazeyu.RPGSystems.Inventory.InventoryListUI@{Feazeyu.RPGSystems.Inventory.InventoryListUI}!CreateOriginPoint@{CreateOriginPoint}}
+\index{CreateOriginPoint@{CreateOriginPoint}!Feazeyu.RPGSystems.Inventory.InventoryListUI@{Feazeyu.RPGSystems.Inventory.InventoryListUI}}
+\doxysubsubsection{\texorpdfstring{CreateOriginPoint()}{CreateOriginPoint()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_u_i_a54c8dfdeaaea1909ba22d5e589e81cd9} 
+void Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+List\+UI.\+Create\+Origin\+Point (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Creates or recreates the origin point Game\+Object for slot positioning. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_u_i_a9e1d70474c875593d3492ed4cfb63989}\index{Feazeyu.RPGSystems.Inventory.InventoryListUI@{Feazeyu.RPGSystems.Inventory.InventoryListUI}!DrawSlotUI@{DrawSlotUI}}
+\index{DrawSlotUI@{DrawSlotUI}!Feazeyu.RPGSystems.Inventory.InventoryListUI@{Feazeyu.RPGSystems.Inventory.InventoryListUI}}
+\doxysubsubsection{\texorpdfstring{DrawSlotUI()}{DrawSlotUI()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_u_i_a9e1d70474c875593d3492ed4cfb63989} 
+void Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+List\+UI.\+Draw\+Slot\+UI (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot}{Stackable\+Inventory\+Slot}}}]{slot}{, }\item[{int}]{offset}{}\end{DoxyParamCaption})}
+
+
+
+Draws a single inventory slot UI element. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em slot} & The inventory slot to draw.\\
+\hline
+{\em offset} & The vertical offset index for positioning.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_u_i_aec97639d141032cc9fa69dc0a6b4cdf9}\index{Feazeyu.RPGSystems.Inventory.InventoryListUI@{Feazeyu.RPGSystems.Inventory.InventoryListUI}!GenerateUI@{GenerateUI}}
+\index{GenerateUI@{GenerateUI}!Feazeyu.RPGSystems.Inventory.InventoryListUI@{Feazeyu.RPGSystems.Inventory.InventoryListUI}}
+\doxysubsubsection{\texorpdfstring{GenerateUI()}{GenerateUI()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_u_i_aec97639d141032cc9fa69dc0a6b4cdf9} 
+void Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+List\+UI.\+Generate\+UI (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Generates the UI elements for each inventory slot. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_u_i_a2bdf0f814cac432b2ee7bd17cdfd5a1c}\index{Feazeyu.RPGSystems.Inventory.InventoryListUI@{Feazeyu.RPGSystems.Inventory.InventoryListUI}!OnDrop@{OnDrop}}
+\index{OnDrop@{OnDrop}!Feazeyu.RPGSystems.Inventory.InventoryListUI@{Feazeyu.RPGSystems.Inventory.InventoryListUI}}
+\doxysubsubsection{\texorpdfstring{OnDrop()}{OnDrop()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_u_i_a2bdf0f814cac432b2ee7bd17cdfd5a1c} 
+void Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+List\+UI.\+On\+Drop (\begin{DoxyParamCaption}\item[{Pointer\+Event\+Data}]{event\+Data}{}\end{DoxyParamCaption})}
+
+
+
+
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_u_i_a2cdcf81867d984150a3e2cc9baf0aa1a}\index{Feazeyu.RPGSystems.Inventory.InventoryListUI@{Feazeyu.RPGSystems.Inventory.InventoryListUI}!OnScroll@{OnScroll}}
+\index{OnScroll@{OnScroll}!Feazeyu.RPGSystems.Inventory.InventoryListUI@{Feazeyu.RPGSystems.Inventory.InventoryListUI}}
+\doxysubsubsection{\texorpdfstring{OnScroll()}{OnScroll()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_u_i_a2cdcf81867d984150a3e2cc9baf0aa1a} 
+void Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+List\+UI.\+On\+Scroll (\begin{DoxyParamCaption}\item[{Pointer\+Event\+Data}]{event\+Data}{}\end{DoxyParamCaption})}
+
+
+
+Handles scroll events to move the inventory UI vertically. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em event\+Data} & Pointer event data.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_u_i_afe9379d38824888a363c51dec49ed639}\index{Feazeyu.RPGSystems.Inventory.InventoryListUI@{Feazeyu.RPGSystems.Inventory.InventoryListUI}!PutItem@{PutItem}}
+\index{PutItem@{PutItem}!Feazeyu.RPGSystems.Inventory.InventoryListUI@{Feazeyu.RPGSystems.Inventory.InventoryListUI}}
+\doxysubsubsection{\texorpdfstring{PutItem()}{PutItem()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_u_i_afe9379d38824888a363c51dec49ed639} 
+bool Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+List\+UI.\+Put\+Item (\begin{DoxyParamCaption}\item[{Game\+Object}]{item}{}\end{DoxyParamCaption})}
+
+
+
+Put item. 
+
+
+
+Implements \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_container_a73f752e259b652360f2aa76a3a6207eb}{Feazeyu.\+RPGSystems.\+Inventory.\+IItem\+Container}}.
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_u_i_a32791a83c989e9a90b81272bc2e89d9e}\index{Feazeyu.RPGSystems.Inventory.InventoryListUI@{Feazeyu.RPGSystems.Inventory.InventoryListUI}!RedrawContents@{RedrawContents}}
+\index{RedrawContents@{RedrawContents}!Feazeyu.RPGSystems.Inventory.InventoryListUI@{Feazeyu.RPGSystems.Inventory.InventoryListUI}}
+\doxysubsubsection{\texorpdfstring{RedrawContents()}{RedrawContents()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_u_i_a32791a83c989e9a90b81272bc2e89d9e} 
+void Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+List\+UI.\+Redraw\+Contents (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Redraws the inventory UI contents. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_u_i_a487a71f22d78dabdcbaee31f3aa1e623}\index{Feazeyu.RPGSystems.Inventory.InventoryListUI@{Feazeyu.RPGSystems.Inventory.InventoryListUI}!ReturnItem@{ReturnItem}}
+\index{ReturnItem@{ReturnItem}!Feazeyu.RPGSystems.Inventory.InventoryListUI@{Feazeyu.RPGSystems.Inventory.InventoryListUI}}
+\doxysubsubsection{\texorpdfstring{ReturnItem()}{ReturnItem()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_u_i_a487a71f22d78dabdcbaee31f3aa1e623} 
+void Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+List\+UI.\+Return\+Item (\begin{DoxyParamCaption}\item[{Game\+Object}]{item}{}\end{DoxyParamCaption})}
+
+
+
+Return item. 
+
+
+
+Implements \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_container_a45565d62df1cd8edba6e2a562cbd9f13}{Feazeyu.\+RPGSystems.\+Inventory.\+IItem\+Container}}.
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_u_i_doc-variable-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_u_i_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_u_i_a978ce1992cd20e1e69e3554dc74310c9}\index{Feazeyu.RPGSystems.Inventory.InventoryListUI@{Feazeyu.RPGSystems.Inventory.InventoryListUI}!firstElementPosition@{firstElementPosition}}
+\index{firstElementPosition@{firstElementPosition}!Feazeyu.RPGSystems.Inventory.InventoryListUI@{Feazeyu.RPGSystems.Inventory.InventoryListUI}}
+\doxysubsubsection{\texorpdfstring{firstElementPosition}{firstElementPosition}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_u_i_a978ce1992cd20e1e69e3554dc74310c9} 
+Vector2 Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+List\+UI.\+first\+Element\+Position = new Vector2(0, 0)}
+
+
+
+The position of the first element in the inventory UI. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_u_i_ad334ec2a317e6203188b0ea56f268ceb}\index{Feazeyu.RPGSystems.Inventory.InventoryListUI@{Feazeyu.RPGSystems.Inventory.InventoryListUI}!list@{list}}
+\index{list@{list}!Feazeyu.RPGSystems.Inventory.InventoryListUI@{Feazeyu.RPGSystems.Inventory.InventoryListUI}}
+\doxysubsubsection{\texorpdfstring{list}{list}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_u_i_ad334ec2a317e6203188b0ea56f268ceb} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list}{Inventory\+List}} Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+List\+UI.\+list}
+
+
+
+The inventory list data source. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_u_i_a6bf6e9cc45ac080fafcbb05e09831dd9}\index{Feazeyu.RPGSystems.Inventory.InventoryListUI@{Feazeyu.RPGSystems.Inventory.InventoryListUI}!margin@{margin}}
+\index{margin@{margin}!Feazeyu.RPGSystems.Inventory.InventoryListUI@{Feazeyu.RPGSystems.Inventory.InventoryListUI}}
+\doxysubsubsection{\texorpdfstring{margin}{margin}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_u_i_a6bf6e9cc45ac080fafcbb05e09831dd9} 
+Vector2 Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+List\+UI.\+margin = new Vector2(0, 0)}
+
+
+
+Margin between inventory slots. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_u_i_a3f8d8069ed52bccc0c98ff40175f4245}\index{Feazeyu.RPGSystems.Inventory.InventoryListUI@{Feazeyu.RPGSystems.Inventory.InventoryListUI}!slotPrefab@{slotPrefab}}
+\index{slotPrefab@{slotPrefab}!Feazeyu.RPGSystems.Inventory.InventoryListUI@{Feazeyu.RPGSystems.Inventory.InventoryListUI}}
+\doxysubsubsection{\texorpdfstring{slotPrefab}{slotPrefab}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_u_i_a3f8d8069ed52bccc0c98ff40175f4245} 
+Game\+Object Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+List\+UI.\+slot\+Prefab}
+
+
+
+Prefab for the background behind the item name. 
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Inventory/\+\+List/\+\doxymbox{\hyperlink{_inventory_list_u_i_8cs}{Inventory\+List\+UI.\+cs}}\end{DoxyCompactItemize}

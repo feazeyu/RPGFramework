@@ -1,0 +1,313 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Chain\+Runner Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner}\index{Feazeyu.RPGSystems.Quest.QuestChainRunner@{Feazeyu.RPGSystems.Quest.QuestChainRunner}}
+
+
+Runtime driver for a Quest\+Kind.\+Chain quest graph.  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Chain\+Runner:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner}{Quest\+Runner}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_af7ae07ccea2e7b7455e59449ebdd1da5}{Get\+Active\+Runner}} (string chain\+Node\+Guid)
+\begin{DoxyCompactList}\small\item\em The runner for a specific active graph quest, or null (simple /\+ not active). \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_a70eb2adc896a6458e18d902868b6b2dd}{Start\+Chain}} ()
+\begin{DoxyCompactList}\small\item\em Start chain. \end{DoxyCompactList}\item 
+List$<$ \doxymbox{\hyperlink{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_entry}{Quest\+Entry}} $>$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_aec61897f9225644bd1beed4f383cba88}{Get\+Available\+Quests}} ()
+\begin{DoxyCompactList}\small\item\em Returns the list of quest entries currently in the Available state. \end{DoxyCompactList}\item 
+IEnumerable$<$ \doxymbox{\hyperlink{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_entry}{Quest\+Entry}} $>$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_a65e7251e9ca6101d903f7c263e0f5728}{Get\+All\+Entries}} ()
+\begin{DoxyCompactList}\small\item\em Returns every entry (any state) — useful for a quest-\/log UI. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_ae1dbcd62ba8a43471fb7647b597ae7bf}{Start\+Quest}} (string chain\+Node\+Guid)
+\begin{DoxyCompactList}\small\item\em Begin the given available quest. Behaviour depends on Quest\+Entry.\+Source:\+ 
+\begin{DoxyItemize}
+\item Graph quest → spawn a child Quest\+Runner and hand over. 
+\item Simple quest → transition the entry to Active and wait for external notification. 
+\end{DoxyItemize}Up to Max\+Active\+Quests quests may run in parallel (-\/1 = unlimited); the call is refused once that cap is reached. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_ae3ff594b15f1cf43552d8ceff1de6252}{Notify\+External\+Quest\+Completed}} (string chain\+Node\+Guid)
+\begin{DoxyCompactList}\small\item\em Called by game code when a simple quest (Quest\+Source.\+Simple) has been completed. Has no effect on graph-\/based quests (they drive themselves through Quest\+Runner.\+On\+Quest\+Ended). Safe to call even if the quest is not currently active — it will no-\/op. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_a50d719a47066d87c17384ba9d036f83d}{Notify\+External\+Quest\+Failed}} (string chain\+Node\+Guid, string reason=null)
+\begin{DoxyCompactList}\small\item\em Signal external failure of a simple quest. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_aa6bf94d3b94761f3dba23a93e8bfda7c}{Abort\+Quest}} (string chain\+Node\+Guid)
+\begin{DoxyCompactList}\small\item\em Abort a specific active quest by its chain node guid. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_ac5d4592867b311953b7e1cd05687e970}{Abort\+Active\+Quest}} ()
+\begin{DoxyCompactList}\small\item\em Abort every currently active quest. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_graph_asset}{Quest\+Graph\+Asset}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_a86ebc96c23716860604db547f08d0c5a}{Chain}}
+\begin{DoxyCompactList}\small\item\em Chain. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_ae36e6f1449e338f05b8823cd147bb395}{Auto\+Start}} = false
+\begin{DoxyCompactList}\small\item\em Auto start. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_afc8b6f5b21e44bb93726d18a127b0478}{Max\+Active\+Quests}} = 1
+\begin{DoxyCompactList}\small\item\em Max active quests. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_chain_ready_event}{Chain\+Ready\+Event}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_affcd65c03a2b85abbe53cd5d9eda6919}{On\+Available\+Quests\+Changed}}
+\begin{DoxyCompactList}\small\item\em On available quests changed. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_chain_quest_event}{Chain\+Quest\+Event}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_a3391f5ed13b85fa8534a7326e6858eca}{On\+Quest\+Started}}
+\begin{DoxyCompactList}\small\item\em On quest started. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_chain_quest_event}{Chain\+Quest\+Event}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_afc547c8273f248aae2c285840deb45ed}{On\+Quest\+Completed}}
+\begin{DoxyCompactList}\small\item\em On quest completed. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_chain_quest_failed_event}{Chain\+Quest\+Failed\+Event}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_a961c83cd52f34c73426669e2964717f2}{On\+Quest\+Failed}}
+\begin{DoxyCompactList}\small\item\em On quest failed. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_chain_quest_event}{Chain\+Quest\+Event}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_ad154110440835890130aff7c42b235b2}{On\+Quest\+Aborted}}
+\begin{DoxyCompactList}\small\item\em On quest aborted. \end{DoxyCompactList}\item 
+Unity\+Event \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_afddd9118fa409a562b795458bdb63b34}{On\+Chain\+Completed}}
+\begin{DoxyCompactList}\small\item\em On chain completed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_aa588c82261aff2d117c8c7fd508a331c}{Is\+Started}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Is started. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_a422aa0fa2e2193f2f26addc03abb8dd0}{Active\+Quest\+Count}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Number of quests currently in the Active state (graph + simple). \end{DoxyCompactList}\item 
+IRead\+Only\+Collection$<$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner}{Quest\+Runner}} $>$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_a3ce9729246cb2dbc27431a92f9ddc249}{Active\+Runners}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em The child runners of all currently-\/active graph quests. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Runtime driver for a Quest\+Kind.\+Chain quest graph. 
+
+The chain is a static dependency description, not a linear flow:\+ every {\ttfamily Run\+Subgraph} node represents a quest; edges mean "{}prerequisite"{}. The runner maintains completion state and exposes the topological frontier as the set of Available quests.
+
+── Supported quest kinds ──────────────────────────────────── Each \doxylink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest}{Quest} Reference node\textquotesingle{}s "{}\+Quest"{} field must be linked to a blackboard variable. The variable type decides how the quest is driven:\+ 
+\begin{DoxyItemize}
+\item Variable of type {\bfseries{Quest\+Graph}} holding a Quest\+Graph\+Asset:\+ Start\+Quest spawns a child Game\+Object with a Quest\+Runner that walks the quest\textquotesingle{}s graph, and the chain observes its {\ttfamily On\+Quest\+Ended} event. 
+\item Variable of type {\bfseries{\doxylink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest}{Quest}}} holding a Quest\+Asset (simple quest, no graph):\+ Start\+Quest does not spawn a runner — it calls Quest\+Asset.\+Start on the asset and waits for external code to call Notify\+External\+Quest\+Completed (or Notify\+External\+Quest\+Failed) when the player\textquotesingle{}s condition is satisfied. 
+\end{DoxyItemize}Supporting both lets chains mix graph-\/based quests (with objectives and rewards) and simple flag quests without forcing every quest to be a full graph. 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_ac5d4592867b311953b7e1cd05687e970}\index{Feazeyu.RPGSystems.Quest.QuestChainRunner@{Feazeyu.RPGSystems.Quest.QuestChainRunner}!AbortActiveQuest@{AbortActiveQuest}}
+\index{AbortActiveQuest@{AbortActiveQuest}!Feazeyu.RPGSystems.Quest.QuestChainRunner@{Feazeyu.RPGSystems.Quest.QuestChainRunner}}
+\doxysubsubsection{\texorpdfstring{AbortActiveQuest()}{AbortActiveQuest()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_ac5d4592867b311953b7e1cd05687e970} 
+void Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Chain\+Runner.\+Abort\+Active\+Quest (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Abort every currently active quest. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_aa6bf94d3b94761f3dba23a93e8bfda7c}\index{Feazeyu.RPGSystems.Quest.QuestChainRunner@{Feazeyu.RPGSystems.Quest.QuestChainRunner}!AbortQuest@{AbortQuest}}
+\index{AbortQuest@{AbortQuest}!Feazeyu.RPGSystems.Quest.QuestChainRunner@{Feazeyu.RPGSystems.Quest.QuestChainRunner}}
+\doxysubsubsection{\texorpdfstring{AbortQuest()}{AbortQuest()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_aa6bf94d3b94761f3dba23a93e8bfda7c} 
+void Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Chain\+Runner.\+Abort\+Quest (\begin{DoxyParamCaption}\item[{string}]{chain\+Node\+Guid}{}\end{DoxyParamCaption})}
+
+
+
+Abort a specific active quest by its chain node guid. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_af7ae07ccea2e7b7455e59449ebdd1da5}\index{Feazeyu.RPGSystems.Quest.QuestChainRunner@{Feazeyu.RPGSystems.Quest.QuestChainRunner}!GetActiveRunner@{GetActiveRunner}}
+\index{GetActiveRunner@{GetActiveRunner}!Feazeyu.RPGSystems.Quest.QuestChainRunner@{Feazeyu.RPGSystems.Quest.QuestChainRunner}}
+\doxysubsubsection{\texorpdfstring{GetActiveRunner()}{GetActiveRunner()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_af7ae07ccea2e7b7455e59449ebdd1da5} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner}{Quest\+Runner}} Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Chain\+Runner.\+Get\+Active\+Runner (\begin{DoxyParamCaption}\item[{string}]{chain\+Node\+Guid}{}\end{DoxyParamCaption})}
+
+
+
+The runner for a specific active graph quest, or null (simple /\+ not active). 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_a65e7251e9ca6101d903f7c263e0f5728}\index{Feazeyu.RPGSystems.Quest.QuestChainRunner@{Feazeyu.RPGSystems.Quest.QuestChainRunner}!GetAllEntries@{GetAllEntries}}
+\index{GetAllEntries@{GetAllEntries}!Feazeyu.RPGSystems.Quest.QuestChainRunner@{Feazeyu.RPGSystems.Quest.QuestChainRunner}}
+\doxysubsubsection{\texorpdfstring{GetAllEntries()}{GetAllEntries()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_a65e7251e9ca6101d903f7c263e0f5728} 
+IEnumerable$<$ \doxymbox{\hyperlink{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_entry}{Quest\+Entry}} $>$ Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Chain\+Runner.\+Get\+All\+Entries (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Returns every entry (any state) — useful for a quest-\/log UI. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_aec61897f9225644bd1beed4f383cba88}\index{Feazeyu.RPGSystems.Quest.QuestChainRunner@{Feazeyu.RPGSystems.Quest.QuestChainRunner}!GetAvailableQuests@{GetAvailableQuests}}
+\index{GetAvailableQuests@{GetAvailableQuests}!Feazeyu.RPGSystems.Quest.QuestChainRunner@{Feazeyu.RPGSystems.Quest.QuestChainRunner}}
+\doxysubsubsection{\texorpdfstring{GetAvailableQuests()}{GetAvailableQuests()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_aec61897f9225644bd1beed4f383cba88} 
+List$<$ \doxymbox{\hyperlink{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_entry}{Quest\+Entry}} $>$ Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Chain\+Runner.\+Get\+Available\+Quests (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Returns the list of quest entries currently in the Available state. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_ae3ff594b15f1cf43552d8ceff1de6252}\index{Feazeyu.RPGSystems.Quest.QuestChainRunner@{Feazeyu.RPGSystems.Quest.QuestChainRunner}!NotifyExternalQuestCompleted@{NotifyExternalQuestCompleted}}
+\index{NotifyExternalQuestCompleted@{NotifyExternalQuestCompleted}!Feazeyu.RPGSystems.Quest.QuestChainRunner@{Feazeyu.RPGSystems.Quest.QuestChainRunner}}
+\doxysubsubsection{\texorpdfstring{NotifyExternalQuestCompleted()}{NotifyExternalQuestCompleted()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_ae3ff594b15f1cf43552d8ceff1de6252} 
+void Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Chain\+Runner.\+Notify\+External\+Quest\+Completed (\begin{DoxyParamCaption}\item[{string}]{chain\+Node\+Guid}{}\end{DoxyParamCaption})}
+
+
+
+Called by game code when a simple quest (Quest\+Source.\+Simple) has been completed. Has no effect on graph-\/based quests (they drive themselves through Quest\+Runner.\+On\+Quest\+Ended). Safe to call even if the quest is not currently active — it will no-\/op. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_a50d719a47066d87c17384ba9d036f83d}\index{Feazeyu.RPGSystems.Quest.QuestChainRunner@{Feazeyu.RPGSystems.Quest.QuestChainRunner}!NotifyExternalQuestFailed@{NotifyExternalQuestFailed}}
+\index{NotifyExternalQuestFailed@{NotifyExternalQuestFailed}!Feazeyu.RPGSystems.Quest.QuestChainRunner@{Feazeyu.RPGSystems.Quest.QuestChainRunner}}
+\doxysubsubsection{\texorpdfstring{NotifyExternalQuestFailed()}{NotifyExternalQuestFailed()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_a50d719a47066d87c17384ba9d036f83d} 
+void Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Chain\+Runner.\+Notify\+External\+Quest\+Failed (\begin{DoxyParamCaption}\item[{string}]{chain\+Node\+Guid}{, }\item[{string}]{reason}{ = {\ttfamily null}}\end{DoxyParamCaption})}
+
+
+
+Signal external failure of a simple quest. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_a70eb2adc896a6458e18d902868b6b2dd}\index{Feazeyu.RPGSystems.Quest.QuestChainRunner@{Feazeyu.RPGSystems.Quest.QuestChainRunner}!StartChain@{StartChain}}
+\index{StartChain@{StartChain}!Feazeyu.RPGSystems.Quest.QuestChainRunner@{Feazeyu.RPGSystems.Quest.QuestChainRunner}}
+\doxysubsubsection{\texorpdfstring{StartChain()}{StartChain()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_a70eb2adc896a6458e18d902868b6b2dd} 
+void Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Chain\+Runner.\+Start\+Chain (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Start chain. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_ae1dbcd62ba8a43471fb7647b597ae7bf}\index{Feazeyu.RPGSystems.Quest.QuestChainRunner@{Feazeyu.RPGSystems.Quest.QuestChainRunner}!StartQuest@{StartQuest}}
+\index{StartQuest@{StartQuest}!Feazeyu.RPGSystems.Quest.QuestChainRunner@{Feazeyu.RPGSystems.Quest.QuestChainRunner}}
+\doxysubsubsection{\texorpdfstring{StartQuest()}{StartQuest()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_ae1dbcd62ba8a43471fb7647b597ae7bf} 
+void Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Chain\+Runner.\+Start\+Quest (\begin{DoxyParamCaption}\item[{string}]{chain\+Node\+Guid}{}\end{DoxyParamCaption})}
+
+
+
+Begin the given available quest. Behaviour depends on Quest\+Entry.\+Source:\+ 
+\begin{DoxyItemize}
+\item Graph quest → spawn a child Quest\+Runner and hand over. 
+\item Simple quest → transition the entry to Active and wait for external notification. 
+\end{DoxyItemize}Up to Max\+Active\+Quests quests may run in parallel (-\/1 = unlimited); the call is refused once that cap is reached. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_doc-variable-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_ae36e6f1449e338f05b8823cd147bb395}\index{Feazeyu.RPGSystems.Quest.QuestChainRunner@{Feazeyu.RPGSystems.Quest.QuestChainRunner}!AutoStart@{AutoStart}}
+\index{AutoStart@{AutoStart}!Feazeyu.RPGSystems.Quest.QuestChainRunner@{Feazeyu.RPGSystems.Quest.QuestChainRunner}}
+\doxysubsubsection{\texorpdfstring{AutoStart}{AutoStart}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_ae36e6f1449e338f05b8823cd147bb395} 
+bool Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Chain\+Runner.\+Auto\+Start = false}
+
+
+
+Auto start. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_a86ebc96c23716860604db547f08d0c5a}\index{Feazeyu.RPGSystems.Quest.QuestChainRunner@{Feazeyu.RPGSystems.Quest.QuestChainRunner}!Chain@{Chain}}
+\index{Chain@{Chain}!Feazeyu.RPGSystems.Quest.QuestChainRunner@{Feazeyu.RPGSystems.Quest.QuestChainRunner}}
+\doxysubsubsection{\texorpdfstring{Chain}{Chain}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_a86ebc96c23716860604db547f08d0c5a} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_graph_asset}{Quest\+Graph\+Asset}} Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Chain\+Runner.\+Chain}
+
+
+
+Chain. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_afc8b6f5b21e44bb93726d18a127b0478}\index{Feazeyu.RPGSystems.Quest.QuestChainRunner@{Feazeyu.RPGSystems.Quest.QuestChainRunner}!MaxActiveQuests@{MaxActiveQuests}}
+\index{MaxActiveQuests@{MaxActiveQuests}!Feazeyu.RPGSystems.Quest.QuestChainRunner@{Feazeyu.RPGSystems.Quest.QuestChainRunner}}
+\doxysubsubsection{\texorpdfstring{MaxActiveQuests}{MaxActiveQuests}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_afc8b6f5b21e44bb93726d18a127b0478} 
+int Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Chain\+Runner.\+Max\+Active\+Quests = 1}
+
+
+
+Max active quests. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_affcd65c03a2b85abbe53cd5d9eda6919}\index{Feazeyu.RPGSystems.Quest.QuestChainRunner@{Feazeyu.RPGSystems.Quest.QuestChainRunner}!OnAvailableQuestsChanged@{OnAvailableQuestsChanged}}
+\index{OnAvailableQuestsChanged@{OnAvailableQuestsChanged}!Feazeyu.RPGSystems.Quest.QuestChainRunner@{Feazeyu.RPGSystems.Quest.QuestChainRunner}}
+\doxysubsubsection{\texorpdfstring{OnAvailableQuestsChanged}{OnAvailableQuestsChanged}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_affcd65c03a2b85abbe53cd5d9eda6919} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_chain_ready_event}{Chain\+Ready\+Event}} Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Chain\+Runner.\+On\+Available\+Quests\+Changed}
+
+
+
+On available quests changed. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_afddd9118fa409a562b795458bdb63b34}\index{Feazeyu.RPGSystems.Quest.QuestChainRunner@{Feazeyu.RPGSystems.Quest.QuestChainRunner}!OnChainCompleted@{OnChainCompleted}}
+\index{OnChainCompleted@{OnChainCompleted}!Feazeyu.RPGSystems.Quest.QuestChainRunner@{Feazeyu.RPGSystems.Quest.QuestChainRunner}}
+\doxysubsubsection{\texorpdfstring{OnChainCompleted}{OnChainCompleted}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_afddd9118fa409a562b795458bdb63b34} 
+Unity\+Event Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Chain\+Runner.\+On\+Chain\+Completed}
+
+
+
+On chain completed. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_ad154110440835890130aff7c42b235b2}\index{Feazeyu.RPGSystems.Quest.QuestChainRunner@{Feazeyu.RPGSystems.Quest.QuestChainRunner}!OnQuestAborted@{OnQuestAborted}}
+\index{OnQuestAborted@{OnQuestAborted}!Feazeyu.RPGSystems.Quest.QuestChainRunner@{Feazeyu.RPGSystems.Quest.QuestChainRunner}}
+\doxysubsubsection{\texorpdfstring{OnQuestAborted}{OnQuestAborted}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_ad154110440835890130aff7c42b235b2} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_chain_quest_event}{Chain\+Quest\+Event}} Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Chain\+Runner.\+On\+Quest\+Aborted}
+
+
+
+On quest aborted. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_afc547c8273f248aae2c285840deb45ed}\index{Feazeyu.RPGSystems.Quest.QuestChainRunner@{Feazeyu.RPGSystems.Quest.QuestChainRunner}!OnQuestCompleted@{OnQuestCompleted}}
+\index{OnQuestCompleted@{OnQuestCompleted}!Feazeyu.RPGSystems.Quest.QuestChainRunner@{Feazeyu.RPGSystems.Quest.QuestChainRunner}}
+\doxysubsubsection{\texorpdfstring{OnQuestCompleted}{OnQuestCompleted}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_afc547c8273f248aae2c285840deb45ed} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_chain_quest_event}{Chain\+Quest\+Event}} Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Chain\+Runner.\+On\+Quest\+Completed}
+
+
+
+On quest completed. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_a961c83cd52f34c73426669e2964717f2}\index{Feazeyu.RPGSystems.Quest.QuestChainRunner@{Feazeyu.RPGSystems.Quest.QuestChainRunner}!OnQuestFailed@{OnQuestFailed}}
+\index{OnQuestFailed@{OnQuestFailed}!Feazeyu.RPGSystems.Quest.QuestChainRunner@{Feazeyu.RPGSystems.Quest.QuestChainRunner}}
+\doxysubsubsection{\texorpdfstring{OnQuestFailed}{OnQuestFailed}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_a961c83cd52f34c73426669e2964717f2} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_chain_quest_failed_event}{Chain\+Quest\+Failed\+Event}} Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Chain\+Runner.\+On\+Quest\+Failed}
+
+
+
+On quest failed. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_a3391f5ed13b85fa8534a7326e6858eca}\index{Feazeyu.RPGSystems.Quest.QuestChainRunner@{Feazeyu.RPGSystems.Quest.QuestChainRunner}!OnQuestStarted@{OnQuestStarted}}
+\index{OnQuestStarted@{OnQuestStarted}!Feazeyu.RPGSystems.Quest.QuestChainRunner@{Feazeyu.RPGSystems.Quest.QuestChainRunner}}
+\doxysubsubsection{\texorpdfstring{OnQuestStarted}{OnQuestStarted}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_a3391f5ed13b85fa8534a7326e6858eca} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_chain_quest_event}{Chain\+Quest\+Event}} Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Chain\+Runner.\+On\+Quest\+Started}
+
+
+
+On quest started. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_doc-property-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_a422aa0fa2e2193f2f26addc03abb8dd0}\index{Feazeyu.RPGSystems.Quest.QuestChainRunner@{Feazeyu.RPGSystems.Quest.QuestChainRunner}!ActiveQuestCount@{ActiveQuestCount}}
+\index{ActiveQuestCount@{ActiveQuestCount}!Feazeyu.RPGSystems.Quest.QuestChainRunner@{Feazeyu.RPGSystems.Quest.QuestChainRunner}}
+\doxysubsubsection{\texorpdfstring{ActiveQuestCount}{ActiveQuestCount}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_a422aa0fa2e2193f2f26addc03abb8dd0} 
+int Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Chain\+Runner.\+Active\+Quest\+Count\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Number of quests currently in the Active state (graph + simple). 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_a3ce9729246cb2dbc27431a92f9ddc249}\index{Feazeyu.RPGSystems.Quest.QuestChainRunner@{Feazeyu.RPGSystems.Quest.QuestChainRunner}!ActiveRunners@{ActiveRunners}}
+\index{ActiveRunners@{ActiveRunners}!Feazeyu.RPGSystems.Quest.QuestChainRunner@{Feazeyu.RPGSystems.Quest.QuestChainRunner}}
+\doxysubsubsection{\texorpdfstring{ActiveRunners}{ActiveRunners}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_a3ce9729246cb2dbc27431a92f9ddc249} 
+IRead\+Only\+Collection$<$\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner}{Quest\+Runner}}$>$ Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Chain\+Runner.\+Active\+Runners\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+The child runners of all currently-\/active graph quests. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_aa588c82261aff2d117c8c7fd508a331c}\index{Feazeyu.RPGSystems.Quest.QuestChainRunner@{Feazeyu.RPGSystems.Quest.QuestChainRunner}!IsStarted@{IsStarted}}
+\index{IsStarted@{IsStarted}!Feazeyu.RPGSystems.Quest.QuestChainRunner@{Feazeyu.RPGSystems.Quest.QuestChainRunner}}
+\doxysubsubsection{\texorpdfstring{IsStarted}{IsStarted}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner_aa588c82261aff2d117c8c7fd508a331c} 
+bool Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Chain\+Runner.\+Is\+Started\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Is started. 
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Quest/\+\+Runtime/\+\doxymbox{\hyperlink{_quest_chain_runner_8cs}{Quest\+Chain\+Runner.\+cs}}\end{DoxyCompactItemize}

@@ -2,10 +2,10 @@ using System;
 using System.Collections;
 using UnityEngine;
 using Feazeyu.RPGSystems.Dialogue;
-using QuestGraph.Runtime;
+using Feazeyu.RPGSystems.Quest;
 using Feazeyu.RPGSystems.Inventory;
 
-namespace QuestGraph.Nodes
+namespace Feazeyu.RPGSystems.Quest.Nodes
 {
     /// <summary>
     /// Handler for the Accumulate Item objective node (typeId = "obj_accumulate").

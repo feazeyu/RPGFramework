@@ -1,6 +1,6 @@
 using UnityEditor;
 using UnityEngine;
-using QuestGraph.Runtime;
+using Feazeyu.RPGSystems.Quest;
 
 namespace Feazeyu.RPGSystems.EditorTools
 {

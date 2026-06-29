@@ -1,0 +1,39 @@
+\doxysection{Packages/\+com.feazeyu.\+rpgsystems/\+\+Runtime/\+\+Quest/\+\+Runtime/\+\+Quest\+Runner.cs File Reference}
+\hypertarget{_quest_runner_8cs}{}\label{_quest_runner_8cs}\index{Packages/com.feazeyu.rpgsystems/Runtime/Quest/Runtime/QuestRunner.cs@{Packages/com.feazeyu.rpgsystems/Runtime/Quest/Runtime/QuestRunner.cs}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_info}{Feazeyu.\+RPGSystems.\+Quest.\+Objective\+Info}}
+\begin{DoxyCompactList}\small\item\em Describes an active objective to listeners (HUD/\+quest log). Carried through the runner\textquotesingle{}s objective events; Node\+Guid keys it to its graph node. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_reward_info}{Feazeyu.\+RPGSystems.\+Quest.\+Reward\+Info}}
+\begin{DoxyCompactList}\small\item\em Describes a reward granted by a Reward node. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner}{Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Runner}}
+\begin{DoxyCompactList}\small\item\em Executes a Single quest graph. Supports any number of simultaneously active objectives (needed for continuous-\/mode parallel objectives). \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_event}{Feazeyu.\+RPGSystems.\+Quest.\+Objective\+Event}}
+\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_reward_event}{Feazeyu.\+RPGSystems.\+Quest.\+Reward\+Event}}
+\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_result_event}{Feazeyu.\+RPGSystems.\+Quest.\+Result\+Event}}
+\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_failed_event}{Feazeyu.\+RPGSystems.\+Quest.\+Failed\+Event}}
+\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_dialogue_runner_event}{Feazeyu.\+RPGSystems.\+Quest.\+Dialogue\+Runner\+Event}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \doxymbox{\hyperlink{namespace_feazeyu}{Feazeyu}}
+\item 
+namespace \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems}{Feazeyu.\+RPGSystems}}
+\item 
+namespace \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest}{Feazeyu.\+RPGSystems.\+Quest}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest_a397aad428d96c102b7bc1197a00979ad}{Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Result}} \{ \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest_a397aad428d96c102b7bc1197a00979ada12d868c18cb29bf58f02b504be9033fd}{Feazeyu.\+RPGSystems.\+Quest.\+In\+Progress}} = 0
+, \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest_a397aad428d96c102b7bc1197a00979ada07ca5050e697392c9ed47e6453f1453f}{Feazeyu.\+RPGSystems.\+Quest.\+Completed}} = 1
+, \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest_a397aad428d96c102b7bc1197a00979adad7c8c85bf79bbe1b7188497c32c3b0ca}{Feazeyu.\+RPGSystems.\+Quest.\+Failed}} = 2
+, \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest_a397aad428d96c102b7bc1197a00979ada721c28f4c74928cc9e0bb3fef345e408}{Feazeyu.\+RPGSystems.\+Quest.\+Aborted}} = 3
+ \}
+\begin{DoxyCompactList}\small\item\em Outcome of a quest run. \end{DoxyCompactList}\end{DoxyCompactItemize}

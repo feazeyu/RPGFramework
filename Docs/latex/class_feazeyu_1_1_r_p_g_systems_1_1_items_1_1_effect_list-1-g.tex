@@ -1,0 +1,251 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Items.\+Effect\+List\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_effect_list-1-g}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_effect_list-1-g}\index{Feazeyu.RPGSystems.Items.EffectList$<$ T $>$@{Feazeyu.RPGSystems.Items.EffectList$<$ T $>$}}
+
+
+Represents a serializable list of stat effects of type {\itshape T} .  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Items.\+Effect\+List\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_effect_list-1-g}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_effect_list-1-g_a025d9b9647a8ee4d976f2a26a15dec30}{Add}} (T item)
+\begin{DoxyCompactList}\small\item\em Adds an item to the list. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_effect_list-1-g_afe3037aa83637146b194bc9fe1d3690b}{Insert}} (int index, T item)
+\begin{DoxyCompactList}\small\item\em Inserts an item to the list at the specified index. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_effect_list-1-g_a940acbecddb4146df771b9890102ab4f}{Copy\+To}} (T\+[$\,$]\+ array, int array\+Index)
+\begin{DoxyCompactList}\small\item\em Copies the elements of the list to an array, starting at a particular array index. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_effect_list-1-g_a58e0101db3156521e0a9d2771aec1e38}{Index\+Of}} (T item)
+\begin{DoxyCompactList}\small\item\em Determines the index of a specific item in the list. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_effect_list-1-g_a5c77cc62f3998a1a2a95942bfd4dc9e4}{Contains}} (T item)
+\begin{DoxyCompactList}\small\item\em Determines whether the list contains a specific value. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_effect_list-1-g_a2eb5a5ad052e7a176e001afc5bec9b69}{Remove}} (T item)
+\begin{DoxyCompactList}\small\item\em Removes the first occurrence of a specific object from the list. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_effect_list-1-g_ac4c5831299c419631f94e627b686ed7e}{Remove\+At}} (int index)
+\begin{DoxyCompactList}\small\item\em Removes the item at the specified index. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_effect_list-1-g_ab4ef893cc826d1c6ef80017731048136}{Clear}} ()
+\begin{DoxyCompactList}\small\item\em Removes all items from the list. \end{DoxyCompactList}\item 
+IEnumerator$<$ T $>$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_effect_list-1-g_a7e5ad773b42db05742f222cb6c761c28}{Get\+Enumerator}} ()
+\begin{DoxyCompactList}\small\item\em Returns an enumerator that iterates through the list. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+int \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_effect_list-1-g_a03130cf9b478a2d62f2359da5eed87a8}{Count}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Gets the number of elements contained in the list. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_effect_list-1-g_ab306acda68716b9024ce0029f8535419}{Is\+Read\+Only}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Gets a value indicating whether the list is read-\/only. \end{DoxyCompactList}\item 
+T \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_effect_list-1-g_ab373e70379239c90ade9b48ce27c6f8e}{this\+[int index]\+}}\hspace{0.3cm}{\ttfamily  \+[get, set]\+}
+\begin{DoxyCompactList}\small\item\em Gets or sets the element at the specified index. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a serializable list of stat effects of type {\itshape T} . 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The type of stat effect, must inherit from Stat\+Effect.\\
+\hline
+\end{DoxyTemplParams}
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em T} : {\em Stat\+Effect}]\end{description}
+\end{Desc}
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_effect_list-1-g_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_effect_list-1-g_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_effect_list-1-g_a025d9b9647a8ee4d976f2a26a15dec30}\index{Feazeyu.RPGSystems.Items.EffectList$<$ T $>$@{Feazeyu.RPGSystems.Items.EffectList$<$ T $>$}!Add@{Add}}
+\index{Add@{Add}!Feazeyu.RPGSystems.Items.EffectList$<$ T $>$@{Feazeyu.RPGSystems.Items.EffectList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Add()}{Add()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_effect_list-1-g_a025d9b9647a8ee4d976f2a26a15dec30} 
+void Feazeyu.\+RPGSystems.\+Items.\+Effect\+List$<$ T $>$.Add (\begin{DoxyParamCaption}\item[{T}]{item}{}\end{DoxyParamCaption})}
+
+
+
+Adds an item to the list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The object to add.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_effect_list-1-g_ab4ef893cc826d1c6ef80017731048136}\index{Feazeyu.RPGSystems.Items.EffectList$<$ T $>$@{Feazeyu.RPGSystems.Items.EffectList$<$ T $>$}!Clear@{Clear}}
+\index{Clear@{Clear}!Feazeyu.RPGSystems.Items.EffectList$<$ T $>$@{Feazeyu.RPGSystems.Items.EffectList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Clear()}{Clear()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_effect_list-1-g_ab4ef893cc826d1c6ef80017731048136} 
+void Feazeyu.\+RPGSystems.\+Items.\+Effect\+List$<$ T $>$.Clear (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Removes all items from the list. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_effect_list-1-g_a5c77cc62f3998a1a2a95942bfd4dc9e4}\index{Feazeyu.RPGSystems.Items.EffectList$<$ T $>$@{Feazeyu.RPGSystems.Items.EffectList$<$ T $>$}!Contains@{Contains}}
+\index{Contains@{Contains}!Feazeyu.RPGSystems.Items.EffectList$<$ T $>$@{Feazeyu.RPGSystems.Items.EffectList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Contains()}{Contains()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_effect_list-1-g_a5c77cc62f3998a1a2a95942bfd4dc9e4} 
+bool Feazeyu.\+RPGSystems.\+Items.\+Effect\+List$<$ T $>$.Contains (\begin{DoxyParamCaption}\item[{T}]{item}{}\end{DoxyParamCaption})}
+
+
+
+Determines whether the list contains a specific value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The object to locate.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if item is found; otherwise, false.
+\end{DoxyReturn}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_effect_list-1-g_a940acbecddb4146df771b9890102ab4f}\index{Feazeyu.RPGSystems.Items.EffectList$<$ T $>$@{Feazeyu.RPGSystems.Items.EffectList$<$ T $>$}!CopyTo@{CopyTo}}
+\index{CopyTo@{CopyTo}!Feazeyu.RPGSystems.Items.EffectList$<$ T $>$@{Feazeyu.RPGSystems.Items.EffectList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{CopyTo()}{CopyTo()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_effect_list-1-g_a940acbecddb4146df771b9890102ab4f} 
+void Feazeyu.\+RPGSystems.\+Items.\+Effect\+List$<$ T $>$.Copy\+To (\begin{DoxyParamCaption}\item[{T\+[$\,$]\+}]{array}{, }\item[{int}]{array\+Index}{}\end{DoxyParamCaption})}
+
+
+
+Copies the elements of the list to an array, starting at a particular array index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em array} & The one-\/dimensional array that is the destination of the elements copied from list.\\
+\hline
+{\em array\+Index} & The zero-\/based index in array at which copying begins.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_effect_list-1-g_a7e5ad773b42db05742f222cb6c761c28}\index{Feazeyu.RPGSystems.Items.EffectList$<$ T $>$@{Feazeyu.RPGSystems.Items.EffectList$<$ T $>$}!GetEnumerator@{GetEnumerator}}
+\index{GetEnumerator@{GetEnumerator}!Feazeyu.RPGSystems.Items.EffectList$<$ T $>$@{Feazeyu.RPGSystems.Items.EffectList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{GetEnumerator()}{GetEnumerator()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_effect_list-1-g_a7e5ad773b42db05742f222cb6c761c28} 
+IEnumerator$<$ T $>$ Feazeyu.\+RPGSystems.\+Items.\+Effect\+List$<$ T $>$.Get\+Enumerator (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Returns an enumerator that iterates through the list. 
+
+\begin{DoxyReturn}{Returns}
+An enumerator for the list.
+\end{DoxyReturn}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_effect_list-1-g_a58e0101db3156521e0a9d2771aec1e38}\index{Feazeyu.RPGSystems.Items.EffectList$<$ T $>$@{Feazeyu.RPGSystems.Items.EffectList$<$ T $>$}!IndexOf@{IndexOf}}
+\index{IndexOf@{IndexOf}!Feazeyu.RPGSystems.Items.EffectList$<$ T $>$@{Feazeyu.RPGSystems.Items.EffectList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{IndexOf()}{IndexOf()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_effect_list-1-g_a58e0101db3156521e0a9d2771aec1e38} 
+int Feazeyu.\+RPGSystems.\+Items.\+Effect\+List$<$ T $>$.Index\+Of (\begin{DoxyParamCaption}\item[{T}]{item}{}\end{DoxyParamCaption})}
+
+
+
+Determines the index of a specific item in the list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The object to locate.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The index of item if found; otherwise, -\/1.
+\end{DoxyReturn}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_effect_list-1-g_afe3037aa83637146b194bc9fe1d3690b}\index{Feazeyu.RPGSystems.Items.EffectList$<$ T $>$@{Feazeyu.RPGSystems.Items.EffectList$<$ T $>$}!Insert@{Insert}}
+\index{Insert@{Insert}!Feazeyu.RPGSystems.Items.EffectList$<$ T $>$@{Feazeyu.RPGSystems.Items.EffectList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Insert()}{Insert()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_effect_list-1-g_afe3037aa83637146b194bc9fe1d3690b} 
+void Feazeyu.\+RPGSystems.\+Items.\+Effect\+List$<$ T $>$.Insert (\begin{DoxyParamCaption}\item[{int}]{index}{, }\item[{T}]{item}{}\end{DoxyParamCaption})}
+
+
+
+Inserts an item to the list at the specified index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The zero-\/based index at which item should be inserted.\\
+\hline
+{\em item} & The object to insert.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_effect_list-1-g_a2eb5a5ad052e7a176e001afc5bec9b69}\index{Feazeyu.RPGSystems.Items.EffectList$<$ T $>$@{Feazeyu.RPGSystems.Items.EffectList$<$ T $>$}!Remove@{Remove}}
+\index{Remove@{Remove}!Feazeyu.RPGSystems.Items.EffectList$<$ T $>$@{Feazeyu.RPGSystems.Items.EffectList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Remove()}{Remove()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_effect_list-1-g_a2eb5a5ad052e7a176e001afc5bec9b69} 
+bool Feazeyu.\+RPGSystems.\+Items.\+Effect\+List$<$ T $>$.Remove (\begin{DoxyParamCaption}\item[{T}]{item}{}\end{DoxyParamCaption})}
+
+
+
+Removes the first occurrence of a specific object from the list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The object to remove.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if item was successfully removed; otherwise, false.
+\end{DoxyReturn}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_effect_list-1-g_ac4c5831299c419631f94e627b686ed7e}\index{Feazeyu.RPGSystems.Items.EffectList$<$ T $>$@{Feazeyu.RPGSystems.Items.EffectList$<$ T $>$}!RemoveAt@{RemoveAt}}
+\index{RemoveAt@{RemoveAt}!Feazeyu.RPGSystems.Items.EffectList$<$ T $>$@{Feazeyu.RPGSystems.Items.EffectList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{RemoveAt()}{RemoveAt()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_effect_list-1-g_ac4c5831299c419631f94e627b686ed7e} 
+void Feazeyu.\+RPGSystems.\+Items.\+Effect\+List$<$ T $>$.Remove\+At (\begin{DoxyParamCaption}\item[{int}]{index}{}\end{DoxyParamCaption})}
+
+
+
+Removes the item at the specified index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The zero-\/based index of the item to remove.\\
+\hline
+\end{DoxyParams}
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_effect_list-1-g_doc-property-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_effect_list-1-g_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_effect_list-1-g_a03130cf9b478a2d62f2359da5eed87a8}\index{Feazeyu.RPGSystems.Items.EffectList$<$ T $>$@{Feazeyu.RPGSystems.Items.EffectList$<$ T $>$}!Count@{Count}}
+\index{Count@{Count}!Feazeyu.RPGSystems.Items.EffectList$<$ T $>$@{Feazeyu.RPGSystems.Items.EffectList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Count}{Count}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_effect_list-1-g_a03130cf9b478a2d62f2359da5eed87a8} 
+int Feazeyu.\+RPGSystems.\+Items.\+Effect\+List$<$ T $>$.Count\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the number of elements contained in the list. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_effect_list-1-g_ab306acda68716b9024ce0029f8535419}\index{Feazeyu.RPGSystems.Items.EffectList$<$ T $>$@{Feazeyu.RPGSystems.Items.EffectList$<$ T $>$}!IsReadOnly@{IsReadOnly}}
+\index{IsReadOnly@{IsReadOnly}!Feazeyu.RPGSystems.Items.EffectList$<$ T $>$@{Feazeyu.RPGSystems.Items.EffectList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{IsReadOnly}{IsReadOnly}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_effect_list-1-g_ab306acda68716b9024ce0029f8535419} 
+bool Feazeyu.\+RPGSystems.\+Items.\+Effect\+List$<$ T $>$.Is\+Read\+Only\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets a value indicating whether the list is read-\/only. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_effect_list-1-g_ab373e70379239c90ade9b48ce27c6f8e}\index{Feazeyu.RPGSystems.Items.EffectList$<$ T $>$@{Feazeyu.RPGSystems.Items.EffectList$<$ T $>$}!this\+[int index]\+@{this[int index]}}
+\index{this\+[int index]\+@{this[int index]}!Feazeyu.RPGSystems.Items.EffectList$<$ T $>$@{Feazeyu.RPGSystems.Items.EffectList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{this[int index]}{this[int index]}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_effect_list-1-g_ab373e70379239c90ade9b48ce27c6f8e} 
+T Feazeyu.\+RPGSystems.\+Items.\+Effect\+List$<$ T $>$.this\+[int index]\+\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the element at the specified index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The zero-\/based index of the element to get or set.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The element at the specified index.
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Items/\+\doxymbox{\hyperlink{_effect_list_8cs}{Effect\+List.\+cs}}\end{DoxyCompactItemize}

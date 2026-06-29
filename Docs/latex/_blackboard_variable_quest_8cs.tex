@@ -1,0 +1,18 @@
+\doxysection{Packages/\+com.feazeyu.\+rpgsystems/\+\+Runtime/\+\+Quest/\+\+Data/\+\+Blackboard\+Variable\+Quest.cs File Reference}
+\hypertarget{_blackboard_variable_quest_8cs}{}\label{_blackboard_variable_quest_8cs}\index{Packages/com.feazeyu.rpgsystems/Runtime/Quest/Data/BlackboardVariableQuest.cs@{Packages/com.feazeyu.rpgsystems/Runtime/Quest/Data/BlackboardVariableQuest.cs}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_blackboard_variable_quest_graph}{Feazeyu.\+RPGSystems.\+Quest.\+Blackboard\+Variable\+Quest\+Graph}}
+\begin{DoxyCompactList}\small\item\em \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard}{Blackboard} variable holding a reference to a Quest\+Graph\+Asset (graph-\/based quest). Used by \doxylink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest}{Quest} Reference (Run\+Subgraph) nodes in chain graphs so the chain runner can resolve which quest each node represents. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_blackboard_variable_quest}{Feazeyu.\+RPGSystems.\+Quest.\+Blackboard\+Variable\+Quest}}
+\begin{DoxyCompactList}\small\item\em \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard}{Blackboard} variable holding a reference to a Quest\+Asset (simple quest, no graph). Chain graphs can reference simple quests via a \doxylink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest}{Quest} Reference node the same way they reference graph-\/based ones; the chain runner recognises the type at lookup time and either spawns a Quest\+Runner (graph) or waits for an external call to Quest\+Chain\+Runner.\+Notify\+External\+Quest\+Completed (simple). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \doxymbox{\hyperlink{namespace_feazeyu}{Feazeyu}}
+\item 
+namespace \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems}{Feazeyu.\+RPGSystems}}
+\item 
+namespace \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest}{Feazeyu.\+RPGSystems.\+Quest}}
+\end{DoxyCompactItemize}

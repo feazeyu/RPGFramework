@@ -1,0 +1,73 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Dialogue.\+IGraph\+Node\+Handler Interface Reference}
+\hypertarget{interface_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_i_graph_node_handler}{}\label{interface_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_i_graph_node_handler}\index{Feazeyu.RPGSystems.Dialogue.IGraphNodeHandler@{Feazeyu.RPGSystems.Dialogue.IGraphNodeHandler}}
+
+
+Implement this interface to define what happens when the graph runner reaches a node of a specific type.  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Dialogue.\+IGraph\+Node\+Handler:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=12.000000cm]{interface_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_i_graph_node_handler}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+IEnumerator \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_i_graph_node_handler_a7362a7107f36dbc527b568e0f5e8af91}{Execute}} (\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}} node, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context}{Graph\+Run\+Context}} context)
+\begin{DoxyCompactList}\small\item\em Coroutine that executes the node. The runner yields on this, so the handler can span multiple frames. Call context.\+Follow /\+ context.\+End when done — either inside this coroutine or from an external callback. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+string \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_i_graph_node_handler_aaae381139fafeb9b8fbb6a24eb984f57}{Node\+Type\+Id}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Must match \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data_a4b2804487fe14225b5522250ef5d85e8}{Node\+Data.\+Node\+Type} for the nodes this handler processes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implement this interface to define what happens when the graph runner reaches a node of a specific type. 
+
+Register implementations with \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a7996fdb2293cb06f7df139785acdb4a0}{Graph\+Runner.\+Register\+Handler()}, or place a \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_node_behaviour}{Graph\+Node\+Behaviour} component on the runner\textquotesingle{}s Game\+Object so it is discovered automatically.
+
+When execution is complete the handler must call either:\+ context.\+Follow("{}\+Port\+Name"{}) — advance along an output port context.\+End() — terminate the graph Failing to call either will stall the graph indefinitely. 
+
+\label{interface_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_i_graph_node_handler_doc-func-members}
+\Hypertarget{interface_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_i_graph_node_handler_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{interface_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_i_graph_node_handler_a7362a7107f36dbc527b568e0f5e8af91}\index{Feazeyu.RPGSystems.Dialogue.IGraphNodeHandler@{Feazeyu.RPGSystems.Dialogue.IGraphNodeHandler}!Execute@{Execute}}
+\index{Execute@{Execute}!Feazeyu.RPGSystems.Dialogue.IGraphNodeHandler@{Feazeyu.RPGSystems.Dialogue.IGraphNodeHandler}}
+\doxysubsubsection{\texorpdfstring{Execute()}{Execute()}}
+{\footnotesize\ttfamily \label{interface_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_i_graph_node_handler_a7362a7107f36dbc527b568e0f5e8af91} 
+IEnumerator Feazeyu.\+RPGSystems.\+Dialogue.\+IGraph\+Node\+Handler.\+Execute (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}}}]{node}{, }\item[{\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context}{Graph\+Run\+Context}}}]{context}{}\end{DoxyParamCaption})}
+
+
+
+Coroutine that executes the node. The runner yields on this, so the handler can span multiple frames. Call context.\+Follow /\+ context.\+End when done — either inside this coroutine or from an external callback. 
+
+
+
+Implemented in \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_add_currency_node_handler_a533487fcfdc53154517fc8ababd984e6}{Feazeyu.\+RPGSystems.\+Dialogue.\+Add\+Currency\+Node\+Handler}}, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_check_currency_node_handler_a0e4f7ec73869d61140bd9e0d782d8f63}{Feazeyu.\+RPGSystems.\+Dialogue.\+Check\+Currency\+Node\+Handler}}, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_close_shop_node_handler_a496e5d6481484a3e4dd8089b7ce13c7e}{Feazeyu.\+RPGSystems.\+Dialogue.\+Close\+Shop\+Node\+Handler}}, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_debug_log_node_handler_a68b9c47330b03a284c480e1ec044ce66}{Feazeyu.\+RPGSystems.\+Dialogue.\+Debug\+Log\+Node\+Handler}}, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_find_object_node_handler_a3f33b1566b2aa01046d6b4ab028bbaf0}{Feazeyu.\+RPGSystems.\+Dialogue.\+Find\+Object\+Node\+Handler}}, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_give_item_node_handler_a5e3d1e49e1c34ce3d7346edf593282cd}{Feazeyu.\+RPGSystems.\+Dialogue.\+Give\+Item\+Node\+Handler}}, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_node_behaviour_a5ba81eca5e567539684853375ea61474}{Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Node\+Behaviour}}, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_open_shop_node_handler_a6593a6156a8acbe45875c9d389b3ccad}{Feazeyu.\+RPGSystems.\+Dialogue.\+Open\+Shop\+Node\+Handler}}, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_remove_currency_node_handler_a93134ba6514ab4cbd38f0bbfb3cd4758}{Feazeyu.\+RPGSystems.\+Dialogue.\+Remove\+Currency\+Node\+Handler}}, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_spawn_prefab_node_handler_af8b00fd0e33b9dd3950b2e3b69f3ca34}{Feazeyu.\+RPGSystems.\+Dialogue.\+Spawn\+Prefab\+Node\+Handler}}, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_accumulate_item_objective_handler_ae4670ba2001ef4a800d42a8dbc8f5335}{Feazeyu.\+RPGSystems.\+Quest.\+Nodes.\+Accumulate\+Item\+Objective\+Handler}}, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_collect_item_objective_handler_a83969b865bf24a045427911e9a24d817}{Feazeyu.\+RPGSystems.\+Quest.\+Nodes.\+Collect\+Item\+Objective\+Handler}}, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_deliver_item_objective_handler_aef8d478ad26abd485d6f0cefc5b5c756}{Feazeyu.\+RPGSystems.\+Quest.\+Nodes.\+Deliver\+Item\+Objective\+Handler}}, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_kill_count_objective_handler_a31b7195e50a2d5eb1239b6157501ec71}{Feazeyu.\+RPGSystems.\+Quest.\+Nodes.\+Kill\+Count\+Objective\+Handler}}, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_reach_location_objective_handler_af32095eade2945e5adc8d73a0a04a26e}{Feazeyu.\+RPGSystems.\+Quest.\+Nodes.\+Reach\+Location\+Objective\+Handler}}, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_reset_progress_node_handler_ae9bb054aec097e17322bd0c626f875b6}{Feazeyu.\+RPGSystems.\+Quest.\+Nodes.\+Reset\+Progress\+Node\+Handler}}, and \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_timer_node_handler_acf84b8996ed2bd2c1b2f29b1f484420a}{Feazeyu.\+RPGSystems.\+Quest.\+Nodes.\+Timer\+Node\+Handler}}.
+
+
+
+\label{interface_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_i_graph_node_handler_doc-property-members}
+\Hypertarget{interface_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_i_graph_node_handler_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{interface_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_i_graph_node_handler_aaae381139fafeb9b8fbb6a24eb984f57}\index{Feazeyu.RPGSystems.Dialogue.IGraphNodeHandler@{Feazeyu.RPGSystems.Dialogue.IGraphNodeHandler}!NodeTypeId@{NodeTypeId}}
+\index{NodeTypeId@{NodeTypeId}!Feazeyu.RPGSystems.Dialogue.IGraphNodeHandler@{Feazeyu.RPGSystems.Dialogue.IGraphNodeHandler}}
+\doxysubsubsection{\texorpdfstring{NodeTypeId}{NodeTypeId}}
+{\footnotesize\ttfamily \label{interface_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_i_graph_node_handler_aaae381139fafeb9b8fbb6a24eb984f57} 
+string Feazeyu.\+RPGSystems.\+Dialogue.\+IGraph\+Node\+Handler.\+Node\+Type\+Id\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Must match \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data_a4b2804487fe14225b5522250ef5d85e8}{Node\+Data.\+Node\+Type} for the nodes this handler processes. 
+
+
+
+Implemented in \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_add_currency_node_handler_ac735c6ad29ec5b4ecaed7b27704cd759}{Feazeyu.\+RPGSystems.\+Dialogue.\+Add\+Currency\+Node\+Handler}}, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_check_currency_node_handler_ade7847ebd7adcce2d5e6e97b0e79cf77}{Feazeyu.\+RPGSystems.\+Dialogue.\+Check\+Currency\+Node\+Handler}}, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_close_shop_node_handler_adac761b3bd7e8adb51ecba27d4870dda}{Feazeyu.\+RPGSystems.\+Dialogue.\+Close\+Shop\+Node\+Handler}}, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_debug_log_node_handler_a618f58ea0dd65f1ca5c8161e4dfd2f61}{Feazeyu.\+RPGSystems.\+Dialogue.\+Debug\+Log\+Node\+Handler}}, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_find_object_node_handler_a50336e61f492ebb6012a5baf484185d7}{Feazeyu.\+RPGSystems.\+Dialogue.\+Find\+Object\+Node\+Handler}}, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_give_item_node_handler_aef5d615ba6670176ad73d64916200abc}{Feazeyu.\+RPGSystems.\+Dialogue.\+Give\+Item\+Node\+Handler}}, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_node_behaviour_a2c0c96ac5b4e808e8ef27bf4f4bd62e9}{Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Node\+Behaviour}}, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_open_shop_node_handler_a4ac73b7ca16ba42257ea60d9278e0cd8}{Feazeyu.\+RPGSystems.\+Dialogue.\+Open\+Shop\+Node\+Handler}}, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_remove_currency_node_handler_a1b7360ece53dd0660884df0ff14b673f}{Feazeyu.\+RPGSystems.\+Dialogue.\+Remove\+Currency\+Node\+Handler}}, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_spawn_prefab_node_handler_a1ca1061137783f9357bff2e727803c75}{Feazeyu.\+RPGSystems.\+Dialogue.\+Spawn\+Prefab\+Node\+Handler}}, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_accumulate_item_objective_handler_acf6d6258c5e966f9190499fb22697e2a}{Feazeyu.\+RPGSystems.\+Quest.\+Nodes.\+Accumulate\+Item\+Objective\+Handler}}, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_collect_item_objective_handler_a5e5eb9b1bd2225cb430f638e7a3ddda9}{Feazeyu.\+RPGSystems.\+Quest.\+Nodes.\+Collect\+Item\+Objective\+Handler}}, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_deliver_item_objective_handler_ad79e0ad052a1fd1b018ee46e71931d51}{Feazeyu.\+RPGSystems.\+Quest.\+Nodes.\+Deliver\+Item\+Objective\+Handler}}, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_kill_count_objective_handler_a0c406d232a15252f4828d4cec0bee4b1}{Feazeyu.\+RPGSystems.\+Quest.\+Nodes.\+Kill\+Count\+Objective\+Handler}}, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_reach_location_objective_handler_a75ec4c47fb96edb1a9736510de2619e8}{Feazeyu.\+RPGSystems.\+Quest.\+Nodes.\+Reach\+Location\+Objective\+Handler}}, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_reset_progress_node_handler_aebd7f982993c02a637ce8f5578aeafe0}{Feazeyu.\+RPGSystems.\+Quest.\+Nodes.\+Reset\+Progress\+Node\+Handler}}, and \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_timer_node_handler_a8c693fd2461f6fd53ff1e577ec81bce5}{Feazeyu.\+RPGSystems.\+Quest.\+Nodes.\+Timer\+Node\+Handler}}.
+
+
+
+The documentation for this interface was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Dialogue/\+\doxymbox{\hyperlink{_i_graph_node_handler_8cs}{IGraph\+Node\+Handler.\+cs}}\end{DoxyCompactItemize}

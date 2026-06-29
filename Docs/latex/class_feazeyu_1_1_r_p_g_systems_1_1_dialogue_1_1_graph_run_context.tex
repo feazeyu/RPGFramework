@@ -1,0 +1,201 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Run\+Context Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context}\index{Feazeyu.RPGSystems.Dialogue.GraphRunContext@{Feazeyu.RPGSystems.Dialogue.GraphRunContext}}
+
+
+Passed to every \doxylink{interface_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_i_graph_node_handler_a7362a7107f36dbc527b568e0f5e8af91}{IGraph\+Node\+Handler.\+Execute()} call. Provides field resolution, blackboard access, and the methods to advance or terminate the graph.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_abeefbbbf6e53eb96cee116883399c840}{Follow}} (string port\+Name)
+\begin{DoxyCompactList}\small\item\em Advance this flow token along the named output port. Spawns one token per edge connected to that port (auto-\/fork), then this token is done. Calling Follow or End more than once per node step is ignored. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_a55bc5e9f38494a7ed152167cb1f0412e}{Fork}} (string port\+Name)
+\begin{DoxyCompactList}\small\item\em Spawn new flow token(s) down the named output port {\bfseries{without}} ending this token. Used by long-\/lived nodes (e.\+g. an auto-\/restarting Timer) that emit on an output repeatedly while continuing to run. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_af95344aed61fa7c2312188ae9b4051ee}{End}} ()
+\begin{DoxyCompactList}\small\item\em Terminate the entire graph (all tokens) cleanly. \end{DoxyCompactList}\item 
+string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_a9412008c58c43d10a5f1940b448a5d80}{Resolve\+String}} (\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}} node, string field\+Name)
+\begin{DoxyCompactList}\small\item\em Returns the string value of a field:\+ prefers the linked blackboard variable\textquotesingle{}s value, falls back to the inline value. \end{DoxyCompactList}\item 
+string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_a8e0b282632aa90a645f56cff4d369a9e}{Resolve\+Text}} (\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}} node, string field\+Name)
+\begin{DoxyCompactList}\small\item\em Like Resolve\+String, but additionally interpolates {\ttfamily \{Variable\+Name\}} tokens against the runtime blackboard — emulating a C\# interpolated string, e.\+g. {\ttfamily "{}\+Hello \{\+Player\+Name\}!"{}}. Use this for player-\/facing text (dialogue lines, choice labels) so authored copy can merge in live blackboard values. Use Resolve\+String for non-\/display fields (operators, numbers, …) where braces are not template. \end{DoxyCompactList}\item 
+string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_afb0048b8683e00ecb00a715e4b719f8d}{Interpolate}} (string template)
+\begin{DoxyCompactList}\small\item\em Replaces every {\ttfamily \{Variable\+Name\}} token in {\itshape template}  with the matching runtime blackboard variable\textquotesingle{}s value (looked up by Name). {\ttfamily \{\{} and {\ttfamily \}\}} are literal braces (as in C\#). Unknown variables are left as the literal {\ttfamily \{Name\}} token so authoring typos are visible. \end{DoxyCompactList}\item 
+Sprite \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_a65a45be3c14b1857c7fcfeb8e2351205}{Resolve\+Sprite}} (\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}} node, string field\+Name)
+\begin{DoxyCompactList}\small\item\em Returns a Sprite from a linked blackboard variable. Inline values cannot reference Sprites at runtime. \end{DoxyCompactList}\item 
+string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_aab8fdea035c19d31d28e6d795c7dcfa1}{Get\+Linked\+Guid}} (\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}} node, string field\+Name)
+\begin{DoxyCompactList}\small\item\em Returns the GUID of the blackboard variable linked to a field. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_field_data}{Field\+Data}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_a70ce8dc1df0a64cdcb4ed8c19f3d3919}{Get\+Field}} (\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}} node, string field\+Name)
+\begin{DoxyCompactList}\small\item\em Returns the raw \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_field_data}{Field\+Data} for a named field, or null. \end{DoxyCompactList}\item 
+T \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_a5ed5ca0779d909979dabcdc7f1ab0ae0}{Get\+Variable$<$ T $>$}} (string variable\+Name)
+\begin{DoxyCompactList}\small\item\em Variable name. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_a1f67ce2ee9dc150c308c65b42a83a050}{Set\+Variable$<$ T $>$}} (string variable\+Name, T value)
+\begin{DoxyCompactList}\small\item\em T. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner}{Graph\+Runner}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_a089765e9ff11895de6eaee3a54c33d5b}{Runner}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Runner. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset}{Graph\+Asset}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_abcbb722b83a24b39441e7be6868bba35}{Graph}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Graph. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard}{Blackboard}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_a5e057d6237ba0abdca63b2d1797ca9d3}{Runtime\+Blackboard}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Runtime blackboard. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Passed to every \doxylink{interface_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_i_graph_node_handler_a7362a7107f36dbc527b568e0f5e8af91}{IGraph\+Node\+Handler.\+Execute()} call. Provides field resolution, blackboard access, and the methods to advance or terminate the graph. 
+
+Handlers MUST call \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_abeefbbbf6e53eb96cee116883399c840}{Follow()} or \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_af95344aed61fa7c2312188ae9b4051ee}{End()} exactly once to continue execution. 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_af95344aed61fa7c2312188ae9b4051ee}\index{Feazeyu.RPGSystems.Dialogue.GraphRunContext@{Feazeyu.RPGSystems.Dialogue.GraphRunContext}!End@{End}}
+\index{End@{End}!Feazeyu.RPGSystems.Dialogue.GraphRunContext@{Feazeyu.RPGSystems.Dialogue.GraphRunContext}}
+\doxysubsubsection{\texorpdfstring{End()}{End()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_af95344aed61fa7c2312188ae9b4051ee} 
+void Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Run\+Context.\+End (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Terminate the entire graph (all tokens) cleanly. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_abeefbbbf6e53eb96cee116883399c840}\index{Feazeyu.RPGSystems.Dialogue.GraphRunContext@{Feazeyu.RPGSystems.Dialogue.GraphRunContext}!Follow@{Follow}}
+\index{Follow@{Follow}!Feazeyu.RPGSystems.Dialogue.GraphRunContext@{Feazeyu.RPGSystems.Dialogue.GraphRunContext}}
+\doxysubsubsection{\texorpdfstring{Follow()}{Follow()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_abeefbbbf6e53eb96cee116883399c840} 
+void Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Run\+Context.\+Follow (\begin{DoxyParamCaption}\item[{string}]{port\+Name}{}\end{DoxyParamCaption})}
+
+
+
+Advance this flow token along the named output port. Spawns one token per edge connected to that port (auto-\/fork), then this token is done. Calling Follow or End more than once per node step is ignored. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_a55bc5e9f38494a7ed152167cb1f0412e}\index{Feazeyu.RPGSystems.Dialogue.GraphRunContext@{Feazeyu.RPGSystems.Dialogue.GraphRunContext}!Fork@{Fork}}
+\index{Fork@{Fork}!Feazeyu.RPGSystems.Dialogue.GraphRunContext@{Feazeyu.RPGSystems.Dialogue.GraphRunContext}}
+\doxysubsubsection{\texorpdfstring{Fork()}{Fork()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_a55bc5e9f38494a7ed152167cb1f0412e} 
+void Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Run\+Context.\+Fork (\begin{DoxyParamCaption}\item[{string}]{port\+Name}{}\end{DoxyParamCaption})}
+
+
+
+Spawn new flow token(s) down the named output port {\bfseries{without}} ending this token. Used by long-\/lived nodes (e.\+g. an auto-\/restarting Timer) that emit on an output repeatedly while continuing to run. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_a70ce8dc1df0a64cdcb4ed8c19f3d3919}\index{Feazeyu.RPGSystems.Dialogue.GraphRunContext@{Feazeyu.RPGSystems.Dialogue.GraphRunContext}!GetField@{GetField}}
+\index{GetField@{GetField}!Feazeyu.RPGSystems.Dialogue.GraphRunContext@{Feazeyu.RPGSystems.Dialogue.GraphRunContext}}
+\doxysubsubsection{\texorpdfstring{GetField()}{GetField()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_a70ce8dc1df0a64cdcb4ed8c19f3d3919} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_field_data}{Field\+Data}} Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Run\+Context.\+Get\+Field (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}}}]{node}{, }\item[{string}]{field\+Name}{}\end{DoxyParamCaption})}
+
+
+
+Returns the raw \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_field_data}{Field\+Data} for a named field, or null. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_aab8fdea035c19d31d28e6d795c7dcfa1}\index{Feazeyu.RPGSystems.Dialogue.GraphRunContext@{Feazeyu.RPGSystems.Dialogue.GraphRunContext}!GetLinkedGuid@{GetLinkedGuid}}
+\index{GetLinkedGuid@{GetLinkedGuid}!Feazeyu.RPGSystems.Dialogue.GraphRunContext@{Feazeyu.RPGSystems.Dialogue.GraphRunContext}}
+\doxysubsubsection{\texorpdfstring{GetLinkedGuid()}{GetLinkedGuid()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_aab8fdea035c19d31d28e6d795c7dcfa1} 
+string Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Run\+Context.\+Get\+Linked\+Guid (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}}}]{node}{, }\item[{string}]{field\+Name}{}\end{DoxyParamCaption})}
+
+
+
+Returns the GUID of the blackboard variable linked to a field. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_a5ed5ca0779d909979dabcdc7f1ab0ae0}\index{Feazeyu.RPGSystems.Dialogue.GraphRunContext@{Feazeyu.RPGSystems.Dialogue.GraphRunContext}!GetVariable$<$ T $>$@{GetVariable$<$ T $>$}}
+\index{GetVariable$<$ T $>$@{GetVariable$<$ T $>$}!Feazeyu.RPGSystems.Dialogue.GraphRunContext@{Feazeyu.RPGSystems.Dialogue.GraphRunContext}}
+\doxysubsubsection{\texorpdfstring{GetVariable$<$ T $>$()}{GetVariable< T >()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_a5ed5ca0779d909979dabcdc7f1ab0ae0} 
+T Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Run\+Context.\+Get\+Variable$<$ T $>$ (\begin{DoxyParamCaption}\item[{string}]{variable\+Name}{}\end{DoxyParamCaption})}
+
+
+
+Variable name. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_afb0048b8683e00ecb00a715e4b719f8d}\index{Feazeyu.RPGSystems.Dialogue.GraphRunContext@{Feazeyu.RPGSystems.Dialogue.GraphRunContext}!Interpolate@{Interpolate}}
+\index{Interpolate@{Interpolate}!Feazeyu.RPGSystems.Dialogue.GraphRunContext@{Feazeyu.RPGSystems.Dialogue.GraphRunContext}}
+\doxysubsubsection{\texorpdfstring{Interpolate()}{Interpolate()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_afb0048b8683e00ecb00a715e4b719f8d} 
+string Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Run\+Context.\+Interpolate (\begin{DoxyParamCaption}\item[{string}]{template}{}\end{DoxyParamCaption})}
+
+
+
+Replaces every {\ttfamily \{Variable\+Name\}} token in {\itshape template}  with the matching runtime blackboard variable\textquotesingle{}s value (looked up by Name). {\ttfamily \{\{} and {\ttfamily \}\}} are literal braces (as in C\#). Unknown variables are left as the literal {\ttfamily \{Name\}} token so authoring typos are visible. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_a65a45be3c14b1857c7fcfeb8e2351205}\index{Feazeyu.RPGSystems.Dialogue.GraphRunContext@{Feazeyu.RPGSystems.Dialogue.GraphRunContext}!ResolveSprite@{ResolveSprite}}
+\index{ResolveSprite@{ResolveSprite}!Feazeyu.RPGSystems.Dialogue.GraphRunContext@{Feazeyu.RPGSystems.Dialogue.GraphRunContext}}
+\doxysubsubsection{\texorpdfstring{ResolveSprite()}{ResolveSprite()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_a65a45be3c14b1857c7fcfeb8e2351205} 
+Sprite Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Run\+Context.\+Resolve\+Sprite (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}}}]{node}{, }\item[{string}]{field\+Name}{}\end{DoxyParamCaption})}
+
+
+
+Returns a Sprite from a linked blackboard variable. Inline values cannot reference Sprites at runtime. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_a9412008c58c43d10a5f1940b448a5d80}\index{Feazeyu.RPGSystems.Dialogue.GraphRunContext@{Feazeyu.RPGSystems.Dialogue.GraphRunContext}!ResolveString@{ResolveString}}
+\index{ResolveString@{ResolveString}!Feazeyu.RPGSystems.Dialogue.GraphRunContext@{Feazeyu.RPGSystems.Dialogue.GraphRunContext}}
+\doxysubsubsection{\texorpdfstring{ResolveString()}{ResolveString()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_a9412008c58c43d10a5f1940b448a5d80} 
+string Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Run\+Context.\+Resolve\+String (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}}}]{node}{, }\item[{string}]{field\+Name}{}\end{DoxyParamCaption})}
+
+
+
+Returns the string value of a field:\+ prefers the linked blackboard variable\textquotesingle{}s value, falls back to the inline value. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_a8e0b282632aa90a645f56cff4d369a9e}\index{Feazeyu.RPGSystems.Dialogue.GraphRunContext@{Feazeyu.RPGSystems.Dialogue.GraphRunContext}!ResolveText@{ResolveText}}
+\index{ResolveText@{ResolveText}!Feazeyu.RPGSystems.Dialogue.GraphRunContext@{Feazeyu.RPGSystems.Dialogue.GraphRunContext}}
+\doxysubsubsection{\texorpdfstring{ResolveText()}{ResolveText()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_a8e0b282632aa90a645f56cff4d369a9e} 
+string Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Run\+Context.\+Resolve\+Text (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}}}]{node}{, }\item[{string}]{field\+Name}{}\end{DoxyParamCaption})}
+
+
+
+Like Resolve\+String, but additionally interpolates {\ttfamily \{Variable\+Name\}} tokens against the runtime blackboard — emulating a C\# interpolated string, e.\+g. {\ttfamily "{}\+Hello \{\+Player\+Name\}!"{}}. Use this for player-\/facing text (dialogue lines, choice labels) so authored copy can merge in live blackboard values. Use Resolve\+String for non-\/display fields (operators, numbers, …) where braces are not template. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_a1f67ce2ee9dc150c308c65b42a83a050}\index{Feazeyu.RPGSystems.Dialogue.GraphRunContext@{Feazeyu.RPGSystems.Dialogue.GraphRunContext}!SetVariable$<$ T $>$@{SetVariable$<$ T $>$}}
+\index{SetVariable$<$ T $>$@{SetVariable$<$ T $>$}!Feazeyu.RPGSystems.Dialogue.GraphRunContext@{Feazeyu.RPGSystems.Dialogue.GraphRunContext}}
+\doxysubsubsection{\texorpdfstring{SetVariable$<$ T $>$()}{SetVariable< T >()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_a1f67ce2ee9dc150c308c65b42a83a050} 
+void Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Run\+Context.\+Set\+Variable$<$ T $>$ (\begin{DoxyParamCaption}\item[{string}]{variable\+Name}{, }\item[{T}]{value}{}\end{DoxyParamCaption})}
+
+
+
+T. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_doc-property-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_abcbb722b83a24b39441e7be6868bba35}\index{Feazeyu.RPGSystems.Dialogue.GraphRunContext@{Feazeyu.RPGSystems.Dialogue.GraphRunContext}!Graph@{Graph}}
+\index{Graph@{Graph}!Feazeyu.RPGSystems.Dialogue.GraphRunContext@{Feazeyu.RPGSystems.Dialogue.GraphRunContext}}
+\doxysubsubsection{\texorpdfstring{Graph}{Graph}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_abcbb722b83a24b39441e7be6868bba35} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset}{Graph\+Asset}} Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Run\+Context.\+Graph\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Graph. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_a089765e9ff11895de6eaee3a54c33d5b}\index{Feazeyu.RPGSystems.Dialogue.GraphRunContext@{Feazeyu.RPGSystems.Dialogue.GraphRunContext}!Runner@{Runner}}
+\index{Runner@{Runner}!Feazeyu.RPGSystems.Dialogue.GraphRunContext@{Feazeyu.RPGSystems.Dialogue.GraphRunContext}}
+\doxysubsubsection{\texorpdfstring{Runner}{Runner}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_a089765e9ff11895de6eaee3a54c33d5b} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner}{Graph\+Runner}} Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Run\+Context.\+Runner\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Runner. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_a5e057d6237ba0abdca63b2d1797ca9d3}\index{Feazeyu.RPGSystems.Dialogue.GraphRunContext@{Feazeyu.RPGSystems.Dialogue.GraphRunContext}!RuntimeBlackboard@{RuntimeBlackboard}}
+\index{RuntimeBlackboard@{RuntimeBlackboard}!Feazeyu.RPGSystems.Dialogue.GraphRunContext@{Feazeyu.RPGSystems.Dialogue.GraphRunContext}}
+\doxysubsubsection{\texorpdfstring{RuntimeBlackboard}{RuntimeBlackboard}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context_a5e057d6237ba0abdca63b2d1797ca9d3} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard}{Blackboard}} Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Run\+Context.\+Runtime\+Blackboard\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Runtime blackboard. 
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Dialogue/\+\doxymbox{\hyperlink{_graph_run_context_8cs}{Graph\+Run\+Context.\+cs}}\end{DoxyCompactItemize}

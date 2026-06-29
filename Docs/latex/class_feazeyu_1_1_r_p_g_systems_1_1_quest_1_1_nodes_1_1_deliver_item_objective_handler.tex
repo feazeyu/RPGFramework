@@ -1,0 +1,75 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Quest.\+Nodes.\+Deliver\+Item\+Objective\+Handler Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_deliver_item_objective_handler}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_deliver_item_objective_handler}\index{Feazeyu.RPGSystems.Quest.Nodes.DeliverItemObjectiveHandler@{Feazeyu.RPGSystems.Quest.Nodes.DeliverItemObjectiveHandler}}
+
+
+Handler for the Deliver Item objective node (type\+Id = "{}obj\+\_\+deliver"{}).  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Quest.\+Nodes.\+Deliver\+Item\+Objective\+Handler:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_deliver_item_objective_handler}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+IEnumerator \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_deliver_item_objective_handler_aef8d478ad26abd485d6f0cefc5b5c756}{Execute}} (\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}} node, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context}{Graph\+Run\+Context}} ctx)
+\begin{DoxyCompactList}\small\item\em Coroutine that executes the node. The runner yields on this, so the handler can span multiple frames. Call context.\+Follow /\+ context.\+End when done — either inside this coroutine or from an external callback. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_deliver_item_objective_handler_ad79e0ad052a1fd1b018ee46e71931d51}{Node\+Type\+Id}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Must match \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data_a4b2804487fe14225b5522250ef5d85e8}{Node\+Data.\+Node\+Type} for the nodes this handler processes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Handler for the Deliver Item objective node (type\+Id = "{}obj\+\_\+deliver"{}). 
+
+Waits for the player to interact with the specified NPC while the linked \doxylink{namespace_feazeyu_1_1_r_p_g_systems_1_1_inventory}{Inventory} contains at least Count of Item\+Id. On success the items are removed and the node follows "{}\+Completed"{}.
+
+{\bfseries{Field resolution}} (first match wins):\+ NPC — blackboard Game\+Object variable, or inline scene object name (Game\+Object.\+Find). \doxylink{namespace_feazeyu_1_1_r_p_g_systems_1_1_inventory}{Inventory} — blackboard Game\+Object variable with an \doxylink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_container}{IItem\+Container} component.
+
+The NPC\textquotesingle{}s \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_interactable_ab236bf4b0418eff83211a852c759ad07}{Interactable.\+On\+Interact} event is used for delivery — make sure the NPC has an \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_interactable}{Interactable} component. 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_deliver_item_objective_handler_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_deliver_item_objective_handler_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_deliver_item_objective_handler_aef8d478ad26abd485d6f0cefc5b5c756}\index{Feazeyu.RPGSystems.Quest.Nodes.DeliverItemObjectiveHandler@{Feazeyu.RPGSystems.Quest.Nodes.DeliverItemObjectiveHandler}!Execute@{Execute}}
+\index{Execute@{Execute}!Feazeyu.RPGSystems.Quest.Nodes.DeliverItemObjectiveHandler@{Feazeyu.RPGSystems.Quest.Nodes.DeliverItemObjectiveHandler}}
+\doxysubsubsection{\texorpdfstring{Execute()}{Execute()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_deliver_item_objective_handler_aef8d478ad26abd485d6f0cefc5b5c756} 
+IEnumerator Feazeyu.\+RPGSystems.\+Quest.\+Nodes.\+Deliver\+Item\+Objective\+Handler.\+Execute (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}}}]{node}{, }\item[{\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context}{Graph\+Run\+Context}}}]{ctx}{}\end{DoxyParamCaption})}
+
+
+
+Coroutine that executes the node. The runner yields on this, so the handler can span multiple frames. Call context.\+Follow /\+ context.\+End when done — either inside this coroutine or from an external callback. 
+
+
+
+Implements \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_i_graph_node_handler_a7362a7107f36dbc527b568e0f5e8af91}{Feazeyu.\+RPGSystems.\+Dialogue.\+IGraph\+Node\+Handler}}.
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_deliver_item_objective_handler_doc-property-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_deliver_item_objective_handler_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_deliver_item_objective_handler_ad79e0ad052a1fd1b018ee46e71931d51}\index{Feazeyu.RPGSystems.Quest.Nodes.DeliverItemObjectiveHandler@{Feazeyu.RPGSystems.Quest.Nodes.DeliverItemObjectiveHandler}!NodeTypeId@{NodeTypeId}}
+\index{NodeTypeId@{NodeTypeId}!Feazeyu.RPGSystems.Quest.Nodes.DeliverItemObjectiveHandler@{Feazeyu.RPGSystems.Quest.Nodes.DeliverItemObjectiveHandler}}
+\doxysubsubsection{\texorpdfstring{NodeTypeId}{NodeTypeId}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_deliver_item_objective_handler_ad79e0ad052a1fd1b018ee46e71931d51} 
+string Feazeyu.\+RPGSystems.\+Quest.\+Nodes.\+Deliver\+Item\+Objective\+Handler.\+Node\+Type\+Id\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Must match \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data_a4b2804487fe14225b5522250ef5d85e8}{Node\+Data.\+Node\+Type} for the nodes this handler processes. 
+
+
+
+Implements \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_i_graph_node_handler_aaae381139fafeb9b8fbb6a24eb984f57}{Feazeyu.\+RPGSystems.\+Dialogue.\+IGraph\+Node\+Handler}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Quest/\+\+Nodes/\+\doxymbox{\hyperlink{_deliver_item_objective_handler_8cs}{Deliver\+Item\+Objective\+Handler.\+cs}}\end{DoxyCompactItemize}

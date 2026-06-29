@@ -1,0 +1,277 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Editor\+Window Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window}\index{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow@{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow}}
+
+
+Shared base for every graph-\/editor window (dialogue, quest, and anything built on top of the Graph\+Asset pipeline).  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Editor\+Window:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.441860cm]{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_a2a78c723bab58dd63e15e83f142b9d40}{Load\+Asset}} (\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset}{Graph\+Asset}} asset)
+\begin{DoxyCompactList}\small\item\em Load asset. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual IRead\+Only\+Dictionary$<$ string, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_info}{Node\+Info}} $>$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_a52267bd271de6cae2e2229481ea825b6}{Get\+Node\+Registry\+For\+Asset}} (\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset}{Graph\+Asset}} asset)
+\begin{DoxyCompactList}\small\item\em Per-\/asset registry hook — called on every Load\+Asset. Override when the palette depends on properties of the loaded asset (e.\+g. \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_quest_graph_window}{Quest\+Graph\+Window} filters by Quest\+Kind). The default returns Node\+Registry\+Source. \end{DoxyCompactList}\item 
+virtual \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset}{Graph\+Asset}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_af522a6cb5e2b17905174f1753d0a40c8}{Create\+Asset\+Instance}} ()
+\begin{DoxyCompactList}\small\item\em Factory for the concrete subclass of Graph\+Asset this window edits. \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_a6228c073dc839d89e0e2959f05443163}{On\+Enable}} ()
+\begin{DoxyCompactList}\small\item\em On enable. \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_a9f1785cffd14afb6b19b90b5ae20318b}{On\+Disable}} ()
+\begin{DoxyCompactList}\small\item\em On disable. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_aec647df132b2e99fa99f12d10729c068}{Save\+Asset}} ()
+\begin{DoxyCompactList}\small\item\em Save asset. \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_a06971f24e93f6d77121e8a03f25faeaa}{On\+Seed\+New\+Asset}} (\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset}{Graph\+Asset}} asset)
+\begin{DoxyCompactList}\small\item\em Hook for subclasses to insert default nodes into a freshly created asset. \end{DoxyCompactList}\item 
+string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_a2a25cac382b5f4c262e638fe27751fbf}{Pref\+Key}} (string key)
+\begin{DoxyCompactList}\small\item\em Pref key. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset}{Graph\+Asset}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_ab66e4d099ce1b429841fb139f6835a7e}{m\+\_\+\+Asset}}
+\begin{DoxyCompactList}\small\item\em Asset. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+virtual string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_ad82efd116d1b00f0ea2c1b6ba2455f8c}{Window\+Title}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Window title. \end{DoxyCompactList}\item 
+virtual string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_a3eb2c16f832ff7fdee5cd1774d95de35}{Pref\+Key\+Prefix}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Pref key prefix. \end{DoxyCompactList}\item 
+virtual string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_ae6e85d0fd0f6a5a216e51ec4a223e42c}{New\+Asset\+Name}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em New asset name. \end{DoxyCompactList}\item 
+virtual string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_aac942d20d12520fc81dd8f4915787a69}{Save\+Dialog\+Title}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Save dialog title. \end{DoxyCompactList}\item 
+virtual string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_a480b578570e6b7b9c9f4d98294b1d62f}{Window\+Icon}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Window icon. \end{DoxyCompactList}\item 
+virtual IRead\+Only\+Dictionary$<$ string, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_info}{Node\+Info}} $>$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_a650251968ad5162831126609d90d3d9a}{Node\+Registry\+Source}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em "{}\+Add Node"{} palette for this graph system. \end{DoxyCompactList}\item 
+virtual Style\+Sheet \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_a12b5367c83f89671afaf711e9d442c66}{Theme\+Style\+Sheet}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em System-\/specific theme sheet, layered on top of {\ttfamily Graph\+Editor.\+uss}. \end{DoxyCompactList}\item 
+virtual string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_a64ee134da75a030f799872043fd3296e}{Graph\+View\+Css\+Class}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Root CSS class added to the canvas so the theme sheet\textquotesingle{}s {\ttfamily .xxx-\/graph-\/view} rules apply. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Shared base for every graph-\/editor window (dialogue, quest, and anything built on top of the Graph\+Asset pipeline). 
+
+Responsibilities:\+ • Build the toolbar /\+ blackboard /\+ canvas /\+ inspector layout • Load the base {\ttfamily Graph\+Editor.\+uss} stylesheet • Wire node-\/selection events between the canvas and inspector • Handle asset New /\+ Open /\+ Save /\+ Auto-\/\+Save
+
+Subclasses supply what\textquotesingle{}s system-\/specific via the template-\/method properties at the top:\+ 
+\begin{DoxyItemize}
+\item Window\+Title — window title string 
+\item Pref\+Key\+Prefix — Editor\+Prefs namespace for last-\/asset memory 
+\item New\+Asset\+Name, Save\+Dialog\+Title, Window\+Icon 
+\item Node\+Registry\+Source — the "{}\+Add Node"{} palette 
+\item Theme\+Style\+Sheet — system-\/specific colour overrides 
+\item Graph\+View\+Css\+Class — root class added to the canvas (drives theme rules) 
+\item Create\+Asset\+Instance — factory for the right subclass of Graph\+Asset 
+\end{DoxyItemize}
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_af522a6cb5e2b17905174f1753d0a40c8}\index{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow@{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow}!CreateAssetInstance@{CreateAssetInstance}}
+\index{CreateAssetInstance@{CreateAssetInstance}!Feazeyu.RPGSystems.EditorTools.GraphEditorWindow@{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow}}
+\doxysubsubsection{\texorpdfstring{CreateAssetInstance()}{CreateAssetInstance()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_af522a6cb5e2b17905174f1753d0a40c8} 
+virtual \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset}{Graph\+Asset}} Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Editor\+Window.\+Create\+Asset\+Instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Factory for the concrete subclass of Graph\+Asset this window edits. 
+
+
+
+Reimplemented in \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_dialogue_graph_window_a09b53cab01a759951bd81e9e435a8d30}{Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Dialogue\+Graph\+Window}}, and \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_quest_graph_window_a6f8912951450745e3991827738686d1a}{Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Quest\+Graph\+Window}}.
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_a52267bd271de6cae2e2229481ea825b6}\index{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow@{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow}!GetNodeRegistryForAsset@{GetNodeRegistryForAsset}}
+\index{GetNodeRegistryForAsset@{GetNodeRegistryForAsset}!Feazeyu.RPGSystems.EditorTools.GraphEditorWindow@{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow}}
+\doxysubsubsection{\texorpdfstring{GetNodeRegistryForAsset()}{GetNodeRegistryForAsset()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_a52267bd271de6cae2e2229481ea825b6} 
+virtual IRead\+Only\+Dictionary$<$ string, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_info}{Node\+Info}} $>$ Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Editor\+Window.\+Get\+Node\+Registry\+For\+Asset (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset}{Graph\+Asset}}}]{asset}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Per-\/asset registry hook — called on every Load\+Asset. Override when the palette depends on properties of the loaded asset (e.\+g. \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_quest_graph_window}{Quest\+Graph\+Window} filters by Quest\+Kind). The default returns Node\+Registry\+Source. 
+
+
+
+Reimplemented in \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_quest_graph_window_a42e7df963c4aedef6fc0f31a67088e0e}{Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Quest\+Graph\+Window}}.
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_a2a78c723bab58dd63e15e83f142b9d40}\index{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow@{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow}!LoadAsset@{LoadAsset}}
+\index{LoadAsset@{LoadAsset}!Feazeyu.RPGSystems.EditorTools.GraphEditorWindow@{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow}}
+\doxysubsubsection{\texorpdfstring{LoadAsset()}{LoadAsset()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_a2a78c723bab58dd63e15e83f142b9d40} 
+void Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Editor\+Window.\+Load\+Asset (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset}{Graph\+Asset}}}]{asset}{}\end{DoxyParamCaption})}
+
+
+
+Load asset. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_a9f1785cffd14afb6b19b90b5ae20318b}\index{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow@{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow}!OnDisable@{OnDisable}}
+\index{OnDisable@{OnDisable}!Feazeyu.RPGSystems.EditorTools.GraphEditorWindow@{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow}}
+\doxysubsubsection{\texorpdfstring{OnDisable()}{OnDisable()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_a9f1785cffd14afb6b19b90b5ae20318b} 
+virtual void Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Editor\+Window.\+On\+Disable (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+On disable. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_a6228c073dc839d89e0e2959f05443163}\index{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow@{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow}!OnEnable@{OnEnable}}
+\index{OnEnable@{OnEnable}!Feazeyu.RPGSystems.EditorTools.GraphEditorWindow@{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow}}
+\doxysubsubsection{\texorpdfstring{OnEnable()}{OnEnable()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_a6228c073dc839d89e0e2959f05443163} 
+virtual void Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Editor\+Window.\+On\+Enable (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+On enable. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_a06971f24e93f6d77121e8a03f25faeaa}\index{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow@{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow}!OnSeedNewAsset@{OnSeedNewAsset}}
+\index{OnSeedNewAsset@{OnSeedNewAsset}!Feazeyu.RPGSystems.EditorTools.GraphEditorWindow@{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow}}
+\doxysubsubsection{\texorpdfstring{OnSeedNewAsset()}{OnSeedNewAsset()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_a06971f24e93f6d77121e8a03f25faeaa} 
+virtual void Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Editor\+Window.\+On\+Seed\+New\+Asset (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset}{Graph\+Asset}}}]{asset}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Hook for subclasses to insert default nodes into a freshly created asset. 
+
+
+
+Reimplemented in \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_quest_graph_window_a9a66b8de97fcf969729cb95dddda78ec}{Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Quest\+Graph\+Window}}.
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_a2a25cac382b5f4c262e638fe27751fbf}\index{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow@{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow}!PrefKey@{PrefKey}}
+\index{PrefKey@{PrefKey}!Feazeyu.RPGSystems.EditorTools.GraphEditorWindow@{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow}}
+\doxysubsubsection{\texorpdfstring{PrefKey()}{PrefKey()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_a2a25cac382b5f4c262e638fe27751fbf} 
+string Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Editor\+Window.\+Pref\+Key (\begin{DoxyParamCaption}\item[{string}]{key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Pref key. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_aec647df132b2e99fa99f12d10729c068}\index{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow@{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow}!SaveAsset@{SaveAsset}}
+\index{SaveAsset@{SaveAsset}!Feazeyu.RPGSystems.EditorTools.GraphEditorWindow@{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow}}
+\doxysubsubsection{\texorpdfstring{SaveAsset()}{SaveAsset()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_aec647df132b2e99fa99f12d10729c068} 
+void Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Editor\+Window.\+Save\+Asset (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Save asset. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_doc-variable-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_ab66e4d099ce1b429841fb139f6835a7e}\index{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow@{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow}!m\_Asset@{m\_Asset}}
+\index{m\_Asset@{m\_Asset}!Feazeyu.RPGSystems.EditorTools.GraphEditorWindow@{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow}}
+\doxysubsubsection{\texorpdfstring{m\_Asset}{m\_Asset}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_ab66e4d099ce1b429841fb139f6835a7e} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset}{Graph\+Asset}} Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Editor\+Window.\+m\+\_\+\+Asset\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Asset. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_doc-property-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_a64ee134da75a030f799872043fd3296e}\index{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow@{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow}!GraphViewCssClass@{GraphViewCssClass}}
+\index{GraphViewCssClass@{GraphViewCssClass}!Feazeyu.RPGSystems.EditorTools.GraphEditorWindow@{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow}}
+\doxysubsubsection{\texorpdfstring{GraphViewCssClass}{GraphViewCssClass}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_a64ee134da75a030f799872043fd3296e} 
+virtual string Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Editor\+Window.\+Graph\+View\+Css\+Class\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [protected]}}
+
+
+
+Root CSS class added to the canvas so the theme sheet\textquotesingle{}s {\ttfamily .xxx-\/graph-\/view} rules apply. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_ae6e85d0fd0f6a5a216e51ec4a223e42c}\index{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow@{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow}!NewAssetName@{NewAssetName}}
+\index{NewAssetName@{NewAssetName}!Feazeyu.RPGSystems.EditorTools.GraphEditorWindow@{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow}}
+\doxysubsubsection{\texorpdfstring{NewAssetName}{NewAssetName}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_ae6e85d0fd0f6a5a216e51ec4a223e42c} 
+virtual string Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Editor\+Window.\+New\+Asset\+Name\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [protected]}}
+
+
+
+New asset name. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_a650251968ad5162831126609d90d3d9a}\index{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow@{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow}!NodeRegistrySource@{NodeRegistrySource}}
+\index{NodeRegistrySource@{NodeRegistrySource}!Feazeyu.RPGSystems.EditorTools.GraphEditorWindow@{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow}}
+\doxysubsubsection{\texorpdfstring{NodeRegistrySource}{NodeRegistrySource}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_a650251968ad5162831126609d90d3d9a} 
+virtual IRead\+Only\+Dictionary$<$string, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_info}{Node\+Info}}$>$ Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Editor\+Window.\+Node\+Registry\+Source\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [protected]}}
+
+
+
+"{}\+Add Node"{} palette for this graph system. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_a3eb2c16f832ff7fdee5cd1774d95de35}\index{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow@{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow}!PrefKeyPrefix@{PrefKeyPrefix}}
+\index{PrefKeyPrefix@{PrefKeyPrefix}!Feazeyu.RPGSystems.EditorTools.GraphEditorWindow@{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow}}
+\doxysubsubsection{\texorpdfstring{PrefKeyPrefix}{PrefKeyPrefix}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_a3eb2c16f832ff7fdee5cd1774d95de35} 
+virtual string Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Editor\+Window.\+Pref\+Key\+Prefix\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [protected]}}
+
+
+
+Pref key prefix. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_aac942d20d12520fc81dd8f4915787a69}\index{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow@{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow}!SaveDialogTitle@{SaveDialogTitle}}
+\index{SaveDialogTitle@{SaveDialogTitle}!Feazeyu.RPGSystems.EditorTools.GraphEditorWindow@{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow}}
+\doxysubsubsection{\texorpdfstring{SaveDialogTitle}{SaveDialogTitle}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_aac942d20d12520fc81dd8f4915787a69} 
+virtual string Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Editor\+Window.\+Save\+Dialog\+Title\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [protected]}}
+
+
+
+Save dialog title. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_a12b5367c83f89671afaf711e9d442c66}\index{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow@{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow}!ThemeStyleSheet@{ThemeStyleSheet}}
+\index{ThemeStyleSheet@{ThemeStyleSheet}!Feazeyu.RPGSystems.EditorTools.GraphEditorWindow@{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow}}
+\doxysubsubsection{\texorpdfstring{ThemeStyleSheet}{ThemeStyleSheet}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_a12b5367c83f89671afaf711e9d442c66} 
+virtual Style\+Sheet Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Editor\+Window.\+Theme\+Style\+Sheet\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [protected]}}
+
+
+
+System-\/specific theme sheet, layered on top of {\ttfamily Graph\+Editor.\+uss}. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_a480b578570e6b7b9c9f4d98294b1d62f}\index{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow@{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow}!WindowIcon@{WindowIcon}}
+\index{WindowIcon@{WindowIcon}!Feazeyu.RPGSystems.EditorTools.GraphEditorWindow@{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow}}
+\doxysubsubsection{\texorpdfstring{WindowIcon}{WindowIcon}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_a480b578570e6b7b9c9f4d98294b1d62f} 
+virtual string Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Editor\+Window.\+Window\+Icon\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [protected]}}
+
+
+
+Window icon. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_ad82efd116d1b00f0ea2c1b6ba2455f8c}\index{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow@{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow}!WindowTitle@{WindowTitle}}
+\index{WindowTitle@{WindowTitle}!Feazeyu.RPGSystems.EditorTools.GraphEditorWindow@{Feazeyu.RPGSystems.EditorTools.GraphEditorWindow}}
+\doxysubsubsection{\texorpdfstring{WindowTitle}{WindowTitle}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window_ad82efd116d1b00f0ea2c1b6ba2455f8c} 
+virtual string Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Editor\+Window.\+Window\+Title\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [protected]}}
+
+
+
+Window title. 
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Editor/\+\+Graph/\+\+Windows/\+\doxymbox{\hyperlink{_graph_editor_window_8cs}{Graph\+Editor\+Window.\+cs}}\end{DoxyCompactItemize}

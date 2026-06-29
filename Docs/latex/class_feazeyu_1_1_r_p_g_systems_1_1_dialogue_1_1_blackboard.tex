@@ -1,0 +1,131 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Dialogue.\+Blackboard Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard}\index{Feazeyu.RPGSystems.Dialogue.Blackboard@{Feazeyu.RPGSystems.Dialogue.Blackboard}}
+
+
+Holds the master (authored) list of Blackboard\+Variables for a \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_graph_asset}{Dialogue\+Graph\+Asset}. At runtime a runner builds its own working copy via Clone\+For\+Runtime:\+ non-\/shared variables are deep-\/cloned per runner, Shared variables resolve to a global instance in Shared\+Blackboard\+Store. The authored values here are never mutated at runtime — they are the defaults restored when play mode ends.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_a3434c74c91bf4f77d6eeb32a4af7d3e8}{Add\+Variable}} (\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable}{Blackboard\+Variable}} variable)
+\begin{DoxyCompactList}\small\item\em Add variable. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_ab9c53300d032ae720d0592772fe672ab}{Remove\+Variable}} (string guid)
+\begin{DoxyCompactList}\small\item\em Remove variable. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable}{Blackboard\+Variable}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_a0e427ee9d05f85644e4315282a4f295e}{Get\+Variable}} (string guid)
+\begin{DoxyCompactList}\small\item\em Get variable. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable}{Blackboard\+Variable}}$<$ T $>$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_acfe2cee9eddbe8332d948c9e4cdbc201}{Get\+Variable$<$ T $>$}} (string guid)
+\begin{DoxyCompactList}\small\item\em Guid. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_a8ad3873278d71c91ca0c3ea4a916eb1a}{Try\+Get\+Value$<$ T $>$}} (string guid, out T value)
+\begin{DoxyCompactList}\small\item\em T. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_a82d128d55c6ca6365390a4733a9792f9}{Set\+Value$<$ T $>$}} (string guid, T value)
+\begin{DoxyCompactList}\small\item\em T. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard}{Blackboard}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_aed2c0531ee68b18bb419023e08cec0f8}{Clone\+For\+Runtime}} ()
+\begin{DoxyCompactList}\small\item\em Builds the working blackboard for a single runner from these authored values. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+IRead\+Only\+List$<$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable}{Blackboard\+Variable}} $>$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_ac1dc2cf8edda668ee4430a1487e45f44}{Variables}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Variables. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Holds the master (authored) list of Blackboard\+Variables for a \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_graph_asset}{Dialogue\+Graph\+Asset}. At runtime a runner builds its own working copy via Clone\+For\+Runtime:\+ non-\/shared variables are deep-\/cloned per runner, Shared variables resolve to a global instance in Shared\+Blackboard\+Store. The authored values here are never mutated at runtime — they are the defaults restored when play mode ends. 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_a3434c74c91bf4f77d6eeb32a4af7d3e8}\index{Feazeyu.RPGSystems.Dialogue.Blackboard@{Feazeyu.RPGSystems.Dialogue.Blackboard}!AddVariable@{AddVariable}}
+\index{AddVariable@{AddVariable}!Feazeyu.RPGSystems.Dialogue.Blackboard@{Feazeyu.RPGSystems.Dialogue.Blackboard}}
+\doxysubsubsection{\texorpdfstring{AddVariable()}{AddVariable()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_a3434c74c91bf4f77d6eeb32a4af7d3e8} 
+void Feazeyu.\+RPGSystems.\+Dialogue.\+Blackboard.\+Add\+Variable (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable}{Blackboard\+Variable}}}]{variable}{}\end{DoxyParamCaption})}
+
+
+
+Add variable. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_aed2c0531ee68b18bb419023e08cec0f8}\index{Feazeyu.RPGSystems.Dialogue.Blackboard@{Feazeyu.RPGSystems.Dialogue.Blackboard}!CloneForRuntime@{CloneForRuntime}}
+\index{CloneForRuntime@{CloneForRuntime}!Feazeyu.RPGSystems.Dialogue.Blackboard@{Feazeyu.RPGSystems.Dialogue.Blackboard}}
+\doxysubsubsection{\texorpdfstring{CloneForRuntime()}{CloneForRuntime()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_aed2c0531ee68b18bb419023e08cec0f8} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard}{Blackboard}} Feazeyu.\+RPGSystems.\+Dialogue.\+Blackboard.\+Clone\+For\+Runtime (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Builds the working blackboard for a single runner from these authored values. 
+
+Non-\/shared variables are deep-\/cloned, giving the runner its own isolated copy. A runner keeps this copy for its whole lifetime, so a non-\/shared value set during one dialogue persists into later dialogues with the same runner; it resets to the authored default only when the runner (and play mode) ends.
+
+Shared variables resolve to a single global instance per Guid via Shared\+Blackboard\+Store, so all runners read and write the same value across dialogues.
+
+In neither case is the authored asset variable mutated. \Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_a0e427ee9d05f85644e4315282a4f295e}\index{Feazeyu.RPGSystems.Dialogue.Blackboard@{Feazeyu.RPGSystems.Dialogue.Blackboard}!GetVariable@{GetVariable}}
+\index{GetVariable@{GetVariable}!Feazeyu.RPGSystems.Dialogue.Blackboard@{Feazeyu.RPGSystems.Dialogue.Blackboard}}
+\doxysubsubsection{\texorpdfstring{GetVariable()}{GetVariable()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_a0e427ee9d05f85644e4315282a4f295e} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable}{Blackboard\+Variable}} Feazeyu.\+RPGSystems.\+Dialogue.\+Blackboard.\+Get\+Variable (\begin{DoxyParamCaption}\item[{string}]{guid}{}\end{DoxyParamCaption})}
+
+
+
+Get variable. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_acfe2cee9eddbe8332d948c9e4cdbc201}\index{Feazeyu.RPGSystems.Dialogue.Blackboard@{Feazeyu.RPGSystems.Dialogue.Blackboard}!GetVariable$<$ T $>$@{GetVariable$<$ T $>$}}
+\index{GetVariable$<$ T $>$@{GetVariable$<$ T $>$}!Feazeyu.RPGSystems.Dialogue.Blackboard@{Feazeyu.RPGSystems.Dialogue.Blackboard}}
+\doxysubsubsection{\texorpdfstring{GetVariable$<$ T $>$()}{GetVariable< T >()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_acfe2cee9eddbe8332d948c9e4cdbc201} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable}{Blackboard\+Variable}}$<$ T $>$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_a0e427ee9d05f85644e4315282a4f295e}{Feazeyu.\+RPGSystems.\+Dialogue.\+Blackboard.\+Get\+Variable}}$<$ T $>$ (\begin{DoxyParamCaption}\item[{string}]{guid}{}\end{DoxyParamCaption})}
+
+
+
+Guid. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_ab9c53300d032ae720d0592772fe672ab}\index{Feazeyu.RPGSystems.Dialogue.Blackboard@{Feazeyu.RPGSystems.Dialogue.Blackboard}!RemoveVariable@{RemoveVariable}}
+\index{RemoveVariable@{RemoveVariable}!Feazeyu.RPGSystems.Dialogue.Blackboard@{Feazeyu.RPGSystems.Dialogue.Blackboard}}
+\doxysubsubsection{\texorpdfstring{RemoveVariable()}{RemoveVariable()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_ab9c53300d032ae720d0592772fe672ab} 
+bool Feazeyu.\+RPGSystems.\+Dialogue.\+Blackboard.\+Remove\+Variable (\begin{DoxyParamCaption}\item[{string}]{guid}{}\end{DoxyParamCaption})}
+
+
+
+Remove variable. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_a82d128d55c6ca6365390a4733a9792f9}\index{Feazeyu.RPGSystems.Dialogue.Blackboard@{Feazeyu.RPGSystems.Dialogue.Blackboard}!SetValue$<$ T $>$@{SetValue$<$ T $>$}}
+\index{SetValue$<$ T $>$@{SetValue$<$ T $>$}!Feazeyu.RPGSystems.Dialogue.Blackboard@{Feazeyu.RPGSystems.Dialogue.Blackboard}}
+\doxysubsubsection{\texorpdfstring{SetValue$<$ T $>$()}{SetValue< T >()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_a82d128d55c6ca6365390a4733a9792f9} 
+bool Feazeyu.\+RPGSystems.\+Dialogue.\+Blackboard.\+Set\+Value$<$ T $>$ (\begin{DoxyParamCaption}\item[{string}]{guid}{, }\item[{T}]{value}{}\end{DoxyParamCaption})}
+
+
+
+T. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_a8ad3873278d71c91ca0c3ea4a916eb1a}\index{Feazeyu.RPGSystems.Dialogue.Blackboard@{Feazeyu.RPGSystems.Dialogue.Blackboard}!TryGetValue$<$ T $>$@{TryGetValue$<$ T $>$}}
+\index{TryGetValue$<$ T $>$@{TryGetValue$<$ T $>$}!Feazeyu.RPGSystems.Dialogue.Blackboard@{Feazeyu.RPGSystems.Dialogue.Blackboard}}
+\doxysubsubsection{\texorpdfstring{TryGetValue$<$ T $>$()}{TryGetValue< T >()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_a8ad3873278d71c91ca0c3ea4a916eb1a} 
+bool Feazeyu.\+RPGSystems.\+Dialogue.\+Blackboard.\+Try\+Get\+Value$<$ T $>$ (\begin{DoxyParamCaption}\item[{string}]{guid}{, }\item[{out T}]{value}{}\end{DoxyParamCaption})}
+
+
+
+T. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_doc-property-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_ac1dc2cf8edda668ee4430a1487e45f44}\index{Feazeyu.RPGSystems.Dialogue.Blackboard@{Feazeyu.RPGSystems.Dialogue.Blackboard}!Variables@{Variables}}
+\index{Variables@{Variables}!Feazeyu.RPGSystems.Dialogue.Blackboard@{Feazeyu.RPGSystems.Dialogue.Blackboard}}
+\doxysubsubsection{\texorpdfstring{Variables}{Variables}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_ac1dc2cf8edda668ee4430a1487e45f44} 
+IRead\+Only\+List$<$\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable}{Blackboard\+Variable}}$>$ Feazeyu.\+RPGSystems.\+Dialogue.\+Blackboard.\+Variables\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Variables. 
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Dialogue/\+\+Data/\+\doxymbox{\hyperlink{_blackboard_8cs}{Blackboard.\+cs}}\end{DoxyCompactItemize}

@@ -1,0 +1,110 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Character.\+Health Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_health}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_health}\index{Feazeyu.RPGSystems.Character.Health@{Feazeyu.RPGSystems.Character.Health}}
+
+
+\doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_health}{Health} Resource. Destroys its Game\+Object when it reaches zero.  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Character.\+Health:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_health}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_health_a070ab283c5b1d1a83d674a67308934d3}{Start}} ()
+\begin{DoxyCompactList}\small\item\em Subscribes the destroy-\/on-\/zero handler. \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_health_a320f60ce81bc9de96a92bae12858e12c}{On\+Destroy}} ()
+\begin{DoxyCompactList}\small\item\em Unsubscribes the destroy-\/on-\/zero handler. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource}{Feazeyu.\+RPGSystems.\+Character.\+Resource}}}
+\begin{DoxyCompactItemize}
+\item 
+delegate void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_a4fb686b2c8ea92151f168db0417c68c6}{On\+Resource\+Reaches\+Zero}} ()
+\begin{DoxyCompactList}\small\item\em Delegate for when the resource reaches zero. \end{DoxyCompactList}\item 
+delegate void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_a249540d15059caa919c8d02703608dc5}{On\+Resource\+Lost}} (float lost\+Amount)
+\begin{DoxyCompactList}\small\item\em Delegate for when resource points are lost. \end{DoxyCompactList}\item 
+delegate void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_af4b22b169380a5b7d8e31695d33c6f16}{On\+Resource\+Gained}} (float gain\+Amount)
+\begin{DoxyCompactList}\small\item\em Delegate for when resource points are gained. \end{DoxyCompactList}\item 
+delegate void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_a4a46960273f75febd5c7faa6225430a6}{On\+Resource\+Changed}} (float change\+Amount)
+\begin{DoxyCompactList}\small\item\em Delegate for when resource points are changed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+new readonly \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_character_a7f44022bf2d755a4cb26a73a870b3f42}{Resource\+Types}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_health_aee9fdfbed0004567ebc8bb768058745a}{resource\+Type}} = \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_character_a7f44022bf2d755a4cb26a73a870b3f42a605669cab962bf944d99ce89cf9e58d9}{Resource\+Types.\+Health}}
+\begin{DoxyCompactList}\small\item\em The resource type for this component. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes inherited from \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource}{Feazeyu.\+RPGSystems.\+Character.\+Resource}}}
+\begin{DoxyCompactItemize}
+\item 
+readonly \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_character_a7f44022bf2d755a4cb26a73a870b3f42}{Resource\+Types}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_a47499cacc6f29d25fec49a9ef95be85f}{resource\+Type}} = \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_character_a7f44022bf2d755a4cb26a73a870b3f42a6adf97f83acf6453d4a6a4b1070f3754}{Resource\+Types.\+None}}
+\begin{DoxyCompactList}\small\item\em The type of resource represented by this instance. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_a593aab0f87762ab4b755cf99f7989fa8}{max\+Amount}}
+\begin{DoxyCompactList}\small\item\em The maximum amount of this resource. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Properties inherited from \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource}{Feazeyu.\+RPGSystems.\+Character.\+Resource}}}
+\begin{DoxyCompactItemize}
+\item 
+float \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_a18560f2534b2130816bbdcf6490e6cd2}{Points}}\hspace{0.3cm}{\ttfamily  \+[get, set]\+}
+\begin{DoxyCompactList}\small\item\em Gets or sets the current amount of resource points. Triggers events when the value changes, is gained, lost, or reaches zero. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_ae0101e166a060146135e6111b5e05cc7}{Percent}}\hspace{0.3cm}{\ttfamily  \+[get, set]\+}
+\begin{DoxyCompactList}\small\item\em Gets or sets the current resource as a percentage (0 to 1) of the maximum amount. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Events inherited from \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource}{Feazeyu.\+RPGSystems.\+Character.\+Resource}}}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_a4fb686b2c8ea92151f168db0417c68c6}{On\+Resource\+Reaches\+Zero}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_a873773d661daea82e23895f3e6417f09}{on\+Resource\+Reaches\+Zero}}
+\begin{DoxyCompactList}\small\item\em Event triggered when the resource reaches zero. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_a249540d15059caa919c8d02703608dc5}{On\+Resource\+Lost}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_a2ea93d980e565fd605a7314ab6734efd}{on\+Resource\+Lost}}
+\begin{DoxyCompactList}\small\item\em Event triggered when resource points are lost. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_af4b22b169380a5b7d8e31695d33c6f16}{On\+Resource\+Gained}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_a80d34d29bcb55acd7c70e208ee617c65}{on\+Resource\+Gained}}
+\begin{DoxyCompactList}\small\item\em Event triggered when resource points are gained. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_a4a46960273f75febd5c7faa6225430a6}{On\+Resource\+Changed}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_ace4499faddd4c2c2ec5f19f3e7cdcb3b}{on\+Resource\+Changed}}
+\begin{DoxyCompactList}\small\item\em Event triggered when resource points are changed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_health}{Health} Resource. Destroys its Game\+Object when it reaches zero. 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_health_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_health_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_health_a320f60ce81bc9de96a92bae12858e12c}\index{Feazeyu.RPGSystems.Character.Health@{Feazeyu.RPGSystems.Character.Health}!OnDestroy@{OnDestroy}}
+\index{OnDestroy@{OnDestroy}!Feazeyu.RPGSystems.Character.Health@{Feazeyu.RPGSystems.Character.Health}}
+\doxysubsubsection{\texorpdfstring{OnDestroy()}{OnDestroy()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_health_a320f60ce81bc9de96a92bae12858e12c} 
+virtual void Feazeyu.\+RPGSystems.\+Character.\+Health.\+On\+Destroy (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Unsubscribes the destroy-\/on-\/zero handler. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_health_a070ab283c5b1d1a83d674a67308934d3}\index{Feazeyu.RPGSystems.Character.Health@{Feazeyu.RPGSystems.Character.Health}!Start@{Start}}
+\index{Start@{Start}!Feazeyu.RPGSystems.Character.Health@{Feazeyu.RPGSystems.Character.Health}}
+\doxysubsubsection{\texorpdfstring{Start()}{Start()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_health_a070ab283c5b1d1a83d674a67308934d3} 
+virtual void Feazeyu.\+RPGSystems.\+Character.\+Health.\+Start (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Subscribes the destroy-\/on-\/zero handler. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_health_doc-variable-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_health_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_health_aee9fdfbed0004567ebc8bb768058745a}\index{Feazeyu.RPGSystems.Character.Health@{Feazeyu.RPGSystems.Character.Health}!resourceType@{resourceType}}
+\index{resourceType@{resourceType}!Feazeyu.RPGSystems.Character.Health@{Feazeyu.RPGSystems.Character.Health}}
+\doxysubsubsection{\texorpdfstring{resourceType}{resourceType}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_health_aee9fdfbed0004567ebc8bb768058745a} 
+new readonly \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_character_a7f44022bf2d755a4cb26a73a870b3f42}{Resource\+Types}} Feazeyu.\+RPGSystems.\+Character.\+Health.\+resource\+Type = \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_character_a7f44022bf2d755a4cb26a73a870b3f42a605669cab962bf944d99ce89cf9e58d9}{Resource\+Types.\+Health}}}
+
+
+
+The resource type for this component. 
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Character/\+\+Resources/\+\doxymbox{\hyperlink{_health_8cs}{Health.\+cs}}\end{DoxyCompactItemize}

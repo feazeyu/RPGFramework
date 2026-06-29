@@ -1,0 +1,116 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Character.\+Entity Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_entity}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_entity}\index{Feazeyu.RPGSystems.Character.Entity@{Feazeyu.RPGSystems.Character.Entity}}
+
+
+Represents an entity in the game that can cast spells and manage resources.  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Character.\+Entity:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_entity}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_entity_ad05b579f9e8b63b4e8ee7e18e277ea51}{Get\+Resource\+Components}} ()
+\begin{DoxyCompactList}\small\item\em Retrieves all Resource components attached to this entity and populates the resources dictionary. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Serializable\+Dictionary$<$ \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_character_a7f44022bf2d755a4cb26a73a870b3f42}{Resource\+Types}}, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource}{Resource}} $>$? \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_entity_ab5d9e9fc0826d4b8a28c5406440b95b7}{resources}}
+\begin{DoxyCompactList}\small\item\em The resources available to this entity, mapped by resource type. \end{DoxyCompactList}\item 
+Transform? \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_entity_a1c8ee37dc249b45df77490a8f9be2332}{casting\+Position}}
+\begin{DoxyCompactList}\small\item\em The transform where spells are spawned when cast. \end{DoxyCompactList}\item 
+Transform? \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_entity_a1952fcc4697871c4e81244a8d6f023b1}{casting\+Rotation\+Reference}}
+\begin{DoxyCompactList}\small\item\em The transform whose rotation is inherited by spawned spells. \end{DoxyCompactList}\item 
+Unity\+Event \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_entity_a51d7eb3ff8890e29d372ad4b2d01d227}{On\+Death}} = new()
+\begin{DoxyCompactList}\small\item\em Raised when the entity\textquotesingle{}s \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_health}{Health} resource reaches zero. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_entity_a37493fa0b485323d8de39cbd2c61970c}{Awake}} ()
+\begin{DoxyCompactList}\small\item\em Initializes the entity\textquotesingle{}s resources and spell cooldowns. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents an entity in the game that can cast spells and manage resources. 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_entity_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_entity_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_entity_a37493fa0b485323d8de39cbd2c61970c}\index{Feazeyu.RPGSystems.Character.Entity@{Feazeyu.RPGSystems.Character.Entity}!Awake@{Awake}}
+\index{Awake@{Awake}!Feazeyu.RPGSystems.Character.Entity@{Feazeyu.RPGSystems.Character.Entity}}
+\doxysubsubsection{\texorpdfstring{Awake()}{Awake()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_entity_a37493fa0b485323d8de39cbd2c61970c} 
+virtual void Feazeyu.\+RPGSystems.\+Character.\+Entity.\+Awake (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Initializes the entity\textquotesingle{}s resources and spell cooldowns. 
+
+
+
+Reimplemented in \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_player_controller_a3ba151e3f0d2e92c992b17eb6ad41278}{Feazeyu.\+RPGSystems.\+Character.\+Player\+Controller}}.
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_entity_ad05b579f9e8b63b4e8ee7e18e277ea51}\index{Feazeyu.RPGSystems.Character.Entity@{Feazeyu.RPGSystems.Character.Entity}!GetResourceComponents@{GetResourceComponents}}
+\index{GetResourceComponents@{GetResourceComponents}!Feazeyu.RPGSystems.Character.Entity@{Feazeyu.RPGSystems.Character.Entity}}
+\doxysubsubsection{\texorpdfstring{GetResourceComponents()}{GetResourceComponents()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_entity_ad05b579f9e8b63b4e8ee7e18e277ea51} 
+void Feazeyu.\+RPGSystems.\+Character.\+Entity.\+Get\+Resource\+Components (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Retrieves all Resource components attached to this entity and populates the resources dictionary. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_entity_doc-variable-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_entity_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_entity_a1c8ee37dc249b45df77490a8f9be2332}\index{Feazeyu.RPGSystems.Character.Entity@{Feazeyu.RPGSystems.Character.Entity}!castingPosition@{castingPosition}}
+\index{castingPosition@{castingPosition}!Feazeyu.RPGSystems.Character.Entity@{Feazeyu.RPGSystems.Character.Entity}}
+\doxysubsubsection{\texorpdfstring{castingPosition}{castingPosition}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_entity_a1c8ee37dc249b45df77490a8f9be2332} 
+Transform? Feazeyu.\+RPGSystems.\+Character.\+Entity.\+casting\+Position}
+
+
+
+The transform where spells are spawned when cast. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_entity_a1952fcc4697871c4e81244a8d6f023b1}\index{Feazeyu.RPGSystems.Character.Entity@{Feazeyu.RPGSystems.Character.Entity}!castingRotationReference@{castingRotationReference}}
+\index{castingRotationReference@{castingRotationReference}!Feazeyu.RPGSystems.Character.Entity@{Feazeyu.RPGSystems.Character.Entity}}
+\doxysubsubsection{\texorpdfstring{castingRotationReference}{castingRotationReference}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_entity_a1952fcc4697871c4e81244a8d6f023b1} 
+Transform? Feazeyu.\+RPGSystems.\+Character.\+Entity.\+casting\+Rotation\+Reference}
+
+
+
+The transform whose rotation is inherited by spawned spells. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_entity_a51d7eb3ff8890e29d372ad4b2d01d227}\index{Feazeyu.RPGSystems.Character.Entity@{Feazeyu.RPGSystems.Character.Entity}!OnDeath@{OnDeath}}
+\index{OnDeath@{OnDeath}!Feazeyu.RPGSystems.Character.Entity@{Feazeyu.RPGSystems.Character.Entity}}
+\doxysubsubsection{\texorpdfstring{OnDeath}{OnDeath}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_entity_a51d7eb3ff8890e29d372ad4b2d01d227} 
+Unity\+Event Feazeyu.\+RPGSystems.\+Character.\+Entity.\+On\+Death = new()}
+
+
+
+Raised when the entity\textquotesingle{}s \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_health}{Health} resource reaches zero. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_entity_ab5d9e9fc0826d4b8a28c5406440b95b7}\index{Feazeyu.RPGSystems.Character.Entity@{Feazeyu.RPGSystems.Character.Entity}!resources@{resources}}
+\index{resources@{resources}!Feazeyu.RPGSystems.Character.Entity@{Feazeyu.RPGSystems.Character.Entity}}
+\doxysubsubsection{\texorpdfstring{resources}{resources}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_entity_ab5d9e9fc0826d4b8a28c5406440b95b7} 
+Serializable\+Dictionary$<$\doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_character_a7f44022bf2d755a4cb26a73a870b3f42}{Resource\+Types}}, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource}{Resource}}$>$? Feazeyu.\+RPGSystems.\+Character.\+Entity.\+resources}
+
+
+
+The resources available to this entity, mapped by resource type. 
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Character/\+\doxymbox{\hyperlink{_entity_8cs}{Entity.\+cs}}\end{DoxyCompactItemize}

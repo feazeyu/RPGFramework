@@ -1,0 +1,352 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Slot Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot}\index{Feazeyu.RPGSystems.Inventory.InventorySlot@{Feazeyu.RPGSystems.Inventory.InventorySlot}}
+
+
+Represents a single inventory slot that can hold one item.  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Slot:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.353293cm]{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_ad2280982df540e25b0894630b44a3057}{Inventory\+Slot}} (Game\+Object item)
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the Inventory\+Slot class with the specified item. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_a0060ab8a5ea840a8e98e7b025626c331}{Inventory\+Slot}} (Game\+Object item, Vector2\+Int position)
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the Inventory\+Slot class with the specified item and position. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_ac2a69117c3050301645143bd3f794bde}{Inventory\+Slot}} (int id, Vector2\+Int position)
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the Inventory\+Slot class with the specified item id and position. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_afd3e99578640476d59688364ddb0cdee}{Inventory\+Slot}} (int id)
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the Inventory\+Slot class with the specified item id. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_af7206707b3ed3042001986165f29379c}{Inventory\+Slot}} (Vector2\+Int position)
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the Inventory\+Slot class with the specified position. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_af7a29b47b364704a3984dc5780bf6877}{Inventory\+Slot}} ()
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the Inventory\+Slot class. \end{DoxyCompactList}\item 
+virtual bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_a936fa5c327be1d33a775fd20a0b2d7dd}{Put\+Item}} (Game\+Object item)
+\begin{DoxyCompactList}\small\item\em Attempts to put an item in the slot. \end{DoxyCompactList}\item 
+virtual bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_a029f24f6d88d5d3b06a6104d85e20c49}{Accepts\+Item}} ()
+\begin{DoxyCompactList}\small\item\em Determines whether the slot can accept a new item, irrespective of which item it is. This is the structural check (empty, enabled, not a non-\/anchor cell). \end{DoxyCompactList}\item 
+virtual bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_ae74938508bb3825f71e09eaa8dc52bdd}{Accepts\+Item}} (\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_item_info}{Item\+Info}} item)
+\begin{DoxyCompactList}\small\item\em Determines whether the slot can accept the specified item. Override this to filter by item type, category, Item\+Target, etc. The grid placement path and the base Put\+Item(\+Game\+Object) both call this overload, so a filter declared here is enforced at placement time. Defaults to the item-\/agnostic Accepts\+Item() check so existing slots keep their behavior. \end{DoxyCompactList}\item 
+virtual int \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_aff419397fc2d1f5be77817d66ed439cc}{Remove\+Item}} ()
+\begin{DoxyCompactList}\small\item\em Removes the item from the slot. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_container}{Feazeyu.\+RPGSystems.\+Inventory.\+IItem\+Container}}}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_container_adc3bb2142789ac573bfce23b03556b6f}{Remove\+Item}} (int item\+Id, int count=1)
+\begin{DoxyCompactList}\small\item\em Removes {\itshape count}  items with {\itshape item\+Id}  from the container. Returns false if not enough items are present (no-\/op in that case). \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_container_a37f354146a3b8db38ff8f417a02b317a}{Count\+Item}} (int item\+Id)
+\begin{DoxyCompactList}\small\item\em Returns the total number of items with {\itshape item\+Id}  in the container. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_container_a45565d62df1cd8edba6e2a562cbd9f13}{Return\+Item}} (Game\+Object item)
+\begin{DoxyCompactList}\small\item\em Returns an item to the container. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_container_a6c7b3fb8ed2cb756a5dbe37a95d8be77}{Try\+Add\+Item}} (int item\+Id, int count=1)
+\begin{DoxyCompactList}\small\item\em Looks up the item prefab by ID and tries to add {\itshape count}  copies. Returns false if the item is not registered or there is no space. Implementors that support this should override the default. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Vector2\+Int \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_a965af97cb94368c0170d9fe84dcbb68e}{position}} = Vector2\+Int.\+zero
+\begin{DoxyCompactList}\small\item\em The position of the slot in the inventory. \end{DoxyCompactList}\item 
+Vector2\+Int \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_a6cc264796acb98d1d93fa484efcd1658}{anchor\+Position}} = new(-\/1, -\/1)
+\begin{DoxyCompactList}\small\item\em The position of the main itemslot for multislot items. If it is not -\/1,-\/1, the item ui is not drawn. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_aa3f19856ce05563e20cd56390cbfcc17}{Is\+Enabled}} = true
+\begin{DoxyCompactList}\small\item\em Gets or sets a value indicating whether the slot is enabled. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+virtual \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_ad739bf7fefdac7f7596367c61a6ae529}{Color}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_afa1e21e48c40ce9fc952de3bfa0a688c}{Base\+Color}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Gets the base color of the slot. This affects only the editor ui. \end{DoxyCompactList}\item 
+string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_a309451f2ffba7bad548e94a5aee86527}{Editor\+UILabel}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Gets a label for the editor UI. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_ad00321650cb82fe38df574f130ee0450}{Item\+Id}}\hspace{0.3cm}{\ttfamily  \+[get, protected set]\+}
+\begin{DoxyCompactList}\small\item\em Gets the item id in the slot. \end{DoxyCompactList}\item 
+Game\+Object? \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_a6aec3c8fbdf5de7457b8918377a2bf8e}{Item}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Gets the item Game\+Object in the slot, or null if empty. \end{DoxyCompactList}\item 
+Color \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_ad739bf7fefdac7f7596367c61a6ae529}{Color}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Gets the color of the slot, depending on its enabled state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a single inventory slot that can hold one item. 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_doc-constructors}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_ad2280982df540e25b0894630b44a3057}\index{Feazeyu.RPGSystems.Inventory.InventorySlot@{Feazeyu.RPGSystems.Inventory.InventorySlot}!InventorySlot@{InventorySlot}}
+\index{InventorySlot@{InventorySlot}!Feazeyu.RPGSystems.Inventory.InventorySlot@{Feazeyu.RPGSystems.Inventory.InventorySlot}}
+\doxysubsubsection{\texorpdfstring{InventorySlot()}{InventorySlot()}\hspace{0.1cm}{\footnotesize\ttfamily [1/6]}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_ad2280982df540e25b0894630b44a3057} 
+Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Slot.\+Inventory\+Slot (\begin{DoxyParamCaption}\item[{Game\+Object}]{item}{}\end{DoxyParamCaption})}
+
+
+
+Initializes a new instance of the Inventory\+Slot class with the specified item. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The item to place in the slot.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_a0060ab8a5ea840a8e98e7b025626c331}\index{Feazeyu.RPGSystems.Inventory.InventorySlot@{Feazeyu.RPGSystems.Inventory.InventorySlot}!InventorySlot@{InventorySlot}}
+\index{InventorySlot@{InventorySlot}!Feazeyu.RPGSystems.Inventory.InventorySlot@{Feazeyu.RPGSystems.Inventory.InventorySlot}}
+\doxysubsubsection{\texorpdfstring{InventorySlot()}{InventorySlot()}\hspace{0.1cm}{\footnotesize\ttfamily [2/6]}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_a0060ab8a5ea840a8e98e7b025626c331} 
+Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Slot.\+Inventory\+Slot (\begin{DoxyParamCaption}\item[{Game\+Object}]{item}{, }\item[{Vector2\+Int}]{position}{}\end{DoxyParamCaption})}
+
+
+
+Initializes a new instance of the Inventory\+Slot class with the specified item and position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The item to place in the slot.\\
+\hline
+{\em position} & The position of the slot.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_ac2a69117c3050301645143bd3f794bde}\index{Feazeyu.RPGSystems.Inventory.InventorySlot@{Feazeyu.RPGSystems.Inventory.InventorySlot}!InventorySlot@{InventorySlot}}
+\index{InventorySlot@{InventorySlot}!Feazeyu.RPGSystems.Inventory.InventorySlot@{Feazeyu.RPGSystems.Inventory.InventorySlot}}
+\doxysubsubsection{\texorpdfstring{InventorySlot()}{InventorySlot()}\hspace{0.1cm}{\footnotesize\ttfamily [3/6]}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_ac2a69117c3050301645143bd3f794bde} 
+Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Slot.\+Inventory\+Slot (\begin{DoxyParamCaption}\item[{int}]{id}{, }\item[{Vector2\+Int}]{position}{}\end{DoxyParamCaption})}
+
+
+
+Initializes a new instance of the Inventory\+Slot class with the specified item id and position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The item id to place in the slot.\\
+\hline
+{\em position} & The position of the slot.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_afd3e99578640476d59688364ddb0cdee}\index{Feazeyu.RPGSystems.Inventory.InventorySlot@{Feazeyu.RPGSystems.Inventory.InventorySlot}!InventorySlot@{InventorySlot}}
+\index{InventorySlot@{InventorySlot}!Feazeyu.RPGSystems.Inventory.InventorySlot@{Feazeyu.RPGSystems.Inventory.InventorySlot}}
+\doxysubsubsection{\texorpdfstring{InventorySlot()}{InventorySlot()}\hspace{0.1cm}{\footnotesize\ttfamily [4/6]}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_afd3e99578640476d59688364ddb0cdee} 
+Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Slot.\+Inventory\+Slot (\begin{DoxyParamCaption}\item[{int}]{id}{}\end{DoxyParamCaption})}
+
+
+
+Initializes a new instance of the Inventory\+Slot class with the specified item id. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The item id to place in the slot.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_af7206707b3ed3042001986165f29379c}\index{Feazeyu.RPGSystems.Inventory.InventorySlot@{Feazeyu.RPGSystems.Inventory.InventorySlot}!InventorySlot@{InventorySlot}}
+\index{InventorySlot@{InventorySlot}!Feazeyu.RPGSystems.Inventory.InventorySlot@{Feazeyu.RPGSystems.Inventory.InventorySlot}}
+\doxysubsubsection{\texorpdfstring{InventorySlot()}{InventorySlot()}\hspace{0.1cm}{\footnotesize\ttfamily [5/6]}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_af7206707b3ed3042001986165f29379c} 
+Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Slot.\+Inventory\+Slot (\begin{DoxyParamCaption}\item[{Vector2\+Int}]{position}{}\end{DoxyParamCaption})}
+
+
+
+Initializes a new instance of the Inventory\+Slot class with the specified position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & The position of the slot.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_af7a29b47b364704a3984dc5780bf6877}\index{Feazeyu.RPGSystems.Inventory.InventorySlot@{Feazeyu.RPGSystems.Inventory.InventorySlot}!InventorySlot@{InventorySlot}}
+\index{InventorySlot@{InventorySlot}!Feazeyu.RPGSystems.Inventory.InventorySlot@{Feazeyu.RPGSystems.Inventory.InventorySlot}}
+\doxysubsubsection{\texorpdfstring{InventorySlot()}{InventorySlot()}\hspace{0.1cm}{\footnotesize\ttfamily [6/6]}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_af7a29b47b364704a3984dc5780bf6877} 
+Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Slot.\+Inventory\+Slot (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Initializes a new instance of the Inventory\+Slot class. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_a029f24f6d88d5d3b06a6104d85e20c49}\index{Feazeyu.RPGSystems.Inventory.InventorySlot@{Feazeyu.RPGSystems.Inventory.InventorySlot}!AcceptsItem@{AcceptsItem}}
+\index{AcceptsItem@{AcceptsItem}!Feazeyu.RPGSystems.Inventory.InventorySlot@{Feazeyu.RPGSystems.Inventory.InventorySlot}}
+\doxysubsubsection{\texorpdfstring{AcceptsItem()}{AcceptsItem()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_a029f24f6d88d5d3b06a6104d85e20c49} 
+virtual bool Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Slot.\+Accepts\+Item (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Determines whether the slot can accept a new item, irrespective of which item it is. This is the structural check (empty, enabled, not a non-\/anchor cell). 
+
+\begin{DoxyReturn}{Returns}
+True if the slot can accept an item; otherwise, false.
+\end{DoxyReturn}
+
+
+Reimplemented in \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_locked_inventory_slot_a7eb9be5144ffd589916a520785c9d2d0}{Feazeyu.\+RPGSystems.\+Inventory.\+Locked\+Inventory\+Slot}}.
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_ae74938508bb3825f71e09eaa8dc52bdd}\index{Feazeyu.RPGSystems.Inventory.InventorySlot@{Feazeyu.RPGSystems.Inventory.InventorySlot}!AcceptsItem@{AcceptsItem}}
+\index{AcceptsItem@{AcceptsItem}!Feazeyu.RPGSystems.Inventory.InventorySlot@{Feazeyu.RPGSystems.Inventory.InventorySlot}}
+\doxysubsubsection{\texorpdfstring{AcceptsItem()}{AcceptsItem()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_ae74938508bb3825f71e09eaa8dc52bdd} 
+virtual bool Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Slot.\+Accepts\+Item (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_item_info}{Item\+Info}}}]{item}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Determines whether the slot can accept the specified item. Override this to filter by item type, category, Item\+Target, etc. The grid placement path and the base Put\+Item(\+Game\+Object) both call this overload, so a filter declared here is enforced at placement time. Defaults to the item-\/agnostic Accepts\+Item() check so existing slots keep their behavior. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The info of the item being placed.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the slot can accept the item; otherwise, false.
+\end{DoxyReturn}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_a936fa5c327be1d33a775fd20a0b2d7dd}\index{Feazeyu.RPGSystems.Inventory.InventorySlot@{Feazeyu.RPGSystems.Inventory.InventorySlot}!PutItem@{PutItem}}
+\index{PutItem@{PutItem}!Feazeyu.RPGSystems.Inventory.InventorySlot@{Feazeyu.RPGSystems.Inventory.InventorySlot}}
+\doxysubsubsection{\texorpdfstring{PutItem()}{PutItem()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_a936fa5c327be1d33a775fd20a0b2d7dd} 
+virtual bool Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Slot.\+Put\+Item (\begin{DoxyParamCaption}\item[{Game\+Object}]{item}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Attempts to put an item in the slot. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The item to put in the slot.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the item was placed; otherwise, false.
+\end{DoxyReturn}
+
+
+Implements \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_container_a73f752e259b652360f2aa76a3a6207eb}{Feazeyu.\+RPGSystems.\+Inventory.\+IItem\+Container}}.
+
+
+
+Reimplemented in \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_locked_inventory_slot_a55f2679fe32c5113ba339d55770cc83c}{Feazeyu.\+RPGSystems.\+Inventory.\+Locked\+Inventory\+Slot}}, and \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot_a42c9e4143ff72651d7e4712ee03b339d}{Feazeyu.\+RPGSystems.\+Inventory.\+Stackable\+Inventory\+Slot}}.
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_aff419397fc2d1f5be77817d66ed439cc}\index{Feazeyu.RPGSystems.Inventory.InventorySlot@{Feazeyu.RPGSystems.Inventory.InventorySlot}!RemoveItem@{RemoveItem}}
+\index{RemoveItem@{RemoveItem}!Feazeyu.RPGSystems.Inventory.InventorySlot@{Feazeyu.RPGSystems.Inventory.InventorySlot}}
+\doxysubsubsection{\texorpdfstring{RemoveItem()}{RemoveItem()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_aff419397fc2d1f5be77817d66ed439cc} 
+virtual int Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Slot.\+Remove\+Item (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Removes the item from the slot. 
+
+\begin{DoxyReturn}{Returns}
+The id of the removed item, or -\/1 if none was removed.
+\end{DoxyReturn}
+
+
+Implements \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_single_item_container_ae150e44822c6445a6d40a8532ac137cb}{Feazeyu.\+RPGSystems.\+Inventory.\+ISingle\+Item\+Container}}.
+
+
+
+Reimplemented in \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_locked_inventory_slot_a2b2acc33f6a817218beee60e0a91ebeb}{Feazeyu.\+RPGSystems.\+Inventory.\+Locked\+Inventory\+Slot}}, and \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot_afde40bdaf53246d41bfe09046889d43b}{Feazeyu.\+RPGSystems.\+Inventory.\+Stackable\+Inventory\+Slot}}.
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_doc-variable-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_a6cc264796acb98d1d93fa484efcd1658}\index{Feazeyu.RPGSystems.Inventory.InventorySlot@{Feazeyu.RPGSystems.Inventory.InventorySlot}!anchorPosition@{anchorPosition}}
+\index{anchorPosition@{anchorPosition}!Feazeyu.RPGSystems.Inventory.InventorySlot@{Feazeyu.RPGSystems.Inventory.InventorySlot}}
+\doxysubsubsection{\texorpdfstring{anchorPosition}{anchorPosition}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_a6cc264796acb98d1d93fa484efcd1658} 
+Vector2\+Int Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Slot.\+anchor\+Position = new(-\/1, -\/1)}
+
+
+
+The position of the main itemslot for multislot items. If it is not -\/1,-\/1, the item ui is not drawn. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_aa3f19856ce05563e20cd56390cbfcc17}\index{Feazeyu.RPGSystems.Inventory.InventorySlot@{Feazeyu.RPGSystems.Inventory.InventorySlot}!IsEnabled@{IsEnabled}}
+\index{IsEnabled@{IsEnabled}!Feazeyu.RPGSystems.Inventory.InventorySlot@{Feazeyu.RPGSystems.Inventory.InventorySlot}}
+\doxysubsubsection{\texorpdfstring{IsEnabled}{IsEnabled}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_aa3f19856ce05563e20cd56390cbfcc17} 
+bool Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Slot.\+Is\+Enabled = true}
+
+
+
+Gets or sets a value indicating whether the slot is enabled. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_a965af97cb94368c0170d9fe84dcbb68e}\index{Feazeyu.RPGSystems.Inventory.InventorySlot@{Feazeyu.RPGSystems.Inventory.InventorySlot}!position@{position}}
+\index{position@{position}!Feazeyu.RPGSystems.Inventory.InventorySlot@{Feazeyu.RPGSystems.Inventory.InventorySlot}}
+\doxysubsubsection{\texorpdfstring{position}{position}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_a965af97cb94368c0170d9fe84dcbb68e} 
+Vector2\+Int Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Slot.\+position = Vector2\+Int.\+zero}
+
+
+
+The position of the slot in the inventory. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_doc-property-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_afa1e21e48c40ce9fc952de3bfa0a688c}\index{Feazeyu.RPGSystems.Inventory.InventorySlot@{Feazeyu.RPGSystems.Inventory.InventorySlot}!BaseColor@{BaseColor}}
+\index{BaseColor@{BaseColor}!Feazeyu.RPGSystems.Inventory.InventorySlot@{Feazeyu.RPGSystems.Inventory.InventorySlot}}
+\doxysubsubsection{\texorpdfstring{BaseColor}{BaseColor}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_afa1e21e48c40ce9fc952de3bfa0a688c} 
+virtual \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_ad739bf7fefdac7f7596367c61a6ae529}{Color}} Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Slot.\+Base\+Color\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [protected]}}
+
+
+
+Gets the base color of the slot. This affects only the editor ui. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_ad739bf7fefdac7f7596367c61a6ae529}\index{Feazeyu.RPGSystems.Inventory.InventorySlot@{Feazeyu.RPGSystems.Inventory.InventorySlot}!Color@{Color}}
+\index{Color@{Color}!Feazeyu.RPGSystems.Inventory.InventorySlot@{Feazeyu.RPGSystems.Inventory.InventorySlot}}
+\doxysubsubsection{\texorpdfstring{Color}{Color}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_ad739bf7fefdac7f7596367c61a6ae529} 
+Color Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Slot.\+Color\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the color of the slot, depending on its enabled state. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_a309451f2ffba7bad548e94a5aee86527}\index{Feazeyu.RPGSystems.Inventory.InventorySlot@{Feazeyu.RPGSystems.Inventory.InventorySlot}!EditorUILabel@{EditorUILabel}}
+\index{EditorUILabel@{EditorUILabel}!Feazeyu.RPGSystems.Inventory.InventorySlot@{Feazeyu.RPGSystems.Inventory.InventorySlot}}
+\doxysubsubsection{\texorpdfstring{EditorUILabel}{EditorUILabel}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_a309451f2ffba7bad548e94a5aee86527} 
+string Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Slot.\+Editor\+UILabel\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets a label for the editor UI. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_a6aec3c8fbdf5de7457b8918377a2bf8e}\index{Feazeyu.RPGSystems.Inventory.InventorySlot@{Feazeyu.RPGSystems.Inventory.InventorySlot}!Item@{Item}}
+\index{Item@{Item}!Feazeyu.RPGSystems.Inventory.InventorySlot@{Feazeyu.RPGSystems.Inventory.InventorySlot}}
+\doxysubsubsection{\texorpdfstring{Item}{Item}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_a6aec3c8fbdf5de7457b8918377a2bf8e} 
+Game\+Object? Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Slot.\+Item\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the item Game\+Object in the slot, or null if empty. 
+
+
+
+Implements \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_single_item_container_aeede7bee620ba5b069618e51fd383266}{Feazeyu.\+RPGSystems.\+Inventory.\+ISingle\+Item\+Container}}.
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_ad00321650cb82fe38df574f130ee0450}\index{Feazeyu.RPGSystems.Inventory.InventorySlot@{Feazeyu.RPGSystems.Inventory.InventorySlot}!ItemId@{ItemId}}
+\index{ItemId@{ItemId}!Feazeyu.RPGSystems.Inventory.InventorySlot@{Feazeyu.RPGSystems.Inventory.InventorySlot}}
+\doxysubsubsection{\texorpdfstring{ItemId}{ItemId}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_ad00321650cb82fe38df574f130ee0450} 
+int Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Slot.\+Item\+Id\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [protected set]}}
+
+
+
+Gets the item id in the slot. 
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Inventory/\+\doxymbox{\hyperlink{_inventory_slot_8cs}{Inventory\+Slot.\+cs}}\end{DoxyCompactItemize}

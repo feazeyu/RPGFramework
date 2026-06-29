@@ -2,7 +2,7 @@ using UnityEngine;
 using Feazeyu.RPGSystems.Character;
 using Feazeyu.RPGSystems.Inventory;
 
-namespace QuestGraph.Demo
+namespace Feazeyu.RPGSystems.Demo
 {
     /// <summary>
     /// World pickup. On interact, adds <see cref="amount"/> of item

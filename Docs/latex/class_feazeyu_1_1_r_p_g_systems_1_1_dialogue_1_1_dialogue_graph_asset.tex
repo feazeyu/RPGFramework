@@ -1,0 +1,55 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Dialogue.\+Dialogue\+Graph\+Asset Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_graph_asset}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_graph_asset}\index{Feazeyu.RPGSystems.Dialogue.DialogueGraphAsset@{Feazeyu.RPGSystems.Dialogue.DialogueGraphAsset}}
+
+
+The dialogue-\/system Scriptable\+Object asset. All fields and CRUD live on Graph\+Asset; this subclass exists only to carry the {\ttfamily \+[Create\+Asset\+Menu]\+} so dialogue graphs get their own entry under {\bfseries{Assets → Create → \doxylink{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue}{Dialogue}}}.  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Dialogue.\+Dialogue\+Graph\+Asset:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_graph_asset}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset}{Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Asset}}}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_aa17a3d044ceecc47afc7838b2e3c4610}{Add\+Node}} (string node\+Type, string display\+Name, Vector2 position)
+\begin{DoxyCompactList}\small\item\em Add node. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_a352e580b61f35715f761e20648cc660e}{Remove\+Node}} (string guid)
+\begin{DoxyCompactList}\small\item\em Remove node. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_a2ef6700e1f603a5e334113e59915b17d}{Get\+Node}} (string guid)
+\begin{DoxyCompactList}\small\item\em Get node. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_edge_data}{Edge\+Data}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_a7ffe1f24f47f4bdfcaa50ab224b4d0d9}{Add\+Edge}} (string output\+Guid, string output\+Port, string input\+Guid, string input\+Port)
+\begin{DoxyCompactList}\small\item\em Add edge. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_aeefda67ca806a09fcfa1374394a69b33}{Remove\+Edge}} (string guid)
+\begin{DoxyCompactList}\small\item\em Remove edge. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_af4edf757ea6b555e52149b5d9b54d487}{Find\+Entry\+Node}} ()
+\begin{DoxyCompactList}\small\item\em Finds the entry /\+ Start node. Prefers an explicit "{}\+Start"{}-\/typed node so nodes with no incoming edges (e.\+g. Requirement nodes) are not mistaken for the graph entry point. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes inherited from \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset}{Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Asset}}}
+\begin{DoxyCompactItemize}
+\item 
+Vector3 \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_a06e27e126b9cd62e467cfca6573ae987}{View\+Transform}} = Vector3.\+zero
+\item 
+Vector2 \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_a1436a1d6b6d90b90b08587d513d3c20b}{Blackboard\+Position}} = new Vector2(10, 60)
+\end{DoxyCompactItemize}
+\doxysubsection*{Properties inherited from \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset}{Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Asset}}}
+\begin{DoxyCompactItemize}
+\item 
+IRead\+Only\+List$<$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}} $>$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_a727f2f4063665c8a63c45aca57e94fc2}{Nodes}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Nodes. \end{DoxyCompactList}\item 
+IRead\+Only\+List$<$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_edge_data}{Edge\+Data}} $>$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_a42e291e237ff48c75d1dd138ee2a0202}{Edges}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Edges. \end{DoxyCompactList}\item 
+Blackboard \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_a2466d0151e84d7b741a0034ebaad5129}{Blackboard}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard}{Blackboard}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The dialogue-\/system Scriptable\+Object asset. All fields and CRUD live on Graph\+Asset; this subclass exists only to carry the {\ttfamily \+[Create\+Asset\+Menu]\+} so dialogue graphs get their own entry under {\bfseries{Assets → Create → \doxylink{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue}{Dialogue}}}. 
+
+Serialisation-\/compatible with the pre-\/split asset:\+ the full type name and every serialised field ({\ttfamily m\+\_\+\+Nodes}, {\ttfamily m\+\_\+\+Edges}, {\ttfamily m\+\_\+\+Blackboard}, {\ttfamily View\+Transform}, {\ttfamily Blackboard\+Position}) are unchanged — they just live on the base now. 
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Dialogue/\+\+Data/\+\doxymbox{\hyperlink{_dialogue_graph_asset_8cs}{Dialogue\+Graph\+Asset.\+cs}}\end{DoxyCompactItemize}

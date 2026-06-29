@@ -1,0 +1,219 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Asset Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset}\index{Feazeyu.RPGSystems.Quest.QuestAsset@{Feazeyu.RPGSystems.Quest.QuestAsset}}
+
+
+A lightweight alternative to Quest\+Graph\+Asset.  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Asset:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_a6e30a660d7ced9b907ebf317ce311ab3}{Start}} ()
+\begin{DoxyCompactList}\small\item\em Transition to Active. No-\/op if already completed/\+failed. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_aae06fec3513c6c8c64785725f52e4b2d}{Complete}} ()
+\begin{DoxyCompactList}\small\item\em Mark the quest complete. Callable from any state — the call is idempotent if the quest is already Completed. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_a69d6096d0b509d50ea0b0309fbb5ad4e}{Fail}} ()
+\begin{DoxyCompactList}\small\item\em Mark the quest failed. Idempotent if already Failed. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_a96c527d1a9d42558ef4df4d54d71f0a2}{Reset}} ()
+\begin{DoxyCompactList}\small\item\em Clear state back to Not\+Started. Intended for game-\/start cleanup so play sessions don\textquotesingle{}t inherit stale Scriptable\+Object state from a previous run. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Unity\+Event \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_a4b7353957ca5fca32c078819fc747176}{On\+Started}}
+\begin{DoxyCompactList}\small\item\em On started. \end{DoxyCompactList}\item 
+Unity\+Event \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_a58f4bf7f46adc109a6a1124631980e6e}{On\+Completed}}
+\begin{DoxyCompactList}\small\item\em On completed. \end{DoxyCompactList}\item 
+Unity\+Event \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_acf6d3ff9276bc03a71246fdbea7e022c}{On\+Failed}}
+\begin{DoxyCompactList}\small\item\em On failed. \end{DoxyCompactList}\item 
+Unity\+Event \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_a590ad2544db0d22959c852e73f93e383}{On\+Reset}}
+\begin{DoxyCompactList}\small\item\em On reset. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_a00029e74410756fc41727c8e9f2f2aa2}{Title}}\hspace{0.3cm}{\ttfamily  \+[get, set]\+}
+\begin{DoxyCompactList}\small\item\em Title. \end{DoxyCompactList}\item 
+string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_ab5ed7a667e27137c27ab84026385f82f}{Description}}\hspace{0.3cm}{\ttfamily  \+[get, set]\+}
+\begin{DoxyCompactList}\small\item\em Description. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest_a8f3e6c75d7329009672e6aeb5d720b18}{Quest\+State}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_a8d75a194078e72992c550e6920e97d1f}{State}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em State. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_a8322cfdf40aaa351e1702a6524aabb8b}{Is\+Completed}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Is completed. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_a920107763eb74138a0507e36a1d0a132}{Is\+Failed}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Is failed. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_acba4dfe6eb5bcea54689668a2a59e3d0}{Is\+Active}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Is active. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A lightweight alternative to Quest\+Graph\+Asset. 
+
+Use this when a quest doesn\textquotesingle{}t need graph-\/based logic — no branching objectives, no conditional flow, just "{}player did the thing → quest is complete."{} The simple quest is a plain Scriptable\+Object with a title, description, and a boolean state; game code calls Complete (or Fail) when the condition is satisfied.
+
+Also usable as a blackboard value, so chain graphs can reference simple quests the same way they reference graph quests. When a chain encounters a \doxylink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest}{Quest} Reference linked to a Quest\+Asset (rather than a Quest\+Graph\+Asset), no Quest\+Runner is spawned — completion is driven externally by the game calling Complete, which the chain runner observes via Quest\+Chain\+Runner.\+Notify\+External\+Quest\+Completed.
+
+State lives on the Scriptable\+Object (it is the shared, inspector-\/wired identity that both the chain runner and external game code mutate, so it cannot be cloned per-\/runner the way a Blackboard is). Because mutating a serialized asset during play leaves the in-\/memory copy dirty after exiting play mode, the runtime state (m\+\_\+\+State) is reset to Quest\+State.\+Not\+Started automatically at the start of every play session — see Reset\+Runtime\+State\+On\+Play and On\+Enable — so editor runs always begin from a clean slate without any explicit game-\/start cleanup. Reset remains available for manually re-\/arming a quest mid-\/session. 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_aae06fec3513c6c8c64785725f52e4b2d}\index{Feazeyu.RPGSystems.Quest.QuestAsset@{Feazeyu.RPGSystems.Quest.QuestAsset}!Complete@{Complete}}
+\index{Complete@{Complete}!Feazeyu.RPGSystems.Quest.QuestAsset@{Feazeyu.RPGSystems.Quest.QuestAsset}}
+\doxysubsubsection{\texorpdfstring{Complete()}{Complete()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_aae06fec3513c6c8c64785725f52e4b2d} 
+void Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Asset.\+Complete (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Mark the quest complete. Callable from any state — the call is idempotent if the quest is already Completed. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_a69d6096d0b509d50ea0b0309fbb5ad4e}\index{Feazeyu.RPGSystems.Quest.QuestAsset@{Feazeyu.RPGSystems.Quest.QuestAsset}!Fail@{Fail}}
+\index{Fail@{Fail}!Feazeyu.RPGSystems.Quest.QuestAsset@{Feazeyu.RPGSystems.Quest.QuestAsset}}
+\doxysubsubsection{\texorpdfstring{Fail()}{Fail()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_a69d6096d0b509d50ea0b0309fbb5ad4e} 
+void Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Asset.\+Fail (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Mark the quest failed. Idempotent if already Failed. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_a96c527d1a9d42558ef4df4d54d71f0a2}\index{Feazeyu.RPGSystems.Quest.QuestAsset@{Feazeyu.RPGSystems.Quest.QuestAsset}!Reset@{Reset}}
+\index{Reset@{Reset}!Feazeyu.RPGSystems.Quest.QuestAsset@{Feazeyu.RPGSystems.Quest.QuestAsset}}
+\doxysubsubsection{\texorpdfstring{Reset()}{Reset()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_a96c527d1a9d42558ef4df4d54d71f0a2} 
+void Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Asset.\+Reset (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Clear state back to Not\+Started. Intended for game-\/start cleanup so play sessions don\textquotesingle{}t inherit stale Scriptable\+Object state from a previous run. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_a6e30a660d7ced9b907ebf317ce311ab3}\index{Feazeyu.RPGSystems.Quest.QuestAsset@{Feazeyu.RPGSystems.Quest.QuestAsset}!Start@{Start}}
+\index{Start@{Start}!Feazeyu.RPGSystems.Quest.QuestAsset@{Feazeyu.RPGSystems.Quest.QuestAsset}}
+\doxysubsubsection{\texorpdfstring{Start()}{Start()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_a6e30a660d7ced9b907ebf317ce311ab3} 
+void Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Asset.\+Start (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Transition to Active. No-\/op if already completed/\+failed. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_doc-variable-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_a58f4bf7f46adc109a6a1124631980e6e}\index{Feazeyu.RPGSystems.Quest.QuestAsset@{Feazeyu.RPGSystems.Quest.QuestAsset}!OnCompleted@{OnCompleted}}
+\index{OnCompleted@{OnCompleted}!Feazeyu.RPGSystems.Quest.QuestAsset@{Feazeyu.RPGSystems.Quest.QuestAsset}}
+\doxysubsubsection{\texorpdfstring{OnCompleted}{OnCompleted}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_a58f4bf7f46adc109a6a1124631980e6e} 
+Unity\+Event Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Asset.\+On\+Completed}
+
+
+
+On completed. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_acf6d3ff9276bc03a71246fdbea7e022c}\index{Feazeyu.RPGSystems.Quest.QuestAsset@{Feazeyu.RPGSystems.Quest.QuestAsset}!OnFailed@{OnFailed}}
+\index{OnFailed@{OnFailed}!Feazeyu.RPGSystems.Quest.QuestAsset@{Feazeyu.RPGSystems.Quest.QuestAsset}}
+\doxysubsubsection{\texorpdfstring{OnFailed}{OnFailed}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_acf6d3ff9276bc03a71246fdbea7e022c} 
+Unity\+Event Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Asset.\+On\+Failed}
+
+
+
+On failed. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_a590ad2544db0d22959c852e73f93e383}\index{Feazeyu.RPGSystems.Quest.QuestAsset@{Feazeyu.RPGSystems.Quest.QuestAsset}!OnReset@{OnReset}}
+\index{OnReset@{OnReset}!Feazeyu.RPGSystems.Quest.QuestAsset@{Feazeyu.RPGSystems.Quest.QuestAsset}}
+\doxysubsubsection{\texorpdfstring{OnReset}{OnReset}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_a590ad2544db0d22959c852e73f93e383} 
+Unity\+Event Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Asset.\+On\+Reset}
+
+
+
+On reset. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_a4b7353957ca5fca32c078819fc747176}\index{Feazeyu.RPGSystems.Quest.QuestAsset@{Feazeyu.RPGSystems.Quest.QuestAsset}!OnStarted@{OnStarted}}
+\index{OnStarted@{OnStarted}!Feazeyu.RPGSystems.Quest.QuestAsset@{Feazeyu.RPGSystems.Quest.QuestAsset}}
+\doxysubsubsection{\texorpdfstring{OnStarted}{OnStarted}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_a4b7353957ca5fca32c078819fc747176} 
+Unity\+Event Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Asset.\+On\+Started}
+
+
+
+On started. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_doc-property-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_ab5ed7a667e27137c27ab84026385f82f}\index{Feazeyu.RPGSystems.Quest.QuestAsset@{Feazeyu.RPGSystems.Quest.QuestAsset}!Description@{Description}}
+\index{Description@{Description}!Feazeyu.RPGSystems.Quest.QuestAsset@{Feazeyu.RPGSystems.Quest.QuestAsset}}
+\doxysubsubsection{\texorpdfstring{Description}{Description}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_ab5ed7a667e27137c27ab84026385f82f} 
+string Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Asset.\+Description\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Description. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_acba4dfe6eb5bcea54689668a2a59e3d0}\index{Feazeyu.RPGSystems.Quest.QuestAsset@{Feazeyu.RPGSystems.Quest.QuestAsset}!IsActive@{IsActive}}
+\index{IsActive@{IsActive}!Feazeyu.RPGSystems.Quest.QuestAsset@{Feazeyu.RPGSystems.Quest.QuestAsset}}
+\doxysubsubsection{\texorpdfstring{IsActive}{IsActive}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_acba4dfe6eb5bcea54689668a2a59e3d0} 
+bool Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Asset.\+Is\+Active\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Is active. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_a8322cfdf40aaa351e1702a6524aabb8b}\index{Feazeyu.RPGSystems.Quest.QuestAsset@{Feazeyu.RPGSystems.Quest.QuestAsset}!IsCompleted@{IsCompleted}}
+\index{IsCompleted@{IsCompleted}!Feazeyu.RPGSystems.Quest.QuestAsset@{Feazeyu.RPGSystems.Quest.QuestAsset}}
+\doxysubsubsection{\texorpdfstring{IsCompleted}{IsCompleted}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_a8322cfdf40aaa351e1702a6524aabb8b} 
+bool Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Asset.\+Is\+Completed\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Is completed. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_a920107763eb74138a0507e36a1d0a132}\index{Feazeyu.RPGSystems.Quest.QuestAsset@{Feazeyu.RPGSystems.Quest.QuestAsset}!IsFailed@{IsFailed}}
+\index{IsFailed@{IsFailed}!Feazeyu.RPGSystems.Quest.QuestAsset@{Feazeyu.RPGSystems.Quest.QuestAsset}}
+\doxysubsubsection{\texorpdfstring{IsFailed}{IsFailed}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_a920107763eb74138a0507e36a1d0a132} 
+bool Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Asset.\+Is\+Failed\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Is failed. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_a8d75a194078e72992c550e6920e97d1f}\index{Feazeyu.RPGSystems.Quest.QuestAsset@{Feazeyu.RPGSystems.Quest.QuestAsset}!State@{State}}
+\index{State@{State}!Feazeyu.RPGSystems.Quest.QuestAsset@{Feazeyu.RPGSystems.Quest.QuestAsset}}
+\doxysubsubsection{\texorpdfstring{State}{State}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_a8d75a194078e72992c550e6920e97d1f} 
+\doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest_a8f3e6c75d7329009672e6aeb5d720b18}{Quest\+State}} Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Asset.\+State\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+State. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_a00029e74410756fc41727c8e9f2f2aa2}\index{Feazeyu.RPGSystems.Quest.QuestAsset@{Feazeyu.RPGSystems.Quest.QuestAsset}!Title@{Title}}
+\index{Title@{Title}!Feazeyu.RPGSystems.Quest.QuestAsset@{Feazeyu.RPGSystems.Quest.QuestAsset}}
+\doxysubsubsection{\texorpdfstring{Title}{Title}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset_a00029e74410756fc41727c8e9f2f2aa2} 
+string Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Asset.\+Title\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Title. 
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Quest/\+\+Data/\+\doxymbox{\hyperlink{_quest_asset_8cs}{Quest\+Asset.\+cs}}\end{DoxyCompactItemize}

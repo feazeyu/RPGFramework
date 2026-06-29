@@ -1,0 +1,364 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Core.\+Utilities.\+Serializable\+Dictionary\texorpdfstring{$<$}{<} TKey, TValue \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g}\index{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}}
+
+
+A serializable dictionary implementation for Unity, allowing key-\/value pairs to be serialized and deserialized.  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Core.\+Utilities.\+Serializable\+Dictionary\texorpdfstring{$<$}{<} TKey, TValue \texorpdfstring{$>$}{>}:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.247216cm]{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a508f2aa8a27f0a3b64dee4cf0db440fe}{Serializable\+Dictionary}} ()
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the Serializable\+Dictionary$<$\+TKey, TValue$>$ class. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a72779ebb85577f3d62c001b045b9bc7f}{Serializable\+Dictionary}} (Dictionary$<$ TKey, TValue $>$ dict)
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the Serializable\+Dictionary$<$\+TKey, TValue$>$ class with an existing dictionary. \end{DoxyCompactList}\item 
+Dictionary$<$ TKey, TValue $>$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_ac1cbe18bacb74c1f3af029a13337e28a}{To\+Dictionary}} ()
+\begin{DoxyCompactList}\small\item\em Converts the serializable dictionary to a standard Dictionary$<$\+TKey, TValue$>$. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a63b38c60c09550e7311a8da0a4537ab4}{On\+Before\+Serialize}} ()
+\begin{DoxyCompactList}\small\item\em Flattens the runtime dictionary into the serialized pairs array. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_af787dffac4f009dfb09730146360fa2b}{On\+After\+Deserialize}} ()
+\begin{DoxyCompactList}\small\item\em Rebuilds the runtime dictionary from the serialized pairs array. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a303b4f517da9cb786517539a68fefa71}{Add}} (TKey key, TValue value)
+\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_ab7720122fc49a76b9f8532f78694e9ac}{Add}} (Key\+Value\+Pair$<$ TKey, TValue $>$ item)
+\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a02ef00fcb4ef925e55f96296131b8c1c}{Contains\+Key}} (TKey key)
+\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a1b0adb88ebebc672a4e20b4ada78f3fc}{Contains}} (Key\+Value\+Pair$<$ TKey, TValue $>$ item)
+\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a61e11f0c89883e973c9f4ed0b8ce84fa}{Try\+Get\+Value}} (TKey key, out TValue value)
+\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_ac026270aa054f51f1d5d56563955cd11}{Remove}} (TKey key)
+\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a81865c43ee9f5d9b395c0fb8eead1f3d}{Clear}} ()
+\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a5752b1c13b12d99e3370c4257322bfd4}{Copy\+To}} (Key\+Value\+Pair$<$ TKey, TValue $>$\+[$\,$]\+ array, int array\+Index)
+\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a4b95c37b0e729a9dc3d767fb2d616f40}{Remove}} (Key\+Value\+Pair$<$ TKey, TValue $>$ item)
+\item 
+IEnumerator$<$ Key\+Value\+Pair$<$ TKey, TValue $>$ $>$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a092d4e4397500db8410cd89715ca7d2a}{Get\+Enumerator}} ()
+\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_ab6b686f343626d95f59e55990be1922b}{Pair}} (TKey key, TValue value)
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the Pair struct. \end{DoxyCompactList}\item 
+readonly void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a379cb2038d027eda83db742f9a216cf1}{Deconstruct}} (out TKey key, out TValue value)
+\begin{DoxyCompactList}\small\item\em Deconstructs the pair into key and value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+TKey \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a789e9ccaf88e17714c32361edd0a9dbc}{Key}}
+\begin{DoxyCompactList}\small\item\em Key. \end{DoxyCompactList}\item 
+TValue \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_aa64e3ffa025dc0d1fc5a90ebf79a4a75}{Value}}
+\begin{DoxyCompactList}\small\item\em Value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+ICollection$<$ TKey $>$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_ab0f69885a1116e91cc861a82d88b353d}{Keys}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\item 
+ICollection$<$ TValue $>$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a8af44031d9cf71d8698761fc8407074e}{Values}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\item 
+int \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_ac67e1345b52f877731a01abb2af7edea}{Count}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a26754cff0a382ec10f468cc7b9a5745c}{Is\+Read\+Only}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\item 
+TValue \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a98a11b64ffd086315f3b596b02687c40}{this\+[\+TKey key]\+}}\hspace{0.3cm}{\ttfamily  \+[get, set]\+}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A serializable dictionary implementation for Unity, allowing key-\/value pairs to be serialized and deserialized. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em TKey} & The type of keys in the dictionary.\\
+\hline
+{\em TValue} & The type of values in the dictionary.\\
+\hline
+\end{DoxyTemplParams}
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_ab7720122fc49a76b9f8532f78694e9ac}\index{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}!Add@{Add}}
+\index{Add@{Add}!Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{Add()}{Add()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_ab7720122fc49a76b9f8532f78694e9ac} 
+void Feazeyu.\+RPGSystems.\+Core.\+Utilities.\+Serializable\+Dictionary$<$ TKey, TValue $>$.Add (\begin{DoxyParamCaption}\item[{Key\+Value\+Pair$<$ TKey, TValue $>$}]{item}{}\end{DoxyParamCaption})}
+
+
+
+
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a303b4f517da9cb786517539a68fefa71}\index{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}!Add@{Add}}
+\index{Add@{Add}!Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{Add()}{Add()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a303b4f517da9cb786517539a68fefa71} 
+void Feazeyu.\+RPGSystems.\+Core.\+Utilities.\+Serializable\+Dictionary$<$ TKey, TValue $>$.Add (\begin{DoxyParamCaption}\item[{TKey}]{key}{, }\item[{TValue}]{value}{}\end{DoxyParamCaption})}
+
+
+
+
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a81865c43ee9f5d9b395c0fb8eead1f3d}\index{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}!Clear@{Clear}}
+\index{Clear@{Clear}!Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{Clear()}{Clear()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a81865c43ee9f5d9b395c0fb8eead1f3d} 
+void Feazeyu.\+RPGSystems.\+Core.\+Utilities.\+Serializable\+Dictionary$<$ TKey, TValue $>$.Clear (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a1b0adb88ebebc672a4e20b4ada78f3fc}\index{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}!Contains@{Contains}}
+\index{Contains@{Contains}!Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{Contains()}{Contains()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a1b0adb88ebebc672a4e20b4ada78f3fc} 
+bool Feazeyu.\+RPGSystems.\+Core.\+Utilities.\+Serializable\+Dictionary$<$ TKey, TValue $>$.Contains (\begin{DoxyParamCaption}\item[{Key\+Value\+Pair$<$ TKey, TValue $>$}]{item}{}\end{DoxyParamCaption})}
+
+
+
+
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a02ef00fcb4ef925e55f96296131b8c1c}\index{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}!ContainsKey@{ContainsKey}}
+\index{ContainsKey@{ContainsKey}!Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{ContainsKey()}{ContainsKey()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a02ef00fcb4ef925e55f96296131b8c1c} 
+bool Feazeyu.\+RPGSystems.\+Core.\+Utilities.\+Serializable\+Dictionary$<$ TKey, TValue $>$.Contains\+Key (\begin{DoxyParamCaption}\item[{TKey}]{key}{}\end{DoxyParamCaption})}
+
+
+
+
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a5752b1c13b12d99e3370c4257322bfd4}\index{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}!CopyTo@{CopyTo}}
+\index{CopyTo@{CopyTo}!Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{CopyTo()}{CopyTo()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a5752b1c13b12d99e3370c4257322bfd4} 
+void Feazeyu.\+RPGSystems.\+Core.\+Utilities.\+Serializable\+Dictionary$<$ TKey, TValue $>$.Copy\+To (\begin{DoxyParamCaption}\item[{Key\+Value\+Pair$<$ TKey, TValue $>$\+[$\,$]\+}]{array}{, }\item[{int}]{array\+Index}{}\end{DoxyParamCaption})}
+
+
+
+
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a379cb2038d027eda83db742f9a216cf1}\index{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}!Deconstruct@{Deconstruct}}
+\index{Deconstruct@{Deconstruct}!Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{Deconstruct()}{Deconstruct()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a379cb2038d027eda83db742f9a216cf1} 
+readonly void Feazeyu.\+RPGSystems.\+Core.\+Utilities.\+Serializable\+Dictionary$<$ TKey, TValue $>$.Deconstruct (\begin{DoxyParamCaption}\item[{out TKey}]{key}{, }\item[{out TValue}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Deconstructs the pair into key and value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key.\\
+\hline
+{\em value} & The value.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a092d4e4397500db8410cd89715ca7d2a}\index{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}!GetEnumerator@{GetEnumerator}}
+\index{GetEnumerator@{GetEnumerator}!Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{GetEnumerator()}{GetEnumerator()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a092d4e4397500db8410cd89715ca7d2a} 
+IEnumerator$<$ Key\+Value\+Pair$<$ TKey, TValue $>$ $>$ Feazeyu.\+RPGSystems.\+Core.\+Utilities.\+Serializable\+Dictionary$<$ TKey, TValue $>$.Get\+Enumerator (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_af787dffac4f009dfb09730146360fa2b}\index{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}!OnAfterDeserialize@{OnAfterDeserialize}}
+\index{OnAfterDeserialize@{OnAfterDeserialize}!Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{OnAfterDeserialize()}{OnAfterDeserialize()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_af787dffac4f009dfb09730146360fa2b} 
+void Feazeyu.\+RPGSystems.\+Core.\+Utilities.\+Serializable\+Dictionary$<$ TKey, TValue $>$.On\+After\+Deserialize (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Rebuilds the runtime dictionary from the serialized pairs array. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a63b38c60c09550e7311a8da0a4537ab4}\index{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}!OnBeforeSerialize@{OnBeforeSerialize}}
+\index{OnBeforeSerialize@{OnBeforeSerialize}!Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{OnBeforeSerialize()}{OnBeforeSerialize()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a63b38c60c09550e7311a8da0a4537ab4} 
+void Feazeyu.\+RPGSystems.\+Core.\+Utilities.\+Serializable\+Dictionary$<$ TKey, TValue $>$.On\+Before\+Serialize (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Flattens the runtime dictionary into the serialized pairs array. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_ab6b686f343626d95f59e55990be1922b}\index{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}!Pair@{Pair}}
+\index{Pair@{Pair}!Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{Pair()}{Pair()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_ab6b686f343626d95f59e55990be1922b} 
+Feazeyu.\+RPGSystems.\+Core.\+Utilities.\+Serializable\+Dictionary$<$ TKey, TValue $>$.Pair (\begin{DoxyParamCaption}\item[{TKey}]{key}{, }\item[{TValue}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Initializes a new instance of the Pair struct. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key.\\
+\hline
+{\em value} & The value.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a4b95c37b0e729a9dc3d767fb2d616f40}\index{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}!Remove@{Remove}}
+\index{Remove@{Remove}!Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{Remove()}{Remove()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a4b95c37b0e729a9dc3d767fb2d616f40} 
+bool Feazeyu.\+RPGSystems.\+Core.\+Utilities.\+Serializable\+Dictionary$<$ TKey, TValue $>$.Remove (\begin{DoxyParamCaption}\item[{Key\+Value\+Pair$<$ TKey, TValue $>$}]{item}{}\end{DoxyParamCaption})}
+
+
+
+
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_ac026270aa054f51f1d5d56563955cd11}\index{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}!Remove@{Remove}}
+\index{Remove@{Remove}!Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{Remove()}{Remove()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_ac026270aa054f51f1d5d56563955cd11} 
+bool Feazeyu.\+RPGSystems.\+Core.\+Utilities.\+Serializable\+Dictionary$<$ TKey, TValue $>$.Remove (\begin{DoxyParamCaption}\item[{TKey}]{key}{}\end{DoxyParamCaption})}
+
+
+
+
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a508f2aa8a27f0a3b64dee4cf0db440fe}\index{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}!SerializableDictionary@{SerializableDictionary}}
+\index{SerializableDictionary@{SerializableDictionary}!Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{SerializableDictionary()}{SerializableDictionary()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a508f2aa8a27f0a3b64dee4cf0db440fe} 
+Feazeyu.\+RPGSystems.\+Core.\+Utilities.\+Serializable\+Dictionary$<$ TKey, TValue $>$.Serializable\+Dictionary (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Initializes a new instance of the Serializable\+Dictionary$<$\+TKey, TValue$>$ class. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a72779ebb85577f3d62c001b045b9bc7f}\index{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}!SerializableDictionary@{SerializableDictionary}}
+\index{SerializableDictionary@{SerializableDictionary}!Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{SerializableDictionary()}{SerializableDictionary()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a72779ebb85577f3d62c001b045b9bc7f} 
+Feazeyu.\+RPGSystems.\+Core.\+Utilities.\+Serializable\+Dictionary$<$ TKey, TValue $>$.Serializable\+Dictionary (\begin{DoxyParamCaption}\item[{Dictionary$<$ TKey, TValue $>$}]{dict}{}\end{DoxyParamCaption})}
+
+
+
+Initializes a new instance of the Serializable\+Dictionary$<$\+TKey, TValue$>$ class with an existing dictionary. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dict} & The dictionary to initialize from.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_ac1cbe18bacb74c1f3af029a13337e28a}\index{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}!ToDictionary@{ToDictionary}}
+\index{ToDictionary@{ToDictionary}!Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{ToDictionary()}{ToDictionary()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_ac1cbe18bacb74c1f3af029a13337e28a} 
+Dictionary$<$ TKey, TValue $>$ Feazeyu.\+RPGSystems.\+Core.\+Utilities.\+Serializable\+Dictionary$<$ TKey, TValue $>$.To\+Dictionary (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Converts the serializable dictionary to a standard Dictionary$<$\+TKey, TValue$>$. 
+
+\begin{DoxyReturn}{Returns}
+The internal dictionary.
+\end{DoxyReturn}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a61e11f0c89883e973c9f4ed0b8ce84fa}\index{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}!TryGetValue@{TryGetValue}}
+\index{TryGetValue@{TryGetValue}!Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{TryGetValue()}{TryGetValue()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a61e11f0c89883e973c9f4ed0b8ce84fa} 
+bool Feazeyu.\+RPGSystems.\+Core.\+Utilities.\+Serializable\+Dictionary$<$ TKey, TValue $>$.Try\+Get\+Value (\begin{DoxyParamCaption}\item[{TKey}]{key}{, }\item[{out TValue}]{value}{}\end{DoxyParamCaption})}
+
+
+
+
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_doc-variable-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a789e9ccaf88e17714c32361edd0a9dbc}\index{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}!Key@{Key}}
+\index{Key@{Key}!Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{Key}{Key}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a789e9ccaf88e17714c32361edd0a9dbc} 
+TKey Feazeyu.\+RPGSystems.\+Core.\+Utilities.\+Serializable\+Dictionary$<$ TKey, TValue $>$.Key}
+
+
+
+Key. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_aa64e3ffa025dc0d1fc5a90ebf79a4a75}\index{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}!Value@{Value}}
+\index{Value@{Value}!Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{Value}{Value}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_aa64e3ffa025dc0d1fc5a90ebf79a4a75} 
+TValue Feazeyu.\+RPGSystems.\+Core.\+Utilities.\+Serializable\+Dictionary$<$ TKey, TValue $>$.Value}
+
+
+
+Value. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_doc-property-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_ac67e1345b52f877731a01abb2af7edea}\index{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}!Count@{Count}}
+\index{Count@{Count}!Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{Count}{Count}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_ac67e1345b52f877731a01abb2af7edea} 
+int Feazeyu.\+RPGSystems.\+Core.\+Utilities.\+Serializable\+Dictionary$<$ TKey, TValue $>$.Count\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a26754cff0a382ec10f468cc7b9a5745c}\index{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}!IsReadOnly@{IsReadOnly}}
+\index{IsReadOnly@{IsReadOnly}!Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{IsReadOnly}{IsReadOnly}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a26754cff0a382ec10f468cc7b9a5745c} 
+bool Feazeyu.\+RPGSystems.\+Core.\+Utilities.\+Serializable\+Dictionary$<$ TKey, TValue $>$.Is\+Read\+Only\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_ab0f69885a1116e91cc861a82d88b353d}\index{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}!Keys@{Keys}}
+\index{Keys@{Keys}!Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{Keys}{Keys}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_ab0f69885a1116e91cc861a82d88b353d} 
+ICollection$<$TKey$>$ Feazeyu.\+RPGSystems.\+Core.\+Utilities.\+Serializable\+Dictionary$<$ TKey, TValue $>$.Keys\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a98a11b64ffd086315f3b596b02687c40}\index{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}!this\+[TKey key]\+@{this[TKey key]}}
+\index{this\+[TKey key]\+@{this[TKey key]}!Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{this[TKey key]}{this[TKey key]}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a98a11b64ffd086315f3b596b02687c40} 
+TValue Feazeyu.\+RPGSystems.\+Core.\+Utilities.\+Serializable\+Dictionary$<$ TKey, TValue $>$.this\+[TKey key]\+\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a8af44031d9cf71d8698761fc8407074e}\index{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}!Values@{Values}}
+\index{Values@{Values}!Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$@{Feazeyu.RPGSystems.Core.Utilities.SerializableDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{Values}{Values}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g_a8af44031d9cf71d8698761fc8407074e} 
+ICollection$<$TValue$>$ Feazeyu.\+RPGSystems.\+Core.\+Utilities.\+Serializable\+Dictionary$<$ TKey, TValue $>$.Values\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Core/\+\+Utilities/\+\doxymbox{\hyperlink{_serializable_dictionary_8cs}{Serializable\+Dictionary.\+cs}}\end{DoxyCompactItemize}

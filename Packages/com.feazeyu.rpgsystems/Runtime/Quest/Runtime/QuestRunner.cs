@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Feazeyu.RPGSystems.Dialogue;
-using QuestGraph.Nodes;
+using Feazeyu.RPGSystems.Quest.Nodes;
 using Feazeyu.RPGSystems.Inventory;
 
-namespace QuestGraph.Runtime
+namespace Feazeyu.RPGSystems.Quest
 {
     /// <summary>Outcome of a quest run.</summary>
     public enum QuestResult

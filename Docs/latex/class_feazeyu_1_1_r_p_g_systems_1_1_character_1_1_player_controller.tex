@@ -1,0 +1,200 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Character.\+Player\+Controller Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_player_controller}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_player_controller}\index{Feazeyu.RPGSystems.Character.PlayerController@{Feazeyu.RPGSystems.Character.PlayerController}}
+
+
+Player avatar:\+ top-\/down movement, aim-\/based weapon rotation, attack state, and interaction, driven by the Input System. Extends Entity.  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Character.\+Player\+Controller:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_player_controller}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_player_controller_a6348b483b57b41bb760095824a4f244e}{On\+Move}} (Input\+Action.\+Callback\+Context ctx)
+\begin{DoxyCompactList}\small\item\em Input System callback:\+ reads the movement vector. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_player_controller_ae7955c37daa9000931cf1e4c4f760de0}{On\+Look}} (Input\+Action.\+Callback\+Context ctx)
+\begin{DoxyCompactList}\small\item\em Input System callback:\+ reads the aim vector. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_player_controller_a6a17ce38b920e4ea4636fc911ef633e4}{On\+Interact}} (Input\+Action.\+Callback\+Context ctx)
+\begin{DoxyCompactList}\small\item\em Input System callback:\+ interacts with the closest interactable. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_player_controller_a00532628e508c52e25e2a75599f45419}{On\+Attack}} (Input\+Action.\+Callback\+Context ctx)
+\begin{DoxyCompactList}\small\item\em Input System callback:\+ tracks the attack (shooting) held state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_entity}{Feazeyu.\+RPGSystems.\+Character.\+Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_entity_ad05b579f9e8b63b4e8ee7e18e277ea51}{Get\+Resource\+Components}} ()
+\begin{DoxyCompactList}\small\item\em Retrieves all Resource components attached to this entity and populates the resources dictionary. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_player_controller_a91cc2ccb7f0ace3f52aae3dd009199cd}{move\+Speed}} = 5f
+\begin{DoxyCompactList}\small\item\em Move speed. \end{DoxyCompactList}\item 
+Camera \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_player_controller_a5c4fceea018f73bd7e0d54cf65a0aa3f}{main\+Camera}}
+\begin{DoxyCompactList}\small\item\em Main camera. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_rotate_towards_point}{Rotate\+Towards\+Point}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_player_controller_a53828c32f867235bbd1036ff86a1fe97}{weapon\+Rotation\+Handler}}
+\begin{DoxyCompactList}\small\item\em Weapon rotation handler. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_player_controller_af037d64d7bcf847e7c1b6214807513d0}{flip\+On\+Aim\+Left}} = true
+\begin{DoxyCompactList}\small\item\em Flip on aim left. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_interactor}{Interactor}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_player_controller_a38fdc2e2080471559493951e2645f6a7}{interactor}}
+\begin{DoxyCompactList}\small\item\em \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_interactor}{Interactor}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes inherited from \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_entity}{Feazeyu.\+RPGSystems.\+Character.\+Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+Serializable\+Dictionary$<$ \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_character_a7f44022bf2d755a4cb26a73a870b3f42}{Resource\+Types}}, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource}{Resource}} $>$? \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_entity_ab5d9e9fc0826d4b8a28c5406440b95b7}{resources}}
+\begin{DoxyCompactList}\small\item\em The resources available to this entity, mapped by resource type. \end{DoxyCompactList}\item 
+Transform? \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_entity_a1c8ee37dc249b45df77490a8f9be2332}{casting\+Position}}
+\begin{DoxyCompactList}\small\item\em The transform where spells are spawned when cast. \end{DoxyCompactList}\item 
+Transform? \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_entity_a1952fcc4697871c4e81244a8d6f023b1}{casting\+Rotation\+Reference}}
+\begin{DoxyCompactList}\small\item\em The transform whose rotation is inherited by spawned spells. \end{DoxyCompactList}\item 
+Unity\+Event \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_entity_a51d7eb3ff8890e29d372ad4b2d01d227}{On\+Death}} = new()
+\begin{DoxyCompactList}\small\item\em Raised when the entity\textquotesingle{}s \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_health}{Health} resource reaches zero. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+override void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_player_controller_a3ba151e3f0d2e92c992b17eb6ad41278}{Awake}} ()
+\begin{DoxyCompactList}\small\item\em Caches components and subscribes to the player\textquotesingle{}s death. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_player_controller_a61f540074110d8ed7708ec121dfebc88}{Is\+Shooting}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Whether the attack input is currently held. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Player avatar:\+ top-\/down movement, aim-\/based weapon rotation, attack state, and interaction, driven by the Input System. Extends Entity. 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_player_controller_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_player_controller_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_player_controller_a3ba151e3f0d2e92c992b17eb6ad41278}\index{Feazeyu.RPGSystems.Character.PlayerController@{Feazeyu.RPGSystems.Character.PlayerController}!Awake@{Awake}}
+\index{Awake@{Awake}!Feazeyu.RPGSystems.Character.PlayerController@{Feazeyu.RPGSystems.Character.PlayerController}}
+\doxysubsubsection{\texorpdfstring{Awake()}{Awake()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_player_controller_a3ba151e3f0d2e92c992b17eb6ad41278} 
+override void Feazeyu.\+RPGSystems.\+Character.\+Player\+Controller.\+Awake (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Caches components and subscribes to the player\textquotesingle{}s death. 
+
+
+
+Reimplemented from \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_entity_a37493fa0b485323d8de39cbd2c61970c}{Feazeyu.\+RPGSystems.\+Character.\+Entity}}.
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_player_controller_a00532628e508c52e25e2a75599f45419}\index{Feazeyu.RPGSystems.Character.PlayerController@{Feazeyu.RPGSystems.Character.PlayerController}!OnAttack@{OnAttack}}
+\index{OnAttack@{OnAttack}!Feazeyu.RPGSystems.Character.PlayerController@{Feazeyu.RPGSystems.Character.PlayerController}}
+\doxysubsubsection{\texorpdfstring{OnAttack()}{OnAttack()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_player_controller_a00532628e508c52e25e2a75599f45419} 
+void Feazeyu.\+RPGSystems.\+Character.\+Player\+Controller.\+On\+Attack (\begin{DoxyParamCaption}\item[{Input\+Action.\+Callback\+Context}]{ctx}{}\end{DoxyParamCaption})}
+
+
+
+Input System callback:\+ tracks the attack (shooting) held state. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_player_controller_a6a17ce38b920e4ea4636fc911ef633e4}\index{Feazeyu.RPGSystems.Character.PlayerController@{Feazeyu.RPGSystems.Character.PlayerController}!OnInteract@{OnInteract}}
+\index{OnInteract@{OnInteract}!Feazeyu.RPGSystems.Character.PlayerController@{Feazeyu.RPGSystems.Character.PlayerController}}
+\doxysubsubsection{\texorpdfstring{OnInteract()}{OnInteract()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_player_controller_a6a17ce38b920e4ea4636fc911ef633e4} 
+void Feazeyu.\+RPGSystems.\+Character.\+Player\+Controller.\+On\+Interact (\begin{DoxyParamCaption}\item[{Input\+Action.\+Callback\+Context}]{ctx}{}\end{DoxyParamCaption})}
+
+
+
+Input System callback:\+ interacts with the closest interactable. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_player_controller_ae7955c37daa9000931cf1e4c4f760de0}\index{Feazeyu.RPGSystems.Character.PlayerController@{Feazeyu.RPGSystems.Character.PlayerController}!OnLook@{OnLook}}
+\index{OnLook@{OnLook}!Feazeyu.RPGSystems.Character.PlayerController@{Feazeyu.RPGSystems.Character.PlayerController}}
+\doxysubsubsection{\texorpdfstring{OnLook()}{OnLook()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_player_controller_ae7955c37daa9000931cf1e4c4f760de0} 
+void Feazeyu.\+RPGSystems.\+Character.\+Player\+Controller.\+On\+Look (\begin{DoxyParamCaption}\item[{Input\+Action.\+Callback\+Context}]{ctx}{}\end{DoxyParamCaption})}
+
+
+
+Input System callback:\+ reads the aim vector. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_player_controller_a6348b483b57b41bb760095824a4f244e}\index{Feazeyu.RPGSystems.Character.PlayerController@{Feazeyu.RPGSystems.Character.PlayerController}!OnMove@{OnMove}}
+\index{OnMove@{OnMove}!Feazeyu.RPGSystems.Character.PlayerController@{Feazeyu.RPGSystems.Character.PlayerController}}
+\doxysubsubsection{\texorpdfstring{OnMove()}{OnMove()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_player_controller_a6348b483b57b41bb760095824a4f244e} 
+void Feazeyu.\+RPGSystems.\+Character.\+Player\+Controller.\+On\+Move (\begin{DoxyParamCaption}\item[{Input\+Action.\+Callback\+Context}]{ctx}{}\end{DoxyParamCaption})}
+
+
+
+Input System callback:\+ reads the movement vector. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_player_controller_doc-variable-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_player_controller_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_player_controller_af037d64d7bcf847e7c1b6214807513d0}\index{Feazeyu.RPGSystems.Character.PlayerController@{Feazeyu.RPGSystems.Character.PlayerController}!flipOnAimLeft@{flipOnAimLeft}}
+\index{flipOnAimLeft@{flipOnAimLeft}!Feazeyu.RPGSystems.Character.PlayerController@{Feazeyu.RPGSystems.Character.PlayerController}}
+\doxysubsubsection{\texorpdfstring{flipOnAimLeft}{flipOnAimLeft}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_player_controller_af037d64d7bcf847e7c1b6214807513d0} 
+bool Feazeyu.\+RPGSystems.\+Character.\+Player\+Controller.\+flip\+On\+Aim\+Left = true}
+
+
+
+Flip on aim left. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_player_controller_a38fdc2e2080471559493951e2645f6a7}\index{Feazeyu.RPGSystems.Character.PlayerController@{Feazeyu.RPGSystems.Character.PlayerController}!interactor@{interactor}}
+\index{interactor@{interactor}!Feazeyu.RPGSystems.Character.PlayerController@{Feazeyu.RPGSystems.Character.PlayerController}}
+\doxysubsubsection{\texorpdfstring{interactor}{interactor}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_player_controller_a38fdc2e2080471559493951e2645f6a7} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_interactor}{Interactor}} Feazeyu.\+RPGSystems.\+Character.\+Player\+Controller.\+interactor}
+
+
+
+\doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_interactor}{Interactor}. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_player_controller_a5c4fceea018f73bd7e0d54cf65a0aa3f}\index{Feazeyu.RPGSystems.Character.PlayerController@{Feazeyu.RPGSystems.Character.PlayerController}!mainCamera@{mainCamera}}
+\index{mainCamera@{mainCamera}!Feazeyu.RPGSystems.Character.PlayerController@{Feazeyu.RPGSystems.Character.PlayerController}}
+\doxysubsubsection{\texorpdfstring{mainCamera}{mainCamera}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_player_controller_a5c4fceea018f73bd7e0d54cf65a0aa3f} 
+Camera Feazeyu.\+RPGSystems.\+Character.\+Player\+Controller.\+main\+Camera}
+
+
+
+Main camera. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_player_controller_a91cc2ccb7f0ace3f52aae3dd009199cd}\index{Feazeyu.RPGSystems.Character.PlayerController@{Feazeyu.RPGSystems.Character.PlayerController}!moveSpeed@{moveSpeed}}
+\index{moveSpeed@{moveSpeed}!Feazeyu.RPGSystems.Character.PlayerController@{Feazeyu.RPGSystems.Character.PlayerController}}
+\doxysubsubsection{\texorpdfstring{moveSpeed}{moveSpeed}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_player_controller_a91cc2ccb7f0ace3f52aae3dd009199cd} 
+float Feazeyu.\+RPGSystems.\+Character.\+Player\+Controller.\+move\+Speed = 5f}
+
+
+
+Move speed. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_player_controller_a53828c32f867235bbd1036ff86a1fe97}\index{Feazeyu.RPGSystems.Character.PlayerController@{Feazeyu.RPGSystems.Character.PlayerController}!weaponRotationHandler@{weaponRotationHandler}}
+\index{weaponRotationHandler@{weaponRotationHandler}!Feazeyu.RPGSystems.Character.PlayerController@{Feazeyu.RPGSystems.Character.PlayerController}}
+\doxysubsubsection{\texorpdfstring{weaponRotationHandler}{weaponRotationHandler}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_player_controller_a53828c32f867235bbd1036ff86a1fe97} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_rotate_towards_point}{Rotate\+Towards\+Point}} Feazeyu.\+RPGSystems.\+Character.\+Player\+Controller.\+weapon\+Rotation\+Handler}
+
+
+
+Weapon rotation handler. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_player_controller_doc-property-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_player_controller_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_player_controller_a61f540074110d8ed7708ec121dfebc88}\index{Feazeyu.RPGSystems.Character.PlayerController@{Feazeyu.RPGSystems.Character.PlayerController}!IsShooting@{IsShooting}}
+\index{IsShooting@{IsShooting}!Feazeyu.RPGSystems.Character.PlayerController@{Feazeyu.RPGSystems.Character.PlayerController}}
+\doxysubsubsection{\texorpdfstring{IsShooting}{IsShooting}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_player_controller_a61f540074110d8ed7708ec121dfebc88} 
+bool Feazeyu.\+RPGSystems.\+Character.\+Player\+Controller.\+Is\+Shooting\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Whether the attack input is currently held. 
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Character/\+\doxymbox{\hyperlink{_player_controller_8cs}{Player\+Controller.\+cs}}\end{DoxyCompactItemize}

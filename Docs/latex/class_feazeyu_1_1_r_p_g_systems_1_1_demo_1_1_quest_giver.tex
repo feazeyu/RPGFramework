@@ -1,0 +1,43 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Demo.\+Quest\+Giver Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_demo_1_1_quest_giver}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_demo_1_1_quest_giver}\index{Feazeyu.RPGSystems.Demo.QuestGiver@{Feazeyu.RPGSystems.Demo.QuestGiver}}
+
+
+Replaces the old Quest\+Demo\+Director. Drives the chain demo straight from NPC interaction instead of auto-\/starting quests:\+  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Demo.\+Quest\+Giver:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_feazeyu_1_1_r_p_g_systems_1_1_demo_1_1_quest_giver}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_demo_1_1_quest_giver_a1728666e76f8db72218cbe67fac38e12}{Offer\+Next\+Quest}} ()
+\begin{DoxyCompactList}\small\item\em Wire this to the NPC\textquotesingle{}s \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_interactable_ab236bf4b0418eff83211a852c759ad07}{Interactable.\+On\+Interact}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Replaces the old Quest\+Demo\+Director. Drives the chain demo straight from NPC interaction instead of auto-\/starting quests:\+ 
+
+• Talking to the NPC (wire Offer\+Next\+Quest to the NPC\textquotesingle{}s {\ttfamily \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_interactable_ab236bf4b0418eff83211a852c759ad07}{Interactable.\+On\+Interact}}) starts the chain on first use and then starts the next Available quest. Each quest graph opens with a Run \doxylink{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue}{Dialogue} node, so starting it immediately plays the offer dialogue where the player accepts or declines. Declining aborts the quest, which the chain returns to Available — so the next interaction re-\/offers it. • A quest is only offered while none is active, so the same interaction also serves the Deliver objective (which hands in items on interact) without double-\/starting. • Optionally seeds the player\textquotesingle{}s inventory so the first (Deliver) quest is doable. This is pure scene setup, not orchestration. 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_demo_1_1_quest_giver_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_demo_1_1_quest_giver_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_demo_1_1_quest_giver_a1728666e76f8db72218cbe67fac38e12}\index{Feazeyu.RPGSystems.Demo.QuestGiver@{Feazeyu.RPGSystems.Demo.QuestGiver}!OfferNextQuest@{OfferNextQuest}}
+\index{OfferNextQuest@{OfferNextQuest}!Feazeyu.RPGSystems.Demo.QuestGiver@{Feazeyu.RPGSystems.Demo.QuestGiver}}
+\doxysubsubsection{\texorpdfstring{OfferNextQuest()}{OfferNextQuest()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_demo_1_1_quest_giver_a1728666e76f8db72218cbe67fac38e12} 
+void Feazeyu.\+RPGSystems.\+Demo.\+Quest\+Giver.\+Offer\+Next\+Quest (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Wire this to the NPC\textquotesingle{}s \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_interactable_ab236bf4b0418eff83211a852c759ad07}{Interactable.\+On\+Interact}. 
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Samples\texorpdfstring{$\sim$}{\string~}/\+\+Quest Demo/\+\doxymbox{\hyperlink{_quest_giver_8cs}{Quest\+Giver.\+cs}}\end{DoxyCompactItemize}

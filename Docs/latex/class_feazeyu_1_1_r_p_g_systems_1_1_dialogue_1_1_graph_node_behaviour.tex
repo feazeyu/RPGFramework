@@ -1,0 +1,79 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Node\+Behaviour Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_node_behaviour}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_node_behaviour}\index{Feazeyu.RPGSystems.Dialogue.GraphNodeBehaviour@{Feazeyu.RPGSystems.Dialogue.GraphNodeBehaviour}}
+
+
+Abstract Mono\+Behaviour that acts as an \doxylink{interface_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_i_graph_node_handler}{IGraph\+Node\+Handler}. Place this (or a subclass) on any Game\+Object in the scene, then either:\+ • Add it to the same Game\+Object as your \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner}{Graph\+Runner} — it will be discovered automatically via Get\+Components\+In\+Children. • Call runner.\+Register\+Handler(this) manually.  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Node\+Behaviour:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.723077cm]{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_node_behaviour}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+IEnumerator \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_node_behaviour_a5ba81eca5e567539684853375ea61474}{Execute}} (\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}} node, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context}{Graph\+Run\+Context}} context)
+\begin{DoxyCompactList}\small\item\em Implement your node logic here. When done, call context.\+Follow("{}\+Port\+Name"{}) or context.\+End() to continue graph execution. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+virtual string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_node_behaviour_a2c0c96ac5b4e808e8ef27bf4f4bd62e9}{Node\+Type\+Id}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em The node type ID this behaviour handles. Override the property if you prefer a hardcoded value over the Inspector field. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Abstract Mono\+Behaviour that acts as an \doxylink{interface_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_i_graph_node_handler}{IGraph\+Node\+Handler}. Place this (or a subclass) on any Game\+Object in the scene, then either:\+ • Add it to the same Game\+Object as your \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner}{Graph\+Runner} — it will be discovered automatically via Get\+Components\+In\+Children. • Call runner.\+Register\+Handler(this) manually. 
+
+Use case — quest goals:\+ public class Kill\+Enemies\+Goal :\+ \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_node_behaviour}{Graph\+Node\+Behaviour} \{ public override string Node\+Type\+Id =\texorpdfstring{$>$}{>} "{}\+Quest\+Goal\+\_\+\+Kill\+Enemies"{}; public int Required = 5; private int m\+\_\+\+Count;
+
+public override IEnumerator \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_node_behaviour_a5ba81eca5e567539684853375ea61474}{Execute(\+Node\+Data node, Graph\+Run\+Context ctx)} \{ m\+\_\+\+Count = 0;
+
+Enemy\+Manager.\+On\+Kill += On\+Kill; yield return new Wait\+Until(() =\texorpdfstring{$>$}{>} m\+\_\+\+Count \texorpdfstring{$>$}{>}= Required); Enemy\+Manager.\+On\+Kill -\/= On\+Kill; ctx.\+Follow("{}\+Out"{}); \}
+
+private void On\+Kill() =\texorpdfstring{$>$}{>} m\+\_\+\+Count++; \}
+
+The matching node in the graph editor must have Node\+Type == Node\+Type\+Id. Register the type in \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry}{Node\+Registry} or tag the class with \+[Dialogue\+Node]\+. 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_node_behaviour_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_node_behaviour_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_node_behaviour_a5ba81eca5e567539684853375ea61474}\index{Feazeyu.RPGSystems.Dialogue.GraphNodeBehaviour@{Feazeyu.RPGSystems.Dialogue.GraphNodeBehaviour}!Execute@{Execute}}
+\index{Execute@{Execute}!Feazeyu.RPGSystems.Dialogue.GraphNodeBehaviour@{Feazeyu.RPGSystems.Dialogue.GraphNodeBehaviour}}
+\doxysubsubsection{\texorpdfstring{Execute()}{Execute()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_node_behaviour_a5ba81eca5e567539684853375ea61474} 
+IEnumerator Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Node\+Behaviour.\+Execute (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}}}]{node}{, }\item[{\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context}{Graph\+Run\+Context}}}]{context}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [abstract]}}
+
+
+
+Implement your node logic here. When done, call context.\+Follow("{}\+Port\+Name"{}) or context.\+End() to continue graph execution. 
+
+
+
+Implements \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_i_graph_node_handler_a7362a7107f36dbc527b568e0f5e8af91}{Feazeyu.\+RPGSystems.\+Dialogue.\+IGraph\+Node\+Handler}}.
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_node_behaviour_doc-property-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_node_behaviour_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_node_behaviour_a2c0c96ac5b4e808e8ef27bf4f4bd62e9}\index{Feazeyu.RPGSystems.Dialogue.GraphNodeBehaviour@{Feazeyu.RPGSystems.Dialogue.GraphNodeBehaviour}!NodeTypeId@{NodeTypeId}}
+\index{NodeTypeId@{NodeTypeId}!Feazeyu.RPGSystems.Dialogue.GraphNodeBehaviour@{Feazeyu.RPGSystems.Dialogue.GraphNodeBehaviour}}
+\doxysubsubsection{\texorpdfstring{NodeTypeId}{NodeTypeId}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_node_behaviour_a2c0c96ac5b4e808e8ef27bf4f4bd62e9} 
+virtual string Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Node\+Behaviour.\+Node\+Type\+Id\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+The node type ID this behaviour handles. Override the property if you prefer a hardcoded value over the Inspector field. 
+
+
+
+Implements \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_i_graph_node_handler_aaae381139fafeb9b8fbb6a24eb984f57}{Feazeyu.\+RPGSystems.\+Dialogue.\+IGraph\+Node\+Handler}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Dialogue/\+\doxymbox{\hyperlink{_graph_node_behaviour_8cs}{Graph\+Node\+Behaviour.\+cs}}\end{DoxyCompactItemize}

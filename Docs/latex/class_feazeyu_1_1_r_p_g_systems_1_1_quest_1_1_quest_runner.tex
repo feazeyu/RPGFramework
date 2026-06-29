@@ -1,0 +1,478 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Runner Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner}\index{Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}}
+
+
+Executes a Single quest graph. Supports any number of simultaneously active objectives (needed for continuous-\/mode parallel objectives).  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Runner:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a79fc711eac3c6e662b164e4aa63db11c}{Start\+Quest}} ()
+\begin{DoxyCompactList}\small\item\em Start quest. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_afca02b4180be3e9cee936b98574a62c1}{Complete\+Objective}} (string node\+Guid)
+\begin{DoxyCompactList}\small\item\em Signal that the named objective was satisfied. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a8407488e06589ae7359397ca1062665c}{Fail\+Objective}} (string node\+Guid)
+\begin{DoxyCompactList}\small\item\em Signal that the named objective has failed. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a925e1df6d02998131cd43725a7a7c848}{Force\+Fail\+Quest}} (string reason)
+\begin{DoxyCompactList}\small\item\em Immediately fail the quest (e.\+g., a continuous guard lost its condition). Safe to call from any coroutine running on this runner. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a9d91d9d70726afb76fca64d04c73e5db}{Abort\+Quest}} ()
+\begin{DoxyCompactList}\small\item\em Abort quest. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_afd4f8d18d546f1786958afb3940499ab}{Register\+Objective}} (\doxymbox{\hyperlink{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_info}{Objective\+Info}} info)
+\begin{DoxyCompactList}\small\item\em Called by objective node handlers at the start of execution. Fires On\+Objective\+Started so the HUD can show the new objective. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_ad78f6ea5bffa7924156cc859b54dbaba}{Unregister\+Objective}} (string node\+Guid, bool? outcome=null)
+\begin{DoxyCompactList}\small\item\em Called by objective node handlers when they conclude (complete, fail, or continuous monitor ends). Fires the appropriate event. \end{DoxyCompactList}\item 
+bool? \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_accbcba3ea428b05ed36ba1b903925079}{Get\+Objective\+Outcome}} (string node\+Guid)
+\begin{DoxyCompactList}\small\item\em Returns the pending outcome for an active objective, or null if still waiting. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_progress}{Objective\+Progress}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_ae27d523830374ac9709ad707078d2953}{Register\+Progress}} (string node\+Guid, int required)
+\begin{DoxyCompactList}\small\item\em Creates (or replaces) the resettable progress counter for an objective node. Objective handlers call this at activation, then attach a composed gate predicate. Timer/\+\+Reset nodes act on the same counter by node guid. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_aafecf842d7a70a9f74b65dcd2f5c5761}{Unregister\+Progress}} (string node\+Guid)
+\begin{DoxyCompactList}\small\item\em Unregister progress. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_progress}{Objective\+Progress}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_aa36fcdf7bab44dbea5cab7383f01ee05}{Get\+Progress}} (string node\+Guid)
+\begin{DoxyCompactList}\small\item\em Get progress. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a450948f14be761b714b9ed0baaf7943e}{Reset\+Objective\+Progress}} (string node\+Guid)
+\begin{DoxyCompactList}\small\item\em Wipe an objective\textquotesingle{}s accumulated progress (used by Reset Progress nodes). \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a1acc5e786b735d35581d14308f4294c2}{Raise\+Timer\+Timeout}} ()
+\begin{DoxyCompactList}\small\item\em Fires On\+Timer\+Timeout (called by Timer node handlers). \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_aaaf4f649cc0862ee8445f64bf89b1f77}{Set\+Timer\+Window}} (float seconds)
+\begin{DoxyCompactList}\small\item\em Called by a Timer node each time it (re)arms, so the HUD can show a live countdown. The latest call wins (single shared window display). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner}{Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Runner}}}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a7996fdb2293cb06f7df139785acdb4a0}{Register\+Handler}} (\doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_i_graph_node_handler}{IGraph\+Node\+Handler}} handler)
+\begin{DoxyCompactList}\small\item\em Registers a handler for a node type. Call this in \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a0883a615c8adc62c6d5c42cd579f9911}{Awake()} before \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a17ad162d81213c50b2219e9e7cead4ea}{Start\+Graph()} is invoked. Later registrations overwrite earlier ones. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a17ad162d81213c50b2219e9e7cead4ea}{Start\+Graph}} ()
+\begin{DoxyCompactList}\small\item\em Start graph. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a9ce8d870bbfec9c55b6d2f9c935ef69a}{Stop\+Graph}} ()
+\begin{DoxyCompactList}\small\item\em Stop graph. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a1b6490c77fc881a02bbd955cfd3be1d1}{Set\+Blackboard\+Value}} (string variable\+Name, object value)
+\begin{DoxyCompactList}\small\item\em Sets the value of a runtime blackboard variable by name. Used by scene components (e.\+g. Zone\+Flag triggers) to feed world state into gates. No-\/op until the graph has started and built its runtime blackboard. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_event}{Objective\+Event}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_aa3810902a8a09402de7c7b813a861e79}{On\+Objective\+Started}} = new()
+\begin{DoxyCompactList}\small\item\em On objective started. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_event}{Objective\+Event}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_ad27acf414c548208283421463880d411}{On\+Objective\+Completed}} = new()
+\begin{DoxyCompactList}\small\item\em On objective completed. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_event}{Objective\+Event}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_aa4961e5b1de1b9a1a9a7fa1c7e0c6a35}{On\+Objective\+Failed}} = new()
+\begin{DoxyCompactList}\small\item\em On objective failed. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_reward_event}{Reward\+Event}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_ac177b3f6ae31092e21f7dbbc1ebd2f40}{On\+Reward\+Granted}} = new()
+\begin{DoxyCompactList}\small\item\em On reward granted. \end{DoxyCompactList}\item 
+Unity\+Event \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a654bc2fce16bd6c73a60058a34003573}{On\+Quest\+Completed}} = new()
+\begin{DoxyCompactList}\small\item\em On quest completed. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_failed_event}{Failed\+Event}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a7da59b52248778943ed2003557f9abd1}{On\+Quest\+Failed}} = new()
+\begin{DoxyCompactList}\small\item\em On quest failed. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_result_event}{Result\+Event}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a5b33eb873534103dad10403a27fc4c38}{On\+Quest\+Ended}} = new()
+\begin{DoxyCompactList}\small\item\em On quest ended. \end{DoxyCompactList}\item 
+Unity\+Event \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_ab8ad26fe4bfdc7e9cb11bb12184ecf41}{On\+Timer\+Timeout}} = new()
+\begin{DoxyCompactList}\small\item\em On timer timeout. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_dialogue_runner_event}{Dialogue\+Runner\+Event}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a4a8c6867017d033698f75cd2101a823f}{On\+Dialogue\+Started}} = new()
+\begin{DoxyCompactList}\small\item\em On dialogue started. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes inherited from \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner}{Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Runner}}}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset}{Graph\+Asset}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_aa0d2aac7bfdb42a880f6ccc49b0560fc}{Graph}}
+\begin{DoxyCompactList}\small\item\em Graph. \end{DoxyCompactList}\item 
+Unity\+Event \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a21ce5b9864ef410d40ea4bbe599df6d0}{On\+Graph\+Started}} = new()
+\begin{DoxyCompactList}\small\item\em On graph started. \end{DoxyCompactList}\item 
+Unity\+Event \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a4c5af182b70a408c163c403dc835a79d}{On\+Graph\+Ended}} = new()
+\begin{DoxyCompactList}\small\item\em On graph ended. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+override void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a9d47fab16181758307dbe1c99ab68fa4}{Awake}} ()
+\begin{DoxyCompactList}\small\item\em Awake. \end{DoxyCompactList}\item 
+override void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_aa14d252b137f618c70d9f1387dbd2920}{On\+Graph\+Stop}} ()
+\begin{DoxyCompactList}\small\item\em Called after the graph ends. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner}{Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Runner}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset}{Graph\+Asset}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a95403ddb4f425b2927a95833cb6cc778}{Resolve\+Subgraph\+Asset}} (\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}} node)
+\begin{DoxyCompactList}\small\item\em Override to return the subgraph asset for a Run\+Subgraph node. Base implementation always returns null (no inline asset references yet). \end{DoxyCompactList}\item 
+virtual \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner}{Graph\+Runner}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a2054a99aee83b56e27ef6d73ed8d3929}{Create\+Sub\+Runner}} (Game\+Object go)
+\begin{DoxyCompactList}\small\item\em Factory for the sub-\/runner used by Run\+Subgraph nodes. Override in subclasses to return a typed subclass (e.\+g. \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_runner}{Dialogue\+Runner}). \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_ad72976a530f102f35aab2252f9262385}{On\+Graph\+Start}} ()
+\begin{DoxyCompactList}\small\item\em Called after the graph starts and the first node is about to execute. \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_aa44d8799644c701331916fe66dd6a59d}{On\+Variable\+Changed}} (string variable\+Name, string new\+Value\+String)
+\begin{DoxyCompactList}\small\item\em Called when a Set\+Variable node successfully changes a variable. Override to fire UI events or drive external systems. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a17ddf75c6cdc6144daaf3d856bee2d36}{End\+Graph}} ()
+\begin{DoxyCompactList}\small\item\em End graph. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_ae29fa6e39c8c2a8b8169f8510f6b4a13}{Get\+Node\+Connected\+To\+Output}} (\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}} node, string port\+Name)
+\begin{DoxyCompactList}\small\item\em Get node connected to output. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest_a397aad428d96c102b7bc1197a00979ad}{Quest\+Result}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a4a6a028fa945a3a975515df5a5ccb342}{Result}} = \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest_a397aad428d96c102b7bc1197a00979ada12d868c18cb29bf58f02b504be9033fd}{Quest\+Result.\+In\+Progress}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Result. \end{DoxyCompactList}\item 
+string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a930417015cae683697740f55bded42db}{Failure\+Reason}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Failure reason. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_info}{Objective\+Info}}? \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_aaa5c3ae9b7e086a7959a04b3369a47e2}{Active\+Objective}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Active objective. \end{DoxyCompactList}\item 
+IRead\+Only\+Collection$<$ \doxymbox{\hyperlink{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_info}{Objective\+Info}} $>$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a363424f458f35a74b73b0be21c41be54}{Active\+Objectives}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Active objectives. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a69aee0f9c29def722104452d6d45c357}{Has\+Active\+Timer}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em True while a Timer node window is armed and the quest is running. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a93c298d2ac43e58f0a6f58be5707694e}{Timer\+Remaining}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Seconds left in the current Timer window (0 once elapsed). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties inherited from \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner}{Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Runner}}}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a89177d09f5512d2307d7c5dd8d9f208b}{Is\+Running}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Is running. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner}{Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Runner}}}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard}{Blackboard}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a0a9e62d6260f8ae895eb9a058bde6d46}{m\+\_\+\+Runtime\+Blackboard}}
+\begin{DoxyCompactList}\small\item\em Runtime blackboard. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context}{Graph\+Run\+Context}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a9b1a11e453ca742a1b647d411a2958c4}{m\+\_\+\+Context}}
+\begin{DoxyCompactList}\small\item\em Context. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Executes a Single quest graph. Supports any number of simultaneously active objectives (needed for continuous-\/mode parallel objectives). 
+
+Objective node handlers call Register\+Objective /\+ Unregister\+Objective directly; external code still calls Complete\+Objective /\+ Fail\+Objective by GUID as before. 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a9d91d9d70726afb76fca64d04c73e5db}\index{Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}!AbortQuest@{AbortQuest}}
+\index{AbortQuest@{AbortQuest}!Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}}
+\doxysubsubsection{\texorpdfstring{AbortQuest()}{AbortQuest()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a9d91d9d70726afb76fca64d04c73e5db} 
+void Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Runner.\+Abort\+Quest (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Abort quest. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a9d47fab16181758307dbe1c99ab68fa4}\index{Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}!Awake@{Awake}}
+\index{Awake@{Awake}!Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}}
+\doxysubsubsection{\texorpdfstring{Awake()}{Awake()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a9d47fab16181758307dbe1c99ab68fa4} 
+override void Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Runner.\+Awake (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Awake. 
+
+
+
+Reimplemented from \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a0883a615c8adc62c6d5c42cd579f9911}{Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Runner}}.
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_afca02b4180be3e9cee936b98574a62c1}\index{Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}!CompleteObjective@{CompleteObjective}}
+\index{CompleteObjective@{CompleteObjective}!Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}}
+\doxysubsubsection{\texorpdfstring{CompleteObjective()}{CompleteObjective()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_afca02b4180be3e9cee936b98574a62c1} 
+void Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Runner.\+Complete\+Objective (\begin{DoxyParamCaption}\item[{string}]{node\+Guid}{}\end{DoxyParamCaption})}
+
+
+
+Signal that the named objective was satisfied. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a8407488e06589ae7359397ca1062665c}\index{Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}!FailObjective@{FailObjective}}
+\index{FailObjective@{FailObjective}!Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}}
+\doxysubsubsection{\texorpdfstring{FailObjective()}{FailObjective()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a8407488e06589ae7359397ca1062665c} 
+void Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Runner.\+Fail\+Objective (\begin{DoxyParamCaption}\item[{string}]{node\+Guid}{}\end{DoxyParamCaption})}
+
+
+
+Signal that the named objective has failed. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a925e1df6d02998131cd43725a7a7c848}\index{Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}!ForceFailQuest@{ForceFailQuest}}
+\index{ForceFailQuest@{ForceFailQuest}!Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}}
+\doxysubsubsection{\texorpdfstring{ForceFailQuest()}{ForceFailQuest()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a925e1df6d02998131cd43725a7a7c848} 
+void Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Runner.\+Force\+Fail\+Quest (\begin{DoxyParamCaption}\item[{string}]{reason}{}\end{DoxyParamCaption})}
+
+
+
+Immediately fail the quest (e.\+g., a continuous guard lost its condition). Safe to call from any coroutine running on this runner. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_accbcba3ea428b05ed36ba1b903925079}\index{Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}!GetObjectiveOutcome@{GetObjectiveOutcome}}
+\index{GetObjectiveOutcome@{GetObjectiveOutcome}!Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}}
+\doxysubsubsection{\texorpdfstring{GetObjectiveOutcome()}{GetObjectiveOutcome()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_accbcba3ea428b05ed36ba1b903925079} 
+bool? Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Runner.\+Get\+Objective\+Outcome (\begin{DoxyParamCaption}\item[{string}]{node\+Guid}{}\end{DoxyParamCaption})}
+
+
+
+Returns the pending outcome for an active objective, or null if still waiting. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_aa36fcdf7bab44dbea5cab7383f01ee05}\index{Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}!GetProgress@{GetProgress}}
+\index{GetProgress@{GetProgress}!Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}}
+\doxysubsubsection{\texorpdfstring{GetProgress()}{GetProgress()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_aa36fcdf7bab44dbea5cab7383f01ee05} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_progress}{Objective\+Progress}} Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Runner.\+Get\+Progress (\begin{DoxyParamCaption}\item[{string}]{node\+Guid}{}\end{DoxyParamCaption})}
+
+
+
+Get progress. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_aa14d252b137f618c70d9f1387dbd2920}\index{Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}!OnGraphStop@{OnGraphStop}}
+\index{OnGraphStop@{OnGraphStop}!Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}}
+\doxysubsubsection{\texorpdfstring{OnGraphStop()}{OnGraphStop()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_aa14d252b137f618c70d9f1387dbd2920} 
+override void Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Runner.\+On\+Graph\+Stop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Called after the graph ends. 
+
+
+
+Reimplemented from \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_aeecb2ae3334774897189c579e49018eb}{Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Runner}}.
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a1acc5e786b735d35581d14308f4294c2}\index{Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}!RaiseTimerTimeout@{RaiseTimerTimeout}}
+\index{RaiseTimerTimeout@{RaiseTimerTimeout}!Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}}
+\doxysubsubsection{\texorpdfstring{RaiseTimerTimeout()}{RaiseTimerTimeout()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a1acc5e786b735d35581d14308f4294c2} 
+void Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Runner.\+Raise\+Timer\+Timeout (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Fires On\+Timer\+Timeout (called by Timer node handlers). 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_afd4f8d18d546f1786958afb3940499ab}\index{Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}!RegisterObjective@{RegisterObjective}}
+\index{RegisterObjective@{RegisterObjective}!Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}}
+\doxysubsubsection{\texorpdfstring{RegisterObjective()}{RegisterObjective()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_afd4f8d18d546f1786958afb3940499ab} 
+void Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Runner.\+Register\+Objective (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_info}{Objective\+Info}}}]{info}{}\end{DoxyParamCaption})}
+
+
+
+Called by objective node handlers at the start of execution. Fires On\+Objective\+Started so the HUD can show the new objective. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_ae27d523830374ac9709ad707078d2953}\index{Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}!RegisterProgress@{RegisterProgress}}
+\index{RegisterProgress@{RegisterProgress}!Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}}
+\doxysubsubsection{\texorpdfstring{RegisterProgress()}{RegisterProgress()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_ae27d523830374ac9709ad707078d2953} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_progress}{Objective\+Progress}} Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Runner.\+Register\+Progress (\begin{DoxyParamCaption}\item[{string}]{node\+Guid}{, }\item[{int}]{required}{}\end{DoxyParamCaption})}
+
+
+
+Creates (or replaces) the resettable progress counter for an objective node. Objective handlers call this at activation, then attach a composed gate predicate. Timer/\+\+Reset nodes act on the same counter by node guid. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a450948f14be761b714b9ed0baaf7943e}\index{Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}!ResetObjectiveProgress@{ResetObjectiveProgress}}
+\index{ResetObjectiveProgress@{ResetObjectiveProgress}!Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}}
+\doxysubsubsection{\texorpdfstring{ResetObjectiveProgress()}{ResetObjectiveProgress()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a450948f14be761b714b9ed0baaf7943e} 
+void Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Runner.\+Reset\+Objective\+Progress (\begin{DoxyParamCaption}\item[{string}]{node\+Guid}{}\end{DoxyParamCaption})}
+
+
+
+Wipe an objective\textquotesingle{}s accumulated progress (used by Reset Progress nodes). 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_aaaf4f649cc0862ee8445f64bf89b1f77}\index{Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}!SetTimerWindow@{SetTimerWindow}}
+\index{SetTimerWindow@{SetTimerWindow}!Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}}
+\doxysubsubsection{\texorpdfstring{SetTimerWindow()}{SetTimerWindow()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_aaaf4f649cc0862ee8445f64bf89b1f77} 
+void Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Runner.\+Set\+Timer\+Window (\begin{DoxyParamCaption}\item[{float}]{seconds}{}\end{DoxyParamCaption})}
+
+
+
+Called by a Timer node each time it (re)arms, so the HUD can show a live countdown. The latest call wins (single shared window display). 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a79fc711eac3c6e662b164e4aa63db11c}\index{Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}!StartQuest@{StartQuest}}
+\index{StartQuest@{StartQuest}!Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}}
+\doxysubsubsection{\texorpdfstring{StartQuest()}{StartQuest()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a79fc711eac3c6e662b164e4aa63db11c} 
+void Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Runner.\+Start\+Quest (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Start quest. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_ad78f6ea5bffa7924156cc859b54dbaba}\index{Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}!UnregisterObjective@{UnregisterObjective}}
+\index{UnregisterObjective@{UnregisterObjective}!Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}}
+\doxysubsubsection{\texorpdfstring{UnregisterObjective()}{UnregisterObjective()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_ad78f6ea5bffa7924156cc859b54dbaba} 
+void Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Runner.\+Unregister\+Objective (\begin{DoxyParamCaption}\item[{string}]{node\+Guid}{, }\item[{bool?}]{outcome}{ = {\ttfamily null}}\end{DoxyParamCaption})}
+
+
+
+Called by objective node handlers when they conclude (complete, fail, or continuous monitor ends). Fires the appropriate event. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_aafecf842d7a70a9f74b65dcd2f5c5761}\index{Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}!UnregisterProgress@{UnregisterProgress}}
+\index{UnregisterProgress@{UnregisterProgress}!Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}}
+\doxysubsubsection{\texorpdfstring{UnregisterProgress()}{UnregisterProgress()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_aafecf842d7a70a9f74b65dcd2f5c5761} 
+void Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Runner.\+Unregister\+Progress (\begin{DoxyParamCaption}\item[{string}]{node\+Guid}{}\end{DoxyParamCaption})}
+
+
+
+Unregister progress. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_doc-variable-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a4a8c6867017d033698f75cd2101a823f}\index{Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}!OnDialogueStarted@{OnDialogueStarted}}
+\index{OnDialogueStarted@{OnDialogueStarted}!Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}}
+\doxysubsubsection{\texorpdfstring{OnDialogueStarted}{OnDialogueStarted}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a4a8c6867017d033698f75cd2101a823f} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_dialogue_runner_event}{Dialogue\+Runner\+Event}} Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Runner.\+On\+Dialogue\+Started = new()}
+
+
+
+On dialogue started. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_ad27acf414c548208283421463880d411}\index{Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}!OnObjectiveCompleted@{OnObjectiveCompleted}}
+\index{OnObjectiveCompleted@{OnObjectiveCompleted}!Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}}
+\doxysubsubsection{\texorpdfstring{OnObjectiveCompleted}{OnObjectiveCompleted}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_ad27acf414c548208283421463880d411} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_event}{Objective\+Event}} Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Runner.\+On\+Objective\+Completed = new()}
+
+
+
+On objective completed. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_aa4961e5b1de1b9a1a9a7fa1c7e0c6a35}\index{Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}!OnObjectiveFailed@{OnObjectiveFailed}}
+\index{OnObjectiveFailed@{OnObjectiveFailed}!Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}}
+\doxysubsubsection{\texorpdfstring{OnObjectiveFailed}{OnObjectiveFailed}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_aa4961e5b1de1b9a1a9a7fa1c7e0c6a35} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_event}{Objective\+Event}} Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Runner.\+On\+Objective\+Failed = new()}
+
+
+
+On objective failed. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_aa3810902a8a09402de7c7b813a861e79}\index{Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}!OnObjectiveStarted@{OnObjectiveStarted}}
+\index{OnObjectiveStarted@{OnObjectiveStarted}!Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}}
+\doxysubsubsection{\texorpdfstring{OnObjectiveStarted}{OnObjectiveStarted}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_aa3810902a8a09402de7c7b813a861e79} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_event}{Objective\+Event}} Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Runner.\+On\+Objective\+Started = new()}
+
+
+
+On objective started. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a654bc2fce16bd6c73a60058a34003573}\index{Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}!OnQuestCompleted@{OnQuestCompleted}}
+\index{OnQuestCompleted@{OnQuestCompleted}!Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}}
+\doxysubsubsection{\texorpdfstring{OnQuestCompleted}{OnQuestCompleted}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a654bc2fce16bd6c73a60058a34003573} 
+Unity\+Event Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Runner.\+On\+Quest\+Completed = new()}
+
+
+
+On quest completed. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a5b33eb873534103dad10403a27fc4c38}\index{Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}!OnQuestEnded@{OnQuestEnded}}
+\index{OnQuestEnded@{OnQuestEnded}!Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}}
+\doxysubsubsection{\texorpdfstring{OnQuestEnded}{OnQuestEnded}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a5b33eb873534103dad10403a27fc4c38} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_result_event}{Result\+Event}} Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Runner.\+On\+Quest\+Ended = new()}
+
+
+
+On quest ended. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a7da59b52248778943ed2003557f9abd1}\index{Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}!OnQuestFailed@{OnQuestFailed}}
+\index{OnQuestFailed@{OnQuestFailed}!Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}}
+\doxysubsubsection{\texorpdfstring{OnQuestFailed}{OnQuestFailed}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a7da59b52248778943ed2003557f9abd1} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_failed_event}{Failed\+Event}} Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Runner.\+On\+Quest\+Failed = new()}
+
+
+
+On quest failed. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_ac177b3f6ae31092e21f7dbbc1ebd2f40}\index{Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}!OnRewardGranted@{OnRewardGranted}}
+\index{OnRewardGranted@{OnRewardGranted}!Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}}
+\doxysubsubsection{\texorpdfstring{OnRewardGranted}{OnRewardGranted}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_ac177b3f6ae31092e21f7dbbc1ebd2f40} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_reward_event}{Reward\+Event}} Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Runner.\+On\+Reward\+Granted = new()}
+
+
+
+On reward granted. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_ab8ad26fe4bfdc7e9cb11bb12184ecf41}\index{Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}!OnTimerTimeout@{OnTimerTimeout}}
+\index{OnTimerTimeout@{OnTimerTimeout}!Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}}
+\doxysubsubsection{\texorpdfstring{OnTimerTimeout}{OnTimerTimeout}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_ab8ad26fe4bfdc7e9cb11bb12184ecf41} 
+Unity\+Event Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Runner.\+On\+Timer\+Timeout = new()}
+
+
+
+On timer timeout. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_doc-property-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_aaa5c3ae9b7e086a7959a04b3369a47e2}\index{Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}!ActiveObjective@{ActiveObjective}}
+\index{ActiveObjective@{ActiveObjective}!Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}}
+\doxysubsubsection{\texorpdfstring{ActiveObjective}{ActiveObjective}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_aaa5c3ae9b7e086a7959a04b3369a47e2} 
+\doxymbox{\hyperlink{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_info}{Objective\+Info}}? Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Runner.\+Active\+Objective\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Active objective. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a363424f458f35a74b73b0be21c41be54}\index{Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}!ActiveObjectives@{ActiveObjectives}}
+\index{ActiveObjectives@{ActiveObjectives}!Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}}
+\doxysubsubsection{\texorpdfstring{ActiveObjectives}{ActiveObjectives}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a363424f458f35a74b73b0be21c41be54} 
+IRead\+Only\+Collection$<$\doxymbox{\hyperlink{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_info}{Objective\+Info}}$>$ Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Runner.\+Active\+Objectives\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Active objectives. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a930417015cae683697740f55bded42db}\index{Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}!FailureReason@{FailureReason}}
+\index{FailureReason@{FailureReason}!Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}}
+\doxysubsubsection{\texorpdfstring{FailureReason}{FailureReason}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a930417015cae683697740f55bded42db} 
+string Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Runner.\+Failure\+Reason\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Failure reason. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a69aee0f9c29def722104452d6d45c357}\index{Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}!HasActiveTimer@{HasActiveTimer}}
+\index{HasActiveTimer@{HasActiveTimer}!Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}}
+\doxysubsubsection{\texorpdfstring{HasActiveTimer}{HasActiveTimer}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a69aee0f9c29def722104452d6d45c357} 
+bool Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Runner.\+Has\+Active\+Timer\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+True while a Timer node window is armed and the quest is running. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a4a6a028fa945a3a975515df5a5ccb342}\index{Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}!Result@{Result}}
+\index{Result@{Result}!Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}}
+\doxysubsubsection{\texorpdfstring{Result}{Result}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a4a6a028fa945a3a975515df5a5ccb342} 
+\doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest_a397aad428d96c102b7bc1197a00979ad}{Quest\+Result}} Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Runner.\+Result = \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest_a397aad428d96c102b7bc1197a00979ada12d868c18cb29bf58f02b504be9033fd}{Quest\+Result.\+In\+Progress}}\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Result. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a93c298d2ac43e58f0a6f58be5707694e}\index{Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}!TimerRemaining@{TimerRemaining}}
+\index{TimerRemaining@{TimerRemaining}!Feazeyu.RPGSystems.Quest.QuestRunner@{Feazeyu.RPGSystems.Quest.QuestRunner}}
+\doxysubsubsection{\texorpdfstring{TimerRemaining}{TimerRemaining}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a93c298d2ac43e58f0a6f58be5707694e} 
+float Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Runner.\+Timer\+Remaining\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Seconds left in the current Timer window (0 once elapsed). 
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Quest/\+\+Runtime/\+\doxymbox{\hyperlink{_quest_runner_8cs}{Quest\+Runner.\+cs}}\end{DoxyCompactItemize}

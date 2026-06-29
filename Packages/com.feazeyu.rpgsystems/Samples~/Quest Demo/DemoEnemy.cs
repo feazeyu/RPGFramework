@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Feazeyu.RPGSystems.Character;
 
-namespace QuestGraph.Demo
+namespace Feazeyu.RPGSystems.Demo
 {
     /// <summary>Sample enemy for the Quest demo: takes damage on interact and dies for kill objectives.</summary>
     [RequireComponent(typeof(Entity), typeof(Health), typeof(Interactable))]

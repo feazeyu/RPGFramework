@@ -203,7 +203,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb28db1b48202b44991f82a34048fe6b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Feazeyu.RPGSystems.Samples.QuestDemo::QuestGraph.Demo.ItemPickup
+  m_EditorClassIdentifier: Feazeyu.RPGSystems.Samples.QuestDemo::Feazeyu.RPGSystems.Demo.ItemPickup
   OnInteract:
     m_PersistentCalls:
       m_Calls: []
@@ -391,7 +391,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb28db1b48202b44991f82a34048fe6b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Feazeyu.RPGSystems.Samples.QuestDemo::QuestGraph.Demo.ItemPickup
+  m_EditorClassIdentifier: Feazeyu.RPGSystems.Samples.QuestDemo::Feazeyu.RPGSystems.Demo.ItemPickup
   OnInteract:
     m_PersistentCalls:
       m_Calls: []
@@ -637,7 +637,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb28db1b48202b44991f82a34048fe6b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Feazeyu.RPGSystems.Samples.QuestDemo::QuestGraph.Demo.ItemPickup
+  m_EditorClassIdentifier: Feazeyu.RPGSystems.Samples.QuestDemo::Feazeyu.RPGSystems.Demo.ItemPickup
   OnInteract:
     m_PersistentCalls:
       m_Calls: []
@@ -1031,7 +1031,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb28db1b48202b44991f82a34048fe6b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Feazeyu.RPGSystems.Samples.QuestDemo::QuestGraph.Demo.ItemPickup
+  m_EditorClassIdentifier: Feazeyu.RPGSystems.Samples.QuestDemo::Feazeyu.RPGSystems.Demo.ItemPickup
   OnInteract:
     m_PersistentCalls:
       m_Calls: []
@@ -1216,7 +1216,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32ce21371df686e44ae5b3ff34803433, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Feazeyu.RPGSystems.Quest::QuestGraph.Runtime.QuestChainRunner
+  m_EditorClassIdentifier: Feazeyu.RPGSystems.Quest::Feazeyu.RPGSystems.Quest.QuestChainRunner
   Chain: {fileID: 11400000, guid: 6c17fa0acac31ae4f829a7056a1f7da7, type: 2}
   AutoStart: 0
   OnAvailableQuestsChanged:
@@ -1250,7 +1250,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: QuestGraph.Demo.QuestDemoDirector, Feazeyu.RPGSystems.Samples.QuestDemo
+        m_TargetAssemblyTypeName: Feazeyu.RPGSystems.Demo.QuestDemoDirector, Feazeyu.RPGSystems.Samples.QuestDemo
         m_MethodName: BeginChain
         m_Mode: 0
         m_Arguments:
@@ -1388,7 +1388,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30821024542824944905d94767fe10de, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Feazeyu.RPGSystems.Samples.QuestDemo::QuestGraph.Demo.QuestGiver
+  m_EditorClassIdentifier: Feazeyu.RPGSystems.Samples.QuestDemo::Feazeyu.RPGSystems.Demo.QuestGiver
   m_Chain: {fileID: 543087066}
   m_PlayerInventory: {fileID: 902522278}
   m_StartingItemId: 10
@@ -1438,7 +1438,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb28db1b48202b44991f82a34048fe6b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Feazeyu.RPGSystems.Samples.QuestDemo::QuestGraph.Demo.ItemPickup
+  m_EditorClassIdentifier: Feazeyu.RPGSystems.Samples.QuestDemo::Feazeyu.RPGSystems.Demo.ItemPickup
   OnInteract:
     m_PersistentCalls:
       m_Calls: []
@@ -1763,7 +1763,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb28db1b48202b44991f82a34048fe6b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Feazeyu.RPGSystems.Samples.QuestDemo::QuestGraph.Demo.ItemPickup
+  m_EditorClassIdentifier: Feazeyu.RPGSystems.Samples.QuestDemo::Feazeyu.RPGSystems.Demo.ItemPickup
   OnInteract:
     m_PersistentCalls:
       m_Calls: []
@@ -2385,7 +2385,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb28db1b48202b44991f82a34048fe6b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Feazeyu.RPGSystems.Samples.QuestDemo::QuestGraph.Demo.ItemPickup
+  m_EditorClassIdentifier: Feazeyu.RPGSystems.Samples.QuestDemo::Feazeyu.RPGSystems.Demo.ItemPickup
   OnInteract:
     m_PersistentCalls:
       m_Calls: []
@@ -2640,7 +2640,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 50522a39c2540ea4ebecbb195689e6b9, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Feazeyu.RPGSystems.Samples.QuestDemo::QuestGraph.Demo.QuestDemoUI
+  m_EditorClassIdentifier: Feazeyu.RPGSystems.Samples.QuestDemo::Feazeyu.RPGSystems.Demo.QuestDemoUI
   m_Chain: {fileID: 543087066}
   m_TitleText: {fileID: 1266061539}
   m_ObjectivesText: {fileID: 1913305978}
@@ -2692,7 +2692,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb28db1b48202b44991f82a34048fe6b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Feazeyu.RPGSystems.Samples.QuestDemo::QuestGraph.Demo.ItemPickup
+  m_EditorClassIdentifier: Feazeyu.RPGSystems.Samples.QuestDemo::Feazeyu.RPGSystems.Demo.ItemPickup
   OnInteract:
     m_PersistentCalls:
       m_Calls: []
@@ -2925,7 +2925,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb28db1b48202b44991f82a34048fe6b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Feazeyu.RPGSystems.Samples.QuestDemo::QuestGraph.Demo.ItemPickup
+  m_EditorClassIdentifier: Feazeyu.RPGSystems.Samples.QuestDemo::Feazeyu.RPGSystems.Demo.ItemPickup
   OnInteract:
     m_PersistentCalls:
       m_Calls: []
@@ -3216,7 +3216,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb28db1b48202b44991f82a34048fe6b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Feazeyu.RPGSystems.Samples.QuestDemo::QuestGraph.Demo.ItemPickup
+  m_EditorClassIdentifier: Feazeyu.RPGSystems.Samples.QuestDemo::Feazeyu.RPGSystems.Demo.ItemPickup
   OnInteract:
     m_PersistentCalls:
       m_Calls: []
@@ -3456,7 +3456,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb28db1b48202b44991f82a34048fe6b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Feazeyu.RPGSystems.Samples.QuestDemo::QuestGraph.Demo.ItemPickup
+  m_EditorClassIdentifier: Feazeyu.RPGSystems.Samples.QuestDemo::Feazeyu.RPGSystems.Demo.ItemPickup
   OnInteract:
     m_PersistentCalls:
       m_Calls: []
@@ -3657,7 +3657,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb28db1b48202b44991f82a34048fe6b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Feazeyu.RPGSystems.Samples.QuestDemo::QuestGraph.Demo.ItemPickup
+  m_EditorClassIdentifier: Feazeyu.RPGSystems.Samples.QuestDemo::Feazeyu.RPGSystems.Demo.ItemPickup
   OnInteract:
     m_PersistentCalls:
       m_Calls: []
@@ -3811,7 +3811,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb28db1b48202b44991f82a34048fe6b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Feazeyu.RPGSystems.Samples.QuestDemo::QuestGraph.Demo.ItemPickup
+  m_EditorClassIdentifier: Feazeyu.RPGSystems.Samples.QuestDemo::Feazeyu.RPGSystems.Demo.ItemPickup
   OnInteract:
     m_PersistentCalls:
       m_Calls: []
@@ -4025,7 +4025,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb28db1b48202b44991f82a34048fe6b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Feazeyu.RPGSystems.Samples.QuestDemo::QuestGraph.Demo.ItemPickup
+  m_EditorClassIdentifier: Feazeyu.RPGSystems.Samples.QuestDemo::Feazeyu.RPGSystems.Demo.ItemPickup
   OnInteract:
     m_PersistentCalls:
       m_Calls: []
@@ -4367,7 +4367,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb28db1b48202b44991f82a34048fe6b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Feazeyu.RPGSystems.Samples.QuestDemo::QuestGraph.Demo.ItemPickup
+  m_EditorClassIdentifier: Feazeyu.RPGSystems.Samples.QuestDemo::Feazeyu.RPGSystems.Demo.ItemPickup
   OnInteract:
     m_PersistentCalls:
       m_Calls: []
@@ -4658,7 +4658,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb28db1b48202b44991f82a34048fe6b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Feazeyu.RPGSystems.Samples.QuestDemo::QuestGraph.Demo.ItemPickup
+  m_EditorClassIdentifier: Feazeyu.RPGSystems.Samples.QuestDemo::Feazeyu.RPGSystems.Demo.ItemPickup
   OnInteract:
     m_PersistentCalls:
       m_Calls: []
@@ -4812,7 +4812,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb28db1b48202b44991f82a34048fe6b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Feazeyu.RPGSystems.Samples.QuestDemo::QuestGraph.Demo.ItemPickup
+  m_EditorClassIdentifier: Feazeyu.RPGSystems.Samples.QuestDemo::Feazeyu.RPGSystems.Demo.ItemPickup
   OnInteract:
     m_PersistentCalls:
       m_Calls: []
@@ -4966,7 +4966,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb28db1b48202b44991f82a34048fe6b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Feazeyu.RPGSystems.Samples.QuestDemo::QuestGraph.Demo.ItemPickup
+  m_EditorClassIdentifier: Feazeyu.RPGSystems.Samples.QuestDemo::Feazeyu.RPGSystems.Demo.ItemPickup
   OnInteract:
     m_PersistentCalls:
       m_Calls: []

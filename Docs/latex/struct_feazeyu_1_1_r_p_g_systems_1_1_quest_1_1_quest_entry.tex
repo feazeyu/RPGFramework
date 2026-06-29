@@ -1,0 +1,105 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Entry Struct Reference}
+\hypertarget{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_entry}{}\label{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_entry}\index{Feazeyu.RPGSystems.Quest.QuestEntry@{Feazeyu.RPGSystems.Quest.QuestEntry}}
+
+
+A single quest reference inside a chain.  
+
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string \doxymbox{\hyperlink{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_entry_ad533945f868ec172fb9ccbac138b0ab2}{Chain\+Node\+Guid}}
+\begin{DoxyCompactList}\small\item\em GUID of the Run\+Subgraph \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data} inside the chain asset. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest_add252d5adcba7db84974e666d02cbab1}{Quest\+Source}} \doxymbox{\hyperlink{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_entry_a9ca292dc4f98fb594ae2e0a0bff1d308}{Source}}
+\begin{DoxyCompactList}\small\item\em Which kind of quest this entry references. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_graph_asset}{Quest\+Graph\+Asset}} \doxymbox{\hyperlink{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_entry_af0984e392765dbb93f4a0ef72bd7f88d}{Graph\+Quest}}
+\begin{DoxyCompactList}\small\item\em Set when Source is Quest\+Source.\+Graph. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset}{Quest\+Asset}} \doxymbox{\hyperlink{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_entry_a9d221b7b52fa3d9a97812176fa73eed9}{Simple\+Quest}}
+\begin{DoxyCompactList}\small\item\em Set when Source is Quest\+Source.\+Simple. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest_a1fd380eabee832cf0c0514d02e9d993d}{Quest\+Entry\+State}} \doxymbox{\hyperlink{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_entry_a11064e84274d834ec8e6e28b8bb62686}{State}}
+\begin{DoxyCompactList}\small\item\em Current lifecycle state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+string \doxymbox{\hyperlink{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_entry_afe249fd36503ace595a1a62fda5744df}{Display\+Name}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Best-\/effort display name for UI. Prefers Quest\+Asset.\+Title on simple quests, falls back to the Scriptable\+Object\textquotesingle{}s asset name. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A single quest reference inside a chain. 
+
+Source indicates which of Graph\+Quest /\+ Simple\+Quest is populated — exactly one is non-\/null for a well-\/formed entry. None means the link was missing or pointed at an unsupported type. 
+
+\label{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_entry_doc-variable-members}
+\Hypertarget{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_entry_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_entry_ad533945f868ec172fb9ccbac138b0ab2}\index{Feazeyu.RPGSystems.Quest.QuestEntry@{Feazeyu.RPGSystems.Quest.QuestEntry}!ChainNodeGuid@{ChainNodeGuid}}
+\index{ChainNodeGuid@{ChainNodeGuid}!Feazeyu.RPGSystems.Quest.QuestEntry@{Feazeyu.RPGSystems.Quest.QuestEntry}}
+\doxysubsubsection{\texorpdfstring{ChainNodeGuid}{ChainNodeGuid}}
+{\footnotesize\ttfamily \label{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_entry_ad533945f868ec172fb9ccbac138b0ab2} 
+string Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Entry.\+Chain\+Node\+Guid}
+
+
+
+GUID of the Run\+Subgraph \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data} inside the chain asset. 
+
+\Hypertarget{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_entry_af0984e392765dbb93f4a0ef72bd7f88d}\index{Feazeyu.RPGSystems.Quest.QuestEntry@{Feazeyu.RPGSystems.Quest.QuestEntry}!GraphQuest@{GraphQuest}}
+\index{GraphQuest@{GraphQuest}!Feazeyu.RPGSystems.Quest.QuestEntry@{Feazeyu.RPGSystems.Quest.QuestEntry}}
+\doxysubsubsection{\texorpdfstring{GraphQuest}{GraphQuest}}
+{\footnotesize\ttfamily \label{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_entry_af0984e392765dbb93f4a0ef72bd7f88d} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_graph_asset}{Quest\+Graph\+Asset}} Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Entry.\+Graph\+Quest}
+
+
+
+Set when Source is Quest\+Source.\+Graph. 
+
+\Hypertarget{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_entry_a9d221b7b52fa3d9a97812176fa73eed9}\index{Feazeyu.RPGSystems.Quest.QuestEntry@{Feazeyu.RPGSystems.Quest.QuestEntry}!SimpleQuest@{SimpleQuest}}
+\index{SimpleQuest@{SimpleQuest}!Feazeyu.RPGSystems.Quest.QuestEntry@{Feazeyu.RPGSystems.Quest.QuestEntry}}
+\doxysubsubsection{\texorpdfstring{SimpleQuest}{SimpleQuest}}
+{\footnotesize\ttfamily \label{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_entry_a9d221b7b52fa3d9a97812176fa73eed9} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_asset}{Quest\+Asset}} Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Entry.\+Simple\+Quest}
+
+
+
+Set when Source is Quest\+Source.\+Simple. 
+
+\Hypertarget{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_entry_a9ca292dc4f98fb594ae2e0a0bff1d308}\index{Feazeyu.RPGSystems.Quest.QuestEntry@{Feazeyu.RPGSystems.Quest.QuestEntry}!Source@{Source}}
+\index{Source@{Source}!Feazeyu.RPGSystems.Quest.QuestEntry@{Feazeyu.RPGSystems.Quest.QuestEntry}}
+\doxysubsubsection{\texorpdfstring{Source}{Source}}
+{\footnotesize\ttfamily \label{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_entry_a9ca292dc4f98fb594ae2e0a0bff1d308} 
+\doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest_add252d5adcba7db84974e666d02cbab1}{Quest\+Source}} Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Entry.\+Source}
+
+
+
+Which kind of quest this entry references. 
+
+\Hypertarget{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_entry_a11064e84274d834ec8e6e28b8bb62686}\index{Feazeyu.RPGSystems.Quest.QuestEntry@{Feazeyu.RPGSystems.Quest.QuestEntry}!State@{State}}
+\index{State@{State}!Feazeyu.RPGSystems.Quest.QuestEntry@{Feazeyu.RPGSystems.Quest.QuestEntry}}
+\doxysubsubsection{\texorpdfstring{State}{State}}
+{\footnotesize\ttfamily \label{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_entry_a11064e84274d834ec8e6e28b8bb62686} 
+\doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest_a1fd380eabee832cf0c0514d02e9d993d}{Quest\+Entry\+State}} Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Entry.\+State}
+
+
+
+Current lifecycle state. 
+
+
+
+\label{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_entry_doc-property-members}
+\Hypertarget{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_entry_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_entry_afe249fd36503ace595a1a62fda5744df}\index{Feazeyu.RPGSystems.Quest.QuestEntry@{Feazeyu.RPGSystems.Quest.QuestEntry}!DisplayName@{DisplayName}}
+\index{DisplayName@{DisplayName}!Feazeyu.RPGSystems.Quest.QuestEntry@{Feazeyu.RPGSystems.Quest.QuestEntry}}
+\doxysubsubsection{\texorpdfstring{DisplayName}{DisplayName}}
+{\footnotesize\ttfamily \label{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_entry_afe249fd36503ace595a1a62fda5744df} 
+string Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Entry.\+Display\+Name\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Best-\/effort display name for UI. Prefers Quest\+Asset.\+Title on simple quests, falls back to the Scriptable\+Object\textquotesingle{}s asset name. 
+
+
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Quest/\+\+Runtime/\+\doxymbox{\hyperlink{_quest_chain_runner_8cs}{Quest\+Chain\+Runner.\+cs}}\end{DoxyCompactItemize}

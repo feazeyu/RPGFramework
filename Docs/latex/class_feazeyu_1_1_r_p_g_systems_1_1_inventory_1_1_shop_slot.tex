@@ -1,0 +1,123 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+Slot Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot}\index{Feazeyu.RPGSystems.Inventory.ShopSlot@{Feazeyu.RPGSystems.Inventory.ShopSlot}}
+
+
+One shop listing:\+ an item, its price, and remaining stock (negative = infinite).  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_ac70d85f892f9ad0afc0f3b35a36774e4}{Try\+Sell}} ()
+\begin{DoxyCompactList}\small\item\em Consumes one unit of stock; returns false if none available. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_a31e57f21caf2eeafef864b5f8915ce6f}{Undo\+Sell}} ()
+\begin{DoxyCompactList}\small\item\em Returns one unit to stock, reversing a Try\+Sell. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_a41a456e3d7c67a505e99b21153916851}{item\+Id}}
+\begin{DoxyCompactList}\small\item\em Id of the item sold by this listing. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_a84fbf6853ff3ebd0ef5084ede7de0f27}{price}}
+\begin{DoxyCompactList}\small\item\em Unit price. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_a74164426aedd99c449ed56a72b769588}{stock}} = -\/1
+\begin{DoxyCompactList}\small\item\em Remaining stock; -\/1 means infinite. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_a1de503ba9e4fd1803c11cdb6f787a15e}{Is\+Infinite}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Whether the listing has infinite stock. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_ada439970c1e76ded6a2d531e290388bd}{Is\+Available}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Whether at least one unit can be sold. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+One shop listing:\+ an item, its price, and remaining stock (negative = infinite). 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_ac70d85f892f9ad0afc0f3b35a36774e4}\index{Feazeyu.RPGSystems.Inventory.ShopSlot@{Feazeyu.RPGSystems.Inventory.ShopSlot}!TrySell@{TrySell}}
+\index{TrySell@{TrySell}!Feazeyu.RPGSystems.Inventory.ShopSlot@{Feazeyu.RPGSystems.Inventory.ShopSlot}}
+\doxysubsubsection{\texorpdfstring{TrySell()}{TrySell()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_ac70d85f892f9ad0afc0f3b35a36774e4} 
+bool Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+Slot.\+Try\+Sell (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Consumes one unit of stock; returns false if none available. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_a31e57f21caf2eeafef864b5f8915ce6f}\index{Feazeyu.RPGSystems.Inventory.ShopSlot@{Feazeyu.RPGSystems.Inventory.ShopSlot}!UndoSell@{UndoSell}}
+\index{UndoSell@{UndoSell}!Feazeyu.RPGSystems.Inventory.ShopSlot@{Feazeyu.RPGSystems.Inventory.ShopSlot}}
+\doxysubsubsection{\texorpdfstring{UndoSell()}{UndoSell()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_a31e57f21caf2eeafef864b5f8915ce6f} 
+void Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+Slot.\+Undo\+Sell (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Returns one unit to stock, reversing a Try\+Sell. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_doc-variable-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_a41a456e3d7c67a505e99b21153916851}\index{Feazeyu.RPGSystems.Inventory.ShopSlot@{Feazeyu.RPGSystems.Inventory.ShopSlot}!itemId@{itemId}}
+\index{itemId@{itemId}!Feazeyu.RPGSystems.Inventory.ShopSlot@{Feazeyu.RPGSystems.Inventory.ShopSlot}}
+\doxysubsubsection{\texorpdfstring{itemId}{itemId}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_a41a456e3d7c67a505e99b21153916851} 
+int Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+Slot.\+item\+Id}
+
+
+
+Id of the item sold by this listing. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_a84fbf6853ff3ebd0ef5084ede7de0f27}\index{Feazeyu.RPGSystems.Inventory.ShopSlot@{Feazeyu.RPGSystems.Inventory.ShopSlot}!price@{price}}
+\index{price@{price}!Feazeyu.RPGSystems.Inventory.ShopSlot@{Feazeyu.RPGSystems.Inventory.ShopSlot}}
+\doxysubsubsection{\texorpdfstring{price}{price}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_a84fbf6853ff3ebd0ef5084ede7de0f27} 
+int Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+Slot.\+price}
+
+
+
+Unit price. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_a74164426aedd99c449ed56a72b769588}\index{Feazeyu.RPGSystems.Inventory.ShopSlot@{Feazeyu.RPGSystems.Inventory.ShopSlot}!stock@{stock}}
+\index{stock@{stock}!Feazeyu.RPGSystems.Inventory.ShopSlot@{Feazeyu.RPGSystems.Inventory.ShopSlot}}
+\doxysubsubsection{\texorpdfstring{stock}{stock}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_a74164426aedd99c449ed56a72b769588} 
+int Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+Slot.\+stock = -\/1}
+
+
+
+Remaining stock; -\/1 means infinite. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_doc-property-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_ada439970c1e76ded6a2d531e290388bd}\index{Feazeyu.RPGSystems.Inventory.ShopSlot@{Feazeyu.RPGSystems.Inventory.ShopSlot}!IsAvailable@{IsAvailable}}
+\index{IsAvailable@{IsAvailable}!Feazeyu.RPGSystems.Inventory.ShopSlot@{Feazeyu.RPGSystems.Inventory.ShopSlot}}
+\doxysubsubsection{\texorpdfstring{IsAvailable}{IsAvailable}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_ada439970c1e76ded6a2d531e290388bd} 
+bool Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+Slot.\+Is\+Available\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Whether at least one unit can be sold. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_a1de503ba9e4fd1803c11cdb6f787a15e}\index{Feazeyu.RPGSystems.Inventory.ShopSlot@{Feazeyu.RPGSystems.Inventory.ShopSlot}!IsInfinite@{IsInfinite}}
+\index{IsInfinite@{IsInfinite}!Feazeyu.RPGSystems.Inventory.ShopSlot@{Feazeyu.RPGSystems.Inventory.ShopSlot}}
+\doxysubsubsection{\texorpdfstring{IsInfinite}{IsInfinite}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_a1de503ba9e4fd1803c11cdb6f787a15e} 
+bool Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+Slot.\+Is\+Infinite\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Whether the listing has infinite stock. 
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Inventory/\+\+Shopping/\+\doxymbox{\hyperlink{_shop_slot_8cs}{Shop\+Slot.\+cs}}\end{DoxyCompactItemize}

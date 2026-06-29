@@ -1,0 +1,112 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Core.\+Stats.\+Stat\+Effect Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect}\index{Feazeyu.RPGSystems.Core.Stats.StatEffect@{Feazeyu.RPGSystems.Core.Stats.StatEffect}}
+
+
+Base class for a named modifier applied to a single Stats.\+Stat.  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Core.\+Stats.\+Stat\+Effect:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_ac89b691f55ee3b06264e0e2b744a2d6d}{Stat\+Effect}} (\doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_interfaces_1_1_i_named}{INamed}} source, \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a6b983b75d35bd1cd1ee36a55d6978184}{Stat}} stat)
+\begin{DoxyCompactList}\small\item\em Initializes the effect with its source and target stat. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_interfaces_1_1_i_named}{INamed}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_a4bb8dc0255c3e5e521d2b1fd9daee9d2}{\+\_\+source}}
+\begin{DoxyCompactList}\small\item\em Source. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a6b983b75d35bd1cd1ee36a55d6978184}{Stat}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_a8fcec3872f4c345deab5ffb762caf0ff}{\+\_\+stat}}
+\begin{DoxyCompactList}\small\item\em Stat. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_a4307caab1bd11e185280a7e469c2d970}{Name}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Name of the effect, taken from its INamed source. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a6b983b75d35bd1cd1ee36a55d6978184}{Stat}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_af5045767c1b3f3d48f9548cced908ae7}{Stat}}\hspace{0.3cm}{\ttfamily  \+[get, set]\+}
+\begin{DoxyCompactList}\small\item\em The stat this effect modifies. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Base class for a named modifier applied to a single Stats.\+Stat. 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_doc-constructors}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_ac89b691f55ee3b06264e0e2b744a2d6d}\index{Feazeyu.RPGSystems.Core.Stats.StatEffect@{Feazeyu.RPGSystems.Core.Stats.StatEffect}!StatEffect@{StatEffect}}
+\index{StatEffect@{StatEffect}!Feazeyu.RPGSystems.Core.Stats.StatEffect@{Feazeyu.RPGSystems.Core.Stats.StatEffect}}
+\doxysubsubsection{\texorpdfstring{StatEffect()}{StatEffect()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_ac89b691f55ee3b06264e0e2b744a2d6d} 
+Feazeyu.\+RPGSystems.\+Core.\+Stats.\+Stat\+Effect.\+Stat\+Effect (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_interfaces_1_1_i_named}{INamed}}}]{source}{, }\item[{\doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a6b983b75d35bd1cd1ee36a55d6978184}{Stat}}}]{stat}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Initializes the effect with its source and target stat. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em source} & The named originator of the effect (item, buff, …).\\
+\hline
+{\em stat} & The stat this effect modifies.\\
+\hline
+\end{DoxyParams}
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_doc-variable-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_a4bb8dc0255c3e5e521d2b1fd9daee9d2}\index{Feazeyu.RPGSystems.Core.Stats.StatEffect@{Feazeyu.RPGSystems.Core.Stats.StatEffect}!\_source@{\_source}}
+\index{\_source@{\_source}!Feazeyu.RPGSystems.Core.Stats.StatEffect@{Feazeyu.RPGSystems.Core.Stats.StatEffect}}
+\doxysubsubsection{\texorpdfstring{\_source}{\_source}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_a4bb8dc0255c3e5e521d2b1fd9daee9d2} 
+\doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_interfaces_1_1_i_named}{INamed}} Feazeyu.\+RPGSystems.\+Core.\+Stats.\+Stat\+Effect.\+\_\+source\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Source. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_a8fcec3872f4c345deab5ffb762caf0ff}\index{Feazeyu.RPGSystems.Core.Stats.StatEffect@{Feazeyu.RPGSystems.Core.Stats.StatEffect}!\_stat@{\_stat}}
+\index{\_stat@{\_stat}!Feazeyu.RPGSystems.Core.Stats.StatEffect@{Feazeyu.RPGSystems.Core.Stats.StatEffect}}
+\doxysubsubsection{\texorpdfstring{\_stat}{\_stat}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_a8fcec3872f4c345deab5ffb762caf0ff} 
+\doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a6b983b75d35bd1cd1ee36a55d6978184}{Stat}} Feazeyu.\+RPGSystems.\+Core.\+Stats.\+Stat\+Effect.\+\_\+stat\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Stat. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_doc-property-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_a4307caab1bd11e185280a7e469c2d970}\index{Feazeyu.RPGSystems.Core.Stats.StatEffect@{Feazeyu.RPGSystems.Core.Stats.StatEffect}!Name@{Name}}
+\index{Name@{Name}!Feazeyu.RPGSystems.Core.Stats.StatEffect@{Feazeyu.RPGSystems.Core.Stats.StatEffect}}
+\doxysubsubsection{\texorpdfstring{Name}{Name}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_a4307caab1bd11e185280a7e469c2d970} 
+string Feazeyu.\+RPGSystems.\+Core.\+Stats.\+Stat\+Effect.\+Name\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Name of the effect, taken from its INamed source. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_af5045767c1b3f3d48f9548cced908ae7}\index{Feazeyu.RPGSystems.Core.Stats.StatEffect@{Feazeyu.RPGSystems.Core.Stats.StatEffect}!Stat@{Stat}}
+\index{Stat@{Stat}!Feazeyu.RPGSystems.Core.Stats.StatEffect@{Feazeyu.RPGSystems.Core.Stats.StatEffect}}
+\doxysubsubsection{\texorpdfstring{Stat}{Stat}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_af5045767c1b3f3d48f9548cced908ae7} 
+\doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a6b983b75d35bd1cd1ee36a55d6978184}{Stat}} Feazeyu.\+RPGSystems.\+Core.\+Stats.\+Stat\+Effect.\+Stat\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The stat this effect modifies. 
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Core/\+\+Stats/\+\doxymbox{\hyperlink{_stat_effect_8cs}{Stat\+Effect.\+cs}}\end{DoxyCompactItemize}

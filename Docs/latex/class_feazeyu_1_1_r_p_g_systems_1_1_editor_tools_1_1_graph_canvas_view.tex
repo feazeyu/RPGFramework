@@ -1,0 +1,169 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Canvas\+View Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_canvas_view}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_canvas_view}\index{Feazeyu.RPGSystems.EditorTools.GraphCanvasView@{Feazeyu.RPGSystems.EditorTools.GraphCanvasView}}
+
+
+The shared graph canvas. Extends Unity\textquotesingle{}s Graph\+View so we get node drag, rubber-\/band selection, edge drawing, pan/\+zoom, and minimap for free.  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Canvas\+View:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_canvas_view}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_canvas_view_aa0ed89b01605d8237f9396e0a78bb283}{Graph\+Canvas\+View}} (Editor\+Window window, IRead\+Only\+Dictionary$<$ string, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_info}{Node\+Info}} $>$ node\+Registry, Style\+Sheet theme\+Sheet, string root\+Css\+Class)
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the Graph\+Canvas\+View class. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_canvas_view_aa75afbed673013d6d359b37cd6406a33}{Set\+Node\+Registry}} (IRead\+Only\+Dictionary$<$ string, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_info}{Node\+Info}} $>$ node\+Registry)
+\begin{DoxyCompactList}\small\item\em Swap the "{}\+Add Node"{} palette at runtime. Used by windows whose palette depends on properties of the currently loaded asset (e.\+g. Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Quest\+Graph\+Window filters by {\ttfamily Quest\+Kind}). Existing node views keep their cached Node\+Info; nodes created after this call use the new registry. \end{DoxyCompactList}\item 
+override List$<$ Port $>$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_canvas_view_aff0d6be70d458e0243b40c7fb24e6aeb}{Get\+Compatible\+Ports}} (Port start\+Port, Node\+Adapter adapter)
+\begin{DoxyCompactList}\small\item\em Rule:\+ Output→\+Input, matching direction, no self-\/loops. \end{DoxyCompactList}\item 
+override void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_canvas_view_a5349a7d47c576afa2dc5f460b1996715}{Build\+Contextual\+Menu}} (Contextual\+Menu\+Populate\+Event evt)
+\begin{DoxyCompactList}\small\item\em Right-\/click → contextual menu populated from the injected registry. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_canvas_view_a64ec947a061abcf969186014c1d5f5b9}{Populate}} (\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset}{Graph\+Asset}} asset)
+\begin{DoxyCompactList}\small\item\em Populate. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_canvas_view_ad78a1ee1b376a54bed0519ce9f935cea}{Flush\+View\+State}} ()
+\begin{DoxyCompactList}\small\item\em Writes the current pan/\+zoom back to the asset before saving. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_canvas_view_aa350ff958c0ef1f0268c1d56448daf67}{Refresh\+Node\+View}} (string guid)
+\begin{DoxyCompactList}\small\item\em Refresh node view. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Action$<$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}} $>$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_canvas_view_a24403c0799568670077f9ef356ea4e6c}{On\+Node\+Selected}}
+\begin{DoxyCompactList}\small\item\em On node selected. \end{DoxyCompactList}\item 
+Action \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_canvas_view_a75294d6b6880c09392836dab63199b3b}{On\+Node\+Deselected}}
+\begin{DoxyCompactList}\small\item\em On node deselected. \end{DoxyCompactList}\item 
+Action$<$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}} $>$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_canvas_view_a21033d56f29d1e8808446b296bc8621b}{On\+Node\+Fields\+Changed}}
+\begin{DoxyCompactList}\small\item\em On node fields changed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The shared graph canvas. Extends Unity\textquotesingle{}s Graph\+View so we get node drag, rubber-\/band selection, edge drawing, pan/\+zoom, and minimap for free. 
+
+System-\/agnostic — used by every graph-\/based editor (dialogue, quest, ...). What makes it system-\/specific is the three constructor parameters:\+ 
+\begin{DoxyItemize}
+\item {\itshape node\+Registry}  — populates the "{}\+Add Node"{} context menu 
+\item {\itshape theme\+Sheet}  — system-\/specific colour USS layered over Graph\+Editor.\+uss 
+\item {\itshape root\+Css\+Class}  — CSS class added to {\ttfamily this} so the theme sheet\textquotesingle{}s {\ttfamily .xxx-\/graph-\/view} rules apply 
+\end{DoxyItemize}
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_canvas_view_doc-constructors}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_canvas_view_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_canvas_view_aa0ed89b01605d8237f9396e0a78bb283}\index{Feazeyu.RPGSystems.EditorTools.GraphCanvasView@{Feazeyu.RPGSystems.EditorTools.GraphCanvasView}!GraphCanvasView@{GraphCanvasView}}
+\index{GraphCanvasView@{GraphCanvasView}!Feazeyu.RPGSystems.EditorTools.GraphCanvasView@{Feazeyu.RPGSystems.EditorTools.GraphCanvasView}}
+\doxysubsubsection{\texorpdfstring{GraphCanvasView()}{GraphCanvasView()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_canvas_view_aa0ed89b01605d8237f9396e0a78bb283} 
+Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Canvas\+View.\+Graph\+Canvas\+View (\begin{DoxyParamCaption}\item[{Editor\+Window}]{window}{, }\item[{IRead\+Only\+Dictionary$<$ string, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_info}{Node\+Info}} $>$}]{node\+Registry}{, }\item[{Style\+Sheet}]{theme\+Sheet}{, }\item[{string}]{root\+Css\+Class}{}\end{DoxyParamCaption})}
+
+
+
+Initializes a new instance of the Graph\+Canvas\+View class. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_canvas_view_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_canvas_view_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_canvas_view_a5349a7d47c576afa2dc5f460b1996715}\index{Feazeyu.RPGSystems.EditorTools.GraphCanvasView@{Feazeyu.RPGSystems.EditorTools.GraphCanvasView}!BuildContextualMenu@{BuildContextualMenu}}
+\index{BuildContextualMenu@{BuildContextualMenu}!Feazeyu.RPGSystems.EditorTools.GraphCanvasView@{Feazeyu.RPGSystems.EditorTools.GraphCanvasView}}
+\doxysubsubsection{\texorpdfstring{BuildContextualMenu()}{BuildContextualMenu()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_canvas_view_a5349a7d47c576afa2dc5f460b1996715} 
+override void Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Canvas\+View.\+Build\+Contextual\+Menu (\begin{DoxyParamCaption}\item[{Contextual\+Menu\+Populate\+Event}]{evt}{}\end{DoxyParamCaption})}
+
+
+
+Right-\/click → contextual menu populated from the injected registry. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_canvas_view_ad78a1ee1b376a54bed0519ce9f935cea}\index{Feazeyu.RPGSystems.EditorTools.GraphCanvasView@{Feazeyu.RPGSystems.EditorTools.GraphCanvasView}!FlushViewState@{FlushViewState}}
+\index{FlushViewState@{FlushViewState}!Feazeyu.RPGSystems.EditorTools.GraphCanvasView@{Feazeyu.RPGSystems.EditorTools.GraphCanvasView}}
+\doxysubsubsection{\texorpdfstring{FlushViewState()}{FlushViewState()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_canvas_view_ad78a1ee1b376a54bed0519ce9f935cea} 
+void Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Canvas\+View.\+Flush\+View\+State (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Writes the current pan/\+zoom back to the asset before saving. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_canvas_view_aff0d6be70d458e0243b40c7fb24e6aeb}\index{Feazeyu.RPGSystems.EditorTools.GraphCanvasView@{Feazeyu.RPGSystems.EditorTools.GraphCanvasView}!GetCompatiblePorts@{GetCompatiblePorts}}
+\index{GetCompatiblePorts@{GetCompatiblePorts}!Feazeyu.RPGSystems.EditorTools.GraphCanvasView@{Feazeyu.RPGSystems.EditorTools.GraphCanvasView}}
+\doxysubsubsection{\texorpdfstring{GetCompatiblePorts()}{GetCompatiblePorts()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_canvas_view_aff0d6be70d458e0243b40c7fb24e6aeb} 
+override List$<$ Port $>$ Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Canvas\+View.\+Get\+Compatible\+Ports (\begin{DoxyParamCaption}\item[{Port}]{start\+Port}{, }\item[{Node\+Adapter}]{adapter}{}\end{DoxyParamCaption})}
+
+
+
+Rule:\+ Output→\+Input, matching direction, no self-\/loops. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_canvas_view_a64ec947a061abcf969186014c1d5f5b9}\index{Feazeyu.RPGSystems.EditorTools.GraphCanvasView@{Feazeyu.RPGSystems.EditorTools.GraphCanvasView}!Populate@{Populate}}
+\index{Populate@{Populate}!Feazeyu.RPGSystems.EditorTools.GraphCanvasView@{Feazeyu.RPGSystems.EditorTools.GraphCanvasView}}
+\doxysubsubsection{\texorpdfstring{Populate()}{Populate()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_canvas_view_a64ec947a061abcf969186014c1d5f5b9} 
+void Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Canvas\+View.\+Populate (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset}{Graph\+Asset}}}]{asset}{}\end{DoxyParamCaption})}
+
+
+
+Populate. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_canvas_view_aa350ff958c0ef1f0268c1d56448daf67}\index{Feazeyu.RPGSystems.EditorTools.GraphCanvasView@{Feazeyu.RPGSystems.EditorTools.GraphCanvasView}!RefreshNodeView@{RefreshNodeView}}
+\index{RefreshNodeView@{RefreshNodeView}!Feazeyu.RPGSystems.EditorTools.GraphCanvasView@{Feazeyu.RPGSystems.EditorTools.GraphCanvasView}}
+\doxysubsubsection{\texorpdfstring{RefreshNodeView()}{RefreshNodeView()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_canvas_view_aa350ff958c0ef1f0268c1d56448daf67} 
+void Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Canvas\+View.\+Refresh\+Node\+View (\begin{DoxyParamCaption}\item[{string}]{guid}{}\end{DoxyParamCaption})}
+
+
+
+Refresh node view. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_canvas_view_aa75afbed673013d6d359b37cd6406a33}\index{Feazeyu.RPGSystems.EditorTools.GraphCanvasView@{Feazeyu.RPGSystems.EditorTools.GraphCanvasView}!SetNodeRegistry@{SetNodeRegistry}}
+\index{SetNodeRegistry@{SetNodeRegistry}!Feazeyu.RPGSystems.EditorTools.GraphCanvasView@{Feazeyu.RPGSystems.EditorTools.GraphCanvasView}}
+\doxysubsubsection{\texorpdfstring{SetNodeRegistry()}{SetNodeRegistry()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_canvas_view_aa75afbed673013d6d359b37cd6406a33} 
+void Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Canvas\+View.\+Set\+Node\+Registry (\begin{DoxyParamCaption}\item[{IRead\+Only\+Dictionary$<$ string, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_info}{Node\+Info}} $>$}]{node\+Registry}{}\end{DoxyParamCaption})}
+
+
+
+Swap the "{}\+Add Node"{} palette at runtime. Used by windows whose palette depends on properties of the currently loaded asset (e.\+g. Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Quest\+Graph\+Window filters by {\ttfamily Quest\+Kind}). Existing node views keep their cached Node\+Info; nodes created after this call use the new registry. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_canvas_view_doc-variable-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_canvas_view_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_canvas_view_a75294d6b6880c09392836dab63199b3b}\index{Feazeyu.RPGSystems.EditorTools.GraphCanvasView@{Feazeyu.RPGSystems.EditorTools.GraphCanvasView}!OnNodeDeselected@{OnNodeDeselected}}
+\index{OnNodeDeselected@{OnNodeDeselected}!Feazeyu.RPGSystems.EditorTools.GraphCanvasView@{Feazeyu.RPGSystems.EditorTools.GraphCanvasView}}
+\doxysubsubsection{\texorpdfstring{OnNodeDeselected}{OnNodeDeselected}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_canvas_view_a75294d6b6880c09392836dab63199b3b} 
+Action Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Canvas\+View.\+On\+Node\+Deselected}
+
+
+
+On node deselected. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_canvas_view_a21033d56f29d1e8808446b296bc8621b}\index{Feazeyu.RPGSystems.EditorTools.GraphCanvasView@{Feazeyu.RPGSystems.EditorTools.GraphCanvasView}!OnNodeFieldsChanged@{OnNodeFieldsChanged}}
+\index{OnNodeFieldsChanged@{OnNodeFieldsChanged}!Feazeyu.RPGSystems.EditorTools.GraphCanvasView@{Feazeyu.RPGSystems.EditorTools.GraphCanvasView}}
+\doxysubsubsection{\texorpdfstring{OnNodeFieldsChanged}{OnNodeFieldsChanged}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_canvas_view_a21033d56f29d1e8808446b296bc8621b} 
+Action$<$\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}}$>$ Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Canvas\+View.\+On\+Node\+Fields\+Changed}
+
+
+
+On node fields changed. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_canvas_view_a24403c0799568670077f9ef356ea4e6c}\index{Feazeyu.RPGSystems.EditorTools.GraphCanvasView@{Feazeyu.RPGSystems.EditorTools.GraphCanvasView}!OnNodeSelected@{OnNodeSelected}}
+\index{OnNodeSelected@{OnNodeSelected}!Feazeyu.RPGSystems.EditorTools.GraphCanvasView@{Feazeyu.RPGSystems.EditorTools.GraphCanvasView}}
+\doxysubsubsection{\texorpdfstring{OnNodeSelected}{OnNodeSelected}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_canvas_view_a24403c0799568670077f9ef356ea4e6c} 
+Action$<$\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}}$>$ Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Canvas\+View.\+On\+Node\+Selected}
+
+
+
+On node selected. 
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Editor/\+\+Graph/\+\+Windows/\+\doxymbox{\hyperlink{_graph_canvas_view_8cs}{Graph\+Canvas\+View.\+cs}}\end{DoxyCompactItemize}

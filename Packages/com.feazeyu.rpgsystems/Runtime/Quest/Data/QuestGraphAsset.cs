@@ -1,7 +1,7 @@
 using UnityEngine;
 using Feazeyu.RPGSystems.Dialogue;
 
-namespace QuestGraph.Runtime
+namespace Feazeyu.RPGSystems.Quest
 {
     /// <summary>
     /// Which flavour of quest graph this asset represents.

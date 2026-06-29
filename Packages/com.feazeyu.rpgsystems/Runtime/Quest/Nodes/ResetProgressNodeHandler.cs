@@ -1,8 +1,8 @@
 using System.Collections;
 using Feazeyu.RPGSystems.Dialogue;
-using QuestGraph.Runtime;
+using Feazeyu.RPGSystems.Quest;
 
-namespace QuestGraph.Nodes
+namespace Feazeyu.RPGSystems.Quest.Nodes
 {
     /// <summary>
     /// When a token reaches this node, it wipes the accumulated progress of every

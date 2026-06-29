@@ -1,0 +1,75 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Quest.\+Nodes.\+Accumulate\+Item\+Objective\+Handler Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_accumulate_item_objective_handler}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_accumulate_item_objective_handler}\index{Feazeyu.RPGSystems.Quest.Nodes.AccumulateItemObjectiveHandler@{Feazeyu.RPGSystems.Quest.Nodes.AccumulateItemObjectiveHandler}}
+
+
+Handler for the Accumulate Item objective node (type\+Id = "{}obj\+\_\+accumulate"{}).  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Quest.\+Nodes.\+Accumulate\+Item\+Objective\+Handler:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_accumulate_item_objective_handler}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+IEnumerator \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_accumulate_item_objective_handler_ae4670ba2001ef4a800d42a8dbc8f5335}{Execute}} (\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}} node, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context}{Graph\+Run\+Context}} ctx)
+\begin{DoxyCompactList}\small\item\em Coroutine that executes the node. The runner yields on this, so the handler can span multiple frames. Call context.\+Follow /\+ context.\+End when done — either inside this coroutine or from an external callback. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_accumulate_item_objective_handler_acf6d6258c5e966f9190499fb22697e2a}{Node\+Type\+Id}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Must match \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data_a4b2804487fe14225b5522250ef5d85e8}{Node\+Data.\+Node\+Type} for the nodes this handler processes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Handler for the Accumulate Item objective node (type\+Id = "{}obj\+\_\+accumulate"{}). 
+
+Counts how many of Item\+Id the player {\bfseries{acquires after the objective starts}}, ignoring whatever they already held, and completes once Count have been gained. Each gained unit is offered to a shared Objective\+Progress as a Progress\+Event (subject = the inventory owner), so the composable modifiers apply:\+ Gate nodes on the In port (in a zone, while wearing X, …) and a Timer + Reset Progress pair for "{}acquire N within a window, resetting on expiry"{}.
+
+Counting is {\bfseries{net}}:\+ additions count (through the gate) and removals decrement (ungated, may go negative), so dropping an item and re-\/collecting it nets to a single count rather than double-\/counting. Detection is exact when the container implements IItem\+Count\+Notifier (subscribes to On\+Item\+Added/\+\+On\+Item\+Removed); otherwise it polls signed Count\+Item deltas.
+
+Fields:\+ \doxylink{namespace_feazeyu_1_1_r_p_g_systems_1_1_inventory}{Inventory} — blackboard Game\+Object variable with an \doxylink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_container}{IItem\+Container} component 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_accumulate_item_objective_handler_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_accumulate_item_objective_handler_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_accumulate_item_objective_handler_ae4670ba2001ef4a800d42a8dbc8f5335}\index{Feazeyu.RPGSystems.Quest.Nodes.AccumulateItemObjectiveHandler@{Feazeyu.RPGSystems.Quest.Nodes.AccumulateItemObjectiveHandler}!Execute@{Execute}}
+\index{Execute@{Execute}!Feazeyu.RPGSystems.Quest.Nodes.AccumulateItemObjectiveHandler@{Feazeyu.RPGSystems.Quest.Nodes.AccumulateItemObjectiveHandler}}
+\doxysubsubsection{\texorpdfstring{Execute()}{Execute()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_accumulate_item_objective_handler_ae4670ba2001ef4a800d42a8dbc8f5335} 
+IEnumerator Feazeyu.\+RPGSystems.\+Quest.\+Nodes.\+Accumulate\+Item\+Objective\+Handler.\+Execute (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}}}]{node}{, }\item[{\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context}{Graph\+Run\+Context}}}]{ctx}{}\end{DoxyParamCaption})}
+
+
+
+Coroutine that executes the node. The runner yields on this, so the handler can span multiple frames. Call context.\+Follow /\+ context.\+End when done — either inside this coroutine or from an external callback. 
+
+
+
+Implements \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_i_graph_node_handler_a7362a7107f36dbc527b568e0f5e8af91}{Feazeyu.\+RPGSystems.\+Dialogue.\+IGraph\+Node\+Handler}}.
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_accumulate_item_objective_handler_doc-property-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_accumulate_item_objective_handler_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_accumulate_item_objective_handler_acf6d6258c5e966f9190499fb22697e2a}\index{Feazeyu.RPGSystems.Quest.Nodes.AccumulateItemObjectiveHandler@{Feazeyu.RPGSystems.Quest.Nodes.AccumulateItemObjectiveHandler}!NodeTypeId@{NodeTypeId}}
+\index{NodeTypeId@{NodeTypeId}!Feazeyu.RPGSystems.Quest.Nodes.AccumulateItemObjectiveHandler@{Feazeyu.RPGSystems.Quest.Nodes.AccumulateItemObjectiveHandler}}
+\doxysubsubsection{\texorpdfstring{NodeTypeId}{NodeTypeId}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_accumulate_item_objective_handler_acf6d6258c5e966f9190499fb22697e2a} 
+string Feazeyu.\+RPGSystems.\+Quest.\+Nodes.\+Accumulate\+Item\+Objective\+Handler.\+Node\+Type\+Id\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Must match \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data_a4b2804487fe14225b5522250ef5d85e8}{Node\+Data.\+Node\+Type} for the nodes this handler processes. 
+
+
+
+Implements \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_i_graph_node_handler_aaae381139fafeb9b8fbb6a24eb984f57}{Feazeyu.\+RPGSystems.\+Dialogue.\+IGraph\+Node\+Handler}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Quest/\+\+Nodes/\+\doxymbox{\hyperlink{_accumulate_item_objective_handler_8cs}{Accumulate\+Item\+Objective\+Handler.\+cs}}\end{DoxyCompactItemize}

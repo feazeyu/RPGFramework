@@ -1,0 +1,73 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Dialogue.\+Find\+Object\+Node\+Handler Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_find_object_node_handler}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_find_object_node_handler}\index{Feazeyu.RPGSystems.Dialogue.FindObjectNodeHandler@{Feazeyu.RPGSystems.Dialogue.FindObjectNodeHandler}}
+
+
+Finds a scene Game\+Object by name or tag and writes it to a linked blackboard Game\+Object variable.  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Dialogue.\+Find\+Object\+Node\+Handler:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_find_object_node_handler}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+IEnumerator \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_find_object_node_handler_a3f33b1566b2aa01046d6b4ab028bbaf0}{Execute}} (\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}} node, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context}{Graph\+Run\+Context}} ctx)
+\begin{DoxyCompactList}\small\item\em Coroutine that executes the node. The runner yields on this, so the handler can span multiple frames. Call context.\+Follow /\+ context.\+End when done — either inside this coroutine or from an external callback. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_find_object_node_handler_a50336e61f492ebb6012a5baf484185d7}{Node\+Type\+Id}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Must match \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data_a4b2804487fe14225b5522250ef5d85e8}{Node\+Data.\+Node\+Type} for the nodes this handler processes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Finds a scene Game\+Object by name or tag and writes it to a linked blackboard Game\+Object variable. 
+
+Fields:\+ Mode — "{}\+By\+Name"{} (default) or "{}\+By\+Tag"{} Value — the name /\+ tag string to search for (inline or blackboard String) Target — blackboard Game\+Object variable that receives the result
+
+Ports:\+ Found (object was located), Not\+Found. 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_find_object_node_handler_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_find_object_node_handler_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_find_object_node_handler_a3f33b1566b2aa01046d6b4ab028bbaf0}\index{Feazeyu.RPGSystems.Dialogue.FindObjectNodeHandler@{Feazeyu.RPGSystems.Dialogue.FindObjectNodeHandler}!Execute@{Execute}}
+\index{Execute@{Execute}!Feazeyu.RPGSystems.Dialogue.FindObjectNodeHandler@{Feazeyu.RPGSystems.Dialogue.FindObjectNodeHandler}}
+\doxysubsubsection{\texorpdfstring{Execute()}{Execute()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_find_object_node_handler_a3f33b1566b2aa01046d6b4ab028bbaf0} 
+IEnumerator Feazeyu.\+RPGSystems.\+Dialogue.\+Find\+Object\+Node\+Handler.\+Execute (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}}}]{node}{, }\item[{\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context}{Graph\+Run\+Context}}}]{ctx}{}\end{DoxyParamCaption})}
+
+
+
+Coroutine that executes the node. The runner yields on this, so the handler can span multiple frames. Call context.\+Follow /\+ context.\+End when done — either inside this coroutine or from an external callback. 
+
+
+
+Implements \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_i_graph_node_handler_a7362a7107f36dbc527b568e0f5e8af91}{Feazeyu.\+RPGSystems.\+Dialogue.\+IGraph\+Node\+Handler}}.
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_find_object_node_handler_doc-property-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_find_object_node_handler_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_find_object_node_handler_a50336e61f492ebb6012a5baf484185d7}\index{Feazeyu.RPGSystems.Dialogue.FindObjectNodeHandler@{Feazeyu.RPGSystems.Dialogue.FindObjectNodeHandler}!NodeTypeId@{NodeTypeId}}
+\index{NodeTypeId@{NodeTypeId}!Feazeyu.RPGSystems.Dialogue.FindObjectNodeHandler@{Feazeyu.RPGSystems.Dialogue.FindObjectNodeHandler}}
+\doxysubsubsection{\texorpdfstring{NodeTypeId}{NodeTypeId}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_find_object_node_handler_a50336e61f492ebb6012a5baf484185d7} 
+string Feazeyu.\+RPGSystems.\+Dialogue.\+Find\+Object\+Node\+Handler.\+Node\+Type\+Id\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Must match \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data_a4b2804487fe14225b5522250ef5d85e8}{Node\+Data.\+Node\+Type} for the nodes this handler processes. 
+
+
+
+Implements \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_i_graph_node_handler_aaae381139fafeb9b8fbb6a24eb984f57}{Feazeyu.\+RPGSystems.\+Dialogue.\+IGraph\+Node\+Handler}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Dialogue/\+\+Nodes/\+\doxymbox{\hyperlink{_find_object_node_handler_8cs}{Find\+Object\+Node\+Handler.\+cs}}\end{DoxyCompactItemize}

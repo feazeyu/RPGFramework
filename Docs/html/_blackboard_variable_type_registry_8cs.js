@@ -1,0 +1,4 @@
+var _blackboard_variable_type_registry_8cs =
+[
+    [ "Feazeyu.RPGSystems.EditorTools.BlackboardVariableTypeRegistry.Entry", "struct_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_blackboard_variable_type_registry_1_1_entry.html", "struct_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_blackboard_variable_type_registry_1_1_entry" ]
+];

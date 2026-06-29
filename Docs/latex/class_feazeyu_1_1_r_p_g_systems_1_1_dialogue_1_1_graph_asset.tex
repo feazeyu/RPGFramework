@@ -1,0 +1,173 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Asset Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset}\index{Feazeyu.RPGSystems.Dialogue.GraphAsset@{Feazeyu.RPGSystems.Dialogue.GraphAsset}}
+
+
+Common serialised data and CRUD for every graph-\/based system (\doxylink{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue}{Dialogue}, \doxylink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest}{Quest}, and any future graph editor built on top of Feazeyu.\+RPGSystems.\+Editor\textquotesingle{}s window pipeline).  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Asset:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.641510cm]{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_aa17a3d044ceecc47afc7838b2e3c4610}{Add\+Node}} (string node\+Type, string display\+Name, Vector2 position)
+\begin{DoxyCompactList}\small\item\em Add node. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_a352e580b61f35715f761e20648cc660e}{Remove\+Node}} (string guid)
+\begin{DoxyCompactList}\small\item\em Remove node. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_a2ef6700e1f603a5e334113e59915b17d}{Get\+Node}} (string guid)
+\begin{DoxyCompactList}\small\item\em Get node. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_edge_data}{Edge\+Data}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_a7ffe1f24f47f4bdfcaa50ab224b4d0d9}{Add\+Edge}} (string output\+Guid, string output\+Port, string input\+Guid, string input\+Port)
+\begin{DoxyCompactList}\small\item\em Add edge. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_aeefda67ca806a09fcfa1374394a69b33}{Remove\+Edge}} (string guid)
+\begin{DoxyCompactList}\small\item\em Remove edge. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_af4edf757ea6b555e52149b5d9b54d487}{Find\+Entry\+Node}} ()
+\begin{DoxyCompactList}\small\item\em Finds the entry /\+ Start node. Prefers an explicit "{}\+Start"{}-\/typed node so nodes with no incoming edges (e.\+g. Requirement nodes) are not mistaken for the graph entry point. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Vector3 \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_a06e27e126b9cd62e467cfca6573ae987}{View\+Transform}} = Vector3.\+zero
+\item 
+Vector2 \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_a1436a1d6b6d90b90b08587d513d3c20b}{Blackboard\+Position}} = new Vector2(10, 60)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+IRead\+Only\+List$<$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}} $>$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_a727f2f4063665c8a63c45aca57e94fc2}{Nodes}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Nodes. \end{DoxyCompactList}\item 
+IRead\+Only\+List$<$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_edge_data}{Edge\+Data}} $>$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_a42e291e237ff48c75d1dd138ee2a0202}{Edges}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Edges. \end{DoxyCompactList}\item 
+Blackboard \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_a2466d0151e84d7b741a0034ebaad5129}{Blackboard}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard}{Blackboard}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Common serialised data and CRUD for every graph-\/based system (\doxylink{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue}{Dialogue}, \doxylink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest}{Quest}, and any future graph editor built on top of Feazeyu.\+RPGSystems.\+Editor\textquotesingle{}s window pipeline). 
+
+Concrete subclasses (Dialogue\+Graph\+Asset, Quest\+Graph\+Asset) exist only to carry a {\ttfamily \+[Create\+Asset\+Menu]\+} attribute so each system gets its own entry under {\bfseries{Assets → Create}}.
+
+Serialisation layout — {\bfseries{do not change}} without a migration step. Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Blackboard\+Property\+Bridge walks {\ttfamily m\+\_\+\+Blackboard.\+m\+\_\+\+Variables} via absolute Serialized\+Property paths; any rename here silently breaks the inspector\textquotesingle{}s bound fields. 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_a7ffe1f24f47f4bdfcaa50ab224b4d0d9}\index{Feazeyu.RPGSystems.Dialogue.GraphAsset@{Feazeyu.RPGSystems.Dialogue.GraphAsset}!AddEdge@{AddEdge}}
+\index{AddEdge@{AddEdge}!Feazeyu.RPGSystems.Dialogue.GraphAsset@{Feazeyu.RPGSystems.Dialogue.GraphAsset}}
+\doxysubsubsection{\texorpdfstring{AddEdge()}{AddEdge()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_a7ffe1f24f47f4bdfcaa50ab224b4d0d9} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_edge_data}{Edge\+Data}} Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Asset.\+Add\+Edge (\begin{DoxyParamCaption}\item[{string}]{output\+Guid}{, }\item[{string}]{output\+Port}{, }\item[{string}]{input\+Guid}{, }\item[{string}]{input\+Port}{}\end{DoxyParamCaption})}
+
+
+
+Add edge. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_aa17a3d044ceecc47afc7838b2e3c4610}\index{Feazeyu.RPGSystems.Dialogue.GraphAsset@{Feazeyu.RPGSystems.Dialogue.GraphAsset}!AddNode@{AddNode}}
+\index{AddNode@{AddNode}!Feazeyu.RPGSystems.Dialogue.GraphAsset@{Feazeyu.RPGSystems.Dialogue.GraphAsset}}
+\doxysubsubsection{\texorpdfstring{AddNode()}{AddNode()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_aa17a3d044ceecc47afc7838b2e3c4610} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}} Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Asset.\+Add\+Node (\begin{DoxyParamCaption}\item[{string}]{node\+Type}{, }\item[{string}]{display\+Name}{, }\item[{Vector2}]{position}{}\end{DoxyParamCaption})}
+
+
+
+Add node. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_af4edf757ea6b555e52149b5d9b54d487}\index{Feazeyu.RPGSystems.Dialogue.GraphAsset@{Feazeyu.RPGSystems.Dialogue.GraphAsset}!FindEntryNode@{FindEntryNode}}
+\index{FindEntryNode@{FindEntryNode}!Feazeyu.RPGSystems.Dialogue.GraphAsset@{Feazeyu.RPGSystems.Dialogue.GraphAsset}}
+\doxysubsubsection{\texorpdfstring{FindEntryNode()}{FindEntryNode()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_af4edf757ea6b555e52149b5d9b54d487} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}} Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Asset.\+Find\+Entry\+Node (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Finds the entry /\+ Start node. Prefers an explicit "{}\+Start"{}-\/typed node so nodes with no incoming edges (e.\+g. Requirement nodes) are not mistaken for the graph entry point. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_a2ef6700e1f603a5e334113e59915b17d}\index{Feazeyu.RPGSystems.Dialogue.GraphAsset@{Feazeyu.RPGSystems.Dialogue.GraphAsset}!GetNode@{GetNode}}
+\index{GetNode@{GetNode}!Feazeyu.RPGSystems.Dialogue.GraphAsset@{Feazeyu.RPGSystems.Dialogue.GraphAsset}}
+\doxysubsubsection{\texorpdfstring{GetNode()}{GetNode()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_a2ef6700e1f603a5e334113e59915b17d} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}} Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Asset.\+Get\+Node (\begin{DoxyParamCaption}\item[{string}]{guid}{}\end{DoxyParamCaption})}
+
+
+
+Get node. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_aeefda67ca806a09fcfa1374394a69b33}\index{Feazeyu.RPGSystems.Dialogue.GraphAsset@{Feazeyu.RPGSystems.Dialogue.GraphAsset}!RemoveEdge@{RemoveEdge}}
+\index{RemoveEdge@{RemoveEdge}!Feazeyu.RPGSystems.Dialogue.GraphAsset@{Feazeyu.RPGSystems.Dialogue.GraphAsset}}
+\doxysubsubsection{\texorpdfstring{RemoveEdge()}{RemoveEdge()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_aeefda67ca806a09fcfa1374394a69b33} 
+bool Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Asset.\+Remove\+Edge (\begin{DoxyParamCaption}\item[{string}]{guid}{}\end{DoxyParamCaption})}
+
+
+
+Remove edge. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_a352e580b61f35715f761e20648cc660e}\index{Feazeyu.RPGSystems.Dialogue.GraphAsset@{Feazeyu.RPGSystems.Dialogue.GraphAsset}!RemoveNode@{RemoveNode}}
+\index{RemoveNode@{RemoveNode}!Feazeyu.RPGSystems.Dialogue.GraphAsset@{Feazeyu.RPGSystems.Dialogue.GraphAsset}}
+\doxysubsubsection{\texorpdfstring{RemoveNode()}{RemoveNode()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_a352e580b61f35715f761e20648cc660e} 
+bool Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Asset.\+Remove\+Node (\begin{DoxyParamCaption}\item[{string}]{guid}{}\end{DoxyParamCaption})}
+
+
+
+Remove node. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_doc-variable-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_a1436a1d6b6d90b90b08587d513d3c20b}\index{Feazeyu.RPGSystems.Dialogue.GraphAsset@{Feazeyu.RPGSystems.Dialogue.GraphAsset}!BlackboardPosition@{BlackboardPosition}}
+\index{BlackboardPosition@{BlackboardPosition}!Feazeyu.RPGSystems.Dialogue.GraphAsset@{Feazeyu.RPGSystems.Dialogue.GraphAsset}}
+\doxysubsubsection{\texorpdfstring{BlackboardPosition}{BlackboardPosition}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_a1436a1d6b6d90b90b08587d513d3c20b} 
+Vector2 Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Asset.\+Blackboard\+Position = new Vector2(10, 60)}
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_a06e27e126b9cd62e467cfca6573ae987}\index{Feazeyu.RPGSystems.Dialogue.GraphAsset@{Feazeyu.RPGSystems.Dialogue.GraphAsset}!ViewTransform@{ViewTransform}}
+\index{ViewTransform@{ViewTransform}!Feazeyu.RPGSystems.Dialogue.GraphAsset@{Feazeyu.RPGSystems.Dialogue.GraphAsset}}
+\doxysubsubsection{\texorpdfstring{ViewTransform}{ViewTransform}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_a06e27e126b9cd62e467cfca6573ae987} 
+Vector3 Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Asset.\+View\+Transform = Vector3.\+zero}
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_doc-property-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_a2466d0151e84d7b741a0034ebaad5129}\index{Feazeyu.RPGSystems.Dialogue.GraphAsset@{Feazeyu.RPGSystems.Dialogue.GraphAsset}!Blackboard@{Blackboard}}
+\index{Blackboard@{Blackboard}!Feazeyu.RPGSystems.Dialogue.GraphAsset@{Feazeyu.RPGSystems.Dialogue.GraphAsset}}
+\doxysubsubsection{\texorpdfstring{Blackboard}{Blackboard}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_a2466d0151e84d7b741a0034ebaad5129} 
+Blackboard Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Asset.\+Blackboard\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+\doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard}{Blackboard}. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_a42e291e237ff48c75d1dd138ee2a0202}\index{Feazeyu.RPGSystems.Dialogue.GraphAsset@{Feazeyu.RPGSystems.Dialogue.GraphAsset}!Edges@{Edges}}
+\index{Edges@{Edges}!Feazeyu.RPGSystems.Dialogue.GraphAsset@{Feazeyu.RPGSystems.Dialogue.GraphAsset}}
+\doxysubsubsection{\texorpdfstring{Edges}{Edges}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_a42e291e237ff48c75d1dd138ee2a0202} 
+IRead\+Only\+List$<$\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_edge_data}{Edge\+Data}}$>$ Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Asset.\+Edges\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Edges. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_a727f2f4063665c8a63c45aca57e94fc2}\index{Feazeyu.RPGSystems.Dialogue.GraphAsset@{Feazeyu.RPGSystems.Dialogue.GraphAsset}!Nodes@{Nodes}}
+\index{Nodes@{Nodes}!Feazeyu.RPGSystems.Dialogue.GraphAsset@{Feazeyu.RPGSystems.Dialogue.GraphAsset}}
+\doxysubsubsection{\texorpdfstring{Nodes}{Nodes}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset_a727f2f4063665c8a63c45aca57e94fc2} 
+IRead\+Only\+List$<$\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}}$>$ Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Asset.\+Nodes\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Nodes. 
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Dialogue/\+\+Data/\+\doxymbox{\hyperlink{_graph_asset_8cs}{Graph\+Asset.\+cs}}\end{DoxyCompactItemize}

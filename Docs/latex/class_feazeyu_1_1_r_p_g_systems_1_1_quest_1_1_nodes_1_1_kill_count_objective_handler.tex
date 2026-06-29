@@ -1,0 +1,75 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Quest.\+Nodes.\+Kill\+Count\+Objective\+Handler Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_kill_count_objective_handler}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_kill_count_objective_handler}\index{Feazeyu.RPGSystems.Quest.Nodes.KillCountObjectiveHandler@{Feazeyu.RPGSystems.Quest.Nodes.KillCountObjectiveHandler}}
+
+
+Handler for the Kill Count objective node (type\+Id = "{}obj\+\_\+kill"{}).  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Quest.\+Nodes.\+Kill\+Count\+Objective\+Handler:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_kill_count_objective_handler}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+IEnumerator \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_kill_count_objective_handler_a31b7195e50a2d5eb1239b6157501ec71}{Execute}} (\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}} node, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context}{Graph\+Run\+Context}} ctx)
+\begin{DoxyCompactList}\small\item\em Coroutine that executes the node. The runner yields on this, so the handler can span multiple frames. Call context.\+Follow /\+ context.\+End when done — either inside this coroutine or from an external callback. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_kill_count_objective_handler_a0c406d232a15252f4828d4cec0bee4b1}{Node\+Type\+Id}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Must match \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data_a4b2804487fe14225b5522250ef5d85e8}{Node\+Data.\+Node\+Type} for the nodes this handler processes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Handler for the Kill Count objective node (type\+Id = "{}obj\+\_\+kill"{}). 
+
+Waits until the player has killed {\ttfamily Count} entities tagged with {\ttfamily Tag}, then follows "{}\+Completed"{}. Entities spawned after activation are picked up automatically every second.
+
+Each kill is offered to a shared Objective\+Progress as a Progress\+Event (subject = the slain enemy), so composable modifiers apply:\+ attach Gate nodes to the In port to require conditions (in a zone, while wearing X, while carrying Y), and a Timer + Reset Progress pair to enforce a time window that wipes progress on expiry.
+
+Sequential chaining:\+ connect the "{}\+Completed"{} port to the next objective node\textquotesingle{}s "{}\+In"{} port. 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_kill_count_objective_handler_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_kill_count_objective_handler_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_kill_count_objective_handler_a31b7195e50a2d5eb1239b6157501ec71}\index{Feazeyu.RPGSystems.Quest.Nodes.KillCountObjectiveHandler@{Feazeyu.RPGSystems.Quest.Nodes.KillCountObjectiveHandler}!Execute@{Execute}}
+\index{Execute@{Execute}!Feazeyu.RPGSystems.Quest.Nodes.KillCountObjectiveHandler@{Feazeyu.RPGSystems.Quest.Nodes.KillCountObjectiveHandler}}
+\doxysubsubsection{\texorpdfstring{Execute()}{Execute()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_kill_count_objective_handler_a31b7195e50a2d5eb1239b6157501ec71} 
+IEnumerator Feazeyu.\+RPGSystems.\+Quest.\+Nodes.\+Kill\+Count\+Objective\+Handler.\+Execute (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}}}]{node}{, }\item[{\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context}{Graph\+Run\+Context}}}]{ctx}{}\end{DoxyParamCaption})}
+
+
+
+Coroutine that executes the node. The runner yields on this, so the handler can span multiple frames. Call context.\+Follow /\+ context.\+End when done — either inside this coroutine or from an external callback. 
+
+
+
+Implements \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_i_graph_node_handler_a7362a7107f36dbc527b568e0f5e8af91}{Feazeyu.\+RPGSystems.\+Dialogue.\+IGraph\+Node\+Handler}}.
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_kill_count_objective_handler_doc-property-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_kill_count_objective_handler_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_kill_count_objective_handler_a0c406d232a15252f4828d4cec0bee4b1}\index{Feazeyu.RPGSystems.Quest.Nodes.KillCountObjectiveHandler@{Feazeyu.RPGSystems.Quest.Nodes.KillCountObjectiveHandler}!NodeTypeId@{NodeTypeId}}
+\index{NodeTypeId@{NodeTypeId}!Feazeyu.RPGSystems.Quest.Nodes.KillCountObjectiveHandler@{Feazeyu.RPGSystems.Quest.Nodes.KillCountObjectiveHandler}}
+\doxysubsubsection{\texorpdfstring{NodeTypeId}{NodeTypeId}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_kill_count_objective_handler_a0c406d232a15252f4828d4cec0bee4b1} 
+string Feazeyu.\+RPGSystems.\+Quest.\+Nodes.\+Kill\+Count\+Objective\+Handler.\+Node\+Type\+Id\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Must match \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data_a4b2804487fe14225b5522250ef5d85e8}{Node\+Data.\+Node\+Type} for the nodes this handler processes. 
+
+
+
+Implements \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_i_graph_node_handler_aaae381139fafeb9b8fbb6a24eb984f57}{Feazeyu.\+RPGSystems.\+Dialogue.\+IGraph\+Node\+Handler}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Quest/\+\+Nodes/\+\doxymbox{\hyperlink{_kill_count_objective_handler_8cs}{Kill\+Count\+Objective\+Handler.\+cs}}\end{DoxyCompactItemize}

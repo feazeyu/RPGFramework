@@ -2,9 +2,9 @@ using System.Collections;
 using System.Globalization;
 using UnityEngine;
 using Feazeyu.RPGSystems.Dialogue;
-using QuestGraph.Runtime;
+using Feazeyu.RPGSystems.Quest;
 
-namespace QuestGraph.Nodes
+namespace Feazeyu.RPGSystems.Quest.Nodes
 {
     /// <summary>
     /// A standalone timer. A token entering the <c>Begin</c> input starts the

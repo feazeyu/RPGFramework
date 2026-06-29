@@ -1,0 +1,56 @@
+\doxysection{Packages/\+com.feazeyu.\+rpgsystems Directory Reference}
+\hypertarget{dir_8ef45574f42f7d0335f5ddb2d0096129}{}\label{dir_8ef45574f42f7d0335f5ddb2d0096129}\index{Packages/com.feazeyu.rpgsystems Directory Reference@{Packages/com.feazeyu.rpgsystems Directory Reference}}
+\doxysubsubsection*{Directories}
+\begin{DoxyCompactItemize}
+\item 
+directory \doxymbox{\hyperlink{dir_911df676b4484a373f541fa91df953ad}{Editor}}
+\item 
+directory \doxymbox{\hyperlink{dir_a59178acf201bad1c70c898eed984d2b}{Runtime}}
+\item 
+directory \doxymbox{\hyperlink{dir_f4f20b127137281b9f23b83325bac159}{Samples\texorpdfstring{$\sim$}{\string~}}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\hypertarget{dir_8ef45574f42f7d0335f5ddb2d0096129_autotoc_md3}{}\doxysubsection{\texorpdfstring{RPG Systems}{RPG Systems}}\label{dir_8ef45574f42f7d0335f5ddb2d0096129_autotoc_md3}
+Graph-\/based {\bfseries{dialogue}} and {\bfseries{quest}} systems, a flexible {\bfseries{inventory}} (grid, list, and shop), and a small {\bfseries{character/\+combat}} layer for 2D RPGs in Unity. The dialogue and quest systems share a single graph execution framework, so custom nodes and blackboard variables work the same across both.\hypertarget{dir_8ef45574f42f7d0335f5ddb2d0096129_autotoc_md4}{}\doxysubsection{\texorpdfstring{Features}{Features}}\label{dir_8ef45574f42f7d0335f5ddb2d0096129_autotoc_md4}
+
+\begin{DoxyItemize}
+\item {\bfseries{Unified graph framework}} — node/\+edge/\+blackboard model with a coroutine-\/driven runner, parallel flow tokens, subgraphs, and a full graph editor window (canvas, blackboard, inspector) you can reuse for your own graph-\/based systems.
+\item {\bfseries{Dialogue}} — branching lines, conditional choices, requirement gating, text interpolation from blackboard variables, and inline event/\+prefab actions.
+\item {\bfseries{Quests}} — single quests (objectives, rewards, terminal outcomes) and quest chains (dependency graphs with gates and per-\/quest variables). Composable objectives (kill count, collect/\+accumulate/\+deliver items, reach location) with stackable gate, timer, and reset modifiers.
+\item {\bfseries{Inventory}} — shape-\/aware grid inventory with drag-\/and-\/drop and stacking, a linear list inventory, and a shop layer (buy/\+sell against a runtime copy of the stock).
+\item {\bfseries{Character \& combat}} — entity resources (health/\+mana/\+stamina), a stat/\+effect scaling system, weapons (melee, projectile, combos), and an interaction system.
+\end{DoxyItemize}\hypertarget{dir_8ef45574f42f7d0335f5ddb2d0096129_autotoc_md5}{}\doxysubsection{\texorpdfstring{Requirements}{Requirements}}\label{dir_8ef45574f42f7d0335f5ddb2d0096129_autotoc_md5}
+
+\begin{DoxyItemize}
+\item Unity {\bfseries{6000.\+0}} (developed against 6000.\+0.\+43f1)
+\item Dependencies (installed automatically):\+ {\ttfamily com.\+unity.\+ugui}, {\ttfamily com.\+unity.\+inputsystem}
+\end{DoxyItemize}\hypertarget{dir_8ef45574f42f7d0335f5ddb2d0096129_autotoc_md6}{}\doxysubsection{\texorpdfstring{Installation}{Installation}}\label{dir_8ef45574f42f7d0335f5ddb2d0096129_autotoc_md6}
+Install via the Package Manager using the Git URL or a local path:\+
+
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Window → Package Manager → + → Add package from git URL…}} (or {\itshape from disk…} and pick this folder\textquotesingle{}s {\ttfamily package.\+json}).
+\item Unity resolves the {\ttfamily com.\+unity.\+ugui} and {\ttfamily com.\+unity.\+inputsystem} dependencies automatically.
+\end{DoxyEnumerate}\hypertarget{dir_8ef45574f42f7d0335f5ddb2d0096129_autotoc_md7}{}\doxysubsection{\texorpdfstring{Samples}{Samples}}\label{dir_8ef45574f42f7d0335f5ddb2d0096129_autotoc_md7}
+Import the demos from the package\textquotesingle{}s {\bfseries{Samples}} tab in the Package Manager:\+
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Dialogue Demo}} — an interactive NPC dialogue scene.
+\item {\bfseries{Quest Demo}} — a quest with objectives, enemies, and rewards.
+\item {\bfseries{Inventory Demo}} — a player grid inventory and chests with list inventories.
+\end{DoxyItemize}
+
+\begin{quote}
+Samples use Text\+Mesh\+Pro. If prompted, import the TMP Essentials (Window → Text\+Mesh\+Pro → Import TMP Essential Resources). \end{quote}
+\hypertarget{dir_8ef45574f42f7d0335f5ddb2d0096129_autotoc_md8}{}\doxysubsection{\texorpdfstring{Getting started}{Getting started}}\label{dir_8ef45574f42f7d0335f5ddb2d0096129_autotoc_md8}
+
+\begin{DoxyItemize}
+\item {\bfseries{Dialogue:\+}} {\itshape Assets → Create → Dialogue Graph}, author the graph, add a {\ttfamily Dialogue\+Runner} to an NPC, and start it (e.\+g. through the provided {\ttfamily Interactable}/\+{\ttfamily Interactor}).
+\item {\bfseries{Quests:\+}} {\itshape Assets → Create → RPGFramework → Quest Graph}. Use a {\ttfamily Quest\+Runner} for a single quest or a {\ttfamily Quest\+Chain\+Runner} for a chain.
+\end{DoxyItemize}
+
+See the in-\/code XML documentation for API details.\hypertarget{dir_8ef45574f42f7d0335f5ddb2d0096129_autotoc_md9}{}\doxysubsection{\texorpdfstring{License}{License}}\label{dir_8ef45574f42f7d0335f5ddb2d0096129_autotoc_md9}
+MIT — see \doxysectlink{md__packages_2com_8feazeyu_8rpgsystems_2_l_i_c_e_n_s_e}{LICENSE.md}{0}. 

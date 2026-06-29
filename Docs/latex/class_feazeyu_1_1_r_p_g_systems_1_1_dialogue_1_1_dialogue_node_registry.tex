@@ -1,0 +1,185 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Dialogue.\+Dialogue\+Node\+Registry Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_node_registry}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_node_registry}\index{Feazeyu.RPGSystems.Dialogue.DialogueNodeRegistry@{Feazeyu.RPGSystems.Dialogue.DialogueNodeRegistry}}
+
+
+Node registry for the dialogue graph system. Built-\/in shared flow/\+logic nodes come from Node\+Registry.\+Register\+Common\+Nodes; this class adds the dialogue-\/specific palette (\doxylink{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue}{Dialogue} Line, Choice Branch, Requirement, inventory/\+shop nodes) and the dialogue flavour of Condition and Run Subgraph. User types are discovered via Dialogue\+Node\+Attribute.  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Dialogue.\+Dialogue\+Node\+Registry:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_node_registry}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_info}{Node\+Info}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_node_registry_a458eacc899f18e9d954b12f762e11640}{Get}} (string type\+Id)
+\begin{DoxyCompactList}\small\item\em Look up a dialogue node type, or {\ttfamily null} if not registered. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_node_registry_acaca07dedb33454f9630ddf8dd85b61d}{Type\+Dialogue\+Line}} = "{}Dialogue\+Line"{}
+\begin{DoxyCompactList}\small\item\em Type dialogue line. \end{DoxyCompactList}\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_node_registry_a701421a0663c1c8aa2d552cf4d57878c}{Type\+Choice\+Branch}} = "{}Choice\+Branch"{}
+\begin{DoxyCompactList}\small\item\em Type choice branch. \end{DoxyCompactList}\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_node_registry_a4289b13c7f8864899fbb0b3df5770cf7}{Type\+Requirement}} = "{}requirement"{}
+\begin{DoxyCompactList}\small\item\em Type requirement. \end{DoxyCompactList}\item 
+static readonly Color \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_node_registry_a9074f8342c6362dda2e26a6f680a4ac7}{Col\+Dialogue}} = new Color(0.\+29f, 0.\+61f, 0.\+78f)
+\begin{DoxyCompactList}\small\item\em Col dialogue. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes inherited from \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry}{Feazeyu.\+RPGSystems.\+Dialogue.\+Node\+Registry}}}
+\begin{DoxyCompactItemize}
+\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a1a0fb8131ae3f1aa0cb1aa14300dafc7}{Type\+Start}} = "{}Start"{}
+\begin{DoxyCompactList}\small\item\em Type start. \end{DoxyCompactList}\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a2b33aa179b325ea50f2d4a09580cdc1b}{Type\+End}} = "{}End"{}
+\begin{DoxyCompactList}\small\item\em Type end. \end{DoxyCompactList}\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_acfc97496840d197fcd5609ed579845b6}{Type\+Condition}} = "{}Condition"{}
+\begin{DoxyCompactList}\small\item\em Type condition. \end{DoxyCompactList}\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_ab9b51268cba2eccfb2e4b00076ef57ea}{Type\+Set\+Variable}} = "{}Set\+Variable"{}
+\begin{DoxyCompactList}\small\item\em Type set variable. \end{DoxyCompactList}\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a3563731102077a475427b2bc744b728b}{Type\+Trigger\+Event}} = "{}Trigger\+Event"{}
+\begin{DoxyCompactList}\small\item\em Type trigger event. \end{DoxyCompactList}\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_afe0a4d45ae7c1580b948a93406891922}{Type\+Wait\+For\+Event}} = "{}Wait\+For\+Event"{}
+\begin{DoxyCompactList}\small\item\em Type wait for event. \end{DoxyCompactList}\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a100ba62b8107b87622788da466596d2d}{Type\+Run\+Subgraph}} = "{}Run\+Subgraph"{}
+\begin{DoxyCompactList}\small\item\em Type run subgraph. \end{DoxyCompactList}\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a17b167f83914ac53654270027de20cab}{Type\+Find\+Object}} = "{}find\+\_\+object"{}
+\begin{DoxyCompactList}\small\item\em Type find object. \end{DoxyCompactList}\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a37a5ffcb42602000b5b1f8dc593c51d8}{Type\+Debug\+Log}} = "{}debug\+\_\+log"{}
+\begin{DoxyCompactList}\small\item\em Type debug log. \end{DoxyCompactList}\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_ad42e9f242df47232e4ff76f030e6b9e7}{Type\+Spawn\+Prefab}} = "{}spawn\+\_\+prefab"{}
+\begin{DoxyCompactList}\small\item\em Type spawn prefab. \end{DoxyCompactList}\item 
+static readonly Color \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_af51a8fbcbf35166ee26f11deb229182f}{Col\+Flow}} = new Color(0.\+18f, 0.\+62f, 0.\+48f)
+\begin{DoxyCompactList}\small\item\em Col flow. \end{DoxyCompactList}\item 
+static readonly Color \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a9e8a393878b942f6bd59ea410342352a}{Col\+Logic}} = new Color(0.\+94f, 0.\+65f, 0.\+20f)
+\begin{DoxyCompactList}\small\item\em Col logic. \end{DoxyCompactList}\item 
+static readonly Color \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a2b38db1f26385c037ef2ddf07ba8ae05}{Col\+Event}} = new Color(0.\+88f, 0.\+31f, 0.\+44f)
+\begin{DoxyCompactList}\small\item\em Col event. \end{DoxyCompactList}\item 
+static readonly Color \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a9180943355045328250d91f2149600ba}{Col\+Variable}} = new Color(0.\+69f, 0.\+42f, 0.\+97f)
+\begin{DoxyCompactList}\small\item\em Col variable. \end{DoxyCompactList}\item 
+static readonly Color \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a2fac337408255d3293c96df869fbc6ac}{Col\+Start}} = new Color(0.\+34f, 0.\+78f, 0.\+34f)
+\begin{DoxyCompactList}\small\item\em Col start. \end{DoxyCompactList}\item 
+static readonly Color \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a8b19b6ac053dcbbf96bd4bbe124af3bb}{Col\+End}} = new Color(0.\+75f, 0.\+25f, 0.\+25f)
+\begin{DoxyCompactList}\small\item\em Col end. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+override void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_node_registry_a692c1df134487636e1619691955aa633}{Build}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry}{Feazeyu.\+RPGSystems.\+Dialogue.\+Node\+Registry}}}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_info}{Node\+Info}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_af62674c336b937fbf2db2ae539c367d1}{Get\+Node}} (string type\+Id)
+\begin{DoxyCompactList}\small\item\em Look up a single node type, or {\ttfamily null} if not registered. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a339da60080c3e851b87411b3e36abc45}{Register}} (\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_info}{Node\+Info}} info)
+\begin{DoxyCompactList}\small\item\em Add (or overwrite) a node type in the table. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a299c6d8190241aa3d7dff01d2ddebdc5}{Build}} ()
+\begin{DoxyCompactList}\small\item\em Template method:\+ derived registries populate their node set here, typically by calling Register\+Common\+Nodes first, then registering their own built-\/ins and Register\+Attribute\+Nodes$<$\+TAttr$>$. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a51b95c795ba72735757e432f6d1143aa}{Register\+Common\+Nodes}} ()
+\begin{DoxyCompactList}\small\item\em Registers the flow/\+logic/\+scene/\+event nodes that every graph system shares. Nodes whose layout differs between systems — {\ttfamily Condition} and {\ttfamily Run\+Subgraph} — are intentionally left to each derived registry. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a0eaa37493339075554465e5b41432e5a}{Register\+Attribute\+Nodes$<$ TAttr $>$}} (Func$<$ TAttr, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_info}{Node\+Info}} $>$ factory)
+\begin{DoxyCompactList}\small\item\em Scans all loaded assemblies for classes tagged with {\itshape TAttr}  and registers the Node\+Info produced by {\itshape factory} . Types whose id is already registered (built-\/ins) are skipped, as are factories that return {\ttfamily null}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+static IRead\+Only\+Dictionary$<$ string, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_info}{Node\+Info}} $>$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_node_registry_a578e1330571e31799263deb062c0384b}{All}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em All dialogue node types, built on first access. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties inherited from \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry}{Feazeyu.\+RPGSystems.\+Dialogue.\+Node\+Registry}}}
+\begin{DoxyCompactItemize}
+\item 
+IRead\+Only\+Dictionary$<$ string, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_info}{Node\+Info}} $>$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a17c57068a32dc5122ae96c27355597b6}{All\+Nodes}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em All node types this registry exposes, built on first access. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Node registry for the dialogue graph system. Built-\/in shared flow/\+logic nodes come from Node\+Registry.\+Register\+Common\+Nodes; this class adds the dialogue-\/specific palette (\doxylink{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue}{Dialogue} Line, Choice Branch, Requirement, inventory/\+shop nodes) and the dialogue flavour of Condition and Run Subgraph. User types are discovered via Dialogue\+Node\+Attribute. 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_node_registry_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_node_registry_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_node_registry_a692c1df134487636e1619691955aa633}\index{Feazeyu.RPGSystems.Dialogue.DialogueNodeRegistry@{Feazeyu.RPGSystems.Dialogue.DialogueNodeRegistry}!Build@{Build}}
+\index{Build@{Build}!Feazeyu.RPGSystems.Dialogue.DialogueNodeRegistry@{Feazeyu.RPGSystems.Dialogue.DialogueNodeRegistry}}
+\doxysubsubsection{\texorpdfstring{Build()}{Build()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_node_registry_a692c1df134487636e1619691955aa633} 
+override void Feazeyu.\+RPGSystems.\+Dialogue.\+Dialogue\+Node\+Registry.\+Build (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_node_registry_a458eacc899f18e9d954b12f762e11640}\index{Feazeyu.RPGSystems.Dialogue.DialogueNodeRegistry@{Feazeyu.RPGSystems.Dialogue.DialogueNodeRegistry}!Get@{Get}}
+\index{Get@{Get}!Feazeyu.RPGSystems.Dialogue.DialogueNodeRegistry@{Feazeyu.RPGSystems.Dialogue.DialogueNodeRegistry}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_node_registry_a458eacc899f18e9d954b12f762e11640} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_info}{Node\+Info}} Feazeyu.\+RPGSystems.\+Dialogue.\+Dialogue\+Node\+Registry.\+Get (\begin{DoxyParamCaption}\item[{string}]{type\+Id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Look up a dialogue node type, or {\ttfamily null} if not registered. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_node_registry_doc-variable-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_node_registry_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_node_registry_a9074f8342c6362dda2e26a6f680a4ac7}\index{Feazeyu.RPGSystems.Dialogue.DialogueNodeRegistry@{Feazeyu.RPGSystems.Dialogue.DialogueNodeRegistry}!ColDialogue@{ColDialogue}}
+\index{ColDialogue@{ColDialogue}!Feazeyu.RPGSystems.Dialogue.DialogueNodeRegistry@{Feazeyu.RPGSystems.Dialogue.DialogueNodeRegistry}}
+\doxysubsubsection{\texorpdfstring{ColDialogue}{ColDialogue}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_node_registry_a9074f8342c6362dda2e26a6f680a4ac7} 
+readonly Color Feazeyu.\+RPGSystems.\+Dialogue.\+Dialogue\+Node\+Registry.\+Col\+Dialogue = new Color(0.\+29f, 0.\+61f, 0.\+78f)\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Col dialogue. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_node_registry_a701421a0663c1c8aa2d552cf4d57878c}\index{Feazeyu.RPGSystems.Dialogue.DialogueNodeRegistry@{Feazeyu.RPGSystems.Dialogue.DialogueNodeRegistry}!TypeChoiceBranch@{TypeChoiceBranch}}
+\index{TypeChoiceBranch@{TypeChoiceBranch}!Feazeyu.RPGSystems.Dialogue.DialogueNodeRegistry@{Feazeyu.RPGSystems.Dialogue.DialogueNodeRegistry}}
+\doxysubsubsection{\texorpdfstring{TypeChoiceBranch}{TypeChoiceBranch}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_node_registry_a701421a0663c1c8aa2d552cf4d57878c} 
+const string Feazeyu.\+RPGSystems.\+Dialogue.\+Dialogue\+Node\+Registry.\+Type\+Choice\+Branch = "{}Choice\+Branch"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Type choice branch. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_node_registry_acaca07dedb33454f9630ddf8dd85b61d}\index{Feazeyu.RPGSystems.Dialogue.DialogueNodeRegistry@{Feazeyu.RPGSystems.Dialogue.DialogueNodeRegistry}!TypeDialogueLine@{TypeDialogueLine}}
+\index{TypeDialogueLine@{TypeDialogueLine}!Feazeyu.RPGSystems.Dialogue.DialogueNodeRegistry@{Feazeyu.RPGSystems.Dialogue.DialogueNodeRegistry}}
+\doxysubsubsection{\texorpdfstring{TypeDialogueLine}{TypeDialogueLine}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_node_registry_acaca07dedb33454f9630ddf8dd85b61d} 
+const string Feazeyu.\+RPGSystems.\+Dialogue.\+Dialogue\+Node\+Registry.\+Type\+Dialogue\+Line = "{}Dialogue\+Line"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Type dialogue line. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_node_registry_a4289b13c7f8864899fbb0b3df5770cf7}\index{Feazeyu.RPGSystems.Dialogue.DialogueNodeRegistry@{Feazeyu.RPGSystems.Dialogue.DialogueNodeRegistry}!TypeRequirement@{TypeRequirement}}
+\index{TypeRequirement@{TypeRequirement}!Feazeyu.RPGSystems.Dialogue.DialogueNodeRegistry@{Feazeyu.RPGSystems.Dialogue.DialogueNodeRegistry}}
+\doxysubsubsection{\texorpdfstring{TypeRequirement}{TypeRequirement}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_node_registry_a4289b13c7f8864899fbb0b3df5770cf7} 
+const string Feazeyu.\+RPGSystems.\+Dialogue.\+Dialogue\+Node\+Registry.\+Type\+Requirement = "{}requirement"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Type requirement. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_node_registry_doc-property-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_node_registry_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_node_registry_a578e1330571e31799263deb062c0384b}\index{Feazeyu.RPGSystems.Dialogue.DialogueNodeRegistry@{Feazeyu.RPGSystems.Dialogue.DialogueNodeRegistry}!All@{All}}
+\index{All@{All}!Feazeyu.RPGSystems.Dialogue.DialogueNodeRegistry@{Feazeyu.RPGSystems.Dialogue.DialogueNodeRegistry}}
+\doxysubsubsection{\texorpdfstring{All}{All}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_node_registry_a578e1330571e31799263deb062c0384b} 
+IRead\+Only\+Dictionary$<$string, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_info}{Node\+Info}}$>$ Feazeyu.\+RPGSystems.\+Dialogue.\+Dialogue\+Node\+Registry.\+All\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [get]}}
+
+
+
+All dialogue node types, built on first access. 
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Dialogue/\+\+Nodes/\+\doxymbox{\hyperlink{_dialogue_node_registry_8cs}{Dialogue\+Node\+Registry.\+cs}}\end{DoxyCompactItemize}

@@ -1,0 +1,28 @@
+\doxysection{Packages/\+com.feazeyu.\+rpgsystems/\+\+Runtime/\+\+Inventory/\+\+Inventory\+Helper.cs File Reference}
+\hypertarget{_inventory_helper_8cs}{}\label{_inventory_helper_8cs}\index{Packages/com.feazeyu.rpgsystems/Runtime/Inventory/InventoryHelper.cs@{Packages/com.feazeyu.rpgsystems/Runtime/Inventory/InventoryHelper.cs}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bfseries Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Helper}
+\begin{DoxyCompactList}\small\item\em Provides helper methods for inventory UI and slot management. \end{DoxyCompactList}\item 
+interface \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_u_i_item_container}{Feazeyu.\+RPGSystems.\+Inventory.\+IUIItem\+Container}}
+\begin{DoxyCompactList}\small\item\em Represents a UI item container that can redraw its contents. \end{DoxyCompactList}\item 
+interface \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_container}{Feazeyu.\+RPGSystems.\+Inventory.\+IItem\+Container}}
+\begin{DoxyCompactList}\small\item\em Represents a generic item container. \end{DoxyCompactList}\item 
+interface \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_count_notifier}{Feazeyu.\+RPGSystems.\+Inventory.\+IItem\+Count\+Notifier}}
+\begin{DoxyCompactList}\small\item\em Optional capability for an IItem\+Container that announces content changes. Lets observers (e.\+g. an Accumulate Item quest objective) count items gained and lost exactly, instead of polling IItem\+Container.\+Count\+Item. Tracking both directions makes "{}net acquired"{} robust:\+ dropping then re-\/collecting nets to one count. \end{DoxyCompactList}\item 
+interface \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_single_item_container}{Feazeyu.\+RPGSystems.\+Inventory.\+ISingle\+Item\+Container}}
+\begin{DoxyCompactList}\small\item\em Represents a container that holds a single item. \end{DoxyCompactList}\item 
+interface \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_positional_item_container}{Feazeyu.\+RPGSystems.\+Inventory.\+IPositional\+Item\+Container}}
+\begin{DoxyCompactList}\small\item\em An IItem\+Container addressable by grid coordinate, with defaults bridging the non-\/positional API. \end{DoxyCompactList}\item 
+interface \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_u_i_positional_item_container}{Feazeyu.\+RPGSystems.\+Inventory.\+IUIPositional\+Item\+Container}}
+\begin{DoxyCompactList}\small\item\em Represents a UI positional item container that can redraw its contents. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \doxymbox{\hyperlink{namespace_feazeyu}{Feazeyu}}
+\item 
+namespace \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems}{Feazeyu.\+RPGSystems}}
+\item 
+namespace \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_inventory}{Feazeyu.\+RPGSystems.\+Inventory}}
+\end{DoxyCompactItemize}

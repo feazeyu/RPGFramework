@@ -1,0 +1,55 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Editor\+Tools Namespace Reference}
+\hypertarget{namespace_feazeyu_1_1_r_p_g_systems_1_1_editor_tools}{}\label{namespace_feazeyu_1_1_r_p_g_systems_1_1_editor_tools}\index{Feazeyu.RPGSystems.EditorTools@{Feazeyu.RPGSystems.EditorTools}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_blackboard_panel}{Blackboard\+Panel}}
+\begin{DoxyCompactList}\small\item\em Graph editor panel for viewing and editing a graph\textquotesingle{}s blackboard variables. \end{DoxyCompactList}\item 
+class {\bfseries Blackboard\+Property\+Bridge}
+\begin{DoxyCompactList}\small\item\em Navigates a Serialized\+Object to find Serialized\+Property fields inside a Blackboard\+Variable stored in a \+[Serialize\+Reference]\+ array. \end{DoxyCompactList}\item 
+class {\bfseries Blackboard\+Variable\+Type\+Registry}
+\begin{DoxyCompactList}\small\item\em Extension point so other editor assemblies can contribute Blackboard\+Variable types to the blackboard picker without the blackboard panel needing to know about them directly. \end{DoxyCompactList}\item 
+class {\bfseries Choice\+Branch\+Decorator}
+\begin{DoxyCompactList}\small\item\em Injects the "{}\+Add Choice /\+ Remove Choice"{} UI into Choice\+Branch node cards. Registered automatically when the editor loads via \+[Initialize\+On\+Load\+Method]\+. \end{DoxyCompactList}\item 
+class {\bfseries Dialogue\+Blackboard\+Type\+Registrar}
+\begin{DoxyCompactList}\small\item\em Registers the Dialogue\+Graph type with the blackboard variable type picker so a graph can hold a Dialogue\+Graph\+Asset reference as a blackboard value — the only way to feed a subgraph into a dialogue Run Subgraph node. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_dialogue_graph_asset_editor}{Dialogue\+Graph\+Asset\+Editor}}
+\begin{DoxyCompactList}\small\item\em Custom Inspector for \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_graph_asset}{Dialogue\+Graph\+Asset} (shown in the Project window when the asset is selected). Adds an "{}\+Open in Graph Editor"{} button and shows a quick summary of nodes and variables. \end{DoxyCompactList}\item 
+class {\bfseries Dialogue\+Graph\+Asset\+Opener}
+\begin{DoxyCompactList}\small\item\em Opens a Dialogue\+Graph\+Asset in the graph window when double-\/clicked in the Project view. \end{DoxyCompactList}\item 
+class {\bfseries Dialogue\+Graph\+Style\+Sheet}
+\begin{DoxyCompactList}\small\item\em Provides the dialogue-\/system USS Style\+Sheet (colour/\+theme overrides) layered on top of the shared Graph\+Editor.\+uss base sheet. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_dialogue_graph_window}{Dialogue\+Graph\+Window}}
+\begin{DoxyCompactList}\small\item\em Dialogue-\/system graph editor window. \end{DoxyCompactList}\item 
+class {\bfseries Editor\+Utility\+Helper}
+\begin{DoxyCompactList}\small\item\em Editor-\/only helpers shared by the node view, guarded for runtime builds. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_canvas_view}{Graph\+Canvas\+View}}
+\begin{DoxyCompactList}\small\item\em The shared graph canvas. Extends Unity\textquotesingle{}s Graph\+View so we get node drag, rubber-\/band selection, edge drawing, pan/\+zoom, and minimap for free. \end{DoxyCompactList}\item 
+class {\bfseries Graph\+Editor\+Style\+Sheet}
+\begin{DoxyCompactList}\small\item\em Loads the shared Graph\+Editor.\+uss base stylesheet. Every graph editor window loads this first, then loads its own system-\/specific theme sheet (e.\+g. Dialogue\+Graph.\+uss). \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_editor_window}{Graph\+Editor\+Window}}
+\begin{DoxyCompactList}\small\item\em Shared base for every graph-\/editor window (dialogue, quest, and anything built on top of the Graph\+Asset pipeline). \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_node_view}{Graph\+Node\+View}}
+\begin{DoxyCompactList}\small\item\em Visual representation of a single Node\+Data inside the Graph\+View canvas. Agnostic to which graph system (dialogue /\+ quest) owns the node — the palette lookup goes through an injected registry so the same class renders both. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_runner_editor}{Graph\+Runner\+Editor}}
+\begin{DoxyCompactList}\small\item\em Inspector for Graph\+Runner and every subclass ({\ttfamily \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_runner}{Dialogue\+Runner}}, {\ttfamily Quest\+Runner}, …) via {\ttfamily editor\+For\+Child\+Classes:\+ true}. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_inspector_panel}{Inspector\+Panel}}
+\begin{DoxyCompactList}\small\item\em Graph editor panel showing details for the current selection (node or graph). \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_node_resizer}{Node\+Resizer}}
+\begin{DoxyCompactList}\small\item\em Adds resize handles to a Visual\+Element (the node card). \end{DoxyCompactList}\item 
+class {\bfseries Node\+View\+Decorator\+Registry}
+\begin{DoxyCompactList}\small\item\em Maps a node type-\/id (see Node\+Registry or Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Node\+Registry) to an optional "{}decorator"{} callback that injects extra UI into a node card\textquotesingle{}s field container. \end{DoxyCompactList}\item 
+class {\bfseries Quest\+Blackboard\+Type\+Registrar}
+\begin{DoxyCompactList}\small\item\em Registers \doxylink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest}{Quest} and Quest\+Graph with the blackboard variable type picker so users can hold either kind of quest reference as a blackboard value. Chain graphs then link a \doxylink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest}{Quest} Reference node\textquotesingle{}s "{}\+Quest"{} field to one of these variables. \end{DoxyCompactList}\item 
+class {\bfseries Quest\+Chain\+Create\+Menu}
+\begin{DoxyCompactList}\small\item\em Adds a second entry under {\bfseries{Assets → Create → \doxylink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest}{Quest} → \doxylink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest}{Quest} Chain}} that creates a Quest\+Graph\+Asset with Quest\+Graph\+Asset.\+Kind pre-\/set to Quest\+Kind.\+Chain. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_quest_graph_asset_editor}{Quest\+Graph\+Asset\+Editor}}
+\begin{DoxyCompactList}\small\item\em Custom Inspector for Quest\+Graph\+Asset (shown in the Project window when a quest asset is selected). Mirrors {\ttfamily \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_dialogue_graph_asset_editor}{Dialogue\+Graph\+Asset\+Editor}}; adds:\+ • A Kind selector (Single /\+ Chain) with a warning about content loss when switching on a non-\/empty graph. • An Open button whose label adapts to the kind. • A summary distinguishing objective nodes (singles) from quest-\/reference nodes (chains). \end{DoxyCompactList}\item 
+class {\bfseries Quest\+Graph\+Asset\+Opener}
+\begin{DoxyCompactList}\small\item\em Opens a Quest\+Graph\+Asset in the graph window when double-\/clicked in the Project view. \end{DoxyCompactList}\item 
+class {\bfseries Quest\+Graph\+Style\+Sheet}
+\begin{DoxyCompactList}\small\item\em Provides the quest-\/system USS Style\+Sheet (colour/\+theme overrides) layered on top of the shared {\ttfamily Graph\+Editor.\+uss} base sheet. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_quest_graph_window}{Quest\+Graph\+Window}}
+\begin{DoxyCompactList}\small\item\em Quest-\/system graph editor window. Sibling of Dialogue\+Graph\+Window; inherits from Graph\+Editor\+Window and differs in:\+ • the palette source (Quest\+Node\+Registry) • the theme sheet ({\ttfamily Quest\+Graph.\+uss}) • the CSS class ({\ttfamily quest-\/graph-\/view}) • the asset factory (Quest\+Graph\+Asset). \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_soft_edge}{Soft\+Edge}}
+\begin{DoxyCompactList}\small\item\em Marker Edge subclass. Used so Connect\+To\texorpdfstring{$<$}{<}\doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_soft_edge}{Soft\+Edge}\texorpdfstring{$>$}{>} creates consistently typed edges; actual curve softness comes from Orientation.\+Vertical ports and the --edge-\/width USS variable rather than C\# tangent manipulation (Edge\+Control.\+control\+Points is read-\/only in current Unity versions). \end{DoxyCompactList}\end{DoxyCompactItemize}

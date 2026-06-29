@@ -1,0 +1,163 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Core.\+Stats.\+StatF Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_f}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_f}\index{Feazeyu.RPGSystems.Core.Stats.StatF@{Feazeyu.RPGSystems.Core.Stats.StatF}}
+
+
+A floating-\/point stat:\+ effective value is {\ttfamily (base + flat) \texorpdfstring{$\ast$}{*} multiply}.  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Core.\+Stats.\+StatF:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_f}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_f_abe9eb98ca4325f6f5f2902d71e162cae}{StatF}} (float base\+Value)
+\begin{DoxyCompactList}\small\item\em Creates a float stat with the given base value. \end{DoxyCompactList}\item 
+override void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_f_a5ed768a50daa75ba305e0523daa56ef5}{Update\+Value}} ()
+\begin{DoxyCompactList}\small\item\em Recomputes Value from the base value and applied effects. \end{DoxyCompactList}\item 
+override string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_f_ae7bdd499beb7a92a1cd39b4dd6ddd6dc}{To\+String}} ()
+\begin{DoxyCompactList}\small\item\em Returns the effective value formatted to two decimals. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_base-2-g}{Feazeyu.\+RPGSystems.\+Core.\+Stats.\+Stat\+Base$<$ T, TEffect $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_base-2-g_a96152b6f6dadbb30ca9ae5d66c06ea51}{Stat\+Base}} (T base\+Value)
+\begin{DoxyCompactList}\small\item\em Creates a stat with the given base value. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_base-2-g_a7e3b1f8567db3e3641395de72cbbfe00}{Apply}} (TEffect effect)
+\begin{DoxyCompactList}\small\item\em Applies an effect and recomputes Value. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_base-2-g_acff2e2b9cb52f80ebfe71ff82d4627fb}{Remove}} (TEffect effect)
+\begin{DoxyCompactList}\small\item\em Removes a previously applied effect and recomputes Value. \end{DoxyCompactList}\item 
+override string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_base-2-g_a789fcc9187fbea8453695d74d735d645}{To\+String}} ()
+\begin{DoxyCompactList}\small\item\em Returns the effective value as a string. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_base-2-g_a3e3facd24900cc17d051d038b4c7d06f}{On\+Before\+Serialize}} ()
+\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_base-2-g_a7eff5eab3903cec4e3569ef22b65f519}{On\+After\+Deserialize}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+override void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_f_a5b1cae65031c2fb229b37cb561459ca4}{Initialize}} ()
+\begin{DoxyCompactList}\small\item\em Resets the accumulated modifiers to their identity values. \end{DoxyCompactList}\item 
+override void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_f_a0bd7c850f64f124fa118949a1b9f4d29}{Apply\+Effect}} (\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_f}{Stat\+EffectF}} effect)
+\item 
+override void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_f_a49a0b9b924955aa571ecd1f4727f2b0b}{Remove\+Effect}} (\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_f}{Stat\+EffectF}} effect)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_base-2-g}{Feazeyu.\+RPGSystems.\+Core.\+Stats.\+Stat\+Base$<$ T, TEffect $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_base-2-g_a1c2a57f26f746ca2cca33bab05bb58e2}{Stat\+Base}} ()
+\begin{DoxyCompactList}\small\item\em Creates a stat with the type\textquotesingle{}s default base value. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_base-2-g_a22668efcffe541919fe963d14605a4c2}{Apply\+Effect}} (TEffect effect)
+\begin{DoxyCompactList}\small\item\em Folds a single effect into the accumulated modifiers. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_base-2-g_aa97e1b076c018ea3ca0a800e69c380c3}{Remove\+Effect}} (TEffect effect)
+\begin{DoxyCompactList}\small\item\em Reverses a single effect\textquotesingle{}s contribution to the accumulated modifiers. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_base-2-g}{Feazeyu.\+RPGSystems.\+Core.\+Stats.\+Stat\+Base$<$ T, TEffect $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+static implicit \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_base-2-g_ab31227360fc30e124f297153367fced6}{operator T}} (\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_base-2-g_a1c2a57f26f746ca2cca33bab05bb58e2}{Stat\+Base}}$<$ T, TEffect $>$ stat)
+\begin{DoxyCompactList}\small\item\em Implicitly converts the stat to its effective Value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_base-2-g}{Feazeyu.\+RPGSystems.\+Core.\+Stats.\+Stat\+Base$<$ T, TEffect $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+T \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_base-2-g_a497259f41dca206f0aac9682dd48091a}{\+\_\+value}}
+\begin{DoxyCompactList}\small\item\em Value. \end{DoxyCompactList}\item 
+T \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_base-2-g_a0de11f1ffa00088729c8a850d73e319c}{\+\_\+base}} = default
+\begin{DoxyCompactList}\small\item\em Base. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties inherited from \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_base-2-g}{Feazeyu.\+RPGSystems.\+Core.\+Stats.\+Stat\+Base$<$ T, TEffect $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+T \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_base-2-g_a4c76ac487ec8e85323bb0e69831bd43d}{Value}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em The effective value after all effects are applied. \end{DoxyCompactList}\item 
+T \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_base-2-g_ab72957fea72b928a21d87a03452d5f5b}{Base}}\hspace{0.3cm}{\ttfamily  \+[get, set]\+}
+\begin{DoxyCompactList}\small\item\em The unmodified base value; setting it recomputes Value. \end{DoxyCompactList}\item 
+IEnumerable$<$ TEffect $>$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_base-2-g_ad3e6adc930cca06d8dceb2f104ad77f9}{Effects}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em The effects currently applied to this stat. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A floating-\/point stat:\+ effective value is {\ttfamily (base + flat) \texorpdfstring{$\ast$}{*} multiply}. 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_f_doc-constructors}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_f_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_f_abe9eb98ca4325f6f5f2902d71e162cae}\index{Feazeyu.RPGSystems.Core.Stats.StatF@{Feazeyu.RPGSystems.Core.Stats.StatF}!StatF@{StatF}}
+\index{StatF@{StatF}!Feazeyu.RPGSystems.Core.Stats.StatF@{Feazeyu.RPGSystems.Core.Stats.StatF}}
+\doxysubsubsection{\texorpdfstring{StatF()}{StatF()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_f_abe9eb98ca4325f6f5f2902d71e162cae} 
+Feazeyu.\+RPGSystems.\+Core.\+Stats.\+Stat\+F.\+StatF (\begin{DoxyParamCaption}\item[{float}]{base\+Value}{}\end{DoxyParamCaption})}
+
+
+
+Creates a float stat with the given base value. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_f_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_f_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_f_a0bd7c850f64f124fa118949a1b9f4d29}\index{Feazeyu.RPGSystems.Core.Stats.StatF@{Feazeyu.RPGSystems.Core.Stats.StatF}!ApplyEffect@{ApplyEffect}}
+\index{ApplyEffect@{ApplyEffect}!Feazeyu.RPGSystems.Core.Stats.StatF@{Feazeyu.RPGSystems.Core.Stats.StatF}}
+\doxysubsubsection{\texorpdfstring{ApplyEffect()}{ApplyEffect()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_f_a0bd7c850f64f124fa118949a1b9f4d29} 
+override void Feazeyu.\+RPGSystems.\+Core.\+Stats.\+Stat\+F.\+Apply\+Effect (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_f}{Stat\+EffectF}}}]{effect}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_f_a5b1cae65031c2fb229b37cb561459ca4}\index{Feazeyu.RPGSystems.Core.Stats.StatF@{Feazeyu.RPGSystems.Core.Stats.StatF}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!Feazeyu.RPGSystems.Core.Stats.StatF@{Feazeyu.RPGSystems.Core.Stats.StatF}}
+\doxysubsubsection{\texorpdfstring{Initialize()}{Initialize()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_f_a5b1cae65031c2fb229b37cb561459ca4} 
+override void Feazeyu.\+RPGSystems.\+Core.\+Stats.\+Stat\+F.\+Initialize (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Resets the accumulated modifiers to their identity values. 
+
+
+
+Reimplemented from \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_base-2-g_ac6eae1bc461ff0e2a647d2d373860bd7}{Feazeyu.\+RPGSystems.\+Core.\+Stats.\+Stat\+Base$<$ T, TEffect $>$}}.
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_f_a49a0b9b924955aa571ecd1f4727f2b0b}\index{Feazeyu.RPGSystems.Core.Stats.StatF@{Feazeyu.RPGSystems.Core.Stats.StatF}!RemoveEffect@{RemoveEffect}}
+\index{RemoveEffect@{RemoveEffect}!Feazeyu.RPGSystems.Core.Stats.StatF@{Feazeyu.RPGSystems.Core.Stats.StatF}}
+\doxysubsubsection{\texorpdfstring{RemoveEffect()}{RemoveEffect()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_f_a49a0b9b924955aa571ecd1f4727f2b0b} 
+override void Feazeyu.\+RPGSystems.\+Core.\+Stats.\+Stat\+F.\+Remove\+Effect (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_f}{Stat\+EffectF}}}]{effect}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_f_ae7bdd499beb7a92a1cd39b4dd6ddd6dc}\index{Feazeyu.RPGSystems.Core.Stats.StatF@{Feazeyu.RPGSystems.Core.Stats.StatF}!ToString@{ToString}}
+\index{ToString@{ToString}!Feazeyu.RPGSystems.Core.Stats.StatF@{Feazeyu.RPGSystems.Core.Stats.StatF}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_f_ae7bdd499beb7a92a1cd39b4dd6ddd6dc} 
+override string Feazeyu.\+RPGSystems.\+Core.\+Stats.\+Stat\+F.\+To\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Returns the effective value formatted to two decimals. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_f_a5ed768a50daa75ba305e0523daa56ef5}\index{Feazeyu.RPGSystems.Core.Stats.StatF@{Feazeyu.RPGSystems.Core.Stats.StatF}!UpdateValue@{UpdateValue}}
+\index{UpdateValue@{UpdateValue}!Feazeyu.RPGSystems.Core.Stats.StatF@{Feazeyu.RPGSystems.Core.Stats.StatF}}
+\doxysubsubsection{\texorpdfstring{UpdateValue()}{UpdateValue()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_f_a5ed768a50daa75ba305e0523daa56ef5} 
+override void Feazeyu.\+RPGSystems.\+Core.\+Stats.\+Stat\+F.\+Update\+Value (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Recomputes Value from the base value and applied effects. 
+
+
+
+Reimplemented from \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_base-2-g_a4902f7cb63e6c3a4d57925ba46bd0b43}{Feazeyu.\+RPGSystems.\+Core.\+Stats.\+Stat\+Base$<$ T, TEffect $>$}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Core/\+\+Stats/\+\doxymbox{\hyperlink{_stat_base_8cs}{Stat\+Base.\+cs}}\end{DoxyCompactItemize}

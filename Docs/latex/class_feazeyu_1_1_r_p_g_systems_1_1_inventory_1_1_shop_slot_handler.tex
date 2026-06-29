@@ -1,0 +1,189 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+Slot\+Handler Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler}\index{Feazeyu.RPGSystems.Inventory.ShopSlotHandler@{Feazeyu.RPGSystems.Inventory.ShopSlotHandler}}
+
+
+Attach to each shop slot UI element. Handles click-\/to-\/buy and slot display. The shop UI generators wire this up automatically; configure optional UI references in the slot prefab by naming children "{}\+Name"{}, "{}\+Price"{}, "{}\+Stock"{}, "{}\+Icon"{}.  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+Slot\+Handler:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=0.933333cm]{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler_a2ebae803af84694295751e1ad0cbdad0}{Setup}} (\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot}{Shop\+Slot}} shop\+Slot, \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_shop_currency}{IShop\+Currency}} currency, \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_container}{IItem\+Container}} buyer\+Inventory)
+\begin{DoxyCompactList}\small\item\em Setup. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler_a0603c2a7f8007eabf4a8a68ba23b4f15}{Refresh}} ()
+\begin{DoxyCompactList}\small\item\em Refresh. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler_a5652cb5214152c9f2a2fa49636637152}{On\+Pointer\+Click}} (Pointer\+Event\+Data event\+Data)
+\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler_ad50e6defbf056af8356282a396976e27}{On\+Pointer\+Enter}} (Pointer\+Event\+Data event\+Data)
+\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler_a0909c46e3585346e0bb525c4f5298ffc}{On\+Pointer\+Exit}} (Pointer\+Event\+Data event\+Data)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot}{Shop\+Slot}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler_a19bcf3c6d95e064ac158376085a57fc6}{slot}}
+\item 
+TMP\+\_\+\+Text \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler_a009f808f7707796a0b5f598054f709e2}{name\+Text}}
+\begin{DoxyCompactList}\small\item\em Name text. \end{DoxyCompactList}\item 
+TMP\+\_\+\+Text \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler_a6713422eff8ee5728d7e50619e2b2694}{price\+Text}}
+\begin{DoxyCompactList}\small\item\em Price text. \end{DoxyCompactList}\item 
+TMP\+\_\+\+Text \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler_a7ed7c4246df8bab4cf07a0cc43a88aa4}{stock\+Text}}
+\begin{DoxyCompactList}\small\item\em Stock text. \end{DoxyCompactList}\item 
+Image \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler_ae3fed37f478b97945f06cf0c689386b1}{icon\+Image}}
+\begin{DoxyCompactList}\small\item\em Icon image. \end{DoxyCompactList}\item 
+Graphic \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler_a2e775409d9c323e4ffeeb1e5e70e3174}{highlight}}
+\begin{DoxyCompactList}\small\item\em Highlight. \end{DoxyCompactList}\item 
+Unity\+Event$<$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot}{Shop\+Slot}} $>$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler_af9f1997a318dfd1e5180254c8553043d}{On\+Purchased}}
+\begin{DoxyCompactList}\small\item\em On purchased. \end{DoxyCompactList}\item 
+Unity\+Event$<$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot}{Shop\+Slot}} $>$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler_a82fd93cc1cca88791eab5dd67edf1f86}{On\+Purchase\+Failed}}
+\begin{DoxyCompactList}\small\item\em On purchase failed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Attach to each shop slot UI element. Handles click-\/to-\/buy and slot display. The shop UI generators wire this up automatically; configure optional UI references in the slot prefab by naming children "{}\+Name"{}, "{}\+Price"{}, "{}\+Stock"{}, "{}\+Icon"{}. 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler_a5652cb5214152c9f2a2fa49636637152}\index{Feazeyu.RPGSystems.Inventory.ShopSlotHandler@{Feazeyu.RPGSystems.Inventory.ShopSlotHandler}!OnPointerClick@{OnPointerClick}}
+\index{OnPointerClick@{OnPointerClick}!Feazeyu.RPGSystems.Inventory.ShopSlotHandler@{Feazeyu.RPGSystems.Inventory.ShopSlotHandler}}
+\doxysubsubsection{\texorpdfstring{OnPointerClick()}{OnPointerClick()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler_a5652cb5214152c9f2a2fa49636637152} 
+void Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+Slot\+Handler.\+On\+Pointer\+Click (\begin{DoxyParamCaption}\item[{Pointer\+Event\+Data}]{event\+Data}{}\end{DoxyParamCaption})}
+
+
+
+
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler_ad50e6defbf056af8356282a396976e27}\index{Feazeyu.RPGSystems.Inventory.ShopSlotHandler@{Feazeyu.RPGSystems.Inventory.ShopSlotHandler}!OnPointerEnter@{OnPointerEnter}}
+\index{OnPointerEnter@{OnPointerEnter}!Feazeyu.RPGSystems.Inventory.ShopSlotHandler@{Feazeyu.RPGSystems.Inventory.ShopSlotHandler}}
+\doxysubsubsection{\texorpdfstring{OnPointerEnter()}{OnPointerEnter()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler_ad50e6defbf056af8356282a396976e27} 
+void Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+Slot\+Handler.\+On\+Pointer\+Enter (\begin{DoxyParamCaption}\item[{Pointer\+Event\+Data}]{event\+Data}{}\end{DoxyParamCaption})}
+
+
+
+
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler_a0909c46e3585346e0bb525c4f5298ffc}\index{Feazeyu.RPGSystems.Inventory.ShopSlotHandler@{Feazeyu.RPGSystems.Inventory.ShopSlotHandler}!OnPointerExit@{OnPointerExit}}
+\index{OnPointerExit@{OnPointerExit}!Feazeyu.RPGSystems.Inventory.ShopSlotHandler@{Feazeyu.RPGSystems.Inventory.ShopSlotHandler}}
+\doxysubsubsection{\texorpdfstring{OnPointerExit()}{OnPointerExit()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler_a0909c46e3585346e0bb525c4f5298ffc} 
+void Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+Slot\+Handler.\+On\+Pointer\+Exit (\begin{DoxyParamCaption}\item[{Pointer\+Event\+Data}]{event\+Data}{}\end{DoxyParamCaption})}
+
+
+
+
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler_a0603c2a7f8007eabf4a8a68ba23b4f15}\index{Feazeyu.RPGSystems.Inventory.ShopSlotHandler@{Feazeyu.RPGSystems.Inventory.ShopSlotHandler}!Refresh@{Refresh}}
+\index{Refresh@{Refresh}!Feazeyu.RPGSystems.Inventory.ShopSlotHandler@{Feazeyu.RPGSystems.Inventory.ShopSlotHandler}}
+\doxysubsubsection{\texorpdfstring{Refresh()}{Refresh()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler_a0603c2a7f8007eabf4a8a68ba23b4f15} 
+void Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+Slot\+Handler.\+Refresh (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Refresh. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler_a2ebae803af84694295751e1ad0cbdad0}\index{Feazeyu.RPGSystems.Inventory.ShopSlotHandler@{Feazeyu.RPGSystems.Inventory.ShopSlotHandler}!Setup@{Setup}}
+\index{Setup@{Setup}!Feazeyu.RPGSystems.Inventory.ShopSlotHandler@{Feazeyu.RPGSystems.Inventory.ShopSlotHandler}}
+\doxysubsubsection{\texorpdfstring{Setup()}{Setup()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler_a2ebae803af84694295751e1ad0cbdad0} 
+void Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+Slot\+Handler.\+Setup (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot}{Shop\+Slot}}}]{shop\+Slot}{, }\item[{\doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_shop_currency}{IShop\+Currency}}}]{currency}{, }\item[{\doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_container}{IItem\+Container}}}]{buyer\+Inventory}{}\end{DoxyParamCaption})}
+
+
+
+Setup. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler_doc-variable-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler_a2e775409d9c323e4ffeeb1e5e70e3174}\index{Feazeyu.RPGSystems.Inventory.ShopSlotHandler@{Feazeyu.RPGSystems.Inventory.ShopSlotHandler}!highlight@{highlight}}
+\index{highlight@{highlight}!Feazeyu.RPGSystems.Inventory.ShopSlotHandler@{Feazeyu.RPGSystems.Inventory.ShopSlotHandler}}
+\doxysubsubsection{\texorpdfstring{highlight}{highlight}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler_a2e775409d9c323e4ffeeb1e5e70e3174} 
+Graphic Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+Slot\+Handler.\+highlight}
+
+
+
+Highlight. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler_ae3fed37f478b97945f06cf0c689386b1}\index{Feazeyu.RPGSystems.Inventory.ShopSlotHandler@{Feazeyu.RPGSystems.Inventory.ShopSlotHandler}!iconImage@{iconImage}}
+\index{iconImage@{iconImage}!Feazeyu.RPGSystems.Inventory.ShopSlotHandler@{Feazeyu.RPGSystems.Inventory.ShopSlotHandler}}
+\doxysubsubsection{\texorpdfstring{iconImage}{iconImage}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler_ae3fed37f478b97945f06cf0c689386b1} 
+Image Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+Slot\+Handler.\+icon\+Image}
+
+
+
+Icon image. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler_a009f808f7707796a0b5f598054f709e2}\index{Feazeyu.RPGSystems.Inventory.ShopSlotHandler@{Feazeyu.RPGSystems.Inventory.ShopSlotHandler}!nameText@{nameText}}
+\index{nameText@{nameText}!Feazeyu.RPGSystems.Inventory.ShopSlotHandler@{Feazeyu.RPGSystems.Inventory.ShopSlotHandler}}
+\doxysubsubsection{\texorpdfstring{nameText}{nameText}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler_a009f808f7707796a0b5f598054f709e2} 
+TMP\+\_\+\+Text Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+Slot\+Handler.\+name\+Text}
+
+
+
+Name text. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler_af9f1997a318dfd1e5180254c8553043d}\index{Feazeyu.RPGSystems.Inventory.ShopSlotHandler@{Feazeyu.RPGSystems.Inventory.ShopSlotHandler}!OnPurchased@{OnPurchased}}
+\index{OnPurchased@{OnPurchased}!Feazeyu.RPGSystems.Inventory.ShopSlotHandler@{Feazeyu.RPGSystems.Inventory.ShopSlotHandler}}
+\doxysubsubsection{\texorpdfstring{OnPurchased}{OnPurchased}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler_af9f1997a318dfd1e5180254c8553043d} 
+Unity\+Event$<$\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot}{Shop\+Slot}}$>$ Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+Slot\+Handler.\+On\+Purchased}
+
+
+
+On purchased. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler_a82fd93cc1cca88791eab5dd67edf1f86}\index{Feazeyu.RPGSystems.Inventory.ShopSlotHandler@{Feazeyu.RPGSystems.Inventory.ShopSlotHandler}!OnPurchaseFailed@{OnPurchaseFailed}}
+\index{OnPurchaseFailed@{OnPurchaseFailed}!Feazeyu.RPGSystems.Inventory.ShopSlotHandler@{Feazeyu.RPGSystems.Inventory.ShopSlotHandler}}
+\doxysubsubsection{\texorpdfstring{OnPurchaseFailed}{OnPurchaseFailed}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler_a82fd93cc1cca88791eab5dd67edf1f86} 
+Unity\+Event$<$\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot}{Shop\+Slot}}$>$ Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+Slot\+Handler.\+On\+Purchase\+Failed}
+
+
+
+On purchase failed. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler_a6713422eff8ee5728d7e50619e2b2694}\index{Feazeyu.RPGSystems.Inventory.ShopSlotHandler@{Feazeyu.RPGSystems.Inventory.ShopSlotHandler}!priceText@{priceText}}
+\index{priceText@{priceText}!Feazeyu.RPGSystems.Inventory.ShopSlotHandler@{Feazeyu.RPGSystems.Inventory.ShopSlotHandler}}
+\doxysubsubsection{\texorpdfstring{priceText}{priceText}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler_a6713422eff8ee5728d7e50619e2b2694} 
+TMP\+\_\+\+Text Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+Slot\+Handler.\+price\+Text}
+
+
+
+Price text. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler_a19bcf3c6d95e064ac158376085a57fc6}\index{Feazeyu.RPGSystems.Inventory.ShopSlotHandler@{Feazeyu.RPGSystems.Inventory.ShopSlotHandler}!slot@{slot}}
+\index{slot@{slot}!Feazeyu.RPGSystems.Inventory.ShopSlotHandler@{Feazeyu.RPGSystems.Inventory.ShopSlotHandler}}
+\doxysubsubsection{\texorpdfstring{slot}{slot}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler_a19bcf3c6d95e064ac158376085a57fc6} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot}{Shop\+Slot}} Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+Slot\+Handler.\+slot}
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler_a7ed7c4246df8bab4cf07a0cc43a88aa4}\index{Feazeyu.RPGSystems.Inventory.ShopSlotHandler@{Feazeyu.RPGSystems.Inventory.ShopSlotHandler}!stockText@{stockText}}
+\index{stockText@{stockText}!Feazeyu.RPGSystems.Inventory.ShopSlotHandler@{Feazeyu.RPGSystems.Inventory.ShopSlotHandler}}
+\doxysubsubsection{\texorpdfstring{stockText}{stockText}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler_a7ed7c4246df8bab4cf07a0cc43a88aa4} 
+TMP\+\_\+\+Text Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+Slot\+Handler.\+stock\+Text}
+
+
+
+Stock text. 
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Inventory/\+\+Shopping/\+\doxymbox{\hyperlink{_shop_slot_handler_8cs}{Shop\+Slot\+Handler.\+cs}}\end{DoxyCompactItemize}

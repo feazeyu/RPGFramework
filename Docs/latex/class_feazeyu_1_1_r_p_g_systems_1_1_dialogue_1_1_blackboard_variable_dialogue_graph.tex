@@ -1,0 +1,104 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Dialogue.\+Blackboard\+Variable\+Dialogue\+Graph Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable_dialogue_graph}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable_dialogue_graph}\index{Feazeyu.RPGSystems.Dialogue.BlackboardVariableDialogueGraph@{Feazeyu.RPGSystems.Dialogue.BlackboardVariableDialogueGraph}}
+
+
+Typed intermediate — provides the strongly-\/typed Value property. Subclasses must be concrete (non-\/generic) so Unity\textquotesingle{}s Serialized\+Property absolute-\/path lookup can resolve m\+\_\+\+Value against the concrete runtime type.  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Dialogue.\+Blackboard\+Variable\+Dialogue\+Graph:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable_dialogue_graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable_dialogue_graph_a5f47d25e2b5444b510f24dc0a8bdd324}{Blackboard\+Variable\+Dialogue\+Graph}} ()
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the Blackboard\+Variable\+Dialogue\+Graph class. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable_dialogue_graph_a3122c59451fd9945ccbd443d8cabf01b}{Blackboard\+Variable\+Dialogue\+Graph}} (\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_graph_asset}{Dialogue\+Graph\+Asset}} v)
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the Blackboard\+Variable\+Dialogue\+Graph class. \end{DoxyCompactList}\item 
+override \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable}{Blackboard\+Variable}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable_dialogue_graph_a4bc49e86fe62e83c9ee1f96cfbd300e3}{Clone}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Typed intermediate — provides the strongly-\/typed Value property. Subclasses must be concrete (non-\/generic) so Unity\textquotesingle{}s Serialized\+Property absolute-\/path lookup can resolve m\+\_\+\+Value against the concrete runtime type. 
+
+WHY CONCRETE SUBCLASSES:\+ Serialized\+Object.\+Find\+Property("{}...\+Array.\+data\+[i]\+.\+m\+\_\+\+Value"{}) resolves field names against the actual stored type. A raw \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable}{Blackboard\+Variable}\texorpdfstring{$<$}{<}T\texorpdfstring{$>$}{>} works at runtime but the serializer\textquotesingle{}s reflection sees the closed generic name (e.\+g. "{}\+Blackboard\+Variable\`{}1\+[\+[\+System.\+Int32]\+]\+"{}) and cannot reliably navigate into m\+\_\+\+Value when T is a value type. A concrete sealed class gives the serializer a stable, non-\/generic type to reflect against. \texorpdfstring{$\ast$}{*}/\+ \+[Serializable]\+ public abstract class Blackboard\+Variable$<$\+T$>$ :\+ \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable}{Blackboard\+Variable} \{ \+[Serialize\+Field]\+ protected T m\+\_\+\+Value;
+
+/\+ Initializes a new instance of the Blackboard\+Variable class. protected Blackboard\+Variable() \{ \} /\+ Initializes a new instance of the Blackboard\+Variable class. protected Blackboard\+Variable(\+T value) \{ m\+\_\+\+Value = value; \}
+
+/\+ Value. public T Value \{ get =\texorpdfstring{$>$}{>} m\+\_\+\+Value; set \{ if (!\+Equals(m\+\_\+\+Value, value)) \{ m\+\_\+\+Value = value; Notify\+Value\+Changed(); \} \} \}
+
+/\+  public override Type Value\+Type =\texorpdfstring{$>$}{>} typeof(\+T); /\+  public override object Object\+Value \{ get =\texorpdfstring{$>$}{>} m\+\_\+\+Value; set =\texorpdfstring{$>$}{>} Value = (T)value; \} \}
+
+\+[Serializable]\+ public sealed class Blackboard\+Variable\+Bool :\+ Blackboard\+Variable$<$bool$>$ \{ /\+ Initializes a new instance of the Blackboard\+Variable\+Bool class. public Blackboard\+Variable\+Bool() \{ \} /\+ Initializes a new instance of the Blackboard\+Variable\+Bool class. public Blackboard\+Variable\+Bool(bool v) :\+ base(v) \{ \} /\+  public override \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable}{Blackboard\+Variable} \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable_dialogue_graph_a4bc49e86fe62e83c9ee1f96cfbd300e3}{Clone()} =\texorpdfstring{$>$}{>} new Blackboard\+Variable\+Bool(m\+\_\+\+Value) \{ Name = Name, Guid = Guid, Exposed = Exposed, Shared = Shared \}; \}
+
+\+[Serializable]\+ public sealed class Blackboard\+Variable\+Int :\+ Blackboard\+Variable$<$int$>$ \{ /\+ Initializes a new instance of the Blackboard\+Variable\+Int class. public Blackboard\+Variable\+Int() \{ \} /\+ Initializes a new instance of the Blackboard\+Variable\+Int class. public Blackboard\+Variable\+Int(int v) :\+ base(v) \{ \} /\+  public override \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable}{Blackboard\+Variable} \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable_dialogue_graph_a4bc49e86fe62e83c9ee1f96cfbd300e3}{Clone()} =\texorpdfstring{$>$}{>} new Blackboard\+Variable\+Int(m\+\_\+\+Value) \{ Name = Name, Guid = Guid, Exposed = Exposed, Shared = Shared \}; \}
+
+\+[Serializable]\+ public sealed class Blackboard\+Variable\+Float :\+ Blackboard\+Variable$<$float$>$ \{ /\+ Initializes a new instance of the Blackboard\+Variable\+Float class. public Blackboard\+Variable\+Float() \{ \} /\+ Initializes a new instance of the Blackboard\+Variable\+Float class. public Blackboard\+Variable\+Float(float v) :\+ base(v) \{ \} /\+  public override \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable}{Blackboard\+Variable} \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable_dialogue_graph_a4bc49e86fe62e83c9ee1f96cfbd300e3}{Clone()} =\texorpdfstring{$>$}{>} new Blackboard\+Variable\+Float(m\+\_\+\+Value) \{ Name = Name, Guid = Guid, Exposed = Exposed, Shared = Shared \}; \}
+
+\+[Serializable]\+ public sealed class Blackboard\+Variable\+String :\+ Blackboard\+Variable$<$string$>$ \{ /\+ Initializes a new instance of the Blackboard\+Variable\+String class. public Blackboard\+Variable\+String() \{ \} /\+ Initializes a new instance of the Blackboard\+Variable\+String class. public Blackboard\+Variable\+String(string v) :\+ base(v) \{ \} /\+  public override \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable}{Blackboard\+Variable} \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable_dialogue_graph_a4bc49e86fe62e83c9ee1f96cfbd300e3}{Clone()} =\texorpdfstring{$>$}{>} new Blackboard\+Variable\+String(m\+\_\+\+Value) \{ Name = Name, Guid = Guid, Exposed = Exposed, Shared = Shared \}; \}
+
+\+[Serializable]\+ public sealed class Blackboard\+Variable\+Vector2 :\+ Blackboard\+Variable$<$\+Vector2$>$ \{ /\+ Initializes a new instance of the Blackboard\+Variable\+Vector2 class. public Blackboard\+Variable\+Vector2() \{ \} /\+ Initializes a new instance of the Blackboard\+Variable\+Vector2 class. public Blackboard\+Variable\+Vector2(\+Vector2 v) :\+ base(v) \{ \} /\+  public override \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable}{Blackboard\+Variable} \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable_dialogue_graph_a4bc49e86fe62e83c9ee1f96cfbd300e3}{Clone()} =\texorpdfstring{$>$}{>} new Blackboard\+Variable\+Vector2(m\+\_\+\+Value) \{ Name = Name, Guid = Guid, Exposed = Exposed, Shared = Shared \}; \}
+
+\+[Serializable]\+ public sealed class Blackboard\+Variable\+Vector3 :\+ Blackboard\+Variable$<$\+Vector3$>$ \{ /\+ Initializes a new instance of the Blackboard\+Variable\+Vector3 class. public Blackboard\+Variable\+Vector3() \{ \} /\+ Initializes a new instance of the Blackboard\+Variable\+Vector3 class. public Blackboard\+Variable\+Vector3(\+Vector3 v) :\+ base(v) \{ \} /\+  public override \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable}{Blackboard\+Variable} \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable_dialogue_graph_a4bc49e86fe62e83c9ee1f96cfbd300e3}{Clone()} =\texorpdfstring{$>$}{>} new Blackboard\+Variable\+Vector3(m\+\_\+\+Value) \{ Name = Name, Guid = Guid, Exposed = Exposed, Shared = Shared \}; \}
+
+\+[Serializable]\+ public sealed class Blackboard\+Variable\+Color :\+ Blackboard\+Variable$<$\+Color$>$ \{ /\+ Initializes a new instance of the Blackboard\+Variable\+Color class. public Blackboard\+Variable\+Color() \{ \} /\+ Initializes a new instance of the Blackboard\+Variable\+Color class. public Blackboard\+Variable\+Color(\+Color v) :\+ base(v) \{ \} /\+  public override \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable}{Blackboard\+Variable} \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable_dialogue_graph_a4bc49e86fe62e83c9ee1f96cfbd300e3}{Clone()} =\texorpdfstring{$>$}{>} new Blackboard\+Variable\+Color(m\+\_\+\+Value) \{ Name = Name, Guid = Guid, Exposed = Exposed, Shared = Shared \}; \}
+
+\+[Serializable]\+ public sealed class Blackboard\+Variable\+Game\+Object :\+ Blackboard\+Variable$<$\+Game\+Object$>$ \{ /\+ Initializes a new instance of the Blackboard\+Variable\+Game\+Object class. public Blackboard\+Variable\+Game\+Object() \{ \} /\+ Initializes a new instance of the Blackboard\+Variable\+Game\+Object class. public Blackboard\+Variable\+Game\+Object(\+Game\+Object v) :\+ base(v) \{ \} /\+  public override \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable}{Blackboard\+Variable} \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable_dialogue_graph_a4bc49e86fe62e83c9ee1f96cfbd300e3}{Clone()} =\texorpdfstring{$>$}{>} new Blackboard\+Variable\+Game\+Object(m\+\_\+\+Value) \{ Name = Name, Guid = Guid, Exposed = Exposed, Shared = Shared \}; \}
+
+\+[Serializable]\+ public sealed class Blackboard\+Variable\+Transform :\+ Blackboard\+Variable$<$\+Transform$>$ \{ /\+ Initializes a new instance of the Blackboard\+Variable\+Transform class. public Blackboard\+Variable\+Transform() \{ \} /\+ Initializes a new instance of the Blackboard\+Variable\+Transform class. public Blackboard\+Variable\+Transform(\+Transform v) :\+ base(v) \{ \} /\+  public override \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable}{Blackboard\+Variable} \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable_dialogue_graph_a4bc49e86fe62e83c9ee1f96cfbd300e3}{Clone()} =\texorpdfstring{$>$}{>} new Blackboard\+Variable\+Transform(m\+\_\+\+Value) \{ Name = Name, Guid = Guid, Exposed = Exposed, Shared = Shared \}; \}
+
+\+[Serializable]\+ public sealed class Blackboard\+Variable\+Sprite :\+ Blackboard\+Variable$<$\+Sprite$>$ \{ /\+ Initializes a new instance of the Blackboard\+Variable\+Sprite class. public Blackboard\+Variable\+Sprite() \{ \} /\+ Initializes a new instance of the Blackboard\+Variable\+Sprite class. public Blackboard\+Variable\+Sprite(\+Sprite v) :\+ base(v) \{ \} /\+  public override \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable}{Blackboard\+Variable} \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable_dialogue_graph_a4bc49e86fe62e83c9ee1f96cfbd300e3}{Clone()} =\texorpdfstring{$>$}{>} new Blackboard\+Variable\+Sprite(m\+\_\+\+Value) \{ Name = Name, Guid = Guid, Exposed = Exposed, Shared = Shared \}; \}
+
+\+[Serializable]\+ public sealed class Blackboard\+Variable\+Audio\+Clip :\+ Blackboard\+Variable$<$\+Audio\+Clip$>$ \{ /\+ Initializes a new instance of the Blackboard\+Variable\+Audio\+Clip class. public Blackboard\+Variable\+Audio\+Clip() \{ \} /\+ Initializes a new instance of the Blackboard\+Variable\+Audio\+Clip class. public Blackboard\+Variable\+Audio\+Clip(\+Audio\+Clip v) :\+ base(v) \{ \} /\+  public override \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable}{Blackboard\+Variable} \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable_dialogue_graph_a4bc49e86fe62e83c9ee1f96cfbd300e3}{Clone()} =\texorpdfstring{$>$}{>} new Blackboard\+Variable\+Audio\+Clip(m\+\_\+\+Value) \{ Name = Name, Guid = Guid, Exposed = Exposed, Shared = Shared \}; \}
+
+/\+\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}
+
+Holds a reference to a Dialogue\+Graph\+Asset so a dialogue graph can store another graph as a variable — e.\+g. linked to a Run Subgraph node\textquotesingle{}s "{}\+Graph"{} field (asset references can\textquotesingle{}t be stored inline, so this is the only way to feed a graph to that node). Mirrors the Quest\+Graph variable in the quest system. 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable_dialogue_graph_doc-constructors}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable_dialogue_graph_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable_dialogue_graph_a5f47d25e2b5444b510f24dc0a8bdd324}\index{Feazeyu.RPGSystems.Dialogue.BlackboardVariableDialogueGraph@{Feazeyu.RPGSystems.Dialogue.BlackboardVariableDialogueGraph}!BlackboardVariableDialogueGraph@{BlackboardVariableDialogueGraph}}
+\index{BlackboardVariableDialogueGraph@{BlackboardVariableDialogueGraph}!Feazeyu.RPGSystems.Dialogue.BlackboardVariableDialogueGraph@{Feazeyu.RPGSystems.Dialogue.BlackboardVariableDialogueGraph}}
+\doxysubsubsection{\texorpdfstring{BlackboardVariableDialogueGraph()}{BlackboardVariableDialogueGraph()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable_dialogue_graph_a5f47d25e2b5444b510f24dc0a8bdd324} 
+Feazeyu.\+RPGSystems.\+Dialogue.\+Blackboard\+Variable\+Dialogue\+Graph.\+Blackboard\+Variable\+Dialogue\+Graph (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Initializes a new instance of the Blackboard\+Variable\+Dialogue\+Graph class. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable_dialogue_graph_a3122c59451fd9945ccbd443d8cabf01b}\index{Feazeyu.RPGSystems.Dialogue.BlackboardVariableDialogueGraph@{Feazeyu.RPGSystems.Dialogue.BlackboardVariableDialogueGraph}!BlackboardVariableDialogueGraph@{BlackboardVariableDialogueGraph}}
+\index{BlackboardVariableDialogueGraph@{BlackboardVariableDialogueGraph}!Feazeyu.RPGSystems.Dialogue.BlackboardVariableDialogueGraph@{Feazeyu.RPGSystems.Dialogue.BlackboardVariableDialogueGraph}}
+\doxysubsubsection{\texorpdfstring{BlackboardVariableDialogueGraph()}{BlackboardVariableDialogueGraph()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable_dialogue_graph_a3122c59451fd9945ccbd443d8cabf01b} 
+Feazeyu.\+RPGSystems.\+Dialogue.\+Blackboard\+Variable\+Dialogue\+Graph.\+Blackboard\+Variable\+Dialogue\+Graph (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_graph_asset}{Dialogue\+Graph\+Asset}}}]{v}{}\end{DoxyParamCaption})}
+
+
+
+Initializes a new instance of the Blackboard\+Variable\+Dialogue\+Graph class. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable_dialogue_graph_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable_dialogue_graph_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable_dialogue_graph_a4bc49e86fe62e83c9ee1f96cfbd300e3}\index{Feazeyu.RPGSystems.Dialogue.BlackboardVariableDialogueGraph@{Feazeyu.RPGSystems.Dialogue.BlackboardVariableDialogueGraph}!Clone@{Clone}}
+\index{Clone@{Clone}!Feazeyu.RPGSystems.Dialogue.BlackboardVariableDialogueGraph@{Feazeyu.RPGSystems.Dialogue.BlackboardVariableDialogueGraph}}
+\doxysubsubsection{\texorpdfstring{Clone()}{Clone()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable_dialogue_graph_a4bc49e86fe62e83c9ee1f96cfbd300e3} 
+override \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable}{Blackboard\+Variable}} Feazeyu.\+RPGSystems.\+Dialogue.\+Blackboard\+Variable\+Dialogue\+Graph.\+Clone (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Dialogue/\+\+Data/\+\doxymbox{\hyperlink{_blackboard_variable_8cs}{Blackboard\+Variable.\+cs}}\end{DoxyCompactItemize}

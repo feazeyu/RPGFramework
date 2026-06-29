@@ -1,0 +1,29 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Quest.\+Zone\+Flag Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_zone_flag}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_zone_flag}\index{Feazeyu.RPGSystems.Quest.ZoneFlag@{Feazeyu.RPGSystems.Quest.ZoneFlag}}
+
+
+Drives a boolean blackboard variable from a trigger collider:\+ true while a tagged actor (the player by default) is inside, false when it leaves. Pair with a Flag Gate reading the same variable to express "{}while in this zone"{} objectives without any per-\/frame distance checks — physics does the work.  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Quest.\+Zone\+Flag:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_zone_flag}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Detailed Description}
+Drives a boolean blackboard variable from a trigger collider:\+ true while a tagged actor (the player by default) is inside, false when it leaves. Pair with a Flag Gate reading the same variable to express "{}while in this zone"{} objectives without any per-\/frame distance checks — physics does the work. 
+
+Setup:\+
+\begin{DoxyEnumerate}
+\item Put this on a Game\+Object with a trigger Collider2D shaped like the zone.
+\item Point runner at the \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner}{Quest\+Runner} driving the quest.
+\item Set variable\+Name to a Bool blackboard variable\textquotesingle{}s name.
+\item Add a Flag Gate (Variable = that variable, == True) to the objective. 
+\end{DoxyEnumerate}
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Quest/\+\+Runtime/\+\doxymbox{\hyperlink{_zone_flag_8cs}{Zone\+Flag.\+cs}}\end{DoxyCompactItemize}

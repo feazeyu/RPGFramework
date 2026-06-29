@@ -1,0 +1,135 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Inventory.\+IPositional\+Item\+Container Interface Reference}
+\hypertarget{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_positional_item_container}{}\label{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_positional_item_container}\index{Feazeyu.RPGSystems.Inventory.IPositionalItemContainer@{Feazeyu.RPGSystems.Inventory.IPositionalItemContainer}}
+
+
+An IItem\+Container addressable by grid coordinate, with defaults bridging the non-\/positional API.  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Inventory.\+IPositional\+Item\+Container:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.666667cm]{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_positional_item_container}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_positional_item_container_a4ffb0693354a85e9e1e2af1235dd5ef7}{Remove\+Item}} (Vector2\+Int position)
+\begin{DoxyCompactList}\small\item\em Removes the item at the given position; returns its id or -\/1 if empty. \end{DoxyCompactList}\item 
+bool IItem\+Container. \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_positional_item_container_a601eb1775d9d4de9aa4e3206cce35f9d}{Put\+Item}} (Game\+Object item)
+\begin{DoxyCompactList}\small\item\em Puts an item into the container. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_positional_item_container_a005a656ea5d96b5c478343dfaba45f23}{Put\+Item}} (Vector2\+Int position, Game\+Object item)
+\item 
+void IItem\+Container. \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_positional_item_container_a2324d58156f0094210b016c2d49b6aba}{Return\+Item}} (Game\+Object item)
+\begin{DoxyCompactList}\small\item\em Returns an item to the container. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_positional_item_container_a00b774b409c4cd2b178470bc1c17c31d}{Return\+Item}} (Vector2\+Int position, Game\+Object item)
+\item 
+Game\+Object? \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_positional_item_container_a3c042ddc1a805e9763a50a879ba7b328}{Get\+Item}} (Vector2\+Int position)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_container}{Feazeyu.\+RPGSystems.\+Inventory.\+IItem\+Container}}}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_container_adc3bb2142789ac573bfce23b03556b6f}{Remove\+Item}} (int item\+Id, int count=1)
+\begin{DoxyCompactList}\small\item\em Removes {\itshape count}  items with {\itshape item\+Id}  from the container. Returns false if not enough items are present (no-\/op in that case). \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_container_a37f354146a3b8db38ff8f417a02b317a}{Count\+Item}} (int item\+Id)
+\begin{DoxyCompactList}\small\item\em Returns the total number of items with {\itshape item\+Id}  in the container. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_container_a6c7b3fb8ed2cb756a5dbe37a95d8be77}{Try\+Add\+Item}} (int item\+Id, int count=1)
+\begin{DoxyCompactList}\small\item\em Looks up the item prefab by ID and tries to add {\itshape count}  copies. Returns false if the item is not registered or there is no space. Implementors that support this should override the default. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+An IItem\+Container addressable by grid coordinate, with defaults bridging the non-\/positional API. 
+
+\label{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_positional_item_container_doc-func-members}
+\Hypertarget{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_positional_item_container_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_positional_item_container_a3c042ddc1a805e9763a50a879ba7b328}\index{Feazeyu.RPGSystems.Inventory.IPositionalItemContainer@{Feazeyu.RPGSystems.Inventory.IPositionalItemContainer}!GetItem@{GetItem}}
+\index{GetItem@{GetItem}!Feazeyu.RPGSystems.Inventory.IPositionalItemContainer@{Feazeyu.RPGSystems.Inventory.IPositionalItemContainer}}
+\doxysubsubsection{\texorpdfstring{GetItem()}{GetItem()}}
+{\footnotesize\ttfamily \label{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_positional_item_container_a3c042ddc1a805e9763a50a879ba7b328} 
+Game\+Object? Feazeyu.\+RPGSystems.\+Inventory.\+IPositional\+Item\+Container.\+Get\+Item (\begin{DoxyParamCaption}\item[{Vector2\+Int}]{position}{}\end{DoxyParamCaption})}
+
+
+
+Implemented in \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_a1973fd6d72618602ea01ab0211a9bbc4}{Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Grid}}, and \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_a2eefa2260294e5876c20ea0bd2e772f4}{Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+List}}.
+
+\Hypertarget{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_positional_item_container_a601eb1775d9d4de9aa4e3206cce35f9d}\index{Feazeyu.RPGSystems.Inventory.IPositionalItemContainer@{Feazeyu.RPGSystems.Inventory.IPositionalItemContainer}!PutItem@{PutItem}}
+\index{PutItem@{PutItem}!Feazeyu.RPGSystems.Inventory.IPositionalItemContainer@{Feazeyu.RPGSystems.Inventory.IPositionalItemContainer}}
+\doxysubsubsection{\texorpdfstring{PutItem()}{PutItem()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_positional_item_container_a601eb1775d9d4de9aa4e3206cce35f9d} 
+bool IItem\+Container. Feazeyu.\+RPGSystems.\+Inventory.\+IPositional\+Item\+Container.\+Put\+Item (\begin{DoxyParamCaption}\item[{Game\+Object}]{item}{}\end{DoxyParamCaption})}
+
+
+
+Puts an item into the container. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The item Game\+Object to put.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the item was successfully put; otherwise, false.
+\end{DoxyReturn}
+
+
+Implements \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_container_a73f752e259b652360f2aa76a3a6207eb}{Feazeyu.\+RPGSystems.\+Inventory.\+IItem\+Container}}.
+
+\Hypertarget{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_positional_item_container_a005a656ea5d96b5c478343dfaba45f23}\index{Feazeyu.RPGSystems.Inventory.IPositionalItemContainer@{Feazeyu.RPGSystems.Inventory.IPositionalItemContainer}!PutItem@{PutItem}}
+\index{PutItem@{PutItem}!Feazeyu.RPGSystems.Inventory.IPositionalItemContainer@{Feazeyu.RPGSystems.Inventory.IPositionalItemContainer}}
+\doxysubsubsection{\texorpdfstring{PutItem()}{PutItem()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_positional_item_container_a005a656ea5d96b5c478343dfaba45f23} 
+bool Feazeyu.\+RPGSystems.\+Inventory.\+IPositional\+Item\+Container.\+Put\+Item (\begin{DoxyParamCaption}\item[{Vector2\+Int}]{position}{, }\item[{Game\+Object}]{item}{}\end{DoxyParamCaption})}
+
+
+
+Implemented in \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_a981e5bbe83cd806c5a98b1456e2b9340}{Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Grid}}, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_a56e665359042b425653cea6ea1bb5d41}{Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+List}}, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_grid_u_i_a5c8a2103e38b3960c5a9e781e1451ad5}{Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+Grid\+UI}}, and \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_list_u_i_a4a8638d1fbb5d4eea944d8ed2c0e8ef9}{Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+List\+UI}}.
+
+\Hypertarget{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_positional_item_container_a4ffb0693354a85e9e1e2af1235dd5ef7}\index{Feazeyu.RPGSystems.Inventory.IPositionalItemContainer@{Feazeyu.RPGSystems.Inventory.IPositionalItemContainer}!RemoveItem@{RemoveItem}}
+\index{RemoveItem@{RemoveItem}!Feazeyu.RPGSystems.Inventory.IPositionalItemContainer@{Feazeyu.RPGSystems.Inventory.IPositionalItemContainer}}
+\doxysubsubsection{\texorpdfstring{RemoveItem()}{RemoveItem()}}
+{\footnotesize\ttfamily \label{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_positional_item_container_a4ffb0693354a85e9e1e2af1235dd5ef7} 
+int Feazeyu.\+RPGSystems.\+Inventory.\+IPositional\+Item\+Container.\+Remove\+Item (\begin{DoxyParamCaption}\item[{Vector2\+Int}]{position}{}\end{DoxyParamCaption})}
+
+
+
+Removes the item at the given position; returns its id or -\/1 if empty. 
+
+
+
+Implemented in \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_a508d4ad8cb4ba58ded8ef29980cd31c0}{Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Grid}}, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_a45e3885865711fa8a273329f6158e2cb}{Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+List}}, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_grid_u_i_a06b691c3e3483b112ed4ddd53e8f3ac0}{Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+Grid\+UI}}, and \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_list_u_i_a509331ce4d0cc86f01af610e627b8bf6}{Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+List\+UI}}.
+
+\Hypertarget{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_positional_item_container_a2324d58156f0094210b016c2d49b6aba}\index{Feazeyu.RPGSystems.Inventory.IPositionalItemContainer@{Feazeyu.RPGSystems.Inventory.IPositionalItemContainer}!ReturnItem@{ReturnItem}}
+\index{ReturnItem@{ReturnItem}!Feazeyu.RPGSystems.Inventory.IPositionalItemContainer@{Feazeyu.RPGSystems.Inventory.IPositionalItemContainer}}
+\doxysubsubsection{\texorpdfstring{ReturnItem()}{ReturnItem()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_positional_item_container_a2324d58156f0094210b016c2d49b6aba} 
+void IItem\+Container. Feazeyu.\+RPGSystems.\+Inventory.\+IPositional\+Item\+Container.\+Return\+Item (\begin{DoxyParamCaption}\item[{Game\+Object}]{item}{}\end{DoxyParamCaption})}
+
+
+
+Returns an item to the container. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The item Game\+Object to return.\\
+\hline
+\end{DoxyParams}
+
+
+Implements \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_container_a45565d62df1cd8edba6e2a562cbd9f13}{Feazeyu.\+RPGSystems.\+Inventory.\+IItem\+Container}}.
+
+\Hypertarget{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_positional_item_container_a00b774b409c4cd2b178470bc1c17c31d}\index{Feazeyu.RPGSystems.Inventory.IPositionalItemContainer@{Feazeyu.RPGSystems.Inventory.IPositionalItemContainer}!ReturnItem@{ReturnItem}}
+\index{ReturnItem@{ReturnItem}!Feazeyu.RPGSystems.Inventory.IPositionalItemContainer@{Feazeyu.RPGSystems.Inventory.IPositionalItemContainer}}
+\doxysubsubsection{\texorpdfstring{ReturnItem()}{ReturnItem()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_positional_item_container_a00b774b409c4cd2b178470bc1c17c31d} 
+void Feazeyu.\+RPGSystems.\+Inventory.\+IPositional\+Item\+Container.\+Return\+Item (\begin{DoxyParamCaption}\item[{Vector2\+Int}]{position}{, }\item[{Game\+Object}]{item}{}\end{DoxyParamCaption})}
+
+
+
+Implemented in \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_aaaaba25798ed6689efd9cd05b9a54632}{Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Grid}}.
+
+
+
+The documentation for this interface was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Inventory/\+\doxymbox{\hyperlink{_inventory_helper_8cs}{Inventory\+Helper.\+cs}}\end{DoxyCompactItemize}

@@ -1,0 +1,172 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Node\+View Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_node_view}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_node_view}\index{Feazeyu.RPGSystems.EditorTools.GraphNodeView@{Feazeyu.RPGSystems.EditorTools.GraphNodeView}}
+
+
+Visual representation of a single Node\+Data inside the Graph\+View canvas. Agnostic to which graph system (dialogue /\+ quest) owns the node — the palette lookup goes through an injected registry so the same class renders both.  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Node\+View:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_node_view}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_node_view_aa93062de7982463df10831050d67ddc4}{Graph\+Node\+View}} (\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}} data, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset}{Graph\+Asset}} asset, IRead\+Only\+Dictionary$<$ string, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_info}{Node\+Info}} $>$ node\+Registry)
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the Graph\+Node\+View class. \end{DoxyCompactList}\item 
+Port \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_node_view_aafc201403845674c29b6490caa079b9d}{Get\+Port}} (string port\+Name, Direction dir)
+\begin{DoxyCompactList}\small\item\em Get port. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_node_view_af7ec5b4f1144e23ce41e91b1f058db5b}{Refresh}} ()
+\begin{DoxyCompactList}\small\item\em Rebuild the visual representation (call after data change). \end{DoxyCompactList}\item 
+override void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_node_view_aa9cbefabba883c99e7f1345badbe819f}{On\+Selected}} ()
+\item 
+override void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_node_view_a9d0d6a03a430b667443ca30f5d605805}{On\+Unselected}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Action \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_node_view_ae9946593bfc5bc1291823dacf69f69c1}{On\+Select}}
+\begin{DoxyCompactList}\small\item\em On select. \end{DoxyCompactList}\item 
+Action \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_node_view_a653443a6d756db52b985dae4d779c93f}{On\+Deselected}}
+\begin{DoxyCompactList}\small\item\em On deselected. \end{DoxyCompactList}\item 
+Action$<$ Vector2 $>$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_node_view_a85ff369a8c12e1038bc1a2e16f9dd197}{On\+Moved}}
+\begin{DoxyCompactList}\small\item\em On moved. \end{DoxyCompactList}\item 
+Action \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_node_view_a9b9b00f0128691e71e21a528d84ede05}{On\+Fields\+Changed}}
+\begin{DoxyCompactList}\small\item\em On fields changed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_node_view_a36454915abed4bc6eb591b29819a5381}{Data}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Visual representation of a single Node\+Data inside the Graph\+View canvas. Agnostic to which graph system (dialogue /\+ quest) owns the node — the palette lookup goes through an injected registry so the same class renders both. 
+
+Layout (mirrors Unity Behavior node anatomy):\+ ┌──────────────────────────────────┐ │ ▶ \+[Icon]\+ \+[Display\+Name]\+ \+[type]\+ │ ← header (accent-\/coloured left stripe) ├──────────────────────────────────┤ │ \+[field 1]\+ ───○ \+[bb var name]\+ │ ← field rows with link indicator │ \+[field 2]\+ ───○ │ ├──────────────────────────────────┤ │ ● Input port │ ← in port at top of node │ ● Output port(s) │ ← out ports at bottom └──────────────────────────────────┘ 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_node_view_doc-constructors}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_node_view_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_node_view_aa93062de7982463df10831050d67ddc4}\index{Feazeyu.RPGSystems.EditorTools.GraphNodeView@{Feazeyu.RPGSystems.EditorTools.GraphNodeView}!GraphNodeView@{GraphNodeView}}
+\index{GraphNodeView@{GraphNodeView}!Feazeyu.RPGSystems.EditorTools.GraphNodeView@{Feazeyu.RPGSystems.EditorTools.GraphNodeView}}
+\doxysubsubsection{\texorpdfstring{GraphNodeView()}{GraphNodeView()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_node_view_aa93062de7982463df10831050d67ddc4} 
+Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Node\+View.\+Graph\+Node\+View (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}}}]{data}{, }\item[{\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset}{Graph\+Asset}}}]{asset}{, }\item[{IRead\+Only\+Dictionary$<$ string, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_info}{Node\+Info}} $>$}]{node\+Registry}{}\end{DoxyParamCaption})}
+
+
+
+Initializes a new instance of the Graph\+Node\+View class. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_node_view_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_node_view_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_node_view_aafc201403845674c29b6490caa079b9d}\index{Feazeyu.RPGSystems.EditorTools.GraphNodeView@{Feazeyu.RPGSystems.EditorTools.GraphNodeView}!GetPort@{GetPort}}
+\index{GetPort@{GetPort}!Feazeyu.RPGSystems.EditorTools.GraphNodeView@{Feazeyu.RPGSystems.EditorTools.GraphNodeView}}
+\doxysubsubsection{\texorpdfstring{GetPort()}{GetPort()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_node_view_aafc201403845674c29b6490caa079b9d} 
+Port Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Node\+View.\+Get\+Port (\begin{DoxyParamCaption}\item[{string}]{port\+Name}{, }\item[{Direction}]{dir}{}\end{DoxyParamCaption})}
+
+
+
+Get port. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_node_view_aa9cbefabba883c99e7f1345badbe819f}\index{Feazeyu.RPGSystems.EditorTools.GraphNodeView@{Feazeyu.RPGSystems.EditorTools.GraphNodeView}!OnSelected@{OnSelected}}
+\index{OnSelected@{OnSelected}!Feazeyu.RPGSystems.EditorTools.GraphNodeView@{Feazeyu.RPGSystems.EditorTools.GraphNodeView}}
+\doxysubsubsection{\texorpdfstring{OnSelected()}{OnSelected()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_node_view_aa9cbefabba883c99e7f1345badbe819f} 
+override void Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Node\+View.\+On\+Selected (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_node_view_a9d0d6a03a430b667443ca30f5d605805}\index{Feazeyu.RPGSystems.EditorTools.GraphNodeView@{Feazeyu.RPGSystems.EditorTools.GraphNodeView}!OnUnselected@{OnUnselected}}
+\index{OnUnselected@{OnUnselected}!Feazeyu.RPGSystems.EditorTools.GraphNodeView@{Feazeyu.RPGSystems.EditorTools.GraphNodeView}}
+\doxysubsubsection{\texorpdfstring{OnUnselected()}{OnUnselected()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_node_view_a9d0d6a03a430b667443ca30f5d605805} 
+override void Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Node\+View.\+On\+Unselected (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_node_view_af7ec5b4f1144e23ce41e91b1f058db5b}\index{Feazeyu.RPGSystems.EditorTools.GraphNodeView@{Feazeyu.RPGSystems.EditorTools.GraphNodeView}!Refresh@{Refresh}}
+\index{Refresh@{Refresh}!Feazeyu.RPGSystems.EditorTools.GraphNodeView@{Feazeyu.RPGSystems.EditorTools.GraphNodeView}}
+\doxysubsubsection{\texorpdfstring{Refresh()}{Refresh()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_node_view_af7ec5b4f1144e23ce41e91b1f058db5b} 
+void Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Node\+View.\+Refresh (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Rebuild the visual representation (call after data change). 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_node_view_doc-variable-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_node_view_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_node_view_a653443a6d756db52b985dae4d779c93f}\index{Feazeyu.RPGSystems.EditorTools.GraphNodeView@{Feazeyu.RPGSystems.EditorTools.GraphNodeView}!OnDeselected@{OnDeselected}}
+\index{OnDeselected@{OnDeselected}!Feazeyu.RPGSystems.EditorTools.GraphNodeView@{Feazeyu.RPGSystems.EditorTools.GraphNodeView}}
+\doxysubsubsection{\texorpdfstring{OnDeselected}{OnDeselected}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_node_view_a653443a6d756db52b985dae4d779c93f} 
+Action Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Node\+View.\+On\+Deselected}
+
+
+
+On deselected. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_node_view_a9b9b00f0128691e71e21a528d84ede05}\index{Feazeyu.RPGSystems.EditorTools.GraphNodeView@{Feazeyu.RPGSystems.EditorTools.GraphNodeView}!OnFieldsChanged@{OnFieldsChanged}}
+\index{OnFieldsChanged@{OnFieldsChanged}!Feazeyu.RPGSystems.EditorTools.GraphNodeView@{Feazeyu.RPGSystems.EditorTools.GraphNodeView}}
+\doxysubsubsection{\texorpdfstring{OnFieldsChanged}{OnFieldsChanged}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_node_view_a9b9b00f0128691e71e21a528d84ede05} 
+Action Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Node\+View.\+On\+Fields\+Changed}
+
+
+
+On fields changed. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_node_view_a85ff369a8c12e1038bc1a2e16f9dd197}\index{Feazeyu.RPGSystems.EditorTools.GraphNodeView@{Feazeyu.RPGSystems.EditorTools.GraphNodeView}!OnMoved@{OnMoved}}
+\index{OnMoved@{OnMoved}!Feazeyu.RPGSystems.EditorTools.GraphNodeView@{Feazeyu.RPGSystems.EditorTools.GraphNodeView}}
+\doxysubsubsection{\texorpdfstring{OnMoved}{OnMoved}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_node_view_a85ff369a8c12e1038bc1a2e16f9dd197} 
+Action$<$Vector2$>$ Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Node\+View.\+On\+Moved}
+
+
+
+On moved. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_node_view_ae9946593bfc5bc1291823dacf69f69c1}\index{Feazeyu.RPGSystems.EditorTools.GraphNodeView@{Feazeyu.RPGSystems.EditorTools.GraphNodeView}!OnSelect@{OnSelect}}
+\index{OnSelect@{OnSelect}!Feazeyu.RPGSystems.EditorTools.GraphNodeView@{Feazeyu.RPGSystems.EditorTools.GraphNodeView}}
+\doxysubsubsection{\texorpdfstring{OnSelect}{OnSelect}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_node_view_ae9946593bfc5bc1291823dacf69f69c1} 
+Action Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Node\+View.\+On\+Select}
+
+
+
+On select. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_node_view_doc-property-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_node_view_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_node_view_a36454915abed4bc6eb591b29819a5381}\index{Feazeyu.RPGSystems.EditorTools.GraphNodeView@{Feazeyu.RPGSystems.EditorTools.GraphNodeView}!Data@{Data}}
+\index{Data@{Data}!Feazeyu.RPGSystems.EditorTools.GraphNodeView@{Feazeyu.RPGSystems.EditorTools.GraphNodeView}}
+\doxysubsubsection{\texorpdfstring{Data}{Data}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_node_view_a36454915abed4bc6eb591b29819a5381} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}} Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Node\+View.\+Data\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Data. 
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Editor/\+\+Graph/\+\+Nodes/\+\doxymbox{\hyperlink{_graph_node_view_8cs}{Graph\+Node\+View.\+cs}}\end{DoxyCompactItemize}

@@ -7,7 +7,7 @@ namespace Feazeyu.RPGSystems.EditorTools
 {
     /// <summary>
     /// Maps a node type-id (see <see cref="NodeRegistry"/> or
-    /// <see cref="QuestGraph.Runtime.QuestNodeRegistry"/>) to an optional
+    /// <see cref="Feazeyu.RPGSystems.Quest.QuestNodeRegistry"/>) to an optional
     /// "decorator" callback that injects extra UI into a node card's
     /// field container.
     ///

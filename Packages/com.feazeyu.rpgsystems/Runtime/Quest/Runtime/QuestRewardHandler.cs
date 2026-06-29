@@ -1,7 +1,7 @@
 using UnityEngine;
-using QuestGraph.Runtime;
+using Feazeyu.RPGSystems.Quest;
 
-namespace QuestGraph.Runtime
+namespace Feazeyu.RPGSystems.Quest
 {
     /// <summary>
     /// Listens to <see cref="QuestRunner.OnRewardGranted"/>. Override

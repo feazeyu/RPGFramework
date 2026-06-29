@@ -2,12 +2,12 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using TMPro;
-using QuestGraph.Runtime;
+using Feazeyu.RPGSystems.Quest;
 using Feazeyu.RPGSystems.Dialogue;
 using Feazeyu.RPGSystems.Inventory;
 using Feazeyu.RPGSystems.Items;
 
-namespace QuestGraph.Demo
+namespace Feazeyu.RPGSystems.Demo
 {
     /// <summary>
     /// Single-MonoBehaviour quest HUD for the chain demo.

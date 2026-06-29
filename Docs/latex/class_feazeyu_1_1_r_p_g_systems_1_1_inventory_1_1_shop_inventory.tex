@@ -1,0 +1,61 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+Inventory Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_inventory}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_inventory}\index{Feazeyu.RPGSystems.Inventory.ShopInventory@{Feazeyu.RPGSystems.Inventory.ShopInventory}}
+
+
+Authored asset holding a shop\textquotesingle{}s listings; clone it for runtime use.  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+Inventory:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_inventory}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_inventory}{Shop\+Inventory}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_inventory_a0c5b4ee324866a1c62a3f02a1ea286a9}{Clone\+For\+Runtime}} ()
+\begin{DoxyCompactList}\small\item\em Builds a throwaway runtime copy of this inventory. Buying and selling mutate Shop\+Slot.\+stock, so shops must run against a clone — otherwise those mutations are written back into the authored asset and persist across play sessions in the editor. Mirrors {\ttfamily Blackboard.\+Clone\+For\+Runtime()}:\+ the authored asset is never mutated at runtime. Object.\+Instantiate(\+Object) deep-\/copies the serialized listings list (\doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot}{Shop\+Slot} is a by-\/value \+[Serializable]\+ type). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+List$<$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot}{Shop\+Slot}} $>$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_inventory_abbe4d5daedfe4980474566f8daff81da}{listings}} = new()
+\begin{DoxyCompactList}\small\item\em The shop\textquotesingle{}s listings. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Authored asset holding a shop\textquotesingle{}s listings; clone it for runtime use. 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_inventory_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_inventory_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_inventory_a0c5b4ee324866a1c62a3f02a1ea286a9}\index{Feazeyu.RPGSystems.Inventory.ShopInventory@{Feazeyu.RPGSystems.Inventory.ShopInventory}!CloneForRuntime@{CloneForRuntime}}
+\index{CloneForRuntime@{CloneForRuntime}!Feazeyu.RPGSystems.Inventory.ShopInventory@{Feazeyu.RPGSystems.Inventory.ShopInventory}}
+\doxysubsubsection{\texorpdfstring{CloneForRuntime()}{CloneForRuntime()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_inventory_a0c5b4ee324866a1c62a3f02a1ea286a9} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_inventory}{Shop\+Inventory}} Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+Inventory.\+Clone\+For\+Runtime (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Builds a throwaway runtime copy of this inventory. Buying and selling mutate Shop\+Slot.\+stock, so shops must run against a clone — otherwise those mutations are written back into the authored asset and persist across play sessions in the editor. Mirrors {\ttfamily Blackboard.\+Clone\+For\+Runtime()}:\+ the authored asset is never mutated at runtime. Object.\+Instantiate(\+Object) deep-\/copies the serialized listings list (\doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot}{Shop\+Slot} is a by-\/value \+[Serializable]\+ type). 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_inventory_doc-variable-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_inventory_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_inventory_abbe4d5daedfe4980474566f8daff81da}\index{Feazeyu.RPGSystems.Inventory.ShopInventory@{Feazeyu.RPGSystems.Inventory.ShopInventory}!listings@{listings}}
+\index{listings@{listings}!Feazeyu.RPGSystems.Inventory.ShopInventory@{Feazeyu.RPGSystems.Inventory.ShopInventory}}
+\doxysubsubsection{\texorpdfstring{listings}{listings}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_inventory_abbe4d5daedfe4980474566f8daff81da} 
+List$<$\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot}{Shop\+Slot}}$>$ Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+Inventory.\+listings = new()}
+
+
+
+The shop\textquotesingle{}s listings. 
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Inventory/\+\+Shopping/\+\doxymbox{\hyperlink{_shop_inventory_8cs}{Shop\+Inventory.\+cs}}\end{DoxyCompactItemize}

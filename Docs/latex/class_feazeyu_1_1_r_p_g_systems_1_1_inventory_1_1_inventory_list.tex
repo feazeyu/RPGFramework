@@ -1,0 +1,336 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+List Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list}\index{Feazeyu.RPGSystems.Inventory.InventoryList@{Feazeyu.RPGSystems.Inventory.InventoryList}}
+
+
+Represents an inventory list that manages inventory slots and interacts with the UI generator.  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+List:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_a56e665359042b425653cea6ea1bb5d41}{Put\+Item}} (Vector2\+Int position, Game\+Object item)
+\begin{DoxyCompactList}\small\item\em Put item. \end{DoxyCompactList}\item 
+virtual int \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_a45e3885865711fa8a273329f6158e2cb}{Remove\+Item}} (Vector2\+Int position)
+\begin{DoxyCompactList}\small\item\em Remove item. \end{DoxyCompactList}\item 
+Game\+Object \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_a2eefa2260294e5876c20ea0bd2e772f4}{Get\+Item}} (Vector2\+Int position)
+\begin{DoxyCompactList}\small\item\em Get item. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_a98d909fda782901243c745b52aab4bc4}{Try\+Add\+Item}} (int item\+Id, int count=1)
+\begin{DoxyCompactList}\small\item\em Try add item. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_a94b2cede7a852d3783716095ee392895}{Redraw\+Contents}} ()
+\begin{DoxyCompactList}\small\item\em Redraw contents. \end{DoxyCompactList}\item 
+virtual string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_a1e9a2ae5e0344c18fe526e40e9de4c70}{Get\+Item\+Label}} (\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot}{Stackable\+Inventory\+Slot}} slot)
+\begin{DoxyCompactList}\small\item\em The text shown for a slot\textquotesingle{}s item in the list UI. Defaults to the item\textquotesingle{}s name; subclasses (e.\+g. Shop\+List\+UI) override this to append extra info such as a price. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_a91a811e76296e06235c85b6f0986adc1}{On\+Drop}} (Pointer\+Event\+Data event\+Data)
+\item 
+virtual void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_ae68817404b672b3980e68116189f9cc9}{Toggle\+Inventory}} ()
+\begin{DoxyCompactList}\small\item\em Toggles the active state of the inventory UI. \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_ac78b71ff3d3c6acb9b672c1e885f9627}{Open\+Inventory}} ()
+\begin{DoxyCompactList}\small\item\em Opens the inventory UI. \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_af06a646ab595954110d54085bb013ae8}{Close\+Inventory}} ()
+\begin{DoxyCompactList}\small\item\em Closes the inventory UI. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_positional_item_container}{Feazeyu.\+RPGSystems.\+Inventory.\+IPositional\+Item\+Container}}}
+\begin{DoxyCompactItemize}
+\item 
+bool IItem\+Container. \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_positional_item_container_a601eb1775d9d4de9aa4e3206cce35f9d}{Put\+Item}} (Game\+Object item)
+\begin{DoxyCompactList}\small\item\em Puts an item into the container. \end{DoxyCompactList}\item 
+void IItem\+Container. \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_positional_item_container_a2324d58156f0094210b016c2d49b6aba}{Return\+Item}} (Game\+Object item)
+\begin{DoxyCompactList}\small\item\em Returns an item to the container. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_positional_item_container_a00b774b409c4cd2b178470bc1c17c31d}{Return\+Item}} (Vector2\+Int position, Game\+Object item)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_af0c8ff0048eee524f5d5f1c435ed3f25}{Enable\+Slot\+Capacity}} = false
+\begin{DoxyCompactList}\small\item\em Indicates whether slot capacity is enabled. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_a0d66c3acdeaf4071407a17a84d4949c2}{capacity}} = 20
+\begin{DoxyCompactList}\small\item\em The maximum number of slots in the inventory. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_a0b87c21f273bc7236975dd8cd910b032}{scroll\+Sensitivity}} = 10
+\begin{DoxyCompactList}\small\item\em The scroll sensitivity for the inventory UI. \end{DoxyCompactList}\item 
+List$<$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot}{Stackable\+Inventory\+Slot}} $>$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_aab5345561878702fcbaf56ff4b04b385}{contents}}
+\begin{DoxyCompactList}\small\item\em The list of stackable inventory slots. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_ad65efd649bccfd0a6f8f2d4ab2df3672}{On\+Validate}} ()
+\begin{DoxyCompactList}\small\item\em Unity callback invoked when the script is loaded or a value changes in the Inspector. Ensures the UI generator is added only once in the editor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_generator}{Inventory\+List\+Generator}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_a117158d722ea6d138b5eb7c571b12fdc}{ui\+Generator}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Gets the UI generator for this inventory list, adding it if necessary. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Events}
+\begin{DoxyCompactItemize}
+\item 
+Action$<$ int, int $>$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_ac9da6a4b190aa9c31a58bbcdabab1b1d}{On\+Item\+Added}}
+\begin{DoxyCompactList}\small\item\em Raised after an item is added to the list:\+ (item\+Id, count). \end{DoxyCompactList}\item 
+Action$<$ int, int $>$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_a826ee8971ffab064ec5bab69cab4558c}{On\+Item\+Removed}}
+\begin{DoxyCompactList}\small\item\em Raised after an item is removed from the list:\+ (item\+Id, count). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Events inherited from \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_count_notifier}{Feazeyu.\+RPGSystems.\+Inventory.\+IItem\+Count\+Notifier}}}
+\begin{DoxyCompactItemize}
+\item 
+System.\+Action$<$ int, int $>$ \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_count_notifier_a257ef00ff6a1fe5621f721c8a7a4c82e}{On\+Item\+Added}}
+\begin{DoxyCompactList}\small\item\em Raised after item(s) are added to the container:\+ (item\+Id, count). \end{DoxyCompactList}\item 
+System.\+Action$<$ int, int $>$ \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_count_notifier_aebbf65643b0cc9ad6b62bdb9da562c9d}{On\+Item\+Removed}}
+\begin{DoxyCompactList}\small\item\em Raised after item(s) are removed from the container:\+ (item\+Id, count). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents an inventory list that manages inventory slots and interacts with the UI generator. 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_af06a646ab595954110d54085bb013ae8}\index{Feazeyu.RPGSystems.Inventory.InventoryList@{Feazeyu.RPGSystems.Inventory.InventoryList}!CloseInventory@{CloseInventory}}
+\index{CloseInventory@{CloseInventory}!Feazeyu.RPGSystems.Inventory.InventoryList@{Feazeyu.RPGSystems.Inventory.InventoryList}}
+\doxysubsubsection{\texorpdfstring{CloseInventory()}{CloseInventory()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_af06a646ab595954110d54085bb013ae8} 
+virtual void Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+List.\+Close\+Inventory (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Closes the inventory UI. 
+
+
+
+Reimplemented in \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_list_u_i_a215cd308268e2f5d7dae021a5cabb6e8}{Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+List\+UI}}.
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_a2eefa2260294e5876c20ea0bd2e772f4}\index{Feazeyu.RPGSystems.Inventory.InventoryList@{Feazeyu.RPGSystems.Inventory.InventoryList}!GetItem@{GetItem}}
+\index{GetItem@{GetItem}!Feazeyu.RPGSystems.Inventory.InventoryList@{Feazeyu.RPGSystems.Inventory.InventoryList}}
+\doxysubsubsection{\texorpdfstring{GetItem()}{GetItem()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_a2eefa2260294e5876c20ea0bd2e772f4} 
+Game\+Object Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+List.\+Get\+Item (\begin{DoxyParamCaption}\item[{Vector2\+Int}]{position}{}\end{DoxyParamCaption})}
+
+
+
+Get item. 
+
+
+
+Implements \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_positional_item_container_a3c042ddc1a805e9763a50a879ba7b328}{Feazeyu.\+RPGSystems.\+Inventory.\+IPositional\+Item\+Container}}.
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_a1e9a2ae5e0344c18fe526e40e9de4c70}\index{Feazeyu.RPGSystems.Inventory.InventoryList@{Feazeyu.RPGSystems.Inventory.InventoryList}!GetItemLabel@{GetItemLabel}}
+\index{GetItemLabel@{GetItemLabel}!Feazeyu.RPGSystems.Inventory.InventoryList@{Feazeyu.RPGSystems.Inventory.InventoryList}}
+\doxysubsubsection{\texorpdfstring{GetItemLabel()}{GetItemLabel()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_a1e9a2ae5e0344c18fe526e40e9de4c70} 
+virtual string Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+List.\+Get\+Item\+Label (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot}{Stackable\+Inventory\+Slot}}}]{slot}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+The text shown for a slot\textquotesingle{}s item in the list UI. Defaults to the item\textquotesingle{}s name; subclasses (e.\+g. Shop\+List\+UI) override this to append extra info such as a price. 
+
+
+
+Reimplemented in \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_list_u_i_a36e89fef128b42c311b38e352c5a93b7}{Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+List\+UI}}.
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_a91a811e76296e06235c85b6f0986adc1}\index{Feazeyu.RPGSystems.Inventory.InventoryList@{Feazeyu.RPGSystems.Inventory.InventoryList}!OnDrop@{OnDrop}}
+\index{OnDrop@{OnDrop}!Feazeyu.RPGSystems.Inventory.InventoryList@{Feazeyu.RPGSystems.Inventory.InventoryList}}
+\doxysubsubsection{\texorpdfstring{OnDrop()}{OnDrop()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_a91a811e76296e06235c85b6f0986adc1} 
+void Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+List.\+On\+Drop (\begin{DoxyParamCaption}\item[{Pointer\+Event\+Data}]{event\+Data}{}\end{DoxyParamCaption})}
+
+
+
+
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_ad65efd649bccfd0a6f8f2d4ab2df3672}\index{Feazeyu.RPGSystems.Inventory.InventoryList@{Feazeyu.RPGSystems.Inventory.InventoryList}!OnValidate@{OnValidate}}
+\index{OnValidate@{OnValidate}!Feazeyu.RPGSystems.Inventory.InventoryList@{Feazeyu.RPGSystems.Inventory.InventoryList}}
+\doxysubsubsection{\texorpdfstring{OnValidate()}{OnValidate()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_ad65efd649bccfd0a6f8f2d4ab2df3672} 
+virtual void Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+List.\+On\+Validate (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Unity callback invoked when the script is loaded or a value changes in the Inspector. Ensures the UI generator is added only once in the editor. 
+
+
+
+Reimplemented in \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_list_u_i_a24c5c1fa7f9fc273ceaa745d38815367}{Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+List\+UI}}.
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_ac78b71ff3d3c6acb9b672c1e885f9627}\index{Feazeyu.RPGSystems.Inventory.InventoryList@{Feazeyu.RPGSystems.Inventory.InventoryList}!OpenInventory@{OpenInventory}}
+\index{OpenInventory@{OpenInventory}!Feazeyu.RPGSystems.Inventory.InventoryList@{Feazeyu.RPGSystems.Inventory.InventoryList}}
+\doxysubsubsection{\texorpdfstring{OpenInventory()}{OpenInventory()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_ac78b71ff3d3c6acb9b672c1e885f9627} 
+virtual void Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+List.\+Open\+Inventory (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Opens the inventory UI. 
+
+
+
+Reimplemented in \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_list_u_i_a40755ef62ce0ba376e1650463889c7f1}{Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+List\+UI}}.
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_a56e665359042b425653cea6ea1bb5d41}\index{Feazeyu.RPGSystems.Inventory.InventoryList@{Feazeyu.RPGSystems.Inventory.InventoryList}!PutItem@{PutItem}}
+\index{PutItem@{PutItem}!Feazeyu.RPGSystems.Inventory.InventoryList@{Feazeyu.RPGSystems.Inventory.InventoryList}}
+\doxysubsubsection{\texorpdfstring{PutItem()}{PutItem()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_a56e665359042b425653cea6ea1bb5d41} 
+virtual bool Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+List.\+Put\+Item (\begin{DoxyParamCaption}\item[{Vector2\+Int}]{position}{, }\item[{Game\+Object}]{item}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Put item. 
+
+
+
+Implements \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_positional_item_container_a005a656ea5d96b5c478343dfaba45f23}{Feazeyu.\+RPGSystems.\+Inventory.\+IPositional\+Item\+Container}}.
+
+
+
+Reimplemented in \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_list_u_i_a4a8638d1fbb5d4eea944d8ed2c0e8ef9}{Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+List\+UI}}.
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_a94b2cede7a852d3783716095ee392895}\index{Feazeyu.RPGSystems.Inventory.InventoryList@{Feazeyu.RPGSystems.Inventory.InventoryList}!RedrawContents@{RedrawContents}}
+\index{RedrawContents@{RedrawContents}!Feazeyu.RPGSystems.Inventory.InventoryList@{Feazeyu.RPGSystems.Inventory.InventoryList}}
+\doxysubsubsection{\texorpdfstring{RedrawContents()}{RedrawContents()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_a94b2cede7a852d3783716095ee392895} 
+void Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+List.\+Redraw\+Contents (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Redraw contents. 
+
+
+
+Implements \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_u_i_positional_item_container_a3ed0914fc99a2e94c6f4437a255b76bf}{Feazeyu.\+RPGSystems.\+Inventory.\+IUIPositional\+Item\+Container}}.
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_a45e3885865711fa8a273329f6158e2cb}\index{Feazeyu.RPGSystems.Inventory.InventoryList@{Feazeyu.RPGSystems.Inventory.InventoryList}!RemoveItem@{RemoveItem}}
+\index{RemoveItem@{RemoveItem}!Feazeyu.RPGSystems.Inventory.InventoryList@{Feazeyu.RPGSystems.Inventory.InventoryList}}
+\doxysubsubsection{\texorpdfstring{RemoveItem()}{RemoveItem()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_a45e3885865711fa8a273329f6158e2cb} 
+virtual int Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+List.\+Remove\+Item (\begin{DoxyParamCaption}\item[{Vector2\+Int}]{position}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Remove item. 
+
+
+
+Implements \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_positional_item_container_a4ffb0693354a85e9e1e2af1235dd5ef7}{Feazeyu.\+RPGSystems.\+Inventory.\+IPositional\+Item\+Container}}.
+
+
+
+Reimplemented in \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_list_u_i_a509331ce4d0cc86f01af610e627b8bf6}{Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+List\+UI}}.
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_ae68817404b672b3980e68116189f9cc9}\index{Feazeyu.RPGSystems.Inventory.InventoryList@{Feazeyu.RPGSystems.Inventory.InventoryList}!ToggleInventory@{ToggleInventory}}
+\index{ToggleInventory@{ToggleInventory}!Feazeyu.RPGSystems.Inventory.InventoryList@{Feazeyu.RPGSystems.Inventory.InventoryList}}
+\doxysubsubsection{\texorpdfstring{ToggleInventory()}{ToggleInventory()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_ae68817404b672b3980e68116189f9cc9} 
+virtual void Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+List.\+Toggle\+Inventory (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Toggles the active state of the inventory UI. 
+
+
+
+Reimplemented in \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_list_u_i_a95a58b3834278f52d04cb7e032ca7265}{Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+List\+UI}}.
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_a98d909fda782901243c745b52aab4bc4}\index{Feazeyu.RPGSystems.Inventory.InventoryList@{Feazeyu.RPGSystems.Inventory.InventoryList}!TryAddItem@{TryAddItem}}
+\index{TryAddItem@{TryAddItem}!Feazeyu.RPGSystems.Inventory.InventoryList@{Feazeyu.RPGSystems.Inventory.InventoryList}}
+\doxysubsubsection{\texorpdfstring{TryAddItem()}{TryAddItem()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_a98d909fda782901243c745b52aab4bc4} 
+bool Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+List.\+Try\+Add\+Item (\begin{DoxyParamCaption}\item[{int}]{item\+Id}{, }\item[{int}]{count}{ = {\ttfamily 1}}\end{DoxyParamCaption})}
+
+
+
+Try add item. 
+
+
+
+Implements \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_container_a6c7b3fb8ed2cb756a5dbe37a95d8be77}{Feazeyu.\+RPGSystems.\+Inventory.\+IItem\+Container}}.
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_doc-variable-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_a0d66c3acdeaf4071407a17a84d4949c2}\index{Feazeyu.RPGSystems.Inventory.InventoryList@{Feazeyu.RPGSystems.Inventory.InventoryList}!capacity@{capacity}}
+\index{capacity@{capacity}!Feazeyu.RPGSystems.Inventory.InventoryList@{Feazeyu.RPGSystems.Inventory.InventoryList}}
+\doxysubsubsection{\texorpdfstring{capacity}{capacity}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_a0d66c3acdeaf4071407a17a84d4949c2} 
+int Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+List.\+capacity = 20}
+
+
+
+The maximum number of slots in the inventory. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_aab5345561878702fcbaf56ff4b04b385}\index{Feazeyu.RPGSystems.Inventory.InventoryList@{Feazeyu.RPGSystems.Inventory.InventoryList}!contents@{contents}}
+\index{contents@{contents}!Feazeyu.RPGSystems.Inventory.InventoryList@{Feazeyu.RPGSystems.Inventory.InventoryList}}
+\doxysubsubsection{\texorpdfstring{contents}{contents}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_aab5345561878702fcbaf56ff4b04b385} 
+List$<$\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot}{Stackable\+Inventory\+Slot}}$>$ Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+List.\+contents}
+
+
+
+The list of stackable inventory slots. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_af0c8ff0048eee524f5d5f1c435ed3f25}\index{Feazeyu.RPGSystems.Inventory.InventoryList@{Feazeyu.RPGSystems.Inventory.InventoryList}!EnableSlotCapacity@{EnableSlotCapacity}}
+\index{EnableSlotCapacity@{EnableSlotCapacity}!Feazeyu.RPGSystems.Inventory.InventoryList@{Feazeyu.RPGSystems.Inventory.InventoryList}}
+\doxysubsubsection{\texorpdfstring{EnableSlotCapacity}{EnableSlotCapacity}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_af0c8ff0048eee524f5d5f1c435ed3f25} 
+bool Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+List.\+Enable\+Slot\+Capacity = false}
+
+
+
+Indicates whether slot capacity is enabled. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_a0b87c21f273bc7236975dd8cd910b032}\index{Feazeyu.RPGSystems.Inventory.InventoryList@{Feazeyu.RPGSystems.Inventory.InventoryList}!scrollSensitivity@{scrollSensitivity}}
+\index{scrollSensitivity@{scrollSensitivity}!Feazeyu.RPGSystems.Inventory.InventoryList@{Feazeyu.RPGSystems.Inventory.InventoryList}}
+\doxysubsubsection{\texorpdfstring{scrollSensitivity}{scrollSensitivity}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_a0b87c21f273bc7236975dd8cd910b032} 
+int Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+List.\+scroll\+Sensitivity = 10}
+
+
+
+The scroll sensitivity for the inventory UI. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_doc-property-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_a117158d722ea6d138b5eb7c571b12fdc}\index{Feazeyu.RPGSystems.Inventory.InventoryList@{Feazeyu.RPGSystems.Inventory.InventoryList}!uiGenerator@{uiGenerator}}
+\index{uiGenerator@{uiGenerator}!Feazeyu.RPGSystems.Inventory.InventoryList@{Feazeyu.RPGSystems.Inventory.InventoryList}}
+\doxysubsubsection{\texorpdfstring{uiGenerator}{uiGenerator}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_a117158d722ea6d138b5eb7c571b12fdc} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_generator}{Inventory\+List\+Generator}} Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+List.\+ui\+Generator\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Gets the UI generator for this inventory list, adding it if necessary. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_doc-event-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_doc-event-members}
+\doxysubsection{Event Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_ac9da6a4b190aa9c31a58bbcdabab1b1d}\index{Feazeyu.RPGSystems.Inventory.InventoryList@{Feazeyu.RPGSystems.Inventory.InventoryList}!OnItemAdded@{OnItemAdded}}
+\index{OnItemAdded@{OnItemAdded}!Feazeyu.RPGSystems.Inventory.InventoryList@{Feazeyu.RPGSystems.Inventory.InventoryList}}
+\doxysubsubsection{\texorpdfstring{OnItemAdded}{OnItemAdded}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_ac9da6a4b190aa9c31a58bbcdabab1b1d} 
+Action$<$int, int$>$ Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+List.\+On\+Item\+Added}
+
+
+
+Raised after an item is added to the list:\+ (item\+Id, count). 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_a826ee8971ffab064ec5bab69cab4558c}\index{Feazeyu.RPGSystems.Inventory.InventoryList@{Feazeyu.RPGSystems.Inventory.InventoryList}!OnItemRemoved@{OnItemRemoved}}
+\index{OnItemRemoved@{OnItemRemoved}!Feazeyu.RPGSystems.Inventory.InventoryList@{Feazeyu.RPGSystems.Inventory.InventoryList}}
+\doxysubsubsection{\texorpdfstring{OnItemRemoved}{OnItemRemoved}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_a826ee8971ffab064ec5bab69cab4558c} 
+Action$<$int, int$>$ Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+List.\+On\+Item\+Removed}
+
+
+
+Raised after an item is removed from the list:\+ (item\+Id, count). 
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Inventory/\+\+List/\+\doxymbox{\hyperlink{_inventory_list_8cs}{Inventory\+List.\+cs}}\end{DoxyCompactItemize}

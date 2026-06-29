@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 using System.Collections.Generic;
 using Feazeyu.RPGSystems.Dialogue;
 using Feazeyu.RPGSystems.EditorTools;
-using QuestGraph.Runtime;
+using Feazeyu.RPGSystems.Quest;
 
 namespace Feazeyu.RPGSystems.EditorTools
 {

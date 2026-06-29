@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Feazeyu.RPGSystems.Dialogue;
 
-namespace QuestGraph.Runtime
+namespace Feazeyu.RPGSystems.Quest
 {
     /// <summary>
     /// Attribute equivalent to <see cref="DialogueNodeAttribute"/> for the
@@ -213,7 +213,7 @@ namespace QuestGraph.Runtime
                 },
                 DefaultFields = new List<FieldData>
                 {
-                    new FieldData { FieldName = "Quest", TypeName = "QuestGraph.Runtime.QuestReference" },
+                    new FieldData { FieldName = "Quest", TypeName = "Feazeyu.RPGSystems.Quest.QuestReference" },
                 }
             });
         }

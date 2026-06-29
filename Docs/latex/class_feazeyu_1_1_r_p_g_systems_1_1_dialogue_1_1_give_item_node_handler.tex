@@ -1,0 +1,71 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Dialogue.\+Give\+Item\+Node\+Handler Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_give_item_node_handler}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_give_item_node_handler}\index{Feazeyu.RPGSystems.Dialogue.GiveItemNodeHandler@{Feazeyu.RPGSystems.Dialogue.GiveItemNodeHandler}}
+
+
+\doxylink{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue}{Dialogue} node that tries to add an item to an \doxylink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_container}{IItem\+Container}. Follows "{}\+Success"{} if the item was added, "{}\+Failure"{} otherwise.  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Dialogue.\+Give\+Item\+Node\+Handler:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_give_item_node_handler}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+IEnumerator \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_give_item_node_handler_a5e3d1e49e1c34ce3d7346edf593282cd}{Execute}} (\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}} node, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context}{Graph\+Run\+Context}} ctx)
+\begin{DoxyCompactList}\small\item\em Coroutine that executes the node. The runner yields on this, so the handler can span multiple frames. Call context.\+Follow /\+ context.\+End when done — either inside this coroutine or from an external callback. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_give_item_node_handler_aef5d615ba6670176ad73d64916200abc}{Node\+Type\+Id}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Must match \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data_a4b2804487fe14225b5522250ef5d85e8}{Node\+Data.\+Node\+Type} for the nodes this handler processes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue}{Dialogue} node that tries to add an item to an \doxylink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_container}{IItem\+Container}. Follows "{}\+Success"{} if the item was added, "{}\+Failure"{} otherwise. 
+
+Fields:\+ Item\+Id — integer item ID (inline or blackboard Int variable) Count — how many to add (inline or blackboard Int variable), defaults to 1 Target — blackboard Game\+Object variable whose component implements \doxylink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_container}{IItem\+Container} 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_give_item_node_handler_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_give_item_node_handler_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_give_item_node_handler_a5e3d1e49e1c34ce3d7346edf593282cd}\index{Feazeyu.RPGSystems.Dialogue.GiveItemNodeHandler@{Feazeyu.RPGSystems.Dialogue.GiveItemNodeHandler}!Execute@{Execute}}
+\index{Execute@{Execute}!Feazeyu.RPGSystems.Dialogue.GiveItemNodeHandler@{Feazeyu.RPGSystems.Dialogue.GiveItemNodeHandler}}
+\doxysubsubsection{\texorpdfstring{Execute()}{Execute()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_give_item_node_handler_a5e3d1e49e1c34ce3d7346edf593282cd} 
+IEnumerator Feazeyu.\+RPGSystems.\+Dialogue.\+Give\+Item\+Node\+Handler.\+Execute (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}}}]{node}{, }\item[{\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context}{Graph\+Run\+Context}}}]{ctx}{}\end{DoxyParamCaption})}
+
+
+
+Coroutine that executes the node. The runner yields on this, so the handler can span multiple frames. Call context.\+Follow /\+ context.\+End when done — either inside this coroutine or from an external callback. 
+
+
+
+Implements \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_i_graph_node_handler_a7362a7107f36dbc527b568e0f5e8af91}{Feazeyu.\+RPGSystems.\+Dialogue.\+IGraph\+Node\+Handler}}.
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_give_item_node_handler_doc-property-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_give_item_node_handler_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_give_item_node_handler_aef5d615ba6670176ad73d64916200abc}\index{Feazeyu.RPGSystems.Dialogue.GiveItemNodeHandler@{Feazeyu.RPGSystems.Dialogue.GiveItemNodeHandler}!NodeTypeId@{NodeTypeId}}
+\index{NodeTypeId@{NodeTypeId}!Feazeyu.RPGSystems.Dialogue.GiveItemNodeHandler@{Feazeyu.RPGSystems.Dialogue.GiveItemNodeHandler}}
+\doxysubsubsection{\texorpdfstring{NodeTypeId}{NodeTypeId}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_give_item_node_handler_aef5d615ba6670176ad73d64916200abc} 
+string Feazeyu.\+RPGSystems.\+Dialogue.\+Give\+Item\+Node\+Handler.\+Node\+Type\+Id\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Must match \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data_a4b2804487fe14225b5522250ef5d85e8}{Node\+Data.\+Node\+Type} for the nodes this handler processes. 
+
+
+
+Implements \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_i_graph_node_handler_aaae381139fafeb9b8fbb6a24eb984f57}{Feazeyu.\+RPGSystems.\+Dialogue.\+IGraph\+Node\+Handler}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Dialogue/\+\+Nodes/\+\doxymbox{\hyperlink{_give_item_node_handler_8cs}{Give\+Item\+Node\+Handler.\+cs}}\end{DoxyCompactItemize}

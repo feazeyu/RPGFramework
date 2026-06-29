@@ -1,11 +1,11 @@
 using System.Collections;
 using UnityEngine;
 using Feazeyu.RPGSystems.Dialogue;
-using QuestGraph.Runtime;
+using Feazeyu.RPGSystems.Quest;
 using Feazeyu.RPGSystems.Character;
 using Feazeyu.RPGSystems.Inventory;
 
-namespace QuestGraph.Nodes
+namespace Feazeyu.RPGSystems.Quest.Nodes
 {
     /// <summary>
     /// Handler for the Deliver Item objective node (typeId = "obj_deliver").

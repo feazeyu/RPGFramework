@@ -1,0 +1,4 @@
+var _inventory_grid_play_mode_persistence_8cs =
+[
+    [ "Feazeyu.RPGSystems.Inventory.InventoryGridPlayModePersistence.GridCapture.SlotState", "struct_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_play_mode_persistence_1_1_grid_capture_1_1_slot_state.html", "struct_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_play_mode_persistence_1_1_grid_capture_1_1_slot_state" ]
+];

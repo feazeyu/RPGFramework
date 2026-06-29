@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Feazeyu.RPGSystems.Dialogue;
 
-namespace QuestGraph.Runtime
+namespace Feazeyu.RPGSystems.Quest
 {
     /// <summary>
     /// Per-chain-node lifecycle state for <see cref="QuestChainRunner"/>.

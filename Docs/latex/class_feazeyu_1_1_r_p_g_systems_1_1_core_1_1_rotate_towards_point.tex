@@ -1,0 +1,80 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Core.\+Rotate\+Towards\+Point Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_rotate_towards_point}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_rotate_towards_point}\index{Feazeyu.RPGSystems.Core.RotateTowardsPoint@{Feazeyu.RPGSystems.Core.RotateTowardsPoint}}
+
+
+Rotates the owning transform to face a screen-\/space point, driven by mouse aiming.  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Core.\+Rotate\+Towards\+Point:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_rotate_towards_point}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_rotate_towards_point_aed4bd76edcdf5d71371d0d47997bc011}{Rotate\+Towards}} (Vector2 point, Camera cam=null)
+\begin{DoxyCompactList}\small\item\em Rotates the transform so its local right axis points toward {\itshape point} . No-\/op when the point is zero or the mouse is inactive. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Vector2 \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_rotate_towards_point_a38d8dfb2b1e3c9c72dc112aec8591848}{aim\+Direction}}
+\begin{DoxyCompactList}\small\item\em The most recently computed normalized aim direction. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_rotate_towards_point_aeda7b2817be8936594ce3bd7dd41984b}{angle}}
+\begin{DoxyCompactList}\small\item\em The most recently computed aim angle, in degrees. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Rotates the owning transform to face a screen-\/space point, driven by mouse aiming. 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_rotate_towards_point_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_rotate_towards_point_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_rotate_towards_point_aed4bd76edcdf5d71371d0d47997bc011}\index{Feazeyu.RPGSystems.Core.RotateTowardsPoint@{Feazeyu.RPGSystems.Core.RotateTowardsPoint}!RotateTowards@{RotateTowards}}
+\index{RotateTowards@{RotateTowards}!Feazeyu.RPGSystems.Core.RotateTowardsPoint@{Feazeyu.RPGSystems.Core.RotateTowardsPoint}}
+\doxysubsubsection{\texorpdfstring{RotateTowards()}{RotateTowards()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_rotate_towards_point_aed4bd76edcdf5d71371d0d47997bc011} 
+void Feazeyu.\+RPGSystems.\+Core.\+Rotate\+Towards\+Point.\+Rotate\+Towards (\begin{DoxyParamCaption}\item[{Vector2}]{point}{, }\item[{Camera}]{cam}{ = {\ttfamily null}}\end{DoxyParamCaption})}
+
+
+
+Rotates the transform so its local right axis points toward {\itshape point} . No-\/op when the point is zero or the mouse is inactive. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em point} & Target position in screen space.\\
+\hline
+{\em cam} & Camera used to project the transform\textquotesingle{}s world position; falls back to Camera.\+main.\\
+\hline
+\end{DoxyParams}
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_rotate_towards_point_doc-variable-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_rotate_towards_point_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_rotate_towards_point_a38d8dfb2b1e3c9c72dc112aec8591848}\index{Feazeyu.RPGSystems.Core.RotateTowardsPoint@{Feazeyu.RPGSystems.Core.RotateTowardsPoint}!aimDirection@{aimDirection}}
+\index{aimDirection@{aimDirection}!Feazeyu.RPGSystems.Core.RotateTowardsPoint@{Feazeyu.RPGSystems.Core.RotateTowardsPoint}}
+\doxysubsubsection{\texorpdfstring{aimDirection}{aimDirection}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_rotate_towards_point_a38d8dfb2b1e3c9c72dc112aec8591848} 
+Vector2 Feazeyu.\+RPGSystems.\+Core.\+Rotate\+Towards\+Point.\+aim\+Direction}
+
+
+
+The most recently computed normalized aim direction. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_rotate_towards_point_aeda7b2817be8936594ce3bd7dd41984b}\index{Feazeyu.RPGSystems.Core.RotateTowardsPoint@{Feazeyu.RPGSystems.Core.RotateTowardsPoint}!angle@{angle}}
+\index{angle@{angle}!Feazeyu.RPGSystems.Core.RotateTowardsPoint@{Feazeyu.RPGSystems.Core.RotateTowardsPoint}}
+\doxysubsubsection{\texorpdfstring{angle}{angle}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_rotate_towards_point_aeda7b2817be8936594ce3bd7dd41984b} 
+float Feazeyu.\+RPGSystems.\+Core.\+Rotate\+Towards\+Point.\+angle}
+
+
+
+The most recently computed aim angle, in degrees. 
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Core/\+\+Utilities/\+\doxymbox{\hyperlink{_rotate_towards_point_8cs}{Rotate\+Towards\+Point.\+cs}}\end{DoxyCompactItemize}

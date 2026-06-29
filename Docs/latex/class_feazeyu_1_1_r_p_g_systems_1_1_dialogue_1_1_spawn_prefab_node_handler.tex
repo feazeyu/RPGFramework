@@ -1,0 +1,73 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Dialogue.\+Spawn\+Prefab\+Node\+Handler Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_spawn_prefab_node_handler}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_spawn_prefab_node_handler}\index{Feazeyu.RPGSystems.Dialogue.SpawnPrefabNodeHandler@{Feazeyu.RPGSystems.Dialogue.SpawnPrefabNodeHandler}}
+
+
+Instantiates a prefab and continues. The prefab (and the optional parent) come from blackboard variables, because object references can\textquotesingle{}t be stored inline on a node field — link a Game\+Object variable holding the prefab.  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Dialogue.\+Spawn\+Prefab\+Node\+Handler:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_spawn_prefab_node_handler}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+IEnumerator \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_spawn_prefab_node_handler_af8b00fd0e33b9dd3950b2e3b69f3ca34}{Execute}} (\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}} node, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context}{Graph\+Run\+Context}} ctx)
+\begin{DoxyCompactList}\small\item\em Coroutine that executes the node. The runner yields on this, so the handler can span multiple frames. Call context.\+Follow /\+ context.\+End when done — either inside this coroutine or from an external callback. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_spawn_prefab_node_handler_a1ca1061137783f9357bff2e727803c75}{Node\+Type\+Id}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Must match \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data_a4b2804487fe14225b5522250ef5d85e8}{Node\+Data.\+Node\+Type} for the nodes this handler processes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Instantiates a prefab and continues. The prefab (and the optional parent) come from blackboard variables, because object references can\textquotesingle{}t be stored inline on a node field — link a Game\+Object variable holding the prefab. 
+
+Fields:\+ Prefab — blackboard Game\+Object variable holding the prefab to instantiate (required) Parent — optional blackboard Transform (or Game\+Object) variable; the new instance is parented under it. Empty → spawned at the scene root. Result — optional blackboard Game\+Object variable that receives the spawned instance.
+
+Routes to Out (always), or to Failure when no prefab is available. 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_spawn_prefab_node_handler_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_spawn_prefab_node_handler_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_spawn_prefab_node_handler_af8b00fd0e33b9dd3950b2e3b69f3ca34}\index{Feazeyu.RPGSystems.Dialogue.SpawnPrefabNodeHandler@{Feazeyu.RPGSystems.Dialogue.SpawnPrefabNodeHandler}!Execute@{Execute}}
+\index{Execute@{Execute}!Feazeyu.RPGSystems.Dialogue.SpawnPrefabNodeHandler@{Feazeyu.RPGSystems.Dialogue.SpawnPrefabNodeHandler}}
+\doxysubsubsection{\texorpdfstring{Execute()}{Execute()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_spawn_prefab_node_handler_af8b00fd0e33b9dd3950b2e3b69f3ca34} 
+IEnumerator Feazeyu.\+RPGSystems.\+Dialogue.\+Spawn\+Prefab\+Node\+Handler.\+Execute (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}}}]{node}{, }\item[{\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context}{Graph\+Run\+Context}}}]{ctx}{}\end{DoxyParamCaption})}
+
+
+
+Coroutine that executes the node. The runner yields on this, so the handler can span multiple frames. Call context.\+Follow /\+ context.\+End when done — either inside this coroutine or from an external callback. 
+
+
+
+Implements \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_i_graph_node_handler_a7362a7107f36dbc527b568e0f5e8af91}{Feazeyu.\+RPGSystems.\+Dialogue.\+IGraph\+Node\+Handler}}.
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_spawn_prefab_node_handler_doc-property-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_spawn_prefab_node_handler_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_spawn_prefab_node_handler_a1ca1061137783f9357bff2e727803c75}\index{Feazeyu.RPGSystems.Dialogue.SpawnPrefabNodeHandler@{Feazeyu.RPGSystems.Dialogue.SpawnPrefabNodeHandler}!NodeTypeId@{NodeTypeId}}
+\index{NodeTypeId@{NodeTypeId}!Feazeyu.RPGSystems.Dialogue.SpawnPrefabNodeHandler@{Feazeyu.RPGSystems.Dialogue.SpawnPrefabNodeHandler}}
+\doxysubsubsection{\texorpdfstring{NodeTypeId}{NodeTypeId}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_spawn_prefab_node_handler_a1ca1061137783f9357bff2e727803c75} 
+string Feazeyu.\+RPGSystems.\+Dialogue.\+Spawn\+Prefab\+Node\+Handler.\+Node\+Type\+Id\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Must match \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data_a4b2804487fe14225b5522250ef5d85e8}{Node\+Data.\+Node\+Type} for the nodes this handler processes. 
+
+
+
+Implements \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_i_graph_node_handler_aaae381139fafeb9b8fbb6a24eb984f57}{Feazeyu.\+RPGSystems.\+Dialogue.\+IGraph\+Node\+Handler}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Dialogue/\+\+Nodes/\+\doxymbox{\hyperlink{_spawn_prefab_node_handler_8cs}{Spawn\+Prefab\+Node\+Handler.\+cs}}\end{DoxyCompactItemize}

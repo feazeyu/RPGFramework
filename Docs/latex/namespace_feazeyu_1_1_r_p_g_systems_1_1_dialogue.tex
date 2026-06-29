@@ -1,0 +1,144 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Dialogue Namespace Reference}
+\hypertarget{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue}{}\label{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue}\index{Feazeyu.RPGSystems.Dialogue@{Feazeyu.RPGSystems.Dialogue}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_add_currency_node_handler}{Add\+Currency\+Node\+Handler}}
+\begin{DoxyCompactList}\small\item\em Adds the specified amount to the player\textquotesingle{}s wallet and continues. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard}{Blackboard}}
+\begin{DoxyCompactList}\small\item\em Holds the master (authored) list of Blackboard\+Variables for a \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_graph_asset}{Dialogue\+Graph\+Asset}. At runtime a runner builds its own working copy via Clone\+For\+Runtime:\+ non-\/shared variables are deep-\/cloned per runner, Shared variables resolve to a global instance in Shared\+Blackboard\+Store. The authored values here are never mutated at runtime — they are the defaults restored when play mode ends. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable}{Blackboard\+Variable}}
+\begin{DoxyCompactList}\small\item\em Abstract base — holds Name, Guid, Exposed, Shared metadata. Never serialised directly; always via a concrete subclass. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard_variable_dialogue_graph}{Blackboard\+Variable\+Dialogue\+Graph}}
+\begin{DoxyCompactList}\small\item\em Typed intermediate — provides the strongly-\/typed Value property. Subclasses must be concrete (non-\/generic) so Unity\textquotesingle{}s Serialized\+Property absolute-\/path lookup can resolve m\+\_\+\+Value against the concrete runtime type. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_bool_event}{Bool\+Event}}
+\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_check_currency_node_handler}{Check\+Currency\+Node\+Handler}}
+\begin{DoxyCompactList}\small\item\em Checks whether the player\textquotesingle{}s wallet has at least the specified amount. Routes to Enough if balance \texorpdfstring{$>$}{>}= Amount, Not\+Enough otherwise. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_choice_button}{Choice\+Button}}
+\begin{DoxyCompactList}\small\item\em A dialogue choice button that reports its index to a Dialogue\+Runner when clicked. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_choices_event}{Choices\+Event}}
+\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_close_shop_node_handler}{Close\+Shop\+Node\+Handler}}
+\begin{DoxyCompactList}\small\item\em Closes the shop UI on the target object and immediately continues. The target should be a Game\+Object with a \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shopkeep}{Shopkeep}, \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_grid_u_i}{Shop\+Grid\+UI}, or \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_list_u_i}{Shop\+List\+UI} component. The mirror of Open\+Shop\+Node\+Handler. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_debug_log_node_handler}{Debug\+Log\+Node\+Handler}}
+\begin{DoxyCompactList}\small\item\em Node handler that prints a message to the Unity console and continues. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_graph_asset}{Dialogue\+Graph\+Asset}}
+\begin{DoxyCompactList}\small\item\em The dialogue-\/system Scriptable\+Object asset. All fields and CRUD live on Graph\+Asset; this subclass exists only to carry the {\ttfamily \+[Create\+Asset\+Menu]\+} so dialogue graphs get their own entry under {\bfseries{Assets → Create → \doxylink{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue}{Dialogue}}}. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_line_event}{Dialogue\+Line\+Event}}
+\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_node_attribute}{Dialogue\+Node\+Attribute}}
+\begin{DoxyCompactList}\small\item\em Attribute placed on concrete dialogue node definition classes (runtime or editor-\/only) so Dialogue\+Node\+Registry can discover them automatically via reflection. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_node_registry}{Dialogue\+Node\+Registry}}
+\begin{DoxyCompactList}\small\item\em Node registry for the dialogue graph system. Built-\/in shared flow/\+logic nodes come from Node\+Registry.\+Register\+Common\+Nodes; this class adds the dialogue-\/specific palette (\doxylink{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue}{Dialogue} Line, Choice Branch, Requirement, inventory/\+shop nodes) and the dialogue flavour of Condition and Run Subgraph. User types are discovered via Dialogue\+Node\+Attribute. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_runner}{Dialogue\+Runner}}
+\begin{DoxyCompactList}\small\item\em Subclass of \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner}{Graph\+Runner} that handles dialogue-\/specific node types:\+ • Dialogue\+Line — fires On\+Dialogue\+Line, waits for \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_runner_a11fc763156c9d43ae4602100700e9226}{Advance()} • Choice\+Branch — fires On\+Choices\+Presented, waits for \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_runner_ad27cc7617d45accaf4a8d8cb99a00713}{Select\+Choice()} • Trigger\+Event — fires On\+Event\+Triggered • Wait\+For\+Event — stubbed (logs a warning). \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_u_i}{Dialogue\+UI}}
+\begin{DoxyCompactList}\small\item\em Default dialogue view:\+ binds to a Dialogue\+Runner, renders lines and choices, and forwards advance/\+selection input back to the runner. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_edge_data}{Edge\+Data}}
+\begin{DoxyCompactList}\small\item\em Serialized connection between an output port and an input port. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_field_data}{Field\+Data}}
+\begin{DoxyCompactList}\small\item\em Serialized definition of one editable node field, either an inline value or a blackboard link. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_find_object_node_handler}{Find\+Object\+Node\+Handler}}
+\begin{DoxyCompactList}\small\item\em Finds a scene Game\+Object by name or tag and writes it to a linked blackboard Game\+Object variable. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_give_item_node_handler}{Give\+Item\+Node\+Handler}}
+\begin{DoxyCompactList}\small\item\em \doxylink{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue}{Dialogue} node that tries to add an item to an \doxylink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_container}{IItem\+Container}. Follows "{}\+Success"{} if the item was added, "{}\+Failure"{} otherwise. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset}{Graph\+Asset}}
+\begin{DoxyCompactList}\small\item\em Common serialised data and CRUD for every graph-\/based system (\doxylink{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue}{Dialogue}, \doxylink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest}{Quest}, and any future graph editor built on top of Feazeyu.\+RPGSystems.\+Editor\textquotesingle{}s window pipeline). \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_node_behaviour}{Graph\+Node\+Behaviour}}
+\begin{DoxyCompactList}\small\item\em Abstract Mono\+Behaviour that acts as an \doxylink{interface_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_i_graph_node_handler}{IGraph\+Node\+Handler}. Place this (or a subclass) on any Game\+Object in the scene, then either:\+ • Add it to the same Game\+Object as your \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner}{Graph\+Runner} — it will be discovered automatically via Get\+Components\+In\+Children. • Call runner.\+Register\+Handler(this) manually. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context}{Graph\+Run\+Context}}
+\begin{DoxyCompactList}\small\item\em Passed to every \doxylink{interface_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_i_graph_node_handler_a7362a7107f36dbc527b568e0f5e8af91}{IGraph\+Node\+Handler.\+Execute()} call. Provides field resolution, blackboard access, and the methods to advance or terminate the graph. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner}{Graph\+Runner}}
+\begin{DoxyCompactList}\small\item\em Base Mono\+Behaviour that drives execution of a \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset}{Graph\+Asset}. \end{DoxyCompactList}\item 
+interface \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_i_graph_node_handler}{IGraph\+Node\+Handler}}
+\begin{DoxyCompactList}\small\item\em Implement this interface to define what happens when the graph runner reaches a node of a specific type. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}}
+\begin{DoxyCompactList}\small\item\em Serialized data for one graph node:\+ identity, type, layout, ports, and fields. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_info}{Node\+Info}}
+\begin{DoxyCompactList}\small\item\em Metadata record for a single node type. The Editor reads this to populate the right-\/click "{}\+Add Node"{} menu and to generate default ports/\+fields when a node is created. Shared by every graph system (dialogue, quest, …). \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry}{Node\+Registry}}
+\begin{DoxyCompactList}\small\item\em Abstract base for every graph system\textquotesingle{}s node registry. Provides the shared infrastructure all registries need:\+ 
+\begin{DoxyItemize}
+\item The universal flow/\+logic node type-\/id constants and accent colours, so a stored {\ttfamily Node\+Type} string means the same thing in any graph system (a "{}\+Start"{} node is a "{}\+Start"{} node everywhere). 
+\item The lazily-\/built type lookup table plus the Register /\+ All\+Nodes /\+ Get\+Node plumbing. 
+\item Register\+Common\+Nodes — the flow/\+logic/\+scene nodes shared by every system — and Register\+Attribute\+Nodes$<$\+TAttr$>$ for reflection-\/based discovery. 
+\end{DoxyItemize}Concrete registries ({\ttfamily \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_node_registry}{Dialogue\+Node\+Registry}}, {\ttfamily Quest\+Node\+Registry}) derive from this, override Build to add their own node set, and expose a static façade over a private singleton instance. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_open_shop_node_handler}{Open\+Shop\+Node\+Handler}}
+\begin{DoxyCompactList}\small\item\em Opens the shop UI on the target object and immediately continues. The target should be a Game\+Object with a \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shopkeep}{Shopkeep}, \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_grid_u_i}{Shop\+Grid\+UI}, or \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_list_u_i}{Shop\+List\+UI} component. Combine with a Find\+Object node to locate the \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shopkeep}{Shopkeep} first. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_port_data}{Port\+Data}}
+\begin{DoxyCompactList}\small\item\em Serialized definition of one node port. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_remove_currency_node_handler}{Remove\+Currency\+Node\+Handler}}
+\begin{DoxyCompactList}\small\item\em Tries to spend the specified amount from the player\textquotesingle{}s wallet. Routes to Success if the player had enough, Failure if not. \end{DoxyCompactList}\item 
+class {\bfseries Shared\+Blackboard\+Store}
+\begin{DoxyCompactList}\small\item\em Process-\/wide, play-\/session-\/scoped store for Shared blackboard variables. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_spawn_prefab_node_handler}{Spawn\+Prefab\+Node\+Handler}}
+\begin{DoxyCompactList}\small\item\em Instantiates a prefab and continues. The prefab (and the optional parent) come from blackboard variables, because object references can\textquotesingle{}t be stored inline on a node field — link a Game\+Object variable holding the prefab. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_string_event}{String\+Event}}
+\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_variable_set_event}{Variable\+Set\+Event}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue_afa3b76507f0f6547230838a78463532a}{Port\+Direction}} \{ \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue_afa3b76507f0f6547230838a78463532aa324118a6721dd6b8a9b9f4e327df2bf5}{Input}}
+, \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue_afa3b76507f0f6547230838a78463532aa29c2c02a361c9d7028472e5d92cd4a54}{Output}}
+ \}
+\begin{DoxyCompactList}\small\item\em Whether a port receives (Input) or emits (Output) edges. \end{DoxyCompactList}\item 
+enum \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue_a1ebc542c1715c2d8a8b993c10acf535e}{Port\+Capacity}} \{ \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue_a1ebc542c1715c2d8a8b993c10acf535ea66ba162102bbf6ae31b522aec561735e}{Single}}
+, \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue_a1ebc542c1715c2d8a8b993c10acf535eace7898536dd0e928d1640ee2ad531cc8}{Multi}}
+ \}
+\begin{DoxyCompactList}\small\item\em Whether a port accepts a single edge or many. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue_doc-enum-members}
+\Hypertarget{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue_a1ebc542c1715c2d8a8b993c10acf535e}\index{Feazeyu.RPGSystems.Dialogue@{Feazeyu.RPGSystems.Dialogue}!PortCapacity@{PortCapacity}}
+\index{PortCapacity@{PortCapacity}!Feazeyu.RPGSystems.Dialogue@{Feazeyu.RPGSystems.Dialogue}}
+\doxysubsubsection{\texorpdfstring{PortCapacity}{PortCapacity}}
+{\footnotesize\ttfamily \label{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue_a1ebc542c1715c2d8a8b993c10acf535e} 
+enum \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue_a1ebc542c1715c2d8a8b993c10acf535e}{Feazeyu.\+RPGSystems.\+Dialogue.\+Port\+Capacity}}}
+
+
+
+Whether a port accepts a single edge or many. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Single@{Single}!Feazeyu.RPGSystems.Dialogue@{Feazeyu.RPGSystems.Dialogue}}
+\index{Feazeyu.RPGSystems.Dialogue@{Feazeyu.RPGSystems.Dialogue}!Single@{Single}}
+}\Hypertarget{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue_a1ebc542c1715c2d8a8b993c10acf535ea66ba162102bbf6ae31b522aec561735e}\label{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue_a1ebc542c1715c2d8a8b993c10acf535ea66ba162102bbf6ae31b522aec561735e} 
+Single&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Multi@{Multi}!Feazeyu.RPGSystems.Dialogue@{Feazeyu.RPGSystems.Dialogue}}
+\index{Feazeyu.RPGSystems.Dialogue@{Feazeyu.RPGSystems.Dialogue}!Multi@{Multi}}
+}\Hypertarget{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue_a1ebc542c1715c2d8a8b993c10acf535eace7898536dd0e928d1640ee2ad531cc8}\label{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue_a1ebc542c1715c2d8a8b993c10acf535eace7898536dd0e928d1640ee2ad531cc8} 
+Multi&\\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue_afa3b76507f0f6547230838a78463532a}\index{Feazeyu.RPGSystems.Dialogue@{Feazeyu.RPGSystems.Dialogue}!PortDirection@{PortDirection}}
+\index{PortDirection@{PortDirection}!Feazeyu.RPGSystems.Dialogue@{Feazeyu.RPGSystems.Dialogue}}
+\doxysubsubsection{\texorpdfstring{PortDirection}{PortDirection}}
+{\footnotesize\ttfamily \label{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue_afa3b76507f0f6547230838a78463532a} 
+enum \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue_afa3b76507f0f6547230838a78463532a}{Feazeyu.\+RPGSystems.\+Dialogue.\+Port\+Direction}}}
+
+
+
+Whether a port receives (Input) or emits (Output) edges. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Input@{Input}!Feazeyu.RPGSystems.Dialogue@{Feazeyu.RPGSystems.Dialogue}}
+\index{Feazeyu.RPGSystems.Dialogue@{Feazeyu.RPGSystems.Dialogue}!Input@{Input}}
+}\Hypertarget{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue_afa3b76507f0f6547230838a78463532aa324118a6721dd6b8a9b9f4e327df2bf5}\label{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue_afa3b76507f0f6547230838a78463532aa324118a6721dd6b8a9b9f4e327df2bf5} 
+Input&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Output@{Output}!Feazeyu.RPGSystems.Dialogue@{Feazeyu.RPGSystems.Dialogue}}
+\index{Feazeyu.RPGSystems.Dialogue@{Feazeyu.RPGSystems.Dialogue}!Output@{Output}}
+}\Hypertarget{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue_afa3b76507f0f6547230838a78463532aa29c2c02a361c9d7028472e5d92cd4a54}\label{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue_afa3b76507f0f6547230838a78463532aa29c2c02a361c9d7028472e5d92cd4a54} 
+Output&\\
+\hline
+
+\end{DoxyEnumFields}

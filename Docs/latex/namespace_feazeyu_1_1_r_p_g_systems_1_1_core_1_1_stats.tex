@@ -1,0 +1,128 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Core.\+Stats Namespace Reference}
+\hypertarget{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats}{}\label{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats}\index{Feazeyu.RPGSystems.Core.Stats@{Feazeyu.RPGSystems.Core.Stats}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_base-2-g}{Stat\+Base$<$ T, TEffect $>$}}
+\begin{DoxyCompactList}\small\item\em Base class for a stat whose effective Value is derived from a serialized base value and a list of applied {\itshape TEffect} s. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect}{Stat\+Effect}}
+\begin{DoxyCompactList}\small\item\em Base class for a named modifier applied to a single Stats.\+Stat. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_f}{Stat\+EffectF}}
+\begin{DoxyCompactList}\small\item\em A floating-\/point Stat\+Effect contributing a flat addend and/\+or a multiplicative factor, optionally scaled. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_f}{StatF}}
+\begin{DoxyCompactList}\small\item\em A floating-\/point stat:\+ effective value is {\ttfamily (base + flat) \texorpdfstring{$\ast$}{*} multiply}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a0d734b8e19888525676012a7a079152d}{Scaling}} \{ \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a0d734b8e19888525676012a7a079152da6adf97f83acf6453d4a6a4b1070f3754}{None}}
+, \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a0d734b8e19888525676012a7a079152da32a843da6ea40ab3b17a3421ccdf671b}{Linear}}
+, \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a0d734b8e19888525676012a7a079152da0d73bf5decac382ed6a8adc3838fd7e2}{Multiplicative}}
+, \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a0d734b8e19888525676012a7a079152da5614153ffb758c40c77ed7137c646386}{Diminishing\+Returns}}
+ \}
+\begin{DoxyCompactList}\small\item\em How a Stat\+Effect\textquotesingle{}s contribution scales with its source value. \end{DoxyCompactList}\item 
+enum \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a6b983b75d35bd1cd1ee36a55d6978184}{Stat}} \{ \newline
+\doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a6b983b75d35bd1cd1ee36a55d6978184a9436a28b8928f2ffceb225d4ba3006b0}{Max\+Hit\+Points}}
+, \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a6b983b75d35bd1cd1ee36a55d6978184ac77a8030f463c2c14aebd6452fc9f0a8}{Armor}}
+, \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a6b983b75d35bd1cd1ee36a55d6978184aaf726ab1546c1d14aa12ae4034a51fd7}{Magic\+Resistance}}
+, \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a6b983b75d35bd1cd1ee36a55d6978184ab9f24e83531326204197015b2f43a93f}{Damage}}
+, \newline
+\doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a6b983b75d35bd1cd1ee36a55d6978184a87ba2ecc8b6915e8bd6f5089918229fd}{Range}}
+, \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a6b983b75d35bd1cd1ee36a55d6978184aa1039049ad899dd188ddd24169458b48}{Attack\+Speed}}
+, \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a6b983b75d35bd1cd1ee36a55d6978184a6ac1a7dc525ac874fef15626633a9c9c}{Movement\+Speed}}
+ \}
+\begin{DoxyCompactList}\small\item\em Identifies a character attribute that a Stat\+Effect can target. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_doc-enum-members}
+\Hypertarget{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a0d734b8e19888525676012a7a079152d}\index{Feazeyu.RPGSystems.Core.Stats@{Feazeyu.RPGSystems.Core.Stats}!Scaling@{Scaling}}
+\index{Scaling@{Scaling}!Feazeyu.RPGSystems.Core.Stats@{Feazeyu.RPGSystems.Core.Stats}}
+\doxysubsubsection{\texorpdfstring{Scaling}{Scaling}}
+{\footnotesize\ttfamily \label{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a0d734b8e19888525676012a7a079152d} 
+enum \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a0d734b8e19888525676012a7a079152d}{Feazeyu.\+RPGSystems.\+Core.\+Stats.\+Scaling}}}
+
+
+
+How a Stat\+Effect\textquotesingle{}s contribution scales with its source value. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{None@{None}!Feazeyu.RPGSystems.Core.Stats@{Feazeyu.RPGSystems.Core.Stats}}
+\index{Feazeyu.RPGSystems.Core.Stats@{Feazeyu.RPGSystems.Core.Stats}!None@{None}}
+}\Hypertarget{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a0d734b8e19888525676012a7a079152da6adf97f83acf6453d4a6a4b1070f3754}\label{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a0d734b8e19888525676012a7a079152da6adf97f83acf6453d4a6a4b1070f3754} 
+None&No scaling. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Linear@{Linear}!Feazeyu.RPGSystems.Core.Stats@{Feazeyu.RPGSystems.Core.Stats}}
+\index{Feazeyu.RPGSystems.Core.Stats@{Feazeyu.RPGSystems.Core.Stats}!Linear@{Linear}}
+}\Hypertarget{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a0d734b8e19888525676012a7a079152da32a843da6ea40ab3b17a3421ccdf671b}\label{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a0d734b8e19888525676012a7a079152da32a843da6ea40ab3b17a3421ccdf671b} 
+Linear&Scales proportionally with the source value. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Multiplicative@{Multiplicative}!Feazeyu.RPGSystems.Core.Stats@{Feazeyu.RPGSystems.Core.Stats}}
+\index{Feazeyu.RPGSystems.Core.Stats@{Feazeyu.RPGSystems.Core.Stats}!Multiplicative@{Multiplicative}}
+}\Hypertarget{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a0d734b8e19888525676012a7a079152da0d73bf5decac382ed6a8adc3838fd7e2}\label{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a0d734b8e19888525676012a7a079152da0d73bf5decac382ed6a8adc3838fd7e2} 
+Multiplicative&Scales as a product of the source value. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DiminishingReturns@{DiminishingReturns}!Feazeyu.RPGSystems.Core.Stats@{Feazeyu.RPGSystems.Core.Stats}}
+\index{Feazeyu.RPGSystems.Core.Stats@{Feazeyu.RPGSystems.Core.Stats}!DiminishingReturns@{DiminishingReturns}}
+}\Hypertarget{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a0d734b8e19888525676012a7a079152da5614153ffb758c40c77ed7137c646386}\label{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a0d734b8e19888525676012a7a079152da5614153ffb758c40c77ed7137c646386} 
+Diminishing\+Returns&Scales with diminishing returns as the source value grows. \\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a6b983b75d35bd1cd1ee36a55d6978184}\index{Feazeyu.RPGSystems.Core.Stats@{Feazeyu.RPGSystems.Core.Stats}!Stat@{Stat}}
+\index{Stat@{Stat}!Feazeyu.RPGSystems.Core.Stats@{Feazeyu.RPGSystems.Core.Stats}}
+\doxysubsubsection{\texorpdfstring{Stat}{Stat}}
+{\footnotesize\ttfamily \label{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a6b983b75d35bd1cd1ee36a55d6978184} 
+enum \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a6b983b75d35bd1cd1ee36a55d6978184}{Feazeyu.\+RPGSystems.\+Core.\+Stats.\+Stat}}}
+
+
+
+Identifies a character attribute that a Stat\+Effect can target. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MaxHitPoints@{MaxHitPoints}!Feazeyu.RPGSystems.Core.Stats@{Feazeyu.RPGSystems.Core.Stats}}
+\index{Feazeyu.RPGSystems.Core.Stats@{Feazeyu.RPGSystems.Core.Stats}!MaxHitPoints@{MaxHitPoints}}
+}\Hypertarget{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a6b983b75d35bd1cd1ee36a55d6978184a9436a28b8928f2ffceb225d4ba3006b0}\label{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a6b983b75d35bd1cd1ee36a55d6978184a9436a28b8928f2ffceb225d4ba3006b0} 
+Max\+Hit\+Points&Maximum health pool. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Armor@{Armor}!Feazeyu.RPGSystems.Core.Stats@{Feazeyu.RPGSystems.Core.Stats}}
+\index{Feazeyu.RPGSystems.Core.Stats@{Feazeyu.RPGSystems.Core.Stats}!Armor@{Armor}}
+}\Hypertarget{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a6b983b75d35bd1cd1ee36a55d6978184ac77a8030f463c2c14aebd6452fc9f0a8}\label{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a6b983b75d35bd1cd1ee36a55d6978184ac77a8030f463c2c14aebd6452fc9f0a8} 
+Armor&Physical damage reduction. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MagicResistance@{MagicResistance}!Feazeyu.RPGSystems.Core.Stats@{Feazeyu.RPGSystems.Core.Stats}}
+\index{Feazeyu.RPGSystems.Core.Stats@{Feazeyu.RPGSystems.Core.Stats}!MagicResistance@{MagicResistance}}
+}\Hypertarget{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a6b983b75d35bd1cd1ee36a55d6978184aaf726ab1546c1d14aa12ae4034a51fd7}\label{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a6b983b75d35bd1cd1ee36a55d6978184aaf726ab1546c1d14aa12ae4034a51fd7} 
+Magic\+Resistance&Magical damage reduction. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Damage@{Damage}!Feazeyu.RPGSystems.Core.Stats@{Feazeyu.RPGSystems.Core.Stats}}
+\index{Feazeyu.RPGSystems.Core.Stats@{Feazeyu.RPGSystems.Core.Stats}!Damage@{Damage}}
+}\Hypertarget{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a6b983b75d35bd1cd1ee36a55d6978184ab9f24e83531326204197015b2f43a93f}\label{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a6b983b75d35bd1cd1ee36a55d6978184ab9f24e83531326204197015b2f43a93f} 
+Damage&Outgoing damage. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Range@{Range}!Feazeyu.RPGSystems.Core.Stats@{Feazeyu.RPGSystems.Core.Stats}}
+\index{Feazeyu.RPGSystems.Core.Stats@{Feazeyu.RPGSystems.Core.Stats}!Range@{Range}}
+}\Hypertarget{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a6b983b75d35bd1cd1ee36a55d6978184a87ba2ecc8b6915e8bd6f5089918229fd}\label{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a6b983b75d35bd1cd1ee36a55d6978184a87ba2ecc8b6915e8bd6f5089918229fd} 
+Range&Attack/\+ability reach. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{AttackSpeed@{AttackSpeed}!Feazeyu.RPGSystems.Core.Stats@{Feazeyu.RPGSystems.Core.Stats}}
+\index{Feazeyu.RPGSystems.Core.Stats@{Feazeyu.RPGSystems.Core.Stats}!AttackSpeed@{AttackSpeed}}
+}\Hypertarget{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a6b983b75d35bd1cd1ee36a55d6978184aa1039049ad899dd188ddd24169458b48}\label{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a6b983b75d35bd1cd1ee36a55d6978184aa1039049ad899dd188ddd24169458b48} 
+Attack\+Speed&Attacks per unit time. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MovementSpeed@{MovementSpeed}!Feazeyu.RPGSystems.Core.Stats@{Feazeyu.RPGSystems.Core.Stats}}
+\index{Feazeyu.RPGSystems.Core.Stats@{Feazeyu.RPGSystems.Core.Stats}!MovementSpeed@{MovementSpeed}}
+}\Hypertarget{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a6b983b75d35bd1cd1ee36a55d6978184a6ac1a7dc525ac874fef15626633a9c9c}\label{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a6b983b75d35bd1cd1ee36a55d6978184a6ac1a7dc525ac874fef15626633a9c9c} 
+Movement\+Speed&Locomotion speed. \\
+\hline
+
+\end{DoxyEnumFields}

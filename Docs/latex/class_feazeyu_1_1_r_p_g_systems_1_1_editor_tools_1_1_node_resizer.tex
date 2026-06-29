@@ -1,0 +1,79 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Node\+Resizer Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_node_resizer}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_node_resizer}\index{Feazeyu.RPGSystems.EditorTools.NodeResizer@{Feazeyu.RPGSystems.EditorTools.NodeResizer}}
+
+
+Adds resize handles to a Visual\+Element (the node card).  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Node\+Resizer:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_node_resizer}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_node_resizer_a2237ebe475cd1eb0a7b8a2f91daeb076}{Node\+Resizer}} (Action$<$ Vector2 $>$ on\+Resized)
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the Node\+Resizer class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+override void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_node_resizer_a68fb686235f7f65ba109322d9f60613a}{Register\+Callbacks\+On\+Target}} ()
+\item 
+override void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_node_resizer_aed851732bf7e5b80e09ddedd6ee041d5}{Unregister\+Callbacks\+From\+Target}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Adds resize handles to a Visual\+Element (the node card). 
+
+Seven hit zones are overlaid on the node edges and corners:\+
+
+Only right, bottom and the SE corner are exposed — top/\+left would fight with the Graph\+View\textquotesingle{}s own drag-\/to-\/move gesture.
+
+Usage:\+ target.\+Add\+Manipulator(new Node\+Resizer(on\+Resized)); 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_node_resizer_doc-constructors}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_node_resizer_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_node_resizer_a2237ebe475cd1eb0a7b8a2f91daeb076}\index{Feazeyu.RPGSystems.EditorTools.NodeResizer@{Feazeyu.RPGSystems.EditorTools.NodeResizer}!NodeResizer@{NodeResizer}}
+\index{NodeResizer@{NodeResizer}!Feazeyu.RPGSystems.EditorTools.NodeResizer@{Feazeyu.RPGSystems.EditorTools.NodeResizer}}
+\doxysubsubsection{\texorpdfstring{NodeResizer()}{NodeResizer()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_node_resizer_a2237ebe475cd1eb0a7b8a2f91daeb076} 
+Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Node\+Resizer.\+Node\+Resizer (\begin{DoxyParamCaption}\item[{Action$<$ Vector2 $>$}]{on\+Resized}{}\end{DoxyParamCaption})}
+
+
+
+Initializes a new instance of the Node\+Resizer class. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_node_resizer_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_node_resizer_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_node_resizer_a68fb686235f7f65ba109322d9f60613a}\index{Feazeyu.RPGSystems.EditorTools.NodeResizer@{Feazeyu.RPGSystems.EditorTools.NodeResizer}!RegisterCallbacksOnTarget@{RegisterCallbacksOnTarget}}
+\index{RegisterCallbacksOnTarget@{RegisterCallbacksOnTarget}!Feazeyu.RPGSystems.EditorTools.NodeResizer@{Feazeyu.RPGSystems.EditorTools.NodeResizer}}
+\doxysubsubsection{\texorpdfstring{RegisterCallbacksOnTarget()}{RegisterCallbacksOnTarget()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_node_resizer_a68fb686235f7f65ba109322d9f60613a} 
+override void Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Node\+Resizer.\+Register\+Callbacks\+On\+Target (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_node_resizer_aed851732bf7e5b80e09ddedd6ee041d5}\index{Feazeyu.RPGSystems.EditorTools.NodeResizer@{Feazeyu.RPGSystems.EditorTools.NodeResizer}!UnregisterCallbacksFromTarget@{UnregisterCallbacksFromTarget}}
+\index{UnregisterCallbacksFromTarget@{UnregisterCallbacksFromTarget}!Feazeyu.RPGSystems.EditorTools.NodeResizer@{Feazeyu.RPGSystems.EditorTools.NodeResizer}}
+\doxysubsubsection{\texorpdfstring{UnregisterCallbacksFromTarget()}{UnregisterCallbacksFromTarget()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_node_resizer_aed851732bf7e5b80e09ddedd6ee041d5} 
+override void Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Node\+Resizer.\+Unregister\+Callbacks\+From\+Target (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Editor/\+\+Graph/\+\+Nodes/\+\doxymbox{\hyperlink{_node_resizer_8cs}{Node\+Resizer.\+cs}}\end{DoxyCompactItemize}

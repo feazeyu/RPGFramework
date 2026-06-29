@@ -1,0 +1,172 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Inventory.\+Positional\+UISlot Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_positional_u_i_slot}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_positional_u_i_slot}\index{Feazeyu.RPGSystems.Inventory.PositionalUISlot@{Feazeyu.RPGSystems.Inventory.PositionalUISlot}}
+
+
+A reusable UI cell that bridges a single drawn slot to an IUIPositional\+Item\+Container. It is both the drag source (ISingle\+Item\+Container) and the drop target (IDrop\+Handler) for the item rendered in that cell, so any inventory — grid, list, or a custom layout — gets drag-\/and-\/drop by attaching one of these per cell.  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Inventory.\+Positional\+UISlot:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.312500cm]{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_positional_u_i_slot}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_positional_u_i_slot_afe6572dfe149dbbb8444f259a3089828}{Put\+Item}} (Game\+Object item)
+\begin{DoxyCompactList}\small\item\em Put item. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_positional_u_i_slot_aef3a083625120ef5e09794d562c06044}{Remove\+Item}} ()
+\begin{DoxyCompactList}\small\item\em Remove item. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_positional_u_i_slot_ac11b98b47ad9983c01973ef735ce42fc}{Return\+Item}} (Game\+Object item)
+\begin{DoxyCompactList}\small\item\em Return item. \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_positional_u_i_slot_a42131e272b9c8895dfd729de3b223b9a}{Redraw\+Contents}} ()
+\begin{DoxyCompactList}\small\item\em Redraw contents. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_positional_u_i_slot_a456f9a1da7eca0bad9252d93f5101ac6}{On\+Drop}} (Pointer\+Event\+Data event\+Data)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_container}{Feazeyu.\+RPGSystems.\+Inventory.\+IItem\+Container}}}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_container_adc3bb2142789ac573bfce23b03556b6f}{Remove\+Item}} (int item\+Id, int count=1)
+\begin{DoxyCompactList}\small\item\em Removes {\itshape count}  items with {\itshape item\+Id}  from the container. Returns false if not enough items are present (no-\/op in that case). \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_container_a37f354146a3b8db38ff8f417a02b317a}{Count\+Item}} (int item\+Id)
+\begin{DoxyCompactList}\small\item\em Returns the total number of items with {\itshape item\+Id}  in the container. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_container_a6c7b3fb8ed2cb756a5dbe37a95d8be77}{Try\+Add\+Item}} (int item\+Id, int count=1)
+\begin{DoxyCompactList}\small\item\em Looks up the item prefab by ID and tries to add {\itshape count}  copies. Returns false if the item is not registered or there is no space. Implementors that support this should override the default. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Vector2\+Int \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_positional_u_i_slot_a8ed51a9e2a76f975d1b66368e6ce5c03}{position}}
+\begin{DoxyCompactList}\small\item\em Position. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_u_i_positional_item_container}{IUIPositional\+Item\+Container}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_positional_u_i_slot_a29807e81e68ce394b75c47494a3ed5b3}{target}}
+\begin{DoxyCompactList}\small\item\em Target. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+virtual Game\+Object \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_positional_u_i_slot_a42073b4cb84373dde480881ee77d95dc}{Item}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Item. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A reusable UI cell that bridges a single drawn slot to an IUIPositional\+Item\+Container. It is both the drag source (ISingle\+Item\+Container) and the drop target (IDrop\+Handler) for the item rendered in that cell, so any inventory — grid, list, or a custom layout — gets drag-\/and-\/drop by attaching one of these per cell. 
+
+Wire it in code (the target field is an interface and so is not Inspector-\/serializable):\+ add the component, then set target to your container and position to the cell\textquotesingle{}s address. Build the item visual with Inventory\+Helper.\+Create\+UIDrag\+Handler and ensure a Drag\+Layer exists via Inventory\+Helper.\+Generate\+Drag\+Layer. 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_positional_u_i_slot_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_positional_u_i_slot_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_positional_u_i_slot_a456f9a1da7eca0bad9252d93f5101ac6}\index{Feazeyu.RPGSystems.Inventory.PositionalUISlot@{Feazeyu.RPGSystems.Inventory.PositionalUISlot}!OnDrop@{OnDrop}}
+\index{OnDrop@{OnDrop}!Feazeyu.RPGSystems.Inventory.PositionalUISlot@{Feazeyu.RPGSystems.Inventory.PositionalUISlot}}
+\doxysubsubsection{\texorpdfstring{OnDrop()}{OnDrop()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_positional_u_i_slot_a456f9a1da7eca0bad9252d93f5101ac6} 
+void Feazeyu.\+RPGSystems.\+Inventory.\+Positional\+UISlot.\+On\+Drop (\begin{DoxyParamCaption}\item[{Pointer\+Event\+Data}]{event\+Data}{}\end{DoxyParamCaption})}
+
+
+
+
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_positional_u_i_slot_afe6572dfe149dbbb8444f259a3089828}\index{Feazeyu.RPGSystems.Inventory.PositionalUISlot@{Feazeyu.RPGSystems.Inventory.PositionalUISlot}!PutItem@{PutItem}}
+\index{PutItem@{PutItem}!Feazeyu.RPGSystems.Inventory.PositionalUISlot@{Feazeyu.RPGSystems.Inventory.PositionalUISlot}}
+\doxysubsubsection{\texorpdfstring{PutItem()}{PutItem()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_positional_u_i_slot_afe6572dfe149dbbb8444f259a3089828} 
+bool Feazeyu.\+RPGSystems.\+Inventory.\+Positional\+UISlot.\+Put\+Item (\begin{DoxyParamCaption}\item[{Game\+Object}]{item}{}\end{DoxyParamCaption})}
+
+
+
+Put item. 
+
+
+
+Implements \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_container_a73f752e259b652360f2aa76a3a6207eb}{Feazeyu.\+RPGSystems.\+Inventory.\+IItem\+Container}}.
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_positional_u_i_slot_a42131e272b9c8895dfd729de3b223b9a}\index{Feazeyu.RPGSystems.Inventory.PositionalUISlot@{Feazeyu.RPGSystems.Inventory.PositionalUISlot}!RedrawContents@{RedrawContents}}
+\index{RedrawContents@{RedrawContents}!Feazeyu.RPGSystems.Inventory.PositionalUISlot@{Feazeyu.RPGSystems.Inventory.PositionalUISlot}}
+\doxysubsubsection{\texorpdfstring{RedrawContents()}{RedrawContents()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_positional_u_i_slot_a42131e272b9c8895dfd729de3b223b9a} 
+virtual void Feazeyu.\+RPGSystems.\+Inventory.\+Positional\+UISlot.\+Redraw\+Contents (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Redraw contents. 
+
+
+
+Implements \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_u_i_item_container_ae1d1405695f95b1d38d7f9ab0058c19d}{Feazeyu.\+RPGSystems.\+Inventory.\+IUIItem\+Container}}.
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_positional_u_i_slot_aef3a083625120ef5e09794d562c06044}\index{Feazeyu.RPGSystems.Inventory.PositionalUISlot@{Feazeyu.RPGSystems.Inventory.PositionalUISlot}!RemoveItem@{RemoveItem}}
+\index{RemoveItem@{RemoveItem}!Feazeyu.RPGSystems.Inventory.PositionalUISlot@{Feazeyu.RPGSystems.Inventory.PositionalUISlot}}
+\doxysubsubsection{\texorpdfstring{RemoveItem()}{RemoveItem()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_positional_u_i_slot_aef3a083625120ef5e09794d562c06044} 
+int Feazeyu.\+RPGSystems.\+Inventory.\+Positional\+UISlot.\+Remove\+Item (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Remove item. 
+
+
+
+Implements \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_single_item_container_ae150e44822c6445a6d40a8532ac137cb}{Feazeyu.\+RPGSystems.\+Inventory.\+ISingle\+Item\+Container}}.
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_positional_u_i_slot_ac11b98b47ad9983c01973ef735ce42fc}\index{Feazeyu.RPGSystems.Inventory.PositionalUISlot@{Feazeyu.RPGSystems.Inventory.PositionalUISlot}!ReturnItem@{ReturnItem}}
+\index{ReturnItem@{ReturnItem}!Feazeyu.RPGSystems.Inventory.PositionalUISlot@{Feazeyu.RPGSystems.Inventory.PositionalUISlot}}
+\doxysubsubsection{\texorpdfstring{ReturnItem()}{ReturnItem()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_positional_u_i_slot_ac11b98b47ad9983c01973ef735ce42fc} 
+void Feazeyu.\+RPGSystems.\+Inventory.\+Positional\+UISlot.\+Return\+Item (\begin{DoxyParamCaption}\item[{Game\+Object}]{item}{}\end{DoxyParamCaption})}
+
+
+
+Return item. 
+
+
+
+Implements \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_container_a45565d62df1cd8edba6e2a562cbd9f13}{Feazeyu.\+RPGSystems.\+Inventory.\+IItem\+Container}}.
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_positional_u_i_slot_doc-variable-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_positional_u_i_slot_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_positional_u_i_slot_a8ed51a9e2a76f975d1b66368e6ce5c03}\index{Feazeyu.RPGSystems.Inventory.PositionalUISlot@{Feazeyu.RPGSystems.Inventory.PositionalUISlot}!position@{position}}
+\index{position@{position}!Feazeyu.RPGSystems.Inventory.PositionalUISlot@{Feazeyu.RPGSystems.Inventory.PositionalUISlot}}
+\doxysubsubsection{\texorpdfstring{position}{position}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_positional_u_i_slot_a8ed51a9e2a76f975d1b66368e6ce5c03} 
+Vector2\+Int Feazeyu.\+RPGSystems.\+Inventory.\+Positional\+UISlot.\+position}
+
+
+
+Position. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_positional_u_i_slot_a29807e81e68ce394b75c47494a3ed5b3}\index{Feazeyu.RPGSystems.Inventory.PositionalUISlot@{Feazeyu.RPGSystems.Inventory.PositionalUISlot}!target@{target}}
+\index{target@{target}!Feazeyu.RPGSystems.Inventory.PositionalUISlot@{Feazeyu.RPGSystems.Inventory.PositionalUISlot}}
+\doxysubsubsection{\texorpdfstring{target}{target}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_positional_u_i_slot_a29807e81e68ce394b75c47494a3ed5b3} 
+\doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_u_i_positional_item_container}{IUIPositional\+Item\+Container}} Feazeyu.\+RPGSystems.\+Inventory.\+Positional\+UISlot.\+target}
+
+
+
+Target. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_positional_u_i_slot_doc-property-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_positional_u_i_slot_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_positional_u_i_slot_a42073b4cb84373dde480881ee77d95dc}\index{Feazeyu.RPGSystems.Inventory.PositionalUISlot@{Feazeyu.RPGSystems.Inventory.PositionalUISlot}!Item@{Item}}
+\index{Item@{Item}!Feazeyu.RPGSystems.Inventory.PositionalUISlot@{Feazeyu.RPGSystems.Inventory.PositionalUISlot}}
+\doxysubsubsection{\texorpdfstring{Item}{Item}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_positional_u_i_slot_a42073b4cb84373dde480881ee77d95dc} 
+virtual Game\+Object Feazeyu.\+RPGSystems.\+Inventory.\+Positional\+UISlot.\+Item\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Item. 
+
+
+
+Implements \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_single_item_container_aeede7bee620ba5b069618e51fd383266}{Feazeyu.\+RPGSystems.\+Inventory.\+ISingle\+Item\+Container}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Inventory/\+\doxymbox{\hyperlink{_positional_u_i_slot_8cs}{Positional\+UISlot.\+cs}}\end{DoxyCompactItemize}

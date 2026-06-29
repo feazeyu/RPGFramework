@@ -1,0 +1,21 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Quest.\+Nodes Namespace Reference}
+\hypertarget{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes}{}\label{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes}\index{Feazeyu.RPGSystems.Quest.Nodes@{Feazeyu.RPGSystems.Quest.Nodes}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_accumulate_item_objective_handler}{Accumulate\+Item\+Objective\+Handler}}
+\begin{DoxyCompactList}\small\item\em Handler for the Accumulate Item objective node (type\+Id = "{}obj\+\_\+accumulate"{}). \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_collect_item_objective_handler}{Collect\+Item\+Objective\+Handler}}
+\begin{DoxyCompactList}\small\item\em Handler for the Collect Item objective node (type\+Id = "{}obj\+\_\+collect"{}). \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_deliver_item_objective_handler}{Deliver\+Item\+Objective\+Handler}}
+\begin{DoxyCompactList}\small\item\em Handler for the Deliver Item objective node (type\+Id = "{}obj\+\_\+deliver"{}). \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_kill_count_objective_handler}{Kill\+Count\+Objective\+Handler}}
+\begin{DoxyCompactList}\small\item\em Handler for the Kill Count objective node (type\+Id = "{}obj\+\_\+kill"{}). \end{DoxyCompactList}\item 
+class {\bfseries Objective\+Gates}
+\begin{DoxyCompactList}\small\item\em Builds the composed gate predicate for an objective node. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_reach_location_objective_handler}{Reach\+Location\+Objective\+Handler}}
+\begin{DoxyCompactList}\small\item\em Handler for the Reach Location objective node (type\+Id = "{}obj\+\_\+location"{}). \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_reset_progress_node_handler}{Reset\+Progress\+Node\+Handler}}
+\begin{DoxyCompactList}\small\item\em When a token reaches this node, it wipes the accumulated progress of every objective it targets, then continues out {\ttfamily Out}. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_nodes_1_1_timer_node_handler}{Timer\+Node\+Handler}}
+\begin{DoxyCompactList}\small\item\em A standalone timer. A token entering the {\ttfamily Begin} input starts the clock; after {\ttfamily Seconds} it fires Quest\+Runner.\+On\+Timer\+Timeout and forks a token down {\ttfamily Timeout}. With {\ttfamily Auto\+Restart} on it re-\/arms and repeats as a perpetual watchdog (forking a fresh token each cycle while keeping its own token alive); off, it times out once. \end{DoxyCompactList}\end{DoxyCompactItemize}

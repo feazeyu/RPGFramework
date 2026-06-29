@@ -1,0 +1,105 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Items.\+Item\+Shape Struct Reference}
+\hypertarget{struct_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_item_shape}{}\label{struct_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_item_shape}\index{Feazeyu.RPGSystems.Items.ItemShape@{Feazeyu.RPGSystems.Items.ItemShape}}
+
+
+Represents the shape of an item using a set of grid positions.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool\+[,]\+ \doxymbox{\hyperlink{struct_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_item_shape_a25192208b6343d012c553d1e82b9c4a0}{Get\+Bool\+Grid}} (int dimension=5)
+\begin{DoxyCompactList}\small\item\em Returns a boolean grid representation of the shape. \end{DoxyCompactList}\item 
+readonly Vector2\+Int \doxymbox{\hyperlink{struct_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_item_shape_ab86e52358676229452b5f1ba6f49f0c3}{Get\+Offset}} ()
+\begin{DoxyCompactList}\small\item\em Gets the minimum offset of the shape from the origin. \end{DoxyCompactList}\item 
+readonly Vector2 \doxymbox{\hyperlink{struct_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_item_shape_a190856cabe22441fa3d5153f9c36ea6c}{Get\+Center}} ()
+\begin{DoxyCompactList}\small\item\em Gets the center point of the shape. \end{DoxyCompactList}\item 
+readonly void \doxymbox{\hyperlink{struct_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_item_shape_a69a32a43342c2b96e670124455689862}{Trim}} ()
+\begin{DoxyCompactList}\small\item\em Normalizes the shape so that its minimum position is at the origin. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Vector2\+Int\+[$\,$]\+ \doxymbox{\hyperlink{struct_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_item_shape_a28292e4cd8895258822ec6c3cf54977e}{Positions}}
+\begin{DoxyCompactList}\small\item\em The positions that make up the shape of the item. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents the shape of an item using a set of grid positions. 
+
+\label{struct_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_item_shape_doc-func-members}
+\Hypertarget{struct_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_item_shape_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{struct_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_item_shape_a25192208b6343d012c553d1e82b9c4a0}\index{Feazeyu.RPGSystems.Items.ItemShape@{Feazeyu.RPGSystems.Items.ItemShape}!GetBoolGrid@{GetBoolGrid}}
+\index{GetBoolGrid@{GetBoolGrid}!Feazeyu.RPGSystems.Items.ItemShape@{Feazeyu.RPGSystems.Items.ItemShape}}
+\doxysubsubsection{\texorpdfstring{GetBoolGrid()}{GetBoolGrid()}}
+{\footnotesize\ttfamily \label{struct_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_item_shape_a25192208b6343d012c553d1e82b9c4a0} 
+bool\+[,]\+ Feazeyu.\+RPGSystems.\+Items.\+Item\+Shape.\+Get\+Bool\+Grid (\begin{DoxyParamCaption}\item[{int}]{dimension}{ = {\ttfamily 5}}\end{DoxyParamCaption})}
+
+
+
+Returns a boolean grid representation of the shape. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dimension} & The size of the grid (width and height).\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A 2D boolean array where true indicates the presence of the shape at that position.
+\end{DoxyReturn}
+\Hypertarget{struct_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_item_shape_a190856cabe22441fa3d5153f9c36ea6c}\index{Feazeyu.RPGSystems.Items.ItemShape@{Feazeyu.RPGSystems.Items.ItemShape}!GetCenter@{GetCenter}}
+\index{GetCenter@{GetCenter}!Feazeyu.RPGSystems.Items.ItemShape@{Feazeyu.RPGSystems.Items.ItemShape}}
+\doxysubsubsection{\texorpdfstring{GetCenter()}{GetCenter()}}
+{\footnotesize\ttfamily \label{struct_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_item_shape_a190856cabe22441fa3d5153f9c36ea6c} 
+readonly Vector2 Feazeyu.\+RPGSystems.\+Items.\+Item\+Shape.\+Get\+Center (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Gets the center point of the shape. 
+
+\begin{DoxyReturn}{Returns}
+The center Vector2 of the shape.
+\end{DoxyReturn}
+\Hypertarget{struct_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_item_shape_ab86e52358676229452b5f1ba6f49f0c3}\index{Feazeyu.RPGSystems.Items.ItemShape@{Feazeyu.RPGSystems.Items.ItemShape}!GetOffset@{GetOffset}}
+\index{GetOffset@{GetOffset}!Feazeyu.RPGSystems.Items.ItemShape@{Feazeyu.RPGSystems.Items.ItemShape}}
+\doxysubsubsection{\texorpdfstring{GetOffset()}{GetOffset()}}
+{\footnotesize\ttfamily \label{struct_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_item_shape_ab86e52358676229452b5f1ba6f49f0c3} 
+readonly Vector2\+Int Feazeyu.\+RPGSystems.\+Items.\+Item\+Shape.\+Get\+Offset (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Gets the minimum offset of the shape from the origin. 
+
+\begin{DoxyReturn}{Returns}
+The minimum Vector2\+Int offset.
+\end{DoxyReturn}
+\Hypertarget{struct_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_item_shape_a69a32a43342c2b96e670124455689862}\index{Feazeyu.RPGSystems.Items.ItemShape@{Feazeyu.RPGSystems.Items.ItemShape}!Trim@{Trim}}
+\index{Trim@{Trim}!Feazeyu.RPGSystems.Items.ItemShape@{Feazeyu.RPGSystems.Items.ItemShape}}
+\doxysubsubsection{\texorpdfstring{Trim()}{Trim()}}
+{\footnotesize\ttfamily \label{struct_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_item_shape_a69a32a43342c2b96e670124455689862} 
+readonly void Feazeyu.\+RPGSystems.\+Items.\+Item\+Shape.\+Trim (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Normalizes the shape so that its minimum position is at the origin. 
+
+
+
+\label{struct_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_item_shape_doc-variable-members}
+\Hypertarget{struct_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_item_shape_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{struct_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_item_shape_a28292e4cd8895258822ec6c3cf54977e}\index{Feazeyu.RPGSystems.Items.ItemShape@{Feazeyu.RPGSystems.Items.ItemShape}!Positions@{Positions}}
+\index{Positions@{Positions}!Feazeyu.RPGSystems.Items.ItemShape@{Feazeyu.RPGSystems.Items.ItemShape}}
+\doxysubsubsection{\texorpdfstring{Positions}{Positions}}
+{\footnotesize\ttfamily \label{struct_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_item_shape_a28292e4cd8895258822ec6c3cf54977e} 
+Vector2\+Int \+[$\,$]\+ Feazeyu.\+RPGSystems.\+Items.\+Item\+Shape.\+Positions}
+
+
+
+The positions that make up the shape of the item. 
+
+
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Items/\+\doxymbox{\hyperlink{_item_shape_8cs}{Item\+Shape.\+cs}}\end{DoxyCompactItemize}

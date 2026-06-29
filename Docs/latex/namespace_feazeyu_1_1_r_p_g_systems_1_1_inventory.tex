@@ -1,0 +1,83 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Inventory Namespace Reference}
+\hypertarget{namespace_feazeyu_1_1_r_p_g_systems_1_1_inventory}{}\label{namespace_feazeyu_1_1_r_p_g_systems_1_1_inventory}\index{Feazeyu.RPGSystems.Inventory@{Feazeyu.RPGSystems.Inventory}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bfseries Grid\+UISlot}
+\begin{DoxyCompactList}\small\item\em UI slot for a grid cell. Resolves its item through anchor\+Slot\+Position when the cell is a non-\/anchor part of a multi-\/cell item. \end{DoxyCompactList}\item 
+interface \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_hide_in_selections}{IHide\+In\+Selections}}
+\begin{DoxyCompactList}\small\item\em Marker interface to hide in selection lists. \end{DoxyCompactList}\item 
+interface \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_container}{IItem\+Container}}
+\begin{DoxyCompactList}\small\item\em Represents a generic item container. \end{DoxyCompactList}\item 
+interface \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_count_notifier}{IItem\+Count\+Notifier}}
+\begin{DoxyCompactList}\small\item\em Optional capability for an IItem\+Container that announces content changes. Lets observers (e.\+g. an Accumulate Item quest objective) count items gained and lost exactly, instead of polling IItem\+Container.\+Count\+Item. Tracking both directions makes "{}net acquired"{} robust:\+ dropping then re-\/collecting nets to one count. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid}{Inventory\+Grid}}
+\begin{DoxyCompactList}\small\item\em Represents a grid-\/based inventory system that manages item placement, removal, and UI generation. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_editor}{Inventory\+Grid\+Editor}}
+\begin{DoxyCompactList}\small\item\em Custom editor for the Inventory\+Grid component. Provides a visual grid editor in the Unity Inspector for configuring inventory slots and items. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_generator}{Inventory\+Grid\+Generator}}
+\begin{DoxyCompactList}\small\item\em Builds the runtime UI for an Inventory\+Grid:\+ instantiates a cell prefab per slot (by slot type), wires drag handlers, and renders stack counts. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_generator_editor}{Inventory\+Grid\+Generator\+Editor}}
+\begin{DoxyCompactList}\small\item\em Custom inspector for Inventory\+Grid\+Generator. \end{DoxyCompactList}\item 
+class {\bfseries Inventory\+Grid\+Play\+Mode\+Persistence}
+\begin{DoxyCompactList}\small\item\em Captures and restores inventory grid contents across play-\/mode transitions in the editor, so entering and exiting play mode does not lose authored grid state. \end{DoxyCompactList}\item 
+class {\bfseries Inventory\+Helper}
+\begin{DoxyCompactList}\small\item\em Provides helper methods for inventory UI and slot management. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_item_u_i_handler}{Inventory\+Item\+UIHandler}}
+\begin{DoxyCompactList}\small\item\em Handles UI interactions for an inventory item, including drag-\/and-\/drop, tooltip display, and pointer events. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_item_u_i_redirecting_handler}{Inventory\+Item\+UIRedirecting\+Handler}}
+\begin{DoxyCompactList}\small\item\em Drag handler for a non-\/anchor (satellite) cell of a multi-\/cell item. Resolves the real owning slot through target\+Position so the drag originates from, and drops resolve to, the item\textquotesingle{}s anchor cell. Use this instead of Inventory\+Item\+UIHandler on satellite cells of shaped items; Inventory\+Helper.\+Create\+UIDrag\+Handler attaches it when {\ttfamily redirector:\+ true}. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list}{Inventory\+List}}
+\begin{DoxyCompactList}\small\item\em Represents an inventory list that manages inventory slots and interacts with the UI generator. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_generator}{Inventory\+List\+Generator}}
+\begin{DoxyCompactList}\small\item\em Generates and manages the UI for an inventory list, including creation, drawing, and visibility toggling. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_generator_editor}{Inventory\+List\+Generator\+Editor}}
+\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_u_i}{Inventory\+List\+UI}}
+\begin{DoxyCompactList}\small\item\em Manages the UI for an inventory list, including slot creation, drawing, scrolling, and item manipulation. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_manager}{Inventory\+Manager}}
+\begin{DoxyCompactList}\small\item\em Manages the item ID\textquotesingle{}s Implements a singleton pattern for global access. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_manager_editor}{Inventory\+Manager\+Editor}}
+\item 
+class {\bfseries Inventory\+Manager\+Hierarchy\+Context}
+\begin{DoxyCompactList}\small\item\em Adds a Game\+Object menu entry for creating an inventory manager in the scene. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot}{Inventory\+Slot}}
+\begin{DoxyCompactList}\small\item\em Represents a single inventory slot that can hold one item. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_drawer}{Inventory\+Slot\+Drawer}}
+\begin{DoxyCompactList}\small\item\em Property drawer for Inventory\+Slot and its subclasses. \end{DoxyCompactList}\item 
+interface \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_positional_item_container}{IPositional\+Item\+Container}}
+\begin{DoxyCompactList}\small\item\em An IItem\+Container addressable by grid coordinate, with defaults bridging the non-\/positional API. \end{DoxyCompactList}\item 
+interface \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_shop_currency}{IShop\+Currency}}
+\begin{DoxyCompactList}\small\item\em Abstraction over a spendable currency balance used by shops. \end{DoxyCompactList}\item 
+interface \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_single_item_container}{ISingle\+Item\+Container}}
+\begin{DoxyCompactList}\small\item\em Represents a container that holds a single item. \end{DoxyCompactList}\item 
+interface \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_u_i_item_container}{IUIItem\+Container}}
+\begin{DoxyCompactList}\small\item\em Represents a UI item container that can redraw its contents. \end{DoxyCompactList}\item 
+interface \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_u_i_positional_item_container}{IUIPositional\+Item\+Container}}
+\begin{DoxyCompactList}\small\item\em Represents a UI positional item container that can redraw its contents. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_locked_inventory_slot}{Locked\+Inventory\+Slot}}
+\begin{DoxyCompactList}\small\item\em Represents a locked inventory slot that cannot accept or remove items. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_player_wallet}{Player\+Wallet}}
+\begin{DoxyCompactList}\small\item\em Singleton IShop\+Currency holding the player\textquotesingle{}s currency balance. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_positional_u_i_slot}{Positional\+UISlot}}
+\begin{DoxyCompactList}\small\item\em A reusable UI cell that bridges a single drawn slot to an IUIPositional\+Item\+Container. It is both the drag source (ISingle\+Item\+Container) and the drop target (IDrop\+Handler) for the item rendered in that cell, so any inventory — grid, list, or a custom layout — gets drag-\/and-\/drop by attaching one of these per cell. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_grid_u_i}{Shop\+Grid\+UI}}
+\begin{DoxyCompactList}\small\item\em A shop that renders exactly like \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid}{Inventory\+Grid}. \doxylink{namespace_feazeyu_1_1_r_p_g_systems_1_1_items}{Items} are pre-\/populated from a \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_inventory}{Shop\+Inventory}. Dragging an item out charges the player via \doxylink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_shop_currency}{IShop\+Currency}; if they cannot afford it, the drag is blocked. Requires an \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_generator}{Inventory\+Grid\+Generator} on the same Game\+Object (added automatically via On\+Validate). \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_grid_u_i_editor}{Shop\+Grid\+UIEditor}}
+\begin{DoxyCompactList}\small\item\em Custom inspector for Shop\+Grid\+UI, extending the grid editor with shop fields. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_inventory}{Shop\+Inventory}}
+\begin{DoxyCompactList}\small\item\em Authored asset holding a shop\textquotesingle{}s listings; clone it for runtime use. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shopkeep}{Shopkeep}}
+\begin{DoxyCompactList}\small\item\em An Interactable NPC that opens a grid-\/ and/\+or list-\/based shop UI bound to its Shop\+Inventory on interact. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_list_u_i}{Shop\+List\+UI}}
+\begin{DoxyCompactList}\small\item\em A shop rendered as a scrollable list. It is an Inventory\+List pre-\/stocked from a Shop\+Inventory, so it reuses the standard list rendering and drag-\/and-\/drop (Inventory\+List\+Generator /\+ Inventory\+List\+UI) — mirroring how Shop\+Grid\+UI builds on Inventory\+Grid. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot}{Shop\+Slot}}
+\begin{DoxyCompactList}\small\item\em One shop listing:\+ an item, its price, and remaining stock (negative = infinite). \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_slot_handler}{Shop\+Slot\+Handler}}
+\begin{DoxyCompactList}\small\item\em Attach to each shop slot UI element. Handles click-\/to-\/buy and slot display. The shop UI generators wire this up automatically; configure optional UI references in the slot prefab by naming children "{}\+Name"{}, "{}\+Price"{}, "{}\+Stock"{}, "{}\+Icon"{}. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{struct_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_slot_u_i_definition}{Slot\+UIDefinition}}
+\begin{DoxyCompactList}\small\item\em Cell prefabs to use for a given slot type, in enabled and disabled states. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot}{Stackable\+Inventory\+Slot}}
+\begin{DoxyCompactList}\small\item\em Represents an inventory slot that can hold multiple items of the same type (stackable). \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_text_count_item_renderer}{Text\+Count\+Item\+Renderer}}
+\begin{DoxyCompactList}\small\item\em Holds the TMP text fields used to render an inventory slot\textquotesingle{}s item name and stack count. \end{DoxyCompactList}\end{DoxyCompactItemize}

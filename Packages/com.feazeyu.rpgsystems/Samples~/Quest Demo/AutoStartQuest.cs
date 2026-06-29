@@ -1,8 +1,8 @@
 using System.Collections;
 using UnityEngine;
-using QuestGraph.Runtime;
+using Feazeyu.RPGSystems.Quest;
 
-namespace QuestGraph.Demo
+namespace Feazeyu.RPGSystems.Demo
 {
     /// <summary>Sample helper that starts a quest automatically one frame after the scene loads.</summary>
     public class AutoStartQuest : MonoBehaviour

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Feazeyu.RPGSystems.Dialogue;
-using QuestGraph.Runtime;
+using Feazeyu.RPGSystems.Quest;
 using Feazeyu.RPGSystems.Character;
 
-namespace QuestGraph.Nodes
+namespace Feazeyu.RPGSystems.Quest.Nodes
 {
     /// <summary>
     /// Handler for the Kill Count objective node (typeId = "obj_kill").

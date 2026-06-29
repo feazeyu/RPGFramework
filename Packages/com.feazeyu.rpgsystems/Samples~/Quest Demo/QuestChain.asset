@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e2b2521672df6c408cfa6ce09e9f76d, type: 3}
   m_Name: QuestChain
-  m_EditorClassIdentifier: Feazeyu.RPGSystems.Quest::QuestGraph.Runtime.QuestGraphAsset
+  m_EditorClassIdentifier: Feazeyu.RPGSystems.Quest::Feazeyu.RPGSystems.Quest.QuestGraphAsset
   m_Nodes:
   - Guid: 671f6837-ac45-4554-a721-5ed198c2a221
     NodeType: RunSubgraph
@@ -28,7 +28,7 @@ MonoBehaviour:
       Capacity: 1
     Fields:
     - FieldName: Quest
-      TypeName: QuestGraph.Runtime.QuestReference
+      TypeName: Feazeyu.RPGSystems.Quest.QuestReference
       InlineValue: 
       LinkedVariableGuid: d6b24104-c4ca-4594-9955-d153dd2f760a
   - Guid: 5e1cc434-fb68-426e-98c0-8a089d5884b2
@@ -46,7 +46,7 @@ MonoBehaviour:
       Capacity: 1
     Fields:
     - FieldName: Quest
-      TypeName: QuestGraph.Runtime.QuestReference
+      TypeName: Feazeyu.RPGSystems.Quest.QuestReference
       InlineValue: 
       LinkedVariableGuid: 2ebef9a1-5feb-450c-9be1-ddb4ec3cc0cc
   - Guid: 02bc7498-d3cc-46c4-bd76-2f67446b4369
@@ -64,7 +64,7 @@ MonoBehaviour:
       Capacity: 1
     Fields:
     - FieldName: Quest
-      TypeName: QuestGraph.Runtime.QuestReference
+      TypeName: Feazeyu.RPGSystems.Quest.QuestReference
       InlineValue: 
       LinkedVariableGuid: 37011b76-a82a-4b8e-9701-0ed64f7c4d6e
   - Guid: d31d2c0a-efc2-4651-bcf1-5d0823ee6a34
@@ -303,7 +303,7 @@ MonoBehaviour:
     version: 2
     RefIds:
     - rid: 5852939566913421396
-      type: {class: BlackboardVariableQuestGraph, ns: QuestGraph.Runtime, asm: Feazeyu.RPGSystems.Quest}
+      type: {class: BlackboardVariableQuestGraph, ns: Feazeyu.RPGSystems.Quest, asm: Feazeyu.RPGSystems.Quest}
       data:
         m_Name: Quest1
         m_Guid: d6b24104-c4ca-4594-9955-d153dd2f760a
@@ -311,7 +311,7 @@ MonoBehaviour:
         m_Shared: 0
         m_Value: {fileID: 11400000, guid: a575b08eb8feaed47acfff643accce88, type: 2}
     - rid: 5852939566913421397
-      type: {class: BlackboardVariableQuestGraph, ns: QuestGraph.Runtime, asm: Feazeyu.RPGSystems.Quest}
+      type: {class: BlackboardVariableQuestGraph, ns: Feazeyu.RPGSystems.Quest, asm: Feazeyu.RPGSystems.Quest}
       data:
         m_Name: Quest2
         m_Guid: 2ebef9a1-5feb-450c-9be1-ddb4ec3cc0cc
@@ -319,7 +319,7 @@ MonoBehaviour:
         m_Shared: 0
         m_Value: {fileID: 11400000, guid: a530e115a5171db4682b0a569a1b0aa1, type: 2}
     - rid: 5852939566913421398
-      type: {class: BlackboardVariableQuestGraph, ns: QuestGraph.Runtime, asm: Feazeyu.RPGSystems.Quest}
+      type: {class: BlackboardVariableQuestGraph, ns: Feazeyu.RPGSystems.Quest, asm: Feazeyu.RPGSystems.Quest}
       data:
         m_Name: Quest3
         m_Guid: 37011b76-a82a-4b8e-9701-0ed64f7c4d6e

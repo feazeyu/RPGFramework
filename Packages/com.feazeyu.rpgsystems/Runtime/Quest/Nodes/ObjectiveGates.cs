@@ -5,9 +5,9 @@ using UnityEngine;
 using Feazeyu.RPGSystems.Dialogue;
 using Feazeyu.RPGSystems.Character;
 using Feazeyu.RPGSystems.Inventory;
-using QuestGraph.Runtime;
+using Feazeyu.RPGSystems.Quest;
 
-namespace QuestGraph.Nodes
+namespace Feazeyu.RPGSystems.Quest.Nodes
 {
     /// <summary>
     /// Builds the composed gate predicate for an objective node.

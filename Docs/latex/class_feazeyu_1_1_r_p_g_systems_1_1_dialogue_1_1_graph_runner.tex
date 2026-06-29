@@ -1,0 +1,300 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Runner Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner}\index{Feazeyu.RPGSystems.Dialogue.GraphRunner@{Feazeyu.RPGSystems.Dialogue.GraphRunner}}
+
+
+Base Mono\+Behaviour that drives execution of a \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset}{Graph\+Asset}.  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Runner:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.866894cm]{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a7996fdb2293cb06f7df139785acdb4a0}{Register\+Handler}} (\doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_i_graph_node_handler}{IGraph\+Node\+Handler}} handler)
+\begin{DoxyCompactList}\small\item\em Registers a handler for a node type. Call this in \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a0883a615c8adc62c6d5c42cd579f9911}{Awake()} before \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a17ad162d81213c50b2219e9e7cead4ea}{Start\+Graph()} is invoked. Later registrations overwrite earlier ones. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a17ad162d81213c50b2219e9e7cead4ea}{Start\+Graph}} ()
+\begin{DoxyCompactList}\small\item\em Start graph. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a9ce8d870bbfec9c55b6d2f9c935ef69a}{Stop\+Graph}} ()
+\begin{DoxyCompactList}\small\item\em Stop graph. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a1b6490c77fc881a02bbd955cfd3be1d1}{Set\+Blackboard\+Value}} (string variable\+Name, object value)
+\begin{DoxyCompactList}\small\item\em Sets the value of a runtime blackboard variable by name. Used by scene components (e.\+g. Zone\+Flag triggers) to feed world state into gates. No-\/op until the graph has started and built its runtime blackboard. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset}{Graph\+Asset}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_aa0d2aac7bfdb42a880f6ccc49b0560fc}{Graph}}
+\begin{DoxyCompactList}\small\item\em Graph. \end{DoxyCompactList}\item 
+Unity\+Event \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a21ce5b9864ef410d40ea4bbe599df6d0}{On\+Graph\+Started}} = new()
+\begin{DoxyCompactList}\small\item\em On graph started. \end{DoxyCompactList}\item 
+Unity\+Event \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a4c5af182b70a408c163c403dc835a79d}{On\+Graph\+Ended}} = new()
+\begin{DoxyCompactList}\small\item\em On graph ended. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a0883a615c8adc62c6d5c42cd579f9911}{Awake}} ()
+\begin{DoxyCompactList}\small\item\em Awake. \end{DoxyCompactList}\item 
+virtual \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset}{Graph\+Asset}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a95403ddb4f425b2927a95833cb6cc778}{Resolve\+Subgraph\+Asset}} (\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}} node)
+\begin{DoxyCompactList}\small\item\em Override to return the subgraph asset for a Run\+Subgraph node. Base implementation always returns null (no inline asset references yet). \end{DoxyCompactList}\item 
+virtual \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner}{Graph\+Runner}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a2054a99aee83b56e27ef6d73ed8d3929}{Create\+Sub\+Runner}} (Game\+Object go)
+\begin{DoxyCompactList}\small\item\em Factory for the sub-\/runner used by Run\+Subgraph nodes. Override in subclasses to return a typed subclass (e.\+g. \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_runner}{Dialogue\+Runner}). \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_ad72976a530f102f35aab2252f9262385}{On\+Graph\+Start}} ()
+\begin{DoxyCompactList}\small\item\em Called after the graph starts and the first node is about to execute. \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_aeecb2ae3334774897189c579e49018eb}{On\+Graph\+Stop}} ()
+\begin{DoxyCompactList}\small\item\em Called after the graph ends. \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_aa44d8799644c701331916fe66dd6a59d}{On\+Variable\+Changed}} (string variable\+Name, string new\+Value\+String)
+\begin{DoxyCompactList}\small\item\em Called when a Set\+Variable node successfully changes a variable. Override to fire UI events or drive external systems. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a17ddf75c6cdc6144daaf3d856bee2d36}{End\+Graph}} ()
+\begin{DoxyCompactList}\small\item\em End graph. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_ae29fa6e39c8c2a8b8169f8510f6b4a13}{Get\+Node\+Connected\+To\+Output}} (\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}} node, string port\+Name)
+\begin{DoxyCompactList}\small\item\em Get node connected to output. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard}{Blackboard}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a0a9e62d6260f8ae895eb9a058bde6d46}{m\+\_\+\+Runtime\+Blackboard}}
+\begin{DoxyCompactList}\small\item\em Runtime blackboard. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context}{Graph\+Run\+Context}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a9b1a11e453ca742a1b647d411a2958c4}{m\+\_\+\+Context}}
+\begin{DoxyCompactList}\small\item\em Context. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a89177d09f5512d2307d7c5dd8d9f208b}{Is\+Running}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Is running. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Base Mono\+Behaviour that drives execution of a \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset}{Graph\+Asset}. 
+
+Responsibilities:\+ • Builds the runtime blackboard once (reused across runs so non-\/shared state persists; Shared variables are global via Shared\+Blackboard\+Store) • Walks the graph along edges using independent {\bfseries{flow tokens}} • Dispatches each node to a registered \doxylink{interface_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_i_graph_node_handler}{IGraph\+Node\+Handler} • Handles structural built-\/in nodes:\+ Start, End, Condition, Set\+Variable, Run\+Subgraph (no system-\/specific knowledge)
+
+── Parallel flow ──────────────────────────────────────────────────── Execution is carried by one or more Flow\+Tokens, each an independent cursor with its own current node and context. An output port wired to several nodes {\bfseries{auto-\/forks}}:\+ one token per edge. A token ends when its node dead-\/ends or hits an End node; the graph ends when the last token finishes or a handler calls {\ttfamily ctx.\+End()} (the terminal path used by quest Complete/\+\+Fail nodes). Single-\/edge graphs (all existing dialogue/\+quest content) run as exactly one token, so behaviour is unchanged.
+
+To add a new graph-\/based system (quest, cutscene, …):\+
+\begin{DoxyEnumerate}
+\item Subclass \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner}{Graph\+Runner}.
+\item In \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a0883a615c8adc62c6d5c42cd579f9911}{Awake()} call \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a7996fdb2293cb06f7df139785acdb4a0}{Register\+Handler()} for each node type you own.
+\item Alternatively, place \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_node_behaviour}{Graph\+Node\+Behaviour} subclasses on the same Game\+Object — they are discovered automatically.
+\end{DoxyEnumerate}
+
+Node types without a registered handler are skipped with a warning, following the "{}\+Out"{} port if one exists. 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a0883a615c8adc62c6d5c42cd579f9911}\index{Feazeyu.RPGSystems.Dialogue.GraphRunner@{Feazeyu.RPGSystems.Dialogue.GraphRunner}!Awake@{Awake}}
+\index{Awake@{Awake}!Feazeyu.RPGSystems.Dialogue.GraphRunner@{Feazeyu.RPGSystems.Dialogue.GraphRunner}}
+\doxysubsubsection{\texorpdfstring{Awake()}{Awake()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a0883a615c8adc62c6d5c42cd579f9911} 
+virtual void Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Runner.\+Awake (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Awake. 
+
+
+
+Reimplemented in \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_runner_a512c24657f49b699a4fc226624f6a7be}{Feazeyu.\+RPGSystems.\+Dialogue.\+Dialogue\+Runner}}, and \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_a9d47fab16181758307dbe1c99ab68fa4}{Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Runner}}.
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a2054a99aee83b56e27ef6d73ed8d3929}\index{Feazeyu.RPGSystems.Dialogue.GraphRunner@{Feazeyu.RPGSystems.Dialogue.GraphRunner}!CreateSubRunner@{CreateSubRunner}}
+\index{CreateSubRunner@{CreateSubRunner}!Feazeyu.RPGSystems.Dialogue.GraphRunner@{Feazeyu.RPGSystems.Dialogue.GraphRunner}}
+\doxysubsubsection{\texorpdfstring{CreateSubRunner()}{CreateSubRunner()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a2054a99aee83b56e27ef6d73ed8d3929} 
+virtual \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner}{Graph\+Runner}} Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Runner.\+Create\+Sub\+Runner (\begin{DoxyParamCaption}\item[{Game\+Object}]{go}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Factory for the sub-\/runner used by Run\+Subgraph nodes. Override in subclasses to return a typed subclass (e.\+g. \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_runner}{Dialogue\+Runner}). 
+
+
+
+Reimplemented in \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_runner_a02e732dcc287efea0e9912d8180ce741}{Feazeyu.\+RPGSystems.\+Dialogue.\+Dialogue\+Runner}}.
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a17ddf75c6cdc6144daaf3d856bee2d36}\index{Feazeyu.RPGSystems.Dialogue.GraphRunner@{Feazeyu.RPGSystems.Dialogue.GraphRunner}!EndGraph@{EndGraph}}
+\index{EndGraph@{EndGraph}!Feazeyu.RPGSystems.Dialogue.GraphRunner@{Feazeyu.RPGSystems.Dialogue.GraphRunner}}
+\doxysubsubsection{\texorpdfstring{EndGraph()}{EndGraph()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a17ddf75c6cdc6144daaf3d856bee2d36} 
+void Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Runner.\+End\+Graph (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+End graph. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_ae29fa6e39c8c2a8b8169f8510f6b4a13}\index{Feazeyu.RPGSystems.Dialogue.GraphRunner@{Feazeyu.RPGSystems.Dialogue.GraphRunner}!GetNodeConnectedToOutput@{GetNodeConnectedToOutput}}
+\index{GetNodeConnectedToOutput@{GetNodeConnectedToOutput}!Feazeyu.RPGSystems.Dialogue.GraphRunner@{Feazeyu.RPGSystems.Dialogue.GraphRunner}}
+\doxysubsubsection{\texorpdfstring{GetNodeConnectedToOutput()}{GetNodeConnectedToOutput()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_ae29fa6e39c8c2a8b8169f8510f6b4a13} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}} Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Runner.\+Get\+Node\+Connected\+To\+Output (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}}}]{node}{, }\item[{string}]{port\+Name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Get node connected to output. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_ad72976a530f102f35aab2252f9262385}\index{Feazeyu.RPGSystems.Dialogue.GraphRunner@{Feazeyu.RPGSystems.Dialogue.GraphRunner}!OnGraphStart@{OnGraphStart}}
+\index{OnGraphStart@{OnGraphStart}!Feazeyu.RPGSystems.Dialogue.GraphRunner@{Feazeyu.RPGSystems.Dialogue.GraphRunner}}
+\doxysubsubsection{\texorpdfstring{OnGraphStart()}{OnGraphStart()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_ad72976a530f102f35aab2252f9262385} 
+virtual void Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Runner.\+On\+Graph\+Start (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Called after the graph starts and the first node is about to execute. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_aeecb2ae3334774897189c579e49018eb}\index{Feazeyu.RPGSystems.Dialogue.GraphRunner@{Feazeyu.RPGSystems.Dialogue.GraphRunner}!OnGraphStop@{OnGraphStop}}
+\index{OnGraphStop@{OnGraphStop}!Feazeyu.RPGSystems.Dialogue.GraphRunner@{Feazeyu.RPGSystems.Dialogue.GraphRunner}}
+\doxysubsubsection{\texorpdfstring{OnGraphStop()}{OnGraphStop()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_aeecb2ae3334774897189c579e49018eb} 
+virtual void Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Runner.\+On\+Graph\+Stop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Called after the graph ends. 
+
+
+
+Reimplemented in \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_runner_a7558b27c7546dae0a40d65c90647f196}{Feazeyu.\+RPGSystems.\+Dialogue.\+Dialogue\+Runner}}, and \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_runner_aa14d252b137f618c70d9f1387dbd2920}{Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Runner}}.
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_aa44d8799644c701331916fe66dd6a59d}\index{Feazeyu.RPGSystems.Dialogue.GraphRunner@{Feazeyu.RPGSystems.Dialogue.GraphRunner}!OnVariableChanged@{OnVariableChanged}}
+\index{OnVariableChanged@{OnVariableChanged}!Feazeyu.RPGSystems.Dialogue.GraphRunner@{Feazeyu.RPGSystems.Dialogue.GraphRunner}}
+\doxysubsubsection{\texorpdfstring{OnVariableChanged()}{OnVariableChanged()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_aa44d8799644c701331916fe66dd6a59d} 
+virtual void Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Runner.\+On\+Variable\+Changed (\begin{DoxyParamCaption}\item[{string}]{variable\+Name}{, }\item[{string}]{new\+Value\+String}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Called when a Set\+Variable node successfully changes a variable. Override to fire UI events or drive external systems. 
+
+
+
+Reimplemented in \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_runner_a644976257ceabee392de9504c631bb73}{Feazeyu.\+RPGSystems.\+Dialogue.\+Dialogue\+Runner}}.
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a7996fdb2293cb06f7df139785acdb4a0}\index{Feazeyu.RPGSystems.Dialogue.GraphRunner@{Feazeyu.RPGSystems.Dialogue.GraphRunner}!RegisterHandler@{RegisterHandler}}
+\index{RegisterHandler@{RegisterHandler}!Feazeyu.RPGSystems.Dialogue.GraphRunner@{Feazeyu.RPGSystems.Dialogue.GraphRunner}}
+\doxysubsubsection{\texorpdfstring{RegisterHandler()}{RegisterHandler()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a7996fdb2293cb06f7df139785acdb4a0} 
+void Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Runner.\+Register\+Handler (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_i_graph_node_handler}{IGraph\+Node\+Handler}}}]{handler}{}\end{DoxyParamCaption})}
+
+
+
+Registers a handler for a node type. Call this in \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a0883a615c8adc62c6d5c42cd579f9911}{Awake()} before \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a17ad162d81213c50b2219e9e7cead4ea}{Start\+Graph()} is invoked. Later registrations overwrite earlier ones. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a95403ddb4f425b2927a95833cb6cc778}\index{Feazeyu.RPGSystems.Dialogue.GraphRunner@{Feazeyu.RPGSystems.Dialogue.GraphRunner}!ResolveSubgraphAsset@{ResolveSubgraphAsset}}
+\index{ResolveSubgraphAsset@{ResolveSubgraphAsset}!Feazeyu.RPGSystems.Dialogue.GraphRunner@{Feazeyu.RPGSystems.Dialogue.GraphRunner}}
+\doxysubsubsection{\texorpdfstring{ResolveSubgraphAsset()}{ResolveSubgraphAsset()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a95403ddb4f425b2927a95833cb6cc778} 
+virtual \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset}{Graph\+Asset}} Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Runner.\+Resolve\+Subgraph\+Asset (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}}}]{node}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Override to return the subgraph asset for a Run\+Subgraph node. Base implementation always returns null (no inline asset references yet). 
+
+
+
+Reimplemented in \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_runner_a884d7b3fac02e86bc9ac168ebbe50f32}{Feazeyu.\+RPGSystems.\+Dialogue.\+Dialogue\+Runner}}.
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a1b6490c77fc881a02bbd955cfd3be1d1}\index{Feazeyu.RPGSystems.Dialogue.GraphRunner@{Feazeyu.RPGSystems.Dialogue.GraphRunner}!SetBlackboardValue@{SetBlackboardValue}}
+\index{SetBlackboardValue@{SetBlackboardValue}!Feazeyu.RPGSystems.Dialogue.GraphRunner@{Feazeyu.RPGSystems.Dialogue.GraphRunner}}
+\doxysubsubsection{\texorpdfstring{SetBlackboardValue()}{SetBlackboardValue()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a1b6490c77fc881a02bbd955cfd3be1d1} 
+void Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Runner.\+Set\+Blackboard\+Value (\begin{DoxyParamCaption}\item[{string}]{variable\+Name}{, }\item[{object}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Sets the value of a runtime blackboard variable by name. Used by scene components (e.\+g. Zone\+Flag triggers) to feed world state into gates. No-\/op until the graph has started and built its runtime blackboard. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a17ad162d81213c50b2219e9e7cead4ea}\index{Feazeyu.RPGSystems.Dialogue.GraphRunner@{Feazeyu.RPGSystems.Dialogue.GraphRunner}!StartGraph@{StartGraph}}
+\index{StartGraph@{StartGraph}!Feazeyu.RPGSystems.Dialogue.GraphRunner@{Feazeyu.RPGSystems.Dialogue.GraphRunner}}
+\doxysubsubsection{\texorpdfstring{StartGraph()}{StartGraph()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a17ad162d81213c50b2219e9e7cead4ea} 
+void Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Runner.\+Start\+Graph (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Start graph. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a9ce8d870bbfec9c55b6d2f9c935ef69a}\index{Feazeyu.RPGSystems.Dialogue.GraphRunner@{Feazeyu.RPGSystems.Dialogue.GraphRunner}!StopGraph@{StopGraph}}
+\index{StopGraph@{StopGraph}!Feazeyu.RPGSystems.Dialogue.GraphRunner@{Feazeyu.RPGSystems.Dialogue.GraphRunner}}
+\doxysubsubsection{\texorpdfstring{StopGraph()}{StopGraph()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a9ce8d870bbfec9c55b6d2f9c935ef69a} 
+void Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Runner.\+Stop\+Graph (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Stop graph. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_doc-variable-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_aa0d2aac7bfdb42a880f6ccc49b0560fc}\index{Feazeyu.RPGSystems.Dialogue.GraphRunner@{Feazeyu.RPGSystems.Dialogue.GraphRunner}!Graph@{Graph}}
+\index{Graph@{Graph}!Feazeyu.RPGSystems.Dialogue.GraphRunner@{Feazeyu.RPGSystems.Dialogue.GraphRunner}}
+\doxysubsubsection{\texorpdfstring{Graph}{Graph}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_aa0d2aac7bfdb42a880f6ccc49b0560fc} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset}{Graph\+Asset}} Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Runner.\+Graph}
+
+
+
+Graph. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a9b1a11e453ca742a1b647d411a2958c4}\index{Feazeyu.RPGSystems.Dialogue.GraphRunner@{Feazeyu.RPGSystems.Dialogue.GraphRunner}!m\_Context@{m\_Context}}
+\index{m\_Context@{m\_Context}!Feazeyu.RPGSystems.Dialogue.GraphRunner@{Feazeyu.RPGSystems.Dialogue.GraphRunner}}
+\doxysubsubsection{\texorpdfstring{m\_Context}{m\_Context}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a9b1a11e453ca742a1b647d411a2958c4} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_run_context}{Graph\+Run\+Context}} Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Runner.\+m\+\_\+\+Context\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Context. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a0a9e62d6260f8ae895eb9a058bde6d46}\index{Feazeyu.RPGSystems.Dialogue.GraphRunner@{Feazeyu.RPGSystems.Dialogue.GraphRunner}!m\_RuntimeBlackboard@{m\_RuntimeBlackboard}}
+\index{m\_RuntimeBlackboard@{m\_RuntimeBlackboard}!Feazeyu.RPGSystems.Dialogue.GraphRunner@{Feazeyu.RPGSystems.Dialogue.GraphRunner}}
+\doxysubsubsection{\texorpdfstring{m\_RuntimeBlackboard}{m\_RuntimeBlackboard}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a0a9e62d6260f8ae895eb9a058bde6d46} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_blackboard}{Blackboard}} Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Runner.\+m\+\_\+\+Runtime\+Blackboard\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Runtime blackboard. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a4c5af182b70a408c163c403dc835a79d}\index{Feazeyu.RPGSystems.Dialogue.GraphRunner@{Feazeyu.RPGSystems.Dialogue.GraphRunner}!OnGraphEnded@{OnGraphEnded}}
+\index{OnGraphEnded@{OnGraphEnded}!Feazeyu.RPGSystems.Dialogue.GraphRunner@{Feazeyu.RPGSystems.Dialogue.GraphRunner}}
+\doxysubsubsection{\texorpdfstring{OnGraphEnded}{OnGraphEnded}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a4c5af182b70a408c163c403dc835a79d} 
+Unity\+Event Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Runner.\+On\+Graph\+Ended = new()}
+
+
+
+On graph ended. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a21ce5b9864ef410d40ea4bbe599df6d0}\index{Feazeyu.RPGSystems.Dialogue.GraphRunner@{Feazeyu.RPGSystems.Dialogue.GraphRunner}!OnGraphStarted@{OnGraphStarted}}
+\index{OnGraphStarted@{OnGraphStarted}!Feazeyu.RPGSystems.Dialogue.GraphRunner@{Feazeyu.RPGSystems.Dialogue.GraphRunner}}
+\doxysubsubsection{\texorpdfstring{OnGraphStarted}{OnGraphStarted}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a21ce5b9864ef410d40ea4bbe599df6d0} 
+Unity\+Event Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Runner.\+On\+Graph\+Started = new()}
+
+
+
+On graph started. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_doc-property-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a89177d09f5512d2307d7c5dd8d9f208b}\index{Feazeyu.RPGSystems.Dialogue.GraphRunner@{Feazeyu.RPGSystems.Dialogue.GraphRunner}!IsRunning@{IsRunning}}
+\index{IsRunning@{IsRunning}!Feazeyu.RPGSystems.Dialogue.GraphRunner@{Feazeyu.RPGSystems.Dialogue.GraphRunner}}
+\doxysubsubsection{\texorpdfstring{IsRunning}{IsRunning}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_runner_a89177d09f5512d2307d7c5dd8d9f208b} 
+bool Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Runner.\+Is\+Running\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Is running. 
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Dialogue/\+\doxymbox{\hyperlink{_graph_runner_8cs}{Graph\+Runner.\+cs}}\end{DoxyCompactItemize}

@@ -1,9 +1,9 @@
 using UnityEngine;
-using QuestGraph.Runtime;
+using Feazeyu.RPGSystems.Quest;
 using Feazeyu.RPGSystems.Character;
 using Feazeyu.RPGSystems.Inventory;
 
-namespace QuestGraph.Demo
+namespace Feazeyu.RPGSystems.Demo
 {
     /// <summary>
     /// Replaces the old QuestDemoDirector. Drives the chain demo straight from NPC

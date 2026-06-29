@@ -1,0 +1,71 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Character Namespace Reference}
+\hypertarget{namespace_feazeyu_1_1_r_p_g_systems_1_1_character}{}\label{namespace_feazeyu_1_1_r_p_g_systems_1_1_character}\index{Feazeyu.RPGSystems.Character@{Feazeyu.RPGSystems.Character}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_entity}{Entity}}
+\begin{DoxyCompactList}\small\item\em Represents an entity in the game that can cast spells and manage resources. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_health}{Health}}
+\begin{DoxyCompactList}\small\item\em \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_health}{Health} Resource. Destroys its Game\+Object when it reaches zero. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_interactable}{Interactable}}
+\begin{DoxyCompactList}\small\item\em A world object the player can interact with. Registers itself with an Interactor while that interactor is within its trigger collider. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_interactor}{Interactor}}
+\begin{DoxyCompactList}\small\item\em Player-\/side component that tracks nearby Interactables and triggers the closest one on demand. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_mana}{Mana}}
+\begin{DoxyCompactList}\small\item\em \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_mana}{Mana} Resource. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_player_controller}{Player\+Controller}}
+\begin{DoxyCompactList}\small\item\em Player avatar:\+ top-\/down movement, aim-\/based weapon rotation, attack state, and interaction, driven by the Input System. Extends Entity. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource}{Resource}}
+\begin{DoxyCompactList}\small\item\em Abstract base class for character resources (e.\+g., health, mana, stamina). Handles resource value, events for changes, and percent calculation. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_stamina}{Stamina}}
+\begin{DoxyCompactList}\small\item\em \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_stamina}{Stamina} Resource. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_character_a7f44022bf2d755a4cb26a73a870b3f42}{Resource\+Types}} \{ \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_character_a7f44022bf2d755a4cb26a73a870b3f42a6adf97f83acf6453d4a6a4b1070f3754}{None}}
+, \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_character_a7f44022bf2d755a4cb26a73a870b3f42a605669cab962bf944d99ce89cf9e58d9}{Health}}
+, \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_character_a7f44022bf2d755a4cb26a73a870b3f42a02fcc64668dd1b6a85e60ac9797f2dc7}{Mana}}
+, \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_character_a7f44022bf2d755a4cb26a73a870b3f42aa712984d490248f6cfa49d59a5b5c8e9}{Stamina}}
+ \}
+\begin{DoxyCompactList}\small\item\em Identifies the kind of Resource on an entity. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{namespace_feazeyu_1_1_r_p_g_systems_1_1_character_doc-enum-members}
+\Hypertarget{namespace_feazeyu_1_1_r_p_g_systems_1_1_character_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{namespace_feazeyu_1_1_r_p_g_systems_1_1_character_a7f44022bf2d755a4cb26a73a870b3f42}\index{Feazeyu.RPGSystems.Character@{Feazeyu.RPGSystems.Character}!ResourceTypes@{ResourceTypes}}
+\index{ResourceTypes@{ResourceTypes}!Feazeyu.RPGSystems.Character@{Feazeyu.RPGSystems.Character}}
+\doxysubsubsection{\texorpdfstring{ResourceTypes}{ResourceTypes}}
+{\footnotesize\ttfamily \label{namespace_feazeyu_1_1_r_p_g_systems_1_1_character_a7f44022bf2d755a4cb26a73a870b3f42} 
+enum \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_character_a7f44022bf2d755a4cb26a73a870b3f42}{Feazeyu.\+RPGSystems.\+Character.\+Resource\+Types}}}
+
+
+
+Identifies the kind of Resource on an entity. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{None@{None}!Feazeyu.RPGSystems.Character@{Feazeyu.RPGSystems.Character}}
+\index{Feazeyu.RPGSystems.Character@{Feazeyu.RPGSystems.Character}!None@{None}}
+}\Hypertarget{namespace_feazeyu_1_1_r_p_g_systems_1_1_character_a7f44022bf2d755a4cb26a73a870b3f42a6adf97f83acf6453d4a6a4b1070f3754}\label{namespace_feazeyu_1_1_r_p_g_systems_1_1_character_a7f44022bf2d755a4cb26a73a870b3f42a6adf97f83acf6453d4a6a4b1070f3754} 
+None&No specific resource type. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Health@{Health}!Feazeyu.RPGSystems.Character@{Feazeyu.RPGSystems.Character}}
+\index{Feazeyu.RPGSystems.Character@{Feazeyu.RPGSystems.Character}!Health@{Health}}
+}\Hypertarget{namespace_feazeyu_1_1_r_p_g_systems_1_1_character_a7f44022bf2d755a4cb26a73a870b3f42a605669cab962bf944d99ce89cf9e58d9}\label{namespace_feazeyu_1_1_r_p_g_systems_1_1_character_a7f44022bf2d755a4cb26a73a870b3f42a605669cab962bf944d99ce89cf9e58d9} 
+Health&\doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_health}{Health} /\+ hit points. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Mana@{Mana}!Feazeyu.RPGSystems.Character@{Feazeyu.RPGSystems.Character}}
+\index{Feazeyu.RPGSystems.Character@{Feazeyu.RPGSystems.Character}!Mana@{Mana}}
+}\Hypertarget{namespace_feazeyu_1_1_r_p_g_systems_1_1_character_a7f44022bf2d755a4cb26a73a870b3f42a02fcc64668dd1b6a85e60ac9797f2dc7}\label{namespace_feazeyu_1_1_r_p_g_systems_1_1_character_a7f44022bf2d755a4cb26a73a870b3f42a02fcc64668dd1b6a85e60ac9797f2dc7} 
+Mana&\doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_mana}{Mana} /\+ magic points. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Stamina@{Stamina}!Feazeyu.RPGSystems.Character@{Feazeyu.RPGSystems.Character}}
+\index{Feazeyu.RPGSystems.Character@{Feazeyu.RPGSystems.Character}!Stamina@{Stamina}}
+}\Hypertarget{namespace_feazeyu_1_1_r_p_g_systems_1_1_character_a7f44022bf2d755a4cb26a73a870b3f42aa712984d490248f6cfa49d59a5b5c8e9}\label{namespace_feazeyu_1_1_r_p_g_systems_1_1_character_a7f44022bf2d755a4cb26a73a870b3f42aa712984d490248f6cfa49d59a5b5c8e9} 
+Stamina&\doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_stamina}{Stamina} /\+ energy. \\
+\hline
+
+\end{DoxyEnumFields}

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace QuestGraph.Runtime
+namespace Feazeyu.RPGSystems.Quest
 {
     /// <summary>
     /// Context describing a single unit of objective progress (one kill, one

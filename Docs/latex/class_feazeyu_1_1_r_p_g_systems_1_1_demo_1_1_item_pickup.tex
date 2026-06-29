@@ -1,0 +1,62 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Demo.\+Item\+Pickup Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_demo_1_1_item_pickup}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_demo_1_1_item_pickup}\index{Feazeyu.RPGSystems.Demo.ItemPickup@{Feazeyu.RPGSystems.Demo.ItemPickup}}
+
+
+World pickup. On interact, adds amount of item item\+Id to a target IItem\+Container (the player\textquotesingle{}s inventory) and despawns. One script serves both the apple pickups and the chest (which simply "{}gives"{} the Burn item on interact).  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Demo.\+Item\+Pickup:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_feazeyu_1_1_r_p_g_systems_1_1_demo_1_1_item_pickup}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+override void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_demo_1_1_item_pickup_a856bb4c59f937f7232c23137ebb6a521}{Interact}} ()
+\begin{DoxyCompactList}\small\item\em Performs the interaction. Override to add custom behavior; the base implementation raises On\+Interact. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_interactable}{Feazeyu.\+RPGSystems.\+Character.\+Interactable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_interactable_a4aed318e667aee6e08c54b57343648c2}{On\+Trigger\+Enter2D}} (Collider2D collision)
+\begin{DoxyCompactList}\small\item\em Registers an entering Interactor and raises On\+Area\+Enter. \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_interactable_ae2f10f924284ff8f9162b26ef498d867}{On\+Trigger\+Exit2D}} (Collider2D collision)
+\begin{DoxyCompactList}\small\item\em Deregisters a leaving Interactor and raises On\+Area\+Exit. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Attributes inherited from \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_interactable}{Feazeyu.\+RPGSystems.\+Character.\+Interactable}}}
+\begin{DoxyCompactItemize}
+\item 
+Unity\+Event \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_interactable_ab236bf4b0418eff83211a852c759ad07}{On\+Interact}}
+\begin{DoxyCompactList}\small\item\em Raised when the object is interacted with. \end{DoxyCompactList}\item 
+Unity\+Event \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_interactable_ad152369baa379a2d20cdceba6e913057}{On\+Area\+Enter}}
+\begin{DoxyCompactList}\small\item\em Raised when an interactor enters this object\textquotesingle{}s trigger area. \end{DoxyCompactList}\item 
+Unity\+Event \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_interactable_a224ff76b2ff54c52e533b42dcc063d80}{On\+Area\+Exit}}
+\begin{DoxyCompactList}\small\item\em Raised when an interactor leaves this object\textquotesingle{}s trigger area. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+World pickup. On interact, adds amount of item item\+Id to a target IItem\+Container (the player\textquotesingle{}s inventory) and despawns. One script serves both the apple pickups and the chest (which simply "{}gives"{} the Burn item on interact). 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_demo_1_1_item_pickup_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_demo_1_1_item_pickup_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_demo_1_1_item_pickup_a856bb4c59f937f7232c23137ebb6a521}\index{Feazeyu.RPGSystems.Demo.ItemPickup@{Feazeyu.RPGSystems.Demo.ItemPickup}!Interact@{Interact}}
+\index{Interact@{Interact}!Feazeyu.RPGSystems.Demo.ItemPickup@{Feazeyu.RPGSystems.Demo.ItemPickup}}
+\doxysubsubsection{\texorpdfstring{Interact()}{Interact()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_demo_1_1_item_pickup_a856bb4c59f937f7232c23137ebb6a521} 
+override void Feazeyu.\+RPGSystems.\+Demo.\+Item\+Pickup.\+Interact (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Performs the interaction. Override to add custom behavior; the base implementation raises On\+Interact. 
+
+
+
+Reimplemented from \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_interactable_abc9e334f0c09fa1d65cb61083fcaac36}{Feazeyu.\+RPGSystems.\+Character.\+Interactable}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Samples\texorpdfstring{$\sim$}{\string~}/\+\+Quest Demo/\+\doxymbox{\hyperlink{_item_pickup_8cs}{Item\+Pickup.\+cs}}\end{DoxyCompactItemize}

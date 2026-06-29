@@ -1,0 +1,85 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Inventory.\+IShop\+Currency Interface Reference}
+\hypertarget{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_shop_currency}{}\label{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_shop_currency}\index{Feazeyu.RPGSystems.Inventory.IShopCurrency@{Feazeyu.RPGSystems.Inventory.IShopCurrency}}
+
+
+Abstraction over a spendable currency balance used by shops.  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Inventory.\+IShop\+Currency:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_shop_currency}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_shop_currency_ab742b605441cb0a8cff67b45e6223dd9}{Try\+Spend}} (int amount)
+\begin{DoxyCompactList}\small\item\em Attempts to spend {\itshape amount} ; returns false if insufficient. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_shop_currency_aae616c1efc5b9babdf2c03de155cdc89}{Add}} (int amount)
+\begin{DoxyCompactList}\small\item\em Adds {\itshape amount}  to the balance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+int \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_shop_currency_af7715074c9cad6f4da7264fe24e66333}{Balance}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Current balance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Abstraction over a spendable currency balance used by shops. 
+
+\label{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_shop_currency_doc-func-members}
+\Hypertarget{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_shop_currency_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_shop_currency_aae616c1efc5b9babdf2c03de155cdc89}\index{Feazeyu.RPGSystems.Inventory.IShopCurrency@{Feazeyu.RPGSystems.Inventory.IShopCurrency}!Add@{Add}}
+\index{Add@{Add}!Feazeyu.RPGSystems.Inventory.IShopCurrency@{Feazeyu.RPGSystems.Inventory.IShopCurrency}}
+\doxysubsubsection{\texorpdfstring{Add()}{Add()}}
+{\footnotesize\ttfamily \label{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_shop_currency_aae616c1efc5b9babdf2c03de155cdc89} 
+void Feazeyu.\+RPGSystems.\+Inventory.\+IShop\+Currency.\+Add (\begin{DoxyParamCaption}\item[{int}]{amount}{}\end{DoxyParamCaption})}
+
+
+
+Adds {\itshape amount}  to the balance. 
+
+
+
+Implemented in \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_player_wallet_a8fe07138d1d3236ac3b8bd466a586e3d}{Feazeyu.\+RPGSystems.\+Inventory.\+Player\+Wallet}}.
+
+\Hypertarget{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_shop_currency_ab742b605441cb0a8cff67b45e6223dd9}\index{Feazeyu.RPGSystems.Inventory.IShopCurrency@{Feazeyu.RPGSystems.Inventory.IShopCurrency}!TrySpend@{TrySpend}}
+\index{TrySpend@{TrySpend}!Feazeyu.RPGSystems.Inventory.IShopCurrency@{Feazeyu.RPGSystems.Inventory.IShopCurrency}}
+\doxysubsubsection{\texorpdfstring{TrySpend()}{TrySpend()}}
+{\footnotesize\ttfamily \label{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_shop_currency_ab742b605441cb0a8cff67b45e6223dd9} 
+bool Feazeyu.\+RPGSystems.\+Inventory.\+IShop\+Currency.\+Try\+Spend (\begin{DoxyParamCaption}\item[{int}]{amount}{}\end{DoxyParamCaption})}
+
+
+
+Attempts to spend {\itshape amount} ; returns false if insufficient. 
+
+
+
+Implemented in \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_player_wallet_a60bc2f5a69ba43aaa5ec9cb151913705}{Feazeyu.\+RPGSystems.\+Inventory.\+Player\+Wallet}}.
+
+
+
+\label{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_shop_currency_doc-property-members}
+\Hypertarget{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_shop_currency_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_shop_currency_af7715074c9cad6f4da7264fe24e66333}\index{Feazeyu.RPGSystems.Inventory.IShopCurrency@{Feazeyu.RPGSystems.Inventory.IShopCurrency}!Balance@{Balance}}
+\index{Balance@{Balance}!Feazeyu.RPGSystems.Inventory.IShopCurrency@{Feazeyu.RPGSystems.Inventory.IShopCurrency}}
+\doxysubsubsection{\texorpdfstring{Balance}{Balance}}
+{\footnotesize\ttfamily \label{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_shop_currency_af7715074c9cad6f4da7264fe24e66333} 
+int Feazeyu.\+RPGSystems.\+Inventory.\+IShop\+Currency.\+Balance\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Current balance. 
+
+
+
+Implemented in \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_player_wallet_a6141b3f481862a073f1cdf6297f47bf8}{Feazeyu.\+RPGSystems.\+Inventory.\+Player\+Wallet}}.
+
+
+
+The documentation for this interface was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Inventory/\+\+Shopping/\+\doxymbox{\hyperlink{_i_shop_currency_8cs}{IShop\+Currency.\+cs}}\end{DoxyCompactItemize}

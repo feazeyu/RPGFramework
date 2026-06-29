@@ -1,0 +1,323 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Dialogue.\+Node\+Registry Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry}\index{Feazeyu.RPGSystems.Dialogue.NodeRegistry@{Feazeyu.RPGSystems.Dialogue.NodeRegistry}}
+
+
+Abstract base for every graph system\textquotesingle{}s node registry. Provides the shared infrastructure all registries need:\+ 
+\begin{DoxyItemize}
+\item The universal flow/\+logic node type-\/id constants and accent colours, so a stored {\ttfamily Node\+Type} string means the same thing in any graph system (a "{}\+Start"{} node is a "{}\+Start"{} node everywhere). 
+\item The lazily-\/built type lookup table plus the Register /\+ All\+Nodes /\+ Get\+Node plumbing. 
+\item Register\+Common\+Nodes — the flow/\+logic/\+scene nodes shared by every system — and Register\+Attribute\+Nodes$<$\+TAttr$>$ for reflection-\/based discovery. 
+\end{DoxyItemize}Concrete registries ({\ttfamily \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_node_registry}{Dialogue\+Node\+Registry}}, {\ttfamily Quest\+Node\+Registry}) derive from this, override Build to add their own node set, and expose a static façade over a private singleton instance.  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Dialogue.\+Node\+Registry:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.707317cm]{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a1a0fb8131ae3f1aa0cb1aa14300dafc7}{Type\+Start}} = "{}Start"{}
+\begin{DoxyCompactList}\small\item\em Type start. \end{DoxyCompactList}\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a2b33aa179b325ea50f2d4a09580cdc1b}{Type\+End}} = "{}End"{}
+\begin{DoxyCompactList}\small\item\em Type end. \end{DoxyCompactList}\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_acfc97496840d197fcd5609ed579845b6}{Type\+Condition}} = "{}Condition"{}
+\begin{DoxyCompactList}\small\item\em Type condition. \end{DoxyCompactList}\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_ab9b51268cba2eccfb2e4b00076ef57ea}{Type\+Set\+Variable}} = "{}Set\+Variable"{}
+\begin{DoxyCompactList}\small\item\em Type set variable. \end{DoxyCompactList}\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a3563731102077a475427b2bc744b728b}{Type\+Trigger\+Event}} = "{}Trigger\+Event"{}
+\begin{DoxyCompactList}\small\item\em Type trigger event. \end{DoxyCompactList}\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_afe0a4d45ae7c1580b948a93406891922}{Type\+Wait\+For\+Event}} = "{}Wait\+For\+Event"{}
+\begin{DoxyCompactList}\small\item\em Type wait for event. \end{DoxyCompactList}\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a100ba62b8107b87622788da466596d2d}{Type\+Run\+Subgraph}} = "{}Run\+Subgraph"{}
+\begin{DoxyCompactList}\small\item\em Type run subgraph. \end{DoxyCompactList}\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a17b167f83914ac53654270027de20cab}{Type\+Find\+Object}} = "{}find\+\_\+object"{}
+\begin{DoxyCompactList}\small\item\em Type find object. \end{DoxyCompactList}\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a37a5ffcb42602000b5b1f8dc593c51d8}{Type\+Debug\+Log}} = "{}debug\+\_\+log"{}
+\begin{DoxyCompactList}\small\item\em Type debug log. \end{DoxyCompactList}\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_ad42e9f242df47232e4ff76f030e6b9e7}{Type\+Spawn\+Prefab}} = "{}spawn\+\_\+prefab"{}
+\begin{DoxyCompactList}\small\item\em Type spawn prefab. \end{DoxyCompactList}\item 
+static readonly Color \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_af51a8fbcbf35166ee26f11deb229182f}{Col\+Flow}} = new Color(0.\+18f, 0.\+62f, 0.\+48f)
+\begin{DoxyCompactList}\small\item\em Col flow. \end{DoxyCompactList}\item 
+static readonly Color \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a9e8a393878b942f6bd59ea410342352a}{Col\+Logic}} = new Color(0.\+94f, 0.\+65f, 0.\+20f)
+\begin{DoxyCompactList}\small\item\em Col logic. \end{DoxyCompactList}\item 
+static readonly Color \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a2b38db1f26385c037ef2ddf07ba8ae05}{Col\+Event}} = new Color(0.\+88f, 0.\+31f, 0.\+44f)
+\begin{DoxyCompactList}\small\item\em Col event. \end{DoxyCompactList}\item 
+static readonly Color \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a9180943355045328250d91f2149600ba}{Col\+Variable}} = new Color(0.\+69f, 0.\+42f, 0.\+97f)
+\begin{DoxyCompactList}\small\item\em Col variable. \end{DoxyCompactList}\item 
+static readonly Color \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a2fac337408255d3293c96df869fbc6ac}{Col\+Start}} = new Color(0.\+34f, 0.\+78f, 0.\+34f)
+\begin{DoxyCompactList}\small\item\em Col start. \end{DoxyCompactList}\item 
+static readonly Color \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a8b19b6ac053dcbbf96bd4bbe124af3bb}{Col\+End}} = new Color(0.\+75f, 0.\+25f, 0.\+25f)
+\begin{DoxyCompactList}\small\item\em Col end. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_info}{Node\+Info}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_af62674c336b937fbf2db2ae539c367d1}{Get\+Node}} (string type\+Id)
+\begin{DoxyCompactList}\small\item\em Look up a single node type, or {\ttfamily null} if not registered. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a339da60080c3e851b87411b3e36abc45}{Register}} (\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_info}{Node\+Info}} info)
+\begin{DoxyCompactList}\small\item\em Add (or overwrite) a node type in the table. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a299c6d8190241aa3d7dff01d2ddebdc5}{Build}} ()
+\begin{DoxyCompactList}\small\item\em Template method:\+ derived registries populate their node set here, typically by calling Register\+Common\+Nodes first, then registering their own built-\/ins and Register\+Attribute\+Nodes$<$\+TAttr$>$. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a51b95c795ba72735757e432f6d1143aa}{Register\+Common\+Nodes}} ()
+\begin{DoxyCompactList}\small\item\em Registers the flow/\+logic/\+scene/\+event nodes that every graph system shares. Nodes whose layout differs between systems — {\ttfamily Condition} and {\ttfamily Run\+Subgraph} — are intentionally left to each derived registry. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a0eaa37493339075554465e5b41432e5a}{Register\+Attribute\+Nodes$<$ TAttr $>$}} (Func$<$ TAttr, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_info}{Node\+Info}} $>$ factory)
+\begin{DoxyCompactList}\small\item\em Scans all loaded assemblies for classes tagged with {\itshape TAttr}  and registers the Node\+Info produced by {\itshape factory} . Types whose id is already registered (built-\/ins) are skipped, as are factories that return {\ttfamily null}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+IRead\+Only\+Dictionary$<$ string, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_info}{Node\+Info}} $>$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a17c57068a32dc5122ae96c27355597b6}{All\+Nodes}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em All node types this registry exposes, built on first access. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Abstract base for every graph system\textquotesingle{}s node registry. Provides the shared infrastructure all registries need:\+ 
+\begin{DoxyItemize}
+\item The universal flow/\+logic node type-\/id constants and accent colours, so a stored {\ttfamily Node\+Type} string means the same thing in any graph system (a "{}\+Start"{} node is a "{}\+Start"{} node everywhere). 
+\item The lazily-\/built type lookup table plus the Register /\+ All\+Nodes /\+ Get\+Node plumbing. 
+\item Register\+Common\+Nodes — the flow/\+logic/\+scene nodes shared by every system — and Register\+Attribute\+Nodes$<$\+TAttr$>$ for reflection-\/based discovery. 
+\end{DoxyItemize}Concrete registries ({\ttfamily \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_node_registry}{Dialogue\+Node\+Registry}}, {\ttfamily Quest\+Node\+Registry}) derive from this, override Build to add their own node set, and expose a static façade over a private singleton instance. 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a299c6d8190241aa3d7dff01d2ddebdc5}\index{Feazeyu.RPGSystems.Dialogue.NodeRegistry@{Feazeyu.RPGSystems.Dialogue.NodeRegistry}!Build@{Build}}
+\index{Build@{Build}!Feazeyu.RPGSystems.Dialogue.NodeRegistry@{Feazeyu.RPGSystems.Dialogue.NodeRegistry}}
+\doxysubsubsection{\texorpdfstring{Build()}{Build()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a299c6d8190241aa3d7dff01d2ddebdc5} 
+void Feazeyu.\+RPGSystems.\+Dialogue.\+Node\+Registry.\+Build (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [abstract]}, {\ttfamily [protected]}}
+
+
+
+Template method:\+ derived registries populate their node set here, typically by calling Register\+Common\+Nodes first, then registering their own built-\/ins and Register\+Attribute\+Nodes$<$\+TAttr$>$. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_af62674c336b937fbf2db2ae539c367d1}\index{Feazeyu.RPGSystems.Dialogue.NodeRegistry@{Feazeyu.RPGSystems.Dialogue.NodeRegistry}!GetNode@{GetNode}}
+\index{GetNode@{GetNode}!Feazeyu.RPGSystems.Dialogue.NodeRegistry@{Feazeyu.RPGSystems.Dialogue.NodeRegistry}}
+\doxysubsubsection{\texorpdfstring{GetNode()}{GetNode()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_af62674c336b937fbf2db2ae539c367d1} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_info}{Node\+Info}} Feazeyu.\+RPGSystems.\+Dialogue.\+Node\+Registry.\+Get\+Node (\begin{DoxyParamCaption}\item[{string}]{type\+Id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Look up a single node type, or {\ttfamily null} if not registered. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a339da60080c3e851b87411b3e36abc45}\index{Feazeyu.RPGSystems.Dialogue.NodeRegistry@{Feazeyu.RPGSystems.Dialogue.NodeRegistry}!Register@{Register}}
+\index{Register@{Register}!Feazeyu.RPGSystems.Dialogue.NodeRegistry@{Feazeyu.RPGSystems.Dialogue.NodeRegistry}}
+\doxysubsubsection{\texorpdfstring{Register()}{Register()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a339da60080c3e851b87411b3e36abc45} 
+void Feazeyu.\+RPGSystems.\+Dialogue.\+Node\+Registry.\+Register (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_info}{Node\+Info}}}]{info}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Add (or overwrite) a node type in the table. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a0eaa37493339075554465e5b41432e5a}\index{Feazeyu.RPGSystems.Dialogue.NodeRegistry@{Feazeyu.RPGSystems.Dialogue.NodeRegistry}!RegisterAttributeNodes$<$ TAttr $>$@{RegisterAttributeNodes$<$ TAttr $>$}}
+\index{RegisterAttributeNodes$<$ TAttr $>$@{RegisterAttributeNodes$<$ TAttr $>$}!Feazeyu.RPGSystems.Dialogue.NodeRegistry@{Feazeyu.RPGSystems.Dialogue.NodeRegistry}}
+\doxysubsubsection{\texorpdfstring{RegisterAttributeNodes$<$ TAttr $>$()}{RegisterAttributeNodes< TAttr >()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a0eaa37493339075554465e5b41432e5a} 
+void Feazeyu.\+RPGSystems.\+Dialogue.\+Node\+Registry.\+Register\+Attribute\+Nodes$<$ TAttr $>$ (\begin{DoxyParamCaption}\item[{Func$<$ TAttr, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_info}{Node\+Info}} $>$}]{factory}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Scans all loaded assemblies for classes tagged with {\itshape TAttr}  and registers the Node\+Info produced by {\itshape factory} . Types whose id is already registered (built-\/ins) are skipped, as are factories that return {\ttfamily null}. 
+
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em TAttr} : {\em Attribute}]\end{description}
+\end{Desc}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a51b95c795ba72735757e432f6d1143aa}\index{Feazeyu.RPGSystems.Dialogue.NodeRegistry@{Feazeyu.RPGSystems.Dialogue.NodeRegistry}!RegisterCommonNodes@{RegisterCommonNodes}}
+\index{RegisterCommonNodes@{RegisterCommonNodes}!Feazeyu.RPGSystems.Dialogue.NodeRegistry@{Feazeyu.RPGSystems.Dialogue.NodeRegistry}}
+\doxysubsubsection{\texorpdfstring{RegisterCommonNodes()}{RegisterCommonNodes()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a51b95c795ba72735757e432f6d1143aa} 
+void Feazeyu.\+RPGSystems.\+Dialogue.\+Node\+Registry.\+Register\+Common\+Nodes (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Registers the flow/\+logic/\+scene/\+event nodes that every graph system shares. Nodes whose layout differs between systems — {\ttfamily Condition} and {\ttfamily Run\+Subgraph} — are intentionally left to each derived registry. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_doc-variable-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a8b19b6ac053dcbbf96bd4bbe124af3bb}\index{Feazeyu.RPGSystems.Dialogue.NodeRegistry@{Feazeyu.RPGSystems.Dialogue.NodeRegistry}!ColEnd@{ColEnd}}
+\index{ColEnd@{ColEnd}!Feazeyu.RPGSystems.Dialogue.NodeRegistry@{Feazeyu.RPGSystems.Dialogue.NodeRegistry}}
+\doxysubsubsection{\texorpdfstring{ColEnd}{ColEnd}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a8b19b6ac053dcbbf96bd4bbe124af3bb} 
+readonly Color Feazeyu.\+RPGSystems.\+Dialogue.\+Node\+Registry.\+Col\+End = new Color(0.\+75f, 0.\+25f, 0.\+25f)\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Col end. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a2b38db1f26385c037ef2ddf07ba8ae05}\index{Feazeyu.RPGSystems.Dialogue.NodeRegistry@{Feazeyu.RPGSystems.Dialogue.NodeRegistry}!ColEvent@{ColEvent}}
+\index{ColEvent@{ColEvent}!Feazeyu.RPGSystems.Dialogue.NodeRegistry@{Feazeyu.RPGSystems.Dialogue.NodeRegistry}}
+\doxysubsubsection{\texorpdfstring{ColEvent}{ColEvent}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a2b38db1f26385c037ef2ddf07ba8ae05} 
+readonly Color Feazeyu.\+RPGSystems.\+Dialogue.\+Node\+Registry.\+Col\+Event = new Color(0.\+88f, 0.\+31f, 0.\+44f)\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Col event. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_af51a8fbcbf35166ee26f11deb229182f}\index{Feazeyu.RPGSystems.Dialogue.NodeRegistry@{Feazeyu.RPGSystems.Dialogue.NodeRegistry}!ColFlow@{ColFlow}}
+\index{ColFlow@{ColFlow}!Feazeyu.RPGSystems.Dialogue.NodeRegistry@{Feazeyu.RPGSystems.Dialogue.NodeRegistry}}
+\doxysubsubsection{\texorpdfstring{ColFlow}{ColFlow}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_af51a8fbcbf35166ee26f11deb229182f} 
+readonly Color Feazeyu.\+RPGSystems.\+Dialogue.\+Node\+Registry.\+Col\+Flow = new Color(0.\+18f, 0.\+62f, 0.\+48f)\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Col flow. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a9e8a393878b942f6bd59ea410342352a}\index{Feazeyu.RPGSystems.Dialogue.NodeRegistry@{Feazeyu.RPGSystems.Dialogue.NodeRegistry}!ColLogic@{ColLogic}}
+\index{ColLogic@{ColLogic}!Feazeyu.RPGSystems.Dialogue.NodeRegistry@{Feazeyu.RPGSystems.Dialogue.NodeRegistry}}
+\doxysubsubsection{\texorpdfstring{ColLogic}{ColLogic}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a9e8a393878b942f6bd59ea410342352a} 
+readonly Color Feazeyu.\+RPGSystems.\+Dialogue.\+Node\+Registry.\+Col\+Logic = new Color(0.\+94f, 0.\+65f, 0.\+20f)\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Col logic. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a2fac337408255d3293c96df869fbc6ac}\index{Feazeyu.RPGSystems.Dialogue.NodeRegistry@{Feazeyu.RPGSystems.Dialogue.NodeRegistry}!ColStart@{ColStart}}
+\index{ColStart@{ColStart}!Feazeyu.RPGSystems.Dialogue.NodeRegistry@{Feazeyu.RPGSystems.Dialogue.NodeRegistry}}
+\doxysubsubsection{\texorpdfstring{ColStart}{ColStart}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a2fac337408255d3293c96df869fbc6ac} 
+readonly Color Feazeyu.\+RPGSystems.\+Dialogue.\+Node\+Registry.\+Col\+Start = new Color(0.\+34f, 0.\+78f, 0.\+34f)\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Col start. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a9180943355045328250d91f2149600ba}\index{Feazeyu.RPGSystems.Dialogue.NodeRegistry@{Feazeyu.RPGSystems.Dialogue.NodeRegistry}!ColVariable@{ColVariable}}
+\index{ColVariable@{ColVariable}!Feazeyu.RPGSystems.Dialogue.NodeRegistry@{Feazeyu.RPGSystems.Dialogue.NodeRegistry}}
+\doxysubsubsection{\texorpdfstring{ColVariable}{ColVariable}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a9180943355045328250d91f2149600ba} 
+readonly Color Feazeyu.\+RPGSystems.\+Dialogue.\+Node\+Registry.\+Col\+Variable = new Color(0.\+69f, 0.\+42f, 0.\+97f)\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Col variable. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_acfc97496840d197fcd5609ed579845b6}\index{Feazeyu.RPGSystems.Dialogue.NodeRegistry@{Feazeyu.RPGSystems.Dialogue.NodeRegistry}!TypeCondition@{TypeCondition}}
+\index{TypeCondition@{TypeCondition}!Feazeyu.RPGSystems.Dialogue.NodeRegistry@{Feazeyu.RPGSystems.Dialogue.NodeRegistry}}
+\doxysubsubsection{\texorpdfstring{TypeCondition}{TypeCondition}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_acfc97496840d197fcd5609ed579845b6} 
+const string Feazeyu.\+RPGSystems.\+Dialogue.\+Node\+Registry.\+Type\+Condition = "{}Condition"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Type condition. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a37a5ffcb42602000b5b1f8dc593c51d8}\index{Feazeyu.RPGSystems.Dialogue.NodeRegistry@{Feazeyu.RPGSystems.Dialogue.NodeRegistry}!TypeDebugLog@{TypeDebugLog}}
+\index{TypeDebugLog@{TypeDebugLog}!Feazeyu.RPGSystems.Dialogue.NodeRegistry@{Feazeyu.RPGSystems.Dialogue.NodeRegistry}}
+\doxysubsubsection{\texorpdfstring{TypeDebugLog}{TypeDebugLog}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a37a5ffcb42602000b5b1f8dc593c51d8} 
+const string Feazeyu.\+RPGSystems.\+Dialogue.\+Node\+Registry.\+Type\+Debug\+Log = "{}debug\+\_\+log"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Type debug log. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a2b33aa179b325ea50f2d4a09580cdc1b}\index{Feazeyu.RPGSystems.Dialogue.NodeRegistry@{Feazeyu.RPGSystems.Dialogue.NodeRegistry}!TypeEnd@{TypeEnd}}
+\index{TypeEnd@{TypeEnd}!Feazeyu.RPGSystems.Dialogue.NodeRegistry@{Feazeyu.RPGSystems.Dialogue.NodeRegistry}}
+\doxysubsubsection{\texorpdfstring{TypeEnd}{TypeEnd}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a2b33aa179b325ea50f2d4a09580cdc1b} 
+const string Feazeyu.\+RPGSystems.\+Dialogue.\+Node\+Registry.\+Type\+End = "{}End"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Type end. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a17b167f83914ac53654270027de20cab}\index{Feazeyu.RPGSystems.Dialogue.NodeRegistry@{Feazeyu.RPGSystems.Dialogue.NodeRegistry}!TypeFindObject@{TypeFindObject}}
+\index{TypeFindObject@{TypeFindObject}!Feazeyu.RPGSystems.Dialogue.NodeRegistry@{Feazeyu.RPGSystems.Dialogue.NodeRegistry}}
+\doxysubsubsection{\texorpdfstring{TypeFindObject}{TypeFindObject}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a17b167f83914ac53654270027de20cab} 
+const string Feazeyu.\+RPGSystems.\+Dialogue.\+Node\+Registry.\+Type\+Find\+Object = "{}find\+\_\+object"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Type find object. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a100ba62b8107b87622788da466596d2d}\index{Feazeyu.RPGSystems.Dialogue.NodeRegistry@{Feazeyu.RPGSystems.Dialogue.NodeRegistry}!TypeRunSubgraph@{TypeRunSubgraph}}
+\index{TypeRunSubgraph@{TypeRunSubgraph}!Feazeyu.RPGSystems.Dialogue.NodeRegistry@{Feazeyu.RPGSystems.Dialogue.NodeRegistry}}
+\doxysubsubsection{\texorpdfstring{TypeRunSubgraph}{TypeRunSubgraph}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a100ba62b8107b87622788da466596d2d} 
+const string Feazeyu.\+RPGSystems.\+Dialogue.\+Node\+Registry.\+Type\+Run\+Subgraph = "{}Run\+Subgraph"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Type run subgraph. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_ab9b51268cba2eccfb2e4b00076ef57ea}\index{Feazeyu.RPGSystems.Dialogue.NodeRegistry@{Feazeyu.RPGSystems.Dialogue.NodeRegistry}!TypeSetVariable@{TypeSetVariable}}
+\index{TypeSetVariable@{TypeSetVariable}!Feazeyu.RPGSystems.Dialogue.NodeRegistry@{Feazeyu.RPGSystems.Dialogue.NodeRegistry}}
+\doxysubsubsection{\texorpdfstring{TypeSetVariable}{TypeSetVariable}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_ab9b51268cba2eccfb2e4b00076ef57ea} 
+const string Feazeyu.\+RPGSystems.\+Dialogue.\+Node\+Registry.\+Type\+Set\+Variable = "{}Set\+Variable"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Type set variable. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_ad42e9f242df47232e4ff76f030e6b9e7}\index{Feazeyu.RPGSystems.Dialogue.NodeRegistry@{Feazeyu.RPGSystems.Dialogue.NodeRegistry}!TypeSpawnPrefab@{TypeSpawnPrefab}}
+\index{TypeSpawnPrefab@{TypeSpawnPrefab}!Feazeyu.RPGSystems.Dialogue.NodeRegistry@{Feazeyu.RPGSystems.Dialogue.NodeRegistry}}
+\doxysubsubsection{\texorpdfstring{TypeSpawnPrefab}{TypeSpawnPrefab}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_ad42e9f242df47232e4ff76f030e6b9e7} 
+const string Feazeyu.\+RPGSystems.\+Dialogue.\+Node\+Registry.\+Type\+Spawn\+Prefab = "{}spawn\+\_\+prefab"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Type spawn prefab. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a1a0fb8131ae3f1aa0cb1aa14300dafc7}\index{Feazeyu.RPGSystems.Dialogue.NodeRegistry@{Feazeyu.RPGSystems.Dialogue.NodeRegistry}!TypeStart@{TypeStart}}
+\index{TypeStart@{TypeStart}!Feazeyu.RPGSystems.Dialogue.NodeRegistry@{Feazeyu.RPGSystems.Dialogue.NodeRegistry}}
+\doxysubsubsection{\texorpdfstring{TypeStart}{TypeStart}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a1a0fb8131ae3f1aa0cb1aa14300dafc7} 
+const string Feazeyu.\+RPGSystems.\+Dialogue.\+Node\+Registry.\+Type\+Start = "{}Start"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Type start. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a3563731102077a475427b2bc744b728b}\index{Feazeyu.RPGSystems.Dialogue.NodeRegistry@{Feazeyu.RPGSystems.Dialogue.NodeRegistry}!TypeTriggerEvent@{TypeTriggerEvent}}
+\index{TypeTriggerEvent@{TypeTriggerEvent}!Feazeyu.RPGSystems.Dialogue.NodeRegistry@{Feazeyu.RPGSystems.Dialogue.NodeRegistry}}
+\doxysubsubsection{\texorpdfstring{TypeTriggerEvent}{TypeTriggerEvent}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a3563731102077a475427b2bc744b728b} 
+const string Feazeyu.\+RPGSystems.\+Dialogue.\+Node\+Registry.\+Type\+Trigger\+Event = "{}Trigger\+Event"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Type trigger event. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_afe0a4d45ae7c1580b948a93406891922}\index{Feazeyu.RPGSystems.Dialogue.NodeRegistry@{Feazeyu.RPGSystems.Dialogue.NodeRegistry}!TypeWaitForEvent@{TypeWaitForEvent}}
+\index{TypeWaitForEvent@{TypeWaitForEvent}!Feazeyu.RPGSystems.Dialogue.NodeRegistry@{Feazeyu.RPGSystems.Dialogue.NodeRegistry}}
+\doxysubsubsection{\texorpdfstring{TypeWaitForEvent}{TypeWaitForEvent}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_afe0a4d45ae7c1580b948a93406891922} 
+const string Feazeyu.\+RPGSystems.\+Dialogue.\+Node\+Registry.\+Type\+Wait\+For\+Event = "{}Wait\+For\+Event"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Type wait for event. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_doc-property-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a17c57068a32dc5122ae96c27355597b6}\index{Feazeyu.RPGSystems.Dialogue.NodeRegistry@{Feazeyu.RPGSystems.Dialogue.NodeRegistry}!AllNodes@{AllNodes}}
+\index{AllNodes@{AllNodes}!Feazeyu.RPGSystems.Dialogue.NodeRegistry@{Feazeyu.RPGSystems.Dialogue.NodeRegistry}}
+\doxysubsubsection{\texorpdfstring{AllNodes}{AllNodes}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a17c57068a32dc5122ae96c27355597b6} 
+IRead\+Only\+Dictionary$<$string, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_info}{Node\+Info}}$>$ Feazeyu.\+RPGSystems.\+Dialogue.\+Node\+Registry.\+All\+Nodes\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [protected]}}
+
+
+
+All node types this registry exposes, built on first access. 
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Dialogue/\+\+Nodes/\+\doxymbox{\hyperlink{_node_registry_8cs}{Node\+Registry.\+cs}}\end{DoxyCompactItemize}

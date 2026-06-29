@@ -1,0 +1,117 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Character.\+Interactable Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_interactable}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_interactable}\index{Feazeyu.RPGSystems.Character.Interactable@{Feazeyu.RPGSystems.Character.Interactable}}
+
+
+A world object the player can interact with. Registers itself with an Interactor while that interactor is within its trigger collider.  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Character.\+Interactable:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_interactable}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_interactable_abc9e334f0c09fa1d65cb61083fcaac36}{Interact}} ()
+\begin{DoxyCompactList}\small\item\em Performs the interaction. Override to add custom behavior; the base implementation raises On\+Interact. \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_interactable_a4aed318e667aee6e08c54b57343648c2}{On\+Trigger\+Enter2D}} (Collider2D collision)
+\begin{DoxyCompactList}\small\item\em Registers an entering Interactor and raises On\+Area\+Enter. \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_interactable_ae2f10f924284ff8f9162b26ef498d867}{On\+Trigger\+Exit2D}} (Collider2D collision)
+\begin{DoxyCompactList}\small\item\em Deregisters a leaving Interactor and raises On\+Area\+Exit. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Unity\+Event \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_interactable_ab236bf4b0418eff83211a852c759ad07}{On\+Interact}}
+\begin{DoxyCompactList}\small\item\em Raised when the object is interacted with. \end{DoxyCompactList}\item 
+Unity\+Event \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_interactable_ad152369baa379a2d20cdceba6e913057}{On\+Area\+Enter}}
+\begin{DoxyCompactList}\small\item\em Raised when an interactor enters this object\textquotesingle{}s trigger area. \end{DoxyCompactList}\item 
+Unity\+Event \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_interactable_a224ff76b2ff54c52e533b42dcc063d80}{On\+Area\+Exit}}
+\begin{DoxyCompactList}\small\item\em Raised when an interactor leaves this object\textquotesingle{}s trigger area. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A world object the player can interact with. Registers itself with an Interactor while that interactor is within its trigger collider. 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_interactable_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_interactable_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_interactable_abc9e334f0c09fa1d65cb61083fcaac36}\index{Feazeyu.RPGSystems.Character.Interactable@{Feazeyu.RPGSystems.Character.Interactable}!Interact@{Interact}}
+\index{Interact@{Interact}!Feazeyu.RPGSystems.Character.Interactable@{Feazeyu.RPGSystems.Character.Interactable}}
+\doxysubsubsection{\texorpdfstring{Interact()}{Interact()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_interactable_abc9e334f0c09fa1d65cb61083fcaac36} 
+virtual void Feazeyu.\+RPGSystems.\+Character.\+Interactable.\+Interact (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Performs the interaction. Override to add custom behavior; the base implementation raises On\+Interact. 
+
+
+
+Reimplemented in \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_demo_1_1_item_pickup_a856bb4c59f937f7232c23137ebb6a521}{Feazeyu.\+RPGSystems.\+Demo.\+Item\+Pickup}}, and \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shopkeep_aaf2ec7e15c912bb9fa2fb2f0a8e7577e}{Feazeyu.\+RPGSystems.\+Inventory.\+Shopkeep}}.
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_interactable_a4aed318e667aee6e08c54b57343648c2}\index{Feazeyu.RPGSystems.Character.Interactable@{Feazeyu.RPGSystems.Character.Interactable}!OnTriggerEnter2D@{OnTriggerEnter2D}}
+\index{OnTriggerEnter2D@{OnTriggerEnter2D}!Feazeyu.RPGSystems.Character.Interactable@{Feazeyu.RPGSystems.Character.Interactable}}
+\doxysubsubsection{\texorpdfstring{OnTriggerEnter2D()}{OnTriggerEnter2D()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_interactable_a4aed318e667aee6e08c54b57343648c2} 
+virtual void Feazeyu.\+RPGSystems.\+Character.\+Interactable.\+On\+Trigger\+Enter2D (\begin{DoxyParamCaption}\item[{Collider2D}]{collision}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Registers an entering Interactor and raises On\+Area\+Enter. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_interactable_ae2f10f924284ff8f9162b26ef498d867}\index{Feazeyu.RPGSystems.Character.Interactable@{Feazeyu.RPGSystems.Character.Interactable}!OnTriggerExit2D@{OnTriggerExit2D}}
+\index{OnTriggerExit2D@{OnTriggerExit2D}!Feazeyu.RPGSystems.Character.Interactable@{Feazeyu.RPGSystems.Character.Interactable}}
+\doxysubsubsection{\texorpdfstring{OnTriggerExit2D()}{OnTriggerExit2D()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_interactable_ae2f10f924284ff8f9162b26ef498d867} 
+virtual void Feazeyu.\+RPGSystems.\+Character.\+Interactable.\+On\+Trigger\+Exit2D (\begin{DoxyParamCaption}\item[{Collider2D}]{collision}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Deregisters a leaving Interactor and raises On\+Area\+Exit. 
+
+
+
+Reimplemented in \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shopkeep_a3b0c760fa9540228462fafe72134e0ab}{Feazeyu.\+RPGSystems.\+Inventory.\+Shopkeep}}.
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_interactable_doc-variable-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_interactable_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_interactable_ad152369baa379a2d20cdceba6e913057}\index{Feazeyu.RPGSystems.Character.Interactable@{Feazeyu.RPGSystems.Character.Interactable}!OnAreaEnter@{OnAreaEnter}}
+\index{OnAreaEnter@{OnAreaEnter}!Feazeyu.RPGSystems.Character.Interactable@{Feazeyu.RPGSystems.Character.Interactable}}
+\doxysubsubsection{\texorpdfstring{OnAreaEnter}{OnAreaEnter}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_interactable_ad152369baa379a2d20cdceba6e913057} 
+Unity\+Event Feazeyu.\+RPGSystems.\+Character.\+Interactable.\+On\+Area\+Enter}
+
+
+
+Raised when an interactor enters this object\textquotesingle{}s trigger area. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_interactable_a224ff76b2ff54c52e533b42dcc063d80}\index{Feazeyu.RPGSystems.Character.Interactable@{Feazeyu.RPGSystems.Character.Interactable}!OnAreaExit@{OnAreaExit}}
+\index{OnAreaExit@{OnAreaExit}!Feazeyu.RPGSystems.Character.Interactable@{Feazeyu.RPGSystems.Character.Interactable}}
+\doxysubsubsection{\texorpdfstring{OnAreaExit}{OnAreaExit}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_interactable_a224ff76b2ff54c52e533b42dcc063d80} 
+Unity\+Event Feazeyu.\+RPGSystems.\+Character.\+Interactable.\+On\+Area\+Exit}
+
+
+
+Raised when an interactor leaves this object\textquotesingle{}s trigger area. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_interactable_ab236bf4b0418eff83211a852c759ad07}\index{Feazeyu.RPGSystems.Character.Interactable@{Feazeyu.RPGSystems.Character.Interactable}!OnInteract@{OnInteract}}
+\index{OnInteract@{OnInteract}!Feazeyu.RPGSystems.Character.Interactable@{Feazeyu.RPGSystems.Character.Interactable}}
+\doxysubsubsection{\texorpdfstring{OnInteract}{OnInteract}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_interactable_ab236bf4b0418eff83211a852c759ad07} 
+Unity\+Event Feazeyu.\+RPGSystems.\+Character.\+Interactable.\+On\+Interact}
+
+
+
+Raised when the object is interacted with. 
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Character/\+\doxymbox{\hyperlink{_interactable_8cs}{Interactable.\+cs}}\end{DoxyCompactItemize}

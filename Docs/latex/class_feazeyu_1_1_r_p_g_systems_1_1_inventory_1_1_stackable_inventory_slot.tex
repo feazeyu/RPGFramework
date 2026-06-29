@@ -1,0 +1,263 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Inventory.\+Stackable\+Inventory\+Slot Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot}\index{Feazeyu.RPGSystems.Inventory.StackableInventorySlot@{Feazeyu.RPGSystems.Inventory.StackableInventorySlot}}
+
+
+Represents an inventory slot that can hold multiple items of the same type (stackable).  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Inventory.\+Stackable\+Inventory\+Slot:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot_a85bd242fe5772c1a3968c67bf228f1b6}{Stackable\+Inventory\+Slot}} ()
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the Stackable\+Inventory\+Slot class. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot_aad8d66e1bbfd11921a3a8282021d6a80}{Stackable\+Inventory\+Slot}} (Game\+Object item)
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the Stackable\+Inventory\+Slot class with the specified item. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot_ac4dc9c83036c49e225607baab445f613}{Stackable\+Inventory\+Slot}} (int id)
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the Stackable\+Inventory\+Slot class with the specified item id. \end{DoxyCompactList}\item 
+override bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot_a42c9e4143ff72651d7e4712ee03b339d}{Put\+Item}} (Game\+Object item)
+\begin{DoxyCompactList}\small\item\em Attempts to add an item to the stack. \end{DoxyCompactList}\item 
+override int \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot_afde40bdaf53246d41bfe09046889d43b}{Remove\+Item}} ()
+\begin{DoxyCompactList}\small\item\em Removes an item from the stack. Infinite stacks never deplete. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot}{Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Slot}}}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_ad2280982df540e25b0894630b44a3057}{Inventory\+Slot}} (Game\+Object item)
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the Inventory\+Slot class with the specified item. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_a0060ab8a5ea840a8e98e7b025626c331}{Inventory\+Slot}} (Game\+Object item, Vector2\+Int position)
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the Inventory\+Slot class with the specified item and position. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_ac2a69117c3050301645143bd3f794bde}{Inventory\+Slot}} (int id, Vector2\+Int position)
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the Inventory\+Slot class with the specified item id and position. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_afd3e99578640476d59688364ddb0cdee}{Inventory\+Slot}} (int id)
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the Inventory\+Slot class with the specified item id. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_af7206707b3ed3042001986165f29379c}{Inventory\+Slot}} (Vector2\+Int position)
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the Inventory\+Slot class with the specified position. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_af7a29b47b364704a3984dc5780bf6877}{Inventory\+Slot}} ()
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the Inventory\+Slot class. \end{DoxyCompactList}\item 
+virtual bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_a029f24f6d88d5d3b06a6104d85e20c49}{Accepts\+Item}} ()
+\begin{DoxyCompactList}\small\item\em Determines whether the slot can accept a new item, irrespective of which item it is. This is the structural check (empty, enabled, not a non-\/anchor cell). \end{DoxyCompactList}\item 
+virtual bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_ae74938508bb3825f71e09eaa8dc52bdd}{Accepts\+Item}} (\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_items_1_1_item_info}{Item\+Info}} item)
+\begin{DoxyCompactList}\small\item\em Determines whether the slot can accept the specified item. Override this to filter by item type, category, Item\+Target, etc. The grid placement path and the base Put\+Item(\+Game\+Object) both call this overload, so a filter declared here is enforced at placement time. Defaults to the item-\/agnostic Accepts\+Item() check so existing slots keep their behavior. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_container}{Feazeyu.\+RPGSystems.\+Inventory.\+IItem\+Container}}}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_container_adc3bb2142789ac573bfce23b03556b6f}{Remove\+Item}} (int item\+Id, int count=1)
+\begin{DoxyCompactList}\small\item\em Removes {\itshape count}  items with {\itshape item\+Id}  from the container. Returns false if not enough items are present (no-\/op in that case). \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_container_a37f354146a3b8db38ff8f417a02b317a}{Count\+Item}} (int item\+Id)
+\begin{DoxyCompactList}\small\item\em Returns the total number of items with {\itshape item\+Id}  in the container. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_container_a45565d62df1cd8edba6e2a562cbd9f13}{Return\+Item}} (Game\+Object item)
+\begin{DoxyCompactList}\small\item\em Returns an item to the container. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_container_a6c7b3fb8ed2cb756a5dbe37a95d8be77}{Try\+Add\+Item}} (int item\+Id, int count=1)
+\begin{DoxyCompactList}\small\item\em Looks up the item prefab by ID and tries to add {\itshape count}  copies. Returns false if the item is not registered or there is no space. Implementors that support this should override the default. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot_a6efe9ac29dda844a571e2c82e67f392c}{stack\+Size}} = -\/1
+\begin{DoxyCompactList}\small\item\em The maximum stack size for this slot. -\/1 means unlimited. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot_af845cf064a82e0fe1036d5a717da462b}{item\+Count}}
+\begin{DoxyCompactList}\small\item\em The current number of items in the stack. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot_a30032389c440efa3deece00211d85ab7}{infinite}}
+\begin{DoxyCompactList}\small\item\em When true the stack never depletes and renders as "{}∞"{} (used for infinite shop stock). Buying does not decrement it and selling does not change its count. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes inherited from \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot}{Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Slot}}}
+\begin{DoxyCompactItemize}
+\item 
+Vector2\+Int \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_a965af97cb94368c0170d9fe84dcbb68e}{position}} = Vector2\+Int.\+zero
+\begin{DoxyCompactList}\small\item\em The position of the slot in the inventory. \end{DoxyCompactList}\item 
+Vector2\+Int \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_a6cc264796acb98d1d93fa484efcd1658}{anchor\+Position}} = new(-\/1, -\/1)
+\begin{DoxyCompactList}\small\item\em The position of the main itemslot for multislot items. If it is not -\/1,-\/1, the item ui is not drawn. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_aa3f19856ce05563e20cd56390cbfcc17}{Is\+Enabled}} = true
+\begin{DoxyCompactList}\small\item\em Gets or sets a value indicating whether the slot is enabled. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot_a92276d770372d7c5e175a72d85a08488}{Has\+Room}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em True if another item can be added to this stack (empty capacity remaining, or unlimited/\+infinite). \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot_af4e607c52921fd862657d44437d9df2d}{Would\+Remain\+After\+Remove}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em True if removing one item would leave the stack occupied (more than one item, or infinite). Used by the grid to decide between decrementing a stack and clearing the item\textquotesingle{}s footprint. \end{DoxyCompactList}\item 
+override \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_ad739bf7fefdac7f7596367c61a6ae529}{Color}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot_ac558d5051cd495245f608d9a309f5c2c}{Base\+Color}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Gets the base color for stackable slots. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties inherited from \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot}{Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Slot}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_ad739bf7fefdac7f7596367c61a6ae529}{Color}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_afa1e21e48c40ce9fc952de3bfa0a688c}{Base\+Color}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Gets the base color of the slot. This affects only the editor ui. \end{DoxyCompactList}\item 
+string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_a309451f2ffba7bad548e94a5aee86527}{Editor\+UILabel}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Gets a label for the editor UI. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_ad00321650cb82fe38df574f130ee0450}{Item\+Id}}\hspace{0.3cm}{\ttfamily  \+[get, protected set]\+}
+\begin{DoxyCompactList}\small\item\em Gets the item id in the slot. \end{DoxyCompactList}\item 
+Game\+Object? \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_a6aec3c8fbdf5de7457b8918377a2bf8e}{Item}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Gets the item Game\+Object in the slot, or null if empty. \end{DoxyCompactList}\item 
+Color \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_ad739bf7fefdac7f7596367c61a6ae529}{Color}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Gets the color of the slot, depending on its enabled state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents an inventory slot that can hold multiple items of the same type (stackable). 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot_doc-constructors}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot_a85bd242fe5772c1a3968c67bf228f1b6}\index{Feazeyu.RPGSystems.Inventory.StackableInventorySlot@{Feazeyu.RPGSystems.Inventory.StackableInventorySlot}!StackableInventorySlot@{StackableInventorySlot}}
+\index{StackableInventorySlot@{StackableInventorySlot}!Feazeyu.RPGSystems.Inventory.StackableInventorySlot@{Feazeyu.RPGSystems.Inventory.StackableInventorySlot}}
+\doxysubsubsection{\texorpdfstring{StackableInventorySlot()}{StackableInventorySlot()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot_a85bd242fe5772c1a3968c67bf228f1b6} 
+Feazeyu.\+RPGSystems.\+Inventory.\+Stackable\+Inventory\+Slot.\+Stackable\+Inventory\+Slot (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Initializes a new instance of the Stackable\+Inventory\+Slot class. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot_aad8d66e1bbfd11921a3a8282021d6a80}\index{Feazeyu.RPGSystems.Inventory.StackableInventorySlot@{Feazeyu.RPGSystems.Inventory.StackableInventorySlot}!StackableInventorySlot@{StackableInventorySlot}}
+\index{StackableInventorySlot@{StackableInventorySlot}!Feazeyu.RPGSystems.Inventory.StackableInventorySlot@{Feazeyu.RPGSystems.Inventory.StackableInventorySlot}}
+\doxysubsubsection{\texorpdfstring{StackableInventorySlot()}{StackableInventorySlot()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot_aad8d66e1bbfd11921a3a8282021d6a80} 
+Feazeyu.\+RPGSystems.\+Inventory.\+Stackable\+Inventory\+Slot.\+Stackable\+Inventory\+Slot (\begin{DoxyParamCaption}\item[{Game\+Object}]{item}{}\end{DoxyParamCaption})}
+
+
+
+Initializes a new instance of the Stackable\+Inventory\+Slot class with the specified item. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The item to place in the slot.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot_ac4dc9c83036c49e225607baab445f613}\index{Feazeyu.RPGSystems.Inventory.StackableInventorySlot@{Feazeyu.RPGSystems.Inventory.StackableInventorySlot}!StackableInventorySlot@{StackableInventorySlot}}
+\index{StackableInventorySlot@{StackableInventorySlot}!Feazeyu.RPGSystems.Inventory.StackableInventorySlot@{Feazeyu.RPGSystems.Inventory.StackableInventorySlot}}
+\doxysubsubsection{\texorpdfstring{StackableInventorySlot()}{StackableInventorySlot()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot_ac4dc9c83036c49e225607baab445f613} 
+Feazeyu.\+RPGSystems.\+Inventory.\+Stackable\+Inventory\+Slot.\+Stackable\+Inventory\+Slot (\begin{DoxyParamCaption}\item[{int}]{id}{}\end{DoxyParamCaption})}
+
+
+
+Initializes a new instance of the Stackable\+Inventory\+Slot class with the specified item id. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The item id to place in the slot.\\
+\hline
+\end{DoxyParams}
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot_a42c9e4143ff72651d7e4712ee03b339d}\index{Feazeyu.RPGSystems.Inventory.StackableInventorySlot@{Feazeyu.RPGSystems.Inventory.StackableInventorySlot}!PutItem@{PutItem}}
+\index{PutItem@{PutItem}!Feazeyu.RPGSystems.Inventory.StackableInventorySlot@{Feazeyu.RPGSystems.Inventory.StackableInventorySlot}}
+\doxysubsubsection{\texorpdfstring{PutItem()}{PutItem()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot_a42c9e4143ff72651d7e4712ee03b339d} 
+override bool Feazeyu.\+RPGSystems.\+Inventory.\+Stackable\+Inventory\+Slot.\+Put\+Item (\begin{DoxyParamCaption}\item[{Game\+Object}]{item}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Attempts to add an item to the stack. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The item to add.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the item was added; otherwise, false.
+\end{DoxyReturn}
+
+
+Reimplemented from \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_a936fa5c327be1d33a775fd20a0b2d7dd}{Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Slot}}.
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot_afde40bdaf53246d41bfe09046889d43b}\index{Feazeyu.RPGSystems.Inventory.StackableInventorySlot@{Feazeyu.RPGSystems.Inventory.StackableInventorySlot}!RemoveItem@{RemoveItem}}
+\index{RemoveItem@{RemoveItem}!Feazeyu.RPGSystems.Inventory.StackableInventorySlot@{Feazeyu.RPGSystems.Inventory.StackableInventorySlot}}
+\doxysubsubsection{\texorpdfstring{RemoveItem()}{RemoveItem()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot_afde40bdaf53246d41bfe09046889d43b} 
+override int Feazeyu.\+RPGSystems.\+Inventory.\+Stackable\+Inventory\+Slot.\+Remove\+Item (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Removes an item from the stack. Infinite stacks never deplete. 
+
+\begin{DoxyReturn}{Returns}
+The id of the removed item, or -\/1 if none was removed.
+\end{DoxyReturn}
+
+
+Reimplemented from \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_aff419397fc2d1f5be77817d66ed439cc}{Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Slot}}.
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot_doc-variable-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot_a30032389c440efa3deece00211d85ab7}\index{Feazeyu.RPGSystems.Inventory.StackableInventorySlot@{Feazeyu.RPGSystems.Inventory.StackableInventorySlot}!infinite@{infinite}}
+\index{infinite@{infinite}!Feazeyu.RPGSystems.Inventory.StackableInventorySlot@{Feazeyu.RPGSystems.Inventory.StackableInventorySlot}}
+\doxysubsubsection{\texorpdfstring{infinite}{infinite}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot_a30032389c440efa3deece00211d85ab7} 
+bool Feazeyu.\+RPGSystems.\+Inventory.\+Stackable\+Inventory\+Slot.\+infinite}
+
+
+
+When true the stack never depletes and renders as "{}∞"{} (used for infinite shop stock). Buying does not decrement it and selling does not change its count. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot_af845cf064a82e0fe1036d5a717da462b}\index{Feazeyu.RPGSystems.Inventory.StackableInventorySlot@{Feazeyu.RPGSystems.Inventory.StackableInventorySlot}!itemCount@{itemCount}}
+\index{itemCount@{itemCount}!Feazeyu.RPGSystems.Inventory.StackableInventorySlot@{Feazeyu.RPGSystems.Inventory.StackableInventorySlot}}
+\doxysubsubsection{\texorpdfstring{itemCount}{itemCount}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot_af845cf064a82e0fe1036d5a717da462b} 
+int Feazeyu.\+RPGSystems.\+Inventory.\+Stackable\+Inventory\+Slot.\+item\+Count}
+
+
+
+The current number of items in the stack. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot_a6efe9ac29dda844a571e2c82e67f392c}\index{Feazeyu.RPGSystems.Inventory.StackableInventorySlot@{Feazeyu.RPGSystems.Inventory.StackableInventorySlot}!stackSize@{stackSize}}
+\index{stackSize@{stackSize}!Feazeyu.RPGSystems.Inventory.StackableInventorySlot@{Feazeyu.RPGSystems.Inventory.StackableInventorySlot}}
+\doxysubsubsection{\texorpdfstring{stackSize}{stackSize}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot_a6efe9ac29dda844a571e2c82e67f392c} 
+int Feazeyu.\+RPGSystems.\+Inventory.\+Stackable\+Inventory\+Slot.\+stack\+Size = -\/1}
+
+
+
+The maximum stack size for this slot. -\/1 means unlimited. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot_doc-property-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot_ac558d5051cd495245f608d9a309f5c2c}\index{Feazeyu.RPGSystems.Inventory.StackableInventorySlot@{Feazeyu.RPGSystems.Inventory.StackableInventorySlot}!BaseColor@{BaseColor}}
+\index{BaseColor@{BaseColor}!Feazeyu.RPGSystems.Inventory.StackableInventorySlot@{Feazeyu.RPGSystems.Inventory.StackableInventorySlot}}
+\doxysubsubsection{\texorpdfstring{BaseColor}{BaseColor}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot_ac558d5051cd495245f608d9a309f5c2c} 
+override \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot_ad739bf7fefdac7f7596367c61a6ae529}{Color}} Feazeyu.\+RPGSystems.\+Inventory.\+Stackable\+Inventory\+Slot.\+Base\+Color\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [protected]}}
+
+
+
+Gets the base color for stackable slots. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot_a92276d770372d7c5e175a72d85a08488}\index{Feazeyu.RPGSystems.Inventory.StackableInventorySlot@{Feazeyu.RPGSystems.Inventory.StackableInventorySlot}!HasRoom@{HasRoom}}
+\index{HasRoom@{HasRoom}!Feazeyu.RPGSystems.Inventory.StackableInventorySlot@{Feazeyu.RPGSystems.Inventory.StackableInventorySlot}}
+\doxysubsubsection{\texorpdfstring{HasRoom}{HasRoom}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot_a92276d770372d7c5e175a72d85a08488} 
+bool Feazeyu.\+RPGSystems.\+Inventory.\+Stackable\+Inventory\+Slot.\+Has\+Room\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+True if another item can be added to this stack (empty capacity remaining, or unlimited/\+infinite). 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot_af4e607c52921fd862657d44437d9df2d}\index{Feazeyu.RPGSystems.Inventory.StackableInventorySlot@{Feazeyu.RPGSystems.Inventory.StackableInventorySlot}!WouldRemainAfterRemove@{WouldRemainAfterRemove}}
+\index{WouldRemainAfterRemove@{WouldRemainAfterRemove}!Feazeyu.RPGSystems.Inventory.StackableInventorySlot@{Feazeyu.RPGSystems.Inventory.StackableInventorySlot}}
+\doxysubsubsection{\texorpdfstring{WouldRemainAfterRemove}{WouldRemainAfterRemove}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_stackable_inventory_slot_af4e607c52921fd862657d44437d9df2d} 
+bool Feazeyu.\+RPGSystems.\+Inventory.\+Stackable\+Inventory\+Slot.\+Would\+Remain\+After\+Remove\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+True if removing one item would leave the stack occupied (more than one item, or infinite). Used by the grid to decide between decrementing a stack and clearing the item\textquotesingle{}s footprint. 
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Inventory/\+\doxymbox{\hyperlink{_inventory_slot_8cs}{Inventory\+Slot.\+cs}}\end{DoxyCompactItemize}

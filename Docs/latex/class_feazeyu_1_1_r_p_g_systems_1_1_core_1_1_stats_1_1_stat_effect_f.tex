@@ -1,0 +1,166 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Core.\+Stats.\+Stat\+EffectF Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_f}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_f}\index{Feazeyu.RPGSystems.Core.Stats.StatEffectF@{Feazeyu.RPGSystems.Core.Stats.StatEffectF}}
+
+
+A floating-\/point Stat\+Effect contributing a flat addend and/\+or a multiplicative factor, optionally scaled.  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Core.\+Stats.\+Stat\+EffectF:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_f}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_f_a52ba6ca477b8c1a617b115ab5c8fa80b}{Stat\+EffectF}} (\doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_interfaces_1_1_i_named}{INamed}} source, \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a6b983b75d35bd1cd1ee36a55d6978184}{Stat}} stat, float flat=0f, float multiply=0f)
+\begin{DoxyCompactList}\small\item\em Creates a float effect with explicit flat and multiplicative parts. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_f_a52ba6ca477b8c1a617b115ab5c8fa80b}{Stat\+EffectF}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_f_ae6e302f0d1e5e27a05a0f64b23623de5}{Create\+Flat}} (float flat, \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_interfaces_1_1_i_named}{INamed}} source, \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a6b983b75d35bd1cd1ee36a55d6978184}{Stat}} stat)
+\begin{DoxyCompactList}\small\item\em Creates a purely additive (flat) effect. \end{DoxyCompactList}\item 
+static \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_f_a52ba6ca477b8c1a617b115ab5c8fa80b}{Stat\+EffectF}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_f_a65f0e9d62d5002fff05b84753c79fc70}{Create\+Percentage}} (float percentage, \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_interfaces_1_1_i_named}{INamed}} source, \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a6b983b75d35bd1cd1ee36a55d6978184}{Stat}} stat)
+\begin{DoxyCompactList}\small\item\em Creates a purely multiplicative (percentage) effect. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+float \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_f_a4aed507b4ec83d1ec974ee5cd43e574a}{Flat}}\hspace{0.3cm}{\ttfamily  \+[get, set]\+}
+\begin{DoxyCompactList}\small\item\em Flat amount added to the stat\textquotesingle{}s base before multiplication. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_f_a2a186eb790e94a60f02a4119e77413d0}{Multiply}}\hspace{0.3cm}{\ttfamily  \+[get, set]\+}
+\begin{DoxyCompactList}\small\item\em Multiplicative contribution (0 = no change, 0.\+2 = +20\%). \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a0d734b8e19888525676012a7a079152d}{Scaling}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_f_a4c6a7adc28b331db8c5753337fd10f7b}{Scaling}}\hspace{0.3cm}{\ttfamily  \+[get, set]\+}
+\begin{DoxyCompactList}\small\item\em Scaling curve applied to this effect. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_f_a9f8ef72b9ff1997f177c40fd29fd0357}{Flat\+Scale}}\hspace{0.3cm}{\ttfamily  \+[get, set]\+}
+\begin{DoxyCompactList}\small\item\em Scale factor applied to Flat. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_f_aec0e955faa0681f8c1b1899d14b83560}{Multiply\+Scale}}\hspace{0.3cm}{\ttfamily  \+[get, set]\+}
+\begin{DoxyCompactList}\small\item\em Scale factor applied to Multiply. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties inherited from \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect}{Feazeyu.\+RPGSystems.\+Core.\+Stats.\+Stat\+Effect}}}
+\begin{DoxyCompactItemize}
+\item 
+string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_a4307caab1bd11e185280a7e469c2d970}{Name}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Name of the effect, taken from its INamed source. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a6b983b75d35bd1cd1ee36a55d6978184}{Stat}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_af5045767c1b3f3d48f9548cced908ae7}{Stat}}\hspace{0.3cm}{\ttfamily  \+[get, set]\+}
+\begin{DoxyCompactList}\small\item\em The stat this effect modifies. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect}{Feazeyu.\+RPGSystems.\+Core.\+Stats.\+Stat\+Effect}}}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_ac89b691f55ee3b06264e0e2b744a2d6d}{Stat\+Effect}} (\doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_interfaces_1_1_i_named}{INamed}} source, \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a6b983b75d35bd1cd1ee36a55d6978184}{Stat}} stat)
+\begin{DoxyCompactList}\small\item\em Initializes the effect with its source and target stat. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect}{Feazeyu.\+RPGSystems.\+Core.\+Stats.\+Stat\+Effect}}}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_interfaces_1_1_i_named}{INamed}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_a4bb8dc0255c3e5e521d2b1fd9daee9d2}{\+\_\+source}}
+\begin{DoxyCompactList}\small\item\em Source. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a6b983b75d35bd1cd1ee36a55d6978184}{Stat}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_a8fcec3872f4c345deab5ffb762caf0ff}{\+\_\+stat}}
+\begin{DoxyCompactList}\small\item\em Stat. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A floating-\/point Stat\+Effect contributing a flat addend and/\+or a multiplicative factor, optionally scaled. 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_f_doc-constructors}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_f_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_f_a52ba6ca477b8c1a617b115ab5c8fa80b}\index{Feazeyu.RPGSystems.Core.Stats.StatEffectF@{Feazeyu.RPGSystems.Core.Stats.StatEffectF}!StatEffectF@{StatEffectF}}
+\index{StatEffectF@{StatEffectF}!Feazeyu.RPGSystems.Core.Stats.StatEffectF@{Feazeyu.RPGSystems.Core.Stats.StatEffectF}}
+\doxysubsubsection{\texorpdfstring{StatEffectF()}{StatEffectF()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_f_a52ba6ca477b8c1a617b115ab5c8fa80b} 
+Feazeyu.\+RPGSystems.\+Core.\+Stats.\+Stat\+Effect\+F.\+Stat\+EffectF (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_interfaces_1_1_i_named}{INamed}}}]{source}{, }\item[{\doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a6b983b75d35bd1cd1ee36a55d6978184}{Stat}}}]{stat}{, }\item[{float}]{flat}{ = {\ttfamily 0f}, }\item[{float}]{multiply}{ = {\ttfamily 0f}}\end{DoxyParamCaption})}
+
+
+
+Creates a float effect with explicit flat and multiplicative parts. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_f_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_f_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_f_ae6e302f0d1e5e27a05a0f64b23623de5}\index{Feazeyu.RPGSystems.Core.Stats.StatEffectF@{Feazeyu.RPGSystems.Core.Stats.StatEffectF}!CreateFlat@{CreateFlat}}
+\index{CreateFlat@{CreateFlat}!Feazeyu.RPGSystems.Core.Stats.StatEffectF@{Feazeyu.RPGSystems.Core.Stats.StatEffectF}}
+\doxysubsubsection{\texorpdfstring{CreateFlat()}{CreateFlat()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_f_ae6e302f0d1e5e27a05a0f64b23623de5} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_f_a52ba6ca477b8c1a617b115ab5c8fa80b}{Stat\+EffectF}} Feazeyu.\+RPGSystems.\+Core.\+Stats.\+Stat\+Effect\+F.\+Create\+Flat (\begin{DoxyParamCaption}\item[{float}]{flat}{, }\item[{\doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_interfaces_1_1_i_named}{INamed}}}]{source}{, }\item[{\doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a6b983b75d35bd1cd1ee36a55d6978184}{Stat}}}]{stat}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a purely additive (flat) effect. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_f_a65f0e9d62d5002fff05b84753c79fc70}\index{Feazeyu.RPGSystems.Core.Stats.StatEffectF@{Feazeyu.RPGSystems.Core.Stats.StatEffectF}!CreatePercentage@{CreatePercentage}}
+\index{CreatePercentage@{CreatePercentage}!Feazeyu.RPGSystems.Core.Stats.StatEffectF@{Feazeyu.RPGSystems.Core.Stats.StatEffectF}}
+\doxysubsubsection{\texorpdfstring{CreatePercentage()}{CreatePercentage()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_f_a65f0e9d62d5002fff05b84753c79fc70} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_f_a52ba6ca477b8c1a617b115ab5c8fa80b}{Stat\+EffectF}} Feazeyu.\+RPGSystems.\+Core.\+Stats.\+Stat\+Effect\+F.\+Create\+Percentage (\begin{DoxyParamCaption}\item[{float}]{percentage}{, }\item[{\doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_interfaces_1_1_i_named}{INamed}}}]{source}{, }\item[{\doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a6b983b75d35bd1cd1ee36a55d6978184}{Stat}}}]{stat}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a purely multiplicative (percentage) effect. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em percentage} & {\ttfamily 0f} = +0\%, {\ttfamily 0.\+2f} = +20\%, {\ttfamily -\/0.\+2f} = -\/20\%.\\
+\hline
+\end{DoxyParams}
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_f_doc-property-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_f_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_f_a4aed507b4ec83d1ec974ee5cd43e574a}\index{Feazeyu.RPGSystems.Core.Stats.StatEffectF@{Feazeyu.RPGSystems.Core.Stats.StatEffectF}!Flat@{Flat}}
+\index{Flat@{Flat}!Feazeyu.RPGSystems.Core.Stats.StatEffectF@{Feazeyu.RPGSystems.Core.Stats.StatEffectF}}
+\doxysubsubsection{\texorpdfstring{Flat}{Flat}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_f_a4aed507b4ec83d1ec974ee5cd43e574a} 
+float Feazeyu.\+RPGSystems.\+Core.\+Stats.\+Stat\+Effect\+F.\+Flat\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Flat amount added to the stat\textquotesingle{}s base before multiplication. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_f_a9f8ef72b9ff1997f177c40fd29fd0357}\index{Feazeyu.RPGSystems.Core.Stats.StatEffectF@{Feazeyu.RPGSystems.Core.Stats.StatEffectF}!FlatScale@{FlatScale}}
+\index{FlatScale@{FlatScale}!Feazeyu.RPGSystems.Core.Stats.StatEffectF@{Feazeyu.RPGSystems.Core.Stats.StatEffectF}}
+\doxysubsubsection{\texorpdfstring{FlatScale}{FlatScale}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_f_a9f8ef72b9ff1997f177c40fd29fd0357} 
+float Feazeyu.\+RPGSystems.\+Core.\+Stats.\+Stat\+Effect\+F.\+Flat\+Scale\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Scale factor applied to Flat. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_f_a2a186eb790e94a60f02a4119e77413d0}\index{Feazeyu.RPGSystems.Core.Stats.StatEffectF@{Feazeyu.RPGSystems.Core.Stats.StatEffectF}!Multiply@{Multiply}}
+\index{Multiply@{Multiply}!Feazeyu.RPGSystems.Core.Stats.StatEffectF@{Feazeyu.RPGSystems.Core.Stats.StatEffectF}}
+\doxysubsubsection{\texorpdfstring{Multiply}{Multiply}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_f_a2a186eb790e94a60f02a4119e77413d0} 
+float Feazeyu.\+RPGSystems.\+Core.\+Stats.\+Stat\+Effect\+F.\+Multiply\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Multiplicative contribution (0 = no change, 0.\+2 = +20\%). 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_f_aec0e955faa0681f8c1b1899d14b83560}\index{Feazeyu.RPGSystems.Core.Stats.StatEffectF@{Feazeyu.RPGSystems.Core.Stats.StatEffectF}!MultiplyScale@{MultiplyScale}}
+\index{MultiplyScale@{MultiplyScale}!Feazeyu.RPGSystems.Core.Stats.StatEffectF@{Feazeyu.RPGSystems.Core.Stats.StatEffectF}}
+\doxysubsubsection{\texorpdfstring{MultiplyScale}{MultiplyScale}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_f_aec0e955faa0681f8c1b1899d14b83560} 
+float Feazeyu.\+RPGSystems.\+Core.\+Stats.\+Stat\+Effect\+F.\+Multiply\+Scale\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Scale factor applied to Multiply. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_f_a4c6a7adc28b331db8c5753337fd10f7b}\index{Feazeyu.RPGSystems.Core.Stats.StatEffectF@{Feazeyu.RPGSystems.Core.Stats.StatEffectF}!Scaling@{Scaling}}
+\index{Scaling@{Scaling}!Feazeyu.RPGSystems.Core.Stats.StatEffectF@{Feazeyu.RPGSystems.Core.Stats.StatEffectF}}
+\doxysubsubsection{\texorpdfstring{Scaling}{Scaling}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_1_1_stat_effect_f_a4c6a7adc28b331db8c5753337fd10f7b} 
+\doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_stats_a0d734b8e19888525676012a7a079152d}{Scaling}} Feazeyu.\+RPGSystems.\+Core.\+Stats.\+Stat\+Effect\+F.\+Scaling\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Scaling curve applied to this effect. 
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Core/\+\+Stats/\+\doxymbox{\hyperlink{_stat_effect_8cs}{Stat\+Effect.\+cs}}\end{DoxyCompactItemize}

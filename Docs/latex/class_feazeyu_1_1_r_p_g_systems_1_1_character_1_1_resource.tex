@@ -1,0 +1,212 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Character.\+Resource Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource}\index{Feazeyu.RPGSystems.Character.Resource@{Feazeyu.RPGSystems.Character.Resource}}
+
+
+Abstract base class for character resources (e.\+g., health, mana, stamina). Handles resource value, events for changes, and percent calculation.  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Character.\+Resource:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.129277cm]{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+delegate void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_a4fb686b2c8ea92151f168db0417c68c6}{On\+Resource\+Reaches\+Zero}} ()
+\begin{DoxyCompactList}\small\item\em Delegate for when the resource reaches zero. \end{DoxyCompactList}\item 
+delegate void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_a249540d15059caa919c8d02703608dc5}{On\+Resource\+Lost}} (float lost\+Amount)
+\begin{DoxyCompactList}\small\item\em Delegate for when resource points are lost. \end{DoxyCompactList}\item 
+delegate void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_af4b22b169380a5b7d8e31695d33c6f16}{On\+Resource\+Gained}} (float gain\+Amount)
+\begin{DoxyCompactList}\small\item\em Delegate for when resource points are gained. \end{DoxyCompactList}\item 
+delegate void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_a4a46960273f75febd5c7faa6225430a6}{On\+Resource\+Changed}} (float change\+Amount)
+\begin{DoxyCompactList}\small\item\em Delegate for when resource points are changed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+readonly \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_character_a7f44022bf2d755a4cb26a73a870b3f42}{Resource\+Types}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_a47499cacc6f29d25fec49a9ef95be85f}{resource\+Type}} = \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_character_a7f44022bf2d755a4cb26a73a870b3f42a6adf97f83acf6453d4a6a4b1070f3754}{Resource\+Types.\+None}}
+\begin{DoxyCompactList}\small\item\em The type of resource represented by this instance. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_a593aab0f87762ab4b755cf99f7989fa8}{max\+Amount}}
+\begin{DoxyCompactList}\small\item\em The maximum amount of this resource. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+float \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_a18560f2534b2130816bbdcf6490e6cd2}{Points}}\hspace{0.3cm}{\ttfamily  \+[get, set]\+}
+\begin{DoxyCompactList}\small\item\em Gets or sets the current amount of resource points. Triggers events when the value changes, is gained, lost, or reaches zero. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_ae0101e166a060146135e6111b5e05cc7}{Percent}}\hspace{0.3cm}{\ttfamily  \+[get, set]\+}
+\begin{DoxyCompactList}\small\item\em Gets or sets the current resource as a percentage (0 to 1) of the maximum amount. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Events}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_a4fb686b2c8ea92151f168db0417c68c6}{On\+Resource\+Reaches\+Zero}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_a873773d661daea82e23895f3e6417f09}{on\+Resource\+Reaches\+Zero}}
+\begin{DoxyCompactList}\small\item\em Event triggered when the resource reaches zero. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_a249540d15059caa919c8d02703608dc5}{On\+Resource\+Lost}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_a2ea93d980e565fd605a7314ab6734efd}{on\+Resource\+Lost}}
+\begin{DoxyCompactList}\small\item\em Event triggered when resource points are lost. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_af4b22b169380a5b7d8e31695d33c6f16}{On\+Resource\+Gained}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_a80d34d29bcb55acd7c70e208ee617c65}{on\+Resource\+Gained}}
+\begin{DoxyCompactList}\small\item\em Event triggered when resource points are gained. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_a4a46960273f75febd5c7faa6225430a6}{On\+Resource\+Changed}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_ace4499faddd4c2c2ec5f19f3e7cdcb3b}{on\+Resource\+Changed}}
+\begin{DoxyCompactList}\small\item\em Event triggered when resource points are changed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Abstract base class for character resources (e.\+g., health, mana, stamina). Handles resource value, events for changes, and percent calculation. 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_a4a46960273f75febd5c7faa6225430a6}\index{Feazeyu.RPGSystems.Character.Resource@{Feazeyu.RPGSystems.Character.Resource}!OnResourceChanged@{OnResourceChanged}}
+\index{OnResourceChanged@{OnResourceChanged}!Feazeyu.RPGSystems.Character.Resource@{Feazeyu.RPGSystems.Character.Resource}}
+\doxysubsubsection{\texorpdfstring{OnResourceChanged()}{OnResourceChanged()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_a4a46960273f75febd5c7faa6225430a6} 
+delegate void Feazeyu.\+RPGSystems.\+Character.\+Resource.\+On\+Resource\+Changed (\begin{DoxyParamCaption}\item[{float}]{change\+Amount}{}\end{DoxyParamCaption})}
+
+
+
+Delegate for when resource points are changed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em change\+Amount} & The amount of resource changed (positive or negative).\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_af4b22b169380a5b7d8e31695d33c6f16}\index{Feazeyu.RPGSystems.Character.Resource@{Feazeyu.RPGSystems.Character.Resource}!OnResourceGained@{OnResourceGained}}
+\index{OnResourceGained@{OnResourceGained}!Feazeyu.RPGSystems.Character.Resource@{Feazeyu.RPGSystems.Character.Resource}}
+\doxysubsubsection{\texorpdfstring{OnResourceGained()}{OnResourceGained()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_af4b22b169380a5b7d8e31695d33c6f16} 
+delegate void Feazeyu.\+RPGSystems.\+Character.\+Resource.\+On\+Resource\+Gained (\begin{DoxyParamCaption}\item[{float}]{gain\+Amount}{}\end{DoxyParamCaption})}
+
+
+
+Delegate for when resource points are gained. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gain\+Amount} & The amount of resource gained.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_a249540d15059caa919c8d02703608dc5}\index{Feazeyu.RPGSystems.Character.Resource@{Feazeyu.RPGSystems.Character.Resource}!OnResourceLost@{OnResourceLost}}
+\index{OnResourceLost@{OnResourceLost}!Feazeyu.RPGSystems.Character.Resource@{Feazeyu.RPGSystems.Character.Resource}}
+\doxysubsubsection{\texorpdfstring{OnResourceLost()}{OnResourceLost()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_a249540d15059caa919c8d02703608dc5} 
+delegate void Feazeyu.\+RPGSystems.\+Character.\+Resource.\+On\+Resource\+Lost (\begin{DoxyParamCaption}\item[{float}]{lost\+Amount}{}\end{DoxyParamCaption})}
+
+
+
+Delegate for when resource points are lost. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em lost\+Amount} & The amount of resource lost.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_a4fb686b2c8ea92151f168db0417c68c6}\index{Feazeyu.RPGSystems.Character.Resource@{Feazeyu.RPGSystems.Character.Resource}!OnResourceReachesZero@{OnResourceReachesZero}}
+\index{OnResourceReachesZero@{OnResourceReachesZero}!Feazeyu.RPGSystems.Character.Resource@{Feazeyu.RPGSystems.Character.Resource}}
+\doxysubsubsection{\texorpdfstring{OnResourceReachesZero()}{OnResourceReachesZero()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_a4fb686b2c8ea92151f168db0417c68c6} 
+delegate void Feazeyu.\+RPGSystems.\+Character.\+Resource.\+On\+Resource\+Reaches\+Zero (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Delegate for when the resource reaches zero. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_doc-variable-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_a593aab0f87762ab4b755cf99f7989fa8}\index{Feazeyu.RPGSystems.Character.Resource@{Feazeyu.RPGSystems.Character.Resource}!maxAmount@{maxAmount}}
+\index{maxAmount@{maxAmount}!Feazeyu.RPGSystems.Character.Resource@{Feazeyu.RPGSystems.Character.Resource}}
+\doxysubsubsection{\texorpdfstring{maxAmount}{maxAmount}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_a593aab0f87762ab4b755cf99f7989fa8} 
+float Feazeyu.\+RPGSystems.\+Character.\+Resource.\+max\+Amount}
+
+
+
+The maximum amount of this resource. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_a47499cacc6f29d25fec49a9ef95be85f}\index{Feazeyu.RPGSystems.Character.Resource@{Feazeyu.RPGSystems.Character.Resource}!resourceType@{resourceType}}
+\index{resourceType@{resourceType}!Feazeyu.RPGSystems.Character.Resource@{Feazeyu.RPGSystems.Character.Resource}}
+\doxysubsubsection{\texorpdfstring{resourceType}{resourceType}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_a47499cacc6f29d25fec49a9ef95be85f} 
+readonly \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_character_a7f44022bf2d755a4cb26a73a870b3f42}{Resource\+Types}} Feazeyu.\+RPGSystems.\+Character.\+Resource.\+resource\+Type = \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_character_a7f44022bf2d755a4cb26a73a870b3f42a6adf97f83acf6453d4a6a4b1070f3754}{Resource\+Types.\+None}}}
+
+
+
+The type of resource represented by this instance. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_doc-property-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_ae0101e166a060146135e6111b5e05cc7}\index{Feazeyu.RPGSystems.Character.Resource@{Feazeyu.RPGSystems.Character.Resource}!Percent@{Percent}}
+\index{Percent@{Percent}!Feazeyu.RPGSystems.Character.Resource@{Feazeyu.RPGSystems.Character.Resource}}
+\doxysubsubsection{\texorpdfstring{Percent}{Percent}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_ae0101e166a060146135e6111b5e05cc7} 
+float Feazeyu.\+RPGSystems.\+Character.\+Resource.\+Percent\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the current resource as a percentage (0 to 1) of the maximum amount. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_a18560f2534b2130816bbdcf6490e6cd2}\index{Feazeyu.RPGSystems.Character.Resource@{Feazeyu.RPGSystems.Character.Resource}!Points@{Points}}
+\index{Points@{Points}!Feazeyu.RPGSystems.Character.Resource@{Feazeyu.RPGSystems.Character.Resource}}
+\doxysubsubsection{\texorpdfstring{Points}{Points}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_a18560f2534b2130816bbdcf6490e6cd2} 
+float Feazeyu.\+RPGSystems.\+Character.\+Resource.\+Points\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the current amount of resource points. Triggers events when the value changes, is gained, lost, or reaches zero. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_doc-event-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_doc-event-members}
+\doxysubsection{Event Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_ace4499faddd4c2c2ec5f19f3e7cdcb3b}\index{Feazeyu.RPGSystems.Character.Resource@{Feazeyu.RPGSystems.Character.Resource}!onResourceChanged@{onResourceChanged}}
+\index{onResourceChanged@{onResourceChanged}!Feazeyu.RPGSystems.Character.Resource@{Feazeyu.RPGSystems.Character.Resource}}
+\doxysubsubsection{\texorpdfstring{onResourceChanged}{onResourceChanged}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_ace4499faddd4c2c2ec5f19f3e7cdcb3b} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_a4a46960273f75febd5c7faa6225430a6}{On\+Resource\+Changed}} Feazeyu.\+RPGSystems.\+Character.\+Resource.\+on\+Resource\+Changed}
+
+
+
+Event triggered when resource points are changed. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_a80d34d29bcb55acd7c70e208ee617c65}\index{Feazeyu.RPGSystems.Character.Resource@{Feazeyu.RPGSystems.Character.Resource}!onResourceGained@{onResourceGained}}
+\index{onResourceGained@{onResourceGained}!Feazeyu.RPGSystems.Character.Resource@{Feazeyu.RPGSystems.Character.Resource}}
+\doxysubsubsection{\texorpdfstring{onResourceGained}{onResourceGained}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_a80d34d29bcb55acd7c70e208ee617c65} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_af4b22b169380a5b7d8e31695d33c6f16}{On\+Resource\+Gained}} Feazeyu.\+RPGSystems.\+Character.\+Resource.\+on\+Resource\+Gained}
+
+
+
+Event triggered when resource points are gained. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_a2ea93d980e565fd605a7314ab6734efd}\index{Feazeyu.RPGSystems.Character.Resource@{Feazeyu.RPGSystems.Character.Resource}!onResourceLost@{onResourceLost}}
+\index{onResourceLost@{onResourceLost}!Feazeyu.RPGSystems.Character.Resource@{Feazeyu.RPGSystems.Character.Resource}}
+\doxysubsubsection{\texorpdfstring{onResourceLost}{onResourceLost}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_a2ea93d980e565fd605a7314ab6734efd} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_a249540d15059caa919c8d02703608dc5}{On\+Resource\+Lost}} Feazeyu.\+RPGSystems.\+Character.\+Resource.\+on\+Resource\+Lost}
+
+
+
+Event triggered when resource points are lost. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_a873773d661daea82e23895f3e6417f09}\index{Feazeyu.RPGSystems.Character.Resource@{Feazeyu.RPGSystems.Character.Resource}!onResourceReachesZero@{onResourceReachesZero}}
+\index{onResourceReachesZero@{onResourceReachesZero}!Feazeyu.RPGSystems.Character.Resource@{Feazeyu.RPGSystems.Character.Resource}}
+\doxysubsubsection{\texorpdfstring{onResourceReachesZero}{onResourceReachesZero}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_a873773d661daea82e23895f3e6417f09} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_character_1_1_resource_a4fb686b2c8ea92151f168db0417c68c6}{On\+Resource\+Reaches\+Zero}} Feazeyu.\+RPGSystems.\+Character.\+Resource.\+on\+Resource\+Reaches\+Zero}
+
+
+
+Event triggered when the resource reaches zero. 
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Character/\+\+Resources/\+\doxymbox{\hyperlink{_resource_8cs}{Resource.\+cs}}\end{DoxyCompactItemize}

@@ -1,7 +1,7 @@
 using System;
 using Feazeyu.RPGSystems.Dialogue;
 
-namespace QuestGraph.Runtime
+namespace Feazeyu.RPGSystems.Quest
 {
     /// <summary>
     /// Blackboard variable holding a reference to a

@@ -1,0 +1,27 @@
+var class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary_2_g =
+[
+    [ "Add", "class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g.html#ab7720122fc49a76b9f8532f78694e9ac", null ],
+    [ "Add", "class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g.html#a303b4f517da9cb786517539a68fefa71", null ],
+    [ "Clear", "class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g.html#a81865c43ee9f5d9b395c0fb8eead1f3d", null ],
+    [ "Contains", "class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g.html#a1b0adb88ebebc672a4e20b4ada78f3fc", null ],
+    [ "ContainsKey", "class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g.html#a02ef00fcb4ef925e55f96296131b8c1c", null ],
+    [ "CopyTo", "class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g.html#a5752b1c13b12d99e3370c4257322bfd4", null ],
+    [ "Deconstruct", "class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g.html#a379cb2038d027eda83db742f9a216cf1", null ],
+    [ "GetEnumerator", "class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g.html#a092d4e4397500db8410cd89715ca7d2a", null ],
+    [ "OnAfterDeserialize", "class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g.html#af787dffac4f009dfb09730146360fa2b", null ],
+    [ "OnBeforeSerialize", "class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g.html#a63b38c60c09550e7311a8da0a4537ab4", null ],
+    [ "Pair", "class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g.html#ab6b686f343626d95f59e55990be1922b", null ],
+    [ "Remove", "class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g.html#a4b95c37b0e729a9dc3d767fb2d616f40", null ],
+    [ "Remove", "class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g.html#ac026270aa054f51f1d5d56563955cd11", null ],
+    [ "SerializableDictionary", "class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g.html#a508f2aa8a27f0a3b64dee4cf0db440fe", null ],
+    [ "SerializableDictionary", "class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g.html#a72779ebb85577f3d62c001b045b9bc7f", null ],
+    [ "ToDictionary", "class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g.html#ac1cbe18bacb74c1f3af029a13337e28a", null ],
+    [ "TryGetValue", "class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g.html#a61e11f0c89883e973c9f4ed0b8ce84fa", null ],
+    [ "Key", "class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g.html#a789e9ccaf88e17714c32361edd0a9dbc", null ],
+    [ "Value", "class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g.html#aa64e3ffa025dc0d1fc5a90ebf79a4a75", null ],
+    [ "Count", "class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g.html#ac67e1345b52f877731a01abb2af7edea", null ],
+    [ "IsReadOnly", "class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g.html#a26754cff0a382ec10f468cc7b9a5745c", null ],
+    [ "Keys", "class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g.html#ab0f69885a1116e91cc861a82d88b353d", null ],
+    [ "this[TKey key]", "class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g.html#a98a11b64ffd086315f3b596b02687c40", null ],
+    [ "Values", "class_feazeyu_1_1_r_p_g_systems_1_1_core_1_1_utilities_1_1_serializable_dictionary-2-g.html#a8af44031d9cf71d8698761fc8407074e", null ]
+];

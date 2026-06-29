@@ -1,0 +1,114 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Inspector\+Panel Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_inspector_panel}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_inspector_panel}\index{Feazeyu.RPGSystems.EditorTools.InspectorPanel@{Feazeyu.RPGSystems.EditorTools.InspectorPanel}}
+
+
+Graph editor panel showing details for the current selection (node or graph).  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Inspector\+Panel:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_inspector_panel}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_inspector_panel_a3c9e322a258cddc504e3dcc283b03def}{Inspector\+Panel}} ()
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the Inspector\+Panel class. \end{DoxyCompactList}\item 
+new void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_inspector_panel_a5b1b03179f8c1ab9d9395e39df87001c}{Clear}} ()
+\begin{DoxyCompactList}\small\item\em Clear. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_inspector_panel_a0e39c833abdfa70cdfff64d01d1e3113}{Inspect\+Asset}} (\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset}{Graph\+Asset}} asset)
+\begin{DoxyCompactList}\small\item\em Inspect asset. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_inspector_panel_a6364ba0434375906e20ca90bf345aec0}{Inspect\+Node}} (\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}} node, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset}{Graph\+Asset}} asset, Action$<$ string $>$ refresh\+Node\+View)
+\begin{DoxyCompactList}\small\item\em Inspect node. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_inspector_panel_a7483499332d1217b6bffa14d61f9a4ba}{Refresh\+Current}} ()
+\begin{DoxyCompactList}\small\item\em Re-\/render the currently-\/inspected node from its (possibly mutated) Node\+Data. No-\/op when the inspector isn\textquotesingle{}t showing a node. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_inspector_panel_ad5793fc07698a70fae68b26a1a73c989}{Current\+Node\+Guid}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Guid of the currently-\/inspected node, or empty if the inspector is showing the asset view /\+ empty state. Used by the window to decide whether a node-\/level change (e.\+g. blackboard variable deletion cascading into a field) affects what the inspector is showing. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Graph editor panel showing details for the current selection (node or graph). 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_inspector_panel_doc-constructors}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_inspector_panel_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_inspector_panel_a3c9e322a258cddc504e3dcc283b03def}\index{Feazeyu.RPGSystems.EditorTools.InspectorPanel@{Feazeyu.RPGSystems.EditorTools.InspectorPanel}!InspectorPanel@{InspectorPanel}}
+\index{InspectorPanel@{InspectorPanel}!Feazeyu.RPGSystems.EditorTools.InspectorPanel@{Feazeyu.RPGSystems.EditorTools.InspectorPanel}}
+\doxysubsubsection{\texorpdfstring{InspectorPanel()}{InspectorPanel()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_inspector_panel_a3c9e322a258cddc504e3dcc283b03def} 
+Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Inspector\+Panel.\+Inspector\+Panel (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Initializes a new instance of the Inspector\+Panel class. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_inspector_panel_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_inspector_panel_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_inspector_panel_a5b1b03179f8c1ab9d9395e39df87001c}\index{Feazeyu.RPGSystems.EditorTools.InspectorPanel@{Feazeyu.RPGSystems.EditorTools.InspectorPanel}!Clear@{Clear}}
+\index{Clear@{Clear}!Feazeyu.RPGSystems.EditorTools.InspectorPanel@{Feazeyu.RPGSystems.EditorTools.InspectorPanel}}
+\doxysubsubsection{\texorpdfstring{Clear()}{Clear()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_inspector_panel_a5b1b03179f8c1ab9d9395e39df87001c} 
+new void Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Inspector\+Panel.\+Clear (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Clear. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_inspector_panel_a0e39c833abdfa70cdfff64d01d1e3113}\index{Feazeyu.RPGSystems.EditorTools.InspectorPanel@{Feazeyu.RPGSystems.EditorTools.InspectorPanel}!InspectAsset@{InspectAsset}}
+\index{InspectAsset@{InspectAsset}!Feazeyu.RPGSystems.EditorTools.InspectorPanel@{Feazeyu.RPGSystems.EditorTools.InspectorPanel}}
+\doxysubsubsection{\texorpdfstring{InspectAsset()}{InspectAsset()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_inspector_panel_a0e39c833abdfa70cdfff64d01d1e3113} 
+void Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Inspector\+Panel.\+Inspect\+Asset (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset}{Graph\+Asset}}}]{asset}{}\end{DoxyParamCaption})}
+
+
+
+Inspect asset. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_inspector_panel_a6364ba0434375906e20ca90bf345aec0}\index{Feazeyu.RPGSystems.EditorTools.InspectorPanel@{Feazeyu.RPGSystems.EditorTools.InspectorPanel}!InspectNode@{InspectNode}}
+\index{InspectNode@{InspectNode}!Feazeyu.RPGSystems.EditorTools.InspectorPanel@{Feazeyu.RPGSystems.EditorTools.InspectorPanel}}
+\doxysubsubsection{\texorpdfstring{InspectNode()}{InspectNode()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_inspector_panel_a6364ba0434375906e20ca90bf345aec0} 
+void Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Inspector\+Panel.\+Inspect\+Node (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Node\+Data}}}]{node}{, }\item[{\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset}{Graph\+Asset}}}]{asset}{, }\item[{Action$<$ string $>$}]{refresh\+Node\+View}{}\end{DoxyParamCaption})}
+
+
+
+Inspect node. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_inspector_panel_a7483499332d1217b6bffa14d61f9a4ba}\index{Feazeyu.RPGSystems.EditorTools.InspectorPanel@{Feazeyu.RPGSystems.EditorTools.InspectorPanel}!RefreshCurrent@{RefreshCurrent}}
+\index{RefreshCurrent@{RefreshCurrent}!Feazeyu.RPGSystems.EditorTools.InspectorPanel@{Feazeyu.RPGSystems.EditorTools.InspectorPanel}}
+\doxysubsubsection{\texorpdfstring{RefreshCurrent()}{RefreshCurrent()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_inspector_panel_a7483499332d1217b6bffa14d61f9a4ba} 
+void Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Inspector\+Panel.\+Refresh\+Current (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Re-\/render the currently-\/inspected node from its (possibly mutated) Node\+Data. No-\/op when the inspector isn\textquotesingle{}t showing a node. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_inspector_panel_doc-property-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_inspector_panel_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_inspector_panel_ad5793fc07698a70fae68b26a1a73c989}\index{Feazeyu.RPGSystems.EditorTools.InspectorPanel@{Feazeyu.RPGSystems.EditorTools.InspectorPanel}!CurrentNodeGuid@{CurrentNodeGuid}}
+\index{CurrentNodeGuid@{CurrentNodeGuid}!Feazeyu.RPGSystems.EditorTools.InspectorPanel@{Feazeyu.RPGSystems.EditorTools.InspectorPanel}}
+\doxysubsubsection{\texorpdfstring{CurrentNodeGuid}{CurrentNodeGuid}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_inspector_panel_ad5793fc07698a70fae68b26a1a73c989} 
+string Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Inspector\+Panel.\+Current\+Node\+Guid\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Guid of the currently-\/inspected node, or empty if the inspector is showing the asset view /\+ empty state. Used by the window to decide whether a node-\/level change (e.\+g. blackboard variable deletion cascading into a field) affects what the inspector is showing. 
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Editor/\+\+Graph/\+\+Inspector/\+\doxymbox{\hyperlink{_inspector_panel_8cs}{Inspector\+Panel.\+cs}}\end{DoxyCompactItemize}

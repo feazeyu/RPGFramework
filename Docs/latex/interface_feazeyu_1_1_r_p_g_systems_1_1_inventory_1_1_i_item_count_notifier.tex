@@ -1,0 +1,53 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Inventory.\+IItem\+Count\+Notifier Interface Reference}
+\hypertarget{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_count_notifier}{}\label{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_count_notifier}\index{Feazeyu.RPGSystems.Inventory.IItemCountNotifier@{Feazeyu.RPGSystems.Inventory.IItemCountNotifier}}
+
+
+Optional capability for an IItem\+Container that announces content changes. Lets observers (e.\+g. an Accumulate Item quest objective) count items gained and lost exactly, instead of polling IItem\+Container.\+Count\+Item. Tracking both directions makes "{}net acquired"{} robust:\+ dropping then re-\/collecting nets to one count.  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Inventory.\+IItem\+Count\+Notifier:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.763158cm]{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_count_notifier}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Events}
+\begin{DoxyCompactItemize}
+\item 
+System.\+Action$<$ int, int $>$ \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_count_notifier_a257ef00ff6a1fe5621f721c8a7a4c82e}{On\+Item\+Added}}
+\begin{DoxyCompactList}\small\item\em Raised after item(s) are added to the container:\+ (item\+Id, count). \end{DoxyCompactList}\item 
+System.\+Action$<$ int, int $>$ \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_count_notifier_aebbf65643b0cc9ad6b62bdb9da562c9d}{On\+Item\+Removed}}
+\begin{DoxyCompactList}\small\item\em Raised after item(s) are removed from the container:\+ (item\+Id, count). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Optional capability for an IItem\+Container that announces content changes. Lets observers (e.\+g. an Accumulate Item quest objective) count items gained and lost exactly, instead of polling IItem\+Container.\+Count\+Item. Tracking both directions makes "{}net acquired"{} robust:\+ dropping then re-\/collecting nets to one count. 
+
+\label{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_count_notifier_doc-event-members}
+\Hypertarget{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_count_notifier_doc-event-members}
+\doxysubsection{Event Documentation}
+\Hypertarget{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_count_notifier_a257ef00ff6a1fe5621f721c8a7a4c82e}\index{Feazeyu.RPGSystems.Inventory.IItemCountNotifier@{Feazeyu.RPGSystems.Inventory.IItemCountNotifier}!OnItemAdded@{OnItemAdded}}
+\index{OnItemAdded@{OnItemAdded}!Feazeyu.RPGSystems.Inventory.IItemCountNotifier@{Feazeyu.RPGSystems.Inventory.IItemCountNotifier}}
+\doxysubsubsection{\texorpdfstring{OnItemAdded}{OnItemAdded}}
+{\footnotesize\ttfamily \label{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_count_notifier_a257ef00ff6a1fe5621f721c8a7a4c82e} 
+System.\+Action$<$int, int$>$ Feazeyu.\+RPGSystems.\+Inventory.\+IItem\+Count\+Notifier.\+On\+Item\+Added}
+
+
+
+Raised after item(s) are added to the container:\+ (item\+Id, count). 
+
+\Hypertarget{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_count_notifier_aebbf65643b0cc9ad6b62bdb9da562c9d}\index{Feazeyu.RPGSystems.Inventory.IItemCountNotifier@{Feazeyu.RPGSystems.Inventory.IItemCountNotifier}!OnItemRemoved@{OnItemRemoved}}
+\index{OnItemRemoved@{OnItemRemoved}!Feazeyu.RPGSystems.Inventory.IItemCountNotifier@{Feazeyu.RPGSystems.Inventory.IItemCountNotifier}}
+\doxysubsubsection{\texorpdfstring{OnItemRemoved}{OnItemRemoved}}
+{\footnotesize\ttfamily \label{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_count_notifier_aebbf65643b0cc9ad6b62bdb9da562c9d} 
+System.\+Action$<$int, int$>$ Feazeyu.\+RPGSystems.\+Inventory.\+IItem\+Count\+Notifier.\+On\+Item\+Removed}
+
+
+
+Raised after item(s) are removed from the container:\+ (item\+Id, count). 
+
+
+
+The documentation for this interface was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Inventory/\+\doxymbox{\hyperlink{_inventory_helper_8cs}{Inventory\+Helper.\+cs}}\end{DoxyCompactItemize}

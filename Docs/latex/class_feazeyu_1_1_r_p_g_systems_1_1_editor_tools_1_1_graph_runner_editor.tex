@@ -1,0 +1,45 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Runner\+Editor Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_runner_editor}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_runner_editor}\index{Feazeyu.RPGSystems.EditorTools.GraphRunnerEditor@{Feazeyu.RPGSystems.EditorTools.GraphRunnerEditor}}
+
+
+Inspector for Graph\+Runner and every subclass ({\ttfamily \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_runner}{Dialogue\+Runner}}, {\ttfamily Quest\+Runner}, …) via {\ttfamily editor\+For\+Child\+Classes:\+ true}.  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Runner\+Editor:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_runner_editor}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+override void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_runner_editor_a2cbd7a28c95a1b832090fd499bf18eb5}{On\+Inspector\+GUI}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Inspector for Graph\+Runner and every subclass ({\ttfamily \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_runner}{Dialogue\+Runner}}, {\ttfamily Quest\+Runner}, …) via {\ttfamily editor\+For\+Child\+Classes:\+ true}. 
+
+Draws the normal serialized fields (including each subclass\textquotesingle{}s own fields) through Editor.\+Draw\+Default\+Inspector, then adds an "{}\+Exposed Variables"{} section that lets you override the initial value of a graph\textquotesingle{}s Exposed (non-\/\+Shared) blackboard variables per scene instance — mirroring Unity Behavior\textquotesingle{}s "{}\+Expose → Behavior Agent inspector"{} flow.
+
+Overrides are stored on the runner ({\ttfamily m\+\_\+\+Overrides}) and applied onto the runtime blackboard when it is first built; the authored asset is never mutated. Shared variables are intentionally excluded because they resolve to one global instance. 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_runner_editor_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_runner_editor_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_runner_editor_a2cbd7a28c95a1b832090fd499bf18eb5}\index{Feazeyu.RPGSystems.EditorTools.GraphRunnerEditor@{Feazeyu.RPGSystems.EditorTools.GraphRunnerEditor}!OnInspectorGUI@{OnInspectorGUI}}
+\index{OnInspectorGUI@{OnInspectorGUI}!Feazeyu.RPGSystems.EditorTools.GraphRunnerEditor@{Feazeyu.RPGSystems.EditorTools.GraphRunnerEditor}}
+\doxysubsubsection{\texorpdfstring{OnInspectorGUI()}{OnInspectorGUI()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_editor_tools_1_1_graph_runner_editor_a2cbd7a28c95a1b832090fd499bf18eb5} 
+override void Feazeyu.\+RPGSystems.\+Editor\+Tools.\+Graph\+Runner\+Editor.\+On\+Inspector\+GUI (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Editor/\+\+Graph/\+\+Inspector/\+\doxymbox{\hyperlink{_graph_runner_editor_8cs}{Graph\+Runner\+Editor.\+cs}}\end{DoxyCompactItemize}

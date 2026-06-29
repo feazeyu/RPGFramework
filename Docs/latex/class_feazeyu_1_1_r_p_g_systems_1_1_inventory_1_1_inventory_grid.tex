@@ -1,0 +1,472 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Grid Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid}\index{Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}}
+
+
+Represents a grid-\/based inventory system that manages item placement, removal, and UI generation.  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Grid:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.666667cm]{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_ac9070296c450fbd801335ab1833bab55}{Resize\+If\+Necessary}} ()
+\begin{DoxyCompactList}\small\item\em Resizes the grid if the current dimensions do not match the specified rows and columns. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_a4db5416a176e25312bb9bbae9b3cfeb9}{Try\+Get\+Cell}} (int x, int y, \+[Not\+Null\+When(true)]\+ out \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot}{Inventory\+Slot}}? cell)
+\begin{DoxyCompactList}\small\item\em Attempts to get the cell at the specified coordinates. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_adca176fe497234898145d353c02783fc}{Disable\+All}} ()
+\begin{DoxyCompactList}\small\item\em Disables all slots in the inventory grid. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_afd36884030e8d80f888d072838b7d7bc}{Enable\+All}} ()
+\begin{DoxyCompactList}\small\item\em Enables all slots in the inventory grid. \end{DoxyCompactList}\item 
+virtual int \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_a508d4ad8cb4ba58ded8ef29980cd31c0}{Remove\+Item}} (Vector2\+Int position)
+\begin{DoxyCompactList}\small\item\em Removes the item at the specified position from the grid. \end{DoxyCompactList}\item 
+virtual bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_a981e5bbe83cd806c5a98b1456e2b9340}{Put\+Item}} (Vector2\+Int position, Game\+Object item)
+\begin{DoxyCompactList}\small\item\em Attempts to place an item at the specified position in the grid. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_a87b1db35648e59186ad8b83afebc98a2}{Try\+Add\+Item}} (int item\+Id, int count=1)
+\begin{DoxyCompactList}\small\item\em Try add item. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_aaaaba25798ed6689efd9cd05b9a54632}{Return\+Item}} (Vector2\+Int position, Game\+Object item)
+\begin{DoxyCompactList}\small\item\em Returns an item to the specified position in the grid. \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_a59255590eb91ba001a4af3a49b1d7d66}{Redraw\+Contents}} ()
+\begin{DoxyCompactList}\small\item\em Regenerates the inventory UI contents. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_aa8272d1ea8e655f0617000a8ab6d43fe}{Clear}} ()
+\begin{DoxyCompactList}\small\item\em Removes and destroys all items in the grid. \end{DoxyCompactList}\item 
+Game\+Object? \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_a1973fd6d72618602ea01ab0211a9bbc4}{Get\+Item}} (Vector2\+Int position)
+\begin{DoxyCompactList}\small\item\em Gets the item at the specified position in the grid. \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_a66cf0c0aa9c0fd21e90e5af3bfeb0917}{Toggle\+Inventory}} ()
+\begin{DoxyCompactList}\small\item\em Toggles the active state of the inventory UI. \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_abdd2bec04f137b05ced958441d16b7c7}{Open\+Inventory}} ()
+\begin{DoxyCompactList}\small\item\em Enables the inventory UI. \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_a93d3e5d656ab2fad5a3755373e640f08}{Close\+Inventory}} ()
+\begin{DoxyCompactList}\small\item\em Disables the inventory UI. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_positional_item_container}{Feazeyu.\+RPGSystems.\+Inventory.\+IPositional\+Item\+Container}}}
+\begin{DoxyCompactItemize}
+\item 
+void IItem\+Container. \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_positional_item_container_a2324d58156f0094210b016c2d49b6aba}{Return\+Item}} (Game\+Object item)
+\begin{DoxyCompactList}\small\item\em Returns an item to the container. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_a0436c277248a1e1eae4816ec502edefd}{suppress\+Auto\+Add\+UI}} = false
+\begin{DoxyCompactList}\small\item\em Suppress auto add ui. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_ade84e61f3b86df5f9a58e22714ca7978}{rows}} = 5
+\begin{DoxyCompactList}\small\item\em Number of rows in the inventory grid. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_a2a7aad59bf6bd267ddb76c8d3719abab}{columns}} = 5
+\begin{DoxyCompactList}\small\item\em Number of columns in the inventory grid. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_ac7a1808ec2949c99ef63deb4fe6823b9}{allow\+Stacking}} = false
+\begin{DoxyCompactList}\small\item\em When enabled, adding an item that matches an existing stack consolidates into that stack (incrementing its count) instead of occupying a new cell. Counts are rendered in the bottom-\/left of the stack\textquotesingle{}s bottom-\/left cell. Requires the involved cells to be Stackable\+Inventory\+Slot to hold a count — newly created cells become stackable automatically while this is on (see Create\+Empty\+Cell). \end{DoxyCompactList}\item 
+Array2D$<$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot}{Inventory\+Slot}} $>$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_a49dc88988e5cb80db01cf4625a455d16}{Cells}} = new(0, 0)
+\begin{DoxyCompactList}\small\item\em 2D array of inventory slots. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_aaa5d503302cf3e132c9f690c33a67245}{Awake}} ()
+\begin{DoxyCompactList}\small\item\em Called when the script instance is being loaded. Initializes the inventory UI contents. \end{DoxyCompactList}\item 
+virtual \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot}{Inventory\+Slot}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_a336bcda2bd34566eea508c51c5c74dfb}{Create\+Empty\+Cell}} (Vector2\+Int position)
+\begin{DoxyCompactList}\small\item\em Creates an empty cell for the given position. When allow\+Stacking is on, new cells are Stackable\+Inventory\+Slot so they can hold a stack count. \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_a98dc8096c739167972749334230aa786}{On\+Validate}} ()
+\begin{DoxyCompactList}\small\item\em Called when the script is loaded or a value changes in the Inspector (Editor only). Ensures the UI generator is added if needed. \end{DoxyCompactList}\item 
+virtual bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_ab3c8552069197402e75be20602513ab5}{Try\+Add\+Item}} (Game\+Object item)
+\begin{DoxyCompactList}\small\item\em Try add item. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Events}
+\begin{DoxyCompactItemize}
+\item 
+Action$<$ int, int $>$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_aca1d6cccd82a88e1b234a8631b59ca54}{On\+Item\+Added}}
+\begin{DoxyCompactList}\small\item\em Raised after an item is added to the grid:\+ (item\+Id, count). \end{DoxyCompactList}\item 
+Action$<$ int, int $>$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_ad93198bd60c5f8ddcc18cf65afc6508b}{On\+Item\+Removed}}
+\begin{DoxyCompactList}\small\item\em Raised after an item is removed from the grid:\+ (item\+Id, count). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Events inherited from \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_count_notifier}{Feazeyu.\+RPGSystems.\+Inventory.\+IItem\+Count\+Notifier}}}
+\begin{DoxyCompactItemize}
+\item 
+System.\+Action$<$ int, int $>$ \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_count_notifier_a257ef00ff6a1fe5621f721c8a7a4c82e}{On\+Item\+Added}}
+\begin{DoxyCompactList}\small\item\em Raised after item(s) are added to the container:\+ (item\+Id, count). \end{DoxyCompactList}\item 
+System.\+Action$<$ int, int $>$ \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_count_notifier_aebbf65643b0cc9ad6b62bdb9da562c9d}{On\+Item\+Removed}}
+\begin{DoxyCompactList}\small\item\em Raised after item(s) are removed from the container:\+ (item\+Id, count). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a grid-\/based inventory system that manages item placement, removal, and UI generation. 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_aaa5d503302cf3e132c9f690c33a67245}\index{Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}!Awake@{Awake}}
+\index{Awake@{Awake}!Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}}
+\doxysubsubsection{\texorpdfstring{Awake()}{Awake()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_aaa5d503302cf3e132c9f690c33a67245} 
+virtual void Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Grid.\+Awake (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Called when the script instance is being loaded. Initializes the inventory UI contents. 
+
+
+
+Reimplemented in \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_grid_u_i_a0a1c8273960e28eca79b3a025a2d97bc}{Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+Grid\+UI}}.
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_aa8272d1ea8e655f0617000a8ab6d43fe}\index{Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}!Clear@{Clear}}
+\index{Clear@{Clear}!Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}}
+\doxysubsubsection{\texorpdfstring{Clear()}{Clear()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_aa8272d1ea8e655f0617000a8ab6d43fe} 
+void Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Grid.\+Clear (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Removes and destroys all items in the grid. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_a93d3e5d656ab2fad5a3755373e640f08}\index{Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}!CloseInventory@{CloseInventory}}
+\index{CloseInventory@{CloseInventory}!Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}}
+\doxysubsubsection{\texorpdfstring{CloseInventory()}{CloseInventory()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_a93d3e5d656ab2fad5a3755373e640f08} 
+virtual void Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Grid.\+Close\+Inventory (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Disables the inventory UI. 
+
+
+
+Reimplemented in \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_grid_u_i_a501a800ce1e9f5f7fdd652b08952c75c}{Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+Grid\+UI}}.
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_a336bcda2bd34566eea508c51c5c74dfb}\index{Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}!CreateEmptyCell@{CreateEmptyCell}}
+\index{CreateEmptyCell@{CreateEmptyCell}!Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}}
+\doxysubsubsection{\texorpdfstring{CreateEmptyCell()}{CreateEmptyCell()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_a336bcda2bd34566eea508c51c5c74dfb} 
+virtual \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot}{Inventory\+Slot}} Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Grid.\+Create\+Empty\+Cell (\begin{DoxyParamCaption}\item[{Vector2\+Int}]{position}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Creates an empty cell for the given position. When allow\+Stacking is on, new cells are Stackable\+Inventory\+Slot so they can hold a stack count. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & The grid coordinate the cell occupies.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new empty Inventory\+Slot.
+\end{DoxyReturn}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_adca176fe497234898145d353c02783fc}\index{Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}!DisableAll@{DisableAll}}
+\index{DisableAll@{DisableAll}!Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}}
+\doxysubsubsection{\texorpdfstring{DisableAll()}{DisableAll()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_adca176fe497234898145d353c02783fc} 
+void Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Grid.\+Disable\+All (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Disables all slots in the inventory grid. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_afd36884030e8d80f888d072838b7d7bc}\index{Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}!EnableAll@{EnableAll}}
+\index{EnableAll@{EnableAll}!Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}}
+\doxysubsubsection{\texorpdfstring{EnableAll()}{EnableAll()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_afd36884030e8d80f888d072838b7d7bc} 
+void Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Grid.\+Enable\+All (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Enables all slots in the inventory grid. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_a1973fd6d72618602ea01ab0211a9bbc4}\index{Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}!GetItem@{GetItem}}
+\index{GetItem@{GetItem}!Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}}
+\doxysubsubsection{\texorpdfstring{GetItem()}{GetItem()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_a1973fd6d72618602ea01ab0211a9bbc4} 
+Game\+Object? Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Grid.\+Get\+Item (\begin{DoxyParamCaption}\item[{Vector2\+Int}]{position}{}\end{DoxyParamCaption})}
+
+
+
+Gets the item at the specified position in the grid. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & The grid position.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The item Game\+Object if present; otherwise, null.
+\end{DoxyReturn}
+
+
+Implements \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_positional_item_container_a3c042ddc1a805e9763a50a879ba7b328}{Feazeyu.\+RPGSystems.\+Inventory.\+IPositional\+Item\+Container}}.
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_a98dc8096c739167972749334230aa786}\index{Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}!OnValidate@{OnValidate}}
+\index{OnValidate@{OnValidate}!Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}}
+\doxysubsubsection{\texorpdfstring{OnValidate()}{OnValidate()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_a98dc8096c739167972749334230aa786} 
+virtual void Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Grid.\+On\+Validate (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Called when the script is loaded or a value changes in the Inspector (Editor only). Ensures the UI generator is added if needed. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_abdd2bec04f137b05ced958441d16b7c7}\index{Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}!OpenInventory@{OpenInventory}}
+\index{OpenInventory@{OpenInventory}!Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}}
+\doxysubsubsection{\texorpdfstring{OpenInventory()}{OpenInventory()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_abdd2bec04f137b05ced958441d16b7c7} 
+virtual void Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Grid.\+Open\+Inventory (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Enables the inventory UI. 
+
+
+
+Reimplemented in \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_grid_u_i_a79d2e00ebcbf9e7c9819a1a96ea11a9b}{Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+Grid\+UI}}.
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_a981e5bbe83cd806c5a98b1456e2b9340}\index{Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}!PutItem@{PutItem}}
+\index{PutItem@{PutItem}!Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}}
+\doxysubsubsection{\texorpdfstring{PutItem()}{PutItem()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_a981e5bbe83cd806c5a98b1456e2b9340} 
+virtual bool Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Grid.\+Put\+Item (\begin{DoxyParamCaption}\item[{Vector2\+Int}]{position}{, }\item[{Game\+Object}]{item}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Attempts to place an item at the specified position in the grid. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & The grid position.\\
+\hline
+{\em item} & The item Game\+Object.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the item was placed successfully; otherwise, false.
+\end{DoxyReturn}
+
+
+Implements \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_positional_item_container_a005a656ea5d96b5c478343dfaba45f23}{Feazeyu.\+RPGSystems.\+Inventory.\+IPositional\+Item\+Container}}.
+
+
+
+Reimplemented in \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_grid_u_i_a5c8a2103e38b3960c5a9e781e1451ad5}{Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+Grid\+UI}}.
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_a59255590eb91ba001a4af3a49b1d7d66}\index{Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}!RedrawContents@{RedrawContents}}
+\index{RedrawContents@{RedrawContents}!Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}}
+\doxysubsubsection{\texorpdfstring{RedrawContents()}{RedrawContents()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_a59255590eb91ba001a4af3a49b1d7d66} 
+virtual void Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Grid.\+Redraw\+Contents (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Regenerates the inventory UI contents. 
+
+
+
+Implements \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_u_i_positional_item_container_a3ed0914fc99a2e94c6f4437a255b76bf}{Feazeyu.\+RPGSystems.\+Inventory.\+IUIPositional\+Item\+Container}}.
+
+
+
+Reimplemented in \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_grid_u_i_a215f2feb8822b16485a87b05032c97d6}{Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+Grid\+UI}}.
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_a508d4ad8cb4ba58ded8ef29980cd31c0}\index{Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}!RemoveItem@{RemoveItem}}
+\index{RemoveItem@{RemoveItem}!Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}}
+\doxysubsubsection{\texorpdfstring{RemoveItem()}{RemoveItem()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_a508d4ad8cb4ba58ded8ef29980cd31c0} 
+virtual int Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Grid.\+Remove\+Item (\begin{DoxyParamCaption}\item[{Vector2\+Int}]{position}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Removes the item at the specified position from the grid. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & The grid position.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result of the removal operation, or -\/1 if no item was present.
+\end{DoxyReturn}
+
+
+Implements \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_positional_item_container_a4ffb0693354a85e9e1e2af1235dd5ef7}{Feazeyu.\+RPGSystems.\+Inventory.\+IPositional\+Item\+Container}}.
+
+
+
+Reimplemented in \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_grid_u_i_a06b691c3e3483b112ed4ddd53e8f3ac0}{Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+Grid\+UI}}.
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_ac9070296c450fbd801335ab1833bab55}\index{Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}!ResizeIfNecessary@{ResizeIfNecessary}}
+\index{ResizeIfNecessary@{ResizeIfNecessary}!Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}}
+\doxysubsubsection{\texorpdfstring{ResizeIfNecessary()}{ResizeIfNecessary()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_ac9070296c450fbd801335ab1833bab55} 
+void Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Grid.\+Resize\+If\+Necessary (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Resizes the grid if the current dimensions do not match the specified rows and columns. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_aaaaba25798ed6689efd9cd05b9a54632}\index{Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}!ReturnItem@{ReturnItem}}
+\index{ReturnItem@{ReturnItem}!Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}}
+\doxysubsubsection{\texorpdfstring{ReturnItem()}{ReturnItem()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_aaaaba25798ed6689efd9cd05b9a54632} 
+bool Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Grid.\+Return\+Item (\begin{DoxyParamCaption}\item[{Vector2\+Int}]{position}{, }\item[{Game\+Object}]{item}{}\end{DoxyParamCaption})}
+
+
+
+Returns an item to the specified position in the grid. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & The grid position.\\
+\hline
+{\em item} & The item Game\+Object.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the item was returned successfully; otherwise, false.
+\end{DoxyReturn}
+
+
+Implements \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_positional_item_container_a00b774b409c4cd2b178470bc1c17c31d}{Feazeyu.\+RPGSystems.\+Inventory.\+IPositional\+Item\+Container}}.
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_a66cf0c0aa9c0fd21e90e5af3bfeb0917}\index{Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}!ToggleInventory@{ToggleInventory}}
+\index{ToggleInventory@{ToggleInventory}!Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}}
+\doxysubsubsection{\texorpdfstring{ToggleInventory()}{ToggleInventory()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_a66cf0c0aa9c0fd21e90e5af3bfeb0917} 
+virtual void Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Grid.\+Toggle\+Inventory (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Toggles the active state of the inventory UI. 
+
+
+
+Reimplemented in \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_grid_u_i_a13f428ba0c4d1a9dddcb68df82a1b8a3}{Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+Grid\+UI}}.
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_ab3c8552069197402e75be20602513ab5}\index{Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}!TryAddItem@{TryAddItem}}
+\index{TryAddItem@{TryAddItem}!Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}}
+\doxysubsubsection{\texorpdfstring{TryAddItem()}{TryAddItem()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_ab3c8552069197402e75be20602513ab5} 
+virtual bool Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Grid.\+Try\+Add\+Item (\begin{DoxyParamCaption}\item[{Game\+Object}]{item}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Try add item. 
+
+
+
+Reimplemented in \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_grid_u_i_ad5ad66dee6843369579fb3300a0e6bb1}{Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+Grid\+UI}}.
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_a87b1db35648e59186ad8b83afebc98a2}\index{Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}!TryAddItem@{TryAddItem}}
+\index{TryAddItem@{TryAddItem}!Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}}
+\doxysubsubsection{\texorpdfstring{TryAddItem()}{TryAddItem()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_a87b1db35648e59186ad8b83afebc98a2} 
+bool Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Grid.\+Try\+Add\+Item (\begin{DoxyParamCaption}\item[{int}]{item\+Id}{, }\item[{int}]{count}{ = {\ttfamily 1}}\end{DoxyParamCaption})}
+
+
+
+Try add item. 
+
+
+
+Implements \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_container_a6c7b3fb8ed2cb756a5dbe37a95d8be77}{Feazeyu.\+RPGSystems.\+Inventory.\+IItem\+Container}}.
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_a4db5416a176e25312bb9bbae9b3cfeb9}\index{Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}!TryGetCell@{TryGetCell}}
+\index{TryGetCell@{TryGetCell}!Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}}
+\doxysubsubsection{\texorpdfstring{TryGetCell()}{TryGetCell()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_a4db5416a176e25312bb9bbae9b3cfeb9} 
+bool Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Grid.\+Try\+Get\+Cell (\begin{DoxyParamCaption}\item[{int}]{x}{, }\item[{int}]{y}{, }\item[{\+[\+Not\+Null\+When(true)]\+ out \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot}{Inventory\+Slot}}?}]{cell}{}\end{DoxyParamCaption})}
+
+
+
+Attempts to get the cell at the specified coordinates. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The column index.\\
+\hline
+{\em y} & The row index.\\
+\hline
+{\em cell} & The output cell if found.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the cell exists; otherwise, false.
+\end{DoxyReturn}
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_doc-variable-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_ac7a1808ec2949c99ef63deb4fe6823b9}\index{Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}!allowStacking@{allowStacking}}
+\index{allowStacking@{allowStacking}!Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}}
+\doxysubsubsection{\texorpdfstring{allowStacking}{allowStacking}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_ac7a1808ec2949c99ef63deb4fe6823b9} 
+bool Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Grid.\+allow\+Stacking = false}
+
+
+
+When enabled, adding an item that matches an existing stack consolidates into that stack (incrementing its count) instead of occupying a new cell. Counts are rendered in the bottom-\/left of the stack\textquotesingle{}s bottom-\/left cell. Requires the involved cells to be Stackable\+Inventory\+Slot to hold a count — newly created cells become stackable automatically while this is on (see Create\+Empty\+Cell). 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_a49dc88988e5cb80db01cf4625a455d16}\index{Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}!Cells@{Cells}}
+\index{Cells@{Cells}!Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}}
+\doxysubsubsection{\texorpdfstring{Cells}{Cells}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_a49dc88988e5cb80db01cf4625a455d16} 
+Array2D$<$\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_slot}{Inventory\+Slot}}$>$ Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Grid.\+Cells = new(0, 0)}
+
+
+
+2D array of inventory slots. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_a2a7aad59bf6bd267ddb76c8d3719abab}\index{Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}!columns@{columns}}
+\index{columns@{columns}!Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}}
+\doxysubsubsection{\texorpdfstring{columns}{columns}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_a2a7aad59bf6bd267ddb76c8d3719abab} 
+int Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Grid.\+columns = 5}
+
+
+
+Number of columns in the inventory grid. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_ade84e61f3b86df5f9a58e22714ca7978}\index{Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}!rows@{rows}}
+\index{rows@{rows}!Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}}
+\doxysubsubsection{\texorpdfstring{rows}{rows}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_ade84e61f3b86df5f9a58e22714ca7978} 
+int Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Grid.\+rows = 5}
+
+
+
+Number of rows in the inventory grid. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_a0436c277248a1e1eae4816ec502edefd}\index{Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}!suppressAutoAddUI@{suppressAutoAddUI}}
+\index{suppressAutoAddUI@{suppressAutoAddUI}!Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}}
+\doxysubsubsection{\texorpdfstring{suppressAutoAddUI}{suppressAutoAddUI}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_a0436c277248a1e1eae4816ec502edefd} 
+bool Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Grid.\+suppress\+Auto\+Add\+UI = false}
+
+
+
+Suppress auto add ui. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_doc-event-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_doc-event-members}
+\doxysubsection{Event Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_aca1d6cccd82a88e1b234a8631b59ca54}\index{Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}!OnItemAdded@{OnItemAdded}}
+\index{OnItemAdded@{OnItemAdded}!Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}}
+\doxysubsubsection{\texorpdfstring{OnItemAdded}{OnItemAdded}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_aca1d6cccd82a88e1b234a8631b59ca54} 
+Action$<$int, int$>$ Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Grid.\+On\+Item\+Added}
+
+
+
+Raised after an item is added to the grid:\+ (item\+Id, count). 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_ad93198bd60c5f8ddcc18cf65afc6508b}\index{Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}!OnItemRemoved@{OnItemRemoved}}
+\index{OnItemRemoved@{OnItemRemoved}!Feazeyu.RPGSystems.Inventory.InventoryGrid@{Feazeyu.RPGSystems.Inventory.InventoryGrid}}
+\doxysubsubsection{\texorpdfstring{OnItemRemoved}{OnItemRemoved}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_ad93198bd60c5f8ddcc18cf65afc6508b} 
+Action$<$int, int$>$ Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Grid.\+On\+Item\+Removed}
+
+
+
+Raised after an item is removed from the grid:\+ (item\+Id, count). 
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Inventory/\+\+Grid/\+\doxymbox{\hyperlink{_inventory_grid_8cs}{Inventory\+Grid.\+cs}}\end{DoxyCompactItemize}

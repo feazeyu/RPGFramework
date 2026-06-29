@@ -2,7 +2,7 @@
 using UnityEngine;
 using Feazeyu.RPGSystems.EditorTools;
 using Feazeyu.RPGSystems.Dialogue;
-using QuestGraph.Runtime;
+using Feazeyu.RPGSystems.Quest;
 
 namespace Feazeyu.RPGSystems.EditorTools
 {

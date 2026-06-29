@@ -1,0 +1,69 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Inventory.\+IUIPositional\+Item\+Container Interface Reference}
+\hypertarget{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_u_i_positional_item_container}{}\label{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_u_i_positional_item_container}\index{Feazeyu.RPGSystems.Inventory.IUIPositionalItemContainer@{Feazeyu.RPGSystems.Inventory.IUIPositionalItemContainer}}
+
+
+Represents a UI positional item container that can redraw its contents.  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Inventory.\+IUIPositional\+Item\+Container:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_u_i_positional_item_container}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_u_i_positional_item_container_a3ed0914fc99a2e94c6f4437a255b76bf}{Redraw\+Contents}} ()
+\begin{DoxyCompactList}\small\item\em Redraws the contents of the container. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_positional_item_container}{Feazeyu.\+RPGSystems.\+Inventory.\+IPositional\+Item\+Container}}}
+\begin{DoxyCompactItemize}
+\item 
+int \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_positional_item_container_a4ffb0693354a85e9e1e2af1235dd5ef7}{Remove\+Item}} (Vector2\+Int position)
+\begin{DoxyCompactList}\small\item\em Removes the item at the given position; returns its id or -\/1 if empty. \end{DoxyCompactList}\item 
+bool IItem\+Container. \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_positional_item_container_a601eb1775d9d4de9aa4e3206cce35f9d}{Put\+Item}} (Game\+Object item)
+\begin{DoxyCompactList}\small\item\em Puts an item into the container. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_positional_item_container_a005a656ea5d96b5c478343dfaba45f23}{Put\+Item}} (Vector2\+Int position, Game\+Object item)
+\item 
+void IItem\+Container. \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_positional_item_container_a2324d58156f0094210b016c2d49b6aba}{Return\+Item}} (Game\+Object item)
+\begin{DoxyCompactList}\small\item\em Returns an item to the container. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_positional_item_container_a00b774b409c4cd2b178470bc1c17c31d}{Return\+Item}} (Vector2\+Int position, Game\+Object item)
+\item 
+Game\+Object? \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_positional_item_container_a3c042ddc1a805e9763a50a879ba7b328}{Get\+Item}} (Vector2\+Int position)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_container}{Feazeyu.\+RPGSystems.\+Inventory.\+IItem\+Container}}}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_container_adc3bb2142789ac573bfce23b03556b6f}{Remove\+Item}} (int item\+Id, int count=1)
+\begin{DoxyCompactList}\small\item\em Removes {\itshape count}  items with {\itshape item\+Id}  from the container. Returns false if not enough items are present (no-\/op in that case). \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_container_a37f354146a3b8db38ff8f417a02b317a}{Count\+Item}} (int item\+Id)
+\begin{DoxyCompactList}\small\item\em Returns the total number of items with {\itshape item\+Id}  in the container. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_item_container_a6c7b3fb8ed2cb756a5dbe37a95d8be77}{Try\+Add\+Item}} (int item\+Id, int count=1)
+\begin{DoxyCompactList}\small\item\em Looks up the item prefab by ID and tries to add {\itshape count}  copies. Returns false if the item is not registered or there is no space. Implementors that support this should override the default. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a UI positional item container that can redraw its contents. 
+
+\label{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_u_i_positional_item_container_doc-func-members}
+\Hypertarget{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_u_i_positional_item_container_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_u_i_positional_item_container_a3ed0914fc99a2e94c6f4437a255b76bf}\index{Feazeyu.RPGSystems.Inventory.IUIPositionalItemContainer@{Feazeyu.RPGSystems.Inventory.IUIPositionalItemContainer}!RedrawContents@{RedrawContents}}
+\index{RedrawContents@{RedrawContents}!Feazeyu.RPGSystems.Inventory.IUIPositionalItemContainer@{Feazeyu.RPGSystems.Inventory.IUIPositionalItemContainer}}
+\doxysubsubsection{\texorpdfstring{RedrawContents()}{RedrawContents()}}
+{\footnotesize\ttfamily \label{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_u_i_positional_item_container_a3ed0914fc99a2e94c6f4437a255b76bf} 
+void Feazeyu.\+RPGSystems.\+Inventory.\+IUIPositional\+Item\+Container.\+Redraw\+Contents (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Redraws the contents of the container. 
+
+
+
+Implemented in \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_a59255590eb91ba001a4af3a49b1d7d66}{Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Grid}}, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_list_a94b2cede7a852d3783716095ee392895}{Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+List}}, and \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_shop_grid_u_i_a215f2feb8822b16485a87b05032c97d6}{Feazeyu.\+RPGSystems.\+Inventory.\+Shop\+Grid\+UI}}.
+
+
+
+The documentation for this interface was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Inventory/\+\doxymbox{\hyperlink{_inventory_helper_8cs}{Inventory\+Helper.\+cs}}\end{DoxyCompactItemize}

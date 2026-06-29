@@ -1,0 +1,117 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Inventory.\+Player\+Wallet Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_player_wallet}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_player_wallet}\index{Feazeyu.RPGSystems.Inventory.PlayerWallet@{Feazeyu.RPGSystems.Inventory.PlayerWallet}}
+
+
+Singleton IShop\+Currency holding the player\textquotesingle{}s currency balance.  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Inventory.\+Player\+Wallet:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.924399cm]{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_player_wallet}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_player_wallet_a60bc2f5a69ba43aaa5ec9cb151913705}{Try\+Spend}} (int amount)
+\begin{DoxyCompactList}\small\item\em Attempts to spend {\itshape amount} ; returns false if insufficient. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_player_wallet_a8fe07138d1d3236ac3b8bd466a586e3d}{Add}} (int amount)
+\begin{DoxyCompactList}\small\item\em Adds {\itshape amount}  to the balance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+static \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_player_wallet}{Player\+Wallet}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_player_wallet_a1969c16efe7d40db4e43856428cab7d4}{Instance}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Lazily-\/resolved singleton instance; auto-\/created if none exists. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_player_wallet_a6141b3f481862a073f1cdf6297f47bf8}{Balance}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Current balance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Events}
+\begin{DoxyCompactItemize}
+\item 
+Action$<$ int $>$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_player_wallet_a44936f55a894dbc0f758b103f227976b}{On\+Balance\+Changed}}
+\begin{DoxyCompactList}\small\item\em Raised with the new balance whenever it changes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Singleton IShop\+Currency holding the player\textquotesingle{}s currency balance. 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_player_wallet_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_player_wallet_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_player_wallet_a8fe07138d1d3236ac3b8bd466a586e3d}\index{Feazeyu.RPGSystems.Inventory.PlayerWallet@{Feazeyu.RPGSystems.Inventory.PlayerWallet}!Add@{Add}}
+\index{Add@{Add}!Feazeyu.RPGSystems.Inventory.PlayerWallet@{Feazeyu.RPGSystems.Inventory.PlayerWallet}}
+\doxysubsubsection{\texorpdfstring{Add()}{Add()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_player_wallet_a8fe07138d1d3236ac3b8bd466a586e3d} 
+void Feazeyu.\+RPGSystems.\+Inventory.\+Player\+Wallet.\+Add (\begin{DoxyParamCaption}\item[{int}]{amount}{}\end{DoxyParamCaption})}
+
+
+
+Adds {\itshape amount}  to the balance. 
+
+
+
+Implements \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_shop_currency_aae616c1efc5b9babdf2c03de155cdc89}{Feazeyu.\+RPGSystems.\+Inventory.\+IShop\+Currency}}.
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_player_wallet_a60bc2f5a69ba43aaa5ec9cb151913705}\index{Feazeyu.RPGSystems.Inventory.PlayerWallet@{Feazeyu.RPGSystems.Inventory.PlayerWallet}!TrySpend@{TrySpend}}
+\index{TrySpend@{TrySpend}!Feazeyu.RPGSystems.Inventory.PlayerWallet@{Feazeyu.RPGSystems.Inventory.PlayerWallet}}
+\doxysubsubsection{\texorpdfstring{TrySpend()}{TrySpend()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_player_wallet_a60bc2f5a69ba43aaa5ec9cb151913705} 
+bool Feazeyu.\+RPGSystems.\+Inventory.\+Player\+Wallet.\+Try\+Spend (\begin{DoxyParamCaption}\item[{int}]{amount}{}\end{DoxyParamCaption})}
+
+
+
+Attempts to spend {\itshape amount} ; returns false if insufficient. 
+
+
+
+Implements \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_shop_currency_ab742b605441cb0a8cff67b45e6223dd9}{Feazeyu.\+RPGSystems.\+Inventory.\+IShop\+Currency}}.
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_player_wallet_doc-property-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_player_wallet_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_player_wallet_a6141b3f481862a073f1cdf6297f47bf8}\index{Feazeyu.RPGSystems.Inventory.PlayerWallet@{Feazeyu.RPGSystems.Inventory.PlayerWallet}!Balance@{Balance}}
+\index{Balance@{Balance}!Feazeyu.RPGSystems.Inventory.PlayerWallet@{Feazeyu.RPGSystems.Inventory.PlayerWallet}}
+\doxysubsubsection{\texorpdfstring{Balance}{Balance}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_player_wallet_a6141b3f481862a073f1cdf6297f47bf8} 
+int Feazeyu.\+RPGSystems.\+Inventory.\+Player\+Wallet.\+Balance\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Current balance. 
+
+
+
+Implements \doxymbox{\hyperlink{interface_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_i_shop_currency_af7715074c9cad6f4da7264fe24e66333}{Feazeyu.\+RPGSystems.\+Inventory.\+IShop\+Currency}}.
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_player_wallet_a1969c16efe7d40db4e43856428cab7d4}\index{Feazeyu.RPGSystems.Inventory.PlayerWallet@{Feazeyu.RPGSystems.Inventory.PlayerWallet}!Instance@{Instance}}
+\index{Instance@{Instance}!Feazeyu.RPGSystems.Inventory.PlayerWallet@{Feazeyu.RPGSystems.Inventory.PlayerWallet}}
+\doxysubsubsection{\texorpdfstring{Instance}{Instance}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_player_wallet_a1969c16efe7d40db4e43856428cab7d4} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_player_wallet}{Player\+Wallet}} Feazeyu.\+RPGSystems.\+Inventory.\+Player\+Wallet.\+Instance\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [get]}}
+
+
+
+Lazily-\/resolved singleton instance; auto-\/created if none exists. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_player_wallet_doc-event-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_player_wallet_doc-event-members}
+\doxysubsection{Event Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_player_wallet_a44936f55a894dbc0f758b103f227976b}\index{Feazeyu.RPGSystems.Inventory.PlayerWallet@{Feazeyu.RPGSystems.Inventory.PlayerWallet}!OnBalanceChanged@{OnBalanceChanged}}
+\index{OnBalanceChanged@{OnBalanceChanged}!Feazeyu.RPGSystems.Inventory.PlayerWallet@{Feazeyu.RPGSystems.Inventory.PlayerWallet}}
+\doxysubsubsection{\texorpdfstring{OnBalanceChanged}{OnBalanceChanged}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_player_wallet_a44936f55a894dbc0f758b103f227976b} 
+Action$<$int$>$ Feazeyu.\+RPGSystems.\+Inventory.\+Player\+Wallet.\+On\+Balance\+Changed}
+
+
+
+Raised with the new balance whenever it changes. 
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Inventory/\+\+Shopping/\+\doxymbox{\hyperlink{_player_wallet_8cs}{Player\+Wallet.\+cs}}\end{DoxyCompactItemize}

@@ -1,0 +1,41 @@
+\doxysection{Packages/\+com.feazeyu.\+rpgsystems/\+\+Runtime/\+\+Quest/\+\+Runtime/\+\+Quest\+Chain\+Runner.cs File Reference}
+\hypertarget{_quest_chain_runner_8cs}{}\label{_quest_chain_runner_8cs}\index{Packages/com.feazeyu.rpgsystems/Runtime/Quest/Runtime/QuestChainRunner.cs@{Packages/com.feazeyu.rpgsystems/Runtime/Quest/Runtime/QuestChainRunner.cs}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_entry}{Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Entry}}
+\begin{DoxyCompactList}\small\item\em A single quest reference inside a chain. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_chain_runner}{Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Chain\+Runner}}
+\begin{DoxyCompactList}\small\item\em Runtime driver for a Quest\+Kind.\+Chain quest graph. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_chain_ready_event}{Feazeyu.\+RPGSystems.\+Quest.\+Chain\+Ready\+Event}}
+\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_chain_quest_event}{Feazeyu.\+RPGSystems.\+Quest.\+Chain\+Quest\+Event}}
+\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_chain_quest_failed_event}{Feazeyu.\+RPGSystems.\+Quest.\+Chain\+Quest\+Failed\+Event}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \doxymbox{\hyperlink{namespace_feazeyu}{Feazeyu}}
+\item 
+namespace \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems}{Feazeyu.\+RPGSystems}}
+\item 
+namespace \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest}{Feazeyu.\+RPGSystems.\+Quest}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest_a1fd380eabee832cf0c0514d02e9d993d}{Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Entry\+State}} \{ \newline
+\doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest_a1fd380eabee832cf0c0514d02e9d993dad0f2e5376298c880665077b565ffd7dd}{Feazeyu.\+RPGSystems.\+Quest.\+Locked}} = 0
+, \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest_a1fd380eabee832cf0c0514d02e9d993da78945de8de090e90045d299651a68a9b}{Feazeyu.\+RPGSystems.\+Quest.\+Available}} = 1
+, \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest_a1fd380eabee832cf0c0514d02e9d993da4d3d769b812b6faa6b76e1a8abaece2d}{Feazeyu.\+RPGSystems.\+Quest.\+Active}} = 2
+, \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest_a1fd380eabee832cf0c0514d02e9d993da07ca5050e697392c9ed47e6453f1453f}{Feazeyu.\+RPGSystems.\+Quest.\+Completed}} = 3
+, \newline
+\doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest_a1fd380eabee832cf0c0514d02e9d993dad7c8c85bf79bbe1b7188497c32c3b0ca}{Feazeyu.\+RPGSystems.\+Quest.\+Failed}} = 4
+ \}
+\begin{DoxyCompactList}\small\item\em Per-\/chain-\/node lifecycle state for Quest\+Chain\+Runner. Progression:\+ Locked → Available → Active → Completed/\+\+Failed. Available entries form the frontier the UI exposes to the player. \end{DoxyCompactList}\item 
+enum \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest_add252d5adcba7db84974e666d02cbab1}{Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Source}} \{ \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest_add252d5adcba7db84974e666d02cbab1a6adf97f83acf6453d4a6a4b1070f3754}{Feazeyu.\+RPGSystems.\+Quest.\+None}} = 0
+, \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest_add252d5adcba7db84974e666d02cbab1a4cdbd2bafa8193091ba09509cedf94fd}{Feazeyu.\+RPGSystems.\+Quest.\+Graph}} = 1
+, \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest_add252d5adcba7db84974e666d02cbab1a1fbb1e3943c2c6c560247ac8f9289780}{Feazeyu.\+RPGSystems.\+Quest.\+Simple}} = 2
+ \}
+\begin{DoxyCompactList}\small\item\em Which kind of quest asset a chain entry references. \end{DoxyCompactList}\end{DoxyCompactItemize}

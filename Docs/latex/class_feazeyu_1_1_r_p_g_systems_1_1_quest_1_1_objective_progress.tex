@@ -1,0 +1,145 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Quest.\+Objective\+Progress Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_progress}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_progress}\index{Feazeyu.RPGSystems.Quest.ObjectiveProgress@{Feazeyu.RPGSystems.Quest.ObjectiveProgress}}
+
+
+Resettable progress counter shared between an objective handler and any modifiers (gates, timers, reset nodes) attached to that objective node.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_progress_a597dbd9b1053ad4e309e0c692a6dec07}{Try\+Add}} (\doxymbox{\hyperlink{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_progress_event}{Progress\+Event}} e, int amount=1)
+\begin{DoxyCompactList}\small\item\em Offer one unit of progress. Returns true once Required is reached. Ignored (returns false) when a gate rejects the event. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_progress_a0de404e31dd5a1423320f919697a2728}{Subtract}} (int amount=1)
+\begin{DoxyCompactList}\small\item\em Remove progress (e.\+g. an accumulated item was dropped). Ungated and not clamped — Current may go negative — so a drop followed by re-\/acquiring the same item nets to a single count instead of double-\/counting. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_progress_ac37af8e24336140b0c0d495b094507d7}{Reset}} ()
+\begin{DoxyCompactList}\small\item\em Wipe accumulated progress back to zero. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_progress_ad57d28a695f87a51f77c0a7cd12cfa52}{Node\+Guid}}
+\begin{DoxyCompactList}\small\item\em Node guid. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_progress_af541006fefb71729a91bf53aedaee361}{Required}}
+\begin{DoxyCompactList}\small\item\em Required. \end{DoxyCompactList}\item 
+Func$<$ \doxymbox{\hyperlink{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_progress_event}{Progress\+Event}}, bool $>$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_progress_ab71826ab9c64736a6af3a763cf476a33}{Gate}}
+\begin{DoxyCompactList}\small\item\em Composed AND of all attached gate predicates; null = always open. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+int \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_progress_afad8b9ac329b3772b90fbaab922fe528}{Current}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em Current. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Events}
+\begin{DoxyCompactItemize}
+\item 
+Action \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_progress_aceee2a4fca0b12cd313f24150c106ca3}{On\+Changed}}
+\begin{DoxyCompactList}\small\item\em Fires whenever Current changes (HUD countdowns, timers subscribe). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Resettable progress counter shared between an objective handler and any modifiers (gates, timers, reset nodes) attached to that objective node. 
+
+The objective handler raises raw events via Try\+Add; the composed Gate predicate filters them, so an event only counts when every attached gate is satisfied. A Timer/\+\+Reset node can wipe accumulated progress at any time via Reset. 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_progress_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_progress_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_progress_ac37af8e24336140b0c0d495b094507d7}\index{Feazeyu.RPGSystems.Quest.ObjectiveProgress@{Feazeyu.RPGSystems.Quest.ObjectiveProgress}!Reset@{Reset}}
+\index{Reset@{Reset}!Feazeyu.RPGSystems.Quest.ObjectiveProgress@{Feazeyu.RPGSystems.Quest.ObjectiveProgress}}
+\doxysubsubsection{\texorpdfstring{Reset()}{Reset()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_progress_ac37af8e24336140b0c0d495b094507d7} 
+void Feazeyu.\+RPGSystems.\+Quest.\+Objective\+Progress.\+Reset (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Wipe accumulated progress back to zero. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_progress_a0de404e31dd5a1423320f919697a2728}\index{Feazeyu.RPGSystems.Quest.ObjectiveProgress@{Feazeyu.RPGSystems.Quest.ObjectiveProgress}!Subtract@{Subtract}}
+\index{Subtract@{Subtract}!Feazeyu.RPGSystems.Quest.ObjectiveProgress@{Feazeyu.RPGSystems.Quest.ObjectiveProgress}}
+\doxysubsubsection{\texorpdfstring{Subtract()}{Subtract()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_progress_a0de404e31dd5a1423320f919697a2728} 
+void Feazeyu.\+RPGSystems.\+Quest.\+Objective\+Progress.\+Subtract (\begin{DoxyParamCaption}\item[{int}]{amount}{ = {\ttfamily 1}}\end{DoxyParamCaption})}
+
+
+
+Remove progress (e.\+g. an accumulated item was dropped). Ungated and not clamped — Current may go negative — so a drop followed by re-\/acquiring the same item nets to a single count instead of double-\/counting. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_progress_a597dbd9b1053ad4e309e0c692a6dec07}\index{Feazeyu.RPGSystems.Quest.ObjectiveProgress@{Feazeyu.RPGSystems.Quest.ObjectiveProgress}!TryAdd@{TryAdd}}
+\index{TryAdd@{TryAdd}!Feazeyu.RPGSystems.Quest.ObjectiveProgress@{Feazeyu.RPGSystems.Quest.ObjectiveProgress}}
+\doxysubsubsection{\texorpdfstring{TryAdd()}{TryAdd()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_progress_a597dbd9b1053ad4e309e0c692a6dec07} 
+bool Feazeyu.\+RPGSystems.\+Quest.\+Objective\+Progress.\+Try\+Add (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_progress_event}{Progress\+Event}}}]{e}{, }\item[{int}]{amount}{ = {\ttfamily 1}}\end{DoxyParamCaption})}
+
+
+
+Offer one unit of progress. Returns true once Required is reached. Ignored (returns false) when a gate rejects the event. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_progress_doc-variable-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_progress_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_progress_ab71826ab9c64736a6af3a763cf476a33}\index{Feazeyu.RPGSystems.Quest.ObjectiveProgress@{Feazeyu.RPGSystems.Quest.ObjectiveProgress}!Gate@{Gate}}
+\index{Gate@{Gate}!Feazeyu.RPGSystems.Quest.ObjectiveProgress@{Feazeyu.RPGSystems.Quest.ObjectiveProgress}}
+\doxysubsubsection{\texorpdfstring{Gate}{Gate}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_progress_ab71826ab9c64736a6af3a763cf476a33} 
+Func$<$\doxymbox{\hyperlink{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_progress_event}{Progress\+Event}}, bool$>$ Feazeyu.\+RPGSystems.\+Quest.\+Objective\+Progress.\+Gate}
+
+
+
+Composed AND of all attached gate predicates; null = always open. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_progress_ad57d28a695f87a51f77c0a7cd12cfa52}\index{Feazeyu.RPGSystems.Quest.ObjectiveProgress@{Feazeyu.RPGSystems.Quest.ObjectiveProgress}!NodeGuid@{NodeGuid}}
+\index{NodeGuid@{NodeGuid}!Feazeyu.RPGSystems.Quest.ObjectiveProgress@{Feazeyu.RPGSystems.Quest.ObjectiveProgress}}
+\doxysubsubsection{\texorpdfstring{NodeGuid}{NodeGuid}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_progress_ad57d28a695f87a51f77c0a7cd12cfa52} 
+string Feazeyu.\+RPGSystems.\+Quest.\+Objective\+Progress.\+Node\+Guid}
+
+
+
+Node guid. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_progress_af541006fefb71729a91bf53aedaee361}\index{Feazeyu.RPGSystems.Quest.ObjectiveProgress@{Feazeyu.RPGSystems.Quest.ObjectiveProgress}!Required@{Required}}
+\index{Required@{Required}!Feazeyu.RPGSystems.Quest.ObjectiveProgress@{Feazeyu.RPGSystems.Quest.ObjectiveProgress}}
+\doxysubsubsection{\texorpdfstring{Required}{Required}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_progress_af541006fefb71729a91bf53aedaee361} 
+int Feazeyu.\+RPGSystems.\+Quest.\+Objective\+Progress.\+Required}
+
+
+
+Required. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_progress_doc-property-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_progress_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_progress_afad8b9ac329b3772b90fbaab922fe528}\index{Feazeyu.RPGSystems.Quest.ObjectiveProgress@{Feazeyu.RPGSystems.Quest.ObjectiveProgress}!Current@{Current}}
+\index{Current@{Current}!Feazeyu.RPGSystems.Quest.ObjectiveProgress@{Feazeyu.RPGSystems.Quest.ObjectiveProgress}}
+\doxysubsubsection{\texorpdfstring{Current}{Current}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_progress_afad8b9ac329b3772b90fbaab922fe528} 
+int Feazeyu.\+RPGSystems.\+Quest.\+Objective\+Progress.\+Current\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Current. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_progress_doc-event-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_progress_doc-event-members}
+\doxysubsection{Event Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_progress_aceee2a4fca0b12cd313f24150c106ca3}\index{Feazeyu.RPGSystems.Quest.ObjectiveProgress@{Feazeyu.RPGSystems.Quest.ObjectiveProgress}!OnChanged@{OnChanged}}
+\index{OnChanged@{OnChanged}!Feazeyu.RPGSystems.Quest.ObjectiveProgress@{Feazeyu.RPGSystems.Quest.ObjectiveProgress}}
+\doxysubsubsection{\texorpdfstring{OnChanged}{OnChanged}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_objective_progress_aceee2a4fca0b12cd313f24150c106ca3} 
+Action Feazeyu.\+RPGSystems.\+Quest.\+Objective\+Progress.\+On\+Changed}
+
+
+
+Fires whenever Current changes (HUD countdowns, timers subscribe). 
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Quest/\+\+Runtime/\+\doxymbox{\hyperlink{_objective_progress_8cs}{Objective\+Progress.\+cs}}\end{DoxyCompactItemize}

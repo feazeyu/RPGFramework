@@ -1,7 +1,7 @@
 using UnityEngine;
 using Feazeyu.RPGSystems.Dialogue;
 
-namespace QuestGraph.Runtime
+namespace Feazeyu.RPGSystems.Quest
 {
     /// <summary>
     /// Drives a boolean blackboard variable from a trigger collider: true while a

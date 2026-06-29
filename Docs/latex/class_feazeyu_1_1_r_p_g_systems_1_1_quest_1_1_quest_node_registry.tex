@@ -1,0 +1,415 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Node\+Registry Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry}\index{Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}}
+
+
+Node registry for the \doxylink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest}{Quest} graph system. Derives from Node\+Registry, so the shared flow/\+logic nodes come from Node\+Registry.\+Register\+Common\+Nodes; this class adds the quest-\/specific palette (Objective, Reward, terminals, objectives) and the quest flavour of Condition and \doxylink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest}{Quest} Reference (Run Subgraph). Contains every node type either flavour of quest graph can use; the window filters by Quest\+Graph\+Asset.\+Kind via For\+Kind.  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Node\+Registry:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static IRead\+Only\+Dictionary$<$ string, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_info}{Node\+Info}} $>$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a0c04ad26a0f9367a3db3f273cd8664f0}{For\+Kind}} (\doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest_ab9d77e7ffa2b40e8d97fa7ac495543f0}{Quest\+Kind}} kind)
+\begin{DoxyCompactList}\small\item\em Returns the subset of All appropriate for a graph of the given kind. The window\textquotesingle{}s "{}\+Add Node"{} context menu is populated from this. \end{DoxyCompactList}\item 
+static bool \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a2e1ad32aa8262d7d802740d1a8d5e23b}{Is\+Allowed\+In}} (string node\+Type\+Id, \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest_ab9d77e7ffa2b40e8d97fa7ac495543f0}{Quest\+Kind}} kind)
+\begin{DoxyCompactList}\small\item\em Whether a node type is allowed in the given graph kind. \end{DoxyCompactList}\item 
+static \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_info}{Node\+Info}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a27fb70a6a7a6e364859419750f925db6}{Get}} (string type\+Id)
+\begin{DoxyCompactList}\small\item\em Get. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a74d0d60be6b9d25fde99fc9680be8023}{Type\+Objective}} = "{}Objective"{}
+\begin{DoxyCompactList}\small\item\em Type objective. \end{DoxyCompactList}\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a44e68168561c776a10a6d2043c7c333e}{Type\+Reward}} = "{}Reward"{}
+\begin{DoxyCompactList}\small\item\em Type reward. \end{DoxyCompactList}\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a9dfde6f8f66d12f01d4a84127fd287f1}{Type\+Complete\+Quest}} = "{}Complete\+Quest"{}
+\begin{DoxyCompactList}\small\item\em Type complete quest. \end{DoxyCompactList}\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_aaf6b1d9006eb698674745dabf94f2490}{Type\+Fail\+Quest}} = "{}Fail\+Quest"{}
+\begin{DoxyCompactList}\small\item\em Type fail quest. \end{DoxyCompactList}\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a3b121c8df8b7904b908cc09f8c935bf4}{Type\+Spawn\+Item}} = "{}spawn\+\_\+item"{}
+\begin{DoxyCompactList}\small\item\em Type spawn item. \end{DoxyCompactList}\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a998be26ad77855e7cf1b18ba920f737f}{Type\+Run\+Dialogue}} = "{}run\+\_\+dialogue"{}
+\begin{DoxyCompactList}\small\item\em Type run dialogue. \end{DoxyCompactList}\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_ae94a76649f829c04be9e8571a101f13a}{Type\+Obj\+Kill}} = "{}obj\+\_\+kill"{}
+\begin{DoxyCompactList}\small\item\em Type obj kill. \end{DoxyCompactList}\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a2b447a815d5e73b4ea27f1fd85deb146}{Type\+Obj\+Location}} = "{}obj\+\_\+location"{}
+\begin{DoxyCompactList}\small\item\em Type obj location. \end{DoxyCompactList}\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_ab8094835e29527d2a55e71c88874e68a}{Type\+Obj\+Collect}} = "{}obj\+\_\+collect"{}
+\begin{DoxyCompactList}\small\item\em Type obj collect. \end{DoxyCompactList}\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_ad2d9fa87703a4fe9f6ac26a3059b44e4}{Type\+Obj\+Accumulate}} = "{}obj\+\_\+accumulate"{}
+\begin{DoxyCompactList}\small\item\em Type obj accumulate. \end{DoxyCompactList}\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_aca38833f4ba0509359c8140b29942892}{Type\+Obj\+Deliver}} = "{}obj\+\_\+deliver"{}
+\begin{DoxyCompactList}\small\item\em Type obj deliver. \end{DoxyCompactList}\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a71ec97bfe7daac3d7f7db877dab774ce}{Type\+Timer}} = "{}timer"{}
+\begin{DoxyCompactList}\small\item\em Type timer. \end{DoxyCompactList}\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a2e803b0d1907bcfd68107c062e29908c}{Type\+Reset\+Progress}} = "{}reset\+\_\+progress"{}
+\begin{DoxyCompactList}\small\item\em Type reset progress. \end{DoxyCompactList}\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a8ee3ff272e251eca1a32c06c43539a05}{Type\+Gate\+Flag}} = "{}gate\+\_\+flag"{}
+\begin{DoxyCompactList}\small\item\em Type gate flag. \end{DoxyCompactList}\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_aae8238f6eee7f6b863b1333ba5566d1c}{Type\+Gate\+Location}} = "{}gate\+\_\+location"{}
+\begin{DoxyCompactList}\small\item\em Type gate location. \end{DoxyCompactList}\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a680f67f6ff591549ab1ba7dd5fa41b7a}{Type\+Gate\+Item}} = "{}gate\+\_\+item"{}
+\begin{DoxyCompactList}\small\item\em Type gate item. \end{DoxyCompactList}\item 
+static readonly Color \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_aa34d446ee0c540021bff7c28bc096bc4}{Col\+Objective}} = new Color(0.\+95f, 0.\+72f, 0.\+24f)
+\begin{DoxyCompactList}\small\item\em Col objective. \end{DoxyCompactList}\item 
+static readonly Color \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_acf2f179bc1e0d9ca3ecf106d33d6ba48}{Col\+Reward}} = new Color(0.\+90f, 0.\+80f, 0.\+30f)
+\begin{DoxyCompactList}\small\item\em Col reward. \end{DoxyCompactList}\item 
+static readonly Color \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a0820dcaf44a790c1107bd3c31f4791f5}{Col\+Complete}} = new Color(0.\+34f, 0.\+78f, 0.\+34f)
+\begin{DoxyCompactList}\small\item\em Col complete. \end{DoxyCompactList}\item 
+static readonly Color \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_ab08ddd38496bd8ea87916558aa3c16cd}{Col\+Fail}} = new Color(0.\+85f, 0.\+28f, 0.\+28f)
+\begin{DoxyCompactList}\small\item\em Col fail. \end{DoxyCompactList}\item 
+static readonly Color \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_ac91e59fa372ff6d5ec4449ce5b5cac70}{Col\+Subgraph}} = new Color(0.\+62f, 0.\+55f, 0.\+88f)
+\begin{DoxyCompactList}\small\item\em Col subgraph. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes inherited from \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry}{Feazeyu.\+RPGSystems.\+Dialogue.\+Node\+Registry}}}
+\begin{DoxyCompactItemize}
+\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a1a0fb8131ae3f1aa0cb1aa14300dafc7}{Type\+Start}} = "{}Start"{}
+\begin{DoxyCompactList}\small\item\em Type start. \end{DoxyCompactList}\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a2b33aa179b325ea50f2d4a09580cdc1b}{Type\+End}} = "{}End"{}
+\begin{DoxyCompactList}\small\item\em Type end. \end{DoxyCompactList}\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_acfc97496840d197fcd5609ed579845b6}{Type\+Condition}} = "{}Condition"{}
+\begin{DoxyCompactList}\small\item\em Type condition. \end{DoxyCompactList}\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_ab9b51268cba2eccfb2e4b00076ef57ea}{Type\+Set\+Variable}} = "{}Set\+Variable"{}
+\begin{DoxyCompactList}\small\item\em Type set variable. \end{DoxyCompactList}\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a3563731102077a475427b2bc744b728b}{Type\+Trigger\+Event}} = "{}Trigger\+Event"{}
+\begin{DoxyCompactList}\small\item\em Type trigger event. \end{DoxyCompactList}\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_afe0a4d45ae7c1580b948a93406891922}{Type\+Wait\+For\+Event}} = "{}Wait\+For\+Event"{}
+\begin{DoxyCompactList}\small\item\em Type wait for event. \end{DoxyCompactList}\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a100ba62b8107b87622788da466596d2d}{Type\+Run\+Subgraph}} = "{}Run\+Subgraph"{}
+\begin{DoxyCompactList}\small\item\em Type run subgraph. \end{DoxyCompactList}\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a17b167f83914ac53654270027de20cab}{Type\+Find\+Object}} = "{}find\+\_\+object"{}
+\begin{DoxyCompactList}\small\item\em Type find object. \end{DoxyCompactList}\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a37a5ffcb42602000b5b1f8dc593c51d8}{Type\+Debug\+Log}} = "{}debug\+\_\+log"{}
+\begin{DoxyCompactList}\small\item\em Type debug log. \end{DoxyCompactList}\item 
+const string \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_ad42e9f242df47232e4ff76f030e6b9e7}{Type\+Spawn\+Prefab}} = "{}spawn\+\_\+prefab"{}
+\begin{DoxyCompactList}\small\item\em Type spawn prefab. \end{DoxyCompactList}\item 
+static readonly Color \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_af51a8fbcbf35166ee26f11deb229182f}{Col\+Flow}} = new Color(0.\+18f, 0.\+62f, 0.\+48f)
+\begin{DoxyCompactList}\small\item\em Col flow. \end{DoxyCompactList}\item 
+static readonly Color \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a9e8a393878b942f6bd59ea410342352a}{Col\+Logic}} = new Color(0.\+94f, 0.\+65f, 0.\+20f)
+\begin{DoxyCompactList}\small\item\em Col logic. \end{DoxyCompactList}\item 
+static readonly Color \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a2b38db1f26385c037ef2ddf07ba8ae05}{Col\+Event}} = new Color(0.\+88f, 0.\+31f, 0.\+44f)
+\begin{DoxyCompactList}\small\item\em Col event. \end{DoxyCompactList}\item 
+static readonly Color \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a9180943355045328250d91f2149600ba}{Col\+Variable}} = new Color(0.\+69f, 0.\+42f, 0.\+97f)
+\begin{DoxyCompactList}\small\item\em Col variable. \end{DoxyCompactList}\item 
+static readonly Color \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a2fac337408255d3293c96df869fbc6ac}{Col\+Start}} = new Color(0.\+34f, 0.\+78f, 0.\+34f)
+\begin{DoxyCompactList}\small\item\em Col start. \end{DoxyCompactList}\item 
+static readonly Color \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a8b19b6ac053dcbbf96bd4bbe124af3bb}{Col\+End}} = new Color(0.\+75f, 0.\+25f, 0.\+25f)
+\begin{DoxyCompactList}\small\item\em Col end. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+override void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a0fcb601fccf35e623424fba84e53efb0}{Build}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry}{Feazeyu.\+RPGSystems.\+Dialogue.\+Node\+Registry}}}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_info}{Node\+Info}} \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_af62674c336b937fbf2db2ae539c367d1}{Get\+Node}} (string type\+Id)
+\begin{DoxyCompactList}\small\item\em Look up a single node type, or {\ttfamily null} if not registered. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a339da60080c3e851b87411b3e36abc45}{Register}} (\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_info}{Node\+Info}} info)
+\begin{DoxyCompactList}\small\item\em Add (or overwrite) a node type in the table. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a299c6d8190241aa3d7dff01d2ddebdc5}{Build}} ()
+\begin{DoxyCompactList}\small\item\em Template method:\+ derived registries populate their node set here, typically by calling Register\+Common\+Nodes first, then registering their own built-\/ins and Register\+Attribute\+Nodes$<$\+TAttr$>$. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a51b95c795ba72735757e432f6d1143aa}{Register\+Common\+Nodes}} ()
+\begin{DoxyCompactList}\small\item\em Registers the flow/\+logic/\+scene/\+event nodes that every graph system shares. Nodes whose layout differs between systems — {\ttfamily Condition} and {\ttfamily Run\+Subgraph} — are intentionally left to each derived registry. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a0eaa37493339075554465e5b41432e5a}{Register\+Attribute\+Nodes$<$ TAttr $>$}} (Func$<$ TAttr, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_info}{Node\+Info}} $>$ factory)
+\begin{DoxyCompactList}\small\item\em Scans all loaded assemblies for classes tagged with {\itshape TAttr}  and registers the Node\+Info produced by {\itshape factory} . Types whose id is already registered (built-\/ins) are skipped, as are factories that return {\ttfamily null}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+static IRead\+Only\+Dictionary$<$ string, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_info}{Node\+Info}} $>$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a4e02ebe6688b5f969591238756874168}{All}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em All. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties inherited from \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry}{Feazeyu.\+RPGSystems.\+Dialogue.\+Node\+Registry}}}
+\begin{DoxyCompactItemize}
+\item 
+IRead\+Only\+Dictionary$<$ string, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_info}{Node\+Info}} $>$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry_a17c57068a32dc5122ae96c27355597b6}{All\+Nodes}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em All node types this registry exposes, built on first access. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Node registry for the \doxylink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest}{Quest} graph system. Derives from Node\+Registry, so the shared flow/\+logic nodes come from Node\+Registry.\+Register\+Common\+Nodes; this class adds the quest-\/specific palette (Objective, Reward, terminals, objectives) and the quest flavour of Condition and \doxylink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest}{Quest} Reference (Run Subgraph). Contains every node type either flavour of quest graph can use; the window filters by Quest\+Graph\+Asset.\+Kind via For\+Kind. 
+
+Type-\/id constants for shared flow/\+logic nodes mirror Node\+Registry so a node\textquotesingle{}s stored {\ttfamily Node\+Type} string is universal — a "{}\+Start"{} node means the same thing regardless of which graph system it lives in. 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a0fcb601fccf35e623424fba84e53efb0}\index{Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}!Build@{Build}}
+\index{Build@{Build}!Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}}
+\doxysubsubsection{\texorpdfstring{Build()}{Build()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a0fcb601fccf35e623424fba84e53efb0} 
+override void Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Node\+Registry.\+Build (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a0c04ad26a0f9367a3db3f273cd8664f0}\index{Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}!ForKind@{ForKind}}
+\index{ForKind@{ForKind}!Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}}
+\doxysubsubsection{\texorpdfstring{ForKind()}{ForKind()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a0c04ad26a0f9367a3db3f273cd8664f0} 
+IRead\+Only\+Dictionary$<$ string, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_info}{Node\+Info}} $>$ Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Node\+Registry.\+For\+Kind (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest_ab9d77e7ffa2b40e8d97fa7ac495543f0}{Quest\+Kind}}}]{kind}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Returns the subset of All appropriate for a graph of the given kind. The window\textquotesingle{}s "{}\+Add Node"{} context menu is populated from this. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a27fb70a6a7a6e364859419750f925db6}\index{Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}!Get@{Get}}
+\index{Get@{Get}!Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a27fb70a6a7a6e364859419750f925db6} 
+\doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_info}{Node\+Info}} Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Node\+Registry.\+Get (\begin{DoxyParamCaption}\item[{string}]{type\+Id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a2e1ad32aa8262d7d802740d1a8d5e23b}\index{Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}!IsAllowedIn@{IsAllowedIn}}
+\index{IsAllowedIn@{IsAllowedIn}!Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}}
+\doxysubsubsection{\texorpdfstring{IsAllowedIn()}{IsAllowedIn()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a2e1ad32aa8262d7d802740d1a8d5e23b} 
+bool Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Node\+Registry.\+Is\+Allowed\+In (\begin{DoxyParamCaption}\item[{string}]{node\+Type\+Id}{, }\item[{\doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest_ab9d77e7ffa2b40e8d97fa7ac495543f0}{Quest\+Kind}}}]{kind}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Whether a node type is allowed in the given graph kind. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_doc-variable-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a0820dcaf44a790c1107bd3c31f4791f5}\index{Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}!ColComplete@{ColComplete}}
+\index{ColComplete@{ColComplete}!Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}}
+\doxysubsubsection{\texorpdfstring{ColComplete}{ColComplete}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a0820dcaf44a790c1107bd3c31f4791f5} 
+readonly Color Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Node\+Registry.\+Col\+Complete = new Color(0.\+34f, 0.\+78f, 0.\+34f)\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Col complete. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_ab08ddd38496bd8ea87916558aa3c16cd}\index{Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}!ColFail@{ColFail}}
+\index{ColFail@{ColFail}!Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}}
+\doxysubsubsection{\texorpdfstring{ColFail}{ColFail}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_ab08ddd38496bd8ea87916558aa3c16cd} 
+readonly Color Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Node\+Registry.\+Col\+Fail = new Color(0.\+85f, 0.\+28f, 0.\+28f)\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Col fail. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_aa34d446ee0c540021bff7c28bc096bc4}\index{Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}!ColObjective@{ColObjective}}
+\index{ColObjective@{ColObjective}!Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}}
+\doxysubsubsection{\texorpdfstring{ColObjective}{ColObjective}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_aa34d446ee0c540021bff7c28bc096bc4} 
+readonly Color Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Node\+Registry.\+Col\+Objective = new Color(0.\+95f, 0.\+72f, 0.\+24f)\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Col objective. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_acf2f179bc1e0d9ca3ecf106d33d6ba48}\index{Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}!ColReward@{ColReward}}
+\index{ColReward@{ColReward}!Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}}
+\doxysubsubsection{\texorpdfstring{ColReward}{ColReward}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_acf2f179bc1e0d9ca3ecf106d33d6ba48} 
+readonly Color Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Node\+Registry.\+Col\+Reward = new Color(0.\+90f, 0.\+80f, 0.\+30f)\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Col reward. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_ac91e59fa372ff6d5ec4449ce5b5cac70}\index{Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}!ColSubgraph@{ColSubgraph}}
+\index{ColSubgraph@{ColSubgraph}!Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}}
+\doxysubsubsection{\texorpdfstring{ColSubgraph}{ColSubgraph}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_ac91e59fa372ff6d5ec4449ce5b5cac70} 
+readonly Color Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Node\+Registry.\+Col\+Subgraph = new Color(0.\+62f, 0.\+55f, 0.\+88f)\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Col subgraph. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a9dfde6f8f66d12f01d4a84127fd287f1}\index{Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}!TypeCompleteQuest@{TypeCompleteQuest}}
+\index{TypeCompleteQuest@{TypeCompleteQuest}!Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}}
+\doxysubsubsection{\texorpdfstring{TypeCompleteQuest}{TypeCompleteQuest}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a9dfde6f8f66d12f01d4a84127fd287f1} 
+const string Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Node\+Registry.\+Type\+Complete\+Quest = "{}Complete\+Quest"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Type complete quest. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_aaf6b1d9006eb698674745dabf94f2490}\index{Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}!TypeFailQuest@{TypeFailQuest}}
+\index{TypeFailQuest@{TypeFailQuest}!Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}}
+\doxysubsubsection{\texorpdfstring{TypeFailQuest}{TypeFailQuest}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_aaf6b1d9006eb698674745dabf94f2490} 
+const string Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Node\+Registry.\+Type\+Fail\+Quest = "{}Fail\+Quest"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Type fail quest. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a8ee3ff272e251eca1a32c06c43539a05}\index{Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}!TypeGateFlag@{TypeGateFlag}}
+\index{TypeGateFlag@{TypeGateFlag}!Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}}
+\doxysubsubsection{\texorpdfstring{TypeGateFlag}{TypeGateFlag}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a8ee3ff272e251eca1a32c06c43539a05} 
+const string Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Node\+Registry.\+Type\+Gate\+Flag = "{}gate\+\_\+flag"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Type gate flag. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a680f67f6ff591549ab1ba7dd5fa41b7a}\index{Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}!TypeGateItem@{TypeGateItem}}
+\index{TypeGateItem@{TypeGateItem}!Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}}
+\doxysubsubsection{\texorpdfstring{TypeGateItem}{TypeGateItem}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a680f67f6ff591549ab1ba7dd5fa41b7a} 
+const string Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Node\+Registry.\+Type\+Gate\+Item = "{}gate\+\_\+item"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Type gate item. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_aae8238f6eee7f6b863b1333ba5566d1c}\index{Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}!TypeGateLocation@{TypeGateLocation}}
+\index{TypeGateLocation@{TypeGateLocation}!Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}}
+\doxysubsubsection{\texorpdfstring{TypeGateLocation}{TypeGateLocation}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_aae8238f6eee7f6b863b1333ba5566d1c} 
+const string Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Node\+Registry.\+Type\+Gate\+Location = "{}gate\+\_\+location"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Type gate location. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_ad2d9fa87703a4fe9f6ac26a3059b44e4}\index{Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}!TypeObjAccumulate@{TypeObjAccumulate}}
+\index{TypeObjAccumulate@{TypeObjAccumulate}!Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}}
+\doxysubsubsection{\texorpdfstring{TypeObjAccumulate}{TypeObjAccumulate}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_ad2d9fa87703a4fe9f6ac26a3059b44e4} 
+const string Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Node\+Registry.\+Type\+Obj\+Accumulate = "{}obj\+\_\+accumulate"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Type obj accumulate. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_ab8094835e29527d2a55e71c88874e68a}\index{Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}!TypeObjCollect@{TypeObjCollect}}
+\index{TypeObjCollect@{TypeObjCollect}!Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}}
+\doxysubsubsection{\texorpdfstring{TypeObjCollect}{TypeObjCollect}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_ab8094835e29527d2a55e71c88874e68a} 
+const string Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Node\+Registry.\+Type\+Obj\+Collect = "{}obj\+\_\+collect"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Type obj collect. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_aca38833f4ba0509359c8140b29942892}\index{Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}!TypeObjDeliver@{TypeObjDeliver}}
+\index{TypeObjDeliver@{TypeObjDeliver}!Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}}
+\doxysubsubsection{\texorpdfstring{TypeObjDeliver}{TypeObjDeliver}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_aca38833f4ba0509359c8140b29942892} 
+const string Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Node\+Registry.\+Type\+Obj\+Deliver = "{}obj\+\_\+deliver"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Type obj deliver. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a74d0d60be6b9d25fde99fc9680be8023}\index{Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}!TypeObjective@{TypeObjective}}
+\index{TypeObjective@{TypeObjective}!Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}}
+\doxysubsubsection{\texorpdfstring{TypeObjective}{TypeObjective}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a74d0d60be6b9d25fde99fc9680be8023} 
+const string Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Node\+Registry.\+Type\+Objective = "{}Objective"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Type objective. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_ae94a76649f829c04be9e8571a101f13a}\index{Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}!TypeObjKill@{TypeObjKill}}
+\index{TypeObjKill@{TypeObjKill}!Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}}
+\doxysubsubsection{\texorpdfstring{TypeObjKill}{TypeObjKill}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_ae94a76649f829c04be9e8571a101f13a} 
+const string Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Node\+Registry.\+Type\+Obj\+Kill = "{}obj\+\_\+kill"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Type obj kill. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a2b447a815d5e73b4ea27f1fd85deb146}\index{Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}!TypeObjLocation@{TypeObjLocation}}
+\index{TypeObjLocation@{TypeObjLocation}!Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}}
+\doxysubsubsection{\texorpdfstring{TypeObjLocation}{TypeObjLocation}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a2b447a815d5e73b4ea27f1fd85deb146} 
+const string Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Node\+Registry.\+Type\+Obj\+Location = "{}obj\+\_\+location"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Type obj location. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a2e803b0d1907bcfd68107c062e29908c}\index{Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}!TypeResetProgress@{TypeResetProgress}}
+\index{TypeResetProgress@{TypeResetProgress}!Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}}
+\doxysubsubsection{\texorpdfstring{TypeResetProgress}{TypeResetProgress}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a2e803b0d1907bcfd68107c062e29908c} 
+const string Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Node\+Registry.\+Type\+Reset\+Progress = "{}reset\+\_\+progress"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Type reset progress. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a44e68168561c776a10a6d2043c7c333e}\index{Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}!TypeReward@{TypeReward}}
+\index{TypeReward@{TypeReward}!Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}}
+\doxysubsubsection{\texorpdfstring{TypeReward}{TypeReward}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a44e68168561c776a10a6d2043c7c333e} 
+const string Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Node\+Registry.\+Type\+Reward = "{}Reward"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Type reward. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a998be26ad77855e7cf1b18ba920f737f}\index{Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}!TypeRunDialogue@{TypeRunDialogue}}
+\index{TypeRunDialogue@{TypeRunDialogue}!Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}}
+\doxysubsubsection{\texorpdfstring{TypeRunDialogue}{TypeRunDialogue}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a998be26ad77855e7cf1b18ba920f737f} 
+const string Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Node\+Registry.\+Type\+Run\+Dialogue = "{}run\+\_\+dialogue"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Type run dialogue. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a3b121c8df8b7904b908cc09f8c935bf4}\index{Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}!TypeSpawnItem@{TypeSpawnItem}}
+\index{TypeSpawnItem@{TypeSpawnItem}!Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}}
+\doxysubsubsection{\texorpdfstring{TypeSpawnItem}{TypeSpawnItem}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a3b121c8df8b7904b908cc09f8c935bf4} 
+const string Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Node\+Registry.\+Type\+Spawn\+Item = "{}spawn\+\_\+item"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Type spawn item. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a71ec97bfe7daac3d7f7db877dab774ce}\index{Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}!TypeTimer@{TypeTimer}}
+\index{TypeTimer@{TypeTimer}!Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}}
+\doxysubsubsection{\texorpdfstring{TypeTimer}{TypeTimer}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a71ec97bfe7daac3d7f7db877dab774ce} 
+const string Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Node\+Registry.\+Type\+Timer = "{}timer"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Type timer. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_doc-property-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a4e02ebe6688b5f969591238756874168}\index{Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}!All@{All}}
+\index{All@{All}!Feazeyu.RPGSystems.Quest.QuestNodeRegistry@{Feazeyu.RPGSystems.Quest.QuestNodeRegistry}}
+\doxysubsubsection{\texorpdfstring{All}{All}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_quest_node_registry_a4e02ebe6688b5f969591238756874168} 
+IRead\+Only\+Dictionary$<$string, \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_info}{Node\+Info}}$>$ Feazeyu.\+RPGSystems.\+Quest.\+Quest\+Node\+Registry.\+All\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [get]}}
+
+
+
+All. 
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Quest/\+\+Nodes/\+\doxymbox{\hyperlink{_quest_node_registry_8cs}{Quest\+Node\+Registry.\+cs}}\end{DoxyCompactItemize}

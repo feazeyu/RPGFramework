@@ -1,0 +1,174 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Grid\+Generator Class Reference}
+\hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_generator}{}\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_generator}\index{Feazeyu.RPGSystems.Inventory.InventoryGridGenerator@{Feazeyu.RPGSystems.Inventory.InventoryGridGenerator}}
+
+
+Builds the runtime UI for an Inventory\+Grid:\+ instantiates a cell prefab per slot (by slot type), wires drag handlers, and renders stack counts.  
+
+
+Inheritance diagram for Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Grid\+Generator:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.651917cm]{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_generator}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_generator_ac0528afa41207c89dcee228decb06607}{On\+Enable}} ()
+\begin{DoxyCompactList}\small\item\em On enable. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_generator_a5b5b17a5d722ec8e2eaa7bed549bc043}{Generate\+UI}} ()
+\begin{DoxyCompactList}\small\item\em Generates the inventory UI grid based on the current \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid}{Inventory\+Grid} configuration. This method creates and arranges UI slot elements as children of the specified target Canvas, using the defined slot UI prefabs and layout settings. It cleans up any previously generated UI, instantiates new slot UI elements for each cell in the grid, and sets up drag layers for item interaction. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_generator_a34fdea2ad1616031393a9414121d306d}{On\+Before\+Serialize}} ()
+\begin{DoxyCompactList}\small\item\em Called before Unity serializes this object. Serializes the slot\+Definitions dictionary. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_generator_a6a756f9fb4e0e942a307ad1ca49f3026}{On\+After\+Deserialize}} ()
+\begin{DoxyCompactList}\small\item\em Called after Unity deserializes this object. Restores the slot\+Definitions dictionary. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_generator_a9783b2d8fe38f6c96992729308e44078}{Set\+Inventory\+Active\+State}} (bool active)
+\begin{DoxyCompactList}\small\item\em Sets the active state of the generated inventory UI. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_generator_ad1667857792366b40c41e8ce9c6d9645}{Toggle\+Inventory\+Active\+State}} ()
+\begin{DoxyCompactList}\small\item\em Toggles the active state of the generated inventory UI. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Dictionary$<$ string, \doxymbox{\hyperlink{struct_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_slot_u_i_definition}{Slot\+UIDefinition}} $>$ \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_generator_a77488529bdae93703a344aa034f6f85c}{slot\+Definitions}} = new()
+\begin{DoxyCompactList}\small\item\em Slot definitions. \end{DoxyCompactList}\item 
+Canvas? \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_generator_acefc516ad71bac730b549a7a601dd77b}{target}}
+\begin{DoxyCompactList}\small\item\em Target. \end{DoxyCompactList}\item 
+Vector2 \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_generator_a32d4c84e29ffd6722024926a781bb547}{spacing}} = new(0, 0)
+\begin{DoxyCompactList}\small\item\em Spacing. \end{DoxyCompactList}\item 
+Text\+Anchor \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_generator_ae832c85ef049e7696c86e2f4617367d3}{anchor\+Position}} = Text\+Anchor.\+Upper\+Left
+\begin{DoxyCompactList}\small\item\em Anchor position. \end{DoxyCompactList}\item 
+Vector2 \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_generator_a1a0016367e7d5bd1519dcd7271708352}{ui\+Position}} = new(0, 0)
+\begin{DoxyCompactList}\small\item\em Ui position. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Builds the runtime UI for an Inventory\+Grid:\+ instantiates a cell prefab per slot (by slot type), wires drag handlers, and renders stack counts. 
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_generator_doc-func-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_generator_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_generator_a5b5b17a5d722ec8e2eaa7bed549bc043}\index{Feazeyu.RPGSystems.Inventory.InventoryGridGenerator@{Feazeyu.RPGSystems.Inventory.InventoryGridGenerator}!GenerateUI@{GenerateUI}}
+\index{GenerateUI@{GenerateUI}!Feazeyu.RPGSystems.Inventory.InventoryGridGenerator@{Feazeyu.RPGSystems.Inventory.InventoryGridGenerator}}
+\doxysubsubsection{\texorpdfstring{GenerateUI()}{GenerateUI()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_generator_a5b5b17a5d722ec8e2eaa7bed549bc043} 
+void Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Grid\+Generator.\+Generate\+UI (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Generates the inventory UI grid based on the current \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid}{Inventory\+Grid} configuration. This method creates and arranges UI slot elements as children of the specified target Canvas, using the defined slot UI prefabs and layout settings. It cleans up any previously generated UI, instantiates new slot UI elements for each cell in the grid, and sets up drag layers for item interaction. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_generator_a6a756f9fb4e0e942a307ad1ca49f3026}\index{Feazeyu.RPGSystems.Inventory.InventoryGridGenerator@{Feazeyu.RPGSystems.Inventory.InventoryGridGenerator}!OnAfterDeserialize@{OnAfterDeserialize}}
+\index{OnAfterDeserialize@{OnAfterDeserialize}!Feazeyu.RPGSystems.Inventory.InventoryGridGenerator@{Feazeyu.RPGSystems.Inventory.InventoryGridGenerator}}
+\doxysubsubsection{\texorpdfstring{OnAfterDeserialize()}{OnAfterDeserialize()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_generator_a6a756f9fb4e0e942a307ad1ca49f3026} 
+void Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Grid\+Generator.\+On\+After\+Deserialize (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Called after Unity deserializes this object. Restores the slot\+Definitions dictionary. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_generator_a34fdea2ad1616031393a9414121d306d}\index{Feazeyu.RPGSystems.Inventory.InventoryGridGenerator@{Feazeyu.RPGSystems.Inventory.InventoryGridGenerator}!OnBeforeSerialize@{OnBeforeSerialize}}
+\index{OnBeforeSerialize@{OnBeforeSerialize}!Feazeyu.RPGSystems.Inventory.InventoryGridGenerator@{Feazeyu.RPGSystems.Inventory.InventoryGridGenerator}}
+\doxysubsubsection{\texorpdfstring{OnBeforeSerialize()}{OnBeforeSerialize()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_generator_a34fdea2ad1616031393a9414121d306d} 
+void Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Grid\+Generator.\+On\+Before\+Serialize (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Called before Unity serializes this object. Serializes the slot\+Definitions dictionary. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_generator_ac0528afa41207c89dcee228decb06607}\index{Feazeyu.RPGSystems.Inventory.InventoryGridGenerator@{Feazeyu.RPGSystems.Inventory.InventoryGridGenerator}!OnEnable@{OnEnable}}
+\index{OnEnable@{OnEnable}!Feazeyu.RPGSystems.Inventory.InventoryGridGenerator@{Feazeyu.RPGSystems.Inventory.InventoryGridGenerator}}
+\doxysubsubsection{\texorpdfstring{OnEnable()}{OnEnable()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_generator_ac0528afa41207c89dcee228decb06607} 
+void Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Grid\+Generator.\+On\+Enable (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+On enable. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_generator_a9783b2d8fe38f6c96992729308e44078}\index{Feazeyu.RPGSystems.Inventory.InventoryGridGenerator@{Feazeyu.RPGSystems.Inventory.InventoryGridGenerator}!SetInventoryActiveState@{SetInventoryActiveState}}
+\index{SetInventoryActiveState@{SetInventoryActiveState}!Feazeyu.RPGSystems.Inventory.InventoryGridGenerator@{Feazeyu.RPGSystems.Inventory.InventoryGridGenerator}}
+\doxysubsubsection{\texorpdfstring{SetInventoryActiveState()}{SetInventoryActiveState()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_generator_a9783b2d8fe38f6c96992729308e44078} 
+void Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Grid\+Generator.\+Set\+Inventory\+Active\+State (\begin{DoxyParamCaption}\item[{bool}]{active}{}\end{DoxyParamCaption})}
+
+
+
+Sets the active state of the generated inventory UI. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em active} & True to activate, false to deactivate.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_generator_ad1667857792366b40c41e8ce9c6d9645}\index{Feazeyu.RPGSystems.Inventory.InventoryGridGenerator@{Feazeyu.RPGSystems.Inventory.InventoryGridGenerator}!ToggleInventoryActiveState@{ToggleInventoryActiveState}}
+\index{ToggleInventoryActiveState@{ToggleInventoryActiveState}!Feazeyu.RPGSystems.Inventory.InventoryGridGenerator@{Feazeyu.RPGSystems.Inventory.InventoryGridGenerator}}
+\doxysubsubsection{\texorpdfstring{ToggleInventoryActiveState()}{ToggleInventoryActiveState()}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_generator_ad1667857792366b40c41e8ce9c6d9645} 
+void Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Grid\+Generator.\+Toggle\+Inventory\+Active\+State (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Toggles the active state of the generated inventory UI. 
+
+
+
+\label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_generator_doc-variable-members}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_generator_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_generator_ae832c85ef049e7696c86e2f4617367d3}\index{Feazeyu.RPGSystems.Inventory.InventoryGridGenerator@{Feazeyu.RPGSystems.Inventory.InventoryGridGenerator}!anchorPosition@{anchorPosition}}
+\index{anchorPosition@{anchorPosition}!Feazeyu.RPGSystems.Inventory.InventoryGridGenerator@{Feazeyu.RPGSystems.Inventory.InventoryGridGenerator}}
+\doxysubsubsection{\texorpdfstring{anchorPosition}{anchorPosition}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_generator_ae832c85ef049e7696c86e2f4617367d3} 
+Text\+Anchor Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Grid\+Generator.\+anchor\+Position = Text\+Anchor.\+Upper\+Left}
+
+
+
+Anchor position. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_generator_a77488529bdae93703a344aa034f6f85c}\index{Feazeyu.RPGSystems.Inventory.InventoryGridGenerator@{Feazeyu.RPGSystems.Inventory.InventoryGridGenerator}!slotDefinitions@{slotDefinitions}}
+\index{slotDefinitions@{slotDefinitions}!Feazeyu.RPGSystems.Inventory.InventoryGridGenerator@{Feazeyu.RPGSystems.Inventory.InventoryGridGenerator}}
+\doxysubsubsection{\texorpdfstring{slotDefinitions}{slotDefinitions}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_generator_a77488529bdae93703a344aa034f6f85c} 
+Dictionary$<$string, \doxymbox{\hyperlink{struct_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_slot_u_i_definition}{Slot\+UIDefinition}}$>$ Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Grid\+Generator.\+slot\+Definitions = new()}
+
+
+
+Slot definitions. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_generator_a32d4c84e29ffd6722024926a781bb547}\index{Feazeyu.RPGSystems.Inventory.InventoryGridGenerator@{Feazeyu.RPGSystems.Inventory.InventoryGridGenerator}!spacing@{spacing}}
+\index{spacing@{spacing}!Feazeyu.RPGSystems.Inventory.InventoryGridGenerator@{Feazeyu.RPGSystems.Inventory.InventoryGridGenerator}}
+\doxysubsubsection{\texorpdfstring{spacing}{spacing}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_generator_a32d4c84e29ffd6722024926a781bb547} 
+Vector2 Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Grid\+Generator.\+spacing = new(0, 0)}
+
+
+
+Spacing. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_generator_acefc516ad71bac730b549a7a601dd77b}\index{Feazeyu.RPGSystems.Inventory.InventoryGridGenerator@{Feazeyu.RPGSystems.Inventory.InventoryGridGenerator}!target@{target}}
+\index{target@{target}!Feazeyu.RPGSystems.Inventory.InventoryGridGenerator@{Feazeyu.RPGSystems.Inventory.InventoryGridGenerator}}
+\doxysubsubsection{\texorpdfstring{target}{target}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_generator_acefc516ad71bac730b549a7a601dd77b} 
+Canvas? Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Grid\+Generator.\+target}
+
+
+
+Target. 
+
+\Hypertarget{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_generator_a1a0016367e7d5bd1519dcd7271708352}\index{Feazeyu.RPGSystems.Inventory.InventoryGridGenerator@{Feazeyu.RPGSystems.Inventory.InventoryGridGenerator}!uiPosition@{uiPosition}}
+\index{uiPosition@{uiPosition}!Feazeyu.RPGSystems.Inventory.InventoryGridGenerator@{Feazeyu.RPGSystems.Inventory.InventoryGridGenerator}}
+\doxysubsubsection{\texorpdfstring{uiPosition}{uiPosition}}
+{\footnotesize\ttfamily \label{class_feazeyu_1_1_r_p_g_systems_1_1_inventory_1_1_inventory_grid_generator_a1a0016367e7d5bd1519dcd7271708352} 
+Vector2 Feazeyu.\+RPGSystems.\+Inventory.\+Inventory\+Grid\+Generator.\+ui\+Position = new(0, 0)}
+
+
+
+Ui position. 
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Inventory/\+\+Grid/\+\doxymbox{\hyperlink{_inventory_grid_generator_8cs}{Inventory\+Grid\+Generator.\+cs}}\end{DoxyCompactItemize}

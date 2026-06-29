@@ -1,0 +1,61 @@
+\doxysection{Feazeyu.\+RPGSystems.\+Quest.\+Progress\+Event Struct Reference}
+\hypertarget{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_progress_event}{}\label{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_progress_event}\index{Feazeyu.RPGSystems.Quest.ProgressEvent@{Feazeyu.RPGSystems.Quest.ProgressEvent}}
+
+
+Context describing a single unit of objective progress (one kill, one pickup, one interaction, …). Gates inspect it to decide whether the unit counts.  
+
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Game\+Object \doxymbox{\hyperlink{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_progress_event_afb9f8cf55f85ca2b39df564f9f25949c}{Subject}}
+\begin{DoxyCompactList}\small\item\em The event\textquotesingle{}s natural subject, or null. Gates default to the player. \end{DoxyCompactList}\item 
+Vector3 \doxymbox{\hyperlink{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_progress_event_a3ea5bb90af1036dea103fed41865d00a}{Position}}
+\begin{DoxyCompactList}\small\item\em World position the event occurred at, when Has\+Position is true. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_progress_event_a2fbc8fa32f550d9963c98aa7b2382215}{Has\+Position}}
+\begin{DoxyCompactList}\small\item\em Whether Position carries a meaningful value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Context describing a single unit of objective progress (one kill, one pickup, one interaction, …). Gates inspect it to decide whether the unit counts. 
+
+Subject is the natural actor/\+target of the event — the killed enemy, the item\textquotesingle{}s owner, etc. It may be null; gates that need a capability the subject lacks (e.\+g. an inventory on a creature that has none) fall back to the player and warn rather than failing silently. 
+
+\label{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_progress_event_doc-variable-members}
+\Hypertarget{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_progress_event_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_progress_event_a2fbc8fa32f550d9963c98aa7b2382215}\index{Feazeyu.RPGSystems.Quest.ProgressEvent@{Feazeyu.RPGSystems.Quest.ProgressEvent}!HasPosition@{HasPosition}}
+\index{HasPosition@{HasPosition}!Feazeyu.RPGSystems.Quest.ProgressEvent@{Feazeyu.RPGSystems.Quest.ProgressEvent}}
+\doxysubsubsection{\texorpdfstring{HasPosition}{HasPosition}}
+{\footnotesize\ttfamily \label{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_progress_event_a2fbc8fa32f550d9963c98aa7b2382215} 
+bool Feazeyu.\+RPGSystems.\+Quest.\+Progress\+Event.\+Has\+Position}
+
+
+
+Whether Position carries a meaningful value. 
+
+\Hypertarget{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_progress_event_a3ea5bb90af1036dea103fed41865d00a}\index{Feazeyu.RPGSystems.Quest.ProgressEvent@{Feazeyu.RPGSystems.Quest.ProgressEvent}!Position@{Position}}
+\index{Position@{Position}!Feazeyu.RPGSystems.Quest.ProgressEvent@{Feazeyu.RPGSystems.Quest.ProgressEvent}}
+\doxysubsubsection{\texorpdfstring{Position}{Position}}
+{\footnotesize\ttfamily \label{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_progress_event_a3ea5bb90af1036dea103fed41865d00a} 
+Vector3 Feazeyu.\+RPGSystems.\+Quest.\+Progress\+Event.\+Position}
+
+
+
+World position the event occurred at, when Has\+Position is true. 
+
+\Hypertarget{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_progress_event_afb9f8cf55f85ca2b39df564f9f25949c}\index{Feazeyu.RPGSystems.Quest.ProgressEvent@{Feazeyu.RPGSystems.Quest.ProgressEvent}!Subject@{Subject}}
+\index{Subject@{Subject}!Feazeyu.RPGSystems.Quest.ProgressEvent@{Feazeyu.RPGSystems.Quest.ProgressEvent}}
+\doxysubsubsection{\texorpdfstring{Subject}{Subject}}
+{\footnotesize\ttfamily \label{struct_feazeyu_1_1_r_p_g_systems_1_1_quest_1_1_progress_event_afb9f8cf55f85ca2b39df564f9f25949c} 
+Game\+Object Feazeyu.\+RPGSystems.\+Quest.\+Progress\+Event.\+Subject}
+
+
+
+The event\textquotesingle{}s natural subject, or null. Gates default to the player. 
+
+
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Packages/\+com.\+feazeyu.\+rpgsystems/\+\+Runtime/\+\+Quest/\+\+Runtime/\+\doxymbox{\hyperlink{_objective_progress_8cs}{Objective\+Progress.\+cs}}\end{DoxyCompactItemize}

@@ -1,0 +1,23 @@
+\doxysection{Packages/\+com.feazeyu.\+rpgsystems/\+\+Runtime/\+\+Dialogue/\+\+Nodes/\+\+Node\+Registry.cs File Reference}
+\hypertarget{_node_registry_8cs}{}\label{_node_registry_8cs}\index{Packages/com.feazeyu.rpgsystems/Runtime/Dialogue/Nodes/NodeRegistry.cs@{Packages/com.feazeyu.rpgsystems/Runtime/Dialogue/Nodes/NodeRegistry.cs}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_info}{Feazeyu.\+RPGSystems.\+Dialogue.\+Node\+Info}}
+\begin{DoxyCompactList}\small\item\em Metadata record for a single node type. The Editor reads this to populate the right-\/click "{}\+Add Node"{} menu and to generate default ports/\+fields when a node is created. Shared by every graph system (dialogue, quest, …). \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_registry}{Feazeyu.\+RPGSystems.\+Dialogue.\+Node\+Registry}}
+\begin{DoxyCompactList}\small\item\em Abstract base for every graph system\textquotesingle{}s node registry. Provides the shared infrastructure all registries need:\+ 
+\begin{DoxyItemize}
+\item The universal flow/\+logic node type-\/id constants and accent colours, so a stored {\ttfamily Node\+Type} string means the same thing in any graph system (a "{}\+Start"{} node is a "{}\+Start"{} node everywhere). 
+\item The lazily-\/built type lookup table plus the Register /\+ All\+Nodes /\+ Get\+Node plumbing. 
+\item Register\+Common\+Nodes — the flow/\+logic/\+scene nodes shared by every system — and Register\+Attribute\+Nodes$<$\+TAttr$>$ for reflection-\/based discovery. 
+\end{DoxyItemize}Concrete registries ({\ttfamily \doxylink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_dialogue_node_registry}{Dialogue\+Node\+Registry}}, {\ttfamily Quest\+Node\+Registry}) derive from this, override Build to add their own node set, and expose a static façade over a private singleton instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \doxymbox{\hyperlink{namespace_feazeyu}{Feazeyu}}
+\item 
+namespace \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems}{Feazeyu.\+RPGSystems}}
+\item 
+namespace \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue}{Feazeyu.\+RPGSystems.\+Dialogue}}
+\end{DoxyCompactItemize}

@@ -1,0 +1,35 @@
+\doxysection{Packages/\+com.feazeyu.\+rpgsystems/\+\+Runtime/\+\+Dialogue/\+\+Data/\+\+Graph\+Asset.cs File Reference}
+\hypertarget{_graph_asset_8cs}{}\label{_graph_asset_8cs}\index{Packages/com.feazeyu.rpgsystems/Runtime/Dialogue/Data/GraphAsset.cs@{Packages/com.feazeyu.rpgsystems/Runtime/Dialogue/Data/GraphAsset.cs}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_port_data}{Feazeyu.\+RPGSystems.\+Dialogue.\+Port\+Data}}
+\begin{DoxyCompactList}\small\item\em Serialized definition of one node port. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_field_data}{Feazeyu.\+RPGSystems.\+Dialogue.\+Field\+Data}}
+\begin{DoxyCompactList}\small\item\em Serialized definition of one editable node field, either an inline value or a blackboard link. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_node_data}{Feazeyu.\+RPGSystems.\+Dialogue.\+Node\+Data}}
+\begin{DoxyCompactList}\small\item\em Serialized data for one graph node:\+ identity, type, layout, ports, and fields. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_edge_data}{Feazeyu.\+RPGSystems.\+Dialogue.\+Edge\+Data}}
+\begin{DoxyCompactList}\small\item\em Serialized connection between an output port and an input port. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_feazeyu_1_1_r_p_g_systems_1_1_dialogue_1_1_graph_asset}{Feazeyu.\+RPGSystems.\+Dialogue.\+Graph\+Asset}}
+\begin{DoxyCompactList}\small\item\em Common serialised data and CRUD for every graph-\/based system (\doxylink{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue}{Dialogue}, \doxylink{namespace_feazeyu_1_1_r_p_g_systems_1_1_quest}{Quest}, and any future graph editor built on top of Feazeyu.\+RPGSystems.\+Editor\textquotesingle{}s window pipeline). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \doxymbox{\hyperlink{namespace_feazeyu}{Feazeyu}}
+\item 
+namespace \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems}{Feazeyu.\+RPGSystems}}
+\item 
+namespace \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue}{Feazeyu.\+RPGSystems.\+Dialogue}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue_afa3b76507f0f6547230838a78463532a}{Feazeyu.\+RPGSystems.\+Dialogue.\+Port\+Direction}} \{ \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue_afa3b76507f0f6547230838a78463532aa324118a6721dd6b8a9b9f4e327df2bf5}{Feazeyu.\+RPGSystems.\+Dialogue.\+Input}}
+, \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue_afa3b76507f0f6547230838a78463532aa29c2c02a361c9d7028472e5d92cd4a54}{Feazeyu.\+RPGSystems.\+Dialogue.\+Output}}
+ \}
+\begin{DoxyCompactList}\small\item\em Whether a port receives (Input) or emits (Output) edges. \end{DoxyCompactList}\item 
+enum \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue_a1ebc542c1715c2d8a8b993c10acf535e}{Feazeyu.\+RPGSystems.\+Dialogue.\+Port\+Capacity}} \{ \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue_a1ebc542c1715c2d8a8b993c10acf535ea66ba162102bbf6ae31b522aec561735e}{Feazeyu.\+RPGSystems.\+Dialogue.\+Single}}
+, \doxymbox{\hyperlink{namespace_feazeyu_1_1_r_p_g_systems_1_1_dialogue_a1ebc542c1715c2d8a8b993c10acf535eace7898536dd0e928d1640ee2ad531cc8}{Feazeyu.\+RPGSystems.\+Dialogue.\+Multi}}
+ \}
+\begin{DoxyCompactList}\small\item\em Whether a port accepts a single edge or many. \end{DoxyCompactList}\end{DoxyCompactItemize}
