@@ -33,7 +33,7 @@ This guide walks through every system and shows how to set each one up to reprod
 
 Samples import into `Assets/Samples/RPG Systems/<version>/<sample name>/` and each contains a ready-to-play scene (`DialogueDemo.unity`, `QuestDemo.unity`, `InventoryDemo.unity`).
 
-> The samples use TextMeshPro. If prompted, import the TMP Essentials via **Window → TextMeshPro → Import TMP Essential Resources**.
+> The samples use TextMeshPro. If prompted, import the TMP Essentials via **Window -> TextMeshPro -> Import TMP Essential Resources**.
 
 **Demo controls:** WASD / arrow keys to move, **E** to interact, **I** to toggle the player inventory (Inventory Demo).
 
@@ -71,14 +71,14 @@ Both graph types use the same editor window layout; only the node palette differ
 
 **Opening a graph:**
 - **Double-click** a Dialogue Graph or Quest Graph asset in the Project window, or
-- open **Window → Dialogue Graph** / **Window → Quest Graph** and use the toolbar's **Open** button.
+- open **Window -> Dialogue Graph** / **Window -> Quest Graph** and use the toolbar's **Open** button.
 
 ![The demo dialogue graph in all its glory](image-1.png)
 
 **Layout:**
 
 - **Toolbar** — **New** (create an asset), **Open** (asset picker), **Save**, and an **Autosave** toggle. The label shows which asset is open.
-- **Canvas** — the node graph. **Right-click → Add Node** opens the palette, organized by category (Flow, Dialogue, Logic, Quest, Objectives, Gates, …). Drag from a port to another port to connect. Standard GraphView navigation applies (scroll to zoom, middle/alt-drag to pan, box-select, `Delete` to remove).
+- **Canvas** — the node graph. **Right-click -> Add Node** opens the palette, organized by category (Flow, Dialogue, Logic, Quest, Objectives, Gates, …). Drag from a port to another port to connect. Standard GraphView navigation applies (scroll to zoom, middle/alt-drag to pan, box-select, `Delete` to remove).
 - **Blackboard panel** — create and edit the graph's variables (see [section 4](#4-the-blackboard)).
 - **Inspector panel** — shows the selected node's fields. Each field has a **link toggle (◯/◉)** next to it: ◯ means the field holds an inline value, ◉ means it is linked to a blackboard variable and resolves that variable's value at runtime. Click it to pick a variable of a compatible type.
 
@@ -111,9 +111,9 @@ Add variables with the blackboard panel's **+** button, pick a type, and set a d
 
 ### 5.1 Creating a dialogue graph
 
-**Assets → Create → RPGFramework → Dialogue → Dialogue Graph**, then double-click it to open the editor.
+**Assets -> Create -> RPGFramework -> Dialogue -> Dialogue Graph**, then double-click it to open the editor.
 
-A minimal conversation is: **Start → Dialogue Line → … → End**.
+A minimal conversation is: **Start -> Dialogue Line -> … -> End**.
 
 ![A simple dialogue](image-4.png)
 
@@ -123,8 +123,8 @@ A minimal conversation is: **Start → Dialogue Line → … → End**.
 
 | Node | Ports | What it does |
 |---|---|---|
-| **Dialogue Line** | In → Out | Shows one line (`Speaker`, `Text`, `Portrait` sprite via linked variable), then waits until the runner's `Advance()` is called (the Continue button). |
-| **Choice Branch** | In → Choice 1..N | Presents choices; each `Choice N` output port is one option with its `Choice N Text` field. Use the node's **+ Add Choice / remove** buttons to change the number of choices. Waits for `SelectChoice(index)`. |
+| **Dialogue Line** | In -> Out | Shows one line (`Speaker`, `Text`, `Portrait` sprite via linked variable), then waits until the runner's `Advance()` is called (the Continue button). |
+| **Choice Branch** | In -> Choice 1..N | Presents choices; each `Choice N` output port is one option with its `Choice N Text` field. Use the node's **+ Add Choice / remove** buttons to change the number of choices. Waits for `SelectChoice(index)`. |
 | **Requirement** | Out only | Conditionally **hides a choice**: connect its `Out` to the input of the node that *follows* the choice. The choice is only offered while `Variable Operator Value` holds (e.g. `HasKey == True`). Multiple requirements on one target must all pass. |
 
 > **Note:** if every choice of a Choice Branch is hidden by requirements, the branch tries to follow a port named `Out` — with the default ports that ends the dialogue. Keep at least one requirement-free choice, or account for the early end.
@@ -134,23 +134,23 @@ A minimal conversation is: **Start → Dialogue Line → … → End**.
 | Node | Ports | What it does |
 |---|---|---|
 | **Start / End** | — | Entry point / terminates execution. Start's `Out` may fan out to fork parallel branches. |
-| **Condition** | In → True / False | Compares a blackboard variable against a value (`==, !=, >, >=, <, <=`; numeric, bool, or string comparison) and routes accordingly. |
-| **Set Variable** | In → Out | Writes a value to a blackboard variable. Combine with **Shared** variables to persist facts across conversations. |
-| **Run Subgraph** | In → Out | Executes another Dialogue Graph inline. Link the `Graph` field to a **DialogueGraph blackboard variable** holding the sub-asset. |
-| **Trigger Event** | In → Out | Raises the named event channel on the global `GraphEventBus` (waking any Wait For Event node listening for it, in this or any other running graph). Dialogue runners additionally fire their `OnEventTriggered(string)` UnityEvent — hook game reactions there. |
-| **Wait For Event** | In → Out | Suspends the branch until its channel is raised — by a Trigger Event node or by game code calling `GraphEventBus.Raise("Channel")`. Only raises that happen *after* the node starts waiting count; channels are plain strings, matched exactly. |
-| **Debug Log** | In → Out | Prints `Message` to the console (supports `{Var}` interpolation). |
-| **Find Object** | In → Found / NotFound | Finds a scene GameObject by name or tag and stores it in a linked GameObject variable. |
-| **Spawn Prefab** | In → Out / Failure | Instantiates a prefab from a GameObject variable, optionally under a `Parent` Transform, optionally storing the instance in a `Result` variable. |
+| **Condition** | In -> True / False | Compares a blackboard variable against a value (`==, !=, >, >=, <, <=`; numeric, bool, or string comparison) and routes accordingly. |
+| **Set Variable** | In -> Out | Writes a value to a blackboard variable. Combine with **Shared** variables to persist facts across conversations. |
+| **Run Subgraph** | In -> Out | Executes another Dialogue Graph inline. Link the `Graph` field to a **DialogueGraph blackboard variable** holding the sub-asset. |
+| **Trigger Event** | In -> Out | Raises the named event channel on the global `GraphEventBus` (waking any Wait For Event node listening for it, in this or any other running graph). Dialogue runners additionally fire their `OnEventTriggered(string)` UnityEvent — hook game reactions there. |
+| **Wait For Event** | In -> Out | Suspends the branch until its channel is raised — by a Trigger Event node or by game code calling `GraphEventBus.Raise("Channel")`. Only raises that happen *after* the node starts waiting count; channels are plain strings, matched exactly. |
+| **Debug Log** | In -> Out | Prints `Message` to the console (supports `{Var}` interpolation). |
+| **Find Object** | In -> Found / NotFound | Finds a scene GameObject by name or tag and stores it in a linked GameObject variable. |
+| **Spawn Prefab** | In -> Out / Failure | Instantiates a prefab from a GameObject variable, optionally under a `Parent` Transform, optionally storing the instance in a `Result` variable. |
 
 **Inventory & shop nodes** (require the [Inventory](#7-inventory-system)/[Shop](#8-shop-system) systems in the scene)
 
 | Node | Ports | What it does |
 |---|---|---|
-| **Give Item** | In → Success / Failure | Adds `Count` of item `ItemId` to the `IItemContainer` on the `Target` GameObject (linked variable). |
-| **Check Currency** | In → Enough / NotEnough | Tests the player wallet's balance against `Amount`. |
-| **Add / Remove Currency** | In → Out (Remove: Success / Failure) | Changes the `PlayerWallet` balance. |
-| **Open / Close Shop** | In → Out | Opens/closes the shop UI on the `Target` GameObject (a `Shopkeep` or shop UI, via linked variable). |
+| **Give Item** | In -> Success / Failure | Adds `Count` of item `ItemId` to the `IItemContainer` on the `Target` GameObject (linked variable). |
+| **Check Currency** | In -> Enough / NotEnough | Tests the player wallet's balance against `Amount`. |
+| **Add / Remove Currency** | In -> Out (Remove: Success / Failure) | Changes the `PlayerWallet` balance. |
+| **Open / Close Shop** | In -> Out | Opens/closes the shop UI on the `Target` GameObject (a `Shopkeep` or shop UI, via linked variable). |
 
 ### 5.3 Scene setup (recreating the Dialogue Demo)
 
@@ -174,7 +174,9 @@ The Dialogue Demo consists of a player, an NPC, and one dialogue UI canvas. To b
 
 `DialogueUI` is *bound* to a runner at dialogue start via `DialogueUI.Bind(runner)`; it then displays lines, spawns choice buttons (clicks call `SelectChoice`), and hides itself when the graph ends. One UI can serve any number of NPCs.
 
-> 📷 *Screenshot: the DialogueCanvas hierarchy and the DialogueUI component in the Inspector with all fields assigned.*
+![Dialogue canvas in the hierarchy](image-5.png)
+
+![Dialogue UI with set fields](image-6.png)
 
 **3. The NPC.** Create a sprite with:
 - a **trigger** `Collider2D` (the interaction range),
@@ -182,11 +184,12 @@ The Dialogue Demo consists of a player, an NPC, and one dialogue UI canvas. To b
 - `DialogueRunner` with your graph assigned to **Graph**,
 - a small trigger script like the sample's `NPCDialogueTrigger`: on `Interactable.OnInteract` it calls `dialogueUI.Bind(runner)` then `runner.StartDialogue()`; on trigger exit it calls `runner.StopGraph()` so walking away closes the dialogue; it also toggles an "E to talk" prompt object.
 
-> 📷 *Screenshot: the NPC's Inspector — Interactable, DialogueRunner (with graph assigned), and the dialogue trigger script wired together.*
+![NPC interactable script component](image-7.png)
+![NPC Dialogue trigger](image-8.png)
 
 **4. Press Play**, walk to the NPC, and press **E**.
 
-> 📷 *Screenshot: the running dialogue with choice buttons visible.*
+![Dialogue with choices](image-9.png)
 
 ### 5.4 Driving dialogue from code / custom UI
 
@@ -210,9 +213,9 @@ Quests come in three flavours:
 
 | Asset | Create via | Runs on |
 |---|---|---|
-| **Quest Graph** (Single) | Assets → Create → RPGFramework → Quest → **Quest Graph** | `QuestRunner` |
-| **Quest Chain** | Assets → Create → RPGFramework → Quest → **Quest Chain** | `QuestChainRunner` |
-| **Simple Quest** | Assets → Create → RPGFramework → Quest → **Simple Quest** | no runner — plain state asset |
+| **Quest Graph** (Single) | Assets -> Create -> RPGFramework -> Quest -> **Quest Graph** | `QuestRunner` |
+| **Quest Chain** | Assets -> Create -> RPGFramework -> Quest -> **Quest Chain** | `QuestChainRunner` |
+| **Simple Quest** | Assets -> Create -> RPGFramework -> Quest -> **Simple Quest** | no runner — plain state asset |
 
 A **Single** graph is a quest's internal logic (objectives, rewards, outcomes). A **Chain** is a dependency graph *of quests* — its editor palette is intentionally reduced (Start, End, Condition, Set Variable, **Quest Reference**), and edges between Quest Reference nodes mean *prerequisite*. A **Simple Quest** is just title + description + state with `Start()/Complete()/Fail()/Reset()` and events — for quests that need no graph logic. Its runtime state auto-resets at the start of every play session.
 
@@ -220,24 +223,24 @@ A **Single** graph is a quest's internal logic (objectives, rewards, outcomes). 
 
 Add a **`QuestRunner`** to a scene GameObject, assign the Quest Graph, and call `StartQuest()` (from code, a UnityEvent, or the sample's `AutoStartQuest` helper which starts it one frame after load).
 
-A typical quest graph: **Start → Run Dialogue (offer) → Condition (accepted?) → objectives → Reward → Complete Quest**, with `Failed` ports and a **Fail Quest** node for the failure path.
+A typical quest graph: **Start -> Run Dialogue (offer) -> Condition (accepted?) -> objectives -> Reward -> Complete Quest**, with `Failed` ports and a **Fail Quest** node for the failure path.
 
-> 📷 *Screenshot: the Quest Demo's QuestDemoGraph open in the Quest Graph window.*
+![One of the QuestDemo's quest graphs](image-10.png)
 
 **Quest structure nodes**
 
 | Node | Ports | What it does |
 |---|---|---|
-| **Objective** (manual) | In → Completed / Failed | A generic objective. It waits until *your code* calls `runner.CompleteObjective(nodeGuid)` or `FailObjective(nodeGuid)`. Fields: Title, Description, Optional. |
-| **Reward** | In → Out | Fires `OnRewardGranted` with XP, Currency, an Item (link to a ScriptableObject variable, e.g. an `ItemInfo`), and Quantity. Granting is left to your listener — see below. |
+| **Objective** (manual) | In -> Completed / Failed | A generic objective. It waits until *your code* calls `runner.CompleteObjective(nodeGuid)` or `FailObjective(nodeGuid)`. Fields: Title, Description, Optional. |
+| **Reward** | In -> Out | Fires `OnRewardGranted` with XP, Currency, an Item (link to a ScriptableObject variable, e.g. an `ItemInfo`), and Quantity. Granting is left to your listener — see below. |
 | **Complete Quest** | In | Terminal: result = Completed, ends the graph. |
 | **Fail Quest** | In | Terminal: result = Failed with a `Reason` string. |
-| **Spawn Item** | In → Success / Failure | Instantiates the item prefab registered under `ItemId` and puts it into the `IItemContainer` on the `Target` GameObject (linked variable). This is the built-in way to hand out item rewards. |
-| **Run Dialogue** | In → Out | Runs a Dialogue Graph inline (e.g. the NPC offering the quest). Link `Graph` to a **DialogueGraph blackboard variable**. Fires the runner's `OnDialogueStarted(DialogueRunner)` — bind your `DialogueUI` to that runner there. Follows Out when the dialogue ends. |
+| **Spawn Item** | In -> Success / Failure | Instantiates the item prefab registered under `ItemId` and puts it into the `IItemContainer` on the `Target` GameObject (linked variable). This is the built-in way to hand out item rewards. |
+| **Run Dialogue** | In -> Out | Runs a Dialogue Graph inline (e.g. the NPC offering the quest). Link `Graph` to a **DialogueGraph blackboard variable**. Fires the runner's `OnDialogueStarted(DialogueRunner)` — bind your `DialogueUI` to that runner there. Follows Out when the dialogue ends. |
 
-> **Offer/accept pattern (used by the Quest Demo):** the offer dialogue sets a **Shared** variable (e.g. `Accepted = True/False`) with a Set Variable node behind each choice; back in the quest graph, a **Condition** on that variable routes to the objectives or to nothing (letting the quest end → aborted → re-offerable).
+> **Note:** the offer dialogue sets a **Shared** variable (e.g. `Accepted = True/False`) with a Set Variable node behind each choice; back in the quest graph, a **Condition** on that variable routes to the objectives or to nothing (letting the quest end -> aborted -> re-offerable).
 
-**Built-in objective nodes** (all have In → Completed / Failed and Title / Description / Optional fields)
+**Built-in objective nodes** (all have In -> Completed / Failed and Title / Description / Optional fields)
 
 | Node | Key fields | Completes when… |
 |---|---|---|
@@ -249,7 +252,7 @@ A typical quest graph: **Start → Run Dialogue (offer) → Condition (accepted?
 
 If the `Inventory` field is left unlinked, objectives fall back to the first `InventoryList`/`InventoryGrid` found in the scene.
 
-Chain objectives sequentially by wiring `Completed → In` of the next one, or run them in parallel by fanning out from Start / a previous node.
+Chain objectives sequentially by wiring `Completed -> In` of the next one, or run them in parallel by fanning out from Start / a previous node.
 
 **Modifier nodes — gates, timers, resets**
 
@@ -263,39 +266,39 @@ Gates are *decorators*: they have only an `Out` port, which you wire **into the 
 
 | Node | Ports | What it does |
 |---|---|---|
-| **Timer** | Begin → Timeout | Starts when a flow token enters `Begin`; fires `Timeout` after `Seconds`. `AutoRestart` re-arms it as a perpetual watchdog. The runner exposes `HasActiveTimer` / `TimerRemaining` for HUD countdowns, and fires `OnTimerTimeout`. |
-| **Reset Progress** | In, Target →, Out | When triggered, wipes the progress counters of every objective its `Target` port is wired to (reference-only — it never re-runs them), then follows Out. |
+| **Timer** | Begin -> Timeout | Starts when a flow token enters `Begin`; fires `Timeout` after `Seconds`. `AutoRestart` re-arms it as a perpetual watchdog. The runner exposes `HasActiveTimer` / `TimerRemaining` for HUD countdowns, and fires `OnTimerTimeout`. |
+| **Reset Progress** | In, Target ->, Out | When triggered, wipes the progress counters of every objective its `Target` port is wired to (reference-only — it never re-runs them), then follows Out. |
 
-A classic combination: *"kill 5 wolves within 60 s"* = Start forks to both the Kill Count objective and a Timer; `Timeout → Reset Progress` whose `Target` points at the objective (or `Timeout → Fail Quest` for a hard fail).
+A classic combination: *"kill 5 wolves within 60 s"* = Start forks to both the Kill Count objective and a Timer; `Timeout -> Reset Progress` whose `Target` points at the objective (or `Timeout -> Fail Quest` for a hard fail).
 
-> 📷 *Screenshot: an objective with a gate wired into its In port, plus a Timer → Reset Progress pair targeting it.*
+![Quest with gates](image-11.png)
 
 **`ZoneFlag` setup** (for "while in this zone" objectives):
 1. Put `ZoneFlag` on a GameObject with a trigger `Collider2D` shaped like the zone.
 2. Point its **Runner** field at the `QuestRunner`.
 3. Set **Variable Name** to a Bool blackboard variable on the quest graph.
-4. Add a **Flag Gate** (`Variable == True`) to the objective. The player (tag `Player` by default) entering/leaving toggles the flag — no per-frame distance checks.
+4. Add a **Flag Gate** (`Variable == True`) to the objective. The player (tag `Player` by default) entering/leaving toggles the flag.
 
 **QuestRunner events & API** (for HUDs and game logic)
 
 - Events: `OnObjectiveStarted/Completed/Failed(ObjectiveInfo)`, `OnRewardGranted(RewardInfo)`, `OnQuestCompleted`, `OnQuestFailed(string reason)`, `OnQuestEnded(QuestResult)`, `OnTimerTimeout`, `OnDialogueStarted(DialogueRunner)`.
-- API: `StartQuest()`, `AbortQuest()`, `ForceFailQuest(reason)`, `CompleteObjective(guid)` / `FailObjective(guid)` (manual Objective nodes), `GetProgress(guid)` → an `ObjectiveProgress` with `Current`/`Required` for live counters, `Result`, `FailureReason`.
+- API: `StartQuest()`, `AbortQuest()`, `ForceFailQuest(reason)`, `CompleteObjective(guid)` / `FailObjective(guid)` (manual Objective nodes), `GetProgress(guid)` -> an `ObjectiveProgress` with `Current`/`Required` for live counters, `Result`, `FailureReason`.
 - **Rewards are event-driven:** the Reward node only *announces* the reward. Handle `OnRewardGranted` yourself (grant XP/currency), or derive from the **`QuestRewardHandler`** component (add it next to the runner and override `OnRewardGranted`). Item rewards are easiest via the **Spawn Item** node, which physically adds the item to an inventory.
 
 ### 6.2 Quest chains
 
-A chain graph contains **Quest Reference** nodes, each linked (via the chain's blackboard) to a Quest Graph or Simple Quest variable. An edge **A → B** means *B unlocks when A completes*.
+A chain graph contains **Quest Reference** nodes, each linked (via the chain's blackboard) to a Quest Graph or Simple Quest variable. An edge **A -> B** means *B unlocks when A completes*.
 
 Setup:
 
-1. Create the chain asset: **Assets → Create → RPGFramework → Quest → Quest Chain**.
+1. Create the chain asset: **Assets -> Create -> RPGFramework -> Quest -> Quest Chain**.
 2. In its blackboard, add a **QuestGraph** (or **Quest**, for simple quests) variable per quest and assign the assets.
 3. Add a **Quest Reference** node per quest, link each node's `Quest` field to the matching variable, and wire the prerequisite edges.
 4. In the scene, add a **`QuestChainRunner`** and assign the chain to **Chain**. Options: **AutoStart** and **MaxActiveQuests** (default 1).
 
-> 📷 *Screenshot: a chain graph with three Quest Reference nodes wired as prerequisites.*
+![Demo Quest chain](image-12.png)
 
-**Lifecycle.** Every entry starts **Locked**; entries whose prerequisites are all Completed become **Available** (announced via `OnAvailableQuestsChanged`). Calling `StartQuest(chainNodeGuid)` spawns a fresh child `QuestRunner` for that quest (state → **Active**), and its outcome moves the entry to **Completed** / **Failed** — an *aborted* quest (e.g. offer declined) returns to **Available**, so it can be offered again. When every quest resolves, `OnChainCompleted` fires.
+**Lifecycle.** Every entry starts **Locked**; entries whose prerequisites are all Completed become **Available** (announced via `OnAvailableQuestsChanged`). Calling `StartQuest(chainNodeGuid)` spawns a fresh child `QuestRunner` for that quest (state -> **Active**), and its outcome moves the entry to **Completed** / **Failed** — an *aborted* quest (e.g. offer declined) returns to **Available**, so it can be offered again. When every quest resolves, `OnChainCompleted` fires.
 
 - Simple-quest entries spawn no runner — game code drives them by calling `QuestAsset.Complete()` / chain `NotifyExternalQuestCompleted(guid)`.
 - Events: `OnQuestStarted/Completed/Aborted(QuestEntry)`, `OnQuestFailed(QuestEntry, reason)`, `OnAvailableQuestsChanged(List<QuestEntry>)`, `OnChainCompleted`.
@@ -318,9 +321,7 @@ Because each quest graph opens with a **Run Dialogue** offer, talking to the NPC
 
 **The Quest Demo's HUD (`QuestDemoUI`).** Binds to the *chain* (not a fixed runner): on `OnQuestStarted` it grabs the fresh runner via `GetActiveRunner(entry.ChainNodeGuid)`, mirrors its objective events into a checklist, appends live `(current/required)` counters from `GetProgress(guid)`, shows the Timer countdown from `HasActiveTimer`/`TimerRemaining`, and binds a `DialogueUI` on `OnDialogueStarted`. Use it as the reference implementation for your own quest log.
 
-> 📷 *Screenshot: Quest Demo running — HUD with objective checklist, live counter, and timer.*
-
-**Demo enemies & pickups.** `DemoEnemy` (`Entity` + `Health` + `Interactable`, tagged `Enemy`) sets its Health to 0 on interact, firing `Entity.OnDeath` — which is exactly what Kill Count listens for. `ItemPickup` (an `Interactable` subclass) adds `amount` of `itemId` to the player's `IItemContainer` on interact and despawns.
+![Sample quest UI with a timer](image-13.png)
 
 ---
 
@@ -330,20 +331,20 @@ Because each quest graph opens with a **Run Dialogue** offer, talking to the NPC
 
 An item is two assets working together:
 
-1. **`ItemInfo`** (ScriptableObject) — **Assets → Create → RPGFramework → Items → ItemInfo**. Fields: **id** (must be unique — it's how every system references the item), Name, Icon, Target, Tier (1–5), Description, **Shape** (the set of grid cells the item occupies in a grid inventory), and Stat Effects.
+1. **`ItemInfo`** (ScriptableObject) — **Assets -> Create -> RPGFramework -> Items -> ItemInfo**. Fields: **id** (must be unique — it's how every system references the item), Name, Icon, Target, Tier (1–5), Description, **Shape** (the set of grid cells the item occupies in a grid inventory), and Stat Effects.
 2. **An item prefab** — a GameObject with the **`Item`** component pointing at the `ItemInfo` (plus its visuals). Place the prefab in a **`Resources/Items/`** folder.
 
-The **`InventoryManager`** (singleton) maps ids → item prefabs. It loads everything under `Resources/Items/` automatically on Awake (call `InventoryManager.Instance.ReloadItems("Items")` to re-scan, as the demos do) and exposes `GetItemById(id)`. It also defines the global **cell size** for grid UIs. Create one via **GameObject → RPGFramework → Inventory → Create Inventory Manager** — or let it auto-create itself on first access.
+The **`InventoryManager`** (singleton) maps ids -> item prefabs. It loads everything under `Resources/Items/` automatically on Awake (call `InventoryManager.Instance.ReloadItems("Items")` to re-scan, as the demos do) and exposes `GetItemById(id)`. It also defines the global **cell size** for grid UIs. Create one via **GameObject -> RPGFramework -> Inventory -> Create Inventory Manager** — or let it auto-create itself on first access.
 
-The package ships example items (Apple id 10, Burn id 5, Fury, Overkill) under `Runtime/Resources/Items/`.
+The package ships example items (Apple, Burn, Fury, Overkill) under `Runtime/Resources/Items/`.
 
-> 📷 *Screenshot: an ItemInfo asset in the Inspector, showing id, icon, and the shape editor.*
+![ItemInfos of the sample items](image-14.png)
 
 ### 7.2 Grid inventory
 
 A spatial, shape-aware inventory (items occupy their `ItemShape` cells; drag & drop; optional stacking).
 
-**Setup:** right-click in the Hierarchy → **GameObject → RPGFramework → Inventory → Create Inventory Grid** (under a Canvas). This creates a grid with an `InventoryGrid` + `InventoryGridGenerator` (which builds the slot UI). Configure on the `InventoryGrid`:
+**Setup:** right-click in the Hierarchy -> **GameObject -> RPGFramework -> Inventory -> Create Inventory Grid** (under a Canvas). This creates a grid with an `InventoryGrid` + `InventoryGridGenerator` (which builds the slot UI). Configure on the `InventoryGrid`:
 
 - **rows / columns** — grid dimensions.
 - **allowStacking** — allow same-id items to stack in one cell.
@@ -360,20 +361,18 @@ The package also ships a ready **`PlayerGridInventory.prefab`** (and `PlayerList
 
 In code, prefer the **`IItemContainer`** interface (`TryAddItem`, `RemoveItem(itemId, count)`, `CountItem(itemId)`, `PutItem`) — grids, lists, and slots all implement it, so pickups/quests/shops work against any of them.
 
-> 📷 *Screenshot: the grid inventory open with a multi-cell item being dragged.*
+![An Item within a grid inventory](image-15.png)
 
 ### 7.3 List inventory
 
 A linear inventory of stackable slots — ideal for chests and simple storage.
 
-**Setup:** **GameObject → RPGFramework → Inventory → Create Inventory List** (under a Canvas). Configure `InventoryList`: **EnableSlotCapacity** + **capacity** (max slots), **scrollSensitivity**. It supports the same `TryAddItem` / open/close/toggle API, drag & drop with grids, and `OnItemAdded`/`OnItemRemoved`.
+**Setup:** **GameObject -> RPGFramework -> Inventory -> Create Inventory List** (under a Canvas). Configure `InventoryList`: **EnableSlotCapacity** + **capacity** (max slots), **scrollSensitivity**. It supports the same `TryAddItem` / open/close/toggle API, drag & drop with grids, and `OnItemAdded`/`OnItemRemoved`.
 
 **Recreating the Inventory Demo:**
 1. Player: `Rigidbody2D` + `Interactor` + `InventoryGrid` reference; the sample's `InventoryDemoPlayer` moves with WASD, interacts with **E**, toggles the grid with **I**.
-2. Chests: each has a trigger `Collider2D`, `Interactable`, an `InventoryList`, and the sample's `ChestController` — `Interactable.OnInteract` → `Toggle()`, which opens/closes the list; leaving the trigger area closes it and hides the "E" prompt.
+2. Chests: each has a trigger `Collider2D`, `Interactable`, an `InventoryList`, and the sample's `ChestController` — `Interactable.OnInteract` -> `Toggle()`, which opens/closes the list; leaving the trigger area closes it and hides the "E" prompt.
 3. `InventoryDemoBootstrap` seeds the chests at startup by distributing every item id registered in the `InventoryManager` round-robin (`TryAddItem`).
-
-> 📷 *Screenshot: Inventory Demo — player grid inventory and an open chest list side by side mid-drag.*
 
 ---
 
@@ -381,22 +380,22 @@ A linear inventory of stackable slots — ideal for chests and simple storage.
 
 Shops are a layer on top of the inventory UIs: the player buys by dragging items *out* of the shop and sells by dropping items *into* it.
 
-**1. Stock asset.** **Assets → Create → RPGFramework → Shop → ShopInventory**. Add listings: **itemId**, **price**, **stock** (−1 = infinite). At runtime the shop works on a **clone** of this asset, so purchases never mutate your authored stock.
+**1. Stock asset.** **Assets -> Create -> RPGFramework -> Shop -> ShopInventory**. Add listings: **itemId**, **price**, **stock** (−1 = infinite). At runtime the shop works on a **clone** of this asset, so purchases never mutate your authored stock.
 
-**2. Shop UI.** **GameObject → RPGFramework → Shop → Create Shop Grid** (or **Create Shop List**). `ShopGridUI` extends `InventoryGrid`:
+**2. Shop UI.** **GameObject -> RPGFramework -> Shop -> Create Shop Grid** (or **Create Shop List**). `ShopGridUI` extends `InventoryGrid`:
 
 - Dragging an item out **charges** the player via `IShopCurrency`; if they can't afford it, the drag is blocked.
 - Dropping an item in **sells** it for `sellRatio` × its listing price (default 0.5).
 - **priceLabelPrefab** — optional price-tag prefab (the Dialogue Demo sample ships `PriceLabel.prefab`); a procedural label is generated if empty.
 - **currencyProvider** — any `IShopCurrency` MonoBehaviour; falls back to the `PlayerWallet` singleton.
 
-**3. Shopkeep NPC.** **GameObject → RPGFramework → Shop → Create Shopkeep**, or add the **`Shopkeep`** component (an `Interactable`) yourself. Assign its **shopInventory** and the grid- and/or list-UI; interacting toggles the shop, and **closeOnAreaExit** closes it when the player walks away.
+**3. Shopkeep NPC.** **GameObject -> RPGFramework -> Shop -> Create Shopkeep**, or add the **`Shopkeep`** component (an `Interactable`) yourself. Assign its **shopInventory** and the grid- and/or list-UI; interacting toggles the shop, and **closeOnAreaExit** closes it when the player walks away.
 
-**4. Wallet.** Add a **`PlayerWallet`** to the scene (or let it auto-create) — starting balance is serialized (default 100), `TrySpend(amount)` / `Add(amount)`, `OnBalanceChanged(int)` for a coin HUD.
+**4. Wallet.** Add a **`PlayerWallet`** to the scene (or let it auto-create) — starting balance is serialized (default 100), `TrySpend(amount)` / `Add(amount)`, `OnBalanceChanged(int)` for a coin HUD, which is not implemented in any of the demos.
 
 **Dialogue integration.** The Dialogue Demo's merchant opens its shop from conversation: an **Open Shop** node (Target linked to a GameObject variable holding the Shopkeep) plus the **Check / Add / Remove Currency** nodes for haggling logic, and **Close Shop** on farewell.
 
-> 📷 *Screenshot: the merchant's shop grid open with price labels, wallet balance visible.*
+![Sample shop inventory](image-16.png)
 
 ---
 
@@ -404,18 +403,12 @@ Shops are a layer on top of the inventory UIs: the player buys by dragging items
 
 The character layer is deliberately small — enough to power the demos and the quest hooks.
 
-**Entity & resources.** Add **`Entity`** plus any of **`Health`**, **`Mana`**, **`Stamina`** (all extend `Resource`) to a character. `Entity.Awake` collects the `Resource` components into its `resources` dictionary and raises **`OnDeath`** (a UnityEvent) when Health reaches zero. Quest **Kill Count** objectives count any tagged `Entity` whose `OnDeath` fires — so an enemy needs exactly: `Entity` + `Health` + the matching **Tag**, and something that damages it (`health.Points = 0` in the demo).
-
 **Interaction.** Two components form the interaction system used everywhere (dialogue triggers, chests, pickups, shopkeepers, quest delivery):
 
 - **`Interactable`** (on the world object, needs a trigger `Collider2D`) — raises `OnInteract`, `OnAreaEnter`, `OnAreaExit`. Subclass it (`ItemPickup`, `Shopkeep`) or wire the UnityEvents in the Inspector.
 - **`Interactor`** (on the player) — tracks in-range interactables; call `InteractWithClosest()` from your input handling.
 
-**Player controller.** The demos use small self-contained scripts (`DemoPlayer`, `InventoryDemoPlayer`) that poll `Keyboard.current` — copy one as a starting point. The package also provides the fuller **`PlayerController`** (extends `Entity`): top-down movement, mouse-aim weapon rotation (via `RotateTowardsPoint`), attack state, and interaction, driven by Input System callbacks (`OnMove`, `OnLook`, `OnInteract`, `OnAttack`) — add a `PlayerInput` component with **Behavior = Invoke Unity Events** and wire the four actions to those methods. A ready-made **`Char.prefab`** (with animations) ships under `Runtime/Prefabs/Character/`.
-
-**Stats.** `Stat` / `StatEffect` / `Scaling` (in `Runtime/Core/Stats/`) implement a value + modifier system; `ItemInfo.StatEffects` carries an item's effects. Apply them to your own combat math as needed.
-
-> 📷 *Screenshot: an enemy's Inspector — Entity, Health, Interactable, tag set to Enemy.*
+**Player controller.** The demos use small self-contained scripts (`DemoPlayer`, `InventoryDemoPlayer`) that poll `Keyboard.current` — copy one as a starting point. The package also provides the fuller **`PlayerController`** (extends `Entity`) driven by Input System callbacks (`OnMove`, `OnLook`, `OnInteract`) — add a `PlayerInput` component with **Behavior = Invoke Unity Events** and wire the three actions to those methods. A ready-made **`Char.prefab`** (with animations) ships under `Runtime/Prefabs/Character/`.
 
 ---
 
@@ -462,5 +455,3 @@ The `[DialogueNode]` / `[QuestNode]` attribute makes the node appear in the righ
 - **Whole new graph systems** — the dialogue/quest split shows the recipe: a `GraphAsset` subclass, a `GraphRunner` subclass with handlers, a `NodeRegistry` subclass for the palette, and a thin editor window over the shared `GraphEditorWindow` infrastructure.
 
 ---
-
-*See the in-code XML documentation for full API details. Licensed under MIT.*

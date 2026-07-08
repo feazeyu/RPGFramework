@@ -4,6 +4,8 @@
 #
 .utmp/
 /[Ll]ibrary/
+/Assets/Samples/*
+/thesis/*
 /[Tt]emp/
 /[Oo]bj/
 /[Bb]uild/

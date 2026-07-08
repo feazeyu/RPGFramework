@@ -1,6 +1,6 @@
 # RPG Systems
 
-Graph-based **dialogue** and **quest** systems, a flexible **inventory** (grid, list, and shop), and a small **character/combat** layer for 2D RPGs in Unity. The dialogue and quest systems share a single graph execution framework, so custom nodes and blackboard variables work the same across both.
+Graph-based **dialogue** and **quest** systems, a flexible **inventory** (grid, list, and shop), and a small **character/interaction** layer for 2D RPGs in Unity. The dialogue and quest systems share a single graph execution framework, so custom nodes and blackboard variables work the same across both.
 
 ## Features
 

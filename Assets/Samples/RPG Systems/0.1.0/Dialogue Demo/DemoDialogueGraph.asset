@@ -694,7 +694,7 @@ MonoBehaviour:
     - rid: 1756203194680606810
     - rid: 5852939471150907591
     - rid: 5852939497342238808
-  ViewTransform: {x: -871, y: -47, z: 1}
+  ViewTransform: {x: 34, y: -53, z: 1}
   BlackboardPosition: {x: 10, y: 60}
   references:
     version: 2

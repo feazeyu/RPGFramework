@@ -69,9 +69,11 @@
   <Project Path="Unity.2D.Aseprite.Common.csproj" />
   <Project Path="Unity.AppUI.Undo.csproj" />
   <Project Path="Feazeyu.RPGSystems.Character.csproj" />
+  <Project Path="Feazeyu.RPGSystems.Samples.QuestDemo.csproj" />
   <Project Path="Unity.CollabProxy.Editor.csproj" />
   <Project Path="Unity.Behavior.Editor.csproj" />
   <Project Path="Unity.Bindings.OpenImageIO.Editor.csproj" />
+  <Project Path="Feazeyu.RPGSystems.Samples.InventoryDemo.csproj" />
   <Project Path="Unity.Behavior.Serialization.Editor.csproj" />
   <Project Path="Unity.2D.PixelPerfect.csproj" />
   <Project Path="Unity.InputSystem.DocCodeSamples.csproj" />
