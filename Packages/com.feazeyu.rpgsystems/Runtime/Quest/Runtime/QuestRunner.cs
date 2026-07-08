@@ -134,6 +134,8 @@ namespace Feazeyu.RPGSystems.Quest
             RegisterHandler(new DebugLogNodeHandler());
             RegisterHandler(new FindObjectNodeHandler());
             RegisterHandler(new SpawnPrefabNodeHandler());
+            RegisterHandler(new TriggerEventNodeHandler());
+            RegisterHandler(new WaitForEventNodeHandler());
             RegisterHandler(new TimerNodeHandler());
             RegisterHandler(new ResetProgressNodeHandler());
         }

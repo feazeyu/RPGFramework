@@ -259,7 +259,7 @@ MonoBehaviour:
     NodeType: DialogueLine
     DisplayName: Too Poor
     StoryText: 
-    Position: {x: 1200, y: 420}
+    Position: {x: 1200, y: 421}
     Size: {x: 0, y: 0}
     Ports:
     - PortName: In
@@ -694,7 +694,7 @@ MonoBehaviour:
     - rid: 1756203194680606810
     - rid: 5852939471150907591
     - rid: 5852939497342238808
-  ViewTransform: {x: -467, y: -47, z: 1}
+  ViewTransform: {x: -871, y: -47, z: 1}
   BlackboardPosition: {x: 10, y: 60}
   references:
     version: 2

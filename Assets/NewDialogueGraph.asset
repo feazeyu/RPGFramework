@@ -13,76 +13,166 @@ MonoBehaviour:
   m_Name: NewDialogueGraph
   m_EditorClassIdentifier: 
   m_Nodes:
-  - Guid: 0089a15c-a14d-4124-9460-c8e19f03dd78
+  - Guid: c144eb95-a1ff-4bfd-812e-154b0daa9054
     NodeType: Start
     DisplayName: Start
     StoryText: 
-    Position: {x: 80, y: 160}
-    Size: {x: 0, y: 0}
-    Ports: []
+    Position: {x: 237, y: 95}
+    Size: {x: 177, y: 77}
+    Ports:
+    - PortName: Out
+      Direction: 1
+      Capacity: 1
     Fields: []
-  - Guid: 6a85f20b-a429-4f9d-97cf-d0bbd50d9ecd
-    NodeType: Condition
-    DisplayName: Condition
+  - Guid: b5216b47-ee56-4232-9b1a-f3e7df304286
+    NodeType: DialogueLine
+    DisplayName: Dialogue Line
     StoryText: 
-    Position: {x: 683, y: 117}
-    Size: {x: 168, y: 210}
+    Position: {x: 446, y: 81}
+    Size: {x: 0, y: 0}
     Ports:
     - PortName: In
       Direction: 0
       Capacity: 1
-    - PortName: True
-      Direction: 1
-      Capacity: 0
-    - PortName: False
-      Direction: 1
-      Capacity: 0
-    Fields:
-    - FieldName: Variable
-      TypeName: System.String
-      InlineValue: 
-      LinkedVariableGuid: 
-    - FieldName: Operator
-      TypeName: System.String
-      InlineValue: ==
-      LinkedVariableGuid: 
-    - FieldName: Value
-      TypeName: System.String
-      InlineValue: 
-      LinkedVariableGuid: 
-  - Guid: 3f0c1672-c6af-43c7-92a5-07715f806d33
-    NodeType: requirement
-    DisplayName: Requirement
-    StoryText: 
-    Position: {x: 364, y: 107}
-    Size: {x: 0, y: 0}
-    Ports:
     - PortName: Out
       Direction: 1
       Capacity: 0
     Fields:
-    - FieldName: Variable
+    - FieldName: Speaker
       TypeName: System.String
+      InlineValue: A guy
+      LinkedVariableGuid: 
+    - FieldName: Text
+      TypeName: System.String
+      InlineValue: Hello! How are you?
+      LinkedVariableGuid: 
+    - FieldName: Portrait
+      TypeName: UnityEngine.Sprite
       InlineValue: 
       LinkedVariableGuid: 
-    - FieldName: Operator
+  - Guid: ca9f6e2d-7cd8-43cd-a8b0-8409cd424b45
+    NodeType: ChoiceBranch
+    DisplayName: Choice Branch
+    StoryText: 
+    Position: {x: 749, y: 81}
+    Size: {x: 443, y: 207}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Choice 1
+      Direction: 1
+      Capacity: 0
+    - PortName: Choice 2
+      Direction: 1
+      Capacity: 0
+    Fields:
+    - FieldName: Choice 1 Text
       TypeName: System.String
-      InlineValue: ==
+      InlineValue: I'm doing great. Thanks!
       LinkedVariableGuid: 
-    - FieldName: Value
+    - FieldName: Choice 2 Text
       TypeName: System.String
+      InlineValue: My life is crumbling before my very eyes.
+      LinkedVariableGuid: 
+  - Guid: 12481b14-4d95-4642-a8f1-3adfed78d692
+    NodeType: DialogueLine
+    DisplayName: Dialogue Line
+    StoryText: 
+    Position: {x: 1211, y: -53}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Out
+      Direction: 1
+      Capacity: 0
+    Fields:
+    - FieldName: Speaker
+      TypeName: System.String
+      InlineValue: A guy
+      LinkedVariableGuid: 
+    - FieldName: Text
+      TypeName: System.String
+      InlineValue: Awesome!
+      LinkedVariableGuid: 
+    - FieldName: Portrait
+      TypeName: UnityEngine.Sprite
       InlineValue: 
       LinkedVariableGuid: 
+  - Guid: e996f22b-376c-4ac6-b280-15a582da2e9b
+    NodeType: DialogueLine
+    DisplayName: Dialogue Line
+    StoryText: 
+    Position: {x: 1230, y: 227}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    - PortName: Out
+      Direction: 1
+      Capacity: 0
+    Fields:
+    - FieldName: Speaker
+      TypeName: System.String
+      InlineValue: A guy
+      LinkedVariableGuid: 
+    - FieldName: Text
+      TypeName: System.String
+      InlineValue: Me too man, me too.
+      LinkedVariableGuid: 
+    - FieldName: Portrait
+      TypeName: UnityEngine.Sprite
+      InlineValue: 
+      LinkedVariableGuid: 
+  - Guid: a5399eb5-6af6-4042-aafc-9558fe9dae3c
+    NodeType: End
+    DisplayName: End
+    StoryText: 
+    Position: {x: 1580, y: 107}
+    Size: {x: 0, y: 0}
+    Ports:
+    - PortName: In
+      Direction: 0
+      Capacity: 1
+    Fields: []
   m_Edges:
-  - Guid: cae46e89-f913-4589-84b1-1645d8b55a21
-    OutputNodeGuid: 3f0c1672-c6af-43c7-92a5-07715f806d33
+  - Guid: be836e2d-77b1-458f-9a63-bdc8edff324a
+    OutputNodeGuid: c144eb95-a1ff-4bfd-812e-154b0daa9054
     OutputPortName: Out
-    InputNodeGuid: 6a85f20b-a429-4f9d-97cf-d0bbd50d9ecd
+    InputNodeGuid: b5216b47-ee56-4232-9b1a-f3e7df304286
+    InputPortName: In
+  - Guid: debce57a-bbf8-40a9-a2ec-3d3b76de8f11
+    OutputNodeGuid: b5216b47-ee56-4232-9b1a-f3e7df304286
+    OutputPortName: Out
+    InputNodeGuid: ca9f6e2d-7cd8-43cd-a8b0-8409cd424b45
+    InputPortName: In
+  - Guid: 4c75c21b-2da8-408b-94b4-ef4ac7ede2bf
+    OutputNodeGuid: ca9f6e2d-7cd8-43cd-a8b0-8409cd424b45
+    OutputPortName: Choice 1
+    InputNodeGuid: 12481b14-4d95-4642-a8f1-3adfed78d692
+    InputPortName: In
+  - Guid: 8fe05fe7-44a7-4f3d-bc01-4859eb6a234c
+    OutputNodeGuid: ca9f6e2d-7cd8-43cd-a8b0-8409cd424b45
+    OutputPortName: Choice 2
+    InputNodeGuid: e996f22b-376c-4ac6-b280-15a582da2e9b
+    InputPortName: In
+  - Guid: 0f555d97-ac3b-4aac-abdd-bf76892b2c64
+    OutputNodeGuid: 12481b14-4d95-4642-a8f1-3adfed78d692
+    OutputPortName: Out
+    InputNodeGuid: a5399eb5-6af6-4042-aafc-9558fe9dae3c
+    InputPortName: In
+  - Guid: 855a3c52-334a-43df-afda-6711dd581e0a
+    OutputNodeGuid: e996f22b-376c-4ac6-b280-15a582da2e9b
+    OutputPortName: Out
+    InputNodeGuid: a5399eb5-6af6-4042-aafc-9558fe9dae3c
     InputPortName: In
   m_Blackboard:
     m_Variables:
     - rid: 1756203085046743040
-  ViewTransform: {x: -16, y: 240, z: 1}
+  ViewTransform: {x: -174, y: 323, z: 0.8695652}
   BlackboardPosition: {x: 10, y: 60}
   references:
     version: 2

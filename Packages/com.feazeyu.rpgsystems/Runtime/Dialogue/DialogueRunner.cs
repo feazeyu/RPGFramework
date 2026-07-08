@@ -10,8 +10,8 @@ namespace Feazeyu.RPGSystems.Dialogue
     /// Subclass of GraphRunner that handles dialogue-specific node types:
     ///   • DialogueLine  — fires OnDialogueLine, waits for Advance()
     ///   • ChoiceBranch  — fires OnChoicesPresented, waits for SelectChoice()
-    ///   • TriggerEvent  — fires OnEventTriggered
-    ///   • WaitForEvent  — stubbed (logs a warning)
+    ///   • TriggerEvent  — fires OnEventTriggered and raises the GraphEventBus
+    ///   • WaitForEvent  — suspends until its channel is raised on the GraphEventBus
     ///
     /// All structural nodes (Start, End, Condition, SetVariable, RunSubgraph)
     /// are handled by the base GraphRunner.
@@ -55,7 +55,7 @@ namespace Feazeyu.RPGSystems.Dialogue
             RegisterHandler(new DialogueLineHandler(this));
             RegisterHandler(new ChoiceBranchHandler(this));
             RegisterHandler(new TriggerEventHandler(this));
-            RegisterHandler(new WaitForEventHandler());
+            RegisterHandler(new WaitForEventNodeHandler());
             RegisterHandler(new GiveItemNodeHandler());
             RegisterHandler(new DebugLogNodeHandler());
             RegisterHandler(new FindObjectNodeHandler());
@@ -261,21 +261,9 @@ namespace Feazeyu.RPGSystems.Dialogue
             /// <inheritdoc/>
             public IEnumerator Execute(NodeData node, GraphRunContext ctx)
             {
-                m_R.OnEventTriggered?.Invoke(ctx.ResolveString(node, "Event Channel"));
-                ctx.Follow("Out");
-                yield break;
-            }
-        }
-
-        private class WaitForEventHandler : IGraphNodeHandler
-        {
-            /// <inheritdoc/>
-            public string NodeTypeId => NodeRegistry.TypeWaitForEvent;
-
-            /// <inheritdoc/>
-            public IEnumerator Execute(NodeData node, GraphRunContext ctx)
-            {
-                Debug.LogWarning("[DialogueRunner] WaitForEvent is not implemented. Skipping.");
+                var channel = ctx.ResolveString(node, "Event Channel");
+                m_R.OnEventTriggered?.Invoke(channel);
+                GraphEventBus.Raise(channel);
                 ctx.Follow("Out");
                 yield break;
             }

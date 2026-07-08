@@ -171,7 +171,8 @@ namespace Feazeyu.RPGSystems.Dialogue
             Register(new NodeInfo
             {
                 TypeId = TypeTriggerEvent, DisplayName = "Trigger Event", Category = "Events",
-                Description = "Fires a game event channel.",
+                Description = "Raises the named event channel on the GraphEventBus, waking any " +
+                              "Wait For Event node listening for it, and continues.",
                 AccentColor = ColEvent, Icon = "⚡",
                 DefaultPorts = new List<PortData>
                 {
@@ -180,14 +181,16 @@ namespace Feazeyu.RPGSystems.Dialogue
                 },
                 DefaultFields = new List<FieldData>
                 {
-                    new FieldData { FieldName = "Event Channel", TypeName = "UnityEngine.ScriptableObject" },
+                    new FieldData { FieldName = "Event Channel", TypeName = "System.String" },
                 }
             });
 
             Register(new NodeInfo
             {
                 TypeId = TypeWaitForEvent, DisplayName = "Wait For Event", Category = "Events",
-                Description = "Suspends execution until a game event is received.",
+                Description = "Suspends execution until the named channel is raised — by a Trigger " +
+                              "Event node in any running graph, or by game code calling " +
+                              "GraphEventBus.Raise(channel).",
                 AccentColor = ColEvent, Icon = "⏳",
                 DefaultPorts = new List<PortData>
                 {
@@ -196,7 +199,7 @@ namespace Feazeyu.RPGSystems.Dialogue
                 },
                 DefaultFields = new List<FieldData>
                 {
-                    new FieldData { FieldName = "Event Channel", TypeName = "UnityEngine.ScriptableObject" },
+                    new FieldData { FieldName = "Event Channel", TypeName = "System.String" },
                 }
             });
 

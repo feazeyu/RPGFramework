@@ -86,8 +86,8 @@ namespace Feazeyu.RPGSystems.Inventory
                 UIObject = (GameObject)PrefabUtility.InstantiatePrefab(inventoryContainerOverride, targetCanvas.transform);
                 UIObject.name = inventoryName;
 #else
-                    inventoryObject = Instantiate(inventoryContainerOverride, targetCanvas.transform);
-                    inventoryObject.name = inventoryName;
+                UIObject = Instantiate(inventoryContainerOverride, targetCanvas.transform);
+                UIObject.name = inventoryName;
 #endif
                 target = UIObject.GetComponent<InventoryListUI>();
             }

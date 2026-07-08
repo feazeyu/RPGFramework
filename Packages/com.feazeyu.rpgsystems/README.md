@@ -8,7 +8,6 @@ Graph-based **dialogue** and **quest** systems, a flexible **inventory** (grid, 
 - **Dialogue** — branching lines, conditional choices, requirement gating, text interpolation from blackboard variables, and inline event/prefab actions.
 - **Quests** — single quests (objectives, rewards, terminal outcomes) and quest chains (dependency graphs with gates and per-quest variables). Composable objectives (kill count, collect/accumulate/deliver items, reach location) with stackable gate, timer, and reset modifiers.
 - **Inventory** — shape-aware grid inventory with drag-and-drop and stacking, a linear list inventory, and a shop layer (buy/sell against a runtime copy of the stock).
-- **Character & combat** — entity resources (health/mana/stamina), a stat/effect scaling system, weapons (melee, projectile, combos), and an interaction system.
 
 ## Requirements
 
